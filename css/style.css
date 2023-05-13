@@ -329,16 +329,16 @@ section {
     border-radius: 60px;
   }
   .landing-hero-btn-area .landing-hero-btn:hover {
-    background: #FFFFFF;
-    color: #703FB9;
+    background: #703FB9;
+    color: #FFFFFF;
   }
   .landing-hero-btn-area .landing-hero-btn2 {
     background: #FFFFFF;
     color: #59338E;
   }
   .landing-hero-btn-area .landing-hero-btn2:hover {
-    background: #59338E;
-    color: #fff;
+    background: #EDE6F7;
+    color: #59338E;
   }
   .landing-hero-img {
     position: relative;
