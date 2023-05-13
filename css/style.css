@@ -549,7 +549,7 @@ section {
   .swiper-button-next:after, .swiper-rtl .swiper-button-prev:after {
     display: none;
   }
-  .story-ab-btn-prev:hover, .story-ab-btn-next:hover {
+  .landing-testimonia-swiper .story-ab-btn-prev:hover, .landing-testimonia-swiper .story-ab-btn-next:hover {
     background: #703FB9;
   }
   .swiper-button-disabled {
@@ -1431,6 +1431,9 @@ section {
     left: 45% !important;
     top: 88% !important;
     right: auto;
+  }
+  .assistentes-especialistas-swiper .story-ab-btn-prev:hover, .assistentes-especialistas-swiper .story-ab-btn-next:hover {
+    background: #703FB9;
   }
   .assistentes-especialistas-title {
     margin-bottom: 57px;
