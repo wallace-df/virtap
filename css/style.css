@@ -156,6 +156,7 @@ section {
     display: inline-block;
     width: 143px;
     height: auto;
+    vertical-align: middle;
   }
   .header-login-btn {
     display: block;
