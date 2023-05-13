@@ -549,7 +549,7 @@ section {
   .swiper-button-next:after, .swiper-rtl .swiper-button-prev:after {
     display: none;
   }
-  .swiper-button-prev:hover, .swiper-button-next:hover {
+  .story-ab-btn-prev:hover, .story-ab-btn-next:hover {
     background: #703FB9;
   }
   .swiper-button-disabled {
