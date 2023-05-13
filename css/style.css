@@ -1841,6 +1841,8 @@ section {
     color: #FFF;
   }
   .footer-button-scrol:hover {
+    border: 1px solid #703FB9;
     background: #703FB9;
+    color: #FFF;  
   }
   
