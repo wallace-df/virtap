@@ -173,8 +173,8 @@ section {
             box-shadow: 2px 3px 28px rgba(150, 109, 235, 0.21);
   }
   .header-login-btn:hover {
-    color: #6D3FAF;
-    background: #FFFFFF;
+    color: #FFFFFF;
+    background: #703FB9;
   }
   
   .login_dropdown{
@@ -874,8 +874,8 @@ section {
             transform: translate(-50%);
   }
   .virtap-funciona-area .virtap-funciona-btn:hover {
-    background: #fff;
-    color: #6D3FAF;
+    background: #703FB9;
+    color: #FFF;
   }
   .virtap-funciona-title {
     text-align: center;
