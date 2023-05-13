@@ -228,7 +228,7 @@ section {
   }
 
   .login_dropdown button:hover{
-    background: #f1f1f1;
+    background: #ede6f7;
   }
 
   .login_dropdown button img{
@@ -548,6 +548,9 @@ section {
   }
   .swiper-button-next:after, .swiper-rtl .swiper-button-prev:after {
     display: none;
+  }
+  .swiper-button-prev:hover, .swiper-button-next:hover {
+    background: #703FB9;
   }
   .swiper-button-disabled {
     color: #61379D !important;
