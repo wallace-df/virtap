@@ -1836,9 +1836,11 @@ section {
     transition: 0.5s;
     z-index: 999;
     font-size: 17px;
-    border: 1px solid #5F3799;
+    border: 1px solid #522E88;
+    background: #522E88;
+    color: #FFF;
   }
   .footer-button-scrol:hover {
-    color: #5F3799;
+    background: #703FB9;
   }
   
