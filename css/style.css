@@ -606,7 +606,7 @@ section {
     content: "";
     position: absolute;
     left: 0;
-    top: 15px;
+    top: 11px;
     height: 27px;
     width: 27px;
     background: url(../img/cross.png);
@@ -639,7 +639,7 @@ section {
     content: "";
     position: absolute;
     left: 0;
-    top: 15px;
+    top: 11px;
     height: 27px;
     width: 27px;
     background: url(../img/check.png);
