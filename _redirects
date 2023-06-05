@@ -1,1 +1,2 @@
-/blog blog.virtap.com.br/ 301
+/blog https://blog.virtap.com.br/ 301
+/blog/ https://blog.virtap.com.br/ 301
