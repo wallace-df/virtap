@@ -834,7 +834,7 @@
 	}
 
 	.career_icon_box::before{
-		content: '';
+/* 		content: ''; */
 		position: absolute;
 		left: 50%;
 		-webkit-transform: translateX(-50%);
@@ -880,7 +880,7 @@
 	}
 
 	.career_icon_box p br{
-		display: none;
+/* 		display: none; */
 	}
 
 	.career_content_wrap{
