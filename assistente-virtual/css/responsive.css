@@ -438,7 +438,6 @@
 	.login_area .sh4{
 		top: -5.5rem;
 		left: 0;
-		width: 3rem;
 	}
 
 	.login_area .left .login2_img {
@@ -448,6 +447,14 @@
 
 }
 
+.traditional_professions_area .list_box,
+.traditional_professions_area .list_box2 {
+	margin-top: 1.6rem;
+}
+
+.traditional_professions_area h2 {
+	text-align: center;
+}
 
 @media (max-width: 767px) {
 	
