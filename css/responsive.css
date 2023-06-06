@@ -814,7 +814,7 @@
 
 
 
-@media (min-width: 768px) and (max-width: 991px){
+@media (min-width: 0px) and (max-width: 991px){
   .landing-hero-area{
     text-align: center;
   }
@@ -1039,6 +1039,7 @@
     font-size: 35px;
     line-height: 45px;
     padding-bottom: 34px;
+    margin: auto;
   }
   .landing-hero-img .landing-hero-main-img img {
     margin: 0 auto;
