@@ -895,31 +895,31 @@ h5{
 
 .career_icon_box:nth-child(1){
 	top: 1rem;
-	left: -24rem;
+	left: -20rem;
 }
 
 .career_icon_box:nth-child(2){
 	top: 1rem;
-	right: -16rem;
+	right: -24rem;
 }
 
 .career_icon_box:nth-child(3) {
-	right: -35rem;
+	right: -30rem;
 	top: 19rem;
 }
 
 .career_icon_box:nth-child(4) {
-	bottom: 0rem;
-	right: -32rem;
+	bottom: -2rem;
+	right: -26rem;
 }
 
 .career_icon_box:nth-child(5) {
-	bottom: 1rem;
-	left: -21rem;
+	bottom: -17rem;
+	left: -29rem;
 }
 
 .career_icon_box:nth-child(6) {
-	left: -22.5rem;
+	left: -26rem;
 	top: 19rem;
 }
 
@@ -935,12 +935,12 @@ h5{
 	        box-shadow: .2rem .3rem 2.6rem rgba(190, 216, 218, 0.12);
 	-ms-flex-negative: 0;
 	    flex-shrink: 0;
-	margin-left: 5rem;
+	margin-left: 3rem;
 }
 
 .career_icon_box.right .icon{
 	margin-left: 0;
-	margin-right: 5rem;
+	margin-right: 3rem;
 }
 
 .career_icon_box h3{
