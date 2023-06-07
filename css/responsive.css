@@ -612,6 +612,20 @@
   }
 }
 
+@media (min-width: 767px) and (max-width: 991px) {
+
+  .comunidade-students-item h2 {
+    max-width: 600px;
+  }
+
+  .comunidade-students-item p {
+    max-width: 650px;
+  }
+}
+
+
+
+
 
 
 
@@ -1550,15 +1564,8 @@
     background-size: 100% auto; 
   }
 
-  .comunidade-students-item h2 {
-    max-width: 600px;
-  }
 
-  .comunidade-students-item p {
-    max-width: 650px;
-  }
 }
-
 
 
 @media (max-width: 570px) {
