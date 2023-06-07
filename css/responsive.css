@@ -1549,6 +1549,14 @@
     right: -250px;
     background-size: 100% auto; 
   }
+
+  .comunidade-students-item h2 {
+    max-width: 600px;
+  }
+
+  .comunidade-students-item p {
+    max-width: 650px;
+  }
 }
 
 
