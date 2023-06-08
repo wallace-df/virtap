@@ -512,13 +512,13 @@ h5{
 }
 
 .icon_list a:hover{
-	background: var(--primary);
-	border-color: var(--primary);
+/* 	background: var(--primary);
+	border-color: var(--primary); */
 }
 
 .icon_list a:hover img{
-	-webkit-filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
-	        filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+/* 	-webkit-filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+	        filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%); */
 }
 
 
