@@ -89,7 +89,7 @@
 ;(function($) {
     "use strict"; 
     AOS.init({
-        duration: 1000,
+        duration: 400,
         offset: 100,
     }); 
   
