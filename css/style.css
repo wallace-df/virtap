@@ -262,7 +262,7 @@ section {
     position: relative;
     padding-top: 80px;
   }
-  .landing-hero-text-area h2 {
+  .landing-hero-text-area h1 {
     font-weight: 700;
     font-size: 70px;
     line-height: 1.371;
@@ -270,11 +270,11 @@ section {
     max-width: 800px;
     padding-bottom: 60px;
   }
-  .landing-hero-text-area h2 span {
+  .landing-hero-text-area h1 span {
     color: #532E88;
     position: relative;
   }
-  .landing-hero-text-area h2 span::after {
+  .landing-hero-text-area h1 span::after {
     content: "";
     position: absolute;
     left: 0;
