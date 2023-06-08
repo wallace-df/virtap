@@ -269,11 +269,15 @@
 	}
 
 	.career_icon_box:nth-child(3) h3{
-		font-size: 2rem;
+/* 		font-size: 2rem; */
 	}
 
 	.career_icon_box:nth-child(3) p{
-		font-size: 1.7rem;
+/* 		font-size: 1.7rem; */
+	}
+	
+	.career_icon_box:nth-child(3)  .icon {
+		margin-right: 1.rem;
 	}
 
 	.projects_looking_wrap{
