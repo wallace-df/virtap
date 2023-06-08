@@ -5,7 +5,7 @@
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 
-/* Last merge : Thu Jun 8 10:03:03 -03 2023  */
+/* Last merge : Thu Jun 8 10:20:12 -03 2023  */
 
 /* Merging order :
 
@@ -14,7 +14,7 @@
 - bootstrap.min.js
 - aos.js
 - swiper-bundle.min.js
-- js/main.js
+- main.js
 
 */
 
@@ -10459,7 +10459,140 @@
 //# sourceMappingURL=swiper-bundle.min.js.map
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-/* Merging js: js/main.js begins */
+/* Merging js: main.js begins */
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 
+;(function($) {
+    "use strict"; 
+    AOS.init({
+        duration: 1000,
+        offset: 100,
+    }); 
+  
+     
+    // story-about-swiper======
+    var swiper = new Swiper(".landing-testimonia-swiper", {
+        slidesPerView: "auto",
+        spaceBetween: 30,
+        slidesPerView: 3,
+        slidesPerGroup: 1,
+        loop: false,
+        autoplay: false,
+        loopFillGroupWithBlank: true,
+        speed: 700,
+        navigation: {
+            nextEl: ".story-ab-btn-next",
+            prevEl: ".story-ab-btn-prev",
+        },
+        breakpoints: {
+            0: {
+              slidesPerView: 1, 
+              spaceBetween: 10,
+            }, 
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 15,
+            }, 
+            992: {
+              slidesPerView: 2,
+              spaceBetween: 25,
+            },
+            1200: {
+              slidesPerView: 3,
+              spaceBetween: 22,
+            },
+            1400: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+        },
+    });
+
+    // assistentes-especialistas-swiper
+    var swiper = new Swiper(".assistentes-especialistas-swiper", {
+        speed: 700,
+        navigation: {
+            nextEl: ".story-ab-btn-next",
+            prevEl: ".story-ab-btn-prev",
+        },
+        breakpoints: {
+            0: {
+              slidesPerView: 1, 
+              spaceBetween: 10,
+            }, 
+            575: {
+              slidesPerView: 2,
+              spaceBetween: 15,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 15,
+            }, 
+            1200: {
+              slidesPerView: 4,
+              spaceBetween: 25,
+            },
+            1400: {
+              slidesPerView: 4,
+              spaceBetween: 30,
+            },
+        },
+    });
+
+    // Scroll to top
+    function scrollToTop() {
+      if ($('.footer-button-scrol').length) {  
+          $(window).on('scroll', function () {
+              if ($(this).scrollTop() > 200) {
+                  $('.footer-button-scrol').fadeIn();
+              } else {
+                  $('.footer-button-scrol').fadeOut();
+              }
+          }); 
+          //Click event to scroll to top
+          $('.footer-button-scrol').on('click', function () {
+              $('html, body').animate({
+                  scrollTop: 0
+              }, 200);
+              return false;
+          });
+      }
+  }
+
+    
+    /*Function Calls*/ 
+    scrollToTop();
+
+
+        // accordion js
+
+        function accordion() {
+            var Accordion = function(el, multiple) {
+                this.el = el || {};
+                this.multiple = multiple || false;
+
+                // Variables privadas
+                var links = this.el.find('.js-accordion-link');
+                // Evento
+                links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+            }
+
+            Accordion.prototype.dropdown = function(e) {
+                var $el = e.data.el,
+                    $this = $(this),
+                    $next = $this.next();
+
+                $next.slideToggle();
+                $this.parent().toggleClass('is-open');
+
+                if (!e.data.multiple) {
+                    $el.find('.js-accordion-submenu').not($next).slideUp().parent().removeClass('is-open');
+                    $el.find('.js-accordion-submenu').not($next).slideUp();
+                };
+            }
+            var accordion = new Accordion($('#accordion'), false);
+        }
+        accordion();      
+    
+})(jQuery);
