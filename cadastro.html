@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Client Dashboard</title>
+    <title>Virtap | Cliente | Cadastro</title>
     <link rel="stylesheet" href="assets/css/all.min.css" />
     <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -16,52 +16,54 @@
     <div class="sign_up">
         <div class="left_content" style="background: linear-gradient(180deg, #532E88 -190.19%, #FFFFFF 100%);">
             <img src="assets/img/spg.png" alt="">
-            <h2>Fill in the information below so that your request is sent to the professionals registered in our database.</h2>
         </div>
         <div class="right_content">
-            <div class="input_from">
-                <div class="user-info assistant mt-3" id="personal">
-                    <div class="items">
-                        <div class="item">
-                            <div class="search__name" id="name">First Name</div>
-                            <input type="name" class="search__input" placeholder="first name">
-                        </div>
-                        <div class="item">
-                            <div class="search__name" id="gender">Last Nmae</div>
-                            <input type="name" class="search__input" placeholder="last nmae">
-                        </div>
-                    </div>
-                    <div class="items">
-                        <div class="item wp">
-                            <div class="search__name" id="phone">WhatsApp Number</div>
-                            <input type="phone" class="search__input" placeholder="whatsApp number">
-                        </div>
-                        <!-- <div class="item">
-                        </div> -->
-                    </div>
-                    <div class="items">
-                        <div class="item">
-                            <!-- <h2 class="mb-3" style="font-size: 16px">Tell us about yourself and a little about your
-                                professional experience.</h2> -->
-                            <div class="checkbox_item">
-                                <input type="checkbox" class="checkbox">
-                                <p>Acceptance policy checkbox</p>
-                            </div>
-                            <div class="checkbox_item">
-                                <input type="checkbox" class="checkbox">
-                                <p>Acceptance policy checkbox</p>
+            <h2>Cadastre-se gratuitamente e conecte-se com os melhores talentos da Assistência Virtual.
+            </h2>
+            <form id="signupForm">
+                <div class="input_from">
+                    <div class="user-info assistant mt-3" id="personal">
+                        <div class="items">
+                            <div class="item">
+                                <div class="search__name" id="name">Nome</div>
+                                <input type="text" class="search__input" placeholder="Seu nome" id="txtNome" name="name" />
+                                <em>Por favor, informe um nome válido.</em>
                             </div>
                         </div>
+                        <div class="items" style="margin-top: 30px">
+                            <div class="item">
+                                <div class="search__name" id="phone">WhatsApp</div>
+                                <input type="text" class="search__input" placeholder="WhatsApp para contato"
+                                    id="txtWhatsapp" />
+                                <em>Por favor, informe um WhatsApp válido.</em>
+                            </div>
+                        </div>
+                        <div class="items" style="margin-top: 25px">
+                            <div class="item">
+                                <div class="checkbox_item">
+                                    <label>
+                                        <input type="checkbox" class="checkbox" id="chkTermos">
+                                        <span>Aceito os <a href="/termos" target="_blank"
+                                                class="link">termos</a>.</span>
+                                        <em>Por favor, leia e confirme os termos de uso.</em>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 class=" text-danger text-center"
+                            style="line-height: 1; margin: 20px auto 0 auto; display: none" id="txtError"></h2>
+                        </h2>
+                        <div class="text-center mt-2">
+                            <a onclick="signup()" class="btn btn__secondary" style="width: 200px" id="btnSignup">
+                                Cadastrar
+                            </a>
+                        </div>
                     </div>
-                    <a href="index.html" class="btn btn__secondary">
-                        Sign Up
-                    </a>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
-
-
 
     <!-- JavaScript -->
     <script src="assets/js/jquery-3.6.4.min.js"></script>
