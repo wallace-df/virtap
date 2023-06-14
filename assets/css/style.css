@@ -1018,10 +1018,7 @@ My Profile
 } */
 
 .user-info.assistant .items {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-wrap: 30px;
+  display: block;
 }
 
 /* .user-info.assistant .items .item {
@@ -1035,11 +1032,26 @@ My Profile
 .items .checkbox {
   width: auto;
   margin-top: 0;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
-.checkbox_item p {
-  font-size: var(--small-font-size);
+.items label {
+  width: 100%;
+  position: relative;
+  line-height: 1;
+}
+
+.items label > span {
+  position: absolute;
+ 
+}
+
+.checkbox_item a, .link {
+  color: var(--primary-color);
+}
+
+.checkbox_item a:hover, .link:hover {
+  text-decoration: underline;
 }
 
 /*=========================================== 
@@ -1282,10 +1294,6 @@ Popup
   color: #fff;
 }
 
-input::placeholder {
-  color: #fff;
-}
-
 .input-box button {
   cursor: pointer;
   background-color: #eee;
@@ -1340,10 +1348,17 @@ Sign Up Pages
 }
 
 .right_content {
-  padding: 20px 80px;
+  padding: 20px 40px;
   margin: auto;
   max-width: 50vw;
   width: 100%;
+}
+
+.right_content h2 {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
 }
 
 .upload-img canvas {
@@ -1351,7 +1366,30 @@ Sign Up Pages
   height: 80px !important;
 }
 
+.item.error > div {
+  color: #dc3545;
+}
+.item.error input{
+  border-color: #dc3545;
+  color: #dc3545;
+  
+}
 
+.item em {
+  display: none;
+}
+
+.item.error em {
+  margin-top: 5px;
+  display: block;
+  line-height: 1;
+  color: #dc3545;
+  font-size: 8pt;
+}
+
+.item input.disabled {
+  background-color: ;
+}
 /* ================================== */
 /* ================================== */
 
@@ -1568,7 +1606,9 @@ Popup
 
 .user-info .item {
   margin-top: 20px;
-  width: 100%;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .user-info .btn {
@@ -1585,7 +1625,11 @@ Popup
   width: 100%;
   box-sizing: border-box;
   color: var(--title-color);
-  margin-top: 20px;
+  margin-top: 15px;
+}
+
+.items input.disabled {
+  background-color: var(--border-color);
 }
 
 .items textarea {
@@ -1817,8 +1861,8 @@ table {
   }
 
   .right_content {
-    margin-top: 80px;
-    padding: 50px 30px;
+    margin-top: 0px;
+    padding: 15px 30px;
   }
 
   .sign_up {
@@ -1979,6 +2023,13 @@ table {
   .day {
     margin-top: 10px;
   }
+
+  .right_content h2 {
+    width: 100%;
+  }
+
+    
+ 
 }
 
 @media screen and (max-width: 400px) {
@@ -1988,5 +2039,14 @@ table {
 
   .proposals-list .proposal .user .proposal-info {
     margin-left: 0;
+  }
+
+ 
+}
+
+@media screen and (max-width: 500px) {
+
+  .user-info .item {
+    width: 100%;
   }
 }
