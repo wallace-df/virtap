@@ -39,12 +39,12 @@ function signup() {
 
   let hasError = false;
 
-  if ($txtName.val().length < 5) {
+  if ($txtName.val().length < 10) {
     $txtName.closest('.item').addClass('error');
     hasError = true;
   }
 
-  if ($txtWhatsapp.val().length < 8) {
+  if ($txtWhatsapp.val().length < 10) {
     $txtWhatsapp.closest('.item').addClass('error');
     hasError = true;
   }
