@@ -1,5 +1,5 @@
 window.signupAPIEndpoint = 'https://api.virtap.com.br';
-
+window.assistantDashboard = 'https://assistentes.virtap.com.br';
 
 
 function popupWindow(url, windowName, win, w, h) {
@@ -11,11 +11,11 @@ function popupWindow(url, windowName, win, w, h) {
 function upload() {
   var fileinput = document.getElementById("finput");
   if (fileinput.files.length > 0) {
-      let reader = new FileReader();
-      reader.onload = function (event) {
-          $("#canv1").attr('src', event.target.result);
-      };
-      reader.readAsDataURL(fileinput.files[0]);
+    let reader = new FileReader();
+    reader.onload = function (event) {
+      $("#canv1").attr('src', event.target.result);
+    };
+    reader.readAsDataURL(fileinput.files[0]);
   } else {
     $("#canv1").removeAttr('src');
   }
@@ -74,7 +74,7 @@ function signup() {
   }
 
   let selectedAreas = [];
-  
+
   $chkAreas.find('input[type=checkbox]:checked').each(function (i, e) {
     selectedAreas.push($(e).attr('value'));
   });
@@ -104,7 +104,7 @@ function signup() {
     }
 
     $.ajax({
-      url: window.signupAPIEndpoint + '/assistant/register-assistant',
+      url: window.signupAPIEndpoint + '/assistant/register-profile',
       data: formData,
       processData: false,
       contentType: false,
@@ -112,18 +112,28 @@ function signup() {
       xhrFields: {
         withCredentials: true
       },
-      error: function (err) {
+      error: function (xhr, status) {
         $("#signupForm").find('input, .btn').prop("disabled", false).removeClass("disabled");
         $("#btnSignup").text("Cadastrar");
-        if (err.status === 401) {
+        if (xhr.status === 401) {
           $txtError.html("Sua sessão expirou.<br/> <a class='link' href='javascript:void(0)' onclick='popupWindow(\"" + window.signupAPIEndpoint + "/auth/google/assistant?popup=true\",\"_blank\",window, 600, 400)' target='_blank' class='link'> Clique aqui para entrar novamente.</a>").show();
         } else {
-          $txtError.text("Ocorreu um erro no seu cadastro. Por favor, tente novamente.").show();
+          try {
+            let err = JSON.parse(xhr.responseText);
+            if (err.errorObj && err.errorObj.errorCode === 'ASSISTANT_ALREADY_REGISTERED') {
+              window.location = assistantDashboard;
+              return;
+            }
 
+          } catch (err) {
+            console.log(err);
+            $txtError.text("Ocorreu um erro no seu cadastro. Por favor, tente novamente.").show();
+
+          }
         }
       },
       success: function () {
-        window.location = 'https://assistentes.virtap.com.br';
+        window.location = assistantDashboard;
       }
     });
 
