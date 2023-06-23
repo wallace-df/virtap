@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtap | Cliente | Cadastro</title>
+    <link rel="stylesheet" href="assets/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+    <div class="sign_up">
+        <div class="left_content" style="background: linear-gradient(180deg, #9CD7DB -190.19%, #FFFFFF 100%);">
+            <img src="assets/img/spa.png" alt="">
+        </div>
+        <div class="right_content">
+            <h2>Ao contrário da crença popular, o Lorem Ipsum não é simplesmente texto aleatório.
+            </h2>
+            <form id="signupForm" onsubmit="return false">
+                <div class="upload-img">
+                    <img id="canv1" onclick="document.getElementById('finput').click(); return false" style="cursor: pointer"></img>
+                    <p>
+                        <a class="btn bg-secondary" onclick="document.getElementById('finput').click(); return false" style="cursor: pointer">Escolher foto</a>
+                        <input type='file' accept="image/*" id="finput" onchange="upload()" style="display:none">
+                    </p>
+                </div>
+                <div class="input_from" style="margin-top: 20px">
+                    <div class="user-info assistant mt-3" id="personal">
+                        <div class="items">
+                            <div class="item">
+                                <div class="search__name" id="name">Nome</div>
+                                <input type="text" class="search__input form-control" placeholder="" id="txtNome"
+                                    name="name" />
+                                <em>Por favor, informe um nome válido.</em>
+                            </div>
+                        </div>
+                        <div class="items" style="margin-top: 20px">
+                            <div class="item">
+                                <div class="search__name" id="phone">Título</div>
+                                <input type="text" class="search__input form-control" placeholder="" id="txtTitle" />
+                                <em>Por favor, informe um título válido.</em>
+                            </div>
+                        </div>
+                        <div class="items">
+                            <div class="item">
+                                <h2 class="mb-1 text-muted" style="font-size: 14px;">Áreas de atuação (escolha até 3)
+                                </h2>
+                                <div style="display: flex; flex-wrap: wrap;" id="areasAtuacao">
+                                    <div style="flex-grow:1; padding-right: 30px">
+                                        <label class="checkbox_item">
+                                            <input type="checkbox" class="checkbox" value="ASSISTENCIA_PESSOAL">
+                                            <p>Assistência pessoal</p>
+                                        </label>
+                                        <label class="checkbox_item">
+                                            <input type="checkbox" class="checkbox" value="SECRETARIADO_EXECUTIVO">
+                                            <p>Secretariado executivo</p>
+                                        </label>
+                                        <label class="checkbox_item">
+                                            <input type="checkbox" class="checkbox" value="SUPORTE_ADMINISTRATIVO">
+                                            <p>Suporte administrativo</p>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="checkbox_item">
+                                            <input type="checkbox" class="checkbox" value="SECRETARIADO_REMOTO">
+                                            <p>Secretariado remoto</p>
+                                        </label>
+                                        <label class="checkbox_item">
+                                            <input type="checkbox" class="checkbox" value="SUPORTE_PARA_INFOPRODUTORES">
+                                            <p>Suporte para infoprodutores</p>
+                                        </label>
+                                        <label class="checkbox_item">
+                                            <input type="checkbox" class="checkbox" value="ENTRADA_DE_DADOS">
+                                            <p>Entrada de dados</p>
+                                        </label>
+                                    </div>
+                                </div>
+                                <em>Por favor, escolhe até 3 áreas de atuação.</em>
+                            </div>
+                        </div>
+
+                        <div class="items" style="margin-top: 20px">
+                            <div class="item">
+                                <h2 class="mb-1 text-muted" style="font-size: 14px;">Descreva sua experiência na área de
+                                    assistência virtual</h2>
+                                <textarea class="form-control mt-0" id="txtDescription" rows="5"></textarea>
+                                <em>Por favor, informe uma descrição com pelo menos 50 caracteres.</em>
+                            </div>
+                        </div>
+
+                        <div class="items" style="margin-top: 20px">
+                            <div class="item">
+                                <div class="checkbox_item">
+                                    <label>
+                                        <input type="checkbox" class="checkbox" id="chkTermos">
+                                        <span>Aceito os <a href="/termos" target="_blank"
+                                                class="link">termos</a>.</span>
+                                        <em>Por favor, leia e confirme os termos de uso.</em>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 class=" text-danger text-center"
+                            style="line-height: 1; margin: 20px auto 0 auto; display: none" id="txtError"></h2>
+                        </h2>
+                        <div class="text-center mt-2">
+                            <a onclick="signup()" class="btn btn__secondary" style="width: 200px" id="btnSignup">
+                                Cadastrar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/jquery-3.6.4.min.js"></script>
+    <script src="assets/js/all.min.js"></script>
+    <script src="assets/js/fontawesome.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/style.js"></script>
+</body>
+
+</html>
