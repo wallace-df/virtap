@@ -25,7 +25,7 @@
                     <img id="canv1" onclick="document.getElementById('finput').click(); return false" style="cursor: pointer"></img>
                     <p>
                         <a class="btn bg-secondary" onclick="document.getElementById('finput').click(); return false" style="cursor: pointer">Escolher foto</a>
-                        <input type='file' accept="image/*" id="finput" onchange="upload()" style="display:none">
+                        <input type='file' name="picture_file" accept="image/*" id="finput" onchange="upload()" style="display:none">
                     </p>
                 </div>
                 <div class="input_from" style="margin-top: 20px">
@@ -41,7 +41,7 @@
                         <div class="items" style="margin-top: 20px">
                             <div class="item">
                                 <div class="search__name" id="phone">Título</div>
-                                <input type="text" class="search__input form-control" placeholder="" id="txtTitle" />
+                                <input type="text" class="search__input form-control" placeholder="" id="txtTitle" maxlength="30"/>
                                 <em>Por favor, informe um título válido.</em>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                             <div class="item">
                                 <h2 class="mb-1 text-muted" style="font-size: 14px;">Descreva sua experiência na área de
                                     assistência virtual</h2>
-                                <textarea class="form-control mt-0" id="txtDescription" rows="5"></textarea>
+                                <textarea class="form-control mt-0" id="txtDescription" rows="5" maxlength="5000"></textarea>
                                 <em>Por favor, informe uma descrição com pelo menos 50 caracteres.</em>
                             </div>
                         </div>
@@ -124,7 +124,7 @@
     <script src="cadastro/js/all.min.js"></script>
     <script src="cadastro/js/fontawesome.min.js"></script>
     <script src="cadastro/js/bootstrap.min.js"></script>
-    <script src="cadastro/js/style.js"></script>
+    <script src="cadastro/js/functions-v1.js"></script>
 </body>
 
 </html>
