@@ -1035,6 +1035,10 @@ My Profile
   margin-right: 10px;
 }
 
+input[type="checkbox"]{
+  accent-color: var(--primary-color);
+}
+
 .items label {
   width: 100%;
   position: relative;

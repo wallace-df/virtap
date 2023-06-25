@@ -1054,6 +1054,11 @@ My Profile
   text-decoration: underline;
 }
 
+input[type="checkbox"]{
+  accent-color: var(--primary-color);
+}
+
+
 /*=========================================== 
 Project Page
 ===========================================*/
