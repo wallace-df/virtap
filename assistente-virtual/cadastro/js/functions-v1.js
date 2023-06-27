@@ -119,7 +119,7 @@ function signup() {
           try {
             let err = JSON.parse(xhr.responseText);
             if (err.errorCode === 'ASSISTANT_ALREADY_REGISTERED') {
-              window.location = assistantDashboard;
+              $txtError.html("Você já criou uma conta.<br/> <a class='link' href='" + window.assistantDashboard + "' target='_blank' class='link'> Clique aqui para fazer login.</a>").show();
               return;
             }
             throw xhr;
