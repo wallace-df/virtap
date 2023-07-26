@@ -93,7 +93,7 @@
   .faq-image img {
     max-width: 530px;
   }
-  .cada-necessidade-text-area h6 {
+  .cada-necessidade-text-area h4 {
     font-size: 20px;
   }
   .header-login-btn {
@@ -241,7 +241,7 @@
     padding: 25px;
     border-radius: 20px;
   }
-  .virtap-funciona-item h6 {
+  .virtap-funciona-item h3 {
     font-size: 17px;
     padding: 20px 0 8px;
   }
@@ -270,7 +270,7 @@
     height: 400px;
     background-size: cover;
   }
-  .vantagem-plataforma-item h6 {
+  .vantagem-plataforma-item h3 {
     font-size: 16px;
   }
   .vantagem-plataforma-item p {
@@ -328,7 +328,7 @@
   .Para-quem-items img {
     height: 140px;
   }
-  .Para-quem-items a {
+  .Para-quem-items h3 {
     font-size: 17px;
     padding: 35px 0 20px;
   }
@@ -554,7 +554,7 @@
     font-size: 26px;
   }
 
-  .cada-necessidade-text-area h6 {
+  .cada-necessidade-text-area h4 {
     font-size: 18px;
   }
 
@@ -800,7 +800,7 @@
   .virtap-funciona-item .virtap-funciona-img img {
     width: 26px;
   }
-  .virtap-funciona-item h6 {
+  .virtap-funciona-item h3 {
     font-size: 15px;
     padding: 16px 0 8px;
   }
@@ -815,7 +815,7 @@
     height: 55px;
     line-height: 55px;
   }
-  .vantagem-plataforma-item h6 {
+  .vantagem-plataforma-item h3 {
     font-size: 14px;
   }
   .vantagem-plataforma-item p {
@@ -1205,7 +1205,7 @@
     font-size: 16px;
     line-height: 28px;
   }
-  .cada-necessidade-text-area h6 {
+  .cada-necessidade-text-area h4 {
     font-size: 18px;
     line-height: 28px;
   }
@@ -1418,7 +1418,7 @@
     padding-top: 63px;
     padding-bottom: 53px;
   }
-  .Para-quem-items a {
+  .Para-quem-items h3 {
     font-size: 18px;
     padding: 21px 0 3px;
   }
@@ -1708,7 +1708,7 @@
     width: 90%;
     padding: 38px 50px 30px 50px;
   }
-  .virtap-funciona-item h6{
+  .virtap-funciona-item h3{
     font-size: 17px;
   }
   .virtap-funciona-item .right_arrow{
@@ -1729,7 +1729,7 @@
     padding-left: 10px;
     padding-right: 10px;
   }
-  .vantagem-plataforma-item h6 {
+  .vantagem-plataforma-item h3 {
     font-size: 17px;
   }
   .vantagem-plataforma-item p {

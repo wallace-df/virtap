@@ -730,7 +730,7 @@ section {
     padding-bottom: 16px;
     max-width: 571px;
   }
-  .cada-necessidade-text-area h6 {
+  .cada-necessidade-text-area h4 {
     font-weight: 500;
     font-size: 22px;
     line-height: 1.72;
@@ -939,7 +939,7 @@ section {
         -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
   }
-  .virtap-funciona-item h6 {
+  .virtap-funciona-item h3 {
     font-weight: 600;
     font-size: 20px;
     line-height: 1.4;
@@ -989,7 +989,7 @@ section {
     background: #8BCED3;
     margin: 0 auto;
   }
-  .vantagem-plataforma-item h6 {
+  .vantagem-plataforma-item h3 {
     font-weight: 600;
     font-size: 20px;
     line-height: 1.6;
@@ -1163,7 +1163,7 @@ section {
     display: block;
     margin-top: 60px;
   }
-  .Para-quem-items a {
+  .Para-quem-items h3 {
     display: block;
     font-weight: 600;
     font-size: 22px;
