@@ -1638,7 +1638,7 @@ Popup
   width: 100%;
   box-sizing: border-box;
   color: var(--title-color);
-  margin-top: 15px;
+  margin-top: 5px;
 }
 
 .items input.disabled {
@@ -2082,7 +2082,7 @@ textarea.form-control {
 .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
 	color: #535353 !important;
 	opacity: 0.5; /* Firefox */
-	font-size: 12pt;
+	font-size: 11pt;
 }
 
 [data-lastpass-icon-root], [data-lastpass-root] {
