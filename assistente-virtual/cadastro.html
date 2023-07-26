@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
+
     <title>Virtap | Cliente | Cadastro</title>
 
     <link href="img/favicon.svg" type="image/svg" rel="icon">
@@ -25,10 +28,13 @@
             </h2>
             <form id="signupForm" onsubmit="return false">
                 <div class="upload-img">
-                    <img id="canv1" onclick="document.getElementById('finput').click(); return false" style="cursor: pointer"></img>
+                    <img id="canv1" onclick="document.getElementById('finput').click(); return false"
+                        style="cursor: pointer"></img>
                     <p>
-                        <a class="btn bg-secondary" onclick="document.getElementById('finput').click(); return false" style="cursor: pointer">Escolher foto</a>
-                        <input type='file' name="picture_file" accept="image/*" id="finput" onchange="upload()" style="display:none">
+                        <a class="btn bg-secondary" onclick="document.getElementById('finput').click(); return false"
+                            style="cursor: pointer">Escolher foto</a>
+                        <input type='file' name="picture_file" accept="image/*" id="finput" onchange="upload()"
+                            style="display:none">
                     </p>
                 </div>
                 <div class="input_from" style="margin-top: 20px">
@@ -37,14 +43,15 @@
                             <div class="item">
                                 <div class="search__name" id="name">Nome</div>
                                 <input type="text" class="search__input form-control" placeholder="" id="txtNome"
-                                    name="name" maxlength="30"/>
+                                    name="name" maxlength="30" />
                                 <em>Por favor, informe um nome válido.</em>
                             </div>
                         </div>
                         <div class="items" style="margin-top: 20px">
                             <div class="item">
                                 <div class="search__name" id="phone">Título</div>
-                                <input type="text" class="search__input form-control" placeholder="" id="txtTitle" maxlength="30"/>
+                                <input type="text" class="search__input form-control" placeholder="" id="txtTitle"
+                                    maxlength="30" />
                                 <em>Por favor, informe um título válido.</em>
                             </div>
                         </div>
@@ -90,7 +97,8 @@
                             <div class="item">
                                 <h2 class="mb-1 text-muted" style="font-size: 14px;">Descreva sua experiência na área de
                                     assistência virtual</h2>
-                                <textarea class="form-control mt-0" id="txtDescription" rows="5" maxlength="5000"></textarea>
+                                <textarea class="form-control mt-0" id="txtDescription" rows="5"
+                                    maxlength="5000"></textarea>
                                 <em>Por favor, informe uma descrição com pelo menos 50 caracteres.</em>
                             </div>
                         </div>
@@ -109,7 +117,8 @@
                         </div>
 
                         <h2 class=" text-danger text-center"
-                            style="line-height: 1; margin: 20px auto 0 auto; display: none; font-size:12pt" id="txtError"></h2>
+                            style="line-height: 1; margin: 20px auto 0 auto; display: none; font-size:12pt"
+                            id="txtError"></h2>
                         </h2>
                         <div class="text-center mt-2">
                             <a onclick="signup()" class="btn btn__secondary" style="width: 200px" id="btnSignup">

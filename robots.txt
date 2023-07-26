@@ -1,2 +1,6 @@
 User-agent: *
-Disallow:
+Disallow: /cadastro.html
+Disallow: /login.html
+Disallow: /assistente-virtual/cadastro.html
+Disallow: /assistente-virtual/login.html
+
