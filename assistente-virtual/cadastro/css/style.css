@@ -2076,3 +2076,15 @@ table {
 textarea.form-control {
   resize: none;
 }
+
+
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: #535353 !important;
+	opacity: 0.5; /* Firefox */
+	font-size: 12pt;
+}
+
+[data-lastpass-icon-root], [data-lastpass-root] {
+  display: none !important;
+}

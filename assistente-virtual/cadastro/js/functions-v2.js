@@ -30,9 +30,31 @@ function getParameterByName(name, url) {
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-$(document).ready(function () {
-  let nome = getParameterByName('nome');
+$(document).ready(async function () {
 
+//   var c = document.createElement('canvas');
+//   let img = $('<img src="' + 'https://lh3.googleusercontent.com/a/AAcHTtc26AiRJMLFld0NVTwpoGKctW64hNN4FRn8H_IMH-XegUQ=s96-c' + '"/>'); 
+// c.height = img.naturalHeight;
+// c.width = img.naturalWidth;
+// var ctx = c.getContext('2d');
+
+// ctx.drawImage(img, 0, 0, c.width, c.height);
+// var base64String = c.toDataURL();
+
+
+//   let canvas = $('<canvas/>', { id: 'mycanvas', width: 500, height: 500 });
+//   $("body").append(canvas);
+//   var ctx = canvas[0].getContext("2d");
+//   ctx.drawImage(img[0], 0, 0);
+//   var dataURL = canvas[0].toDataURL("image/png");
+//   console.log(dataURL);
+
+//   // let pp = await urlToObject();
+//   // console.log(pp);
+//   // $('#canv1').attr('src', 'https://lh3.googleusercontent.com/a/AAcHTtc26AiRJMLFld0NVTwpoGKctW64hNN4FRn8H_IMH-XegUQ=s96-c');
+//   // $('#canv1').on
+
+  let nome = getParameterByName('nome');
   if (nome) {
     $("#txtNome").val(nome);
   }
@@ -66,7 +88,7 @@ function signup() {
     hasError = true;
   }
 
-  if ($txtDescription.val().length < 50) {
+  if ($txtDescription.val().length < 100) {
     $txtDescription.closest('.item').addClass('error');
     hasError = true;
   }

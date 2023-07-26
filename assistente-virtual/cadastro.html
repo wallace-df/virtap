@@ -24,12 +24,12 @@
             <img src="cadastro/img/spa.png" alt="">
         </div>
         <div class="right_content">
-            <h2>Ao contrário da crença popular, o Lorem Ipsum não é simplesmente texto aleatório.
+            <h2>Preencha os dados abaixo para efetuar seu cadastro.
             </h2>
-            <form id="signupForm" onsubmit="return false">
+            <form id="signupForm" onsubmit="return false" autocomplete="off">
                 <div class="upload-img">
                     <img id="canv1" onclick="document.getElementById('finput').click(); return false"
-                        style="cursor: pointer"></img>
+                        style="cursor: pointer" referrerpolicy="no-referrer"></img>
                     <p>
                         <a class="btn bg-secondary" onclick="document.getElementById('finput').click(); return false"
                             style="cursor: pointer">Escolher foto</a>
@@ -42,7 +42,7 @@
                         <div class="items">
                             <div class="item">
                                 <div class="search__name" id="name">Nome</div>
-                                <input type="text" class="search__input form-control" placeholder="" id="txtNome"
+                                <input type="text" data-lpignore="true" class="search__input form-control" placeholder="" id="txtNome"
                                     name="name" maxlength="30" />
                                 <em>Por favor, informe um nome válido.</em>
                             </div>
@@ -50,8 +50,8 @@
                         <div class="items" style="margin-top: 20px">
                             <div class="item">
                                 <div class="search__name" id="phone">Título</div>
-                                <input type="text" class="search__input form-control" placeholder="" id="txtTitle"
-                                    maxlength="30" />
+                                <input type="text" data-lpignore="true" class="search__input form-control" id="txtTitle"
+                                    maxlength="50" placeholder="Preencha este campo com sua área de atuação principal ou especialização"/>
                                 <em>Por favor, informe um título válido.</em>
                             </div>
                         </div>
@@ -98,8 +98,8 @@
                                 <h2 class="mb-1 text-muted" style="font-size: 14px;">Descreva sua experiência na área de
                                     assistência virtual</h2>
                                 <textarea class="form-control mt-0" id="txtDescription" rows="5"
-                                    maxlength="5000"></textarea>
-                                <em>Por favor, informe uma descrição com pelo menos 50 caracteres.</em>
+                                    maxlength="5000" placeholder="Mostre para o mundo o que você tem a oferecer como profissional. Aqui você pode contar quem é você como profissional, suas experiências, e sua forma de trabalhar."></textarea>
+                                <em>Por favor, informe uma descrição com pelo menos 100 caracteres.</em>
                             </div>
                         </div>
 
@@ -136,7 +136,7 @@
     <script src="cadastro/js/all.min.js"></script>
     <script src="cadastro/js/fontawesome.min.js"></script>
     <script src="cadastro/js/bootstrap.min.js"></script>
-    <script src="cadastro/js/functions-v1.js"></script>
+    <script src="cadastro/js/functions-v2.js"></script>
 </body>
 
 </html>
