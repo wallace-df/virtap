@@ -2088,3 +2088,8 @@ textarea.form-control {
 [data-lastpass-icon-root], [data-lastpass-root] {
   display: none !important;
 }
+
+
+.iti--separate-dial-code .iti__selected-flag {
+	border-radius: 20px 0 0 20px !important;
+}
