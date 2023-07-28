@@ -18,6 +18,14 @@ function getParameterByName(name, url) {
 }
 
 
+var input = document.querySelector("#txtWhatsapp");
+let intl = window.intlTelInput(input, {
+  utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
+  autoInsertDialCode: true,
+  initialCountry: "BR",
+  separateDialCode: true
+});
+
 $(document).ready(function () {
   let nome = getParameterByName('nome');
 
@@ -44,7 +52,7 @@ function signup() {
     hasError = true;
   }
 
-  if ($txtWhatsapp.val().length < 10) {
+  if ($txtWhatsapp.val().length < 1 || !intl.isValidNumber()) {
     $txtWhatsapp.closest('.item').addClass('error');
     hasError = true;
   }
@@ -60,7 +68,7 @@ function signup() {
 
     let formData = new FormData();
     formData.append('name', $txtName.val());
-    formData.append('contact_info', JSON.stringify({ whatsapp: $txtWhatsapp.val() }));
+    formData.append('contact_info', JSON.stringify({ whatsapp: intl.getNumber() }));
 
     $.ajax({
       url: window.signupAPIEndpoint + '/client/register-profile',

@@ -2055,3 +2055,19 @@ table {
     width: 100%;
   }
 }
+
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: #535353 !important;
+	opacity: 0.5; /* Firefox */
+	font-size: 11pt;
+}
+
+[data-lastpass-icon-root], [data-lastpass-root] {
+  display: none !important;
+}
+
+
+.iti--separate-dial-code .iti__selected-flag {
+	border-radius: 20px 0 0 20px !important;
+}
