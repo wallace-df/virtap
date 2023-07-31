@@ -5658,7 +5658,7 @@ $(document).ready(async function () {
 
   let nome = getParameterByName('nome');
   if (nome) {
-    $("#txtNome").val(nome);
+    $("#txtNome").val(nome.substring(0,30));
   }
 });
 
