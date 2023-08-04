@@ -26,6 +26,17 @@ let intl = window.intlTelInput(input, {
   separateDialCode: true
 });
 
+
+$("#txtWhatsapp").on('blur', function () {
+  intl.setNumber(intl.getNumber());
+  if (intl.isValidNumber()) {
+    $("#txtWhatsapp").closest(".item").removeClass("error");
+  } else {
+    $("#txtWhatsapp").closest(".item").addClass("error");
+  }
+});
+
+
 $(document).ready(function () {
   let nome = getParameterByName('nome');
 
