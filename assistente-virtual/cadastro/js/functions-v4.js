@@ -5602,23 +5602,140 @@ let cidades =
   ];
 
 
-// console.log(resp);
 function popupWindow(url, windowName, win, w, h) {
   const y = win.top.outerHeight / 2 + win.top.screenY - (h / 2);
   const x = win.top.outerWidth / 2 + win.top.screenX - (w / 2);
   return win.open(url, windowName, `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=${w}, height=${h}, top=${y}, left=${x}`);
 }
 
+function dataURIToBlob(dataURI) {
+  const splitDataURI = dataURI.split(',')
+  const byteString = splitDataURI[0].indexOf('base64') >= 0 ? atob(splitDataURI[1]) : decodeURI(splitDataURI[1])
+  const mimeString = splitDataURI[0].split(':')[1].split(';')[0]
+
+  const ia = new Uint8Array(byteString.length)
+  for (let i = 0; i < byteString.length; i++)
+    ia[i] = byteString.charCodeAt(i)
+
+  return new Blob([ia], { type: mimeString })
+}
+
+function getImage(dataUrl) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.src = dataUrl;
+    image.onload = () => {
+      resolve(image);
+    };
+    image.onerror = (el, err) => {
+      reject(err.error);
+    };
+  });
+}
+
+async function downscaleImage(
+  dataUrl,
+  imageType,  // e.g. 'image/jpeg'
+  resolution,  // max width/height in pixels
+  quality   // e.g. 0.9 = 90% quality
+) {
+
+  // Create a temporary image so that we can compute the height of the image.
+  const image = await this.getImage(dataUrl);
+  const oldWidth = image.naturalWidth;
+  const oldHeight = image.naturalHeight;
+
+  const longestDimension = oldWidth > oldHeight ? 'width' : 'height';
+  const currentRes = longestDimension == 'width' ? oldWidth : oldHeight;
+
+  // Calculate new dimensions
+  const newSize = longestDimension == 'width'
+    ? Math.floor(oldHeight / oldWidth * resolution)
+    : Math.floor(oldWidth / oldHeight * resolution);
+  const newWidth = longestDimension == 'width' ? resolution : newSize;
+  const newHeight = longestDimension == 'height' ? resolution : newSize;
+
+  // Create a temporary canvas to draw the downscaled image on.
+  const canvas = document.createElement('canvas');
+  canvas.width = newWidth;
+  canvas.height = newHeight;
+
+  // Draw the downscaled image on the canvas and return the new data URL.
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = "#FFF";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(image, 0, 0, newWidth, newHeight);
+  const newDataUrl = canvas.toDataURL(imageType, quality);
+  return newDataUrl;
+
+
+}
+
 function upload() {
   var fileinput = document.getElementById("finput");
+  let $ctx = this;
   if (fileinput.files.length > 0) {
     let reader = new FileReader();
     reader.onload = function (event) {
-      $("#canv1").attr('src', event.target.result);
+      let $modal = $("#editImageModal");
+      let cropper = null;
+
+      $modal.find('[data-confirm]').off().on('click', async function () {
+        let base64 = await cropper.cropme('crop', 'base64');
+        let compressedImage = await downscaleImage(base64, 'image/jpeg', 240, 0.9);
+        let blob = dataURIToBlob(compressedImage);
+        $("#canv1").attr('src', compressedImage);
+        $("#canv1").data('blob', blob);
+        $modal.modal('hide');
+
+      });
+
+
+      $('#editImgContainer').html('<div class="text-center">Carregando...</div>');
+      $modal.modal('show');
+      $modal.off().on('shown.bs.modal', function () {
+        $('#editImgContainer').html('<img data-img class=""></img>');
+        let $img = $("#editImgContainer").find('img').attr('src', event.target.result);
+        $img.on('load', function () {
+          $img.off();
+          cropper = $img.cropme({
+            container: {
+              width: '100%'
+            },
+            viewport: {
+              width: 240,
+              height: 240,
+              border: {
+                color: 'var(--bs-blue)'
+                //type: 'circle'
+              },
+
+            }, zoom: {
+              slider: true
+            },
+            rotation: {
+              slider: false
+            }
+
+
+
+          });
+
+        });
+      }).on('hidden.bs.modal', function () {
+        $("#finput").val("");
+        if (cropper) {
+          cropper.cropme('destroy');
+        }
+      });
+
+
     };
     reader.readAsDataURL(fileinput.files[0]);
   } else {
+    alert('s');
     $("#canv1").removeAttr('src');
+    $("#canv1").data('blob', null);
   }
 }
 
@@ -5654,11 +5771,11 @@ $(document).ready(async function () {
   });
 
 
-  
+
 
   let nome = getParameterByName('nome');
   if (nome) {
-    $("#txtNome").val(nome.substring(0,30));
+    $("#txtNome").val(nome.substring(0, 30));
   }
 });
 
@@ -5670,9 +5787,18 @@ let intl = window.intlTelInput(input, {
   separateDialCode: true
 });
 
+$("#txtPhone").on('blur', function () {
+  intl.setNumber(intl.getNumber());
+  if (intl.isValidNumber()) {
+    $("#txtPhone").closest(".item").removeClass("error");
+  } else {
+    $("#txtPhone").closest(".item").addClass("error");
+  }
+});
+
 
 function signup() {
-  let $filePicture = $("#finput");
+  let $filePicture = $("#canv1");
   let $txtName = $("#txtNome");
   let $txtPhone = $("#txtPhone");
   let $txtCity = $("#txtCity");
@@ -5698,24 +5824,21 @@ function signup() {
     hasError = true;
   }
 
-
   if ($txtTitle.val().length < 8) {
     $txtTitle.closest('.item').addClass('error');
     hasError = true;
   }
 
-  
   if ($txtCity.val().length < 5) {
     $txtCity.closest('.item').addClass('error');
     hasError = true;
   }
-  
 
   if ($txtPhone.val().length < 1 || !intl.isValidNumber()) {
     $txtPhone.closest('.item').addClass('error');
     hasError = true;
   }
-  
+
   if ($txtDescription.val().length < 100) {
     $txtDescription.closest('.item').addClass('error');
     hasError = true;
@@ -5749,8 +5872,8 @@ function signup() {
     formData.append('expertise_areas', JSON.stringify(selectedAreas));
     formData.append('description', $txtDescription.val());
 
-    if ($filePicture[0].files.length > 0) {
-      formData.append('picture_file', $filePicture[0].files[0]);
+    if ($filePicture.data('blob')) {
+      formData.append('picture_file', new File([$filePicture.data('blob')], "image/jpeg"));
     }
 
     $.ajax({

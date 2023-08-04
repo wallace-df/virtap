@@ -15,13 +15,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.css">
-
-    <link rel="stylesheet" href="cadastro/css/all.min.css" />
-    <link rel="stylesheet" href="cadastro/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropme@latest/dist/cropme.min.css">
     <link rel="stylesheet" href="cadastro/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="cadastro/css/style.css" />
-
-
+    <link rel="stylesheet" href="cadastro/css/style-v1.css" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
     <script>
@@ -171,16 +167,39 @@
         </div>
     </div>
 
+
+    <!-- Edit image modal -->
+    <div class="modal fade" id="editImageModal" tabindex="-1" role="dialog" data-bs-keyboard="false"
+        data-bs-backdrop="static">
+        <div class="modal-dialog" role="document" style="width:600px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">
+                        Editar image
+                    </h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
+
+                </div>
+                <div class="modal-body proceed">
+                    <div id="editImgContainer">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn__secondary" data-confirm>Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- JavaScript -->
 
 
     <script src="cadastro/js/jquery-3.6.4.min.js"></script>
-    <script src="cadastro/js/all.min.js"></script>
-    <script src="cadastro/js/fontawesome.min.js"></script>
     <script src="cadastro/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.js"></script>
-    <script src="cadastro/js/functions-v3.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cropme@latest/dist/cropme.min.js"></script>
+    <script src="cadastro/js/functions-v4.js"></script>
 </body>
 
 </html>
