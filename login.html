@@ -50,7 +50,7 @@
                         <a href="/" class="login_site_logo"><img class="w-100" src="/assistente-virtual/img/logo.svg"
                                 alt=""></a>
                         <h3>Cadastre-se ou faça login com a<br> sua conta google</h3>
-                        <a href="https://api.virtap.com.br/auth/google/client" class="login_btn"><img
+                        <a href="https://api.virtap.com.br/auth/google/client" class="login_btn" id="login-button"><img
                                 src="/assistente-virtual/img/google.svg" alt="">Google</a>
                         <p class="bottom px-4">Ao criar uma conta você concorda com os nossos <a href="/termos"
                                 target="_blank" class="link">termos de uso</a>
@@ -66,6 +66,27 @@
     <script src="/assistente-virtual/js/jquery-3.4.1.min.js"></script>
     <script src="/assistente-virtual/js/plugins.js"></script>
     <script src="/assistente-virtual/js/main.js"></script>
+    <script>
+        function getParameterByName(name) {
+            var regexS = "[\\?&]" + name + "=([^&#]*)",
+                regex = new RegExp(regexS),
+                results = regex.exec(window.location.search);
+            if (results == null) {
+                return "";
+            } else {
+                return decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+        }
+
+        $(document).ready(function () {
+            let next = getParameterByName('next');
+            if (next) {
+                let url = $("#login-button").attr('href');
+                url += '?next=' + next;
+                $("#login-button").attr('href', url);
+            }
+        });
+    </script>
 </body>
 
 </html>
