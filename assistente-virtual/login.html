@@ -68,6 +68,27 @@
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        function getParameterByName(name) {
+            var regexS = "[\\?&]" + name + "=([^&#]*)",
+                regex = new RegExp(regexS),
+                results = regex.exec(window.location.search);
+            if (results == null) {
+                return "";
+            } else {
+                return decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+        }
+
+        $(document).ready(function () {
+            let next = getParameterByName('next');
+            if (next) {
+                let url = $("#login-button").attr('href');
+                url += '?next=' + next;
+                $("#login-button").attr('href', url);
+            }
+        });
+    </script>
 </body>
 
 </html>
