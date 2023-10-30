@@ -100,6 +100,9 @@ function signup() {
           try {
             let err = JSON.parse(xhr.responseText);
             if (err.errorCode === 'CLIENT_ALREADY_REGISTERED') {
+              gtag('event', 'conversion', {
+                'send_to': 'AW-924784320/25HBCKer7PEYEMCt_LgD',
+            });
               $txtError.html("Você já criou uma conta.<br/> <a class='link' href='" + window.clientDashboard + "' target='_blank' class='link'> Clique aqui para fazer login.</a>").show();
               return;
             }
