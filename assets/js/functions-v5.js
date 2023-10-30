@@ -45,6 +45,7 @@ $(document).ready(function () {
   }
 });
 
+
 function signup() {
   let $txtName = $("#txtNome");
   let $txtWhatsapp = $("#txtWhatsapp");
@@ -112,7 +113,13 @@ function signup() {
         }
       },
       success: function () {
-        window.location = clientDashboard;
+        let callback = function () {
+          window.location = clientDashboard;
+        };
+        gtag('event', 'conversion', {
+            'send_to': 'AW-924784320/25HBCKer7PEYEMCt_LgD',
+            'event_callback': callback
+        });
       }
     });
 
