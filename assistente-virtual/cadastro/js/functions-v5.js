@@ -5907,7 +5907,13 @@ function signup() {
         }
       },
       success: function () {
-        window.location = assistantDashboard;
+        let callback = function () {
+          window.location = assistantDashboard;
+        };
+        gtag('event', 'conversion', {
+          'send_to': 'AW-924784320/25HBCKer7PEYEMCt_LgD',
+          'event_callback': callback
+        });
       }
     });
 
