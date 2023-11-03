@@ -116,10 +116,15 @@ function signup() {
         let callback = function () {
           window.location = clientDashboard;
         };
-        gtag('event', 'conversion', {
-            'send_to': 'AW-924784320/25HBCKer7PEYEMCt_LgD',
-            'event_callback': callback
+
+        gtag('event', 'Cadastro_Cliente', {
+          'event_callback': callback
         });
+
+        // gtag('event', 'conversion', {
+        //     'send_to': 'AW-924784320/25HBCKer7PEYEMCt_LgD',
+        //     'event_callback': callback
+        // });
       }
     });
 
