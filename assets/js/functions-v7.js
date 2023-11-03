@@ -118,6 +118,7 @@ function signup() {
         };
 
         gtag('event', 'Cadastro_Cliente', {
+          'send_to': 'G-4ZFMG1F0XK',
           'event_callback': callback
         });
 
