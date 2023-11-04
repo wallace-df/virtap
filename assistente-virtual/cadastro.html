@@ -60,18 +60,22 @@
     </script>
     <!-- End Meta Pixel Code -->
 
-    <!-- Begin Inspectlet Asynchronous Code -->
+    <!-- Begin SessionStack code -->
     <script type="text/javascript">
-        (function () {
-            window.__insp = window.__insp || [];
-            __insp.push(['wid', 651100988]);
-            var ldinsp = function () {
-                if (typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js?wid=651100988&r=' + Math.floor(new Date().getTime() / 3600000); var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x);
-            };
-            setTimeout(ldinsp, 0);
-        })();
+        !function (a, b) {
+            var c = window; c.SessionStackKey = a, c[a] = c[a] || {
+                t: b,
+                q: []
+            }; for (var d = ["start", "stop", "identify", "getSessionId", "log", "setOnDataCallback", "trackEvent"], e = 0; e < d.length; e++)!function (b) {
+                c[a][b] = c[a][b] || function () {
+                    c[a].q.push([b].concat([].slice.call(arguments, 0)));
+                }
+            }(d[e]); var f = document.createElement("script"); f.async = 1, f.crossOrigin = "anonymous",
+                f.src = "https://cdn.sessionstack.com/sessionstack.js"; var g = document.getElementsByTagName("script")[0];
+            g.parentNode.insertBefore(f, g)
+        }("SessionStack", "9d1f1977a2bc4878874f4a522f1e5542");
     </script>
-    <!-- End Inspectlet Asynchronous Code -->
+    <!-- End SessionStack Code -->
 
 </head>
 
