@@ -117,7 +117,7 @@ function signup() {
           window.location = clientDashboard;
         };
 
-        gtag('event', 'sign_up', {
+        gtag('event', 'sign_up_client', {
           'send_to': 'G-4ZFMG1F0XK',
           'event_callback': callback
         });
