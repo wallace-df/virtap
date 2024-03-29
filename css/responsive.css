@@ -145,7 +145,7 @@
   }
 
   .landing-hero-text-area p {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .landing-hero-img .landing-hero-main-img img {
@@ -284,7 +284,7 @@
   }
 
   .virtap-area .virtap-text-item .virtap-title p {
-    font-size: 20px;
+    font-size: 19px;
   }
 
   .cada-necessidade-text-area h3 {
@@ -345,11 +345,11 @@
   }
 
   .vantagem-plataforma-item h3 {
-    font-size: 16px;
+    /* font-size: 16px; */
   }
 
   .vantagem-plataforma-item p {
-    font-size: 14px;
+    /* font-size: 14px; */
   }
 
   .vantagem-plataforma-item .vantagem-plataforma-icon {
@@ -631,7 +631,7 @@
   }
 
   .landing-hero-text-area p {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .landing-hero-text-area {
@@ -679,7 +679,7 @@
   }
 
   .virtap-area .virtap-text-item .virtap-title p {
-    font-size: 20px;
+    font-size: 19px;
   }
 
   .title {
@@ -857,7 +857,7 @@
   }
 
   .landing-hero-text-area p {
-    font-size: 22px;
+    font-size: 20px;
     /* line-height: 30px; */
     margin-bottom: 45px;
   }
@@ -1013,11 +1013,11 @@
   }
 
   .vantagem-plataforma-item h3 {
-    font-size: 14px;
+    /* font-size: 14px; */
   }
 
   .vantagem-plataforma-item p {
-    font-size: 12px;
+    /* font-size: 12px; */
   }
 
   .title {
@@ -1054,6 +1054,86 @@
 
 
 @media (max-width: 991px) {
+
+  .career_icon_box {
+    text-align: center;
+    position: relative;
+    left: unset !important;
+    right: unset !important;
+    top: unset !important;
+    bottom: unset !important;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-bottom: 3.8rem;
+    width: 100% !important;
+  }
+
+  .career_icon_box:first-child {
+    padding-top: 0;
+    margin-top: 2rem;
+  }
+
+  .career_icon_box:last-child {
+    padding-bottom: 0;
+  }
+
+  .career_icon_box::before {
+    /* 		content: ''; */
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    top: 0;
+    width: 1px;
+    height: 100%;
+    border-left: 1px dashed #CEE9EB;
+    z-index: -1;
+  }
+
+  .career_icon_box:last-child::before {
+    display: none;
+  }
+
+  .career_icon_box .icon {
+    display: block;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 1.8rem;
+  }
+
+  .career_icon_box:not(.right) .icon {
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
+  }
+
+  .career_icon_box:not(.right)>div {
+    -webkit-box-ordinal-group: 3;
+    -ms-flex-order: 2;
+    order: 2;
+    width: 100%;
+  }
+
+  .career_icon_box>div {
+    width: 100%;
+  }
+
+  .career_icon_box:not(.right) {
+    text-align: center;
+  }
+
+  .career_icon_box p br {
+    display: none;
+  }
+
+  .career_content_wrap {
+    width: auto;
+  } 
+
+  
   .login_dropdown>div:first-child {
     margin-bottom: 30px;
   }
@@ -1298,7 +1378,7 @@
   }
 
   .landing-hero-text-area p {
-    font-size: 22px;
+    font-size: 20px;
     /* line-height: 28px; */
     margin-bottom: 30px;
     text-align: justify;
@@ -1447,7 +1527,7 @@
   }
 
   .virtap-area .virtap-text-item .virtap-title p {
-    font-size: 20px;
+    font-size: 19px;
     line-height: 30px;
     max-width: 100%;
     margin: 0 auto;
@@ -1960,83 +2040,7 @@
   }
 
 
-  .career_icon_box {
-    text-align: center;
-    position: relative;
-    left: unset !important;
-    right: unset !important;
-    top: unset !important;
-    bottom: unset !important;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    padding-bottom: 3.8rem;
-    width: 100% !important;
-  }
-
-  .career_icon_box:first-child {
-    padding-top: 0;
-    margin-top: 2rem;
-  }
-
-  .career_icon_box:last-child {
-    padding-bottom: 0;
-  }
-
-  .career_icon_box::before {
-    /* 		content: ''; */
-    position: absolute;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
-    top: 0;
-    width: 1px;
-    height: 100%;
-    border-left: 1px dashed #CEE9EB;
-    z-index: -1;
-  }
-
-  .career_icon_box:last-child::before {
-    display: none;
-  }
-
-  .career_icon_box .icon {
-    display: block;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    margin-bottom: 1.8rem;
-  }
-
-  .career_icon_box:not(.right) .icon {
-    -webkit-box-ordinal-group: 2;
-    -ms-flex-order: 1;
-    order: 1;
-  }
-
-  .career_icon_box:not(.right)>div {
-    -webkit-box-ordinal-group: 3;
-    -ms-flex-order: 2;
-    order: 2;
-    width: 100%;
-  }
-
-  .career_icon_box>div {
-    width: 100%;
-  }
-
-  .career_icon_box:not(.right) {
-    text-align: center;
-  }
-
-  .career_icon_box p br {
-    display: none;
-  }
-
-  .career_content_wrap {
-    width: auto;
-  }
+  
 
 }
 
@@ -2151,7 +2155,7 @@
   }
 
   .landing-hero-text-area p {
-    font-size: 22px;
+    font-size: 20px;
     /* line-height: 28px; */
     text-align: justify;
   }
@@ -2253,11 +2257,11 @@
   }
 
   .vantagem-plataforma-item h3 {
-    font-size: 17px;
+    /* font-size: 17px; */
   }
 
   .vantagem-plataforma-item p {
-    font-size: 14px;
+    /* font-size: 14px; */
   }
 
   .vantagem-plataforma-item .vantagem-plataforma-icon {
