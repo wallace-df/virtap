@@ -1888,8 +1888,8 @@ section {
     right: -18rem;
   }
 
-  .career_icon_box:nth-child(2) img{
-    margin-right: 2rem !important;
+  .career_icon_box.right:nth-child(2) img{
+    margin-right: 2rem
   }
    
   
@@ -1898,8 +1898,8 @@ section {
     top: 19rem;
   }
   
-  .career_icon_box:nth-child(3) img{
-    margin-right: 2rem !important;
+  .career_icon_box.right:nth-child(3) img{
+    margin-right: 2rem
   }
 
   .career_icon_box:nth-child(4) {
