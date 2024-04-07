@@ -441,7 +441,7 @@ section {
     border-radius: 25px;
     padding: 18px 25px;
     position: relative;
-    margin-top: 130px;
+    margin-top: 35px;
     position: relative;
     user-select: none;
   }
@@ -699,7 +699,7 @@ section {
     text-align: center;
     margin: 0 auto;
     max-width: 744px;
-    padding-bottom: 88px;
+    padding-bottom: 25px;
   }
   .cada-necessidade-text-area {
     position: relative;
@@ -1903,14 +1903,23 @@ section {
   }
 
   .career_icon_box:nth-child(4) {
-    bottom: -2rem;
-    right: -26rem;
+    bottom: -1rem;
+    right: -23rem;
+  }
+
+  .career_icon_box.right:nth-child(4) img{
+    margin-right: 2rem
   }
   
   .career_icon_box:nth-child(5) {
-    bottom: -2rem;
-    left: -28rem;
+    bottom: -1rem;
+    left: -18rem;
   }
+
+  .career_icon_box:nth-child(5) img{
+    margin-left: 2rem
+  }
+
   
   .career_icon_box:nth-child(6) {
     left: -24rem;
