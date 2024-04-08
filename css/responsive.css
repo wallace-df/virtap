@@ -433,8 +433,18 @@
   }
 
   .Para-quem-area {
-    padding: 120px 0;
+    padding-top: 90px;
+    padding-bottom: 90px;
   }
+
+  .cada-necessidade-area {
+    padding-top: 80px;
+  }
+
+  .cada-necessidade-area {
+    padding-bottom: 10px;
+  }
+
 
   .explore-desenvolva-right-item img {
     height: 100px;
@@ -916,6 +926,10 @@
     top: 0;
     height: 1px;
     width: 50%;
+  }
+
+  .Para-quem-area .title {
+    padding-bottom: 80px;
   }
 
   .Para-quem-item-one {
@@ -1548,12 +1562,12 @@
   }
 
   .cada-necessidade-area {
-    padding-top: 45px;
+    padding-top: 60px;
   }
 
   .cada-necessidadetitle {
     max-width: 440px;
-    padding-bottom: 25px;
+    padding-bottom: 35px;
   }
 
   .cada-necessidade-image img {
@@ -1724,7 +1738,7 @@
   }
 
   .cada-necessidade-area {
-    padding-bottom: 45px;
+    padding-bottom: 10px;
   }
 
   .vantagem-plataforma-title {
@@ -1831,8 +1845,8 @@
   }
 
   .Para-quem-area {
-    padding-top: 63px;
-    padding-bottom: 53px;
+    padding-top: 60px;
+    padding-bottom: 60px;
   }
 
   .Para-quem-items h3 {
@@ -1848,10 +1862,6 @@
   .Para-quem-items img {
     height: 150px;
     margin-top: 40px;
-  }
-
-  .Para-quem-area .title {
-    padding-bottom: 80px;
   }
 
   .Para-quem-item-one {

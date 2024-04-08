@@ -692,14 +692,14 @@ section {
     height: auto;
   }
   .cada-necessidade-area {
-    padding-top: 160px;
-    padding-bottom: 250px;
+    padding-top: 80px;
+    padding-bottom: 5px;
   }
   .cada-necessidadetitle {
     text-align: center;
     margin: 0 auto;
     max-width: 744px;
-    padding-bottom: 25px;
+    padding-bottom: 35px;
   }
   .cada-necessidade-text-area {
     position: relative;
@@ -961,7 +961,7 @@ section {
     background: url(../img/vantagem-plataforma-bg.png);
     background-repeat: no-repeat;
     background-size: cover;
-    padding-bottom: 60px;
+    padding-bottom: 30px;
   }
   .vantagem-plataforma-title {
     padding: 180px 0 100px;
@@ -1137,8 +1137,8 @@ section {
     margin: 0 auto 0;
   }
   .Para-quem-area {
-    padding-top: 180px;
-    padding-bottom: 170px;
+    padding-top: 110px;
+    padding-bottom: 110px;
   }
   .Para-quem-title {
     text-align: center;
