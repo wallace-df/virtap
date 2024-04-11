@@ -421,8 +421,8 @@ section {
 
 .landing-hero-btn-area .landing-hero-btn {
   font-weight: 600;
-  font-size: 22px;
-  line-height: 22px;
+  font-size: 21px;
+  line-height: 21px;
   text-align: center;
   color: #FFFFFF;
   padding: 20px;
@@ -433,7 +433,7 @@ section {
   -webkit-box-shadow: 2px 3px 28px rgba(150, 109, 235, 0.21);
   box-shadow: 2px 3px 28px rgba(150, 109, 235, 0.21);
   border-radius: 60px;
-  width: 400px;
+  width: 350px;
 }
 
 .landing-hero-btn-area .landing-hero-btn:hover {
@@ -797,7 +797,7 @@ section {
 }
 
 .virtap-area {
-  padding-top: 140px;
+  padding-top: 40px;
   background: url(../img/virtap-bg.png);
   background-repeat: no-repeat;
   background-position: center;
@@ -805,14 +805,14 @@ section {
 }
 
 .virtap-area::after {
-  content: "";
+  /* content: "";
   position: absolute;
   left: 0;
   top: 0px;
   height: 178px;
   width: 201px;
   background: url(../img/virtap-shap-img-1.png);
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
 }
 
 .virtap-area .virtap-text-item {
@@ -830,7 +830,7 @@ section {
 
 .virtap-area .virtap-text-item .virtap-title p {
   font-weight: 400;
-  font-size: 19px;
+  font-size: 18px;
   line-height: 1.6;
   color: #454545;
   max-width: 594px;
@@ -856,7 +856,7 @@ section {
   text-align: center;
   margin: 0 auto;
   max-width: 744px;
-  padding-bottom: 35px;
+  padding-bottom: 45px;
 }
 
 .cada-necessidade-text-area {
@@ -1155,7 +1155,7 @@ section {
 }
 
 .vantagem-plataforma-title {
-  padding: 180px 0 100px;
+  padding: 180px 0 45px;
   text-align: center;
 }
 

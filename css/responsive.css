@@ -130,6 +130,7 @@
 
   .landing-hero-area {
     padding: 120px 0 100px;
+    padding-bottom: 120px;
   }
 
   .landing-hero-text-area {
@@ -284,7 +285,7 @@
   }
 
   .virtap-area .virtap-text-item .virtap-title p {
-    font-size: 19px;
+    font-size: 18px;
   }
 
   .cada-necessidade-text-area h3 {
@@ -582,7 +583,7 @@
   }
 
   .landing-hero-btn-area .landing-hero-btn {
-    width: 350px;
+    width: 300px;
     /* font-size: 15px;
     padding: 15px 40px; */
   }
@@ -627,7 +628,7 @@
   }
 
   .virtap-area {
-    padding-top: 190px;
+    padding-top: 0px;
   }
 
 }
@@ -690,7 +691,7 @@
   }
 
   .virtap-area .virtap-text-item .virtap-title p {
-    font-size: 19px;
+    font-size: 18px;
   }
 
   .title {
@@ -779,7 +780,7 @@
 @media (max-width: 1199px) {
 
   .virtap-area {
-    padding-top: 180px;
+    padding-top: 0px;
   }
 
   .virtap-funciona-item span {
@@ -1540,11 +1541,11 @@
 
   .virtap-area .virtap-text-item .virtap-title h2 {
     padding-bottom: 14px;
-    text-align: left;
+    text-align: center;
   }
 
   .virtap-area .virtap-text-item .virtap-title p {
-    font-size: 19px;
+    font-size: 18px;
     line-height: 30px;
     max-width: 100%;
     margin: 0 auto;
@@ -1745,7 +1746,7 @@
   }
 
   .vantagem-plataforma-title {
-    padding: 5px 0 32px;
+    padding: 5px 0 24px;
   }
 
   .vantagem-plataforma-wrapper {
@@ -1754,7 +1755,7 @@
   }
 
   .vantagem-plataforma-item .vantagem-plataforma-shap {
-    right: 48%;
+    right: calc(50% - 55px);
     top: unset;
     -webkit-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
@@ -1767,7 +1768,7 @@
   }
 
   .vantagem-plataforma-item .vantagem-plataforma-shap {
-    right: 44%;
+    right: calc(50% - 55px);
     top: unset;
     bottom: -49%;
     -webkit-transform: rotate(90deg);
@@ -2026,7 +2027,7 @@
   }
 
   .vantagem-plataforma-item .vantagem-plataforma-shap {
-    right: 40%;
+    right: calc(50% - 55px);
   }
 
   .cada-necessidade-image img {
@@ -2115,7 +2116,7 @@
   }
 
   .vantagem-plataforma-item .vantagem-plataforma-shap {
-    right: 38%;
+    right: calc(50% - 55px);
   }
 
   .comunidade-students-map img {
@@ -2410,7 +2411,7 @@
 
 @media (max-width: 440px) {
   .vantagem-plataforma-item .vantagem-plataforma-shap {
-    right: 33%;
+    right: calc(50% - 55px);
   }
 
   .vantagem-plataforma-wrapper {
