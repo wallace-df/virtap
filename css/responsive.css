@@ -750,6 +750,12 @@
 
 
 
+@media (min-width: 992px) { 
+	.projects_looking_area .col-lg-6{
+		width: 48.46%;
+	}
+}
+
 @media (min-width: 992px) and (max-width: 1199px) {
   .main-container {
     max-width: 992px;
@@ -1151,6 +1157,15 @@
   } 
 
   
+
+	.projects_looking_wrap{
+		padding-bottom: 9rem;
+	}
+
+	.projects_looking_img{
+		margin-bottom: 10rem;
+	}
+
   .login_dropdown>div:first-child {
     margin-bottom: 30px;
   }
@@ -1941,6 +1956,20 @@
 
 
 @media (max-width: 767px) {
+
+  .icon_list{
+		gap: 0 .85rem;
+	}
+
+	.icon_list a{
+		width: 3.3rem;
+		height: 3.3rem;
+	}
+
+	.icon_list a img{
+		width: 1.3rem;
+	}
+  
   .login_dropdown {
     width: 290px;
     border-radius: 20px;
@@ -2057,6 +2086,123 @@
     right: -250px;
     background-size: 100% auto;
   }
+
+
+  .projects_looking_wrap{
+		padding: 2rem;
+		padding-bottom: 3rem;
+	}
+
+	.projects_looking_img {
+		margin-bottom: 8rem;
+	}
+
+	.projects_looking_img .img{
+		height: 44.7rem;
+		-o-object-fit: cover;
+		   object-fit: cover;
+		border-radius: 1.6rem;
+	}
+
+	.party_blk img {
+		width: 2.8rem;
+		margin-right: 1.2rem;
+	}
+
+	.party_blk{
+		padding: 1.2rem 1.4rem 1.2rem 1.25rem;
+		font-size: 1.2rem;
+		top: 2.7rem;
+		left: -1rem;
+		border-radius: 1.2rem;
+	}
+
+	.party_blk p{
+		font-size: 1.2rem;
+	}
+
+	.projects_looking_img .dot_sh {
+		top: -1.2rem;
+		margin-right: -1.2rem;
+		width: 8.3rem;
+	}
+
+	.latest_project_box{
+		width: 18.8rem;
+		padding: 1.4rem;
+		border-radius: 1.6rem;
+		top: 50%;
+		-webkit-transform: translateY(-50%);
+		    -ms-transform: translateY(-50%);
+		        transform: translateY(-50%);
+		right: -1rem;
+	}
+
+	.latest_project_box h5{
+		font-size: 1.2rem;
+		margin-bottom: 1.2rem;
+	}
+
+	.latest_project_box li{
+		font-size: 1rem;
+	}
+
+	.latest_project_box li .icon{
+		width: 3.4rem;
+		height: 3.4rem;
+		margin-right: 1rem;
+	}
+	
+	.latest_project_box li .icon img{
+		width: 1.4rem;
+	}
+
+	.latest_project_box li:not(:last-child) {
+		margin-bottom: 1.2rem;
+	}
+
+	.latest_project_box li:not(:last-child)::before {
+		top: 84%;
+		left: 1.7rem;
+	}
+
+	.projects_looking_img .rating_box{
+		padding: 2.4rem;
+		left: 1.6rem;
+		bottom: -3.8rem;
+	}
+
+	.projects_looking_img .rating_box .star {
+		width: 12.8rem;
+		margin-bottom: 1.8rem;
+	}
+
+	.projects_looking_img .icon_list {
+		gap: 0 1.4rem;
+	}
+
+	.projects_looking_img .icon_list a {
+		width: 4.4rem;
+		height: 4.4rem;
+	}
+
+	.projects_looking_img .icon_list a img{
+		width: 1.75rem;
+	}
+
+	.projects_looking_img .arrow_sh {
+		right: -1.7rem;
+		bottom: 4rem;
+		width: 3rem;
+		z-index: -1;
+	}
+
+	.projects_looking_area .list_group li{
+		font-size: 1.7rem;
+		background-size: 2.2rem auto;
+		padding-left: 3.4rem;
+		background-position: left .2rem;
+	}
 
 
   
