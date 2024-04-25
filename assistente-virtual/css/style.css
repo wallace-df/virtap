@@ -195,7 +195,7 @@ h5{
 }
 
 .primary_button.white::before{
-	background: var(--white);
+	background: #fff;
 }
 
 .primary_button.white::after{

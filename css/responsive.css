@@ -433,6 +433,10 @@
     padding-right: 15px;
   }
 
+  .projects_looking_area {
+    padding-top: 90px;
+  }
+  
   .Para-quem-area {
     padding-top: 90px;
     padding-bottom: 90px;
@@ -440,12 +444,8 @@
 
   .cada-necessidade-area {
     padding-top: 80px;
-  }
-
-  .cada-necessidade-area {
     padding-bottom: 10px;
   }
-
 
   .explore-desenvolva-right-item img {
     height: 100px;
@@ -753,6 +753,9 @@
 @media (min-width: 992px) { 
 	.projects_looking_area .col-lg-6{
 		width: 48.46%;
+	}
+  .singup_banner_area .col-lg-6{
+		width: 58%;
 	}
 }
 
@@ -1157,7 +1160,42 @@
   } 
 
   
+  .singup_banner_area .sh {
+		right: .5rem;
+		bottom: 41rem;
+		z-index: 1;
+	}
 
+  .singup_banner_img{
+		position: relative;
+		right: unset;
+		top: 0;
+		-webkit-transform: translate(0);
+		    -ms-transform: translate(0);
+		        transform: translate(0);
+		width: calc(100% - 4rem);
+		margin-left: auto;
+		display: block;
+		z-index: 2;
+	}
+
+	.singup_banner_content{
+		padding: 57rem 10rem 9rem 10rem;
+		margin-top: -50rem;
+		text-align: center;
+	}
+
+	.singup_banner_content::before {
+		height: 63%;
+		top: unset;
+		bottom: -2rem;
+	}
+
+	.singup_banner_area .sh {
+		right: .5rem;
+		bottom: 41rem;
+		z-index: 1;
+	}
 	.projects_looking_wrap{
 		padding-bottom: 9rem;
 	}
@@ -1581,7 +1619,7 @@
   }
 
   .cada-necessidade-area {
-    padding-top: 60px;
+    padding-top: 120px;
   }
 
   .cada-necessidadetitle {
@@ -1756,9 +1794,6 @@
     position: relative;
   }
 
-  .cada-necessidade-area {
-    padding-bottom: 10px;
-  }
 
   .vantagem-plataforma-title {
     padding: 5px 0 24px;
@@ -1863,6 +1898,10 @@
     padding: 20px;
   }
 
+  .projects_looking_area {
+    padding-top: 60px;
+  }
+  
   .Para-quem-area {
     padding-top: 60px;
     padding-bottom: 60px;
@@ -2204,8 +2243,54 @@
 		background-position: left .2rem;
 	}
 
+  .singup_banner_area {
+		padding: 6.4rem 0;
+	}
 
-  
+  .singup_banner_area .sh {
+		bottom: 38rem;
+		width: 6rem;
+	}
+
+  .singup_banner_area {
+		padding: 6.4rem 0;
+	}
+
+	.singup_banner_content{
+		margin-top: -17rem;
+		padding: 20rem 1.9rem 3rem 1.9rem;
+		border-radius: 1.6rem;
+		margin-left: 0;
+	}
+
+	.singup_banner_img{
+		-o-object-fit: cover;
+		   object-fit: cover;
+		width: calc(100% - 1rem);
+		height: 23.4rem;
+		border-radius: 1.6rem;
+	}
+
+	.singup_banner_content .primary_button{
+		font-size: 1.6rem;
+		padding: 1.8rem 2.3rem;
+		margin-top: 4rem;
+	}
+	
+	.singup_banner_content h2{
+		font-size: 2.8rem;
+	}
+
+	.singup_banner_content::before {
+		height: 83%;
+		bottom: -1.4rem;
+		left: -1.4rem;
+	}
+
+	.singup_banner_area .sh {
+		bottom: 38rem;
+		width: 6rem;
+	}
 
 }
 
