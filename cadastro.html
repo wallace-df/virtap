@@ -8,16 +8,16 @@
     <meta name="robots" content="noindex">
     <meta name="googlebot" content="noindex">
 
-    <title>Virtap | Cliente | Cadastro</title>
+    <title>Virtap | Assistente Virtual | Cadastro</title>
 
-    <link href="favicon.svg" type="image/svg" rel="icon">
+    <link href="img/favicon.svg" type="image/svg" rel="icon">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.css">
-
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropme@latest/dist/cropme.min.css">
+    <link rel="stylesheet" href="cadastro/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="cadastro/css/style-v1.css" />
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
@@ -25,12 +25,13 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
+
         gtag('config', 'G-4ZFMG1F0XK');
         gtag('config', 'AW-924784320');
     </script>
 
     <!-- Hotjar Tracking Code for https://www.virtap.com.br -->
-    <script>
+    <!-- <script>
         (function (h, o, t, j, a, r) {
             h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
             h._hjSettings = { hjid: 3611346, hjsv: 6 };
@@ -39,7 +40,7 @@
             r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
             a.appendChild(r);
         })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
-    </script>
+    </script> -->
 
     <!-- Meta Pixel Code -->
     <script>
@@ -75,34 +76,119 @@
         }("SessionStack", "9d1f1977a2bc4878874f4a522f1e5542");
     </script>
     <!-- End SessionStack Code -->
+
 </head>
 
 <body>
     <div class="sign_up">
-        <div class="left_content" style="background: linear-gradient(180deg, #532E88 -190.19%, #FFFFFF 100%);">
-            <img src="assets/img/spg.png" alt="">
+        <div class="left_content" style="background: linear-gradient(180deg, #9CD7DB -190.19%, #FFFFFF 100%);">
+            <img src="cadastro/img/spa.png" alt="">
         </div>
         <div class="right_content">
-            <h2>Cadastre-se gratuitamente e conecte-se com os melhores talentos da Assistência Virtual.
+            <h2>Preencha os dados abaixo para efetuar seu cadastro
             </h2>
-            <form id="signupForm">
-                <div class="input_from">
+            <form id="signupForm" onsubmit="return false" autocomplete="off">
+                <div class="upload-img">
+                    <img id="canv1" onclick="document.getElementById('finput').click(); return false"
+                        style="cursor: pointer" referrerpolicy="no-referrer"></img>
+                    <p>
+                        <a class="btn bg-secondary" onclick="document.getElementById('finput').click(); return false"
+                            style="cursor: pointer">Escolher foto</a>
+                        <input type='file' name="picture_file" accept="image/*" id="finput" onchange="upload()"
+                            style="display:none">
+                    </p>
+                </div>
+                <div class="input_from" style="margin-top: 20px">
                     <div class="user-info assistant mt-3" id="personal">
                         <div class="items">
                             <div class="item">
-                                <div class="search__name" id="name">Nome</div>
-                                <input type="text" class="form-control" id="txtNome" name="name" maxlength="30" />
+                                <h2 class="mb-0 text-muted" style="font-size: 14px;">Nome
+                                </h2>
+                                <input type="text" data-lpignore="true" class="form-control" placeholder="" id="txtNome"
+                                    name="name" maxlength="30" />
                                 <em>Por favor, informe um nome válido.</em>
                             </div>
                         </div>
-                        <div class="items" style="margin-top: 30px">
+                        <div class="items" style="margin-top: 20px">
                             <div class="item">
-                                <div class="search__name mb-3" id="phone">WhatsApp</div>
-                                <input type="text" class="form-control" id="txtWhatsapp" maxlength="30" />
-                                <em>Por favor, informe um WhatsApp válido.</em>
+                                <h2 class="mb-0 text-muted" style="font-size: 14px;">Área de atuação principal
+                                </h2>
+                                <div class="search__name" id="phone"> </div>
+                                <input type="text" data-lpignore="true" class="form-control" id="txtTitle"
+                                    maxlength="50"
+                                    placeholder="Preencha este campo com sua área de atuação principal ou especialização." />
+                                <em>Por favor, informe uma área de atuação principal válida.</em>
                             </div>
                         </div>
-                        <div class="items" style="margin-top: 25px">
+
+                        <div class="items">
+                            <div class="item">
+                                <h2 class="mb-1 text-muted" style="font-size: 14px;">Cidade/Estado
+                                </h2>
+                                <input type="text" data-lpignore="true" class="form-control" placeholder="" id="txtCity"
+                                    name="name" />
+                                <em>Por favor, informe uma localização válida.</em>
+                            </div>
+                        </div>
+
+                        <div class="items">
+                            <div class="item">
+                                <h2 class="mb-1 text-muted" style="font-size: 14px;">Telefone
+                                </h2>
+                                <input type="text" data-lpignore="true" class="form-control" placeholder=""
+                                    id="txtPhone" name="name" />
+                                <em>Por favor, informe um telefone válido.</em>
+                            </div>
+                        </div>
+
+                        <div class="items">
+                            <div class="item">
+                                <h2 class="mb-1 text-muted" style="font-size: 14px;">Áreas de atuação (escolha até 3)
+                                </h2>
+                                <div style="display: flex; flex-wrap: wrap;" id="areasAtuacao">
+                                    <div style="flex-grow:1; padding-right: 30px">
+                                        <label class="checkbox_item">
+                                            <input type="checkbox" class="checkbox" value="ASSISTENCIA_PESSOAL">
+                                            <p>Assistência pessoal</p>
+                                        </label>
+                                        <label class="checkbox_item">
+                                            <input type="checkbox" class="checkbox" value="SECRETARIADO_EXECUTIVO">
+                                            <p>Secretariado executivo</p>
+                                        </label>
+                                        <label class="checkbox_item">
+                                            <input type="checkbox" class="checkbox" value="SUPORTE_ADMINISTRATIVO">
+                                            <p>Suporte administrativo</p>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="checkbox_item">
+                                            <input type="checkbox" class="checkbox" value="SECRETARIADO_REMOTO">
+                                            <p>Secretariado remoto</p>
+                                        </label>
+                                        <label class="checkbox_item">
+                                            <input type="checkbox" class="checkbox" value="SUPORTE_PARA_INFOPRODUTORES">
+                                            <p>Suporte para infoprodutores</p>
+                                        </label>
+                                        <label class="checkbox_item">
+                                            <input type="checkbox" class="checkbox" value="ENTRADA_DE_DADOS">
+                                            <p>Entrada de dados</p>
+                                        </label>
+                                    </div>
+                                </div>
+                                <em>Por favor, escolha até 3 áreas de atuação.</em>
+                            </div>
+                        </div>
+
+                        <div class="items" style="margin-top: 20px">
+                            <div class="item">
+                                <h2 class="mb-1 text-muted" style="font-size: 14px;">Sobre você</h2>
+                                <textarea class="form-control mt-0" id="txtDescription" rows="5" maxlength="5000"
+                                    placeholder="Mostre para o mundo o que você tem a oferecer como profissional. Aqui você pode contar quem é você como profissional, suas experiências, e sua forma de trabalhar."></textarea>
+                                <em>Por favor, informe uma descrição com pelo menos 100 caracteres.</em>
+                            </div>
+                        </div>
+
+                        <div class="items" style="margin-top: 20px">
                             <div class="item">
                                 <div class="checkbox_item">
                                     <label>
@@ -111,6 +197,7 @@
                                             e a <a href="/privacidade" target="_blank" class="link">política de
                                                 privacidade</a>.</span>
                                     </label>
+
                                 </div>
                             </div>
                         </div>
@@ -130,11 +217,39 @@
         </div>
     </div>
 
+
+    <!-- Edit image modal -->
+    <div class="modal fade" id="editImageModal" tabindex="-1" role="dialog" data-bs-keyboard="false"
+        data-bs-backdrop="static">
+        <div class="modal-dialog" role="document" style="width:600px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">
+                        Editar image
+                    </h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
+
+                </div>
+                <div class="modal-body proceed">
+                    <div id="editImgContainer">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn__secondary" data-confirm>Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- JavaScript -->
-    <script src="assets/js/jquery-3.6.4.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+
+
+    <script src="cadastro/js/jquery-3.6.4.min.js"></script>
+    <script src="cadastro/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
-    <script src="assets/js/functions-v8.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cropme@latest/dist/cropme.min.js"></script>
+    <script src="cadastro/js/functions-v7.js"></script>
 
     <script type="text/javascript">
         _linkedin_partner_id = "5484012";
@@ -158,6 +273,7 @@
         <img height="1" width="1" style="display:none;" alt=""
             src="https://px.ads.linkedin.com/collect/?pid=5484012&fmt=gif" />
     </noscript>
+
 </body>
 
 </html>
