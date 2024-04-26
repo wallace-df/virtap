@@ -85,9 +85,6 @@
 		width: 54%;
 	}
 
-	.projects_looking_area .col-lg-6{
-		width: 48.46%;
-	}
 
 	.singup_banner_area .col-lg-6{
 		width: 58%;
@@ -948,10 +945,7 @@
 		right: -1rem;
 	}
 
-	.latest_project_box h5{
-		font-size: 1.2rem;
-		margin-bottom: 1.2rem;
-	}
+
 
 	.latest_project_box li{
 		font-size: 1rem;
@@ -992,8 +986,8 @@
 	}
 
 	.projects_looking_img .icon_list a {
-		width: 4.4rem;
-		height: 4.4rem;
+		width: 4rem;
+		height: 4rem;
 	}
 
 	.projects_looking_img .icon_list a img{

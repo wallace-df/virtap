@@ -2332,10 +2332,11 @@ section {
 
 .pricing_area {
   margin-bottom: 110px;
+  margin-top: 110px;
 }
 
 .pricing_area .row {
-  --bs-gutter-x: 4.6rem;
+  --bs-gutter-x: 1rem;
 }
 
 .pricing_area .title_box {
@@ -2343,16 +2344,16 @@ section {
 }
 
 .pricing_area .title_box::before {
-  content: '';
+  /* content: '';
   position: absolute;
   top: -5.6rem;
   left: -17.3rem;
-  width: 56rem;
-  height: 56rem;
+  width: 50rem;
+  height: 50rem;
   border-radius: 50%;
   background: -o-linear-gradient(248.29deg, #D7F1F3 14.24%, #EFFAFC 87.09%);
   background: linear-gradient(201.71deg, #D7F1F3 14.24%, #EFFAFC 87.09%);
-  z-index: -1;
+  z-index: -1; */
 }
 
 
@@ -2446,8 +2447,10 @@ section {
 
 .projects_looking_wrap{
 	background: #EEE8F7;
-	padding: 10rem 3.3rem 15.4rem 6.8rem;
+	padding: 40px;
 	border-radius: 1.6rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .projects_looking_img{
@@ -2479,24 +2482,25 @@ section {
 }
 
 .party_blk p{
-	font-size: 1.7rem;
+	font-size: 1rem;
 	line-height: 1.58;
 }
 
 .latest_project_box{
 	position: absolute;
-	top: 10rem;
-	right: -9.5rem;
-	width: 28rem;
-	padding: 2rem;
+	top: 2rem;
+	right: -7.5rem;
+	width: 21rem;
+	padding: 1.5rem;
 	background: #FFFFFF;
 	border: .1rem solid #DACDED;
 	border-radius: 1.6rem;
 }
 
 .latest_project_box h5{
-	font-size: 1.7rem;
+	font-size: 1rem;
 	margin-bottom: 1.8rem;
+  font-weight: 700;
 }
 
 .latest_project_box li{
@@ -2506,7 +2510,7 @@ section {
 	-webkit-box-align: center;
 	    -ms-flex-align: center;
 	        align-items: center;
-	font-size: 1.6rem;
+	font-size: 1rem;
 	line-height: 1.5;
 	position: relative;
 }
@@ -2515,7 +2519,7 @@ section {
 	content: '';
 	position: absolute;
 	top: 100%;
-	left: 2.5rem;
+	left: 2rem;
 	width: 1px;
 	height: 100%;
 	background: #D9ECED;
@@ -2526,8 +2530,8 @@ section {
 }
 
 .latest_project_box li .icon{
-	width: 5rem;
-	height: 5rem;
+	width: 4rem;
+	height: 4rem;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -2548,7 +2552,7 @@ section {
 }
 
 .latest_project_box li .icon img{
-	width: 2.2rem;
+	width: 2rem;
 }
 
 .projects_looking_img .rating_box{
@@ -2559,7 +2563,7 @@ section {
 	background: #FFFFFF;
 	border: .1rem solid #DACDED;
 	border-radius: 1.6rem;
-	padding: 2.4rem;
+	padding: 1.4rem;
 }
 
 .projects_looking_img .rating_box .star{
@@ -2601,12 +2605,13 @@ section {
 /*====================== singup banner area ========================*/
 
 .singup_banner_area{
-	padding: 22rem 0 19rem;
+  margin-top: 110px;
+	margin-bottom: 180px;
 }
 
 .singup_banner_content h2 {
   font-size: 32px;
-  font-weight: 400;
+  font-weight: bold;
   margin-bottom: 3rem;
 }
 

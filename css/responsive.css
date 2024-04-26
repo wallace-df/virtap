@@ -441,6 +441,11 @@
     padding-top: 90px;
     padding-bottom: 90px;
   }
+   
+  .pricing_area {
+    margin-top: 40px;
+    margin-bottom: 90px;
+  }
 
   .cada-necessidade-area {
     padding-top: 80px;
@@ -634,6 +639,13 @@
 }
 
 
+@media (min-width: 1200px) {
+ .pricing_area h2 {
+  margin-bottom: 40px;
+ }
+
+}
+
 
 
 @media (max-width: 1399px) {
@@ -751,9 +763,6 @@
 
 
 @media (min-width: 992px) { 
-	.projects_looking_area .col-lg-6{
-		width: 48.46%;
-	}
   .singup_banner_area .col-lg-6{
 		width: 58%;
 	}
@@ -1049,6 +1058,10 @@
   .title {
     font-size: 35px;
   }
+
+  .pricing_card {
+		margin-top: 4rem;
+	}
 }
 
 
@@ -1602,6 +1615,7 @@
     line-height: 30px;
     max-width: 100%;
     margin: 0 auto;
+    text-align: justify;
   }
 
   .virtap-area .virtap-image-item {
@@ -1907,6 +1921,17 @@
     padding-bottom: 60px;
   }
 
+  .pricing_area {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+
+  .singup_banner_area{
+    margin-top: 90px;
+    margin-bottom: 60px;
+  }
+  
+
   .Para-quem-items h3 {
     font-size: 18px;
     padding: 21px 0 3px;
@@ -1986,10 +2011,13 @@
   }
 
 
-  .pricing_card{
+  .pricing_card {
 		margin-top: 4rem;
 	}
-
+ 
+  .latest_project_box{
+		right: -7.5rem;
+	}
 }
 
 
@@ -2178,8 +2206,9 @@
 	}
 
 	.latest_project_box h5{
-		font-size: 1.2rem;
+		font-size: 1rem;
 		margin-bottom: 1.2rem;
+    font-weight: 700;
 	}
 
 	.latest_project_box li{
@@ -2206,7 +2235,7 @@
 	}
 
 	.projects_looking_img .rating_box{
-		padding: 2.4rem;
+		padding: 1.4rem;
 		left: 1.6rem;
 		bottom: -3.8rem;
 	}
@@ -2221,8 +2250,8 @@
 	}
 
 	.projects_looking_img .icon_list a {
-		width: 4.4rem;
-		height: 4.4rem;
+		width: 4rem;
+		height: 4rem;
 	}
 
 	.projects_looking_img .icon_list a img{
@@ -2243,18 +2272,11 @@
 		background-position: left .2rem;
 	}
 
-  .singup_banner_area {
-		padding: 6.4rem 0;
-	}
-
   .singup_banner_area .sh {
 		bottom: 38rem;
 		width: 6rem;
 	}
 
-  .singup_banner_area {
-		padding: 6.4rem 0;
-	}
 
 	.singup_banner_content{
 		margin-top: -17rem;
@@ -2274,7 +2296,7 @@
 	.singup_banner_content .primary_button{
 		font-size: 1.6rem;
 		padding: 1.8rem 2.3rem;
-		margin-top: 4rem;
+		margin-top: 1rem;
 	}
 	
 	.singup_banner_content h2{
