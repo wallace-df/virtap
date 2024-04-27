@@ -3,4 +3,6 @@ Disallow: /cadastro.html
 Disallow: /login.html
 Disallow: /assistente-virtual/cadastro.html
 Disallow: /assistente-virtual/login.html
+Disallow: /quero-contratar/cadastro.html
+Disallow: /quero-contratar/login.html
 
