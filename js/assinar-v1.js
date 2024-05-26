@@ -90,11 +90,15 @@ $.ajax({
     paymentElement.mount('#payment-element');
 
     let address = { country: 'BR' };
+    let phone = null;
 
     if (response.address) {
       address = response.address;
     }
 
+    if (response.phone) {
+      phone = response.phone;
+    }
 
     const addressElement = elements.create("address", {
       mode: "billing",
@@ -106,10 +110,11 @@ $.ajax({
         phone: {
           required: 'always',
         },
-      }, 
+      },
       defaultValues: {
         name: response.name,
-        address: address
+        address: address,
+        phone: phone
       }
     });
     addressElement.mount("#address-element");
