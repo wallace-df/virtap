@@ -5893,7 +5893,7 @@ function signup() {
           try {
             let err = JSON.parse(xhr.responseText);
             if (err.errorCode === 'ASSISTANT_ALREADY_REGISTERED') {
-              $txtError.html("Você já criou uma conta.<br/> <a class='link' href='" + window.assistantDashboard + "' target='_blank' class='link'> Clique aqui para fazer login.</a>").show();
+              $txtError.html("Você já criou uma conta.<br/> <a class='link' href='" + window.assistantDashboard + "' target='_blank' class='link'> Clique aqui para acessar sua conta.</a>").show();
               return;
             }
             throw xhr;
