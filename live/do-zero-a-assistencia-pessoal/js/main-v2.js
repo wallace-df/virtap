@@ -108,26 +108,41 @@ function signup() {
         disableUI();
         $("#submit-error").css('opacity', 0);
 
-        $.ajax({
-            url: "https://nocodeform.io/f/6671f7d5a2b15fe1fa291f38",
-            method: "POST",
-            dataType: 'json',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                name: $name.val(),
-                email: $email.val(),
-                phone: intl.getNumber()
-            }),
+        var fd = new FormData();
+        fd.append('entry.1542853996', $name.val());
+        fd.append('entry.1257416528', $email.val());
 
+
+        $.ajax({
+            url: 'https://docs.google.com/forms/d/e/1FAIpQLSdSGJMYCelk_quMKwWIbPPtZg7vrZRrgpRNPZqiQp-d_LteKA/formResponse',
+            data: fd,
+            processData: false,
+            contentType: false,
+            type: 'POST',
             success: function (result) {
                 location.href = 'https://chat.whatsapp.com/CsGFa0UNWIM9m0MAw8rdLi';
 
             },
             error: function (request, status, errorThrown) {
+                console.log(errorThrown);
                 enableUI();
                 $("#submit-error").css('opacity', 1);
             }
         });
+
+        // $.ajax({
+        //     url: "https://nocodeform.io/f/6671f7d5a2b15fe1fa291f38",
+        //     method: "POST",
+        //     dataType: 'json',
+        //     contentType: 'application/json',
+        //     data: JSON.stringify({
+        //         name: $name.val(),
+        //         email: $email.val(),
+        //         phone: intl.getNumber()
+        //     }),
+
+        //
+        // });
 
 
     } else {
