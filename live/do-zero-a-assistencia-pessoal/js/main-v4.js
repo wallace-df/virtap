@@ -109,12 +109,12 @@ function signup() {
         $("#submit-error").css('opacity', 0);
 
         var fd = new FormData();
-        fd.append('entry.1542853996', $name.val());
-        fd.append('entry.1257416528', $email.val());
-
+        fd.append('entry.890504879', $name.val());
+        fd.append('entry.447662442', $email.val());
+        fd.append('entry.1486622628', intl.getNumber());
 
         $.ajax({
-            url: 'https://docs.google.com/forms/d/e/1FAIpQLSdSGJMYCelk_quMKwWIbPPtZg7vrZRrgpRNPZqiQp-d_LteKA/formResponse',
+            url: 'https://docs.google.com/forms/u/1/d/e/1FAIpQLSdabSRX4pEshouWHX1CxMHYo8T7xeKByRy5cZnnfkl6yE4sdA/formResponse',
             data: fd,
             processData: false,
             contentType: false,
@@ -124,9 +124,7 @@ function signup() {
 
             },
             error: function (request, status, errorThrown) {
-                console.log(errorThrown);
-                enableUI();
-                $("#submit-error").css('opacity', 1);
+                location.href = 'https://chat.whatsapp.com/CsGFa0UNWIM9m0MAw8rdLi';
             }
         });
 
