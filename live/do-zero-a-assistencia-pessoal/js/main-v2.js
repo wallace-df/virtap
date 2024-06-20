@@ -111,18 +111,17 @@ function signup() {
         $.ajax({
             url: "https://nocodeform.io/f/6671f7d5a2b15fe1fa291f38",
             method: "POST",
-            headers: {
-                'Content-type': 'application/json'
-              },
-            dataType: "json",
-            data: {
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify({
                 name: $name.val(),
                 email: $email.val(),
                 phone: intl.getNumber()
-            },
+            }),
 
             success: function (result) {
-                enableUI();
+                location.href = 'https://chat.whatsapp.com/CsGFa0UNWIM9m0MAw8rdLi';
+
             },
             error: function (request, status, errorThrown) {
                 enableUI();
