@@ -28,6 +28,8 @@
   <!-- all css here -->
   <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/style.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
+
 </head>
 
 <body>
@@ -86,7 +88,7 @@
               </li>
             </ul>
             <div>
-              <a href="#" class="personal-btn">Quero participar</a>
+              <a href="javascript:collectFormData()" class="personal-btn">Quero participar</a>
             </div>
             <div class="d-lg-none">
               <img class="w-100" src="img/female-img.png" alt="">
@@ -118,8 +120,84 @@
     </div>
   </footer>
 
+
+
+
+
+  <div class="modal fade" tabindex="-1" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title" >Cadastre-se</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cadastrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
   <!-- all js here -->
-  <script src="js/bootstrap.min.js"></script>
+  <script src="/js/jquery-3.6.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
+
+  <script>
+    // var input = document.querySelector("#txtPhone");
+    // let intl = window.intlTelInput(input, {
+    //   utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
+    //   autoInsertDialCode: true,
+    //   initialCountry: "BR",
+    //   separateDialCode: true
+    // });
+
+    // $("#txtPhone").on('blur', function () {
+    //   intl.setNumber(intl.getNumber());
+    //   if (intl.isValidNumber()) {
+    //     $("#txtPhone").closest(".item").removeClass("error");
+    //   } else {
+    //     $("#txtPhone").closest(".item").addClass("error");
+    //   }
+    // });
+
+
+
+    function collectFormData() {
+
+
+      $("#formModal").modal('show');
+
+      // $.ajax({
+      //   url: "https://nocodeform.io/f/{your-form-id}",
+      //   method: "POST",
+      //   dataType: "json",
+      //   data: {
+      //     nome: 'me@xample.com',
+      //     email: "Hello World",
+      //     whatsapp: ''
+      //   }
+      // });
+    }
+
+  </script>
 </body>
 
 </html>

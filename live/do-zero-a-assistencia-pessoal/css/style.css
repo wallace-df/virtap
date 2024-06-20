@@ -499,3 +499,35 @@ footer{
 		display: none;
 	}
 }
+
+.modal {
+	font-family: var(--bs-font-sans-serif);
+	font-size: 120%;
+}
+
+/* .btn-primary {
+	color: var(--white);
+	background-color: var(--primary-color);
+	font-size: 15px;
+	border-radius: 1rem;
+	padding: 1rem;
+	cursor: pointer;
+	border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+	color: var(--white);
+	background-color: var(--primary-color);
+	font-size: 15px;
+	border-radius: 1rem;
+	padding: 1rem;
+} */
+/* 
+.form-control {
+	padding: 1rem;
+	font-size: 15px;
+}
+
+.modal-body label {
+	font-size: 15px;
+} */
