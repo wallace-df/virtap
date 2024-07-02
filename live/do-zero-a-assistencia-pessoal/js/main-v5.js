@@ -55,6 +55,16 @@ function collectFormData() {
     $("#popUp").modal('show');
 }
 
+
+function goToGroup() { gtag('event', 'go_to_whatsapp_page', {
+    'send_to': 'G-4ZFMG1F0XK',
+    'event_callback': function() {
+        location.href = 'https://chat.whatsapp.com/CsGFa0UNWIM9m0MAw8rdLi';
+    }
+  });
+
+} 
+
 function signup() {
     let valid = true;
     let focusElement = null;
