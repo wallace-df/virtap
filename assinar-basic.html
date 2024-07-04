@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/cadastro.css" />
-    <link rel="stylesheet" href="css/card-js.min.css"/>
+    <link rel="stylesheet" href="css/card-js.min.css" />
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
@@ -65,11 +65,10 @@
     <div class="sign_up">
         <div class="left_content" style="background: linear-gradient(180deg, #9CD7DB -190.19%, #FFFFFF 100%);">
             <img src="/img/spa.png" alt="">
+            <h2>Assine o plano Basic</h2>
+
         </div>
         <div class="right_content">
-            <!-- <h2>Preencha os dados abaixo para efetuar seu cadastro
-            </h2> -->
-
             <form>
                 <div class="form-group mb-3">
                     <label for="exampleFormControlInput1" style="line-height: 1;">Nome</label>
@@ -82,49 +81,59 @@
                         placeholder="name@example.com">
                 </div>
                 <div class="form-group mb-3">
-                    <label for="exampleFormControlInput1" style="line-height: 1;">CPF</label>
+                    <label for="exampleFormControlInput1" style="line-height: 1;">CPF/CNPJ</label>
                     <input type="text" class="form-control" id="exampleFormControlInput1"
                         placeholder="name@example.com">
                 </div>
                 <div class="form-group mb-3">
                     <label for="exampleFormControlInput1" style="line-height: 1;">Endereço</label>
                     <input type="address" class="form-control" id="exampleFormControlInput1"
-                        placeholder="name@example.com">
+                        placeholder="name@example.com" onblur="javascript:void($('#full-address').collapse('show'))">
                 </div>
-                <div class="form-group mb-3">
-                    <label for="exampleFormControlInput1" style="line-height: 1;">Bairro</label>
-                    <input type="address" class="form-control" id="exampleFormControlInput1"
-                        placeholder="name@example.com">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="exampleFormControlInput1" style="line-height: 1;">Cidade</label>
-                    <input type="address" class="form-control" id="exampleFormControlInput1"
-                        placeholder="name@example.com">
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group mb-3">
-                            <label for="exampleFormControlInput1" style="line-height: 1;">Estado</label>
-                            <input type="address" class="form-control" id="exampleFormControlInput1"
-                                placeholder="name@example.com">
+                <div id="full-address" class="collapse">
+                    <div class="form-group mb-3">
+                        <label for="exampleFormControlInput1" style="line-height: 1;">Bairro</label>
+                        <input type="address" class="form-control" id="exampleFormControlInput1"
+                            placeholder="name@example.com">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="exampleFormControlInput1" style="line-height: 1;">Cidade</label>
+                        <input type="address" class="form-control" id="exampleFormControlInput1"
+                            placeholder="name@example.com">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="exampleFormControlInput1" style="line-height: 1;">Estado</label>
+                                <input type="address" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="name@example.com">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="exampleFormControlInput1" style="line-height: 1;">CEP</label>
+                                <input type="address" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="name@example.com">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group mb-3">
-                            <label for="exampleFormControlInput1" style="line-height: 1;">CEP</label>
-                            <input type="address" class="form-control" id="exampleFormControlInput1"
-                                placeholder="name@example.com">
-                        </div>
-                    </div>
+
                 </div>
 
                 <div class="mb-3">
                     <div class="card-js form-group">
                         <input class="form-control card-number my-custom-class" name="card-number">
-                        <input class="form-control name" id="the-card-name-id" name="card-holders-name" placeholder="Name on card">
-                        <input class="form-control expiry-month" name="expiry-month">
-                        <input class="form-control expiry-year" name="expiry-year">
-                        <input class="form-control cvc" name="cvc"> 
+                        <input class="form-control name" id="the-card-name-id" name="card-holders-name"
+                            placeholder="Name on card">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input class="form-control expiry-month" name="expiry-month">
+                                <input class="form-control expiry-year" name="expiry-year">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control cvc" name="cvc">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
