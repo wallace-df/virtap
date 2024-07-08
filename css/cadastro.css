@@ -2139,7 +2139,8 @@ textarea.form-control {
   font-weight: 300;
 }
 
-.form-group input, .expiry {
+.form-group input,
+.expiry {
   padding: 12px;
   font-size: 14px;
   transition: border 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
@@ -2179,16 +2180,30 @@ textarea.form-control {
   box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
 }
 
-.full-address {
-}
+.full-address {}
 
 
 @keyframes slideaway {
-  from { display: block; }
-  to { transform: translateY(40px); opacity: 0;}
+  from {
+    display: block;
+  }
+
+  to {
+    transform: translateY(40px);
+    opacity: 0;
+  }
 }
 
 .hide {
   animation: slideaway 200ms;
   display: none;
-} 
+}
+
+
+#loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; 
+  text-align: center;
+}

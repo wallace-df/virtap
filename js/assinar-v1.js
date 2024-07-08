@@ -34,7 +34,7 @@ const handleServerResponse = async (response) => {
 let formData = new FormData();
 
 $.ajax({
-  url: window.signupAPIEndpoint + '/get-signup-data?plan=' + window.target_plan,
+  url: window.signupAPIEndpoint + '/subscribe?plan=' + window.target_plan,
   data: formData,
   processData: false,
   contentType: false,
@@ -65,78 +65,15 @@ $.ajax({
   },
   success: function (response) {
     response = response.responseData;
-    const options = {
-      mode: 'subscription',
-      amount: 5000,
-      currency: 'brl',
-      layout: {
-        type: 'tabs',
-        defaultCollapsed: false,
-      },
-      locale: 'pt-br'
-    };
+
+    $("#loading").remove();
+    $("#sign_up").show();
+    $("#cpf_cnpj").val(response.cpf_cnpj);
+    $("#email").val(response.email);
+    $("#email").prop('disabled', (response.email && response.email.trim().length > 0 ? true : false));
+    ready = true;
 
 
-    // Set up Stripe.js and Elements to use in checkout form
-    const elements = stripe.elements(options);
-    let ready = false;
-
-    // Create and mount the Payment Element
-    const paymentElement = elements.create('payment', {
-      fields: {
-        // billingDetails: 'never'
-      }
-    });
-    paymentElement.mount('#payment-element');
-
-    let address = { country: 'BR' };
-    let phone = null;
-
-    if (response.address) {
-      address = response.address;
-    }
-
-    if (response.phone) {
-      phone = response.phone;
-    }
-
-    const addressElement = elements.create("address", {
-      mode: "billing",
-
-      fields: {
-        phone: 'always',
-      },
-      validation: {
-        phone: {
-          required: 'always',
-        },
-      },
-      defaultValues: {
-        name: response.name,
-        address: address,
-        phone: phone
-      }
-    });
-    addressElement.mount("#address-element");
-
-    paymentElement.on('loaderstart', function (event) {
-
-      addressElement.on('loaderstart', function (event) {
-        $("#loading").remove();
-      });
-    });
-
-    paymentElement.on('ready', function (event) {
-
-      addressElement.on('ready', function (event) {
-        $("#fields").show();
-        $("#submit-btn").show();
-        $("#cpf_cnpj").val(response.cpf_cnpj);
-        $("#email").val(response.email);
-        $("#email").prop('disabled', (response.email && response.email.trim().length > 0 ? true : false));
-        ready = true;
-      });
-    });
 
     const submitBtn = document.getElementById('submit-btn');
 

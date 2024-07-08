@@ -62,14 +62,20 @@
 </head>
 
 <body>
-    <div class="sign_up">
+    <div id="loading">
+        <h1>Por favor, aguarde...<br/>
+            <div class="spinner-border text-primary" role="status"><span class="sr-only"></span></div>
+        </h1>
+    </div>
+
+    <div class="sign_up" style="display: none">
         <div class="left_content" style="background: linear-gradient(180deg, #9CD7DB -190.19%, #FFFFFF 100%);">
             <img src="/img/spa.png" alt="">
             <h2>Assine o plano Basic</h2>
 
         </div>
         <div class="right_content">
-            <form>
+            <form id="subscribe-form">
                 <div class="form-group mb-3">
                     <label for="exampleFormControlInput1" style="line-height: 1;">Nome</label>
                     <input type="text" class="form-control" id="exampleFormControlInput1"
@@ -137,9 +143,6 @@
                     </div>
                 </div>
             </form>
-
-
-
         </div>
     </div>
 
