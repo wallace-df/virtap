@@ -148,21 +148,21 @@ h2{
 	font-weight: 700;
 	color: var(--dark);
 	line-height: 1.42;
-	text-transform: capitalize;
+	/* text-transform: capitalize; */
 }
 h3{
 	font-size: 3.8rem;
 	font-weight: 700;
 	color: var(--dark);
 	line-height: 1.42;
-	text-transform: capitalize;
+	/* text-transform: capitalize; */
 }
 h4{
 	font-size: 3.6rem;
 	font-weight: 700;
 	color: var(--dark);
 	line-height: 1.38;
-	text-transform: capitalize;
+	/* text-transform: capitalize; */
 }
 .sec_pad{
 	padding: 8rem 0;
@@ -195,7 +195,7 @@ h4{
 	line-height: 1.38;
 	margin-top: 2.5rem;
 	margin-bottom: 6.5rem;
-	text-transform: capitalize;
+	/* text-transform: capitalize; */
 }
 .expert{
 	display: -webkit-inline-box;
@@ -235,8 +235,9 @@ h4{
 	outline: 0.1rem solid #8BCED3;
 	outline-offset: 1rem;
 	margin: 1rem;
-	text-transform: capitalize;
+	/* text-transform: capitalize; */
 }
+
 .button:hover{
 	color: var(--dark);
 	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
@@ -540,11 +541,12 @@ h4{
 	border: 0.1rem solid transparent;
 	background-color: #fff;
 	z-index: 2;
-}
+} 
 .toggle_wrap.active{
 	border-color: var(--dark_blue);
 	-webkit-box-shadow: .2rem .3rem 3.0rem rgba(184, 169, 205, 0.15);
 	        box-shadow: .2rem .3rem 3.0rem rgba(184, 169, 205, 0.15);
+	z-index: 3;
 }
 .toggle_wrap button{
 	background: #F8F6FB;
@@ -897,7 +899,7 @@ h4{
 	font-size: 2.8rem;
 	font-weight: 700;
 	margin-bottom: 2.6rem;
-	text-transform: capitalize;
+	/* text-transform: capitalize; */
 }
 .benefit_box p{
 	font-size: 1.8rem;
