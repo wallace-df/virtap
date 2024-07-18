@@ -8,14 +8,24 @@
     <meta name="robots" content="noindex">
     <meta name="googlebot" content="noindex">
 
-    <title>Virtap | Assinar plano Basic</title>
+    <title>Virtap</title>
 
     <link href="img/favicon.svg" type="image/svg" rel="icon">
 
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/cadastro.css" />
     <link rel="stylesheet" href="css/card-js.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
 
+    <style>
+        .iti--separate-dial-code .iti__selected-flag {
+            border-radius: 0 !important;
+        }
+
+        .iti {
+            display: block;
+        }
+    </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
     <script>
@@ -25,7 +35,6 @@
 
         gtag('config', 'G-4ZFMG1F0XK');
         gtag('config', 'AW-924784320');
-        window.target_plan = 'Basic';
     </script>
 
     <!-- Hotjar Tracking Code for https://www.virtap.com.br -->
@@ -70,56 +79,65 @@
         </div>
         <div class="right_content">
             <div id="loading">
-                <h1>Por favor, aguarde...<br/>
+                <h1>Por favor, aguarde...<p class="mt-2"></p>
                     <div class="spinner-border text-primary" role="status"><span class="sr-only"></span></div>
                 </h1>
             </div>
-        
+
             <form id="sign_up" style="display: none">
-                <div class="form-group mb-3">
-                    <label for="exampleFormControlInput1" style="line-height: 1;">Nome</label>
-                    <input type="text" class="form-control" id="name"
-                        placeholder="name@example.com">
+                <div class="form-group mb-3" data-auto-fillable>
+                    <label for="name">Nome</label>
+                    <input type="text" class="form-control" id="name" placeholder="Seu nome">
                 </div>
                 <div class="form-group mb-3">
-                    <label for="exampleFormControlInput1" style="line-height: 1;">E-mail</label>
-                    <input type="email" class="form-control" id="email"
-                        placeholder="name@example.com">
+                    <label for="email">E-mail</label>
+                    <input type="email" class="form-control" id="email" placeholder="seu@email.com">
+                    <div class="mt-2 text-muted">
+                        <em style="font-size: 85%" id="login-note">
+                            <span>Detectado automaticamente porque você fez login na Virtap.</span>
+                            <a href="javascript:logout()" class="link" style="font-weight: bold">Sair da conta</a>.
+                        </em>
+                    </div>
                 </div>
-                <div class="form-group mb-3">
-                    <label for="exampleFormControlInput1" style="line-height: 1;">CPF/CNPJ</label>
-                    <input type="text" class="form-control" id="cpf_cnpj"
-                        placeholder="name@example.com">
+                <div class="form-group mb-3" data-auto-fillable>
+                    <label for="email">Confirme seu e-mail</label>
+                    <input type="email" class="form-control" id="confirm-email" placeholder="seu@email.com">
                 </div>
-                <div class="form-group mb-3">
-                    <label for="exampleFormControlInput1" style="line-height: 1;">Endereço</label>
-                    <input type="address" class="form-control" id="exampleFormControlInput1"
-                        placeholder="name@example.com" onblur="javascript:void($('#full-address').collapse('show'))">
+                <div class="form-group mb-3" data-auto-fillable>
+                    <label for="cpf_cnpj">CPF/CNPJ</label>
+                    <input type="text" class="form-control" id="cpf_cnpj" placeholder="999.999.999-99">
+                </div>
+                <div class="form-group mb-3" data-auto-fillable>
+                    <label for="address">Endereço</label>
+                    <input type="text" class="form-control" id="address" placeholder="Av. Paulista, 999999 "
+                        onblur="javascript:void($('#full-address').collapse('show'))">
                 </div>
                 <div id="full-address" class="collapse">
                     <div class="form-group mb-3">
-                        <label for="exampleFormControlInput1" style="line-height: 1;">Bairro</label>
-                        <input type="address" class="form-control" id="exampleFormControlInput1"
-                            placeholder="name@example.com">
+                        <label for="neighborhood">Bairro</label>
+                        <input type="text" class="form-control" id="neighborhood" placeholder="Jardim Paulista">
                     </div>
                     <div class="form-group mb-3">
-                        <label for="exampleFormControlInput1" style="line-height: 1;">Cidade</label>
-                        <input type="address" class="form-control" id="exampleFormControlInput1"
-                            placeholder="name@example.com">
+                        <label for="city">Cidade</label>
+                        <input type="text" class="form-control" id="city" placeholder="São Paulo">
                     </div>
-                    <div class="row">
+                    <div class="row gx-3">
                         <div class="col-md-6">
                             <div class="form-group mb-3">
-                                <label for="exampleFormControlInput1" style="line-height: 1;">Estado</label>
-                                <input type="address" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="name@example.com">
+                                <label for="state">Estado</label>
+                                <input type="text" class="form-control" id="state" placeholder="São Paulo">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-3">
-                                <label for="exampleFormControlInput1" style="line-height: 1;">CEP</label>
-                                <input type="address" class="form-control" id="exampleFormControlInput1"
-                                    placeholder="name@example.com">
+                                <label for="cep">CEP</label>
+                                <input type="text" class="form-control" id="cep" placeholder="99999-999">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="phone">Telefone</label>
+                                <input type="text" class="form-control" id="phone" placeholder="">
                             </div>
                         </div>
                     </div>
@@ -127,10 +145,11 @@
                 </div>
 
                 <div class="mb-3">
-                    <div class="card-js form-group">
-                        <input class="form-control card-number my-custom-class" name="card-number">
-                        <input class="form-control name" id="the-card-name-id" name="card-holders-name"
-                            placeholder="Name on card">
+                    <div class="form-group card-js" data-card-container>
+                        <input class="form-control card-number" name="card-number"
+                            placeholder="9999 9999 9999 9999">
+                        <input class="form-control name" id="card-holder" name="card-holders-name"
+                            placeholder="Seu nome">
                         <div class="row">
                             <div class="col-md-6">
                                 <input class="form-control expiry-month" name="expiry-month">
@@ -143,19 +162,21 @@
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <button class="btn" id="submit-btn"> Assinar plano Vip</button>
-                    </div>
+                <div class="mb-3 text-center">
+                    <button class="btn" id="submit-btn"></button>
+                </div>
 
             </form>
         </div>
     </div>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/assinar-v1.js"></script>
     <script src="/js/card-js.min.js"></script>
+    <script src="/js/assinar-v1.js"></script>
+
 
     <script type="text/javascript">
         _linkedin_partner_id = "5484012";

@@ -1365,6 +1365,14 @@ Sign Up Pages
   margin-bottom: 20px;
 }
 
+#loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  text-align: center;
+}
+
 .upload-img .btn {
   padding: 5px 10px;
 }
@@ -1890,6 +1898,11 @@ table {
     display: block;
   }
 
+  .loading,
+  #loading {
+    display: block;
+  }
+
   .left_content h2 {
     bottom: -10%;
     width: 100%;
@@ -2155,7 +2168,7 @@ textarea.form-control {
   width: 100%;
   padding: .375rem .75rem;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1;
   color: var(--bs-body-color);
   background-color: var(--bs-body-bg);
   background-clip: padding-box;
@@ -2171,6 +2184,10 @@ textarea.form-control {
   margin-bottom: 0.5rem;
 }
 
+
+.expiry:disabled {
+  background-color: var(--bs-secondary-bg);
+}
 
 .expiry:focus {
   color: var(--bs-body-color);
@@ -2197,13 +2214,4 @@ textarea.form-control {
 .hide {
   animation: slideaway 200ms;
   display: none;
-}
-
-
-#loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 90vh; 
-  text-align: center;
 }

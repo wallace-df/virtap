@@ -47,29 +47,13 @@
     background-position: -160px 0
 }
 
-.card-js .cvc-container {
-    width: 50%;
-    float: right
-}
-
 .card-js .cvc-wrapper {
     box-sizing: border-box;
-    margin-left: 5px
 }
 
 .card-js .cvc-wrapper .cvc {
     display: block;
     width: 100%
-}
-
-.card-js .expiry-container {
-    width: 50%;
-    float: left
-}
-
-.card-js .expiry-wrapper {
-    box-sizing: border-box;
-    margin-right: 5px
 }
 
 .card-js .expiry-wrapper .expiry {
@@ -96,7 +80,7 @@
     width: 24px;
     height: 127px;
     left: 8px;
-    top: 14px;
+    top: 12px;
     pointer-events: none
 }
 
@@ -116,7 +100,6 @@
 
 .card-js .card-number-wrapper,
 .card-js .name-wrapper {
-    margin-bottom: 15px;
     width: 100%
 }
 
@@ -131,7 +114,7 @@
 .card-js .cvc-container,
 .card-js .expiry-container,
 .card-js .name-wrapper {
-    display: inline-block
+    display: block
 }
 
 .card-js::after {
