@@ -1,5 +1,5 @@
 window.signupAPIEndpoint = 'http://localhost:3000';
-window.assistantDashboard = 'https://assistentes.virtap.com.br';
+window.assistantDashboard = 'http://localhost:8080/';
 
 let formData = new FormData();
 let hasBillingDetails = false;
@@ -16,13 +16,19 @@ function getParameterByName(name, url) {
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-function redirectToNext() {
+function getNext() {
   let next = getParameterByName('next');
   let url = window.assistantDashboard;
   if (next && next.trim().length > 0) {
     url += '/' + next;
   }
-  setTimeout(() => location.href = url, 2000);
+  return url;
+
+}
+
+function redirectToNext() {
+  let url = getNext();
+  setTimeout(() => document.location.href = url, 2000);
 }
 
 function handleError(response) {
@@ -47,7 +53,7 @@ function handleError(response) {
     } else if (response.errorCode === 'INVALID_ASSISTANT_STATUS') {
       if (response.errorData.status === 1) {
         let $data = $('<div><h1 style="color: #f6b700">Seu perfil <em data-email></em> ainda está em análise.<br/><br/> Por favor, aguarde a aprovação do seu cadastro e tente novamente.</h1><p class="mt-2"><a class="link fs-4">Clique aqui para acessar sua conta</a></p></div>');
-        $data.find('a').attr('href', window.assistantDashboard);
+        $data.find('a').attr('href', getNext());
         $data.find('[data-email]').text(response.errorData.email).css('color', '#333');
         $("#loading").html($data[0].outerHTML);
         showGenericError = false;
@@ -181,15 +187,14 @@ function init() {
             let billingDetails = {
               name: $("#name").val(),
               cpf_cnpj: $("#cpf_cnpj").val(),
-              address: $("#address").va(),
+              address: $("#address").val(),
               neighborhood: $("#neighborhood").val(),
               city: $("#city").val(),
               state: $("#state").val(),
               zipcode: $("#cep").val(),
 
             }
-            formData.append("name",);
-            formData.append("cpf_cnpj",);
+            formData.append("billing_details", JSON.stringify(billingDetails));
           }
 
           // Create the PaymentIntent
@@ -218,6 +223,9 @@ function init() {
         finally {
           $("#submit-btn").prop('disabled', false).text('Assinar plano ' + target_plan);
           $("input").prop('disabled', false);
+          if (loggedInUser) {
+            $("#email").prop('disabled', true);
+          }
         }
       });
 
