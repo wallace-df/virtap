@@ -38,11 +38,11 @@ function handleError(response) {
 
     if (response.errorCode === 'ALREADY_SUBSCRIBED') {
       let target_plan = getParameterByName('plan');
-      if (target_plan === 'Basic' && response.errorData.assistant_plan === 'Basic') {
+      if (target_plan === 'BASIC' && response.errorData.assistant_plan === 'BASIC') {
         $("#loading").html('<div><h1>Você já assinou o plano Basic.</h1><br /><p>Redirecionando automaticamente...</p></div>');
         showGenericError = false;
         redirectToNext();
-      } else if (response.errorData.assistant_plan === 'Vip') {
+      } else if (response.errorData.assistant_plan === 'VIP') {
         $("#loading").html('<div><h1>Você já assinou o plano Vip.</h1><br /><p>Redirecionando automaticamente...</p></div>');
         showGenericError = false;
         redirectToNext();
@@ -106,18 +106,23 @@ let $container = $(
 $(".expiry-container").detach().appendTo($container.find('[data-first]'));
 $(".cvc-container").detach().appendTo($container.find('[data-second]'));
 
+let plans = {
+  'BASIC': 'Basic',
+  'VIP': 'Vip'
+};
+
 $cardContainer.append($container);
 function init() {
-  let target_plan = getParameterByName('plan');
+  let target_plan = getParameterByName('plano');
 
-  if (target_plan !== 'Basic' && target_plan !== 'Vip') {
+  if (target_plan !== 'BASIC' && target_plan !== 'VIP') {
     console.log('Invalid plan:', target_plan);
     handleError(null);
     return;
   }
 
   $.ajax({
-    url: window.signupAPIEndpoint + '/subscribe?plan=' + target_plan,
+    url: window.signupAPIEndpoint + '/subscribe?plan=' + plans[target_plan],
     data: formData,
     processData: false,
     contentType: false,
@@ -153,9 +158,9 @@ function init() {
         hasBillingDetails = true;
       }
 
-      document.title = 'Virtap | Assinar plano ' + target_plan;
+      document.title = 'Virtap | Assinar plano ' + plans[target_plan];
 
-      $("#submit-btn").text('Assinar plano ' + target_plan);
+      $("#submit-btn").text('Assinar plano ' + plans[target_plan]);
       $("#loading").hide();
       $("#sign_up").show();
       setTimeout(() => $("#name").focus(), 300);
@@ -179,8 +184,10 @@ function init() {
         // Create the subscription
         try {
 
+          // TODO: validate fields;
+
           let formData = new FormData();
-          formData.append("target_plan", target_plan);
+          formData.append("target_plan", plans[target_plan]);
           formData.append("email", $("#email").val());
 
           if (!hasBillingDetails) {
@@ -192,10 +199,19 @@ function init() {
               city: $("#city").val(),
               state: $("#state").val(),
               zipcode: $("#cep").val(),
-
             }
             formData.append("billing_details", JSON.stringify(billingDetails));
           }
+
+          let cardDetails = {
+            card_holder: $cardContainer.CardJs('name'),
+            card_number: $cardContainer.CardJs('cardNumber').replace(/\D/g, ""),
+            card_expiration: $cardContainer.CardJs('expiryMonth') + '/' + $cardContainer.CardJs('expiryYear'),
+            card_cvv: $cardContainer.CardJs('cvc')
+          };
+
+          console.log(cardDetails);
+          formData.append("card_details", JSON.stringify(cardDetails));
 
           // Create the PaymentIntent
           const res = await fetch("http://localhost:3000/subscribe", {
@@ -221,7 +237,7 @@ function init() {
           }
         }
         finally {
-          $("#submit-btn").prop('disabled', false).text('Assinar plano ' + target_plan);
+          $("#submit-btn").prop('disabled', false).text('Assinar plano ' + plans[target_plan]);
           $("input").prop('disabled', false);
           if (loggedInUser) {
             $("#email").prop('disabled', true);
