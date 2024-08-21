@@ -1,5 +1,5 @@
 window.signupAPIEndpoint = 'http://localhost:3000';
-window.assistantDashboard = 'http://localhost:8080/';
+window.assistantDashboard = 'http://localhost:8080';
 
 let formData = new FormData();
 let hasBillingDetails = false;
@@ -16,11 +16,25 @@ function getParameterByName(name, url) {
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+function getPlan() {
+  let target_plan = getParameterByName('plan');
+  if (target_plan) {
+    target_plan = target_plan.toUpperCase();
+  }
+  return target_plan;
+}
+
 function getNext() {
   let next = getParameterByName('next');
   let url = window.assistantDashboard;
   if (next && next.trim().length > 0) {
-    url += '/' + next;
+    if (url.endsWith('/')) {
+      url += next;
+
+    } else {
+      url += '/' + next;
+
+    }
   }
   return url;
 
@@ -37,17 +51,17 @@ function handleError(response) {
   if (response) {
 
     if (response.errorCode === 'ALREADY_SUBSCRIBED') {
-      let target_plan = getParameterByName('plan');
-      if (target_plan === 'BASIC' && response.errorData.assistant_plan === 'BASIC') {
+      let target_plan = getPlan();
+      if (target_plan === 'BASIC' && response.errorData.assistant_plan.toUpperCase() === 'BASIC') {
         $("#loading").html('<div><h1>Você já assinou o plano Basic.</h1><br /><p>Redirecionando automaticamente...</p></div>');
         showGenericError = false;
         redirectToNext();
-      } else if (response.errorData.assistant_plan === 'VIP') {
+      } else if (response.errorData.assistant_plan.toUpperCase() === 'VIP') {
         $("#loading").html('<div><h1>Você já assinou o plano Vip.</h1><br /><p>Redirecionando automaticamente...</p></div>');
         showGenericError = false;
         redirectToNext();
       } else {
-        console.log("Invalid assistant plan:", response.errorData.assistant_plan);
+        console.log("Invalid assistant plan:", response.errorData.assistant_plan.toUpperCase());
       }
 
     } else if (response.errorCode === 'INVALID_ASSISTANT_STATUS') {
@@ -113,7 +127,7 @@ let plans = {
 
 $cardContainer.append($container);
 function init() {
-  let target_plan = getParameterByName('plano');
+  let target_plan = getPlan();
 
   if (target_plan !== 'BASIC' && target_plan !== 'VIP') {
     console.log('Invalid plan:', target_plan);
@@ -210,7 +224,6 @@ function init() {
             card_cvv: $cardContainer.CardJs('cvc')
           };
 
-          console.log(cardDetails);
           formData.append("card_details", JSON.stringify(cardDetails));
 
           // Create the PaymentIntent
@@ -227,13 +240,23 @@ function init() {
 
           const data = await res.json();
           console.log(data);
+          if (data.responseData === true) {
+            if (target_plan === 'BASIC') {
+              $("#loading").html('<div><h1>Assinatura do plano Basic realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+            } else {
+              $("#loading").html('<div><h1>Assinatura do plano Vip realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+            }
+            $("#loading").show();
+            $("#sign_up").hide();
+            redirectToNext();
+          }
 
         } catch (err) {
           if (err && (err.errorCode === 'ALREADY_SUBSCRIBED' || err.errorCode === 'INVALID_ASSISTANT_STATUS')) {
             handleError(err);
           } else {
             console.log(err);
-            alert('ops!');
+            alert('Erro! Tente novamente!');
           }
         }
         finally {
