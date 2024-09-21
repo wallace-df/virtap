@@ -17,7 +17,7 @@ function getParameterByName(name, url) {
 }
 
 function getPlan() {
-  let target_plan = getParameterByName('plan');
+  let target_plan = getParameterByName('plano');
   if (target_plan) {
     target_plan = target_plan.toUpperCase();
   }
