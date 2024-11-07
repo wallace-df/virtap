@@ -218,16 +218,16 @@ function init() {
           }
 
           let paymentDetails = {
-            gateway: 'Test1',
-            method: 'card',
+            gateway: 'vindi',
+            method: 'credit_card',
             details: {
               card_holder: $cardContainer.CardJs('name'),
               card_number: $cardContainer.CardJs('cardNumber').replace(/\D/g, ""),
               card_expiration: $cardContainer.CardJs('expiryMonth') + '/' + $cardContainer.CardJs('expiryYear'),
-              card_cvv: $cardContainer.CardJs('cvc')
+              card_cvv: $cardContainer.CardJs('cvc'),
+              installments: 12
             }
           };
-
 
           formData.append("payment_details", JSON.stringify(paymentDetails));
 
@@ -259,7 +259,7 @@ function init() {
         } catch (err) {
           if (err && (err.errorCode === 'ALREADY_SUBSCRIBED' || err.errorCode === 'INVALID_ASSISTANT_STATUS')) {
             handleError(err);
-          } else {
+          } else { 
             console.log(err);
             alert('Erro! Tente novamente!');
           }
