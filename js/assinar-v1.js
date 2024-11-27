@@ -218,8 +218,8 @@ function init() {
           }
 
           let paymentDetails = {
-            gateway: 'vindi',
-            method: 'credit_card',
+            gateway: 'Test1',
+            method: 'async_method',
             details: {
               card_holder: $cardContainer.CardJs('name'),
               card_number: $cardContainer.CardJs('cardNumber').replace(/\D/g, ""),
@@ -245,21 +245,36 @@ function init() {
 
           const data = await res.json();
           console.log(data);
-          if (data.responseData === true) {
-            if (target_plan === 'BASIC') {
-              $("#loading").html('<div><h1>Assinatura do plano Basic realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+          if (data.responseData) {
+
+            if (data.responseData.charged) {
+              if (target_plan === 'BASIC') {
+                $("#loading").html('<div><h1>Assinatura do plano Basic realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+              } else {
+                $("#loading").html('<div><h1>Assinatura do plano Vip realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+              }
+              $("#loading").show();
+              $("#sign_up").hide();
+              redirectToNext();
             } else {
-              $("#loading").html('<div><h1>Assinatura do plano Vip realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+              if (paymentDetails.method === 'credit_card') {
+                throw new Error("Failure making payment using credit card.");
+              } else {
+                $("#loading").text(JSON.stringify(data.responseData.subscription));
+                $("#loading").show();
+                $("#sign_up").hide();
+              }
             }
-            $("#loading").show();
-            $("#sign_up").hide();
-            redirectToNext();
+
+
+          } else {
+            throw new Error("Failure making payment.");
           }
 
         } catch (err) {
           if (err && (err.errorCode === 'ALREADY_SUBSCRIBED' || err.errorCode === 'INVALID_ASSISTANT_STATUS')) {
             handleError(err);
-          } else { 
+          } else {
             console.log(err);
             alert('Erro! Tente novamente!');
           }
