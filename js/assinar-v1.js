@@ -45,6 +45,71 @@ function redirectToNext() {
   setTimeout(() => document.location.href = url, 2000);
 }
 
+ 
+function validateCPFCNPJ(cpf_cnpj) {
+  // Remove non-numeric characters
+  const cleanDocument = cpf_cnpj.replace(/\D/g, '');
+
+  // Check if the document length is valid for CPF or CNPJ
+  if (cleanDocument.length === 11) {
+      // CPF case
+      return validateCPF(cleanDocument);
+  } else if (cleanDocument.length === 14) {
+      // CNPJ case
+      return validateCNPJ(cleanDocument);
+  } else {
+      return false; // Invalid length for CPF or CNPJ
+  }
+}
+
+function validateCPF(cpf) {
+  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false; // Check for repeated sequences
+
+  let sum = 0;
+  let remainder;
+
+  // Calculate first verification digit
+  for (let i = 1; i <= 9; i++) sum += parseInt(cpf.charAt(i - 1)) * (11 - i);
+  remainder = (sum * 10) % 11;
+  if (remainder === 10 || remainder === 11) remainder = 0;
+  if (remainder !== parseInt(cpf.charAt(9))) return false;
+
+  sum = 0;
+  // Calculate second verification digit
+  for (let i = 1; i <= 10; i++) sum += parseInt(cpf.charAt(i - 1)) * (12 - i);
+  remainder = (sum * 10) % 11;
+  if (remainder === 10 || remainder === 11) remainder = 0;
+  if (remainder !== parseInt(cpf.charAt(10))) return false;
+
+  return true;
+}
+
+function validateCNPJ(cnpj) {
+  if (cnpj.length !== 14 || /^(\d)\1{13}$/.test(cnpj)) return false; // Check for repeated sequences
+
+  let sum = 0;
+  let remainder;
+  const weights1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+  const weights2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+
+  // Calculate first verification digit
+  for (let i = 0; i < 12; i++) sum += parseInt(cnpj.charAt(i)) * weights1[i];
+  remainder = sum % 11;
+  if (remainder < 2) remainder = 0;
+  else remainder = 11 - remainder;
+  if (remainder !== parseInt(cnpj.charAt(12))) return false;
+
+  sum = 0;
+  // Calculate second verification digit
+  for (let i = 0; i < 13; i++) sum += parseInt(cnpj.charAt(i)) * weights2[i];
+  remainder = sum % 11;
+  if (remainder < 2) remainder = 0;
+  else remainder = 11 - remainder;
+  if (remainder !== parseInt(cnpj.charAt(13))) return false;
+
+  return true;
+}
+
 function handleError(response) {
   console.log(response);
   let showGenericError = true;
@@ -212,9 +277,20 @@ function init() {
         // Create the subscription
         try {
 
-          // TODO: validate fields;
-
           $("[data-field]").removeClass("error");
+          let billingDetails = null;
+
+          if (!hasBillingDetails) {
+            billingDetails = {
+              name: $("#name").val().trim(),
+              cpf_cnpj: $("#cpf_cnpj").val(),
+              address: $("#address").val().trim(),
+              neighborhood: $("#neighborhood").val().trim(),
+              city: $("#city").val(),
+              state: $("#state").val(),
+              zipcode: $("#cep").val(),
+            }
+          }
 
           let paymentDetails = {
             gateway: 'Test1',
@@ -230,6 +306,19 @@ function init() {
           };
 
           let hasError = false;
+          if(billingDetails) {
+            if(billingDetails.name.length < 5) {
+              $("#name").parent().addClass('error');
+              hasError = true;
+            }
+ 
+            if(!validateCPFCNPJ(billingDetails.cpf_cnpj)) {
+              $("#cpf_cnpj").parent().addClass('error');
+              hasError = true;
+            }
+
+            
+          }
           if (!validateCreditCard(paymentDetails.details.card_number)) {
             $cardNumber.parent().addClass('error');
             hasError = true;
@@ -240,12 +329,10 @@ function init() {
             hasError = true;
           }
 
-
           if (paymentDetails.details.card_cvv.length < 3) {
             $cardCVC.parent().addClass('error');
             hasError = true;
           }
-
 
           if (!CardJs.isExpiryValid(paymentDetails.details.card_expiration_month, paymentDetails.details.card_expiration_year)) {
             $cardExpiration.parent().addClass('error');
@@ -253,30 +340,16 @@ function init() {
           }
 
 
-
           if (hasError) {
             return;
           }
-
+ 
           let formData = new FormData();
           formData.append("target_plan", plans[target_plan]);
           formData.append("email", $("#email").val());
-
-          if (!hasBillingDetails) {
-            let billingDetails = {
-              name: $("#name").val(),
-              cpf_cnpj: $("#cpf_cnpj").val(),
-              address: $("#address").val(),
-              neighborhood: $("#neighborhood").val(),
-              city: $("#city").val(),
-              state: $("#state").val(),
-              zipcode: $("#cep").val(),
-            }
+          if (billingDetails) {
             formData.append("billing_details", JSON.stringify(billingDetails));
           }
-
-
-
           formData.append("payment_details", JSON.stringify(paymentDetails));
 
           // Create the PaymentIntent

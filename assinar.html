@@ -86,9 +86,10 @@
             </div>
 
             <form id="sign_up" style="display: none">
-                <div class="form-group mb-3" data-auto-fillable>
+                <div class="form-group mb-3" data-field data-auto-fillable>
                     <label for="name">Nome</label>
                     <input type="text" class="form-control" id="name" placeholder="Seu nome">
+                    <em>Por favor, informe um nome válido.</em>
                 </div>
                 <div class="form-group mb-3">
                     <label for="email">E-mail</label>
@@ -104,11 +105,12 @@
                     <label for="email">Confirme seu e-mail</label>
                     <input type="email" class="form-control" id="confirm-email" placeholder="seu@email.com">
                 </div>
-                <div class="form-group mb-3" data-auto-fillable>
+                <div class="form-group mb-3" data-field data-auto-fillable>
                     <label for="cpf_cnpj">CPF/CNPJ</label>
                     <input type="text" class="form-control" id="cpf_cnpj" placeholder="999.999.999-99">
+                    <em>Por favor, informe um CPF/CNPJ válido.</em>
                 </div>
-                <div class="form-group mb-3" data-auto-fillable>
+                <div class="form-group mb-3" data-fueld data-auto-fillable>
                     <label for="address">Endereço</label>
                     <input type="text" class="form-control" id="address" placeholder="Av. Paulista, 999999 "
                         onblur="javascript:void($('#full-address').collapse('show'))">

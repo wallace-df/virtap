@@ -1,7 +1,7 @@
 .card-js input.card-number {
     padding-right: 48px
 }
- 
+
 .card-js .card-number-wrapper .card-type-icon {
     height: 23px;
     width: 32px;
@@ -129,16 +129,19 @@
 }
 
 
-.card-js div.error input {
-    color:  #F64B2F;
-    border-color:     #F64B2F;
+.card-js div.error input,
+.form-group.error input
+{
+    color: #F64B2F;
+    border-color: #F64B2F;
 
 
 }
-.card-js div.error  label
-{
-    color:  #F64B2F
-    /* box-shadow: none */
+
+.card-js div.error label,
+.form-group.error label {
+    color: #F64B2F
+        /* box-shadow: none */
 }
 
 .card-js .error input:focus,
@@ -148,16 +151,18 @@
     box-shadow: 0 0 0 .25rem rgba(253, 25, 13, 0.25);
 }
 
-.card-js  em {
+.card-js em,
+.form-group em {
     padding-top: 5px;
     font-size: 90%;
     font-style: italic;
-    color:  #F64B2F;
     display: none;
 }
 
-.card-js  .error em {
-    display: block;
+.card-js .error em,
+.form-group.error em {
+    color: #F64B2F !important;
+    display: block !important;
 }
 
 
