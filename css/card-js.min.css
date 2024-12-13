@@ -129,18 +129,36 @@
 }
 
 
-.card-js .has-error input{
-    border-color: #F64B2F;
+.card-js div.error input {
+    color:  #F64B2F;
+    border-color:     #F64B2F;
+
+
+}
+.card-js div.error  label
+{
+    color:  #F64B2F
     /* box-shadow: none */
 }
 
-.card-js .has-error input:focus,
-.card-js .has-error input:active {
+.card-js .error input:focus,
+.card-js .error input:active {
     border-color: #F64B2F;
     outline: 0;
     box-shadow: 0 0 0 .25rem rgba(253, 25, 13, 0.25);
 }
 
+.card-js  em {
+    padding-top: 5px;
+    font-size: 90%;
+    font-style: italic;
+    color:  #F64B2F;
+    display: none;
+}
+
+.card-js  .error em {
+    display: block;
+}
 
 
 .card-js input.card-number,
@@ -152,4 +170,8 @@
 
 .card-js.stripe .icon .svg {
     fill: #559A28
+}
+
+label {
+    font-weight: bold !important;
 }

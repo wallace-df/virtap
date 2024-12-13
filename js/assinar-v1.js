@@ -101,11 +101,25 @@ $cardContainer.CardJs();
 
 let $cardNumber = $(".card-number-wrapper");
 let $cardName = $(".name-wrapper");
+let $cardExpiration = $(".expiry-wrapper");
+let $cardCVC = $(".cvc-wrapper");
 
-$('<label>CEP</label>').insertBefore($cardNumber);
+$cardNumber.wrap($("<div data-field></div>"));
+$cardName.wrap($("<div data-field></div>"));
+$cardCVC.wrap($("<div data-field></div>"));
+$cardExpiration.wrap($("<div data-field></div>"));
+
+$('<label>Número do cartão</label>').insertBefore($cardNumber);
+$('<em>Por favor, informe um número válido.</em>').insertAfter($("#card-number").eq(0));
+
 $('<label>Nome no cartão</label>').insertBefore($cardName);
-$('<label>Validade</label>').insertBefore($(".expiry-wrapper"));
-$('<label>Código de segurança</label>').insertBefore($(".cvc-wrapper"));
+$('<em>Por favor, informe um nome válido.</em>').insertAfter($("#card-holder").eq(0));
+
+$('<label>Validade</label>').insertBefore($cardExpiration);
+$cardExpiration.append('<em>Por favor, informe um data de expiração válida.</em>');
+
+$('<label>Código de segurança</label>').insertBefore($cardCVC);
+$('<em>Por favor, informe um CVC válido.</em>').insertAfter($("#card-cvc").eq(0));
 
 $cardNumber.addClass('mb-3');
 $cardName.addClass('mb-3');
@@ -200,6 +214,50 @@ function init() {
 
           // TODO: validate fields;
 
+          $("[data-field]").removeClass("error");
+
+          let paymentDetails = {
+            gateway: 'Test1',
+            method: 'async_method',
+            details: {
+              card_holder: $cardContainer.CardJs('name').trim(),
+              card_number: $cardContainer.CardJs('cardNumber').replace(/\D/g, ""),
+              card_expiration_month: $cardContainer.CardJs('expiryMonth'),
+              card_expiration_year: $cardContainer.CardJs('expiryYear'),
+              card_cvv: $cardContainer.CardJs('cvc').replace(/\D/g, ""),
+              installments: 12
+            }
+          };
+
+          let hasError = false;
+          if (!validateCreditCard(paymentDetails.details.card_number)) {
+            $cardNumber.parent().addClass('error');
+            hasError = true;
+          }
+
+          if (paymentDetails.details.card_holder.length < 5) {
+            $cardName.parent().addClass('error');
+            hasError = true;
+          }
+
+
+          if (paymentDetails.details.card_cvv.length < 3) {
+            $cardCVC.parent().addClass('error');
+            hasError = true;
+          }
+
+
+          if (!CardJs.isExpiryValid(paymentDetails.details.card_expiration_month, paymentDetails.details.card_expiration_year)) {
+            $cardExpiration.parent().addClass('error');
+            hasError = true;
+          }
+
+
+
+          if (hasError) {
+            return;
+          }
+
           let formData = new FormData();
           formData.append("target_plan", plans[target_plan]);
           formData.append("email", $("#email").val());
@@ -217,17 +275,7 @@ function init() {
             formData.append("billing_details", JSON.stringify(billingDetails));
           }
 
-          let paymentDetails = {
-            gateway: 'Test1',
-            method: 'async_method',
-            details: {
-              card_holder: $cardContainer.CardJs('name'),
-              card_number: $cardContainer.CardJs('cardNumber').replace(/\D/g, ""),
-              card_expiration: $cardContainer.CardJs('expiryMonth') + '/' + $cardContainer.CardJs('expiryYear'),
-              card_cvv: $cardContainer.CardJs('cvc'),
-              installments: 12
-            }
-          };
+
 
           formData.append("payment_details", JSON.stringify(paymentDetails));
 
@@ -293,6 +341,36 @@ function init() {
 
 }
 
+function validateCreditCard(number) {
+  // Remove spaces or dashes and ensure the number contains only digits
+  number = number.replace(/\D/g, '');
+
+  // Check if the number has between 13 and 19 digits
+  if (number.length < 13 || number.length > 19) {
+    return false;
+  }
+
+  let sum = 0;
+  let shouldDouble = false;
+
+  // Loop through the digits from right to left
+  for (let i = number.length - 1; i >= 0; i--) {
+    let digit = parseInt(number.charAt(i));
+
+    if (shouldDouble) {
+      digit *= 2;
+      if (digit > 9) {
+        digit -= 9; // Subtract 9 if the result is greater than 9
+      }
+    }
+
+    sum += digit;
+    shouldDouble = !shouldDouble;
+  }
+
+  // The number is valid if the sum is divisible by 10
+  return sum % 10 === 0;
+}
 
 async function logout() {
   try {
