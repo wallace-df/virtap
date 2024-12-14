@@ -2153,7 +2153,9 @@ textarea.form-control {
 }
 
 .form-group input,
+.form-group select,
 .expiry {
+  line-height: 1.125;
   padding: 12px;
   font-size: 14px;
   transition: border 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;

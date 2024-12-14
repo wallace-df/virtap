@@ -4,7 +4,46 @@ window.assistantDashboard = 'http://localhost:8080';
 let formData = new FormData();
 let hasBillingDetails = false;
 let loggedInUser = null;
+let autocomplete;
 let submitBtn = document.getElementById('submit-btn');
+
+window.initAutocomplete = initAutocomplete;
+
+function initAutocomplete() {
+  autocomplete = new google.maps.places.Autocomplete(document.querySelector("#address"), {
+    componentRestrictions: { country: ["br"] },
+    fields: ["address_components", "geometry"],
+    types: ["address"],
+  });
+  // When the user selects an address from the drop-down, populate the
+  // address fields in the form.
+  autocomplete.addListener("place_changed", fillInAddress);
+
+};
+
+
+// Função para popular o select de municípios
+function populateMunicipios(uf) {
+  const municipioSelect = $("#city");
+  municipioSelect.empty();  // Limpa o select de municípios
+
+  let municipiosData = ufs;
+  // Verifica se existem municípios para a UF
+  if (municipiosData[uf]) {
+    // Adiciona os municípios no select
+    municipiosData[uf].municipios.forEach(function (municipio) {
+      municipioSelect.append(`<option value="${municipio.codigo_ibge}">${municipio.nome}</option>`);
+    });
+  }
+}
+
+// Evento de mudança na UF
+$('#state').change(function () {
+  const ufSelecionado = $(this).val();  // Pega a UF selecionada
+  populateMunicipios(ufSelecionado);    // Chama a função para popular os municípios
+});
+
+
 
 function getParameterByName(name, url) {
   if (!url) url = window.location.href;
@@ -45,20 +84,20 @@ function redirectToNext() {
   setTimeout(() => document.location.href = url, 2000);
 }
 
- 
+
 function validateCPFCNPJ(cpf_cnpj) {
   // Remove non-numeric characters
   const cleanDocument = cpf_cnpj.replace(/\D/g, '');
 
   // Check if the document length is valid for CPF or CNPJ
   if (cleanDocument.length === 11) {
-      // CPF case
-      return validateCPF(cleanDocument);
+    // CPF case
+    return validateCPF(cleanDocument);
   } else if (cleanDocument.length === 14) {
-      // CNPJ case
-      return validateCNPJ(cleanDocument);
+    // CNPJ case
+    return validateCNPJ(cleanDocument);
   } else {
-      return false; // Invalid length for CPF or CNPJ
+    return false; // Invalid length for CPF or CNPJ
   }
 }
 
@@ -108,6 +147,80 @@ function validateCNPJ(cnpj) {
   if (remainder !== parseInt(cnpj.charAt(13))) return false;
 
   return true;
+}
+
+function fillInAddress() {
+  // Get the place details from the autocomplete object.
+  const place = autocomplete.getPlace();
+  let address1 = "";
+  let postcode = "";
+
+
+  // Get each component of the address from the place details,
+  // and then fill-in the corresponding field on the form.
+  // place.address_components are google.maps.GeocoderAddressComponent objects
+  // which are documented at http://goo.gle/3l5i5Mr
+  let street_number = null;
+  let address = null;
+  let city = null;
+  let cep = null;
+  let neighborhood = null;
+  let uf = null;
+
+  for (const component of place.address_components) {
+    // @ts-ignore remove once typings fixed
+    const componentType = component.types[0];
+
+    switch (componentType) {
+      case "route": {
+        address = component.long_name;
+        break;
+      }
+
+      case "street_number": {
+        street_number = component.long_name;
+        break;
+      }
+
+      case "sublocality_level_1":
+        neighborhood = component.long_name;
+        break;
+
+      case "postal_code": {
+        cep = component.long_name;
+        break;
+      }
+
+      case "administrative_area_level_1": {
+        uf = component.short_name;
+        break;
+      }
+
+      case "administrative_area_level_2": {
+        city = component.long_name;
+        break;
+      }
+    }
+
+
+  }
+
+  $("#street_number").val(street_number);
+  $("#address").val(address);
+  $("#cep").val(cep);
+  $("#neighborhood").val(neighborhood);
+
+  $("#state").val("");
+  $("#city").val("");
+
+  if (uf) {
+    $("#state").val(uf);
+    $("#state").trigger('change');
+
+    if (city) {
+      $("#city").val(String(ufs[uf].municipioCodes[city]));
+    }
+  }
 }
 
 function handleError(response) {
@@ -286,11 +399,11 @@ function init() {
               cpf_cnpj: $("#cpf_cnpj").val(),
               address: $("#address").val().trim(),
               neighborhood: $("#neighborhood").val().trim(),
-              city: $("#city").val(),
-              state: $("#state").val(),
-              zipcode: $("#cep").val(),
+              city: $("#city").val(), 
+              state: $("#state").val(), 
+              zipcode: $("#cep").val().replace(/\D/g, ""),
             }
-          }
+          } 
 
           let paymentDetails = {
             gateway: 'Test1',
@@ -306,18 +419,33 @@ function init() {
           };
 
           let hasError = false;
-          if(billingDetails) {
-            if(billingDetails.name.length < 5) {
+          if (billingDetails) { 
+            if (billingDetails.name.length < 5) {
               $("#name").parent().addClass('error');
               hasError = true;
             }
- 
-            if(!validateCPFCNPJ(billingDetails.cpf_cnpj)) {
+
+            if (!validateCPFCNPJ(billingDetails.cpf_cnpj)) {
               $("#cpf_cnpj").parent().addClass('error');
               hasError = true;
             }
 
-            
+ 
+            if (billingDetails.address.length < 3) {
+              $("#address").parent().addClass('error');
+              hasError = true;
+            }
+
+            if (billingDetails.neighborhood.length < 3) {
+              $("#neighborhood").parent().addClass('error');
+              hasError = true;
+            }
+
+            if (billingDetails.zipcode.length < 8) {
+              $("#cep").parent().addClass('error');
+              hasError = true;
+            } 
+
           }
           if (!validateCreditCard(paymentDetails.details.card_number)) {
             $cardNumber.parent().addClass('error');
@@ -343,7 +471,7 @@ function init() {
           if (hasError) {
             return;
           }
- 
+
           let formData = new FormData();
           formData.append("target_plan", plans[target_plan]);
           formData.append("email", $("#email").val());

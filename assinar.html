@@ -110,37 +110,86 @@
                     <input type="text" class="form-control" id="cpf_cnpj" placeholder="999.999.999-99">
                     <em>Por favor, informe um CPF/CNPJ válido.</em>
                 </div>
-                <div class="form-group mb-3" data-fueld data-auto-fillable>
+                <div class="form-group mb-3" data-field data-auto-fillable>
                     <label for="address">Endereço</label>
-                    <input type="text" class="form-control" id="address" placeholder="Av. Paulista, 999999 "
+                    <input type="text" class="form-control" id="address" placeholder="Av. Paulista "
                         onblur="javascript:void($('#full-address').collapse('show'))">
+                        <em>Por favor, informe um endereço válido.</em>
                 </div>
                 <div id="full-address" class="collapse">
-                    <div class="form-group mb-3">
-                        <label for="neighborhood">Bairro</label>
-                        <input type="text" class="form-control" id="neighborhood" placeholder="Jardim Paulista">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="city">Cidade</label>
-                        <input type="text" class="form-control" id="city" placeholder="São Paulo">
+                    <div class="row gx-3">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3" data-field>
+                                <label for="number">Número</label>
+                                <input type="number" class="form-control" id="street_number" placeholder="9999999">
+                                <em>Por favor, informe um número válido.</em>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3" data-field>
+                                <label for="neighborhood">Bairro</label>
+                                <input type="text" class="form-control" id="neighborhood" placeholder="Jardim Paulista">                     
+                                <em>Por favor, informe um bairro válido.</em>
+                            </div>
+                        </div>
                     </div>
                     <div class="row gx-3">
                         <div class="col-md-6">
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-3" data-field>
                                 <label for="state">Estado</label>
-                                <input type="text" class="form-control" id="state" placeholder="São Paulo">
+                                <select class="form-control" name="uf" id="state" value="">
+                                    <option></option>
+                                    <option value="AL">Alagoas</option>
+                                    <option value="AC">Acre</option>
+                                    <option value="AM">Amazonas</option>
+                                    <option value="AP">Amapá</option>
+                                    <option value="BA">Bahia</option>
+                                    <option value="CE">Ceará</option>
+                                    <option value="DF">Distrito Federal</option>
+                                    <option value="ES">Espírito Santo</option>
+                                    <option value="GO">Goiás</option>
+                                    <option value="MA">Maranhão</option>
+                                    <option value="MG">Minas Gerais</option>
+                                    <option value="MS">Mato Grosso do Sul</option>
+                                    <option value="MT">Mato Grosso</option>
+                                    <option value="PA">Pará</option>
+                                    <option value="PB">Paraíba</option>
+                                    <option value="PE">Pernambuco</option>
+                                    <option value="PR">Paraná</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="RN">Rio Grande do Norte</option>
+                                    <option value="RS">Rio Grande do Sul</option>
+                                    <option value="RO">Rondônia</option>
+                                    <option value="RR">Roraima</option>
+                                    <option value="SC">Santa Catarina</option>
+                                    <option value="SE">Sergipe</option>
+                                    <option value="SP">São Paulo</option>
+                                    <option value="PI">Piauí</option>
+                                    <option value="TO">Tocantins</option>
+                                </select>
+                                <em>Por favor, informe um estado válido.</em>
                             </div>
-                        </div>
+                        </div> 
                         <div class="col-md-6">
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-3" data-field>
                                 <label for="cep">CEP</label>
                                 <input type="text" class="form-control" id="cep" placeholder="99999-999">
+                                <em>Por favor, informe um CEP válido.</em>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-3" data-field>
+                                <label for="city">Cidade</label>
+                                <select type="text" class="form-control" id="city"></select>
+                                <em>Por favor, informe uma cidade válida.</em>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3" data-field>
                                 <label for="phone">Telefone</label>
                                 <input type="text" class="form-control" id="phone" placeholder="(99) 99999-9999">
+                                <em>Por favor, informe um telefofne válido.</em>
                             </div>
                         </div>
                     </div>
@@ -152,8 +201,8 @@
                     <div class="form-group card-js" data-card-container>
                         <p></p>
                         <div class="xxx">
-                            <input class="form-control card-number" name="card-number"
-                                placeholder="9999 9999 9999 9999" id="card-number">
+                            <input class="form-control card-number" name="card-number" placeholder="9999 9999 9999 9999"
+                                id="card-number">
                         </div>
                         <input class="form-control name" id="card-holder" name="card-holders-name"
                             placeholder="Seu nome">
@@ -178,10 +227,14 @@
     </div>
 
 
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaGDtiIgu7ZxJvRZzcYeSn25LRdUgzS7k&callback=initAutocomplete&libraries=places&v=weekly"
+        defer></script>
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/card-js.min.js"></script>
+    <script src="/js/ufs.js"></script>
     <script src="/js/assinar-v1.js"></script>
 
 
