@@ -92,62 +92,89 @@ function validateCPFCNPJ(cpf_cnpj) {
   // Check if the document length is valid for CPF or CNPJ
   if (cleanDocument.length === 11) {
     // CPF case
-    return validateCPF(cleanDocument);
+    return validateCPF(cpf_cnpj);
   } else if (cleanDocument.length === 14) {
     // CNPJ case
-    return validateCNPJ(cleanDocument);
+    return validateCNPJ(cpf_cnpj);
   } else {
     return false; // Invalid length for CPF or CNPJ
   }
 }
 
 function validateCPF(cpf) {
-  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false; // Check for repeated sequences
+  // Check if the input consists of only numbers or a properly formatted CPF (XXX.XXX.XXX-XX)
+  if (!/^\d{11}$/.test(cpf) && !/^\d{3}(\.\d{3}){2}-\d{2}$/.test(cpf)) {
+    return false;
+  }
 
-  let sum = 0;
-  let remainder;
+  cpf = cpf.replace(/\D/g, ''); // Remove any non-numeric characters (dots, hyphens)
 
-  // Calculate first verification digit
-  for (let i = 1; i <= 9; i++) sum += parseInt(cpf.charAt(i - 1)) * (11 - i);
-  remainder = (sum * 10) % 11;
-  if (remainder === 10 || remainder === 11) remainder = 0;
-  if (remainder !== parseInt(cpf.charAt(9))) return false;
+  // Check if CPF has 11 digits and is not composed of all identical digits
+  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
 
-  sum = 0;
-  // Calculate second verification digit
-  for (let i = 1; i <= 10; i++) sum += parseInt(cpf.charAt(i - 1)) * (12 - i);
-  remainder = (sum * 10) % 11;
-  if (remainder === 10 || remainder === 11) remainder = 0;
-  if (remainder !== parseInt(cpf.charAt(10))) return false;
+  // Function to calculate the verification digit
+  const calcDigit = (cpf, pos) => {
+    let sum = 0, multiplier = pos;
+    for (let i = 0; i < pos - 1; i++) sum += cpf[i] * multiplier--;
+    return (sum % 11 < 2) ? 0 : 11 - (sum % 11);
+  };
+
+  // Validate the two verification digits
+  if (parseInt(cpf[9]) !== calcDigit(cpf, 10) || parseInt(cpf[10]) !== calcDigit(cpf, 11)) return false;
 
   return true;
 }
 
 function validateCNPJ(cnpj) {
-  if (cnpj.length !== 14 || /^(\d)\1{13}$/.test(cnpj)) return false; // Check for repeated sequences
+  // Check if the input is either numeric (14 digits) or in the correct format (XX.XXX.XXX/XXXX-XX)
+  if (!/^\d{14}$/.test(cnpj) && !/^\d{2}(\.\d{3}){2}\/\d{4}-\d{2}$/.test(cnpj)) {
+    return false;
+  }
 
-  let sum = 0;
-  let remainder;
-  const weights1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
-  const weights2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+  cnpj = cnpj.replace(/\D/g, ''); // Remove non-numeric characters (dots, slashes, hyphens)
 
-  // Calculate first verification digit
-  for (let i = 0; i < 12; i++) sum += parseInt(cnpj.charAt(i)) * weights1[i];
-  remainder = sum % 11;
-  if (remainder < 2) remainder = 0;
-  else remainder = 11 - remainder;
-  if (remainder !== parseInt(cnpj.charAt(12))) return false;
+  // Check if CNPJ has 14 digits and is not composed of all identical digits
+  if (cnpj.length !== 14 || /^(\d)\1{13}$/.test(cnpj)) return false;
 
-  sum = 0;
-  // Calculate second verification digit
-  for (let i = 0; i < 13; i++) sum += parseInt(cnpj.charAt(i)) * weights2[i];
-  remainder = sum % 11;
-  if (remainder < 2) remainder = 0;
-  else remainder = 11 - remainder;
-  if (remainder !== parseInt(cnpj.charAt(13))) return false;
+  // Function to calculate the verification digit
+  const calcDigit = (cnpj, weights) => {
+    let sum = 0;
+    for (let i = 0; i < weights.length; i++) {
+      sum += cnpj[i] * weights[i];
+    }
+    const remainder = sum % 11;
+    return remainder < 2 ? 0 : 11 - remainder;
+  };
+
+  // Weights for the first and second check digits
+  const firstDigitWeights = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+  const secondDigitWeights = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+
+  // Validate the two check digits
+  const firstCheckDigit = calcDigit(cnpj, firstDigitWeights);
+  const secondCheckDigit = calcDigit(cnpj, secondDigitWeights);
+
+  if (parseInt(cnpj[12]) !== firstCheckDigit || parseInt(cnpj[13]) !== secondCheckDigit) return false;
 
   return true;
 }
+
+function validateCEP(cep) {
+  // Check if the input is either numeric (8 digits) or in the correct format (XXXXX-XXX)
+  if (!/^\d{8}$/.test(cep) && !/^\d{5}-\d{3}$/.test(cep)) {
+    return false;
+  }
+
+  // If it's in the format with hyphen, we ensure it matches the format exactly
+  if (/^\d{5}-\d{3}$/.test(cep)) {
+    // Ensure that the hyphen is in the correct position (after 5 digits)
+    return true;
+  }
+
+  // If it's in the numeric format, it's already validated as having exactly 8 digits
+  return true;
+}
+
 
 function fillInAddress() {
   // Get the place details from the autocomplete object.
@@ -373,6 +400,106 @@ function init() {
       ready = true;
 
 
+      let getFields = function () {
+
+        $("[data-field]").removeClass("error");
+        let billingDetails = null;
+
+        if (!hasBillingDetails) {
+          billingDetails = {
+            name: $("#name").val().trim(),
+            cpf_cnpj: $("#cpf_cnpj").val(),
+            address: $("#address").val().trim(),
+            address_number: $("#street_number").val().trim(),
+            neighborhood: $("#neighborhood").val().trim(),
+            city: $("#city").val(),
+            state: $("#state").val(),
+            zipcode: $("#cep").val(),
+          }
+        }
+
+        let paymentDetails = {
+          gateway: 'Test1',
+          method: 'async_method',
+          details: {
+            card_holder: $cardContainer.CardJs('name').trim(),
+            card_number: $cardContainer.CardJs('cardNumber').replace(/\D/g, ""),
+            card_expiration_month: $cardContainer.CardJs('expiryMonth'),
+            card_expiration_year: $cardContainer.CardJs('expiryYear'),
+            card_cvv: $cardContainer.CardJs('cvc').replace(/\D/g, ""),
+            installments: 12
+          }
+        };
+
+        let hasError = false;
+        if (billingDetails) {
+          if (billingDetails.name.length < 10) {
+            $("#name").parent().addClass('error');
+            hasError = true;
+          }
+
+          if (!validateCPFCNPJ(billingDetails.cpf_cnpj)) {
+            $("#cpf_cnpj").parent().addClass('error');
+            hasError = true;
+          }
+
+          if (billingDetails.address.length < 5) {
+            $("#address").parent().addClass('error');
+            hasError = true;
+          }
+
+          if (billingDetails.address_number.length < 1) {
+            $("#street_number").parent().addClass('error');
+            hasError = true;
+          }
+
+          if (billingDetails.neighborhood.length < 3) {
+            $("#neighborhood").parent().addClass('error');
+            hasError = true;
+          }
+
+          if (!billingDetails.state) {
+            $("#state").parent().addClass('error');
+            hasError = true;
+          }
+
+          if (!validateCEP(billingDetails.zipcode)) {
+            $("#cep").parent().addClass('error');
+            hasError = true;
+          }
+
+          if (!billingDetails.city) {
+            $("#city").parent().addClass('error');
+            hasError = true;
+          }
+
+        }
+        if (!validateCreditCard(paymentDetails.details.card_number)) {
+          $cardNumber.parent().addClass('error');
+          hasError = true;
+        }
+        if (paymentDetails.details.card_holder.length < 5) {
+          $cardName.parent().addClass('error');
+          hasError = true;
+        }
+        if (paymentDetails.details.card_cvv.length < 3) {
+          $cardCVC.parent().addClass('error');
+          hasError = true;
+        }
+        if (!CardJs.isExpiryValid(paymentDetails.details.card_expiration_month, paymentDetails.details.card_expiration_year)) {
+          $cardExpiration.parent().addClass('error');
+          hasError = true;
+        }
+
+
+        if (hasError) {
+          return null;
+        } else {
+          return { billingDetails: billingDetails, paymentDetails: paymentDetails }
+        }
+
+      }
+
       $("#submit-btn").on('click', async (event) => {
         // We don't want to let default form submission happen here,
         // which would refresh the page.
@@ -390,87 +517,13 @@ function init() {
         // Create the subscription
         try {
 
-          $("[data-field]").removeClass("error");
-          let billingDetails = null;
-
-          if (!hasBillingDetails) {
-            billingDetails = {
-              name: $("#name").val().trim(),
-              cpf_cnpj: $("#cpf_cnpj").val(),
-              address: $("#address").val().trim(),
-              neighborhood: $("#neighborhood").val().trim(),
-              city: $("#city").val(), 
-              state: $("#state").val(), 
-              zipcode: $("#cep").val().replace(/\D/g, ""),
-            }
-          } 
-
-          let paymentDetails = {
-            gateway: 'Test1',
-            method: 'async_method',
-            details: {
-              card_holder: $cardContainer.CardJs('name').trim(),
-              card_number: $cardContainer.CardJs('cardNumber').replace(/\D/g, ""),
-              card_expiration_month: $cardContainer.CardJs('expiryMonth'),
-              card_expiration_year: $cardContainer.CardJs('expiryYear'),
-              card_cvv: $cardContainer.CardJs('cvc').replace(/\D/g, ""),
-              installments: 12
-            }
-          };
-
-          let hasError = false;
-          if (billingDetails) { 
-            if (billingDetails.name.length < 5) {
-              $("#name").parent().addClass('error');
-              hasError = true;
-            }
-
-            if (!validateCPFCNPJ(billingDetails.cpf_cnpj)) {
-              $("#cpf_cnpj").parent().addClass('error');
-              hasError = true;
-            }
-
- 
-            if (billingDetails.address.length < 3) {
-              $("#address").parent().addClass('error');
-              hasError = true;
-            }
-
-            if (billingDetails.neighborhood.length < 3) {
-              $("#neighborhood").parent().addClass('error');
-              hasError = true;
-            }
-
-            if (billingDetails.zipcode.length < 8) {
-              $("#cep").parent().addClass('error');
-              hasError = true;
-            } 
-
-          }
-          if (!validateCreditCard(paymentDetails.details.card_number)) {
-            $cardNumber.parent().addClass('error');
-            hasError = true;
-          }
-
-          if (paymentDetails.details.card_holder.length < 5) {
-            $cardName.parent().addClass('error');
-            hasError = true;
-          }
-
-          if (paymentDetails.details.card_cvv.length < 3) {
-            $cardCVC.parent().addClass('error');
-            hasError = true;
-          }
-
-          if (!CardJs.isExpiryValid(paymentDetails.details.card_expiration_month, paymentDetails.details.card_expiration_year)) {
-            $cardExpiration.parent().addClass('error');
-            hasError = true;
-          }
-
-
-          if (hasError) {
+          let fields = getFields();
+          if (!fields) {
             return;
           }
+
+          let billingDetails = fields.billingDetails;
+          let paymentDetails = fields.paymentDetails;
 
           let formData = new FormData();
           formData.append("target_plan", plans[target_plan]);
