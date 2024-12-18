@@ -84,9 +84,9 @@
                     <div class="spinner-border text-primary" role="status"><span class="sr-only"></span></div>
                 </h1>
             </div>
-
+ 
             <form id="sign_up" style="display: none">
-                <div class="form-group mb-3" data-field data-auto-fillable>
+                <div class="form-group mb-3" data-field="name" data-auto-fillable>
                     <label for="name">Nome</label>
                     <input type="text" class="form-control" id="name" placeholder="Seu nome">
                     <em>Por favor, informe um nome válido.</em>
@@ -105,12 +105,12 @@
                     <label for="email">Confirme seu e-mail</label>
                     <input type="email" class="form-control" id="confirm-email" placeholder="seu@email.com">
                 </div>
-                <div class="form-group mb-3" data-field data-auto-fillable>
+                <div class="form-group mb-3" data-field="cpf_cnpj" data-auto-fillable>
                     <label for="cpf_cnpj">CPF/CNPJ</label>
                     <input type="text" class="form-control" id="cpf_cnpj" placeholder="999.999.999-99">
                     <em>Por favor, informe um CPF/CNPJ válido.</em>
                 </div>
-                <div class="form-group mb-3" data-field data-auto-fillable>
+                <div class="form-group mb-3" data-field="address" data-auto-fillable>
                     <label for="address">Endereço</label>
                     <input type="text" class="form-control" id="address" placeholder="Av. Paulista "
                         onblur="javascript:void($('#full-address').collapse('show'))">
@@ -119,14 +119,14 @@
                 <div id="full-address" class="collapse">
                     <div class="row gx-3">
                         <div class="col-md-6">
-                            <div class="form-group mb-3" data-field>
+                            <div class="form-group mb-3" data-field="address_number">
                                 <label for="number">Número</label>
-                                <input type="number" class="form-control" id="street_number" placeholder="9999999" min="0">
+                                <input type="number" class="form-control" id="address_number" placeholder="9999999" min="0">
                                 <em>Por favor, informe um número válido.</em>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group mb-3" data-field>
+                            <div class="form-group mb-3" data-field="neighborhood">
                                 <label for="neighborhood">Bairro</label>
                                 <input type="text" class="form-control" id="neighborhood" placeholder="Jardim Paulista">                     
                                 <em>Por favor, informe um bairro válido.</em>
@@ -135,7 +135,7 @@
                     </div>
                     <div class="row gx-3">
                         <div class="col-md-6">
-                            <div class="form-group mb-3" data-field>
+                            <div class="form-group mb-3" data-field="state">
                                 <label for="state">Estado</label>
                                 <select class="form-control" name="uf" id="state" value="">
                                     <option></option>
@@ -171,14 +171,14 @@
                             </div>
                         </div> 
                         <div class="col-md-6">
-                            <div class="form-group mb-3" data-field>
+                            <div class="form-group mb-3" data-field="cep">
                                 <label for="cep">CEP</label>
                                 <input type="text" class="form-control" id="cep" placeholder="99999-999" maxlength="9">
                                 <em>Por favor, informe um CEP válido.</em>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group mb-3" data-field>
+                            <div class="form-group mb-3" data-field="city">
                                 <label for="city">Cidade</label>
                                 <select type="text" class="form-control" id="city"></select>
                                 <em>Por favor, informe uma cidade válida.</em>
@@ -186,7 +186,7 @@
 
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group mb-3" data-field>
+                            <div class="form-group mb-3" data-field="phone">
                                 <label for="phone">Telefone</label>
                                 <input type="text" class="form-control" id="phone" placeholder="(99) 99999-9999">
                                 <em>Por favor, informe um telefofne válido.</em>

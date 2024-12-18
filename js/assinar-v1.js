@@ -1,49 +1,12 @@
 window.signupAPIEndpoint = 'http://localhost:3000';
 window.assistantDashboard = 'http://localhost:8080';
+window.initAutocomplete = initAutocomplete;
 
 let formData = new FormData();
 let hasBillingDetails = false;
 let loggedInUser = null;
 let autocomplete;
 let submitBtn = document.getElementById('submit-btn');
-
-window.initAutocomplete = initAutocomplete;
-
-function initAutocomplete() {
-  autocomplete = new google.maps.places.Autocomplete(document.querySelector("#address"), {
-    componentRestrictions: { country: ["br"] },
-    fields: ["address_components", "geometry"],
-    types: ["address"],
-  });
-  // When the user selects an address from the drop-down, populate the
-  // address fields in the form.
-  autocomplete.addListener("place_changed", fillInAddress);
-
-};
-
-
-// Função para popular o select de municípios
-function populateMunicipios(uf) {
-  const municipioSelect = $("#city");
-  municipioSelect.empty();  // Limpa o select de municípios
-
-  let municipiosData = ufs;
-  // Verifica se existem municípios para a UF
-  if (municipiosData[uf]) {
-    // Adiciona os municípios no select
-    municipiosData[uf].municipios.forEach(function (municipio) {
-      municipioSelect.append(`<option value="${municipio.codigo_ibge}">${municipio.nome}</option>`);
-    });
-  }
-}
-
-// Evento de mudança na UF
-$('#state').change(function () {
-  const ufSelecionado = $(this).val();  // Pega a UF selecionada
-  populateMunicipios(ufSelecionado);    // Chama a função para popular os municípios
-});
-
-
 
 function getParameterByName(name, url) {
   if (!url) url = window.location.href;
@@ -83,7 +46,6 @@ function redirectToNext() {
   let url = getNext();
   setTimeout(() => document.location.href = url, 2000);
 }
-
 
 function validateCPFCNPJ(cpf_cnpj) {
   // Remove non-numeric characters
@@ -175,6 +137,71 @@ function validateCEP(cep) {
   return true;
 }
 
+function validatePhone(phoneNumber) {
+  return intlTelInputUtils.isValidNumber(
+    phoneNumber,
+    null,
+    intlTelInputUtils.numberFormat.INTERNATIONAL
+  );
+}
+
+function validateCreditCard(number) {
+  // Remove spaces or dashes and ensure the number contains only digits
+  number = number.replace(/\D/g, '');
+
+  // Check if the number has between 13 and 19 digits
+  if (number.length < 13 || number.length > 19) {
+    return false;
+  }
+
+  let sum = 0;
+  let shouldDouble = false;
+
+  // Loop through the digits from right to left
+  for (let i = number.length - 1; i >= 0; i--) {
+    let digit = parseInt(number.charAt(i));
+
+    if (shouldDouble) {
+      digit *= 2;
+      if (digit > 9) {
+        digit -= 9; // Subtract 9 if the result is greater than 9
+      }
+    }
+
+    sum += digit;
+    shouldDouble = !shouldDouble;
+  }
+
+  // The number is valid if the sum is divisible by 10
+  return sum % 10 === 0;
+}
+
+function initAutocomplete() {
+  autocomplete = new google.maps.places.Autocomplete(document.querySelector("#address"), {
+    componentRestrictions: { country: ["br"] },
+    fields: ["address_components", "geometry"],
+    types: ["address"],
+  });
+  // When the user selects an address from the drop-down, populate the
+  // address fields in the form.
+  autocomplete.addListener("place_changed", fillInAddress);
+
+};
+
+// Função para popular o select de municípios
+function populateMunicipios(uf) {
+  const municipioSelect = $("#city");
+  municipioSelect.empty();  // Limpa o select de municípios
+
+  let municipiosData = ufs;
+  // Verifica se existem municípios para a UF
+  if (municipiosData[uf]) {
+    // Adiciona os municípios no select
+    municipiosData[uf].municipios.forEach(function (municipio) {
+      municipioSelect.append(`<option value="${municipio.codigo_ibge}">${municipio.nome}</option>`);
+    });
+  }
+}
 
 function fillInAddress() {
   // Get the place details from the autocomplete object.
@@ -187,7 +214,7 @@ function fillInAddress() {
   // and then fill-in the corresponding field on the form.
   // place.address_components are google.maps.GeocoderAddressComponent objects
   // which are documented at http://goo.gle/3l5i5Mr
-  let street_number = null;
+  let address_number = null;
   let address = null;
   let city = null;
   let cep = null;
@@ -204,8 +231,8 @@ function fillInAddress() {
         break;
       }
 
-      case "street_number": {
-        street_number = component.long_name;
+      case "address_number": {
+        address_number = component.long_name;
         break;
       }
 
@@ -232,22 +259,24 @@ function fillInAddress() {
 
   }
 
-  $("#street_number").val(street_number);
-  $("#address").val(address);
-  $("#cep").val(cep);
-  $("#neighborhood").val(neighborhood);
+  $("#address_number").val(address_number).trigger('blur');
+  $("#address").val(address).trigger('blur');
+  $("#cep").val(cep).trigger('blur');
+  $("#neighborhood").val(neighborhood).trigger('blur');
 
   $("#state").val("");
   $("#city").val("");
 
   if (uf) {
-    $("#state").val(uf);
+    $("#state").val(uf).trigger('blur');
     $("#state").trigger('change');
 
     if (city) {
-      $("#city").val(String(ufs[uf].municipioCodes[city]));
+      $("#city").val(String(ufs[uf].municipioCodes[city])).trigger('blur');
     }
   }
+
+
 }
 
 function handleError(response) {
@@ -345,6 +374,369 @@ let plans = {
 };
 
 $cardContainer.append($container);
+
+// Evento de mudança na UF
+$('#state').change(function () {
+  const ufSelecionado = $(this).val();  // Pega a UF selecionada
+  populateMunicipios(ufSelecionado);    // Chama a função para popular os municípios
+});
+
+function showSignupForm(response, target_plan) {
+  let hasEmail = (response.email && response.email.trim().length > 0 ? true : false);
+
+  $("#name").val(response.name);
+  $("#cpf_cnpj").val(response.cpf_cnpj);
+  $("#email").val(response.email);
+  $("#email").prop('disabled', hasEmail);
+
+  if (hasEmail) {
+    loggedInUser = response.email;
+    $("#confirm-email").closest('.form-group').hide();
+    $("#confirm-email").val(response.email);
+    $("#login-note").show();
+  } else {
+    $("#confirm-email").closest('.form-group').show();
+    $("#login-note").hide();
+  }
+
+  if (response.billing_details) {
+    $("[data-auto-fillable]").hide();
+    hasBillingDetails = true;
+  }
+
+  document.title = 'Virtap | Assinar plano ' + plans[target_plan];
+
+  $("#submit-btn").text('Assinar plano ' + plans[target_plan]);
+  $("#loading").hide();
+  $("#sign_up").show();
+  setTimeout(() => $("#name").focus(), 300);
+  ready = true;
+
+  let getFields = function () {
+
+    $("[data-field]").removeClass("error");
+    let billingDetails = null;
+
+    if (!hasBillingDetails) {
+      billingDetails = {
+        name: $("#name").val().trim(),
+        cpf_cnpj: $("#cpf_cnpj").val(),
+        address: $("#address").val().trim(),
+        address_number: $("#address_number").val().trim(),
+        neighborhood: $("#neighborhood").val().trim(),
+        city: $("#city").val(),
+        state: $("#state").val(),
+        zipcode: $("#cep").val(),
+      }
+    }
+
+    let paymentDetails = {
+      gateway: 'Test1',
+      method: 'async_method',
+      details: {
+        card_holder: $cardContainer.CardJs('name').trim(),
+        card_number: $cardContainer.CardJs('cardNumber').replace(/\D/g, ""),
+        card_expiration_month: $cardContainer.CardJs('expiryMonth'),
+        card_expiration_year: $cardContainer.CardJs('expiryYear'),
+        card_cvv: $cardContainer.CardJs('cvc').replace(/\D/g, ""),
+        installments: 12
+      }
+    };
+
+    let hasError = false;
+    if (billingDetails) {
+      if (billingDetails.name.length < 10) {
+        $("#name").parent().addClass('error');
+        hasError = true;
+      }
+
+      if (!validateCPFCNPJ(billingDetails.cpf_cnpj)) {
+        $("#cpf_cnpj").parent().addClass('error');
+        hasError = true;
+      }
+
+      if (billingDetails.address.length < 5) {
+        $("#address").parent().addClass('error');
+        hasError = true;
+      }
+
+      if (billingDetails.address_number.length < 1) {
+        $("#address_number").parent().addClass('error');
+        hasError = true;
+      }
+
+      if (billingDetails.neighborhood.length < 3) {
+        $("#neighborhood").parent().addClass('error');
+        hasError = true;
+      }
+
+      if (!billingDetails.state) {
+        $("#state").parent().addClass('error');
+        hasError = true;
+      }
+
+      if (!validateCEP(billingDetails.zipcode)) {
+        $("#cep").parent().addClass('error');
+        hasError = true;
+      }
+
+      if (!billingDetails.city) {
+        $("#city").parent().addClass('error');
+        hasError = true;
+      }
+
+    }
+    if (!validateCreditCard(paymentDetails.details.card_number)) {
+      $cardNumber.parent().addClass('error');
+      hasError = true;
+    }
+    if (paymentDetails.details.card_holder.length < 5) {
+      $cardName.parent().addClass('error');
+      hasError = true;
+    }
+    if (paymentDetails.details.card_cvv.length < 3) {
+      $cardCVC.parent().addClass('error');
+      hasError = true;
+    }
+    if (!CardJs.isExpiryValid(paymentDetails.details.card_expiration_month, paymentDetails.details.card_expiration_year)) {
+      $cardExpiration.parent().addClass('error');
+      hasError = true;
+    }
+
+
+    if (hasError) {
+      return null;
+    } else {
+      return { billingDetails: billingDetails, paymentDetails: paymentDetails }
+    }
+
+  }
+
+  let $name = $("#name");
+  let $cpf_cnpj = $("#cpf_cnpj");
+  let $address = $("#address");
+  let $address_number = $("#address_number");
+  let $neighborhood = $("#neighborhood");
+  let $state = $("#state");
+  let $cep = $("#cep");
+  let $city = $("#city");
+  let $phone = $("#phone");
+
+  // Name field
+  $name.parent().data('get-field', function () {
+    let name = $name.val();
+    if (name.length < 10) {
+      $name.parent().addClass('error');
+      return undefined;
+    }
+    return name;
+  });
+
+  // CPF/CNPJ field
+  $cpf_cnpj.parent().data('get-field', function () {
+    let cpf_cnpj = $cpf_cnpj.val();
+    if (!validateCPFCNPJ(cpf_cnpj)) {
+      $cpf_cnpj.parent().addClass('error');
+      return undefined;
+    }
+    return cpf_cnpj;
+  });
+
+  // Address field
+  $address.parent().data('get-field', function () {
+    let address = $address.val();
+    if (address.length < 5) {
+      $address.parent().addClass('error');
+      return undefined;
+    }
+    return address;
+  });
+
+  // Address number
+  $address_number.parent().data('get-field', function () {
+    let address_number = $address_number.val();
+    if (address_number.length < 1) {
+      $address_number.parent().addClass('error');
+      return undefined;
+    }
+    return address_number;
+  });
+
+  // Neighborhood number
+  $neighborhood.parent().data('get-field', function () {
+    let neighborhood = $neighborhood.val();
+    if (neighborhood.length < 3) {
+      $neighborhood.parent().addClass('error');
+      return undefined;
+    }
+    return neighborhood;
+  });
+
+  // State 
+  $state.parent().data('get-field', function () {
+    let state = $state.val();
+    if (!state) {
+      $state.parent().addClass('error');
+      return undefined;
+    }
+    return state;
+  });
+
+  // CEP
+  $cep.parent().data('get-field', function () {
+    let cep = $cep.val();
+    if (!validateCEP(cep)) {
+      $cep.parent().addClass('error');
+      return undefined;
+    }
+    return parent;
+  });
+
+  // City 
+  $city.parent().data('get-field', function () {
+    let city = $city.val();
+    if (!city) {
+      $city.parent().addClass('error');
+      return undefined;
+    }
+    return city;
+  });
+ 
+  // Phone 
+  $phone.closest('[data-field]').data('get-field', function () {
+    let phone = intl.getNumber();
+    alert(phone);
+    if (!validatePhone(phone)) {
+      $phone.closest('[data-field]').addClass('error');
+      return undefined;
+    }
+    return phone;
+  });
+
+  // Blur validation.
+  $("[data-field]").each(function () {
+    let $field = $(this);
+    $(this).find('input,select').on('blur', function () {
+      if ($(this).val() && $(this).val().trim().length > 0) {
+        $field.removeClass('error');
+        $field.data('get-field')();
+      }
+    })
+  });
+
+  $("#submit-btn").on('click', async (event) => {
+    // We don't want to let default form submission happen here,
+    // which would refresh the page.
+    event.preventDefault();
+
+    // Prevent multiple form submissions
+    if (submitBtn.disabled || !ready) {
+      return;
+    }
+
+    if (1 == 1) {
+      return;
+    }
+    $("[data-field]").removeClass("error");
+
+    let fields = $("[data-field]");
+    let hasError = false;
+    fields.each(function (index) {
+      let func = $(this).data('get-field');
+      if (func === undefined) {
+        hasError = true;
+      } else (
+        func()
+      )
+    });
+
+    if (hasError) {
+      return;
+    }
+
+
+    // Disable form submission while loading
+    $("#submit-btn").prop('disabled', true).text('Por favor, aguarde...');
+    $("input").prop('disabled', true);
+
+    // Create the subscription
+    try {
+
+      let fields = getFields();
+      if (!fields) {
+        return;
+      }
+
+      let billingDetails = fields.billingDetails;
+      let paymentDetails = fields.paymentDetails;
+
+      let formData = new FormData();
+      formData.append("target_plan", plans[target_plan]);
+      formData.append("email", $("#email").val());
+      if (billingDetails) {
+        formData.append("billing_details", JSON.stringify(billingDetails));
+      }
+      formData.append("payment_details", JSON.stringify(paymentDetails));
+
+      // Create the PaymentIntent
+      const res = await fetch("http://localhost:3000/subscribe", {
+        method: "POST",
+        credentials: "include",
+        body: formData
+      });
+
+      if (res.status !== 200) {
+        console.log(res);
+        throw await res.json();
+      }
+
+      const data = await res.json();
+      console.log(data);
+      if (data.responseData) {
+
+        if (data.responseData.charged) {
+          if (target_plan === 'BASIC') {
+            $("#loading").html('<div><h1>Assinatura do plano Basic realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+          } else {
+            $("#loading").html('<div><h1>Assinatura do plano Vip realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+          }
+          $("#loading").show();
+          $("#sign_up").hide();
+          redirectToNext();
+        } else {
+          if (paymentDetails.method === 'credit_card') {
+            throw new Error("Failure making payment using credit card.");
+          } else {
+            $("#loading").text(JSON.stringify(data.responseData.subscription));
+            $("#loading").show();
+            $("#sign_up").hide();
+          }
+        }
+
+
+      } else {
+        throw new Error("Failure making payment.");
+      }
+
+    } catch (err) {
+      if (err && (err.errorCode === 'ALREADY_SUBSCRIBED' || err.errorCode === 'INVALID_ASSISTANT_STATUS')) {
+        handleError(err);
+      } else {
+        console.log(err);
+        alert('Erro! Tente novamente!');
+      }
+    }
+    finally {
+      $("#submit-btn").prop('disabled', false).text('Assinar plano ' + plans[target_plan]);
+      $("input").prop('disabled', false);
+      if (loggedInUser) {
+        $("#email").prop('disabled', true);
+      }
+    }
+  });
+
+}
+
 function init() {
   let target_plan = getPlan();
 
@@ -368,262 +760,9 @@ function init() {
     },
     success: function (response) {
       response = response.responseData;
-
-      let hasEmail = (response.email && response.email.trim().length > 0 ? true : false);
-
-      $("#name").val(response.name);
-      $("#cpf_cnpj").val(response.cpf_cnpj);
-      $("#email").val(response.email);
-      $("#email").prop('disabled', hasEmail);
-
-      if (hasEmail) {
-        loggedInUser = response.email;
-        $("#confirm-email").closest('.form-group').hide();
-        $("#confirm-email").val(response.email);
-        $("#login-note").show();
-      } else {
-        $("#confirm-email").closest('.form-group').show();
-        $("#login-note").hide();
-      }
-
-      if (response.billing_details) {
-        $("[data-auto-fillable]").hide();
-        hasBillingDetails = true;
-      }
-
-      document.title = 'Virtap | Assinar plano ' + plans[target_plan];
-
-      $("#submit-btn").text('Assinar plano ' + plans[target_plan]);
-      $("#loading").hide();
-      $("#sign_up").show();
-      setTimeout(() => $("#name").focus(), 300);
-      ready = true;
-
-
-      let getFields = function () {
-
-        $("[data-field]").removeClass("error");
-        let billingDetails = null;
-
-        if (!hasBillingDetails) {
-          billingDetails = {
-            name: $("#name").val().trim(),
-            cpf_cnpj: $("#cpf_cnpj").val(),
-            address: $("#address").val().trim(),
-            address_number: $("#street_number").val().trim(),
-            neighborhood: $("#neighborhood").val().trim(),
-            city: $("#city").val(),
-            state: $("#state").val(),
-            zipcode: $("#cep").val(),
-          }
-        }
-
-        let paymentDetails = {
-          gateway: 'Test1',
-          method: 'async_method',
-          details: {
-            card_holder: $cardContainer.CardJs('name').trim(),
-            card_number: $cardContainer.CardJs('cardNumber').replace(/\D/g, ""),
-            card_expiration_month: $cardContainer.CardJs('expiryMonth'),
-            card_expiration_year: $cardContainer.CardJs('expiryYear'),
-            card_cvv: $cardContainer.CardJs('cvc').replace(/\D/g, ""),
-            installments: 12
-          }
-        };
-
-        let hasError = false;
-        if (billingDetails) {
-          if (billingDetails.name.length < 10) {
-            $("#name").parent().addClass('error');
-            hasError = true;
-          }
-
-          if (!validateCPFCNPJ(billingDetails.cpf_cnpj)) {
-            $("#cpf_cnpj").parent().addClass('error');
-            hasError = true;
-          }
-
-          if (billingDetails.address.length < 5) {
-            $("#address").parent().addClass('error');
-            hasError = true;
-          }
-
-          if (billingDetails.address_number.length < 1) {
-            $("#street_number").parent().addClass('error');
-            hasError = true;
-          }
-
-          if (billingDetails.neighborhood.length < 3) {
-            $("#neighborhood").parent().addClass('error');
-            hasError = true;
-          }
-
-          if (!billingDetails.state) {
-            $("#state").parent().addClass('error');
-            hasError = true;
-          }
-
-          if (!validateCEP(billingDetails.zipcode)) {
-            $("#cep").parent().addClass('error');
-            hasError = true;
-          }
-
-          if (!billingDetails.city) {
-            $("#city").parent().addClass('error');
-            hasError = true;
-          }
-
-        }
-        if (!validateCreditCard(paymentDetails.details.card_number)) {
-          $cardNumber.parent().addClass('error');
-          hasError = true;
-        }
-        if (paymentDetails.details.card_holder.length < 5) {
-          $cardName.parent().addClass('error');
-          hasError = true;
-        }
-        if (paymentDetails.details.card_cvv.length < 3) {
-          $cardCVC.parent().addClass('error');
-          hasError = true;
-        }
-        if (!CardJs.isExpiryValid(paymentDetails.details.card_expiration_month, paymentDetails.details.card_expiration_year)) {
-          $cardExpiration.parent().addClass('error');
-          hasError = true;
-        }
-
-
-        if (hasError) {
-          return null;
-        } else {
-          return { billingDetails: billingDetails, paymentDetails: paymentDetails }
-        }
-
-      }
-
-      $("#submit-btn").on('click', async (event) => {
-        // We don't want to let default form submission happen here,
-        // which would refresh the page.
-        event.preventDefault();
-
-        // Prevent multiple form submissions
-        if (submitBtn.disabled || !ready) {
-          return;
-        }
-
-        // Disable form submission while loading
-        $("#submit-btn").prop('disabled', true).text('Por favor, aguarde...');
-        $("input").prop('disabled', true);
-
-        // Create the subscription
-        try {
-
-          let fields = getFields();
-          if (!fields) {
-            return;
-          }
-
-          let billingDetails = fields.billingDetails;
-          let paymentDetails = fields.paymentDetails;
-
-          let formData = new FormData();
-          formData.append("target_plan", plans[target_plan]);
-          formData.append("email", $("#email").val());
-          if (billingDetails) {
-            formData.append("billing_details", JSON.stringify(billingDetails));
-          }
-          formData.append("payment_details", JSON.stringify(paymentDetails));
-
-          // Create the PaymentIntent
-          const res = await fetch("http://localhost:3000/subscribe", {
-            method: "POST",
-            credentials: "include",
-            body: formData
-          });
-
-          if (res.status !== 200) {
-            console.log(res);
-            throw await res.json();
-          }
-
-          const data = await res.json();
-          console.log(data);
-          if (data.responseData) {
-
-            if (data.responseData.charged) {
-              if (target_plan === 'BASIC') {
-                $("#loading").html('<div><h1>Assinatura do plano Basic realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
-              } else {
-                $("#loading").html('<div><h1>Assinatura do plano Vip realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
-              }
-              $("#loading").show();
-              $("#sign_up").hide();
-              redirectToNext();
-            } else {
-              if (paymentDetails.method === 'credit_card') {
-                throw new Error("Failure making payment using credit card.");
-              } else {
-                $("#loading").text(JSON.stringify(data.responseData.subscription));
-                $("#loading").show();
-                $("#sign_up").hide();
-              }
-            }
-
-
-          } else {
-            throw new Error("Failure making payment.");
-          }
-
-        } catch (err) {
-          if (err && (err.errorCode === 'ALREADY_SUBSCRIBED' || err.errorCode === 'INVALID_ASSISTANT_STATUS')) {
-            handleError(err);
-          } else {
-            console.log(err);
-            alert('Erro! Tente novamente!');
-          }
-        }
-        finally {
-          $("#submit-btn").prop('disabled', false).text('Assinar plano ' + plans[target_plan]);
-          $("input").prop('disabled', false);
-          if (loggedInUser) {
-            $("#email").prop('disabled', true);
-          }
-        }
-      });
-
+      showSignupForm(response, target_plan);
     }
   });
-
-}
-
-function validateCreditCard(number) {
-  // Remove spaces or dashes and ensure the number contains only digits
-  number = number.replace(/\D/g, '');
-
-  // Check if the number has between 13 and 19 digits
-  if (number.length < 13 || number.length > 19) {
-    return false;
-  }
-
-  let sum = 0;
-  let shouldDouble = false;
-
-  // Loop through the digits from right to left
-  for (let i = number.length - 1; i >= 0; i--) {
-    let digit = parseInt(number.charAt(i));
-
-    if (shouldDouble) {
-      digit *= 2;
-      if (digit > 9) {
-        digit -= 9; // Subtract 9 if the result is greater than 9
-      }
-    }
-
-    sum += digit;
-    shouldDouble = !shouldDouble;
-  }
-
-  // The number is valid if the sum is divisible by 10
-  return sum % 10 === 0;
 }
 
 async function logout() {
