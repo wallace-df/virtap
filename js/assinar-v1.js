@@ -7,6 +7,19 @@ let hasBillingDetails = false;
 let loggedInUser = null;
 let autocomplete;
 let submitBtn = document.getElementById('submit-btn');
+let input = document.querySelector("#phone");
+let intl = window.intlTelInput(input, {
+  utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
+  autoInsertDialCode: true,
+  initialCountry: "BR",
+  separateDialCode: true
+});
+
+let plans = {
+  'BASIC': 'Basic',
+  'VIP': 'Vip'
+};
+
 
 function getParameterByName(name, url) {
   if (!url) url = window.location.href;
@@ -138,6 +151,16 @@ function validateCEP(cep) {
 }
 
 function validatePhone(phoneNumber) {
+  // Regex for validating phone numbers
+  const regex = /^(\(\d+\))?[\d\s\-]+(\d)$/;
+
+  // Test if the input phone number matches the regex
+  if (!regex.test(phoneNumber)) {
+    return false;
+  }
+
+  phoneNumber = '+' + intl.getSelectedCountryData().dialCode + phoneNumber;
+
   return intlTelInputUtils.isValidNumber(
     phoneNumber,
     null,
@@ -231,7 +254,7 @@ function fillInAddress() {
         break;
       }
 
-      case "address_number": {
+      case "street_number": {
         address_number = component.long_name;
         break;
       }
@@ -275,8 +298,6 @@ function fillInAddress() {
       $("#city").val(String(ufs[uf].municipioCodes[city])).trigger('blur');
     }
   }
-
-
 }
 
 function handleError(response) {
@@ -322,67 +343,61 @@ function handleError(response) {
   }
 }
 
-let input = document.querySelector("#phone");
-let intl = window.intlTelInput(input, {
-  utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
-  autoInsertDialCode: true,
-  initialCountry: "BR",
-  separateDialCode: true
-});
-
-let $cardContainer = $('[data-card-container');
-$cardContainer.CardJs();
-
-let $cardNumber = $(".card-number-wrapper");
-let $cardName = $(".name-wrapper");
-let $cardExpiration = $(".expiry-wrapper");
-let $cardCVC = $(".cvc-wrapper");
-
-$cardNumber.wrap($("<div data-field></div>"));
-$cardName.wrap($("<div data-field></div>"));
-$cardCVC.wrap($("<div data-field></div>"));
-$cardExpiration.wrap($("<div data-field></div>"));
-
-$('<label>Número do cartão</label>').insertBefore($cardNumber);
-$('<em>Por favor, informe um número válido.</em>').insertAfter($("#card-number").eq(0));
-
-$('<label>Nome no cartão</label>').insertBefore($cardName);
-$('<em>Por favor, informe um nome válido.</em>').insertAfter($("#card-holder").eq(0));
-
-$('<label>Validade</label>').insertBefore($cardExpiration);
-$cardExpiration.append('<em>Por favor, informe um data de expiração válida.</em>');
-
-$('<label>Código de segurança</label>').insertBefore($cardCVC);
-$('<em>Por favor, informe um CVC válido.</em>').insertAfter($("#card-cvc").eq(0));
-
-$cardNumber.addClass('mb-3');
-$cardName.addClass('mb-3');
-
-let $container = $(
-  '<div class="d-flex" style="gap: 1rem; flex-wrap: wrap">' +
-  '   <div data-first style="flex-grow: 1"></div>' +
-  '   <div data-second style="flex-grow: 1"></div>' +
-  '</div>'
-);
-
-$(".expiry-container").detach().appendTo($container.find('[data-first]'));
-$(".cvc-container").detach().appendTo($container.find('[data-second]'));
-
-let plans = {
-  'BASIC': 'Basic',
-  'VIP': 'Vip'
-};
-
-$cardContainer.append($container);
-
-// Evento de mudança na UF
-$('#state').change(function () {
-  const ufSelecionado = $(this).val();  // Pega a UF selecionada
-  populateMunicipios(ufSelecionado);    // Chama a função para popular os municípios
-});
-
 function showSignupForm(response, target_plan) {
   let hasEmail = (response.email && response.email.trim().length > 0 ? true : false);
+
+  let $cardContainer = $('[data-card-container');
+  $cardContainer.CardJs();
+
+  let $cardNumber = $(".card-number-wrapper");
+  let $cardName = $(".name-wrapper");
+  let $cardExpiration = $(".expiry-wrapper");
+  let $cardCVC = $(".cvc-wrapper");
+
+  $cardNumber.wrap($("<div data-field='card_number' data-card></div>"));
+  $cardName.wrap($("<div data-field='card_holder'  data-card></div>"));
+  $cardCVC.wrap($("<div data-field='card_cvc' data-card></div>"));
+  $cardExpiration.wrap($("<div data-field='card_expiration' data-card></div>"));
+
+  $('<label>Número do cartão</label>').insertBefore($cardNumber);
+  $('<em>Por favor, informe um número válido.</em>').insertAfter($("#card-number").eq(0));
+
+  $('<label>Nome no cartão</label>').insertBefore($cardName);
+  $('<em>Por favor, informe um nome válido.</em>').insertAfter($("#card-holder").eq(0));
+
+  $('<label>Validade</label>').insertBefore($cardExpiration);
+  $cardExpiration.find('input').eq(0).attr('id', 'card-expiration');
+  $cardExpiration.append('<em>Por favor, informe um data de expiração válida.</em>');
+
+  $('<label>Código de segurança</label>').insertBefore($cardCVC);
+  $('<em>Por favor, informe um CVC válido.</em>').insertAfter($("#card-cvc").eq(0));
+
+  $cardNumber.addClass('mb-3');
+  $cardName.addClass('mb-3');
+
+  let $container = $(
+    '<div class="d-flex" style="gap: 1rem; flex-wrap: wrap">' +
+    '   <div data-first style="flex-grow: 1"></div>' +
+    '   <div data-second style="flex-grow: 1"></div>' +
+    '</div>'
+  );
+
+  $(".expiry-container").detach().appendTo($container.find('[data-first]'));
+  $(".cvc-container").detach().appendTo($container.find('[data-second]'));
+
+  $cardContainer.append($container);
+
+  // Evento de mudança na UF
+  $('#state').change(function () {
+    const ufSelecionado = $(this).val();  // Pega a UF selecionada
+    populateMunicipios(ufSelecionado);    // Chama a função para popular os municípios
+  });
+
+  let $installments =  $("#installments");
+  $installments.empty();
+  response.payment_config.installments.forEach(function (config) {
+    $installments.append(`<option value="${config.installments}_${config.amount}">${config.installments}x de R$ ${(config.amount/100).toFixed(2).replace('.',',')}</option>`);
+  });
 
   $("#name").val(response.name);
   $("#cpf_cnpj").val(response.cpf_cnpj);
@@ -416,94 +431,43 @@ function showSignupForm(response, target_plan) {
 
     $("[data-field]").removeClass("error");
     let billingDetails = null;
-
-    if (!hasBillingDetails) {
-      billingDetails = {
-        name: $("#name").val().trim(),
-        cpf_cnpj: $("#cpf_cnpj").val(),
-        address: $("#address").val().trim(),
-        address_number: $("#address_number").val().trim(),
-        neighborhood: $("#neighborhood").val().trim(),
-        city: $("#city").val(),
-        state: $("#state").val(),
-        zipcode: $("#cep").val(),
-      }
-    }
-
     let paymentDetails = {
       gateway: 'Test1',
       method: 'async_method',
       details: {
-        card_holder: $cardContainer.CardJs('name').trim(),
-        card_number: $cardContainer.CardJs('cardNumber').replace(/\D/g, ""),
-        card_expiration_month: $cardContainer.CardJs('expiryMonth'),
-        card_expiration_year: $cardContainer.CardJs('expiryYear'),
-        card_cvv: $cardContainer.CardJs('cvc').replace(/\D/g, ""),
-        installments: 12
       }
     };
-
     let hasError = false;
-    if (billingDetails) {
-      if (billingDetails.name.length < 10) {
-        $("#name").parent().addClass('error');
-        hasError = true;
-      }
 
-      if (!validateCPFCNPJ(billingDetails.cpf_cnpj)) {
-        $("#cpf_cnpj").parent().addClass('error');
-        hasError = true;
-      }
-
-      if (billingDetails.address.length < 5) {
-        $("#address").parent().addClass('error');
-        hasError = true;
-      }
-
-      if (billingDetails.address_number.length < 1) {
-        $("#address_number").parent().addClass('error');
-        hasError = true;
-      }
-
-      if (billingDetails.neighborhood.length < 3) {
-        $("#neighborhood").parent().addClass('error');
-        hasError = true;
-      }
-
-      if (!billingDetails.state) {
-        $("#state").parent().addClass('error');
-        hasError = true;
-      }
-
-      if (!validateCEP(billingDetails.zipcode)) {
-        $("#cep").parent().addClass('error');
-        hasError = true;
-      }
-
-      if (!billingDetails.city) {
-        $("#city").parent().addClass('error');
-        hasError = true;
-      }
-
-    }
-    if (!validateCreditCard(paymentDetails.details.card_number)) {
-      $cardNumber.parent().addClass('error');
-      hasError = true;
-    }
-    if (paymentDetails.details.card_holder.length < 5) {
-      $cardName.parent().addClass('error');
-      hasError = true;
-    }
-    if (paymentDetails.details.card_cvv.length < 3) {
-      $cardCVC.parent().addClass('error');
-      hasError = true;
-    }
-    if (!CardJs.isExpiryValid(paymentDetails.details.card_expiration_month, paymentDetails.details.card_expiration_year)) {
-      $cardExpiration.parent().addClass('error');
-      hasError = true;
+    if (!hasBillingDetails) {
+      billingDetails = {};
+      $("[data-field]").each(function () {
+        let $field = $(this);
+        if (!$field.is('[data-card]')) {
+          let val = $field.data('get-field')();
+          if (val === undefined && !$field.is('[data-optional]')) {
+            console.log($field);
+            hasError = true;
+          } else {
+            billingDetails[$field.attr('data-field')] = val;
+          }
+        }
+      });
     }
 
+    $("[data-card]").each(function () {
+      let $field = $(this);
+      let val = $field.data('get-field')();
+      if (val === undefined && !$field.is('[data-optional]')) {
+        console.log($field);
 
+        hasError = true;
+      } else {
+        paymentDetails.details[$field.attr('data-field')] = val;
+      }
+    });
+
+    console.log(billingDetails, paymentDetails);
     if (hasError) {
       return null;
     } else {
@@ -521,8 +485,12 @@ function showSignupForm(response, target_plan) {
   let $cep = $("#cep");
   let $city = $("#city");
   let $phone = $("#phone");
+  let $card_number = $("#card-number");
+  let $card_holder = $("#card-holder");
+  let $card_expiration = $("#card-expiration");
+  let $card_cvc = $("#card-cvc");
 
-  // Name field
+  // Name
   $name.parent().data('get-field', function () {
     let name = $name.val();
     if (name.length < 10) {
@@ -532,7 +500,7 @@ function showSignupForm(response, target_plan) {
     return name;
   });
 
-  // CPF/CNPJ field
+  // CPF/CNPJ
   $cpf_cnpj.parent().data('get-field', function () {
     let cpf_cnpj = $cpf_cnpj.val();
     if (!validateCPFCNPJ(cpf_cnpj)) {
@@ -542,7 +510,7 @@ function showSignupForm(response, target_plan) {
     return cpf_cnpj;
   });
 
-  // Address field
+  // Address
   $address.parent().data('get-field', function () {
     let address = $address.val();
     if (address.length < 5) {
@@ -555,7 +523,7 @@ function showSignupForm(response, target_plan) {
   // Address number
   $address_number.parent().data('get-field', function () {
     let address_number = $address_number.val();
-    if (address_number.length < 1) {
+    if (address_number.length < 1 || Number(address_number) < 0) {
       $address_number.parent().addClass('error');
       return undefined;
     }
@@ -572,7 +540,7 @@ function showSignupForm(response, target_plan) {
     return neighborhood;
   });
 
-  // State 
+  // Stat
   $state.parent().data('get-field', function () {
     let state = $state.val();
     if (!state) {
@@ -589,7 +557,7 @@ function showSignupForm(response, target_plan) {
       $cep.parent().addClass('error');
       return undefined;
     }
-    return parent;
+    return cep;
   });
 
   // City 
@@ -601,30 +569,98 @@ function showSignupForm(response, target_plan) {
     }
     return city;
   });
- 
+
   // Phone 
   $phone.closest('[data-field]').data('get-field', function () {
-    let phone = intl.getNumber();
-    alert(phone);
+    let phone = $phone.val();
+
+    if (!phone || phone.trim().length === 0) {
+      $phone.closest('[data-field]').removeClass('error');
+      return null;
+    }
+
     if (!validatePhone(phone)) {
       $phone.closest('[data-field]').addClass('error');
       return undefined;
     }
-    return phone;
+    return intl.getNumber();
+  });
+
+  // Card number 
+  $card_number.closest('[data-field]').data('get-field', function () {
+    let card_number = $card_number.val();
+
+    if (!validateCreditCard(card_number)) {
+      $card_number.closest('[data-field]').addClass('error');
+      return undefined;
+    }
+    return card_number;
+  });
+
+  // Card holder
+  $card_holder.closest('[data-field]').data('get-field', function () {
+    let card_holder = $card_holder.val();
+    if (card_holder.length < 10) {
+      $card_holder.closest('[data-field]').addClass('error');
+      return undefined;
+    }
+    return card_holder;
+  });
+
+  // Card expiration
+  $card_expiration.closest('[data-field]').data('get-field', function () {
+    let m = $cardContainer.CardJs('expiryMonth');
+    let y = $cardContainer.CardJs('expiryYear');
+    if (!CardJs.isExpiryValid(m, y)) {
+      $card_expiration.closest('[data-field]').addClass('error');
+      return undefined;
+    }
+    return {
+      month: m,
+      year: y
+    };
+  });
+
+  // Card CVC 
+  $card_cvc.closest('[data-field]').data('get-field', function () {
+    let card_cvc = $card_cvc.val();
+    if (card_cvc.trim().length < 3) {
+      $card_cvc.closest('[data-field]').addClass('error');
+      return undefined;
+    }
+    return card_cvc;
+  });
+
+  $installments.closest('[data-field]').data('get-field', function () {
+    let installments = $installments.val();
+    if (!installments) {
+      $installments.closet('[data-field]').addClass('error');
+      return undefined;
+    }
+    return installments;
   });
 
   // Blur validation.
   $("[data-field]").each(function () {
     let $field = $(this);
     $(this).find('input,select').on('blur', function () {
-      if ($(this).val() && $(this).val().trim().length > 0) {
+      let val = $(this).val()
+
+      if ($field.is('[data-optional]')) {
+        if (!val || val.trim().length === 0) {
+          $field.removeClass('error');
+          return;
+        }
+      }
+
+      if (val && val.trim().length > 0) {
         $field.removeClass('error');
         $field.data('get-field')();
       }
     })
   });
 
-  $("#submit-btn").on('click', async (event) => {
+  $(submitBtn).on('click', async (event) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault();
@@ -634,9 +670,6 @@ function showSignupForm(response, target_plan) {
       return;
     }
 
-    if (1 == 1) {
-      return;
-    }
     $("[data-field]").removeClass("error");
 
     let fields = $("[data-field]");
@@ -654,7 +687,6 @@ function showSignupForm(response, target_plan) {
       return;
     }
 
-
     // Disable form submission while loading
     $("#submit-btn").prop('disabled', true).text('Por favor, aguarde...');
     $("input").prop('disabled', true);
@@ -663,7 +695,11 @@ function showSignupForm(response, target_plan) {
     try {
 
       let fields = getFields();
+      console.log(fields);
       if (!fields) {
+        return;
+      }
+      if (1 == 1) {
         return;
       }
 
