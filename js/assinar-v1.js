@@ -60,6 +60,13 @@ function redirectToNext() {
   setTimeout(() => document.location.href = url, 2000);
 }
 
+function validateName(name) {
+  if (!name || name.trim().length < 10) {
+    return false;
+  }
+  return true;
+}
+
 function validateCPFCNPJ(cpf_cnpj) {
   // Remove non-numeric characters
   const cleanDocument = cpf_cnpj.replace(/\D/g, '');
@@ -133,6 +140,28 @@ function validateCNPJ(cnpj) {
 
   return true;
 }
+
+function validateAddress(address) {
+  if (!address || address.trim().length < 5) {
+    return false;
+  }
+  return true;
+}
+
+function validateAddressNumber(address_number) {
+  if (!address || address_number.trim().length < 1 || Number(address_number) < 0) {
+    return false;
+  }
+  return true;
+}
+
+function validateNeighborhood(neighborhood) {
+  if (!neighborhood || neighborhood.trim().length < 3) {
+    return false;
+  }
+  return true;
+}
+
 
 function validateCEP(cep) {
   // Check if the input is either numeric (8 digits) or in the correct format (XXXXX-XXX)
@@ -393,10 +422,10 @@ function showSignupForm(response, target_plan) {
     populateMunicipios(ufSelecionado);    // Chama a função para popular os municípios
   });
 
-  let $installments =  $("#installments");
+  let $installments = $("#installments");
   $installments.empty();
   response.payment_config.installments.forEach(function (config) {
-    $installments.append(`<option value="${config.installments}_${config.amount}">${config.installments}x de R$ ${(config.amount/100).toFixed(2).replace('.',',')}</option>`);
+    $installments.append(`<option value="${config.installments}_${config.amount}">${config.installments}x de R$ ${(config.amount / 100).toFixed(2).replace('.', ',')}</option>`);
   });
 
   $("#name").val(response.name);
@@ -492,8 +521,8 @@ function showSignupForm(response, target_plan) {
 
   // Name
   $name.parent().data('get-field', function () {
-    let name = $name.val();
-    if (name.length < 10) {
+    let name = $cpf_cnpj.val();
+    if (!validateName(name)) {
       $name.parent().addClass('error');
       return undefined;
     }
@@ -513,7 +542,7 @@ function showSignupForm(response, target_plan) {
   // Address
   $address.parent().data('get-field', function () {
     let address = $address.val();
-    if (address.length < 5) {
+    if (!validateAddress(address)) {
       $address.parent().addClass('error');
       return undefined;
     }
@@ -523,24 +552,24 @@ function showSignupForm(response, target_plan) {
   // Address number
   $address_number.parent().data('get-field', function () {
     let address_number = $address_number.val();
-    if (address_number.length < 1 || Number(address_number) < 0) {
+    if (!validateAddressNumber(address_number)) {
       $address_number.parent().addClass('error');
       return undefined;
     }
     return address_number;
   });
 
-  // Neighborhood number
+  // Neighborhood
   $neighborhood.parent().data('get-field', function () {
     let neighborhood = $neighborhood.val();
-    if (neighborhood.length < 3) {
+    if (!validateNeighborhood(neighborhood)) {
       $neighborhood.parent().addClass('error');
       return undefined;
     }
     return neighborhood;
   });
 
-  // Stat
+  // State
   $state.parent().data('get-field', function () {
     let state = $state.val();
     if (!state) {
@@ -695,7 +724,6 @@ function showSignupForm(response, target_plan) {
     try {
 
       let fields = getFields();
-      console.log(fields);
       if (!fields) {
         return;
       }
