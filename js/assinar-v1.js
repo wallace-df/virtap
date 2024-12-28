@@ -68,18 +68,13 @@ function validateName(name) {
 }
 
 function validateCPFCNPJ(cpf_cnpj) {
-  // Remove non-numeric characters
   const cleanDocument = cpf_cnpj.replace(/\D/g, '');
-
-  // Check if the document length is valid for CPF or CNPJ
   if (cleanDocument.length === 11) {
-    // CPF case
     return validateCPF(cpf_cnpj);
   } else if (cleanDocument.length === 14) {
-    // CNPJ case
     return validateCNPJ(cpf_cnpj);
   } else {
-    return false; // Invalid length for CPF or CNPJ
+    return false;
   }
 }
 
@@ -162,20 +157,15 @@ function validateNeighborhood(neighborhood) {
   return true;
 }
 
-
 function validateCEP(cep) {
-  // Check if the input is either numeric (8 digits) or in the correct format (XXXXX-XXX)
   if (!/^\d{8}$/.test(cep) && !/^\d{5}-\d{3}$/.test(cep)) {
     return false;
   }
 
-  // If it's in the format with hyphen, we ensure it matches the format exactly
   if (/^\d{5}-\d{3}$/.test(cep)) {
-    // Ensure that the hyphen is in the correct position (after 5 digits)
     return true;
   }
 
-  // If it's in the numeric format, it's already validated as having exactly 8 digits
   return true;
 }
 
@@ -198,10 +188,8 @@ function validatePhone(phoneNumber) {
 }
 
 function validateCreditCard(number) {
-  // Remove spaces or dashes and ensure the number contains only digits
   number = number.replace(/\D/g, '');
 
-  // Check if the number has between 13 and 19 digits
   if (number.length < 13 || number.length > 19) {
     return false;
   }
@@ -209,14 +197,13 @@ function validateCreditCard(number) {
   let sum = 0;
   let shouldDouble = false;
 
-  // Loop through the digits from right to left
   for (let i = number.length - 1; i >= 0; i--) {
     let digit = parseInt(number.charAt(i));
 
     if (shouldDouble) {
       digit *= 2;
       if (digit > 9) {
-        digit -= 9; // Subtract 9 if the result is greater than 9
+        digit -= 9;
       }
     }
 
@@ -224,7 +211,6 @@ function validateCreditCard(number) {
     shouldDouble = !shouldDouble;
   }
 
-  // The number is valid if the sum is divisible by 10
   return sum % 10 === 0;
 }
 
@@ -240,7 +226,6 @@ function initAutocomplete() {
 
 };
 
-// Função para popular o select de municípios
 function populateMunicipios(uf) {
   const municipioSelect = $("#city");
   municipioSelect.empty();  // Limpa o select de municípios
@@ -475,7 +460,6 @@ function showSignupForm(response, target_plan) {
         if (!$field.is('[data-card]')) {
           let val = $field.data('get-field')();
           if (val === undefined && !$field.is('[data-optional]')) {
-            console.log($field);
             hasError = true;
           } else {
             billingDetails[$field.attr('data-field')] = val;
@@ -488,16 +472,14 @@ function showSignupForm(response, target_plan) {
       let $field = $(this);
       let val = $field.data('get-field')();
       if (val === undefined && !$field.is('[data-optional]')) {
-        console.log($field);
-
         hasError = true;
       } else {
         paymentDetails.details[$field.attr('data-field')] = val;
       }
     });
 
-    console.log(billingDetails, paymentDetails);
-    if (hasError) {
+    //FIXME
+    if (!hasError) {
       return null;
     } else {
       return { billingDetails: billingDetails, paymentDetails: paymentDetails }
@@ -509,6 +491,7 @@ function showSignupForm(response, target_plan) {
   let $cpf_cnpj = $("#cpf_cnpj");
   let $address = $("#address");
   let $address_number = $("#address_number");
+  let $complement = $("#complement");
   let $neighborhood = $("#neighborhood");
   let $state = $("#state");
   let $cep = $("#cep");
@@ -521,7 +504,7 @@ function showSignupForm(response, target_plan) {
 
   // Name
   $name.parent().data('get-field', function () {
-    let name = $cpf_cnpj.val();
+    let name = $name.val();
     if (!validateName(name)) {
       $name.parent().addClass('error');
       return undefined;
@@ -557,6 +540,11 @@ function showSignupForm(response, target_plan) {
       return undefined;
     }
     return address_number;
+  });
+
+  // Complement 
+  $complement.closest('[data-field]').data('get-field', function () {
+    return $complement.val();
   });
 
   // Neighborhood
@@ -660,6 +648,7 @@ function showSignupForm(response, target_plan) {
     return card_cvc;
   });
 
+  // Installments
   $installments.closest('[data-field]').data('get-field', function () {
     let installments = $installments.val();
     if (!installments) {
@@ -727,9 +716,6 @@ function showSignupForm(response, target_plan) {
       if (!fields) {
         return;
       }
-      if (1 == 1) {
-        return;
-      }
 
       let billingDetails = fields.billingDetails;
       let paymentDetails = fields.paymentDetails;
@@ -755,9 +741,7 @@ function showSignupForm(response, target_plan) {
       }
 
       const data = await res.json();
-      console.log(data);
       if (data.responseData) {
-
         if (data.responseData.charged) {
           if (target_plan === 'BASIC') {
             $("#loading").html('<div><h1>Assinatura do plano Basic realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
@@ -805,7 +789,7 @@ function init() {
   let target_plan = getPlan();
 
   if (target_plan !== 'BASIC' && target_plan !== 'VIP') {
-    console.log('Invalid plan:', target_plan);
+    console.log('Invalid plan: ', target_plan);
     handleError(null);
     return;
   }

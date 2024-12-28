@@ -55,7 +55,7 @@ function handleError(response) {
         showGenericError = false;
         redirectToNext();
       } else {
-        console.log("Invalid assistant plan:", target_plan.toUpperCase());
+        console.log("Invalid assistant plan: ", target_plan.toUpperCase());
       }
 
     } else if (response.errorCode === 'INVALID_ASSISTANT_STATUS') {
@@ -71,7 +71,7 @@ function handleError(response) {
         $("#loading").html($data[0].outerHTML);
         showGenericError = false;
       }
-    } else if(response.errorCode === 'INVALID_SUBSCRIPTION_STATUS') {
+    } else if (response.errorCode === 'INVALID_SUBSCRIPTION_STATUS') {
       $("#loading").html('<div><h1 style="color: #ff4e4e">Esta fatura não está mais disponível.</h1><br /><p>Redirecionando automaticamente...</p></div>');
       showGenericError = false;
       redirectToNext();
@@ -108,7 +108,6 @@ function init() {
     },
     success: function (response) {
       response = response.responseData;
-      console.log(response);
       let plan = response.subscription.plan.toUpperCase();
       document.title = 'Virtap | Assinar plano ' + plans[plan];
       ready = true;

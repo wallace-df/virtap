@@ -127,48 +127,18 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group mb-3" data-field="neighborhood">
-                                <label for="neighborhood">Bairro</label>
-                                <input type="text" class="form-control" id="neighborhood" placeholder="Jardim Paulista">
-                                <em>Por favor, informe um bairro válido.</em>
+                            <div class="form-group mb-3" data-field="complement">
+                                <label for="complement">Complemento</label>
+                                <input type="text" class="form-control" id="complement" placeholder="Apto 999">
                             </div>
                         </div>
                     </div>
                     <div class="row gx-3">
                         <div class="col-md-6">
-                            <div class="form-group mb-3" data-field="state">
-                                <label for="state">Estado</label>
-                                <select class="form-control" name="uf" id="state" value="">
-                                    <option></option>
-                                    <option value="AL">Alagoas</option>
-                                    <option value="AC">Acre</option>
-                                    <option value="AM">Amazonas</option>
-                                    <option value="AP">Amapá</option>
-                                    <option value="BA">Bahia</option>
-                                    <option value="CE">Ceará</option>
-                                    <option value="DF">Distrito Federal</option>
-                                    <option value="ES">Espírito Santo</option>
-                                    <option value="GO">Goiás</option>
-                                    <option value="MA">Maranhão</option>
-                                    <option value="MG">Minas Gerais</option>
-                                    <option value="MS">Mato Grosso do Sul</option>
-                                    <option value="MT">Mato Grosso</option>
-                                    <option value="PA">Pará</option>
-                                    <option value="PB">Paraíba</option>
-                                    <option value="PE">Pernambuco</option>
-                                    <option value="PR">Paraná</option>
-                                    <option value="RJ">Rio de Janeiro</option>
-                                    <option value="RN">Rio Grande do Norte</option>
-                                    <option value="RS">Rio Grande do Sul</option>
-                                    <option value="RO">Rondônia</option>
-                                    <option value="RR">Roraima</option>
-                                    <option value="SC">Santa Catarina</option>
-                                    <option value="SE">Sergipe</option>
-                                    <option value="SP">São Paulo</option>
-                                    <option value="PI">Piauí</option>
-                                    <option value="TO">Tocantins</option>
-                                </select>
-                                <em>Por favor, informe um estado válido.</em>
+                            <div class="form-group mb-3" data-field="neighborhood">
+                                <label for="neighborhood">Bairro</label>
+                                <input type="text" class="form-control" id="neighborhood" placeholder="Jardim Paulista">
+                                <em>Por favor, informe um bairro válido.</em>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -178,19 +148,62 @@
                                 <em>Por favor, informe um CEP válido.</em>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group mb-3" data-field="city">
-                                <label for="city">Cidade</label>
-                                <select type="text" class="form-control" id="city"></select>
-                                <em>Por favor, informe uma cidade válida.</em>
-                            </div>
 
+                        <div class="row gx-3">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3" data-field="state">
+                                    <label for="state">Estado</label>
+                                    <select class="form-control" name="uf" id="state" value="">
+                                        <option></option>
+                                        <option value="AL">Alagoas</option>
+                                        <option value="AC">Acre</option>
+                                        <option value="AM">Amazonas</option>
+                                        <option value="AP">Amapá</option>
+                                        <option value="BA">Bahia</option>
+                                        <option value="CE">Ceará</option>
+                                        <option value="DF">Distrito Federal</option>
+                                        <option value="ES">Espírito Santo</option>
+                                        <option value="GO">Goiás</option>
+                                        <option value="MA">Maranhão</option>
+                                        <option value="MG">Minas Gerais</option>
+                                        <option value="MS">Mato Grosso do Sul</option>
+                                        <option value="MT">Mato Grosso</option>
+                                        <option value="PA">Pará</option>
+                                        <option value="PB">Paraíba</option>
+                                        <option value="PE">Pernambuco</option>
+                                        <option value="PR">Paraná</option>
+                                        <option value="RJ">Rio de Janeiro</option>
+                                        <option value="RN">Rio Grande do Norte</option>
+                                        <option value="RS">Rio Grande do Sul</option>
+                                        <option value="RO">Rondônia</option>
+                                        <option value="RR">Roraima</option>
+                                        <option value="SC">Santa Catarina</option>
+                                        <option value="SE">Sergipe</option>
+                                        <option value="SP">São Paulo</option>
+                                        <option value="PI">Piauí</option>
+                                        <option value="TO">Tocantins</option>
+                                    </select>
+                                    <em>Por favor, informe um estado válido.</em>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3" data-field="city">
+                                    <label for="city">Cidade</label>
+                                    <select type="text" class="form-control" id="city"></select>
+                                    <em>Por favor, informe uma cidade válida.</em>
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group mb-3" data-field="phone" data-optional>
-                                <label for="phone">Telefone</label>
-                                <input type="text" class="form-control" id="phone" placeholder="(99) 99999-9999">
-                                <em>Por favor, informe um teleffone válido.</em>
+
+                        <div class="row gx-3">
+
+                            <div class="col-md-6">
+                                <div class="form-group mb-3" data-field="phone" data-optional>
+                                    <label for="phone">Telefone</label>
+                                    <input type="text" class="form-control" id="phone" placeholder="(99) 99999-9999">
+                                    <em>Por favor, informe um teleffone válido.</em>
+                                </div>
                             </div>
                         </div>
                     </div>
