@@ -1,3 +1,5 @@
+window.signupAPIEndpoint = 'https://api.virtap.com.br';
+window.assistantDashboard = 'https://assistentes.virtap.com.br';
 window.signupAPIEndpoint = 'http://localhost:3000';
 window.assistantDashboard = 'http://localhost:8080';
 window.initAutocomplete = initAutocomplete;
@@ -214,6 +216,15 @@ function validateCreditCard(number) {
   return sum % 10 === 0;
 }
 
+function formatCPFCNPJ(cpf_cnpj) {
+  if (cpf_cnpj.length <= 11) {
+    return cpf_cnpj.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4");
+  } else {
+    return cpf_cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g, "$1.$2.$3/$4-$5");
+  }
+}
+
+
 function initAutocomplete() {
   autocomplete = new google.maps.places.Autocomplete(document.querySelector("#address"), {
     componentRestrictions: { country: ["br"] },
@@ -346,6 +357,9 @@ function handleError(response) {
         $("#loading").html($data[0].outerHTML);
         showGenericError = false;
       }
+    } else if (response.errorCode === 'NOT_AUTHENTICATED') {
+      location.href = window.assistantDashboard + '/plano';
+      showGenericError = false;
     }
   }
 
@@ -355,6 +369,7 @@ function handleError(response) {
   if (showGenericError) {
     $("#loading").html('<h1 style="color: #ff4e4e">Ocorreu um erro.<br/><br/> Por favor, atualize a página e tente novamente.</h1>');
   }
+
 }
 
 function showSignupForm(response, target_plan) {
@@ -446,8 +461,8 @@ function showSignupForm(response, target_plan) {
     $("[data-field]").removeClass("error");
     let billingDetails = null;
     let paymentDetails = {
-      gateway: 'Test1',
-      method: 'async_method',
+      gateway: 'vindi',
+      method: 'credit_card',
       details: {
       }
     };
@@ -478,8 +493,7 @@ function showSignupForm(response, target_plan) {
       }
     });
 
-    //FIXME
-    if (!hasError) {
+    if (hasError) {
       return null;
     } else {
       return { billingDetails: billingDetails, paymentDetails: paymentDetails }
@@ -518,6 +532,8 @@ function showSignupForm(response, target_plan) {
     if (!validateCPFCNPJ(cpf_cnpj)) {
       $cpf_cnpj.parent().addClass('error');
       return undefined;
+    } else {
+      $cpf_cnpj.val(formatCPFCNPJ(cpf_cnpj));
     }
     return cpf_cnpj;
   });
@@ -606,7 +622,6 @@ function showSignupForm(response, target_plan) {
   // Card number 
   $card_number.closest('[data-field]').data('get-field', function () {
     let card_number = $card_number.val();
-
     if (!validateCreditCard(card_number)) {
       $card_number.closest('[data-field]').addClass('error');
       return undefined;
@@ -641,10 +656,11 @@ function showSignupForm(response, target_plan) {
   // Card CVC 
   $card_cvc.closest('[data-field]').data('get-field', function () {
     let card_cvc = $card_cvc.val();
-    if (card_cvc.trim().length < 3) {
+    if (!/^\d{3}$/.test(card_cvc)) {
       $card_cvc.closest('[data-field]').addClass('error');
       return undefined;
     }
+
     return card_cvc;
   });
 
@@ -707,7 +723,7 @@ function showSignupForm(response, target_plan) {
 
     // Disable form submission while loading
     $("#submit-btn").prop('disabled', true).text('Por favor, aguarde...');
-    $("input").prop('disabled', true);
+    $("input,select").prop('disabled', true);
 
     // Create the subscription
     try {
@@ -716,6 +732,7 @@ function showSignupForm(response, target_plan) {
       if (!fields) {
         return;
       }
+
 
       let billingDetails = fields.billingDetails;
       let paymentDetails = fields.paymentDetails;
@@ -729,7 +746,7 @@ function showSignupForm(response, target_plan) {
       formData.append("payment_details", JSON.stringify(paymentDetails));
 
       // Create the PaymentIntent
-      const res = await fetch("http://localhost:3000/subscribe", {
+      const res = await fetch(`${window.signupAPIEndpoint}/subscribe`, {
         method: "POST",
         credentials: "include",
         body: formData
@@ -776,7 +793,7 @@ function showSignupForm(response, target_plan) {
     }
     finally {
       $("#submit-btn").prop('disabled', false).text('Assinar plano ' + plans[target_plan]);
-      $("input").prop('disabled', false);
+      $("input,select").prop('disabled', false);
       if (loggedInUser) {
         $("#email").prop('disabled', true);
       }
@@ -788,7 +805,7 @@ function showSignupForm(response, target_plan) {
 function init() {
   let target_plan = getPlan();
 
-  if (target_plan !== 'BASIC' && target_plan !== 'VIP') {
+  if (target_plan !== 'VIP') {
     console.log('Invalid plan: ', target_plan);
     handleError(null);
     return;
