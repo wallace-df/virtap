@@ -2217,3 +2217,35 @@ textarea.form-control {
   animation: slideaway 200ms;
   display: none;
 }
+
+.regular-link {
+  color: var(--bs-link-color);
+}
+
+.regular-link:hover {
+  color: var(--bs-link-hover-color);
+}
+
+
+.form-group em {
+  padding-top: 5px;
+  font-size: 90%;
+  font-style: italic;
+  display: none;
+}
+
+.form-group.error label {
+  color: #F64B2F
+      /* box-shadow: none */
+}
+
+.form-group.error input
+{
+    color: #F64B2F;
+    border-color: #F64B2F;
+}
+
+.form-group.error em {
+  color: #F64B2F !important;
+  display: block !important;
+}
