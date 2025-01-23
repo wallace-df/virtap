@@ -2249,3 +2249,13 @@ textarea.form-control {
   color: #F64B2F !important;
   display: block !important;
 }
+
+
+p.alert {
+	display: none;
+} 
+
+.login_site_logo {
+	display: inline-block;
+	width: 18rem;
+}

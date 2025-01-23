@@ -33,6 +33,9 @@ function getNext() {
 
 function redirectToNext() {
   let url = getNext();
+  $("#sign_up").hide();
+  $("#loading").html('<div><h1>Login feito com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+  $("#loading").show();
   setTimeout(() => document.location.href = url, 2000);
 }
 
@@ -55,45 +58,20 @@ function handleError(response) {
   console.log(response);
   let showGenericError = true;
   if (response) {
-
-    if (response.errorCode === 'ALREADY_SUBSCRIBED') {
-      let target_plan = getPlan();
-      if (target_plan === 'BASIC' && response.errorData.assistant_plan.toUpperCase() === 'BASIC') {
-        $("#loading").html('<div><h1>Você já assinou o plano Basic.</h1><br /><p>Redirecionando automaticamente...</p></div>');
-        showGenericError = false;
-        redirectToNext();
-      } else if (response.errorData.assistant_plan.toUpperCase() === 'VIP') {
-        $("#loading").html('<div><h1>Você já assinou o plano Vip.</h1><br /><p>Redirecionando automaticamente...</p></div>');
-        showGenericError = false;
-        redirectToNext();
-      } else {
-        console.log("Invalid assistant plan:", response.errorData.assistant_plan.toUpperCase());
-      }
-
-    } else if (response.errorCode === 'INVALID_ASSISTANT_STATUS') {
-      if (response.errorData.status === 1) {
-        let $data = $('<div><h1 style="color: #f6b700">Seu perfil <em data-email></em> ainda está em análise.<br/><br/> Por favor, aguarde a aprovação do seu cadastro e tente novamente.</h1><p class="mt-2"><a class="link fs-4">Clique aqui para acessar sua conta</a></p></div>');
-        $data.find('a').attr('href', getNext());
-        $data.find('[data-email]').text(response.errorData.email).css('color', '#333');
-        $("#loading").html($data[0].outerHTML);
-        showGenericError = false;
-      } else if (response.errorData.status === 3) {
-        let $data = $('<h1 style="color: #ff4e4e">Seu perfil <em data-email></em> foi desativado.<br/><br/> Entre em contato com o suporte para maiores informações.</h1>');
-        $data.find('[data-email]').text(response.errorData.email).css('color', '#333');
-        $("#loading").html($data[0].outerHTML);
-        showGenericError = false;
-      }
-    } else if (response.errorCode === 'NOT_AUTHENTICATED') {
-      location.href = window.assistantDashboard + '/plano';
+    if (response.errorCode === 'ACCOUNT_NOT_VERIFIED') {
+      $("#not-verified").show();
       showGenericError = false;
-    }
+    } else if (response.errorCode === 'PASSWORD_EXPIRED') {
+      $("#expired-password").show();
+      showGenericError = false;
+    } else if (response.errorCode === 'INVALID_CREDENTIALS') {
+      $("#invalid-credentials").show();
+      showGenericError = false;
+    }    
   }
 
-  $("#loading").show();
-  $("#sign_up").hide();
-
   if (showGenericError) {
-    $("#loading").html('<h1 style="color: #ff4e4e">Ocorreu um erro.<br/><br/> Por favor, atualize a página e tente novamente.</h1>');
+    $("#generic-error").show();
   }
 
 }
@@ -186,18 +164,19 @@ $(submitBtn).on('click', async (event) => {
   // Disable form submission while loading
   $("#submit-btn").prop('disabled', true).text('Por favor, aguarde...');
   $("input,select").prop('disabled', true);
+  $("p.alert").hide();
 
   // Log in.
   try {
 
-    let formData = new FormData();
-    formData.append("email", $("#email").val());
-    formData.append("password", $("#password").val());
-
-    const res = await fetch(`${window.signupAPIEndpoint}/login`, {
-      method: "POST",
+ 
+    const res = await fetch(`${window.signupAPIEndpoint}/login?state=assistant`, {
+      method: "POST", 
       credentials: "include",
-      body: formData
+      body: JSON.stringify({username: $("#email").val(), password: $("#password").val()}),
+      headers: {
+        'Content-Type': 'application/json' // Não precisa se estiver usando FormData
+      },
     });
 
     if (res.status !== 200) {
