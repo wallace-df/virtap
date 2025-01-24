@@ -69,6 +69,11 @@ function validateName(name) {
   return true;
 }
 
+
+function validateEmail(email) {
+  return /^\S+@\S+\.\S+$/.test(email);
+}
+
 function validateCPFCNPJ(cpf_cnpj) {
   const cleanDocument = cpf_cnpj.replace(/\D/g, '');
   if (cleanDocument.length === 11) {
@@ -502,6 +507,8 @@ function showSignupForm(response, target_plan) {
   }
 
   let $name = $("#name");
+  let $email = $("#email"); 
+  let $confirmation_email = $("#confirmation_email");
   let $cpf_cnpj = $("#cpf_cnpj");
   let $address = $("#address");
   let $address_number = $("#address_number");
@@ -524,6 +531,27 @@ function showSignupForm(response, target_plan) {
       return undefined;
     }
     return name;
+  });
+
+  // Email 
+  $email.parent().data('get-field', function () {
+    let email = $email.val();
+    if (!validateEmail(email)) {
+      $email.parent().addClass('error');
+      return undefined;
+    }
+    return email;
+  }); 
+
+  // Confirmation email 
+  $confirmation_email.parent().data('get-field', function () {
+    let email = $email.val();
+    let confirmation_email = $confirmation_email.val();
+    if (email !== confirmation_email) {
+      $confirmation_email.parent().addClass('error');
+      return undefined;
+    }
+    return email;
   });
 
   // CPF/CNPJ
@@ -687,7 +715,7 @@ function showSignupForm(response, target_plan) {
         }
       }
 
-      if (val && val.trim().length > 0) {
+      if (val && val.trim().length > 0 || $field.is('[data-not-empty]')) {
         $field.removeClass('error');
         $field.data('get-field')();
       }

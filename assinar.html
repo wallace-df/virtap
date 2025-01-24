@@ -89,19 +89,21 @@
                     <input type="text" class="form-control" id="name" placeholder="Seu nome">
                     <em>Por favor, informe um nome válido.</em>
                 </div>
-                <div class="form-group mb-3">
+                <div class="form-group mb-3" data-field="email">
                     <label for="email">E-mail</label>
-                    <input type="email" class="form-control" id="email" placeholder="seu@email.com">
+                    <input type="text" class="form-control" id="email" placeholder="seu@email.com">
+                    <em>Por favor, informe um e-mail válido.</em>
                     <div class="mt-2 text-muted">
-                        <em style="font-size: 85%" id="login-note">
+                        <span style="font-size: 85%" id="login-note">
                             <span>Detectado automaticamente porque você fez login na Virtap.</span>
                             <a href="javascript:logout()" class="link" style="font-weight: bold">Sair da conta</a>.
-                        </em>
+                        </span>
                     </div>
                 </div>
-                <div class="form-group mb-3" data-auto-fillable>
+                <div class="form-group mb-3" data-auto-fillable  data-field="confirmation_email" data-not-empty>
                     <label for="email">Confirme seu e-mail</label>
-                    <input type="email" class="form-control" id="confirm-email" placeholder="seu@email.com">
+                    <input type="email" class="form-control" id="confirmation_email" placeholder="seu@email.com">
+                    <em>O email digitado não confere.</em>
                 </div>
                 <div class="form-group mb-3" data-field="cpf_cnpj" data-auto-fillable>
                     <label for="cpf_cnpj">CPF/CNPJ</label>
