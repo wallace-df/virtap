@@ -8,13 +8,12 @@
     <meta name="robots" content="noindex">
     <meta name="googlebot" content="noindex">
 
-    <title>Virtap</title>
+    <title>Virtap | Assistente Virtual | Verificar conta</title>
 
     <link href="img/favicon.svg" type="image/svg" rel="icon">
 
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/cadastro.css" />
-
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
@@ -25,7 +24,7 @@
 
         gtag('config', 'G-4ZFMG1F0XK');
         gtag('config', 'AW-924784320');
-    </script>
+    </script> 
 
     <!-- Hotjar Tracking Code for https://www.virtap.com.br -->
     <!-- <script>
@@ -56,37 +55,39 @@
         }("SessionStack", "9d1f1977a2bc4878874f4a522f1e5542");
     </script>
     End SessionStack Code -->
-
-    <script src="https://js.stripe.com/v3/"></script>
 </head>
-
+ 
 <body>
 
     <div class="sign_up">
         <div class="left_content" style="background: linear-gradient(180deg, #9CD7DB -190.19%, #FFFFFF 100%);">
             <img src="/img/spa.png" alt="">
-            <!-- <h2><a id="next-link">Pagar assinatura</a></h2> -->
-            <!-- <h2>Plano Basic</h2> -->
-        </div>
+            <h2><a id="next-link"></a></h2>
+        </div> 
         <div class="right_content">
-            <div id="loading">
+            <div id="loading" style="line-height: 1; word-break: break-all;">
                 <h1>Por favor, aguarde...<p class="mt-2"></p>
                     <div class="spinner-border text-primary" role="status"><span class="sr-only"></span></div>
                 </h1>
             </div>
+            <form id="sign_up" class="row">
+                <div class="col-xs-12 col-sm-10 offset-sm-1">
+                    <div class="mt-4 text-center">
+                        <p class="alert alert-danger" id="generic-error"><strong>Ocorreu um erro ao efetuar login.</strong><br/> Por favor, tente novamente.</p>
+                        <p class="alert alert-danger" id="invalid-credentials"><strong>Usuário/senha inválidos.</strong><br/>Por favor, verifique seus dados.</p>
+                        <p class="alert alert-warning" id="expired-password"><strong>Sua senha expirou.</strong><br/> Enviamos um email com um link para redefinir sua senha.</p>
+                        <p class="alert alert-info" id="not-verified"><strong>Conta ainda não verificada.</strong><br/> Enviamos um email com um link para verificar sua conta.</p>
+                    </div>
 
-            <div id="payment-container" style="display: none; word-break: break-all; line-height:1"> 
-                
-            </div>
-
-     
+                </div>
+            </form>
         </div>
     </div>
 
 
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/pagar-v1.js"></script>
+    <script src="/js/ativar-v1.js"></script>
 
 </body>
 

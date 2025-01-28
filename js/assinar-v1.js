@@ -453,7 +453,7 @@ function showSignupForm(response, target_plan) {
     hasBillingDetails = true;
   }
 
-  document.title = 'Virtap | Assinar plano ' + plans[target_plan];
+  document.title = 'Virtap | Assistente Virtual | Assinar plano ' + plans[target_plan];
 
   $("#submit-btn").text('Assinar plano ' + plans[target_plan]);
   $("#loading").hide();
