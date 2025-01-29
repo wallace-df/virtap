@@ -47,17 +47,14 @@ function isEmpty(str) {
 }
 
 function handleError(response) {
-  console.log(response);
+  console.log(response); 
   let showGenericError = true;
   if (response) {
-    if (response.errorCode === 'ACCOUNT_NOT_VERIFIED') {
-      $("#not-verified").show();
+    if (response.errorCode === 'INVALID_PARAMETERS' || response.errorCode === 'INVALID_VERIFICATION') {
+      $("#invalid-link").show();
       showGenericError = false;
-    } else if (response.errorCode === 'PASSWORD_EXPIRED') {
-      $("#expired-password").show();
-      showGenericError = false;
-    } else if (response.errorCode === 'INVALID_CREDENTIALS') {
-      $("#invalid-credentials").show();
+    } else if (response.errorCode === 'VERIFICATION_EXPIRED') {
+      $("#expired-link").show();
       showGenericError = false;
     }
   }
@@ -84,7 +81,7 @@ async function init() {
       }
     }
 
-    const res = await fetch(`${window.activateAPIEndpoint}/activate?email=${email}&n=${n}&t=${t}&h=${h}`, {
+    const res = await fetch(`${window.activateAPIEndpoint}/verify?email=${email}&n=${n}&t=${t}&h=${h}`, {
       method: "GET"
     });
 
@@ -96,7 +93,6 @@ async function init() {
     }
 
   } catch (err) {
-    alert("x");
     handleError(err);
   }
 }
