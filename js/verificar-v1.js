@@ -50,11 +50,11 @@ function handleError(response) {
   console.log(response); 
   let showGenericError = true;
   if (response) {
-    if (response.errorCode === 'INVALID_PARAMETERS' || response.errorCode === 'INVALID_VERIFICATION') {
-      $("#invalid-link").show();
+    if (response.errorCode === 'INVALID_PARAMETERS') {
+      $("#invalid-parameters").show();
       showGenericError = false;
-    } else if (response.errorCode === 'VERIFICATION_EXPIRED') {
-      $("#expired-link").show();
+    } else if (response.errorCode === 'INVALID_VERIFICATION' || response.errorCode === 'VERIFICATION_EXPIRED') {
+      $("#invalid-link").show();
       showGenericError = false;
     }
   }
