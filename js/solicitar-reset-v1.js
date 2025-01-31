@@ -57,44 +57,28 @@ function handleError(response) {
       showGenericError = false;
     }
   }
-
-  $("#loading").hide();
-  $("#sign_up").hide();
   if (showGenericError) {
     $("#generic-error").show();
   }
 }
 
-function validatePassword(password) {
-  if (!password || password.length < 8) {
+function validateEmail(email) {
+  if (!/^\S+@\S+\.\S+$/.test(email)) {
     return false;
-  } else {
-    return true;
   }
+  return true;
 }
 
-let $new_password = $("#new_password");
-let $confirm_password = $("#confirm_password");
+let $email = $("#email");
 
-// New password
-$new_password.parent().data('get-field', function () {
+
+$email.parent().data('get-field', function () {
   let email = $email.val();
   if (!validateEmail(email)) {
     $email.parent().addClass('error');
     return undefined;
   }
   return email;
-});
-
-// Confirm password
-$confirm_password.parent().data('get-field', function () {
-  let new_password = $new_password.val();
-  let confirm_password = $confirm_password.val();
-  if (new_password !== confirm_password) {
-    $confirm_password.parent().addClass('error');
-    return undefined;
-  }
-  return confirm_password;
 });
 
 
@@ -166,22 +150,19 @@ $(submitBtn).on('click', async (event) => {
 
   // Log in.
   try {
- 
 
-    const res = await fetch(`${window.signupAPIEndpoint}/reset-password?state=assistant`, {
+    const res = await fetch(`${window.signupAPIEndpoint}/request-password-reset?state=assistant`, {
       method: "POST",
       credentials: "include",
-      body: JSON.stringify({ password: $("#new_password").val() }),
+      body: JSON.stringify({ email: $("#email").val() }),
       headers: {
         'Content-Type': 'application/json' // Não precisa se estiver usando FormData
       },
     });
 
-    if (res.status == 200) {
+    if (res.status !== 200) {
       console.log(res);
       throw await res.json();
-    } else {
-      redirectToNext();
     }
 
   } catch (err) {
@@ -194,33 +175,3 @@ $(submitBtn).on('click', async (event) => {
 });
 
 
-async function init() {
-
-  try {
-
-    let email = getParameterByName('email');
-    let n = getParameterByName('n');
-    let t = getParameterByName('t');
-    let h = getParameterByName('h');
-
-    if (isEmpty(email) || isEmpty(n) || isEmpty(t) || isEmpty(h)) {
-      throw {
-        errorCode: 'INVALID_PARAMETERS'
-      }
-    }
-
-    const res = await fetch(`${window.activateAPIEndpoint}/reset-password?email=${email}&n=${n}&t=${t}&h=${h}`, {
-      method: "GET"
-    });
-
-    if (res.status !== 200) {
-      console.log(res);
-      throw await res.json();
-    }
-
-  } catch (err) {
-    handleError(err);
-  }
-}
-
-init();

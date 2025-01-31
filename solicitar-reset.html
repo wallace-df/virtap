@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
+
+    <title>Virtap | Assistente Virtual | Solicitar reset de senha</title>
+
+    <link href="img/favicon.svg" type="image/svg" rel="icon">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/cadastro.css" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-4ZFMG1F0XK');
+        gtag('config', 'AW-924784320');
+    </script>
+</head>
+
+<body>
+
+    <div class="sign_up">
+        <div class="left_content" style="background: linear-gradient(180deg, #9CD7DB -190.19%, #FFFFFF 100%);">
+            <img src="/img/spa.png" alt="">
+            <h2><a id="next-link"></a></h2>
+        </div>
+        <div class="right_content">
+
+            <form id="sign_up" class="row">
+
+                <div class="text-center" style="margin-bottom: 2rem">
+                    <a href="/" class="login_site_logo"><img src="/img/logo.svg" alt=""></a>
+                </div>
+
+                <h1 class="text-center mb-4">Resetar senha da sua conta Virtap</h1>
+                <div class="col-xs-12 col-sm-6 offset-sm-3">
+                    <div class="form-group mt-3" data-field>
+                        <label for="email">Seu e-mail</label>
+                        <input type="text" class="form-control" id="email">
+                        <em>Por favor, informe seu e-mail.</em>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-10 offset-sm-1">
+                    <div class="mt-4 text-center">
+                        <p class="alert alert-danger" id="generic-error"><strong>Erro ao carregar página.</strong><br /> Por
+                            favor, verifique sua conexão e tente novamente.</p>
+                        <p class="alert alert-danger" id="invalid-parameters"><strong>Link incorreto.</strong><br />O link que
+                            você acessou está incorreto.</p>
+                        <p class="alert alert-warning" id="invalid-link"><strong>Link inválido.</strong><br />O link que você
+                            acessou é invalido ou expirou.</p>
+        
+                        <button class="btn" id="submit-btn">Resetar</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/solicitar-reset-v1.js"></script>
+
+</body>
+
+</html>

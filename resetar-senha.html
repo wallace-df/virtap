@@ -24,7 +24,7 @@
 
         gtag('config', 'G-4ZFMG1F0XK');
         gtag('config', 'AW-924784320');
-    </script> 
+    </script>
 
     <!-- Hotjar Tracking Code for https://www.virtap.com.br -->
     <!-- <script>
@@ -56,18 +56,27 @@
     </script>
     End SessionStack Code -->
 </head>
- 
+
 <body>
 
     <div class="sign_up">
         <div class="left_content" style="background: linear-gradient(180deg, #9CD7DB -190.19%, #FFFFFF 100%);">
             <img src="/img/spa.png" alt="">
             <h2><a id="next-link"></a></h2>
-        </div> 
+        </div>
         <div class="right_content">
-            <div id="loading" style="line-height: 1; word-break: break-all;display:none">
+            <div id="loading" style="line-height: 1; word-break: break-all;">
             </div>
-            <form id="sign_up" class="row">
+            <div class="text-center">
+
+                <p class="alert alert-danger" id="generic-error"><strong>Erro ao carregar página.</strong><br /> Por
+                    favor, verifique sua conexão e tente novamente.</p>
+                <p class="alert alert-danger" id="invalid-parameters"><strong>Link incorreto.</strong><br />O link que
+                    você acessou está incorreto.</p>
+                <p class="alert alert-warning" id="invalid-link"><strong>Link inválido.</strong><br />O link que você acessou é invalido ou expirou.</p>
+            </div>
+
+            <form id="sign_up" class="row" style="display:none">
 
                 <div class="text-center" style="margin-bottom: 2rem">
                     <a href="/" class="login_site_logo"><img src="/img/logo.svg" alt=""></a>
@@ -88,9 +97,6 @@
                 </div>
                 <div class="col-xs-12 col-sm-10 offset-sm-1">
                     <div class="mt-4 text-center">
-                        <p class="alert alert-danger" id="generic-error"><strong>Erro ao resetar senha.</strong><br/> Por favor, verifique sua conexão e tente novamente.</p>
-                        <p class="alert alert-danger" id="invalid-parameters"><strong>Link incorreto.</strong><br/>O link que você acessou está incorreto.</p>
-                        <p class="alert alert-warning" id="invalid-link"><strong>Link inválido ou expirado.</strong><br/>Um novo link foi enviado para o seu e-mail.</p>
                         <button class="btn" id="submit-btn">Resetar</button>
                     </div>
 
@@ -102,7 +108,7 @@
 
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/reset-v1.js"></script>
+    <script src="/js/resetar-v1.js"></script>
 
 </body>
 
