@@ -76,9 +76,11 @@
         $(document).ready(function () {
             let next = getParameterByName('next');
             if (next) {
-                let url = $("#login-button").attr('href');
-                url += '?next=' + next;
-                $("#login-button").attr('href', url);
+                $(".login_btn").each((i, el) => {
+                    let url = $(el).attr('href');
+                    url += '?next=' + next;
+                    $(el).attr('href', url);
+                })
             }
         });
     </script>

@@ -26,37 +26,6 @@
         gtag('config', 'AW-924784320');
     </script>
 
-    <!-- Hotjar Tracking Code for https://www.virtap.com.br -->
-    <!-- <script>
-        (function (h, o, t, j, a, r) {
-            h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
-            h._hjSettings = { hjid: 3611346, hjsv: 6 };
-            a = o.getElementsByTagName('head')[0];
-            r = o.createElement('script'); r.async = 1;
-            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
-            a.appendChild(r);
-        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
-    </script> -->
-
-
-    <!-- Begin SessionStack code 
-    <script type="text/javascript">
-        !function (a, b) {
-            var c = window; c.SessionStackKey = a, c[a] = c[a] || {
-                t: b,
-                q: []
-            }; for (var d = ["start", "stop", "identify", "getSessionId", "log", "setOnDataCallback", "trackEvent"], e = 0; e < d.length; e++)!function (b) {
-                c[a][b] = c[a][b] || function () {
-                    c[a].q.push([b].concat([].slice.call(arguments, 0)));
-                }
-            }(d[e]); var f = document.createElement("script"); f.async = 1, f.crossOrigin = "anonymous",
-                f.src = "https://cdn.sessionstack.com/sessionstack.js"; var g = document.getElementsByTagName("script")[0];
-            g.parentNode.insertBefore(f, g)
-        }("SessionStack", "9d1f1977a2bc4878874f4a522f1e5542");
-    </script>
-    End SessionStack Code -->
-</head>
-
 <body>
 
     <div class="sign_up">
@@ -66,6 +35,9 @@
         </div>
         <div class="right_content">
             <div id="loading" style="line-height: 1; word-break: break-all;">
+                <h1>Por favor, aguarde...<p class="mt-2"></p>
+                    <div class="spinner-border text-primary" role="status"><span class="sr-only"></span></div>
+                </h1>
             </div>
             <div class="text-center">
 
@@ -73,7 +45,8 @@
                     favor, verifique sua conexão e tente novamente.</p>
                 <p class="alert alert-danger" id="invalid-parameters"><strong>Link incorreto.</strong><br />O link que
                     você acessou está incorreto.</p>
-                <p class="alert alert-warning" id="invalid-link"><strong>Link inválido.</strong><br />O link que você acessou é invalido ou expirou.</p>
+                <p class="alert alert-warning" id="invalid-link"><strong>Link inválido ou expirado.</strong><br /><a
+                        href="" id="new-link">Clique aqui</a> para solicitar um novo.</p>
             </div>
 
             <form id="sign_up" class="row" style="display:none">
@@ -87,7 +60,7 @@
                     <div class="form-group mt-3" data-field>
                         <label for="password">Nova senha</label>
                         <input type="password" class="form-control" id="new_password">
-                        <em>Por favor, informe sua senha.</em>
+                        <em>Por favor, informe uma nova senha com pelo menos 8 caracteres.</em>
                     </div>
                     <div class="form-group mt-3" data-field>
                         <label for="password">Confirme a senha</label>

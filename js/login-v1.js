@@ -1,6 +1,6 @@
-window.signupAPIEndpoint = 'https://api.virtap.com.br';
+window.loginAPIEndpoint = 'https://api.virtap.com.br';
 window.assistantDashboard = 'https://assistentes.virtap.com.br';
-window.signupAPIEndpoint = 'http://localhost:3000';
+window.loginAPIEndpoint = 'http://localhost:3000';
 window.assistantDashboard = 'http://localhost:8080';
 
 let formData = new FormData();
@@ -67,7 +67,7 @@ function handleError(response) {
     } else if (response.errorCode === 'INVALID_CREDENTIALS') {
       $("#invalid-credentials").show();
       showGenericError = false;
-    }    
+    }
   }
 
   if (showGenericError) {
@@ -156,6 +156,8 @@ $(submitBtn).on('click', async (event) => {
     return;
   }
 
+  $("p.alert").hide();
+
   let fields = getFields();
   if (!fields) {
     return;
@@ -164,16 +166,15 @@ $(submitBtn).on('click', async (event) => {
   // Disable form submission while loading
   $("#submit-btn").prop('disabled', true).text('Por favor, aguarde...');
   $("input,select").prop('disabled', true);
-  $("p.alert").hide();
 
   // Log in.
   try {
 
- 
-    const res = await fetch(`${window.signupAPIEndpoint}/login?state=assistant`, {
-      method: "POST", 
+
+    const res = await fetch(`${window.loginAPIEndpoint}/login?state=assistant`, {
+      method: "POST",
       credentials: "include",
-      body: JSON.stringify({username: $("#email").val(), password: $("#password").val()}),
+      body: JSON.stringify({ username: $("#email").val(), password: $("#password").val() }),
       headers: {
         'Content-Type': 'application/json' // Não precisa se estiver usando FormData
       },

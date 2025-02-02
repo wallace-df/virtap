@@ -31,10 +31,14 @@ function getNext() {
 
 }
 
-function redirectToNext() {
+function redirectToNext(alreadyVerified) {
   let url = getNext();
   $("#sign_up").hide();
-  $("#loading").html('<div><h1>Login feito com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+  if(alreadyVerified) {
+    $("#loading").html('<div><h1>Sua conta já foi verificada!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+  } else {
+    $("#loading").html('<div><h1>Verificação concluída!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+  }
   $("#loading").show();
   setTimeout(() => document.location.href = url, 2000);
 }
@@ -56,6 +60,9 @@ function handleError(response) {
     } else if (response.errorCode === 'INVALID_VERIFICATION' || response.errorCode === 'VERIFICATION_EXPIRED') {
       $("#invalid-link").show();
       showGenericError = false;
+    } else if(response.errorCode === 'ALREADY_VERIFIED') {
+      redirectToNext(true);
+      return;
     }
   }
 
@@ -89,7 +96,7 @@ async function init() {
       console.log(res);
       throw await res.json();
     } else {
-      alert('aeee');
+      redirectToNext(false);
     }
 
   } catch (err) {

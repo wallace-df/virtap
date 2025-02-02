@@ -27,6 +27,7 @@
     </script>
 </head>
 
+
 <body>
 
     <div class="sign_up">
@@ -36,8 +37,10 @@
         </div>
         <div class="right_content">
 
+            <div id="loading" style="line-height: 1; word-break: break-all; display: none;">
+                <p class="alert alert-info" id="link-sent"><strong>Link enviado!</strong><br />Enviamos um email com um link para resetar sua senha.</p>
+            </div>
             <form id="sign_up" class="row">
-
                 <div class="text-center" style="margin-bottom: 2rem">
                     <a href="/" class="login_site_logo"><img src="/img/logo.svg" alt=""></a>
                 </div>
@@ -52,14 +55,10 @@
                 </div>
                 <div class="col-xs-12 col-sm-10 offset-sm-1">
                     <div class="mt-4 text-center">
-                        <p class="alert alert-danger" id="generic-error"><strong>Erro ao carregar página.</strong><br /> Por
+                        <p class="alert alert-danger" id="generic-error"><strong>Erro ao solicitar reset de senha.</strong><br />
+                            Por
                             favor, verifique sua conexão e tente novamente.</p>
-                        <p class="alert alert-danger" id="invalid-parameters"><strong>Link incorreto.</strong><br />O link que
-                            você acessou está incorreto.</p>
-                        <p class="alert alert-warning" id="invalid-link"><strong>Link inválido.</strong><br />O link que você
-                            acessou é invalido ou expirou.</p>
-        
-                        <button class="btn" id="submit-btn">Resetar</button>
+                        <button class="btn" id="submit-btn">Resetar senha</button>
                     </div>
 
                 </div>

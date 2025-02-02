@@ -1,9 +1,10 @@
-window.activateAPIEndpoint = 'https://api.virtap.com.br';
+window.resetAPIEndpoint = 'https://api.virtap.com.br';
 window.assistantDashboard = 'https://assistentes.virtap.com.br';
-window.activateAPIEndpoint = 'http://localhost:3000';
+window.resetAPIEndpoint = 'http://localhost:3000';
 window.assistantDashboard = 'http://localhost:8080';
 
-let formData = new FormData();
+
+let email;
 
 function getParameterByName(name, url) {
   if (!url) url = window.location.href;
@@ -54,6 +55,7 @@ function handleError(response) {
       showGenericError = false;
     } else if (response.errorCode === 'INVALID_TOKEN') {
       $("#invalid-link").show();
+      $("#new-link").attr('href', '/solicitar-reset?email=' + getParameterByName('email'));
       showGenericError = false;
     }
   }
@@ -78,12 +80,12 @@ let $confirm_password = $("#confirm_password");
 
 // New password
 $new_password.parent().data('get-field', function () {
-  let email = $email.val();
-  if (!validateEmail(email)) {
-    $email.parent().addClass('error');
+  let password = $new_password.val();
+  if (!validatePassword(password)) {
+    $new_password.parent().addClass('error');
     return undefined;
   }
-  return email;
+  return password;
 });
 
 // Confirm password
@@ -154,6 +156,8 @@ $(submitBtn).on('click', async (event) => {
     return;
   }
 
+  $("p.alert").hide();
+
   let fields = getFields();
   if (!fields) {
     return;
@@ -162,22 +166,21 @@ $(submitBtn).on('click', async (event) => {
   // Disable form submission while loading
   $("#submit-btn").prop('disabled', true).text('Por favor, aguarde...');
   $("input,select").prop('disabled', true);
-  $("p.alert").hide();
 
   // Log in.
   try {
  
 
-    const res = await fetch(`${window.signupAPIEndpoint}/reset-password?state=assistant`, {
+    const res = await fetch(`${window.signupAPIEndpoint}/reset-password`, {
       method: "POST",
       credentials: "include",
-      body: JSON.stringify({ password: $("#new_password").val() }),
+      body: JSON.stringify({ email_address: email, password: $("#new_password").val() }),
       headers: {
         'Content-Type': 'application/json' // Não precisa se estiver usando FormData
       },
     });
 
-    if (res.status == 200) {
+    if (res.status !== 200) {
       console.log(res);
       throw await res.json();
     } else {
@@ -198,7 +201,7 @@ async function init() {
 
   try {
 
-    let email = getParameterByName('email');
+    email = getParameterByName('email');
     let n = getParameterByName('n');
     let t = getParameterByName('t');
     let h = getParameterByName('h');
@@ -209,17 +212,20 @@ async function init() {
       }
     }
 
-    const res = await fetch(`${window.activateAPIEndpoint}/reset-password?email=${email}&n=${n}&t=${t}&h=${h}`, {
+    const res = await fetch(`${window.resetAPIEndpoint}/reset-password?email=${email}&n=${n}&t=${t}&h=${h}`, {
       method: "GET"
     });
 
     if (res.status !== 200) {
       console.log(res);
       throw await res.json();
+    } else {
+      $("#loading").hide();
+      $("#sign_up").show();
     }
 
   } catch (err) {
-    handleError(err);
+   handleError(err);
   }
 }
 

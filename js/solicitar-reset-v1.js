@@ -1,6 +1,6 @@
-window.activateAPIEndpoint = 'https://api.virtap.com.br';
+window.requestAPIEndpoint = 'https://api.virtap.com.br';
 window.assistantDashboard = 'https://assistentes.virtap.com.br';
-window.activateAPIEndpoint = 'http://localhost:3000';
+window.requestAPIEndpoint = 'http://localhost:3000';
 window.assistantDashboard = 'http://localhost:8080';
 
 let formData = new FormData();
@@ -71,7 +71,6 @@ function validateEmail(email) {
 
 let $email = $("#email");
 
-
 $email.parent().data('get-field', function () {
   let email = $email.val();
   if (!validateEmail(email)) {
@@ -80,7 +79,6 @@ $email.parent().data('get-field', function () {
   }
   return email;
 });
-
 
 // Blur validation.
 $("[data-field]").each(function () {
@@ -138,6 +136,8 @@ $(submitBtn).on('click', async (event) => {
     return;
   }
 
+  $("p.alert").hide();
+
   let fields = getFields();
   if (!fields) {
     return;
@@ -146,12 +146,10 @@ $(submitBtn).on('click', async (event) => {
   // Disable form submission while loading
   $("#submit-btn").prop('disabled', true).text('Por favor, aguarde...');
   $("input,select").prop('disabled', true);
-  $("p.alert").hide();
 
-  // Log in.
   try {
 
-    const res = await fetch(`${window.signupAPIEndpoint}/request-password-reset?state=assistant`, {
+    const res = await fetch(`${window.requestAPIEndpoint}/request-password-reset?state=assistant`, {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({ email: $("#email").val() }),
@@ -165,6 +163,10 @@ $(submitBtn).on('click', async (event) => {
       throw await res.json();
     }
 
+    $("#sign_up").hide();
+    $("#link-sent").show();
+    $("#loading").show();
+
   } catch (err) {
     handleError(err);
   }
@@ -175,3 +177,7 @@ $(submitBtn).on('click', async (event) => {
 });
 
 
+let email = getParameterByName('email');
+if (email && email.trim().length > 0) {
+  $("#email").val(email);
+}
