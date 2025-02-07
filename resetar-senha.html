@@ -40,8 +40,8 @@
                 </h1>
             </div>
             <div class="text-center">
-
-                <p class="alert alert-danger" id="generic-error"><strong>Erro ao carregar página.</strong><br /> Por
+ 
+                <p class="alert alert-danger" id="loading-error"><strong>Erro ao carregar página.</strong><br /> Por
                     favor, verifique sua conexão e tente novamente.</p>
                 <p class="alert alert-danger" id="invalid-parameters"><strong>Link incorreto.</strong><br />O link que
                     você acessou está incorreto.</p>
@@ -60,7 +60,7 @@
                     <div class="form-group mt-3" data-field>
                         <label for="password">Nova senha</label>
                         <input type="password" class="form-control" id="new_password">
-                        <em>Por favor, informe uma nova senha com pelo menos 8 caracteres.</em>
+                        <em>Por favor, informe uma senha com ao menos 8 caracteres.</em>
                     </div>
                     <div class="form-group mt-3" data-field>
                         <label for="password">Confirme a senha</label>
@@ -71,8 +71,9 @@
                 <div class="col-xs-12 col-sm-10 offset-sm-1">
                     <div class="mt-4 text-center">
                         <button class="btn" id="submit-btn">Resetar</button>
-                    </div>
-
+                        <p class="alert alert-danger mt-4" id="generic-error"><strong>Erro ao resetar senha.</strong><br /> Por
+                            favor, verifique sua conexão e tente novamente.</p>
+                        </div>
                 </div>
             </form>
         </div>

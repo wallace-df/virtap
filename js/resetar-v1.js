@@ -46,7 +46,7 @@ function isEmpty(str) {
   return false;
 }
 
-function handleError(response) {
+function handleError(response, loading) {
   console.log(response);
   let showGenericError = true;
   if (response) {
@@ -61,9 +61,20 @@ function handleError(response) {
   }
 
   $("#loading").hide();
-  $("#sign_up").hide();
-  if (showGenericError) {
-    $("#generic-error").show();
+
+  if (loading) {
+    $("#sign_up").hide();
+
+    if (showGenericError) {
+      $("#loading-error").show();
+    }
+
+  } else {
+
+    if (showGenericError) {
+      $("#generic-error").show();
+    }
+
   }
 }
 
@@ -169,7 +180,7 @@ $(submitBtn).on('click', async (event) => {
 
   // Log in.
   try {
- 
+
 
     const res = await fetch(`${window.signupAPIEndpoint}/reset-password`, {
       method: "POST",
@@ -188,7 +199,7 @@ $(submitBtn).on('click', async (event) => {
     }
 
   } catch (err) {
-    handleError(err);
+    handleError(err, false);
   }
   finally {
     $("#submit-btn").prop('disabled', false).text('Log in');
@@ -225,7 +236,7 @@ async function init() {
     }
 
   } catch (err) {
-   handleError(err);
+    handleError(err, true);
   }
 }
 
