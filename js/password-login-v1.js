@@ -1,35 +1,4 @@
-window.loginAPIEndpoint = 'https://api.virtap.com.br';
-window.assistantDashboard = 'https://assistentes.virtap.com.br';
-window.loginAPIEndpoint = 'http://localhost:3000';
-window.assistantDashboard = 'http://localhost:8080';
-
 let formData = new FormData();
-
-function getParameterByName(name, url) {
-  if (!url) url = window.location.href;
-  name = name.replace(/[\[\]]/g, "\\$&");
-  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-    results = regex.exec(url);
-  if (!results) return null;
-  if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
-
-function getNext() {
-  let next = getParameterByName('next');
-  let url = window.assistantDashboard;
-  if (next && next.trim().length > 0) {
-    if (url.endsWith('/')) {
-      url += next;
-
-    } else {
-      url += '/' + next;
-
-    }
-  }
-  return url;
-
-}
 
 function redirectToNext() {
   let url = getNext();
@@ -171,7 +140,7 @@ $(submitBtn).on('click', async (event) => {
   try {
 
 
-    const res = await fetch(`${window.loginAPIEndpoint}/login?state=assistant`, {
+    const res = await fetch(`${window.apiURL}/login?state=assistant`, {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({ username: $("#email").val(), password: $("#password").val() }),

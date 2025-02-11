@@ -3,20 +3,29 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1">
     <meta name="robots" content="noindex">
     <meta name="googlebot" content="noindex">
 
-    <!-- title -->
     <title>Virtap | Assistente Virtual | Cadastrar</title>
 
-    <!-- favicon -->
     <link href="img/favicon.svg" type="image/svg" rel="icon">
 
-    <!-- all css here -->
-    <link rel="stylesheet" href="css/vendor_login.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/vendor-login-v1.css">
+    <link rel="stylesheet" href="css/login-v1.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-4ZFMG1F0XK');
+        gtag('config', 'AW-924784320');
+    </script>
+
 </head>
 
 <body style="background: #FFFFFF;">
@@ -42,38 +51,20 @@
                     <div class="right">
                         <a href="/" class="login_site_logo"><img class="w-100" src="img/logo.svg" alt=""></a>
                         <h3>Cadastre-se na Virtap</h3>
-                        <a href="https://api.virtap.com.br/auth/google/assistant?next=cadastro" class="login_btn"
-                            id="login-button"><img src="img/google.svg" alt="">Cadastrar com Google</a>
+
+                        <p>
+                            <a href="https://api.virtap.com.br/auth/google/assistant?next=cadastro" class="signup_btn"
+                                id="signup-button">
+                                <img src="img/google.svg" alt="" />
+                                <span>Cadastrar com Google</span>
+                            </a>
+                        </p>
                         <p class="mt-5 fs-3"><a href="/login">Já tem uma conta? Faça login.</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-
-    <!-- all js here -->
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script>
-        function getParameterByName(name) {
-            var regexS = "[\\?&]" + name + "=([^&#]*)",
-                regex = new RegExp(regexS),
-                results = regex.exec(window.location.search);
-            if (results == null) {
-                return "";
-            } else {
-                return decodeURIComponent(results[1].replace(/\+/g, " "));
-            }
-        }
-
-        $(document).ready(function () {
-            let next = getParameterByName('next');
-            if (next) {
-                let url = $("#login-button").attr('href');
-                url += '?next=' + next;
-                $("#login-button").attr('href', url);
-            }
-        });
-    </script>
 </body>
 
 </html>

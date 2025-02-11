@@ -3,20 +3,17 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1">
     <meta name="robots" content="noindex">
     <meta name="googlebot" content="noindex">
 
-    <!-- title -->
     <title>Virtap | Assistente Virtual | Entrar</title>
 
-    <!-- favicon -->
     <link href="img/favicon.svg" type="image/svg" rel="icon">
 
-    <!-- all css here -->
-    <link rel="stylesheet" href="css/vendor_login.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/vendor-login-v1.css">
+    <link rel="stylesheet" href="css/login-v1.css">
 </head>
 
 <body style="background: #FFFFFF;">
@@ -36,8 +33,6 @@
                     <div class="right">
                         <a href="/" class="login_site_logo"><img class="w-100" src="img/logo.svg" alt=""></a>
                         <h3>Faça login na Virtap</h3>
-
-
                         <p>
                             <a href="https://api.virtap.com.br/auth/google/assistant" class="login_btn"
                                 id="login-button">
@@ -61,18 +56,8 @@
 
     <!-- all js here -->
     <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/utils-v1.js"></script>
     <script>
-        function getParameterByName(name) {
-            var regexS = "[\\?&]" + name + "=([^&#]*)",
-                regex = new RegExp(regexS),
-                results = regex.exec(window.location.search);
-            if (results == null) {
-                return "";
-            } else {
-                return decodeURIComponent(results[1].replace(/\+/g, " "));
-            }
-        }
-
         $(document).ready(function () {
             let next = getParameterByName('next');
             if (next) {

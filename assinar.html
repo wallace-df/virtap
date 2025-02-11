@@ -2,9 +2,9 @@
 <html lang="pt">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
     <meta name="googlebot" content="noindex">
 
@@ -12,22 +12,12 @@
 
     <link href="img/favicon.svg" type="image/svg" rel="icon">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/cadastro.css" />
-    <link rel="stylesheet" href="css/card-js.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
+    <link rel="stylesheet" href="css/vendor-common-v1.css" />
+    <link rel="stylesheet" href="css/subscribe-v1.css" />
 
-    <style>
-        .iti--separate-dial-code .iti__selected-flag {
-            border-radius: 0 !important;
-        }
-
-        .iti {
-            display: block;
-        }
-    </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
+
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -35,37 +25,12 @@
 
         gtag('config', 'G-4ZFMG1F0XK');
         gtag('config', 'AW-924784320');
+
+        window.apiURL = 'https://api.virtap.com.br';
+        window.dashboardURL = 'https://assistentes.virtap.com.br';
+        window.apiURL = 'http://localhost:3000';
+        window.dashboardURL = 'http://localhost:8080';
     </script>
-
-    <!-- Hotjar Tracking Code for https://www.virtap.com.br -->
-    <!-- <script>
-        (function (h, o, t, j, a, r) {
-            h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
-            h._hjSettings = { hjid: 3611346, hjsv: 6 };
-            a = o.getElementsByTagName('head')[0];
-            r = o.createElement('script'); r.async = 1;
-            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
-            a.appendChild(r);
-        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
-    </script> -->
-
-
-    <!-- Begin SessionStack code 
-    <script type="text/javascript">
-        !function (a, b) {
-            var c = window; c.SessionStackKey = a, c[a] = c[a] || {
-                t: b,
-                q: []
-            }; for (var d = ["start", "stop", "identify", "getSessionId", "log", "setOnDataCallback", "trackEvent"], e = 0; e < d.length; e++)!function (b) {
-                c[a][b] = c[a][b] || function () {
-                    c[a].q.push([b].concat([].slice.call(arguments, 0)));
-                }
-            }(d[e]); var f = document.createElement("script"); f.async = 1, f.crossOrigin = "anonymous",
-                f.src = "https://cdn.sessionstack.com/sessionstack.js"; var g = document.getElementsByTagName("script")[0];
-            g.parentNode.insertBefore(f, g)
-        }("SessionStack", "9d1f1977a2bc4878874f4a522f1e5542");
-    </script>
-    End SessionStack Code -->
 </head>
 
 <body>
@@ -100,7 +65,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="form-group mb-3" data-auto-fillable  data-field="confirmation_email" data-not-empty>
+                <div class="form-group mb-3" data-auto-fillable data-field="confirmation_email" data-not-empty>
                     <label for="email">Confirme seu e-mail</label>
                     <input type="email" class="form-control" id="confirmation_email" placeholder="seu@email.com">
                     <em>O email digitado não confere.</em>
@@ -243,42 +208,8 @@
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaGDtiIgu7ZxJvRZzcYeSn25LRdUgzS7k&callback=initAutocomplete&libraries=places&v=weekly"
         defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
-    <script src="/js/jquery-3.6.0.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/card-js.min.js"></script>
-    <script src="/js/ufs.js"></script>
-    <script src="/js/assinar-v1.js"></script>
-
-
-    <script type="text/javascript">
-        _linkedin_partner_id = "5484012";
-        window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
-        window._linkedin_data_partner_ids.push(_linkedin_partner_id);
-    </script>
-    <script type="text/javascript">
-        (function (l) {
-            if (!l) {
-                window.lintrk = function (a, b) { window.lintrk.q.push([a, b]) };
-                window.lintrk.q = []
-            }
-            var s = document.getElementsByTagName("script")[0];
-            var b = document.createElement("script");
-            b.type = "text/javascript"; b.async = true;
-            b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
-            s.parentNode.insertBefore(b, s);
-        })(window.lintrk);
-    </script>
-    <noscript>
-        <img height="1" width="1" style="display:none;" alt=""
-            src="https://px.ads.linkedin.com/collect/?pid=5484012&fmt=gif" />
-    </noscript>
-
-
-
-
-
-
+    <script src="/js/vendor-common-v1.js"></script>
+    <script src="/js/subscribe-v1.js"></script>
 </body>
 
 </html>

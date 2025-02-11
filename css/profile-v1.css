@@ -2259,3 +2259,11 @@ p.alert {
 	display: inline-block;
 	width: 18rem;
 }
+
+.iti--separate-dial-code .iti__selected-flag {
+  border-radius: 0 !important;
+}
+
+.iti {
+  display: block;
+}
