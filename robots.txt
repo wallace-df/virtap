@@ -1,8 +1,25 @@
 User-agent: *
-Disallow: /cadastro.html
+Disallow: /assinar.html
+Disallow: /cadastrar.html
 Disallow: /login.html
-Disallow: /assistente-virtual/cadastro.html
-Disallow: /assistente-virtual/login.html
+Disallow: /login-com-senha.html
+Disallow: /perfil.html
+Disallow: /resetar-senha.html
+Disallow: /solicitar-nova-senha.html
+Disallow: /verificar-conta.html
+
 Disallow: /quero-contratar/cadastro.html
 Disallow: /quero-contratar/login.html
 
+
+Disallow: /assinar
+Disallow: /cadastrar
+Disallow: /login
+Disallow: /login-com-senha
+Disallow: /perfil
+Disallow: /resetar-senha
+Disallow: /solicitar-nova-senha
+Disallow: /verificar-conta
+
+Disallow: /quero-contratar/cadastro
+Disallow: /quero-contratar/login

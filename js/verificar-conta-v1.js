@@ -1,8 +1,3 @@
-window.activateAPIEndpoint = 'https://api.virtap.com.br';
-window.assistantDashboard = 'https://assistentes.virtap.com.br';
-window.activateAPIEndpoint = 'http://localhost:3000';
-window.assistantDashboard = 'http://localhost:8080';
-
 let formData = new FormData();
 
 function redirectToNext(alreadyVerified) {

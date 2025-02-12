@@ -12,7 +12,7 @@ let plans = {
     'BASIC': 'Basic',
     'VIP': 'Vip'
 };
-
+ 
 function getPlan() {
     let target_plan = getParameterByName('plano');
     if (target_plan) {

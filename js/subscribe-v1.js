@@ -654,4 +654,4 @@ async function logout() {
   location.reload();
 }
 
-init();
+init(); 
