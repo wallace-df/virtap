@@ -25,10 +25,11 @@
         gtag('config', 'G-4ZFMG1F0XK');
         gtag('config', 'AW-924784320');
 
-        window.apiURL = 'https://api.virtap.com.br';
-        window.dashboardURL = 'https://assistentes.virtap.com.br';
+        // window.apiURL = 'https://api.virtap.com.br';
+        // window.dashboardURL = 'https://assistentes.virtap.com.br';
         window.apiURL = 'http://localhost:3000';
         window.dashboardURL = 'http://localhost:8080';
+        window.role = 'assistant';
     </script>
 
 <body>
@@ -50,8 +51,10 @@
                     favor, verifique sua conexão e tente novamente.</p>
                 <p class="alert alert-danger" id="invalid-parameters"><strong>Link incorreto.</strong><br />O link que
                     você acessou está incorreto.</p>
-                <p class="alert alert-warning" id="invalid-link"><strong>Link inválido ou expirado.</strong><br /><a
-                        href="" id="new-link">Clique aqui</a> para solicitar um novo.</p>
+                    <p class="alert alert-warning" id="invalid-link"><strong>Link inválido ou
+                        expirado.</strong><br /><a href="" id="new-link">Clique aqui</a> para solicitar um novo.
+                </p>
+
             </div>
 
             <form id="sign_up" class="row" style="display:none">
@@ -79,6 +82,10 @@
                         <p class="alert alert-danger mt-4" id="generic-error"><strong>Erro ao resetar
                                 senha.</strong><br /> Por
                             favor, verifique sua conexão e tente novamente.</p>
+                        <p class="alert alert-warning mt-4" id="expired-link"><strong>Link inválido ou
+                                expirado.</strong><br /><a href="" id="new-link2">Clique aqui</a> para solicitar um novo.
+                        </p>
+                        
                     </div>
                 </div>
             </form>

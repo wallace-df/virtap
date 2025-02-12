@@ -138,9 +138,7 @@ $(submitBtn).on('click', async (event) => {
 
   // Log in.
   try {
-
-
-    const res = await fetch(`${window.apiURL}/login?state=assistant`, {
+    const res = await fetch(`${window.apiURL}/login?state=${window.role}`, {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({ username: $("#email").val(), password: $("#password").val() }),
@@ -164,4 +162,3 @@ $(submitBtn).on('click', async (event) => {
     $("input,select").prop('disabled', false);
   }
 });
- 

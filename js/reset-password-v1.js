@@ -1,12 +1,15 @@
 
 let email;
+let n;
+let t;
+let h;
 
 function redirectToNext() {
   let url = getNext();
   $("#sign_up").hide();
-  $("#loading").html('<div><h1>Login feito com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+  $("#loading").html('<div><h1>Senha alterada sucesso!</h1><br /><p>Redirecionando automaticamente para o login...</p></div>');
   $("#loading").show();
-  setTimeout(() => document.location.href = url, 2000);
+  setTimeout(() => document.location.href = '/login-com-senha', 2000);
 }
 
 function isEmpty(str) {
@@ -24,8 +27,14 @@ function handleError(response, loading) {
       $("#invalid-parameters").show();
       showGenericError = false;
     } else if (response.errorCode === 'INVALID_TOKEN') {
-      $("#invalid-link").show();
-      $("#new-link").attr('href', '/solicitar-reset?email=' + getParameterByName('email'));
+      if(loading) {
+        $("#invalid-link").show();
+        $("#new-link").attr('href', '/solicitar-nova-senha?email=' + getParameterByName('email'));
+      } else {
+        $("#expired-link").show();
+        $("#new-link2").attr('href', '/solicitar-nova-senha?email=' + getParameterByName('email'));
+
+      }
       showGenericError = false;
     }
   }
@@ -151,17 +160,16 @@ $(submitBtn).on('click', async (event) => {
   // Log in.
   try {
 
-
-    const res = await fetch(`${window.signupAPIEndpoint}/reset-password`, {
+    const res = await fetch(`${window.apiURL}/reset-password`, {
       method: "POST",
       credentials: "include",
-      body: JSON.stringify({ email_address: email, password: $("#new_password").val() }),
+      body: JSON.stringify({ email: email, r: window.role, n: n, t: t, h: h, new_password: $("#new_password").val() }),
       headers: {
         'Content-Type': 'application/json' // Não precisa se estiver usando FormData
       },
     });
 
-    if (res.status !== 200) {
+    if (res.status !== 200 && 1==0) {
       console.log(res);
       throw await res.json();
     } else {
@@ -183,9 +191,9 @@ async function init() {
   try {
 
     email = getParameterByName('email');
-    let n = getParameterByName('n');
-    let t = getParameterByName('t');
-    let h = getParameterByName('h');
+    n = getParameterByName('n');
+    t = getParameterByName('t');
+    h = getParameterByName('h');
 
     if (isEmpty(email) || isEmpty(n) || isEmpty(t) || isEmpty(h)) {
       throw {
@@ -193,11 +201,11 @@ async function init() {
       }
     }
 
-    const res = await fetch(`${window.resetAPIEndpoint}/reset-password?email=${email}&n=${n}&t=${t}&h=${h}`, {
+    const res = await fetch(`${window.apiURL}/reset-password?email=${email}&r=${window.role}&n=${n}&t=${t}&h=${h}`, {
       method: "GET"
     });
 
-    if (res.status !== 200) {
+    if (res.status !== 200 &&1==0) {
       console.log(res);
       throw await res.json();
     } else {

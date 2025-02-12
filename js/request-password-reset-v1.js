@@ -118,11 +118,12 @@ $(submitBtn).on('click', async (event) => {
   $("input,select").prop('disabled', true);
 
   try {
+    let email = $("#email").val()
 
-    const res = await fetch(`${window.requestAPIEndpoint}/request-password-reset?state=assistant`, {
-      method: "POST",
+    const res = await fetch(`${window.apiURL}/request-password-reset`, {
+      method: "POST", 
       credentials: "include",
-      body: JSON.stringify({ email: $("#email").val() }),
+      body: JSON.stringify({ email: $("#email").val(), r: window.role }),
       headers: {
         'Content-Type': 'application/json' // Não precisa se estiver usando FormData
       },
