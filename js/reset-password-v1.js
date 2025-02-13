@@ -12,13 +12,6 @@ function redirectToNext() {
   setTimeout(() => document.location.href = '/login-com-senha', 2000);
 }
 
-function isEmpty(str) {
-  if (!str || str.trim().length === 0) {
-    return true;
-  }
-  return false;
-}
-
 function handleError(response, loading) {
   console.log(response);
   let showGenericError = true;
@@ -27,7 +20,7 @@ function handleError(response, loading) {
       $("#invalid-parameters").show();
       showGenericError = false;
     } else if (response.errorCode === 'INVALID_TOKEN') {
-      if(loading) {
+      if (loading) {
         $("#invalid-link").show();
         $("#new-link").attr('href', '/solicitar-nova-senha?email=' + getParameterByName('email'));
       } else {
@@ -65,52 +58,54 @@ function validatePassword(password) {
   }
 }
 
-let $new_password = $("#new_password");
-let $confirm_password = $("#confirm_password");
+function applyValidations() {
+  let $new_password = $("#new_password");
+  let $confirm_password = $("#confirm_password");
 
-// New password
-$new_password.parent().data('get-field', function () {
-  let password = $new_password.val();
-  if (!validatePassword(password)) {
-    $new_password.parent().addClass('error');
-    return undefined;
-  }
-  return password;
-});
+  // New password
+  $new_password.parent().data('get-field', function () {
+    let password = $new_password.val();
+    if (!validatePassword(password)) {
+      $new_password.parent().addClass('error');
+      return undefined;
+    }
+    return password;
+  });
 
-// Confirm password
-$confirm_password.parent().data('get-field', function () {
-  let new_password = $new_password.val();
-  let confirm_password = $confirm_password.val();
-  if (new_password !== confirm_password) {
-    $confirm_password.parent().addClass('error');
-    return undefined;
-  }
-  return confirm_password;
-});
+  // Confirm password
+  $confirm_password.parent().data('get-field', function () {
+    let new_password = $new_password.val();
+    let confirm_password = $confirm_password.val();
+    if (new_password !== confirm_password) {
+      $confirm_password.parent().addClass('error');
+      return undefined;
+    }
+    return confirm_password;
+  });
 
 
-// Blur validation.
-$("[data-field]").each(function () {
-  let $field = $(this);
-  $(this).find('input,select').on('blur', function () {
-    let val = $(this).val()
+  // Blur validation.
+  $("[data-field]").each(function () {
+    let $field = $(this);
+    $(this).find('input,select').on('blur', function () {
+      let val = $(this).val()
 
-    if ($field.is('[data-optional]')) {
-      if (!val || val.trim().length === 0) {
-        $field.removeClass('error');
-        return;
+      if ($field.is('[data-optional]')) {
+        if (!val || val.trim().length === 0) {
+          $field.removeClass('error');
+          return;
+        }
       }
-    }
 
-    if (val && val.trim().length > 0) {
-      $field.removeClass('error');
-      $field.data('get-field')();
-    }
-  })
-});
+      if (val && val.trim().length > 0) {
+        $field.removeClass('error');
+        $field.data('get-field')();
+      }
+    })
+  });
+}
 
-let getFields = function () {
+function getFields() {
 
   $("[data-field]").removeClass("error");
   let hasError = false;
@@ -135,7 +130,6 @@ let getFields = function () {
 }
 
 let submitBtn = document.getElementById('submit-btn');
-
 $(submitBtn).on('click', async (event) => {
   // We don't want to let default form submission happen here,
   // which would refresh the page.
@@ -169,7 +163,7 @@ $(submitBtn).on('click', async (event) => {
       },
     });
 
-    if (res.status !== 200 && 1==0) {
+    if (res.status !== 200) {
       console.log(res);
       throw await res.json();
     } else {
@@ -205,12 +199,13 @@ async function init() {
       method: "GET"
     });
 
-    if (res.status !== 200 &&1==0) {
+    if (res.status !== 200) {
       console.log(res);
       throw await res.json();
     } else {
       $("#loading").hide();
       $("#sign_up").show();
+      applyValidations();
     }
 
   } catch (err) {

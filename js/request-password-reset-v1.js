@@ -1,18 +1,9 @@
-let formData = new FormData();
-
 function redirectToNext() {
   let url = getNext();
   $("#sign_up").hide();
   $("#loading").html('<div><h1>Login feito com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
   $("#loading").show();
   setTimeout(() => document.location.href = url, 2000);
-}
-
-function isEmpty(str) {
-  if (!str || str.trim().length === 0) {
-    return true;
-  }
-  return false;
 }
 
 function handleError(response) {
@@ -32,46 +23,42 @@ function handleError(response) {
   }
 }
 
-function validateEmail(email) {
-  if (!/^\S+@\S+\.\S+$/.test(email)) {
-    return false;
-  }
-  return true;
+function applyValidations() {
+
+  let $email = $("#email");
+
+  $email.parent().data('get-field', function () {
+    let email = $email.val();
+    if (!validateEmail(email)) {
+      $email.parent().addClass('error');
+      return undefined;
+    }
+    return email;
+  });
+
+  // Blur validation.
+  $("[data-field]").each(function () {
+    let $field = $(this);
+    $(this).find('input,select').on('blur', function () {
+      let val = $(this).val()
+
+      if ($field.is('[data-optional]')) {
+        if (!val || val.trim().length === 0) {
+          $field.removeClass('error');
+          return;
+        }
+      }
+
+      if (val && val.trim().length > 0) {
+        $field.removeClass('error');
+        $field.data('get-field')();
+      }
+    })
+  });
+
 }
 
-let $email = $("#email");
-
-$email.parent().data('get-field', function () {
-  let email = $email.val();
-  if (!validateEmail(email)) {
-    $email.parent().addClass('error');
-    return undefined;
-  }
-  return email;
-});
-
-// Blur validation.
-$("[data-field]").each(function () {
-  let $field = $(this);
-  $(this).find('input,select').on('blur', function () {
-    let val = $(this).val()
-
-    if ($field.is('[data-optional]')) {
-      if (!val || val.trim().length === 0) {
-        $field.removeClass('error');
-        return;
-      }
-    }
-
-    if (val && val.trim().length > 0) {
-      $field.removeClass('error');
-      $field.data('get-field')();
-    }
-  })
-});
-
-let getFields = function () {
-
+function getFields() {
   $("[data-field]").removeClass("error");
   let hasError = false;
 
@@ -95,7 +82,6 @@ let getFields = function () {
 }
 
 let submitBtn = document.getElementById('submit-btn');
-
 $(submitBtn).on('click', async (event) => {
   // We don't want to let default form submission happen here,
   // which would refresh the page.
@@ -121,7 +107,7 @@ $(submitBtn).on('click', async (event) => {
     let email = $("#email").val()
 
     const res = await fetch(`${window.apiURL}/request-password-reset`, {
-      method: "POST", 
+      method: "POST",
       credentials: "include",
       body: JSON.stringify({ email: $("#email").val(), r: window.role }),
       headers: {
@@ -147,8 +133,9 @@ $(submitBtn).on('click', async (event) => {
   }
 });
 
-
 let email = getParameterByName('email');
 if (email && email.trim().length > 0) {
   $("#email").val(email);
 }
+
+applyValidations();

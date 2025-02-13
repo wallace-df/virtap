@@ -1,6 +1,3 @@
-window.initAutocomplete = initAutocomplete;
-
-let formData = new FormData();
 let hasBillingDetails = false;
 let loggedInUser = null;
 let autocomplete;

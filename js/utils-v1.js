@@ -12,7 +12,7 @@ let plans = {
     'BASIC': 'Basic',
     'VIP': 'Vip'
 };
- 
+
 function getPlan() {
     let target_plan = getParameterByName('plano');
     if (target_plan) {
@@ -39,6 +39,14 @@ function getNext() {
 function redirectToNext() {
     let url = getNext();
     setTimeout(() => document.location.href = url, 2000);
+}
+
+
+function isEmpty(str) {
+    if (!str || str.trim().length === 0) {
+        return true;
+    }
+    return false;
 }
 
 function validateName(name) {
@@ -207,3 +215,72 @@ function formatCPFCNPJ(cpf_cnpj) {
     }
 }
 
+
+function popupWindow(url, windowName, win, w, h) {
+    const y = win.top.outerHeight / 2 + win.top.screenY - (h / 2);
+    const x = win.top.outerWidth / 2 + win.top.screenX - (w / 2);
+    return win.open(url, windowName, `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=${w}, height=${h}, top=${y}, left=${x}`);
+}
+
+function dataURIToBlob(dataURI) {
+    const splitDataURI = dataURI.split(',')
+    const byteString = splitDataURI[0].indexOf('base64') >= 0 ? atob(splitDataURI[1]) : decodeURI(splitDataURI[1])
+    const mimeString = splitDataURI[0].split(':')[1].split(';')[0]
+
+    const ia = new Uint8Array(byteString.length)
+    for (let i = 0; i < byteString.length; i++)
+        ia[i] = byteString.charCodeAt(i)
+
+    return new Blob([ia], { type: mimeString })
+}
+
+function getImage(dataUrl) {
+    return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.src = dataUrl;
+        image.onload = () => {
+            resolve(image);
+        };
+        image.onerror = (el, err) => {
+            reject(err.error);
+        };
+    });
+}
+
+async function downscaleImage(
+    dataUrl,
+    imageType,  // e.g. 'image/jpeg'
+    resolution,  // max width/height in pixels
+    quality   // e.g. 0.9 = 90% quality
+) {
+
+    // Create a temporary image so that we can compute the height of the image.
+    const image = await this.getImage(dataUrl);
+    const oldWidth = image.naturalWidth;
+    const oldHeight = image.naturalHeight;
+
+    const longestDimension = oldWidth > oldHeight ? 'width' : 'height';
+    const currentRes = longestDimension == 'width' ? oldWidth : oldHeight;
+
+    // Calculate new dimensions
+    const newSize = longestDimension == 'width'
+        ? Math.floor(oldHeight / oldWidth * resolution)
+        : Math.floor(oldWidth / oldHeight * resolution);
+    const newWidth = longestDimension == 'width' ? resolution : newSize;
+    const newHeight = longestDimension == 'height' ? resolution : newSize;
+
+    // Create a temporary canvas to draw the downscaled image on.
+    const canvas = document.createElement('canvas');
+    canvas.width = newWidth;
+    canvas.height = newHeight;
+
+    // Draw the downscaled image on the canvas and return the new data URL.
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = "#FFF";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(image, 0, 0, newWidth, newHeight);
+    const newDataUrl = canvas.toDataURL(imageType, quality);
+    return newDataUrl;
+
+
+}

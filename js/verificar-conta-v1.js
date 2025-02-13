@@ -1,9 +1,7 @@
-let formData = new FormData();
-
 function redirectToNext(alreadyVerified) {
   let url = getNext();
   $("#sign_up").hide();
-  if(alreadyVerified) {
+  if (alreadyVerified) {
     $("#loading").html('<div><h1>Sua conta já foi verificada!</h1><br /><p>Redirecionando automaticamente...</p></div>');
   } else {
     $("#loading").html('<div><h1>Verificação concluída!</h1><br /><p>Redirecionando automaticamente...</p></div>');
@@ -12,15 +10,8 @@ function redirectToNext(alreadyVerified) {
   setTimeout(() => document.location.href = url, 2000);
 }
 
-function isEmpty(str) {
-  if (!str || str.trim().length === 0) {
-    return true;
-  }
-  return false;
-}
-
 function handleError(response) {
-  console.log(response); 
+  console.log(response);
   let showGenericError = true;
   if (response) {
     if (response.errorCode === 'INVALID_PARAMETERS') {
@@ -29,7 +20,7 @@ function handleError(response) {
     } else if (response.errorCode === 'INVALID_VERIFICATION') {
       $("#invalid-link").show();
       showGenericError = false;
-    } else if(response.errorCode === 'ALREADY_VERIFIED') {
+    } else if (response.errorCode === 'ALREADY_VERIFIED') {
       redirectToNext(true);
       return;
     }
@@ -39,7 +30,6 @@ function handleError(response) {
   if (showGenericError) {
     $("#generic-error").show();
   }
-
 }
 
 async function init() {
