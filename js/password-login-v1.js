@@ -156,4 +156,10 @@ $(submitBtn).on('click', async (event) => {
   }
 });
 
+
+let email = getParameterByName('email');
+if (email && email.trim().length > 0) {
+  $("#email").val(email);
+}
+
 applyValidations();

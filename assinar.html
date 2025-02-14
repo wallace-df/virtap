@@ -17,7 +17,7 @@
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
- 
+
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -47,11 +47,22 @@
                     <div class="spinner-border text-primary" role="status"><span class="sr-only"></span></div>
                 </h1>
             </div>
+            <div class="text-center">
+                <p class="alert alert-danger" id="loading-error"><strong>Erro ao carregar página.</strong><br /> Por
+                    favor, verifique sua conexão e tente novamente.</p>
+                    <p class="alert alert-warning" id="under-review-profile"><strong>Cadastro em análise</strong><br />Seu
+                        cadastro <em data-email></em> ainda está sendo analisado.<br /> Por favor, aguarde a aprovação do
+                        seu cadastro e tente novamente.</p>
+                    </p>
+                    <p class="alert alert-danger" id="inactive-profile"><strong>Cadastro desativado</strong><br />Seu
+                        cadastro <em data-email></em> foi desativado.<br /> Por favor, entre em contato com o suporte.</p>
+                    </p>
+                    </div>
 
             <form id="sign_up" style="display: none">
                 <div class="form-group mb-3" data-field="name" data-auto-fillable>
                     <label for="name">Nome</label>
-                    <input type="text" class="form-control" id="name" placeholder="Seu nome">
+                    <input type="text" class="form-control" id="name" placeholder="Seu nome" maxlength="30">
                     <em>Por favor, informe um nome válido.</em>
                 </div>
                 <div class="form-group mb-3" data-field="email">
@@ -164,7 +175,7 @@
                         <div class="row gx-3">
 
                             <div class="col-md-6">
-                                <div class="form-group mb-3" data-field="phone" data-optional>
+                                <div class="form-group mb-3" data-field="phone">
                                     <label for="phone">Telefone</label>
                                     <input type="text" class="form-control" id="phone" placeholder="(99) 99999-9999">
                                     <em>Por favor, informe um teleffone válido.</em>

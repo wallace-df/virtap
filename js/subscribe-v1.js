@@ -114,15 +114,19 @@ function fillInAddress() {
 function handleError(response) {
   console.log(response);
   let showGenericError = true;
+  $("#loading").hide();
+
   if (response) {
 
     if (response.errorCode === 'ALREADY_SUBSCRIBED') {
       let target_plan = getPlan();
       if (target_plan === 'BASIC' && response.errorData.assistant_plan.toUpperCase() === 'BASIC') {
+        $("#loading").show();
         $("#loading").html('<div><h1>Você já assinou o plano Basic.</h1><br /><p>Redirecionando automaticamente...</p></div>');
         showGenericError = false;
         redirectToNext();
       } else if (response.errorData.assistant_plan.toUpperCase() === 'VIP') {
+        $("#loading").show();
         $("#loading").html('<div><h1>Você já assinou o plano Vip.</h1><br /><p>Redirecionando automaticamente...</p></div>');
         showGenericError = false;
         redirectToNext();
@@ -132,15 +136,14 @@ function handleError(response) {
 
     } else if (response.errorCode === 'INVALID_ASSISTANT_STATUS') {
       if (response.errorData.status === 1) {
-        let $data = $('<div><h1 style="color: #f6b700">Seu perfil <em data-email></em> ainda está em análise.<br/><br/> Por favor, aguarde a aprovação do seu cadastro e tente novamente.</h1><p class="mt-2"><a class="link fs-4">Clique aqui para acessar sua conta</a></p></div>');
-        $data.find('a').attr('href', getNext());
-        $data.find('[data-email]').text(response.errorData.email).css('color', '#333');
-        $("#loading").html($data[0].outerHTML);
+        $("#under-review-profile").show();
+        $("#under-review-profile").find('[data-email]').text(response.errorData.email).show();
+
         showGenericError = false;
       } else if (response.errorData.status === 3) {
-        let $data = $('<h1 style="color: #ff4e4e">Seu perfil <em data-email></em> foi desativado.<br/><br/> Entre em contato com o suporte para maiores informações.</h1>');
-        $data.find('[data-email]').text(response.errorData.email).css('color', '#333');
-        $("#loading").html($data[0].outerHTML);
+        $("#inactive-profile").show();
+        $("#inactive-profile").find('[data-email]').text(response.errorData.email).show();
+
         showGenericError = false;
       }
     } else if (response.errorCode === 'NOT_AUTHENTICATED') {
@@ -149,11 +152,10 @@ function handleError(response) {
     }
   }
 
-  $("#loading").show();
   $("#sign_up").hide();
 
-  if (showGenericError) {
-    $("#loading").html('<h1 style="color: #ff4e4e">Ocorreu um erro.<br/><br/> Por favor, atualize a página e tente novamente.</h1>');
+  if (showGenericError) {    
+    $("#loading-error").show();
   }
 
 }
@@ -221,11 +223,11 @@ function showSignupForm(response, target_plan) {
 
   if (hasEmail) {
     loggedInUser = response.email;
-    $("#confirm-email").closest('.form-group').hide();
-    $("#confirm-email").val(response.email);
+    $("#confirmation_email").closest('.form-group').hide();
+    $("#confirmation_email").val(response.email);
     $("#login-note").show();
   } else {
-    $("#confirm-email").closest('.form-group').show();
+    $("#confirmation_email").closest('.form-group').show();
     $("#login-note").hide();
   }
 
@@ -417,8 +419,8 @@ function showSignupForm(response, target_plan) {
     let phone = $phone.val();
 
     if (!phone || phone.trim().length === 0) {
-      $phone.closest('[data-field]').removeClass('error');
-      return null;
+      $phone.closest('[data-field]').addClass('error');
+      return undefined;
     }
 
     if (!validatePhone(phone)) {
@@ -622,7 +624,6 @@ function init() {
 
   $.ajax({
     url: window.apiURL + '/subscribe?plan=' + plans[target_plan],
-    data: formData,
     processData: false,
     contentType: false,
     type: 'GET',

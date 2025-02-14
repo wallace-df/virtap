@@ -1,3 +1,9 @@
+let email;
+let r;
+let n;
+let t;
+let h;
+
 function redirectToNext(alreadyVerified) {
   let url = getNext();
   $("#sign_up").hide();
@@ -18,6 +24,7 @@ function handleError(response) {
       $("#invalid-parameters").show();
       showGenericError = false;
     } else if (response.errorCode === 'INVALID_VERIFICATION') {
+      $("#new-link").attr('href', '/login-com-senha?email=' + email);
       $("#invalid-link").show();
       showGenericError = false;
     } else if (response.errorCode === 'ALREADY_VERIFIED') {
@@ -36,10 +43,11 @@ async function init() {
 
   try {
 
-    let email = getParameterByName('email');
-    let n = getParameterByName('n');
-    let t = getParameterByName('t');
-    let h = getParameterByName('h');
+    email = getParameterByName('email');
+    r = window.role;
+    n = getParameterByName('n');
+    t = getParameterByName('t');
+    h = getParameterByName('h');
 
     if (isEmpty(email) || isEmpty(n) || isEmpty(t) || isEmpty(h)) {
       throw {
@@ -47,7 +55,7 @@ async function init() {
       }
     }
 
-    const res = await fetch(`${window.activateAPIEndpoint}/verify?email=${email}&n=${n}&t=${t}&h=${h}`, {
+    const res = await fetch(`${window.apiURL}/verify-account?email=${email}&r=${r}&n=${n}&t=${t}&h=${h}`, {
       method: "GET"
     });
 

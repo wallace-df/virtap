@@ -1,5 +1,6 @@
 
 let email;
+let r;
 let n;
 let t;
 let h;
@@ -179,12 +180,12 @@ $(submitBtn).on('click', async (event) => {
   }
 });
 
-
 async function init() {
 
   try {
 
     email = getParameterByName('email');
+    r = window.role;
     n = getParameterByName('n');
     t = getParameterByName('t');
     h = getParameterByName('h');
@@ -195,7 +196,7 @@ async function init() {
       }
     }
 
-    const res = await fetch(`${window.apiURL}/reset-password?email=${email}&r=${window.role}&n=${n}&t=${t}&h=${h}`, {
+    const res = await fetch(`${window.apiURL}/reset-password?email=${email}&r=${r}&n=${n}&t=${t}&h=${h}`, {
       method: "GET"
     });
 

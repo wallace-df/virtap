@@ -1,11 +1,3 @@
-function redirectToNext() {
-  let url = getNext();
-  $("#sign_up").hide();
-  $("#loading").html('<div><h1>Login feito com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
-  $("#loading").show();
-  setTimeout(() => document.location.href = url, 2000);
-}
-
 function handleError(response) {
   console.log(response);
   let showGenericError = true;
