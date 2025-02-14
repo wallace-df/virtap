@@ -5807,12 +5807,15 @@ function signup() {
         if (xhr.status === 401) {
           $("#signupForm").find('input, .btn').prop("disabled", false).removeClass("disabled");
           $("#btnSignup").text("Cadastrar");
+          $txtError.removeClass().addClass('alert alert-warning text-center');
           $txtError.html("Sua sessão expirou.<br/> <a class='link' href='javascript:void(0)' onclick='popupWindow(\"" + window.apiURL + "/auth/google/assistant?popup=true\",\"_blank\",window, 600, 400)' target='_blank' class='link'> Clique aqui para entrar novamente.</a>").show();
         } else {
           try {
             let err = JSON.parse(xhr.responseText);
             if (err.errorCode === 'ASSISTANT_ALREADY_REGISTERED') {
+              $txtError.removeClass().addClass('alert alert-success  text-center');
               $txtError.html("Você já criou uma conta.<br/> <a class='link' href='" + window.dashboardURL + "' target='_blank' class='link'> Clique aqui para acessar sua conta.</a>").show();
+              $("#btnSignup").text("Cadastrar");
               return;
             }
             throw xhr;
@@ -5820,7 +5823,8 @@ function signup() {
           } catch (err) {
             $("#signupForm").find('input, .btn').prop("disabled", false).removeClass("disabled");
             $("#btnSignup").text("Cadastrar");
-            $txtError.text("Ocorreu um erro no seu cadastro. Por favor, tente novamente.").show();
+            $txtError.removeClass().addClass('alert alert-danger  text-center');
+            $txtError.html("Ocorreu um erro no seu cadastro.<br/> Por favor, tente novamente.").show();
           }
         }
       },
