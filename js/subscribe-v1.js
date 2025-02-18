@@ -115,6 +115,7 @@ function handleError(response) {
   console.log(response);
   let showGenericError = true;
   $("#loading").hide();
+  $("#sign_up").hide();
 
   if (response) {
 
@@ -136,11 +137,13 @@ function handleError(response) {
 
     } else if (response.errorCode === 'INVALID_ASSISTANT_STATUS') {
       if (response.errorData.status === 1) {
+        $("#sign_up").show();
         $("#under-review-profile").show();
         $("#under-review-profile").find('[data-email]').text(response.errorData.email).show();
 
         showGenericError = false;
       } else if (response.errorData.status === 3) {
+        $("#sign_up").show();
         $("#inactive-profile").show();
         $("#inactive-profile").find('[data-email]').text(response.errorData.email).show();
 
@@ -152,9 +155,8 @@ function handleError(response) {
     }
   }
 
-  $("#sign_up").hide();
 
-  if (showGenericError) {    
+  if (showGenericError) {
     $("#loading-error").show();
   }
 
@@ -516,6 +518,7 @@ function showSignupForm(response, target_plan) {
     }
 
     $("[data-field]").removeClass("error");
+    $("p.alert").hide();
 
     let fields = $("[data-field]");
     let hasError = false;
@@ -599,7 +602,7 @@ function showSignupForm(response, target_plan) {
         handleError(err);
       } else {
         console.log(err);
-        alert('Erro! Tente novamente!');
+        $("#generic-error").show();
       }
     }
     finally {

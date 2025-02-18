@@ -8,7 +8,7 @@ Disallow: /resetar-senha.html
 Disallow: /solicitar-nova-senha.html
 Disallow: /verificar-conta.html
 
-Disallow: /quero-contratar/cadastro.html
+Disallow: /quero-contratar/cadastrar.html
 Disallow: /quero-contratar/login.html
 
 
@@ -21,5 +21,5 @@ Disallow: /resetar-senha
 Disallow: /solicitar-nova-senha
 Disallow: /verificar-conta
 
-Disallow: /quero-contratar/cadastro
+Disallow: /quero-contratar/cadastrar
 Disallow: /quero-contratar/login

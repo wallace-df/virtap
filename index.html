@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
-        content="Tenha acesso aos melhores cursos e aulas, explore oportunidades reais de trabalho na nossa plataforma e interaja com pessoas que trilham o mesmo caminho que você.">
+        content="Tenha acesso aos melhores cursos e aulas, explore oportunidades reais de trabalho e interaja com pessoas que trilham o mesmo caminho que você.">
 
     <title>Virtap | A melhor plataforma de ensino e oportunidades para Assistentes Virtuais</title>
 
@@ -17,7 +17,6 @@
 
     <link href="img/favicon.svg" type="image/svg" rel="icon">
 
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -38,24 +37,6 @@
             a.appendChild(r);
         })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
     </script> -->
-
-    <!-- Meta Pixel Code -->
-    <script>
-        !function (f, b, e, v, n, t, s) {
-            if (f.fbq) return; n = f.fbq = function () {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-            n.queue = []; t = b.createElement(e); t.async = !0;
-            t.src = v; s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '848946150212475');
-        fbq('track', 'PageView');
-    </script>
-    <!-- End Meta Pixel Code -->
 
     <!-- Begin SessionStack code -->
     <script type="text/javascript">
@@ -80,23 +61,29 @@
     <header class="header-area">
         <div class="main-container">
             <div class="header-wrapper">
-                <a class="header-logo" href="#"><img src="img/logo.png" alt="Logo Virtap"></a>
+                <a class="header-logo" href="."><img src="img/logo.png" alt="Logo Virtap"></a>
                 <div class="dropdown">
                     <a class="header-login-btn" href="javascprit:void(0)" data-bs-toggle="dropdown">
                         <span>Log in</span>
                     </a>
                     <div class="dropdown-menu login_dropdown">
                         <div class="text-center">
-                            <h5>Sou Assistente</h5>
-                            <a href="https://api.virtap.com.br/auth/google/assistant" target="_blank"><button><img
-                                        src="img/google-icon.svg" alt="Login com Google"><span>Entrar com o
-                                        Google</span></button></a>
+                            <h5>Sou AV</h5>
+                            <a href="/login" target="_blank">
+                                <button>
+                                    <img src="img/enter.svg" alt="Login">
+                                    <span>Ir para a plataforma</span>
+                                </button>
+                            </a>
                         </div>
                         <div class="text-center">
-                            <h5>Estou contratando uma AV</h5>
-                            <a href="https://api.virtap.com.br/auth/google/client" target="_blank"><button><img
-                                        src="img/google-icon.svg" alt="Login com Google"><span>Entrar com o
-                                        Google</span></button></a>
+                            <h5>Estou contratando AV</h5>
+                            <a href="/estou-contratando/login" target="_blank">
+                                <button>
+                                    <img src="img/enter.svg" alt="Login">
+                                    <span>Ir para a plataforma</span>
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -111,15 +98,16 @@
                 <div class="landing-hero-text-area" data-aos="fade-right">
                     <h1>Se torne uma <span style="display: block" class="mb-3">Assistente Virtual</span> de verdade.
                     </h1>
-                    <p>Tenha acesso aos melhores cursos e aulas, explore oportunidades reais de trabalho na nossa
-                        plataforma e interaja com pessoas que trilham o mesmo caminho que
+                    <p>Tenha acesso aos melhores cursos e aulas, explore oportunidades reais de trabalho e interaja com
+                        pessoas que trilham o mesmo caminho que
                         você.</p>
                     <div class="landing-hero-btn-area">
                         <!-- <a class="landing-hero-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfDoJhOgj3drelEsaookph1GMNi6I9keW-Qz2dOyjYSXvHMWQ/viewform" target="_blank">Encontrar um talento</a> -->
                         <!-- <a class="landing-hero-btn" href="https://clientes.virtap.com.br" target="_blank">Encontrar um
                             talento</a> -->
-                        <a class="landing-hero-btn landing-hero-btn" href="/cadastro" target="_blank">Comece
-                            agora!</a>
+                        <a class="landing-hero-btn landing-hero-btn" href="/cadastrar" target="_blank">Quero ser AV</a>
+                        <a class="landing-hero-btn landing-hero-btn2" href="/estou-contratando/" target="_blank">Quero
+                            contratar AV</a>
                     </div>
                 </div>
                 <div class="landing-hero-img" data-aos="fade-left">
@@ -579,7 +567,7 @@
                     <div class="col-lg-6">
                         <div class="singup_banner_content">
                             <h2>Cadastre-se agora e aprenda a trabalhar como Assistente Virtual</h2>
-                            <a href="/cadastro.html" target="_blank" class="primary_button mt_50">Quero ser AV</a>
+                            <a href="/cadastrar" target="_blank" class="primary_button mt_50">Quero ser AV</a>
                             <img class="sh check_sh" src="img/cadastre-se-gratuitamente.png" alt="Cadastre-se">
                         </div>
                     </div>
@@ -1103,14 +1091,14 @@
                     <div class="footer-item">
                         <h6 class="footer-item-heading">Trabalhe como Assistente Virtual</h6>
                         <ul class="footer-item-ul">
-                            <li><a href="/cadastro.html" target="_blank">Junte-se à nossa rede de
+                            <li><a href="/cadastrar" target="_blank">Junte-se à nossa rede de
                                     profissionais.</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <span>Copyright 2024 Virtap. All Rights Reserved. </span>
+                <span>Copyright 2025 Virtap. All Rights Reserved. </span>
 
             </div>
         </div>

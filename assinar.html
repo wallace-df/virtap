@@ -15,9 +15,7 @@
     <link rel="stylesheet" href="css/vendor-common-v1.css" />
     <link rel="stylesheet" href="css/subscribe-v1.css" />
 
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
-
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -50,14 +48,7 @@
             <div class="text-center">
                 <p class="alert alert-danger" id="loading-error"><strong>Erro ao carregar página.</strong><br /> Por
                     favor, verifique sua conexão e tente novamente.</p>
-                    <p class="alert alert-warning" id="under-review-profile"><strong>Cadastro em análise</strong><br />Seu
-                        cadastro <em data-email></em> ainda está sendo analisado.<br /> Por favor, aguarde a aprovação do
-                        seu cadastro e tente novamente.</p>
-                    </p>
-                    <p class="alert alert-danger" id="inactive-profile"><strong>Cadastro desativado</strong><br />Seu
-                        cadastro <em data-email></em> foi desativado.<br /> Por favor, entre em contato com o suporte.</p>
-                    </p>
-                    </div>
+            </div>
 
             <form id="sign_up" style="display: none">
                 <div class="form-group mb-3" data-field="name" data-auto-fillable>
@@ -208,6 +199,20 @@
                     </select>
                 </div>
                 <div class="mb-3 text-center">
+                    <p class="alert alert-warning mt-4 mb-4" id="under-review-profile"><strong>Cadastro em
+                            análise</strong><br />Seu
+                        cadastro <em data-email></em> ainda está sendo analisado.<br /> Por favor, aguarde a aprovação
+                        do
+                        seu cadastro e tente novamente.</p>
+                    </p>
+                    <p class="alert alert-danger mt-4 mb-4" id="inactive-profile"><strong>Cadastro
+                            desativado</strong><br />Seu
+                        cadastro <em data-email></em> foi desativado.<br /> Por favor, entre em contato com o suporte.
+                    </p>
+                    <p class="alert alert-danger mt-4 mb-4" id="generic-error"><strong>Erro ao efetuar
+                            assinatura</strong><br />Por favor, verifique
+                        seus dados de pagamento e tente novamente.</p>
+                    </p>
                     <button class="btn" id="submit-btn"></button>
                 </div>
 
