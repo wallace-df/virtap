@@ -21,6 +21,11 @@
         gtag('js', new Date());
         gtag('config', 'G-4ZFMG1F0XK');
         gtag('config', 'AW-924784320');
+
+        window.apiURL = 'https://api.virtap.com.br';
+        window.dashboardURL = 'https://clientes.virtap.com.br';
+        window.apiURL = 'http://localhost:3000';
+        window.dashboardURL = 'http://localhost:8081';
     </script>
 
     <!-- Hotjar Tracking Code for https://www.virtap.com.br -->
@@ -57,16 +62,15 @@
     <div class="sign_up">
         <div class="left_content" style="background: linear-gradient(180deg, #532E88 -190.19%, #FFFFFF 100%);">
             <img src="/img/spg.png" alt="">
+            <h1>Conecte-se com os melhores talentos da Assistência Virtual</h1>
         </div>
         <div class="right_content">
-            <h2>Conecte-se com os melhores talentos da Assistência Virtual.
-            </h2>
             <form id="signupForm">
                 <div class="input_from">
                     <div class="user-info assistant mt-3" id="personal">
                         <div class="items">
                             <div class="item">
-                                <div class="search__name" id="name">Nome</div>
+                                <div class="search__name" id="name"><strong>Nome</strong></div>
                                 <input type="text" class="form-control" id="txtNome" name="name" maxlength="30"
                                     placeholder="Seu nome" />
                                 <em>Por favor, informe um nome válido.</em>
@@ -74,14 +78,14 @@
                         </div>
                         <div class="items" style="margin-top: 30px">
                             <div class="item">
-                                <div class="search__name mb-3" id="phone">WhatsApp</div>
+                                <div class="search__name mb-3" id="phone"><strong>WhatsApp</strong></div>
                                 <input type="text" class="form-control" id="txtWhatsapp" maxlength="30"
-                                    placeholder="(99) 99999-9999" />
+                                    placeholder="(99) 99999-9999" style="width:100%" />
                                 <em>Por favor, informe um WhatsApp válido.</em>
                             </div>
                         </div>
                         <div class="items" style="margin-top: 25px">
-                            <div class="item">
+                            <div class="item" style="width:400px">
                                 <div class="checkbox_item">
                                     <label>
                                         <input type="checkbox" class="checkbox" id="chkTermos">
@@ -93,10 +97,9 @@
                             </div>
                         </div>
 
-                        <h2 class=" text-danger text-center"
-                            style="line-height: 1; margin: 20px auto 0 auto; display: none; font-size:12pt"
-                            id="txtError"></h2>
-                        </h2>
+                        <div class="alert alert-danger text-center"
+                            style="line-height: 1.5; margin: 30px auto 0 auto; display: none; font-size:12pt; font-weight: normal"
+                            id="txtError"></div>
                         <div class="text-center mt-2">
                             <a onclick="signup()" class="btn btn__secondary" style="width: 200px" id="btnSignup">
                                 Cadastrar

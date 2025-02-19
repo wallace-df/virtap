@@ -1,6 +1,3 @@
-window.signupAPIEndpoint = 'https://api.virtap.com.br';
-window.clientDashboard = 'https://clientes.virtap.com.br';
-
 function popupWindow(url, windowName, win, w, h) {
   const y = win.top.outerHeight / 2 + win.top.screenY - (h / 2);
   const x = win.top.outerWidth / 2 + win.top.screenX - (w / 2);
@@ -28,12 +25,31 @@ let intl = window.intlTelInput(input, {
 
 
 $("#txtWhatsapp").on('blur', function () {
-  intl.setNumber(intl.getNumber());
+  let number = intl.getNumber();
+
+  if (number.trim().length === 0) {
+    $("#txtWhatsapp").closest(".item").removeClass("error");
+    return;
+  }
+
+  intl.setNumber(number);
   if (intl.isValidNumber()) {
     $("#txtWhatsapp").closest(".item").removeClass("error");
   } else {
     $("#txtWhatsapp").closest(".item").addClass("error");
   }
+});
+
+ 
+$("#txtNome").on('blur', function () {
+  let n = $("#txtNome").val().length;
+  if (n > 0 && n < 10) {
+    $("#txtNome").closest(".item").addClass("error");
+  } else {
+    $("#txtNome").closest(".item").removeClass("error");
+
+  }
+
 });
 
 
@@ -43,6 +59,8 @@ $(document).ready(function () {
   if (nome) {
     $("#txtNome").val(nome.substring(0, 30));
   }
+
+  $(".iti--allow-dropdown").css('width', '100%');
 });
 
 
@@ -83,7 +101,7 @@ function signup() {
     formData.append('contact_info', JSON.stringify({ whatsapp: intl.getNumber() }));
 
     $.ajax({
-      url: window.signupAPIEndpoint + '/client/register-profile',
+      url: window.apiURL + '/client/register-profile',
       data: formData,
       processData: false,
       contentType: false,
@@ -95,12 +113,16 @@ function signup() {
         if (xhr.status === 401) {
           $("#signupForm").find('input, .btn').prop("disabled", false).removeClass("disabled");
           $("#btnSignup").text("Cadastrar");
-          $txtError.html("Sua sessão expirou.<br/> <a class='link' href='javascript:void(0)' onclick='popupWindow(\"" + window.signupAPIEndpoint + "/auth/google/client?popup=true\",\"_blank\",window, 600, 400)' target='_blank' class='link'> Clique aqui para entrar novamente.</a>").show();
+          $txtError.removeClass().addClass('alert alert-warning text-center');
+          $txtError.html("Sua sessão expirou.<br/> <a class='link' href='javascript:void(0)' onclick='popupWindow(\"" + window.apiURL + "/auth/google/client?popup=true\",\"_blank\",window, 600, 400)' target='_blank' class='link'> Clique aqui para entrar novamente.</a>").show();
         } else {
           try {
             let err = JSON.parse(xhr.responseText);
             if (err.errorCode === 'CLIENT_ALREADY_REGISTERED') {
-              $txtError.html("Você já criou uma conta.<br/> <a class='link' href='" + window.clientDashboard + "' target='_blank' class='link'> Clique aqui para fazer login.</a>").show();
+
+              $txtError.removeClass().addClass('alert alert-success  text-center');
+              $txtError.html("Você já criou uma conta.<br/> <a class='link' href='" + window.dashboardURL + "' target='_blank' class='link'> Clique aqui para acessá-la.</a>").show();
+              $("#btnSignup").text("Cadastrar");
               return;
             }
             throw xhr;
@@ -108,13 +130,14 @@ function signup() {
           } catch (err) {
             $("#signupForm").find('input, .btn').prop("disabled", false).removeClass("disabled");
             $("#btnSignup").text("Cadastrar");
-            $txtError.text("Ocorreu um erro no seu cadastro. Por favor, tente novamente.").show();
+            $txtError.removeClass().addClass('alert alert-danger  text-center');
+            $txtError.html("Ocorreu um erro no seu cadastro.<br/> Por favor, verifique sua conexão e tente novamente.").show();
           }
         }
       },
       success: function () {
         let callback = function () {
-          window.location = clientDashboard;
+          window.location = window.dashboardURL;
         };
 
         gtag('event', 'sign_up_client', {

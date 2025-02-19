@@ -1,4 +1,3 @@
-
 let cidades =
   [
     "Acrelândia – AC",
@@ -5598,7 +5597,6 @@ let cidades =
     "Xambioá – TO"
   ];
 
-
 function upload() {
   var fileinput = document.getElementById("finput");
   let $ctx = this;
@@ -5814,7 +5812,7 @@ function signup() {
             let err = JSON.parse(xhr.responseText);
             if (err.errorCode === 'ASSISTANT_ALREADY_REGISTERED') {
               $txtError.removeClass().addClass('alert alert-success  text-center');
-              $txtError.html("Você já criou uma conta.<br/> <a class='link' href='" + window.dashboardURL + "' target='_blank' class='link'> Clique aqui para acessar sua conta.</a>").show();
+              $txtError.html("Você já criou uma conta.<br/> <a class='link' href='" + window.dashboardURL + "' target='_blank' class='link'> Clique aqui para acessá-la.</a>").show();
               $("#btnSignup").text("Cadastrar");
               return;
             }
@@ -5824,13 +5822,13 @@ function signup() {
             $("#signupForm").find('input, .btn').prop("disabled", false).removeClass("disabled");
             $("#btnSignup").text("Cadastrar");
             $txtError.removeClass().addClass('alert alert-danger  text-center');
-            $txtError.html("Ocorreu um erro no seu cadastro.<br/> Por favor, tente novamente.").show();
+            $txtError.html("Ocorreu um erro no seu cadastro.<br/> Por favor, verifique sua conexão e tente novamente.").show();
           }
         }
       },
       success: function () {
         let callback = function () {
-          window.location = dashboardURL;
+          window.location = window.dashboardURL;
         };
 
         gtag('event', 'sign_up_assistant', {
