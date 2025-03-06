@@ -59,7 +59,7 @@ function collectFormData() {
 function goToGroup() { gtag('event', 'go_to_whatsapp_page', {
     'send_to': 'G-4ZFMG1F0XK',
     'event_callback': function() {
-        location.href = 'https://chat.whatsapp.com/CcWBVCB5KE90tDtbOecugx';
+        location.href = 'https://chat.whatsapp.com/IekSadZ5zm21MKage9G1Vx';
     }
   });
 
@@ -130,11 +130,11 @@ function signup() {
             contentType: false,
             type: 'POST',
             success: function (result) {
-                location.href = 'https://chat.whatsapp.com/CcWBVCB5KE90tDtbOecugx';
+                location.href = 'https://chat.whatsapp.com/IekSadZ5zm21MKage9G1Vx';
 
             },
             error: function (request, status, errorThrown) {
-                location.href = 'https://chat.whatsapp.com/CcWBVCB5KE90tDtbOecugx';
+                location.href = 'https://chat.whatsapp.com/IekSadZ5zm21MKage9G1Vx';
             }
         });
 
