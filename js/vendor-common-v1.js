@@ -22552,7 +22552,7 @@ function getParameterByName(name, url) {
 
 let plans = {
     'BASIC': 'Basic',
-    'VIP': 'Vip'
+    'VIRTAPCLUB': 'VirtapClub'
 };
 
 function getPlan() {

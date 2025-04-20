@@ -126,9 +126,9 @@ function handleError(response) {
         $("#loading").html('<div><h1>Você já assinou o plano Basic.</h1><br /><p>Redirecionando automaticamente...</p></div>');
         showGenericError = false;
         redirectToNext();
-      } else if (response.errorData.assistant_plan.toUpperCase() === 'VIP') {
+      } else if (response.errorData.assistant_plan.toUpperCase() === 'VIRTAPCLUB') {
         $("#loading").show();
-        $("#loading").html('<div><h1>Você já assinou o plano Vip.</h1><br /><p>Redirecionando automaticamente...</p></div>');
+        $("#loading").html('<div><h1>Você já assinou o Virtap Club.</h1><br /><p>Redirecionando automaticamente...</p></div>');
         showGenericError = false;
         redirectToNext();
       } else {
@@ -577,7 +577,7 @@ function showSignupForm(response, target_plan) {
           if (target_plan === 'BASIC') {
             $("#loading").html('<div><h1>Assinatura do plano Basic realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
           } else {
-            $("#loading").html('<div><h1>Assinatura do plano Vip realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+            $("#loading").html('<div><h1>Assinatura do Virtap Club realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
           }
           $("#loading").show();
           $("#sign_up").hide();
@@ -619,7 +619,7 @@ function showSignupForm(response, target_plan) {
 function init() {
   let target_plan = getPlan();
 
-  if (target_plan !== 'VIP') {
+  if (target_plan !== 'VIRTAPCLUB') {
     console.log('Invalid plan: ', target_plan);
     handleError(null);
     return;
