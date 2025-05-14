@@ -1,114 +1,8 @@
-let hasBillingDetails = false;
-let loggedInUser = null;
-let autocomplete;
-let submitBtn = document.getElementById('submit-btn');
-let input = document.querySelector("#phone");
-let intl = window.intlTelInput(input, {
-  utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
-  autoInsertDialCode: true,
-  initialCountry: "BR",
-  separateDialCode: true
-});
 
-
-function initAutocomplete() {
-  autocomplete = new google.maps.places.Autocomplete(document.querySelector("#address"), {
-    componentRestrictions: { country: ["br"] },
-    fields: ["address_components", "geometry"],
-    types: ["address"],
-  });
-  // When the user selects an address from the drop-down, populate the
-  // address fields in the form.
-  autocomplete.addListener("place_changed", fillInAddress);
-
-};
-
-function populateMunicipios(uf) {
-  const municipioSelect = $("#city");
-  municipioSelect.empty();  // Limpa o select de municípios
-
-  let municipiosData = ufs;
-  // Verifica se existem municípios para a UF
-  if (municipiosData[uf]) {
-    // Adiciona os municípios no select
-    municipiosData[uf].municipios.forEach(function (municipio) {
-      municipioSelect.append(`<option value="${municipio.codigo_ibge}">${municipio.nome}</option>`);
-    });
-  }
-}
-
-function fillInAddress() {
-  // Get the place details from the autocomplete object.
-  const place = autocomplete.getPlace();
-  let address1 = "";
-  let postcode = "";
-
-
-  // Get each component of the address from the place details,
-  // and then fill-in the corresponding field on the form.
-  // place.address_components are google.maps.GeocoderAddressComponent objects
-  // which are documented at http://goo.gle/3l5i5Mr
-  let address_number = null;
-  let address = null;
-  let city = null;
-  let cep = null;
-  let neighborhood = null;
-  let uf = null;
-
-  for (const component of place.address_components) {
-    // @ts-ignore remove once typings fixed
-    const componentType = component.types[0];
-
-    switch (componentType) {
-      case "route": {
-        address = component.long_name;
-        break;
-      }
-
-      case "street_number": {
-        address_number = component.long_name;
-        break;
-      }
-
-      case "sublocality_level_1":
-        neighborhood = component.long_name;
-        break;
-
-      case "postal_code": {
-        cep = component.long_name;
-        break;
-      }
-
-      case "administrative_area_level_1": {
-        uf = component.short_name;
-        break;
-      }
-
-      case "administrative_area_level_2": {
-        city = component.long_name;
-        break;
-      }
-    }
-
-
-  }
-
-  $("#address_number").val(address_number).trigger('blur');
-  $("#address").val(address).trigger('blur');
-  $("#cep").val(cep).trigger('blur');
-  $("#neighborhood").val(neighborhood).trigger('blur');
-
-  $("#state").val("");
-  $("#city").val("");
-
-  if (uf) {
-    $("#state").val(uf).trigger('blur');
-    $("#state").trigger('change');
-
-    if (city) {
-      $("#city").val(String(ufs[uf].municipioCodes[city])).trigger('blur');
-    }
-  }
+function handleSuccess() {
+  $("#loading").html('<div><h1>Compra realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+  $("#loading").show();
+  $("#sign_up").hide();
 }
 
 function handleError(response) {
@@ -119,22 +13,10 @@ function handleError(response) {
 
   if (response) {
 
-    if (response.errorCode === 'ALREADY_SUBSCRIBED') {
-      let target_plan = getPlan();
-      if (target_plan === 'BASIC' && response.errorData.assistant_plan.toUpperCase() === 'BASIC') {
-        $("#loading").show();
-        $("#loading").html('<div><h1>Você já assinou o plano Basic.</h1><br /><p>Redirecionando automaticamente...</p></div>');
-        showGenericError = false;
-        redirectToNext();
-      } else if (response.errorData.assistant_plan.toUpperCase() === 'VIRTAPCLUB') {
-        $("#loading").show();
-        $("#loading").html('<div><h1>Você já assinou o Virtap Club.</h1><br /><p>Redirecionando automaticamente...</p></div>');
-        showGenericError = false;
-        redirectToNext();
-      } else {
-        console.log("Invalid assistant plan:", response.errorData.assistant_plan.toUpperCase());
-      }
-
+    if (response.errorCode === 'ALREADY_PURCHASED') {
+      $("#loading").html('<div><h1>Você já adquiriu este curso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+      $("#loading").show();
+      showGenericError = false;
     } else if (response.errorCode === 'INVALID_ASSISTANT_STATUS') {
       if (response.errorData.status === 1) {
         $("#sign_up").show();
@@ -149,12 +31,8 @@ function handleError(response) {
 
         showGenericError = false;
       }
-    } else if (response.errorCode === 'NOT_AUTHENTICATED') {
-      location.href = window.dashboardURL + '/plano';
-      showGenericError = false;
     }
   }
-
 
   if (showGenericError) {
     $("#loading-error").show();
@@ -162,8 +40,8 @@ function handleError(response) {
 
 }
 
-function showSignupForm(response, target_plan) {
-  let hasEmail = (response.email && response.email.trim().length > 0 ? true : false);
+function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepareFormDataFunc, purchaseEndpoint, successHandler, errorHandler) {
+  let hasEmail = (initialDetails.email && initialDetails.email.trim().length > 0 ? true : false);
 
   let $cardContainer = $('[data-card-container');
   $cardContainer.CardJs();
@@ -214,33 +92,35 @@ function showSignupForm(response, target_plan) {
 
   let $installments = $("#installments");
   $installments.empty();
-  response.payment_config.installments.forEach(function (config) {
+  initialDetails.payment_config.installments.forEach(function (config) {
     $installments.append(`<option value="${config.installments}_${config.amount}">${config.installments}x de R$ ${(config.amount / 100).toFixed(2).replace('.', ',')}</option>`);
   });
 
-  $("#name").val(response.name);
-  $("#cpf_cnpj").val(response.cpf_cnpj);
-  $("#email").val(response.email);
+  $("#name").val(initialDetails.name);
+  $("#cpf_cnpj").val(initialDetails.cpf_cnpj);
+  $("#email").val(initialDetails.email);
   $("#email").prop('disabled', hasEmail);
 
   if (hasEmail) {
-    loggedInUser = response.email;
+    loggedInUser = initialDetails.email;
     $("#confirmation_email").closest('.form-group').hide();
-    $("#confirmation_email").val(response.email);
+    $("#confirmation_email").val(initialDetails.email);
     $("#login-note").show();
   } else {
     $("#confirmation_email").closest('.form-group').show();
     $("#login-note").hide();
   }
 
-  if (response.billing_details) {
+  if (initialDetails.billing_details) {
     $("[data-auto-fillable]").hide();
     hasBillingDetails = true;
   }
 
-  document.title = 'Virtap | Assistente Virtual | Assinar plano ' + plans[target_plan];
+  // 'Virtap | Assistente Virtual | Comprar curso';
+  document.title = getTitleFunc();
 
-  $("#submit-btn").text('Assinar plano ' + plans[target_plan]);
+  //'Comprar agora'
+  $("#submit-btn").text(getButtonLabelFunc());
   $("#loading").hide();
   $("#sign_up").show();
   setTimeout(() => $("#name").focus(), 300);
@@ -552,15 +432,16 @@ function showSignupForm(response, target_plan) {
       let paymentDetails = fields.paymentDetails;
 
       let formData = new FormData();
-      formData.append("target_plan", plans[target_plan]);
       formData.append("email", $("#email").val());
       if (billingDetails) {
         formData.append("billing_details", JSON.stringify(billingDetails));
       }
       formData.append("payment_details", JSON.stringify(paymentDetails));
 
+      prepareFormDataFunc(formData);
+
       // Create the PaymentIntent
-      const res = await fetch(`${window.apiURL}/subscribe`, {
+      const res = await fetch(`${window.apiURL}/${purchaseEndpoint}`, {
         method: "POST",
         credentials: "include",
         body: formData
@@ -574,13 +455,7 @@ function showSignupForm(response, target_plan) {
       const data = await res.json();
       if (data.responseData) {
         if (data.responseData.charged) {
-          if (target_plan === 'BASIC') {
-            $("#loading").html('<div><h1>Assinatura do plano Basic realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
-          } else {
-            $("#loading").html('<div><h1>Assinatura do Virtap Club realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
-          }
-          $("#loading").show();
-          $("#sign_up").hide();
+          successHandler();
           redirectToNext();
         } else {
           if (paymentDetails.method === 'credit_card') {
@@ -592,21 +467,18 @@ function showSignupForm(response, target_plan) {
           }
         }
 
-
       } else {
         throw new Error("Failure making payment.");
       }
 
     } catch (err) {
-      if (err && (err.errorCode === 'ALREADY_SUBSCRIBED' || err.errorCode === 'INVALID_ASSISTANT_STATUS')) {
-        handleError(err);
-      } else {
+      if (!err || !errorHandler(err)) {
         console.log(err);
         $("#generic-error").show();
       }
     }
     finally {
-      $("#submit-btn").prop('disabled', false).text('Assinar plano ' + plans[target_plan]);
+      $("#submit-btn").prop('disabled', false).text(getButtonLabelFunc());
       $("input,select").prop('disabled', false);
       if (loggedInUser) {
         $("#email").prop('disabled', true);
@@ -617,16 +489,16 @@ function showSignupForm(response, target_plan) {
 }
 
 function init() {
-  let target_plan = getPlan();
+  let course = getCourse();
 
-  if (target_plan !== 'VIRTAPCLUB') {
-    console.log('Invalid plan: ', target_plan);
+  if (course !== 'form-ap') {
+    console.log('Invalid course: ', course);
     handleError(null);
     return;
   }
 
   $.ajax({
-    url: window.apiURL + '/subscribe?plan=' + plans[target_plan],
+    url: window.apiURL + '/purchase?course=' + course,
     processData: false,
     contentType: false,
     type: 'GET',
@@ -637,10 +509,10 @@ function init() {
       handleError(xhr.responseJSON);
     },
     success: function (response) {
-      response = response.responseData;
-      showSignupForm(response, target_plan);
+      let initialDetails = response.responseData;
+      showPaymentForm(initialDetails, () => 'Adquirir curso', () => 'Comprar agora', (fd) => { fd.append("course", course) }, 'purchase', handleSuccess, handleError);
     }
   });
 }
 
-init(); 
+init();

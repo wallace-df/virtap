@@ -1,3 +1,5 @@
+
+
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -21,6 +23,15 @@ function getPlan() {
     return target_plan;
 }
 
+function getCourse() {
+    let course = getParameterByName('curso');
+    if (course) {
+        course = course.toLowerCase();
+    }
+    return course;
+}
+
+
 function getNext() {
     let next = getParameterByName('next');
     let url = window.dashboardURL;
@@ -39,14 +50,6 @@ function getNext() {
 function redirectToNext() {
     let url = getNext();
     setTimeout(() => document.location.href = url, 2000);
-}
-
-
-function isEmpty(str) {
-    if (!str || str.trim().length === 0) {
-        return true;
-    }
-    return false;
 }
 
 function validateName(name) {
@@ -215,6 +218,13 @@ function formatCPFCNPJ(cpf_cnpj) {
     }
 }
 
+function isEmpty(str) {
+    if (!str || str.trim().length === 0) {
+        return true;
+    }
+    return false;
+}
+
 
 function popupWindow(url, windowName, win, w, h) {
     const y = win.top.outerHeight / 2 + win.top.screenY - (h / 2);
@@ -281,6 +291,118 @@ async function downscaleImage(
     ctx.drawImage(image, 0, 0, newWidth, newHeight);
     const newDataUrl = canvas.toDataURL(imageType, quality);
     return newDataUrl;
+}
 
 
+let autocomplete;
+
+function initAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete(document.querySelector("#address"), {
+        componentRestrictions: { country: ["br"] },
+        fields: ["address_components", "geometry"],
+        types: ["address"],
+    });
+    // When the user selects an address from the drop-down, populate the
+    // address fields in the form.
+    autocomplete.addListener("place_changed", fillInAddress);
+};
+
+function populateMunicipios(uf) {
+    const municipioSelect = $("#city");
+    municipioSelect.empty();  // Limpa o select de municípios
+
+    let municipiosData = ufs;
+    // Verifica se existem municípios para a UF
+    if (municipiosData[uf]) {
+        // Adiciona os municípios no select
+        municipiosData[uf].municipios.forEach(function (municipio) {
+            municipioSelect.append(`<option value="${municipio.codigo_ibge}">${municipio.nome}</option>`);
+        });
+    }
+}
+
+function fillInAddress() {
+    // Get the place details from the autocomplete object.
+    const place = autocomplete.getPlace();
+    let address1 = "";
+    let postcode = "";
+
+
+    // Get each component of the address from the place details,
+    // and then fill-in the corresponding field on the form.
+    // place.address_components are google.maps.GeocoderAddressComponent objects
+    // which are documented at http://goo.gle/3l5i5Mr
+    let address_number = null;
+    let address = null;
+    let city = null;
+    let cep = null;
+    let neighborhood = null;
+    let uf = null;
+
+    for (const component of place.address_components) {
+        // @ts-ignore remove once typings fixed
+        const componentType = component.types[0];
+
+        switch (componentType) {
+            case "route": {
+                address = component.long_name;
+                break;
+            }
+
+            case "street_number": {
+                address_number = component.long_name;
+                break;
+            }
+
+            case "sublocality_level_1":
+                neighborhood = component.long_name;
+                break;
+
+            case "postal_code": {
+                cep = component.long_name;
+                break;
+            }
+
+            case "administrative_area_level_1": {
+                uf = component.short_name;
+                break;
+            }
+
+            case "administrative_area_level_2": {
+                city = component.long_name;
+                break;
+            }
+        }
+
+
+    }
+
+    $("#address_number").val(address_number).trigger('blur');
+    $("#address").val(address).trigger('blur');
+    $("#cep").val(cep).trigger('blur');
+    $("#neighborhood").val(neighborhood).trigger('blur');
+
+    $("#state").val("");
+    $("#city").val("");
+
+    if (uf) {
+        $("#state").val(uf).trigger('blur');
+        $("#state").trigger('change');
+
+        if (city) {
+            $("#city").val(String(ufs[uf].municipioCodes[city])).trigger('blur');
+        }
+    }
+}
+
+async function logout() {
+    try {
+        await fetch(window.apiURL + '/logout', {
+            method: "GET",
+            credentials: "include",
+        });
+    } catch (err) {
+        // Ignore.
+    }
+    location.reload();
 }

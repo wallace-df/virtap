@@ -23,3 +23,4 @@ Disallow: /verificar-conta
 
 Disallow: /quero-contratar/cadastrar
 Disallow: /quero-contratar/login
+
