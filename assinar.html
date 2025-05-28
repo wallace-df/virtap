@@ -198,25 +198,26 @@
                     <select class="form-control" name="uf" id="installments" value="">
                     </select>
                 </div>
-                <div class="mb-3 text-center">
-                    <p class="alert alert-warning mt-4 mb-4" id="under-review-profile"><strong>Cadastro em
-                            análise</strong><br />Seu
-                        cadastro <em data-email></em> ainda está sendo analisado.<br /> Por favor, aguarde a aprovação
-                        do
-                        seu cadastro e tente novamente.</p>
-                    </p>
-                    <p class="alert alert-danger mt-4 mb-4" id="inactive-profile"><strong>Cadastro
-                            desativado</strong><br />Seu
-                        cadastro <em data-email></em> foi desativado.<br /> Por favor, entre em contato com o suporte.
-                    </p>
-                    <p class="alert alert-danger mt-4 mb-4" id="generic-error"><strong>Erro ao efetuar
-                            assinatura</strong><br />Por favor, verifique
-                        seus dados de pagamento e tente novamente.</p>
-                    </p>
-                    <button class="btn" id="submit-btn"></button>
-                </div>
-
             </form>
+            <div class="mb-3 text-center">
+                <p class="alert alert-warning mt-4 mb-4" id="under-review-profile"><strong>Cadastro em
+                        análise</strong><br />Seu
+                    cadastro <em data-email></em> ainda está sendo analisado.<br /> Por favor, aguarde a aprovação
+                    do
+                    seu cadastro e tente novamente.</p>
+                </p>
+                <p class="alert alert-danger mt-4 mb-4" id="inactive-profile"><strong>Cadastro
+                        desativado</strong><br />Seu
+                    cadastro <em data-email></em> foi desativado.<br /> Por favor, entre em contato com o suporte.
+                </p>
+                <p class="alert alert-danger mt-4 mb-4" id="generic-error"><strong>Erro ao efetuar
+                        assinatura</strong><br />Por favor, verifique
+                    seus dados de pagamento e tente novamente.</p>
+                </p>
+                <button class="btn" id="submit-btn" style="display:none"></button>
+            </div>
+
+
         </div>
     </div>
 
@@ -225,6 +226,7 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaGDtiIgu7ZxJvRZzcYeSn25LRdUgzS7k&callback=initAutocomplete&libraries=places&v=weekly"
         defer></script>
     <script src="/js/vendor-common-v1.js"></script>
+    <script src="/js/utils-v1.js"></script>
     <script src="/js/subscribe-v1.js"></script>
 </body>
 
