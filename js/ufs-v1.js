@@ -1,3 +1,4 @@
+// ok
 let ufs = {
     "AC": {
         "nome": "Acre",
@@ -22425,3 +22426,4 @@ for (let uf in ufs) {
         ufs[uf].municipioCodes[municipio.nome] = municipio.codigo_ibge;
     });
 }
+

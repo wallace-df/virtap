@@ -1,3 +1,4 @@
+// ok
 let cidades =
   [
     "Acrelândia – AC",
@@ -5695,20 +5696,12 @@ $(document).ready(async function () {
   }
 });
 
-var input = document.querySelector("#txtPhone");
-let intl = window.intlTelInput(input, {
-  utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
-  autoInsertDialCode: true,
-  initialCountry: "BR",
-  separateDialCode: true
-});
-
-$("#txtPhone").on('blur', function () {
+$("#phone").on('blur', function () {
   intl.setNumber(intl.getNumber());
   if (intl.isValidNumber()) {
-    $("#txtPhone").closest(".item").removeClass("error");
+    $("#phone").closest(".item").removeClass("error");
   } else {
-    $("#txtPhone").closest(".item").addClass("error");
+    $("#phone").closest(".item").addClass("error");
   }
 });
 
@@ -5716,7 +5709,7 @@ $("#txtPhone").on('blur', function () {
 function signup() {
   let $filePicture = $("#canv1");
   let $txtName = $("#txtNome");
-  let $txtPhone = $("#txtPhone");
+  let $txtPhone = $("#phone");
   let $txtCity = $("#txtCity");
   let $txtTitle = $("#txtTitle");
   let $txtDescription = $("#txtDescription");

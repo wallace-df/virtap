@@ -1,3 +1,4 @@
+// ok
 function redirectToNext() {
   let url = getNext();
   $("#sign_up").hide();
@@ -107,7 +108,6 @@ function getFields() {
   }
 }
 
-let submitBtn = document.getElementById('submit-btn');
 $(submitBtn).on('click', async (event) => {
   // We don't want to let default form submission happen here,
   // which would refresh the page.
@@ -155,7 +155,6 @@ $(submitBtn).on('click', async (event) => {
     $("input,select").prop('disabled', false);
   }
 });
-
 
 let email = getParameterByName('email');
 if (email && email.trim().length > 0) {

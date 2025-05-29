@@ -1,3 +1,4 @@
+//ok
 function handleError(response) {
   console.log(response);
   let showGenericError = true;
@@ -73,7 +74,6 @@ function getFields() {
   }
 }
 
-let submitBtn = document.getElementById('submit-btn');
 $(submitBtn).on('click', async (event) => {
   // We don't want to let default form submission happen here,
   // which would refresh the page.

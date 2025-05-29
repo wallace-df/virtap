@@ -1,5 +1,4 @@
-
-
+// ok
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -22,6 +21,7 @@ function getPlan() {
     }
     return target_plan;
 }
+
 
 function getCourse() {
     let course = getParameterByName('curso');

@@ -1,4 +1,4 @@
-
+// ok
 let email;
 let r;
 let n;
@@ -130,7 +130,6 @@ function getFields() {
   }
 }
 
-let submitBtn = document.getElementById('submit-btn');
 $(submitBtn).on('click', async (event) => {
   // We don't want to let default form submission happen here,
   // which would refresh the page.
