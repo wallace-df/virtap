@@ -12,7 +12,9 @@ function handleError(response, loading) {
 
   if (response) {
     if (response.errorCode === 'ALREADY_PURCHASED') {
+      $("#sign_up").hide();
       $("#loading").html('<div><h1>Você já adquiriu este curso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+      $("#submit-btn").hide();
       $("#loading").show();
       showGenericError = false;
       redirectToNext();
