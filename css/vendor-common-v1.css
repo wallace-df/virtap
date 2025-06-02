@@ -255,3 +255,27 @@
 label {
     font-weight: bold !important;
 }
+
+.nav-tabs .nav-link {
+    padding: 20px;
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 18px;
+}
+
+.nav-tabs .nav-link.active{
+    color: var(--primary-color);
+
+}
+
+.text-primary {
+    color: #512d89 !important;
+}
+
+.tab-pane {
+    border:1px solid var(--bs-secondary-bg);
+    border-top: 0;
+    padding: 10px 20px;
+    border-radius: 0 0 5px 5px;
+
+}

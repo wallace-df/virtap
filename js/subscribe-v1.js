@@ -37,7 +37,7 @@ function handleError(response, loading) {
 
     } else if (response.errorCode === 'INVALID_ASSISTANT_STATUS') {
       if (response.errorData.status === 1) {
-        if(loading) {
+        if (loading) {
           $("#loading").hide();
         }
         $("#under-review-profile").show();
@@ -45,7 +45,7 @@ function handleError(response, loading) {
 
         showGenericError = false;
       } else if (response.errorData.status === 3) {
-        if(loading) {
+        if (loading) {
           $("#loading").hide();
         }
         $("#inactive-profile").show();
@@ -79,22 +79,40 @@ function init() {
     return;
   }
 
-  $.ajax({
-    url: window.apiURL + '/subscribe?plan=' + plans[target_plan],
-    processData: false,
-    contentType: false,
-    type: 'GET',
-    xhrFields: {
-      withCredentials: true
-    },
-    error: async function (xhr) {
-      handleError(xhr.responseJSON, true);
-    },
-    success: function (response) {
-      let initialDetails = response.responseData;
-      showPaymentForm(initialDetails, () => 'Virtap | Assinar Virtap Club', () => 'Assinar Virtap Club', (fd) => { fd.append("target_plan", plans[target_plan]) }, 'subscribe', handleSuccess, handleError);
-    }
-  });
+  function loadTemplate() {
+    $.ajax({
+      url: "/payment.html",
+      method: "GET",
+      success: function (data) {
+        $("#payment-container").html(data);
+        loadPaymentForm();
+      },
+      error: function (xhr, status, error) {
+        handleError(error, true);
+      }
+    });
+  }
+
+  function loadPaymentForm() {
+    $.ajax({
+      url: window.apiURL + '/subscribe?plan=' + plans[target_plan],
+      processData: false,
+      contentType: false,
+      type: 'GET',
+      xhrFields: {
+        withCredentials: true
+      },
+      error: async function (xhr) {
+        handleError(xhr.responseJSON, true);
+      },
+      success: function (response) {
+        let initialDetails = response.responseData;
+        showPaymentForm(initialDetails, () => 'Virtap | Assinar Virtap Club', () => 'Assinar Virtap Club', (fd) => { fd.append("target_plan", plans[target_plan]) }, 'subscribe', handleSuccess, handleError);
+      }
+    });
+  }
+
+  loadTemplate();
 }
 
 init();
