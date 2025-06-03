@@ -23484,6 +23484,31 @@ function fillInAddress() {
         }
     }
 }
+window.activePayments = {};
+
+function updatePaymentStatus(method) {
+    let paymentDetails = activePayments[method];
+    $("#boleto-headline").show();
+    $("#boleto-details").hide();
+
+    $("#pix-headline").show();
+    $("#pix-details").hide();
+
+    if (paymentDetails) {
+        $("#submit-btn").hide();
+        if (method === 'boleto') {
+            $("#boleto-headline").hide();
+            $("#boleto-details").show();
+            $('[data-slip-barcode-code]').text(paymentDetails.barcode);
+        } else if (method === 'pix') {
+            $("#pix-headline").hide();
+            $("#pix-details").show();
+            $('[data-pix-qr-code]').text(paymentDetails.qrcode);
+        }
+    } else {
+        $("#submit-btn").show();
+    }
+}
 
 function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepareFormDataFunc, purchaseEndpoint, successHandler, errorHandler) {
     let hasEmail = (initialDetails.email && initialDetails.email.trim().length > 0 ? true : false);
@@ -23573,11 +23598,14 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
         hasBillingDetails = true;
     }
 
-    // 'Virtap | Assistente Virtual | Comprar curso';
     document.title = getTitleFunc();
 
-    //'Comprar agora'
     $("#submit-btn").show().text(getButtonLabelFunc())
+    $('[data-bs-toggle="tab"]').on('show.bs.tab', function (e) {
+        let method = $(e.target).data('payment-method');
+        updatePaymentStatus(method);
+    });
+
     $("#loading").hide();
     $("#sign_up").show();
     setTimeout(() => $("#name").focus(), 300);
@@ -23900,6 +23928,8 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
             formData.append("payment_details", JSON.stringify(paymentDetails));
 
             prepareFormDataFunc(formData);
+            window.activePayments = {};
+            updatePaymentStatus();
 
             // Create the PaymentIntent
             const res = await fetch(`${window.apiURL}/${purchaseEndpoint}`, {
@@ -23921,10 +23951,49 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
                 } else {
                     if (paymentDetails.method === 'credit_card') {
                         throw new Error("Failure making payment using credit card.");
+                    }
+
+                    let invoice = data.responseData.invoice;
+                    if (!invoice) {
+                        throw new Error("Failure getting invoice details.");
+                    }
+                    let details = invoice.details;
+                    if (!details) {
+                        throw new Error("Failure getting invoice details.");
+                    }
+
+                    let paymentMethod = details.payment_method;
+                    if (paymentMethod === "boleto") {
+                        let slip = details.slip;
+                        if (!slip) {
+                            throw new Error("Failure getting slip details.");
+                        }
+
+                        let typeable_barcode = slip.typeable_barcode;
+                        if (!typeable_barcode) {
+                            throw new Error("Failure getting bar code.");
+                        }
+                        window.activePayments['boleto'] = {
+                            barcode: typeable_barcode
+                        };
+                        updatePaymentStatus('boleto');
+                    } else if (paymentMethod === "pix") {
+                        let pix = details.pix;
+                        if (!pix) {
+                            throw new Error("Failure getting pix details.");
+                        }
+
+                        let qrcode_original_path = pix.qrcode_original_path;
+                        if (!qrcode_original_path) {
+                            throw new Error("Failure getting QR code.");
+                        }
+                        window.activePayments['pix'] = {
+                            qrcode: qrcode_original_path
+                        };
+                        updatePaymentStatus('pix');
+
                     } else {
-                        $("#loading").text(JSON.stringify(data.responseData.subscription));
-                        $("#loading").show();
-                        $("#sign_up").hide();
+                        throw new Error("Unsupported payment method:" + paymentMethod);
                     }
                 }
 

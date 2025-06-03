@@ -129,8 +129,8 @@
                 aria-selected="true" data-payment-method="credit_card">Cartão de crédito</a>
             <a class="nav-link" data-bs-toggle="tab" href="#nav-pix" role="tab" aria-controls="nav-pix"
                 aria-selected="false" data-payment-method="pix">Pix</a>
-            <!-- <a class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" href="#nav-boleto" role="tab"
-                aria-controls="nav-contact" aria-selected="false" data-payment-method="boleto">Boleto</a> -->
+            <a class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" href="#nav-boleto" role="tab"
+                aria-controls="nav-contact" aria-selected="false" data-payment-method="boleto">Boleto</a>
         </div>
     </nav>
     <div class="tab-content mb-3" id="nav-tabContent">
@@ -164,12 +164,19 @@
                 <p>Clique em "Assinar Virtap Club" para gerar o QR Code.</p>
             </div>
             <div id="pix-details" style="display: none">
-                Pague o qr code abaixo.....
+                <p><strong>Para pagar, escaneie o QR Code abaixo:</strong></p>
+                <p data-pix-qr-code></p>
             </div>
         </div>
         <div class="tab-pane fade" id="nav-boleto" role="tabpanel" aria-labelledby="nav-contact-tab">
-            <p class="fw-bold">Valor: <span data-price></span></p>
-            <p>Clique em "Assinar Virtap Club" para gerar o boleto.</p>
+            <div id="boleto-headline">
+                <p class="fw-bold">Valor: <span data-price></span></p>
+                <p>Clique em "Assinar Virtap Club" para gerar o boleto.</p>
+            </div>
+            <div id="boleto-details" style="display: none">
+                <p><strong>Para pagar, escaneie ou digite o código de barras abaixo:</strong></p>
+                <p data-slip-barcode-code></p>
+            </div>
         </div>
     </div>
 </form>

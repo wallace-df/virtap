@@ -1,3 +1,5 @@
+let target_plan;
+
 function handleSuccess() {
   if (target_plan === 'BASIC') {
     $("#loading").html('<div><h1>Assinatura do plano Basic realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
@@ -71,7 +73,7 @@ function handleError(response, loading) {
 }
 
 function init() {
-  let target_plan = getPlan();
+  target_plan = getPlan();
 
   if (target_plan !== 'VIRTAPCLUB') {
     console.log('Invalid plan: ', target_plan);
