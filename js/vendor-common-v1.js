@@ -23946,6 +23946,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
             const data = await res.json();
             if (data.responseData) {
                 if (data.responseData.charged) {
+                    $("#submit-btn").hide();
                     successHandler();
                     redirectToNext();
                 } else {
