@@ -1,3 +1,4 @@
+let course;
 function handleSuccess() {
   $("#loading").html('<div><h1>Compra realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
   $("#loading").show();
@@ -21,7 +22,7 @@ function handleError(response, loading) {
 
     } else if (response.errorCode === 'INVALID_ASSISTANT_STATUS') {
       if (response.errorData.status === 1) {
-        if(loading) {
+        if (loading) {
           $("#loading").hide();
         }
         $("#under-review-profile").show();
@@ -29,7 +30,7 @@ function handleError(response, loading) {
 
         showGenericError = false;
       } else if (response.errorData.status === 3) {
-        if(loading) {
+        if (loading) {
           $("#loading").hide();
         }
         $("#inactive-profile").show();
@@ -65,22 +66,40 @@ function init() {
     return;
   }
 
-  $.ajax({
-    url: window.apiURL + '/purchase?course=' + course,
-    processData: false,
-    contentType: false,
-    type: 'GET',
-    xhrFields: {
-      withCredentials: true
-    },
-    error: async function (xhr) {
-      handleError(xhr.responseJSON, true);
-    },
-    success: function (response) {
-      let initialDetails = response.responseData;
-      showPaymentForm(initialDetails, () => `Virtap | ${courseName} | Comprar`, () => 'Comprar agora', (fd) => { fd.append("course", course) }, 'purchase', handleSuccess, handleError);
-    }
-  });
+  function loadTemplate() {
+    $.ajax({
+      url: "/payment.html",
+      method: "GET",
+      success: function (data) {
+        $("#payment-container").html(data);
+        loadPaymentForm();
+      },
+      error: function (xhr, status, error) {
+        handleError(error, true);
+      }
+    });
+  }
+
+  function loadPaymentForm() {
+    $.ajax({
+      url: window.apiURL + '/purchase?course=' + course,
+      processData: false,
+      contentType: false,
+      type: 'GET',
+      xhrFields: {
+        withCredentials: true
+      },
+      error: async function (xhr) {
+        handleError(xhr.responseJSON, true);
+      },
+      success: function (response) {
+        let initialDetails = response.responseData;
+        showPaymentForm(initialDetails, () => `Virtap | ${courseName} | Comprar`, () => 'Comprar agora', (fd) => { fd.append("course", course) }, 'purchase', handleSuccess, handleError);
+      }
+    });
+  }
+
+  loadTemplate();
 }
 
 init();
