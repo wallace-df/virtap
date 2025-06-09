@@ -257,6 +257,14 @@
         .input-error:hover {
             border: 2px solid red !important;
         }
+
+        #whatsapp {
+            width: 100%;
+        }
+
+        .iti--allow-dropdown {
+            margin-bottom: 16px;
+        }
     </style>
 </head>
 
@@ -281,7 +289,7 @@
                 <input type="text" name="email" placeholder="Seu e-mail" />
                 <div class="error-message" id="erro-email"></div>
 
-                <input type="tel" name="whatsapp" id="whatsapp" placeholder="WhatsApp" />
+                <input type="tel" name="whatsapp" id="whatsapp" placeholder="(99) 99999-9999" />
                 <div class="error-message" id="erro-whatsapp"></div>
 
                 <button type="submit">Entrar na lista de espera</button>
@@ -365,8 +373,8 @@
             }
 
             // Validação WhatsApp
-            if (whatsapp.length < 8 || !/^\d+$/.test(whatsapp)) {
-                document.getElementById('erro-whatsapp').textContent = 'Digite um número de WhatsApp válido com pelo menos 8 dígitos.';
+            if (!intl.isValidNumber()) {
+                document.getElementById('erro-whatsapp').textContent = 'Digite um número de WhatsApp.';
                 form.whatsapp.classList.add('input-error');
 
                 hasError = true;
@@ -385,7 +393,7 @@
             const url = 'https://script.google.com/macros/s/AKfycbz3o5ZhQYnyi6CLmXZDMggC3o0sYhLZaAe_x2v5OOI84DguWK1lTxmEnns3sWmshdPi/exec';
 
 
-            const body = `nome=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&whatsapp=${encodeURIComponent(whatsapp)}`;
+            const body = `nome=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&whatsapp=${encodeURIComponent(intl.getNumber())}`;
 
             try {
                 const response = await fetch(url, {
