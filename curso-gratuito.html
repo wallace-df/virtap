@@ -2,14 +2,9 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lista de Espera – Virtap</title>
-    <meta name="description"
-        content="Cadastre-se na lista de espera da Virtap e seja o primeiro a descobrir a nova era da assistência virtual." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <title>Curso Gratuito Virtap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./css/intlTelInput.min.css" rel="stylesheet" />
 
     <style>
@@ -18,150 +13,142 @@
         }
 
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: #fff;
+            background-color: #e9faff;
+            padding: 0;
         }
 
         .container {
             display: flex;
-            min-height: 100vh;
-            flex-direction: row;
-        }
-
-        .left {
-            background-color: #000;
-            color: #fff;
-            flex: 1;
-            padding: 40px;
-            display: flex;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            padding: 40px 20px;
+            gap: 40px;
         }
 
-        .lock-icon {
-            position: absolute;
-            top: 175px;
-            left: calc(50% - 12px);
-            transform: translate(-50%, -50%);
-            width: 240px;
-            height: 240px;
-            z-index: 0;
-            opacity: 0.10;
-            filter: blur(1.5px);
-            pointer-events: none;
-            fill: white;
+        .video-box {
+            max-width: 750px;
+            flex: 1;
         }
 
-        .lock-icon svg {
+
+        .video-box img {
             width: 100%;
-            height: 100%;
+            border-radius: 15px;
+            border: 8px solid #592baf;
         }
 
-        .left .content {
-            max-width: 450px;
-            z-index: 2;
+        .text-block {
+            margin-top: 10px;
         }
 
-        .logo {
-            mix-blend-mode: screen;
-            /* ou try: difference, luminosity */
-            z-index: 2;
-            position: relative;
-
-        }
-
-        .left .content img.logo {
-            width: 200px;
-            margin-bottom: 18px;
-            z-index: 999;
-        }
-
-        .left h1 {
-            font-size: 42px;
-            margin-bottom: 12px;
-        }
-
-        .left p {
+        .text-block h1 {
             font-size: 32px;
-            color: #ccc;
+            font-weight: bold;
+            margin: 10px 0;
         }
 
+        .text-block p {
+            font-size: 24px;
+            color: #333;
+            margin: 10px 0;
+        }
 
-
-        .right {
+        .form-box {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 480px;
+            width: 100%;
             flex: 1;
-            padding: 60px 40px;
-            background-color: #f9f9f9;
+        }
+
+        .form-box .logo {
             display: flex;
             align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
             justify-content: center;
         }
 
-        form {
-            width: 100%;
-            max-width: 400px;
-            display: flex;
-            flex-direction: column;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        .form-box .logo img {
+            width: 140px;
         }
 
-        form h2 {
+        .form-box h2 {
+            font-size: 28px;
             margin-bottom: 20px;
-            font-size: 24px;
             color: #222;
         }
 
-        input {
+        .form-box form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-box input {
             padding: 12px;
-            margin-bottom: 16px;
-            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            border: 2px solid #ccc;
             border-radius: 8px;
             font-size: 16px;
         }
 
-        button {
+        .form-box button {
             padding: 14px;
-            background-color: #532E88;
+            background-color: #592baf;
             color: white;
             font-size: 16px;
+            font-weight: bold;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s ease;
         }
 
-        button:hover {
+        .form-box button:hover {
             background-color: #703FB9;
         }
+
+        .form-box small {
+            display: block;
+            margin-top: 12px;
+            font-size: 12px;
+            color: #444;
+            text-align: left;
+        }
+
+        .form-box small a {
+            color: #592baf;
+            text-decoration: none;
+        }
+
+        .form-box small a:hover {
+            color: #703FB9;
+            text-decoration: underline;
+        }
+
 
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
+                align-items: center;
+                padding: 30px 15px;
             }
 
-            .left,
-            .right {
-                flex: none;
-                width: 100%;
-                min-height: auto;
+            .video-box,
+            .form-box {
+                max-width: 100%;
             }
 
-            form {
-                box-shadow: none;
-                padding: 20px;
-            }
-
-            .left .content img.logo {
-                width: 200px;
+            .text-block {
+                text-align: center;
             }
         }
+
+
 
         .modal {
             display: none;
@@ -249,13 +236,13 @@
             animation: shake 0.4s;
         }
 
-
         button:disabled,
         button:disabled:hover {
             background-color: #ccc;
             cursor: not-allowed;
             color: #666;
         }
+
 
         .error-message {
             color: #F64B2F;
@@ -288,42 +275,39 @@
 
 <body>
 
-    <main class="container">
-        <section class="left">
-            <div class="lock-icon">
-                <!-- Cadeado SVG -->
-                <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
-                    <path fill="white" d="M400 192h-24V128C376 57.3 318.7 0 248 0S120 57.3 120 128v64H96c-35.3 0-64 28.7-64 64v192c0 
-      35.3 28.7 64 64 64h304c35.3 0 64-28.7 64-64V256c0-35.3-28.7-64-64-64zM168 
-      128c0-44.2 35.8-80 80-80s80 35.8 80 80v64H168v-64zm80 240c-17.7 
-      0-32-14.3-32-32 0-12.2 6.9-22.7 17-28.2V288c0-8.8 
-      7.2-16 16-16s16 7.2 16 16v19.8c10.1 5.5 17 16 17 28.2 0 
-      17.7-14.3 32-32 32z" />
-                </svg>
+    <div class="container">
+        <div class="video-box">
+            <img src="./img/curso-gratuito.jpeg" alt="Curso gratuito Virtap">
+            <div class="text-block">
+                <h1>Curso gratuito + Certificado</h1>
+                <p>Conteúdo direto ao ponto para você dar os primeiros passos na nova profissão do futuro.</p>
             </div>
-            <div class="content">
-                <img src="https://www.virtap.com.br/img/logo.png" alt="Logo Virtap" class="logo" />
-                <h1>A nova era da Assistência virtual está chegando</h1>
-                <p>Cadastre-se na lista de espera e saia na frente.</p>
-            </div>
-        </section>
+        </div>
 
-        <section class="right">
-            <form id="lead-form" method="post">
-                <h2>Cadastre-se agora e seja o primeiro a saber</h2>
-                <input type="text" name="nome" placeholder="Seu nome" />
+        <div class="form-box" id="signup-form">
+            <div class="logo">
+                <img src="https://www.virtap.com.br/img/logo.png" alt="Virtap logo">
+            </div>
+            <h2>Cadastre-se gratuitamente para começar o curso agora mesmo!</h2>
+            <form>
+                <input type="text" placeholder="Nome" id="nome">
                 <div class="error-message" id="erro-nome"></div>
 
-                <input type="text" name="email" placeholder="Seu e-mail" />
+                <input type="text" placeholder="E-mail" id="email">
                 <div class="error-message" id="erro-email"></div>
 
-                <input type="tel" name="whatsapp" id="whatsapp" placeholder="(99) 99999-9999" />
+                <input type="text" placeholder="(99) 99999-9999" id="whatsapp">
                 <div class="error-message" id="erro-whatsapp"></div>
 
-                <button type="submit">Entrar na lista de espera</button>
+                <button type="submit">Inscreva-se</button>
             </form>
-        </section>
-    </main>
+            <small>
+                Ao criar uma conta você concorda com os
+                <a href="/termos.html" target="_blank">nossos termos de uso</a> e com a
+                <a href="/privacidade.html" target="_blank">política de privacidade</a>.
+            </small>
+        </div>
+    </div>
 
     <div id="error-modal" class="modal">
         <div class="modal-content">
@@ -364,7 +348,7 @@
             }
         });
 
-        document.getElementById('lead-form').addEventListener('submit', async function (e) {
+        document.getElementById('signup-form').addEventListener('submit', async function (e) {
             e.preventDefault();
 
             const form = e.target;
@@ -374,10 +358,9 @@
             document.getElementById('erro-email').textContent = '';
             document.getElementById('erro-whatsapp').textContent = '';
 
-            form.nome.classList.remove('input-error');
-            form.email.classList.remove('input-error');
-            form.whatsapp.classList.remove('input-error');
-
+            document.getElementById('nome').classList.remove('input-error');
+            document.getElementById('email').classList.remove('input-error');
+            document.getElementById('whatsapp').classList.remove('input-error');
 
             const nome = form.nome.value.trim();
             const email = form.email.value.trim();
@@ -418,26 +401,33 @@
             // Desativa todos os campos e muda o texto do botão
             inputs.forEach(el => el.disabled = true);
             button.textContent = "Enviando...";
-            const url = 'https://script.google.com/macros/s/AKfycbz3o5ZhQYnyi6CLmXZDMggC3o0sYhLZaAe_x2v5OOI84DguWK1lTxmEnns3sWmshdPi/exec';
+            const url = 'http://localhost:3000/signup-intro-av';
 
 
-            const body = `nome=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&whatsapp=${encodeURIComponent(intl.getNumber())}`;
+            const body = {
+                nome: nome,
+                email: email,
+                whatsapp: intl.getNumber()
+            };
 
             try {
                 const response = await fetch(url, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Content-Type': 'application/json',
                     },
-                    body: body
+                    body: JSON.stringify(body)
                 });
 
-                const text = await response.text();
-                if (text.trim() === "OK") {
-                    window.location.href = "/obrigado.html";
+                if (response.status === 200) {
+                    window.location.href = "/cadastro-feito.html";
                 } else {
-                    throw text;
-                    showModal();
+                    let data = await response.json();
+                    if (data.errorCode === 'ALREADY_REGISTERED') {
+                        window.location.href = "/cadastro-ja-feito.html";
+                    } else {
+                        throw data;
+                    }
                 }
             } catch (err) {
                 inputs.forEach(el => el.disabled = false);
