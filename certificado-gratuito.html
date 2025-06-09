@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Curso Gratuito Virtap</title>
+    <title>Certificado Gratuito - Virtap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./css/intlTelInput.min.css" rel="stylesheet" />
+    <link href="img/favicon.svg" type="image/svg" rel="icon">
 
     <style>
         * {
@@ -145,6 +146,18 @@
 
             .text-block {
                 text-align: center;
+            }
+
+            .text-block h1 {
+                font-size: 24px;
+            }
+
+            .text-block p {
+                font-size: 18px;
+            }
+
+            .form-box h2 {
+                font-size: 24px;
             }
         }
 
@@ -420,7 +433,7 @@
                 } else {
                     let data = await response.json();
                     if (data.errorCode === 'ALREADY_REGISTERED') {
-                        window.location.href = "/cadastro-ja-feito.html";
+                        window.location.href = "/cadastro-ja-realizado.html";
                     } else {
                         throw data;
                     }

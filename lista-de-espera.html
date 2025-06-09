@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lista de Espera – Virtap</title>
+    <title>Lista de Espera – Virtap 2.0</title>
     <meta name="description"
         content="Cadastre-se na lista de espera da Virtap e seja o primeiro a descobrir a nova era da assistência virtual." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
     <link href="./css/intlTelInput.min.css" rel="stylesheet" />
+    <link href="img/favicon.svg" type="image/svg" rel="icon">
 
     <style>
         * {
@@ -303,7 +304,7 @@
             </div>
             <div class="content">
                 <img src="https://www.virtap.com.br/img/logo.png" alt="Logo Virtap" class="logo" />
-                <h1>A nova era da Assistência virtual está chegando</h1>
+                <h1>A nova era da Assistência Virtual está chegando...</h1>
                 <p>Cadastre-se na lista de espera e saia na frente.</p>
             </div>
         </section>
@@ -434,10 +435,9 @@
 
                 const text = await response.text();
                 if (text.trim() === "OK") {
-                    window.location.href = "/obrigado.html";
+                    window.location.href = "/espera-confirmada.html";
                 } else {
                     throw text;
-                    showModal();
                 }
             } catch (err) {
                 inputs.forEach(el => el.disabled = false);
