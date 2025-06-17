@@ -63,7 +63,7 @@ $(document).ready(function () {
   $(".iti--allow-dropdown").css('width', '100%');
 });
 
-
+ 
 function signup() {
   let $txtName = $("#txtNome");
   let $txtWhatsapp = $("#txtWhatsapp");
