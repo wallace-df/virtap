@@ -23402,14 +23402,6 @@ let input;
 let intl;
 
 function initAutocomplete() {
-    autocomplete = new google.maps.places.Autocomplete(document.querySelector("#address"), {
-        componentRestrictions: { country: ["br"] },
-        fields: ["address_components", "geometry"],
-        types: ["address"],
-    });
-    // When the user selects an address from the drop-down, populate the
-    // address fields in the form.
-    autocomplete.addListener("place_changed", fillInAddress);
 };
 
 function populateMunicipios(uf) {
@@ -23540,6 +23532,16 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
         initialCountry: "BR",
         separateDialCode: true
     });
+
+    autocomplete = new google.maps.places.Autocomplete(document.querySelector("#address"), {
+        componentRestrictions: { country: ["br"] },
+        fields: ["address_components", "geometry"],
+        types: ["address"],
+    });
+    // When the user selects an address from the drop-down, populate the
+    // address fields in the form.
+    autocomplete.addListener("place_changed", fillInAddress);
+
 
     let $cardContainer = $('[data-card-container');
     $cardContainer.CardJs();

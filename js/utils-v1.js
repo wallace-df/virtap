@@ -307,23 +307,11 @@ let hasBillingDetails = false;
 let loggedInUser = null;
 let submitBtn = document.getElementById('submit-btn');
 let autocomplete = null;
-let input = document.querySelector("#phone");
-let intl = window.intlTelInput(input, {
-    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
-    autoInsertDialCode: true,
-    initialCountry: "BR",
-    separateDialCode: true
-});
+let input;
+let intl;
 
 function initAutocomplete() {
-    autocomplete = new google.maps.places.Autocomplete(document.querySelector("#address"), {
-        componentRestrictions: { country: ["br"] },
-        fields: ["address_components", "geometry"],
-        types: ["address"],
-    });
-    // When the user selects an address from the drop-down, populate the
-    // address fields in the form.
-    autocomplete.addListener("place_changed", fillInAddress);
+
 };
 
 function populateMunicipios(uf) {
@@ -413,10 +401,57 @@ function fillInAddress() {
         }
     }
 }
+window.activePayments = {};
+
+function updatePaymentStatus(method) {
+    let paymentDetails = activePayments[method];
+    $("#boleto-headline").show();
+    $("#boleto-details").hide();
+
+    $("#pix-headline").show();
+    $("#pix-details").hide();
+
+    if (paymentDetails) {
+        $("#submit-btn").hide();
+        if (method === 'boleto') {
+            $("#boleto-headline").hide();
+            $("#boleto-details").show();
+            $('#slip-barcode').html("");
+            let boleto = new Boleto(paymentDetails.barcode);
+            boleto.toSVG('#slip-barcode');
+            $('#slip-number').text(boleto.prettyNumber());
+        } else if (method === 'pix') {
+            $("#pix-headline").hide();
+            $("#pix-details").show();
+
+            let qrcode = new QRCode({ content: paymentDetails.qrcode, join: true });
+            document.getElementById("pix-qrcode").innerHTML = qrcode.svg();
+        }
+    } else {
+        $("#submit-btn").show();
+    }
+}
 
 function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepareFormDataFunc, purchaseEndpoint, successHandler, errorHandler) {
     let hasEmail = (initialDetails.email && initialDetails.email.trim().length > 0 ? true : false);
+    submitBtn = document.getElementById('submit-btn');
+    input = document.querySelector("#phone");
 
+    intl = window.intlTelInput(input, {
+        autoInsertDialCode: true,
+        initialCountry: "BR",
+        separateDialCode: true
+    });
+
+    autocomplete = new google.maps.places.Autocomplete(document.querySelector("#address"), {
+        componentRestrictions: { country: ["br"] },
+        fields: ["address_components", "geometry"],
+        types: ["address"],
+    });
+    // When the user selects an address from the drop-down, populate the
+    // address fields in the form.
+    autocomplete.addListener("place_changed", fillInAddress);
+    
     let $cardContainer = $('[data-card-container');
     $cardContainer.CardJs();
 
@@ -470,6 +505,9 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
         $installments.append(`<option value="${config.installments}_${config.amount}">${config.installments}x de R$ ${(config.amount / 100).toFixed(2).replace('.', ',')}</option>`);
     });
 
+    let price = (initialDetails.payment_config.installments[0].amount / 100).toFixed(2).replace('.', ',');
+    $("#sign_up").find('[data-price]').text(`R$ ${price}`);
+    $("#sign_up").find('[data-payment-method]').attr('data-price', initialDetails.payment_config.installments[0].amount);
     $("#name").val(initialDetails.name);
     $("#cpf_cnpj").val(initialDetails.cpf_cnpj);
     $("#email").val(initialDetails.email);
@@ -495,6 +533,10 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
     //'Comprar agora'
     $("#submit-btn").show().text(getButtonLabelFunc())
+    $('[data-bs-toggle="tab"]').on('show.bs.tab', function (e) {
+        let method = $(e.target).data('payment-method');
+        updatePaymentStatus(method);
+    });
     $("#loading").hide();
     $("#sign_up").show();
     setTimeout(() => $("#name").focus(), 300);
@@ -503,10 +545,12 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
     let getFields = function () {
 
         $("[data-field]").removeClass("error");
+        let method = $("#sign_up").find('[data-payment-method].active');
         let billingDetails = null;
         let paymentDetails = {
             gateway: 'vindi',
-            method: 'credit_card',
+            method: method.data('payment-method'),
+            price: method.data('price'),
             details: {
             }
         };
@@ -527,6 +571,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
             });
         }
 
+        if (paymentDetails.method === 'credit_card') {
         $("[data-card]").each(function () {
             let $field = $(this);
             let val = $field.data('get-field')();
@@ -536,6 +581,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
                 paymentDetails.details[$field.attr('data-field')] = val;
             }
         });
+        }
 
         if (hasError) {
             return null;
@@ -792,8 +838,9 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
         // Disable form submission while loading
         $("#submit-btn").prop('disabled', true).text('Por favor, aguarde...');
         $("input,select").prop('disabled', true);
+        $(".nav-link").addClass("disabled");
 
-        // Create the subscription
+        // Create the subscription.
         try {
 
             let fields = getFields();
@@ -813,6 +860,8 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
             formData.append("payment_details", JSON.stringify(paymentDetails));
 
             prepareFormDataFunc(formData);
+            window.activePayments = {};
+            updatePaymentStatus();
 
             // Create the PaymentIntent
             const res = await fetch(`${window.apiURL}/${purchaseEndpoint}`, {
@@ -829,15 +878,54 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
             const data = await res.json();
             if (data.responseData) {
                 if (data.responseData.charged) {
+                    $("#submit-btn").hide();
                     successHandler();
                     redirectToNext();
                 } else {
                     if (paymentDetails.method === 'credit_card') {
                         throw new Error("Failure making payment using credit card.");
+                    }
+
+                    let invoice = data.responseData.invoice;
+                    if (!invoice) {
+                        throw new Error("Failure getting invoice details.");
+                    }
+                    let details = invoice.details;
+                    if (!details) {
+                        throw new Error("Failure getting invoice details.");
+                    }
+
+                    let paymentMethod = details.payment_method;
+                    if (paymentMethod === "boleto") {
+                        let slip = details.slip;
+                        if (!slip) {
+                            throw new Error("Failure getting slip details.");
+                        }
+
+                        let typeable_barcode = slip.typeable_barcode;
+                        if (!typeable_barcode) {
+                            throw new Error("Failure getting bar code.");
+                        }
+                        window.activePayments['boleto'] = {
+                            barcode: typeable_barcode
+                        };
+                        updatePaymentStatus('boleto');
+                    } else if (paymentMethod === "pix") {
+                        let pix = details.pix;
+                        if (!pix) {
+                            throw new Error("Failure getting pix details.");
+                        }
+
+                        let qrcode_original_path = pix.qrcode_original_path;
+                        if (!qrcode_original_path) {
+                            throw new Error("Failure getting QR code.");
+                        }
+                        window.activePayments['pix'] = {
+                            qrcode: qrcode_original_path
+                        };
+                        updatePaymentStatus('pix');
                     } else {
-                        $("#loading").text(JSON.stringify(data.responseData.subscription));
-                        $("#loading").show();
-                        $("#sign_up").hide();
+                        throw new Error("Unsupported payment method:" + paymentMethod);
                     }
                 }
 
@@ -854,6 +942,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
         finally {
             $("#submit-btn").prop('disabled', false).text(getButtonLabelFunc());
             $("input,select").prop('disabled', false);
+            $(".nav-link").removeClass("disabled");
             if (loggedInUser) {
                 $("#email").prop('disabled', true);
             }
