@@ -309,8 +309,27 @@ let submitBtn = document.getElementById('submit-btn');
 let autocomplete = null;
 let input;
 let intl;
+let initAutocompleteAfterPaymentForm = false;
 
 function initAutocomplete() {
+    let addressField = document.querySelector("#address");
+
+    if (!addressField) {
+        console.log("Loading auto complete after payment form...");
+        initAutocompleteAfterPaymentForm = true;
+    } else {
+        console.log("Loading auto complete!");
+        autocomplete = new google.maps.places.Autocomplete(addressField, {
+            componentRestrictions: { country: ["br"] },
+            fields: ["address_components", "geometry"],
+            types: ["address"],
+        });
+        // When the user selects an address from the drop-down, populate the
+        // address fields in the form.
+        autocomplete.addListener("place_changed", fillInAddress);
+
+    }
+
 
 };
 
@@ -443,15 +462,11 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
         separateDialCode: true
     });
 
-    autocomplete = new google.maps.places.Autocomplete(document.querySelector("#address"), {
-        componentRestrictions: { country: ["br"] },
-        fields: ["address_components", "geometry"],
-        types: ["address"],
-    });
-    // When the user selects an address from the drop-down, populate the
-    // address fields in the form.
-    autocomplete.addListener("place_changed", fillInAddress);
-    
+    if (initAutocompleteAfterPaymentForm) {
+        initAutocomplete();
+    }
+
+
     let $cardContainer = $('[data-card-container');
     $cardContainer.CardJs();
 
@@ -572,15 +587,15 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
         }
 
         if (paymentDetails.method === 'credit_card') {
-        $("[data-card]").each(function () {
-            let $field = $(this);
-            let val = $field.data('get-field')();
-            if (val === undefined && !$field.is('[data-optional]')) {
-                hasError = true;
-            } else {
-                paymentDetails.details[$field.attr('data-field')] = val;
-            }
-        });
+            $("[data-card]").each(function () {
+                let $field = $(this);
+                let val = $field.data('get-field')();
+                if (val === undefined && !$field.is('[data-optional]')) {
+                    hasError = true;
+                } else {
+                    paymentDetails.details[$field.attr('data-field')] = val;
+                }
+            });
         }
 
         if (hasError) {
@@ -872,7 +887,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
             if (res.status !== 200) {
                 console.log(res);
-                throw await res.json(); 
+                throw await res.json();
             }
 
             const data = await res.json();
