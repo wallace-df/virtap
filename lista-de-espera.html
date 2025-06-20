@@ -411,7 +411,6 @@
 
             if (hasError) return; // Interrompe se houver erros
 
-
             const inputs = form.querySelectorAll('input, button');
             const button = form.querySelector('button');
             const originalButtonText = button.textContent;
@@ -419,25 +418,28 @@
             // Desativa todos os campos e muda o texto do botão
             inputs.forEach(el => el.disabled = true);
             button.textContent = "Enviando...";
-            const url = 'https://script.google.com/macros/s/AKfycbz3o5ZhQYnyi6CLmXZDMggC3o0sYhLZaAe_x2v5OOI84DguWK1lTxmEnns3sWmshdPi/exec';
+            const url = 'https://apinew.virtap.com.br/signup-waiting-list';
 
-
-            const body = `nome=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&whatsapp=${encodeURIComponent(intl.getNumber())}`;
+            const body = {
+                nome: nome,
+                email: email,
+                whatsapp: intl.getNumber()
+            };
 
             try {
                 const response = await fetch(url, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Content-Type': 'application/json',
                     },
-                    body: body
+                    body: JSON.stringify(body)
                 });
 
-                const text = await response.text();
-                if (text.trim() === "OK") {
+
+                if (response.status === 200) {
                     window.location.href = "/espera-confirmada.html";
                 } else {
-                    throw text;
+                    throw response;
                 }
             } catch (err) {
                 inputs.forEach(el => el.disabled = false);
