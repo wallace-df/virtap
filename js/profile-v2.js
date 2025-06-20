@@ -5665,6 +5665,11 @@ function upload() {
     $("#canv1").data('blob', null);
   }
 }
+intl = window.intlTelInput(document.getElementById('phone'), {
+  autoInsertDialCode: true,
+  initialCountry: "BR",
+  separateDialCode: true
+});
 
 $(document).ready(async function () {
 

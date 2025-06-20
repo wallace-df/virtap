@@ -63,7 +63,7 @@ $(document).ready(function () {
   $(".iti--allow-dropdown").css('width', '100%');
 });
 
-
+ 
 function signup() {
   let $txtName = $("#txtNome");
   let $txtWhatsapp = $("#txtWhatsapp");
@@ -152,8 +152,7 @@ function signup() {
       }
     });
 
-    window.lintrk('track', { conversion_id: 14639236 });
-    window.fbq('track', 'CompleteRegistration');
+    // window.fbq('track', 'CompleteRegistration');
 
   }
 

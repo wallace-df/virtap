@@ -131,6 +131,14 @@
             text-decoration: underline;
         }
 
+        input[type="text"]:hover,
+        input[type="text"]:active,
+        input[type="text"]:focus,
+        input[type="text"]:visited,
+        input[type="text"]:focus-visible {
+            border-color: #592baf;
+            outline-color: #592baf;
+        }
 
         @media (max-width: 768px) {
             .container {
@@ -410,7 +418,7 @@
             // Desativa todos os campos e muda o texto do botão
             inputs.forEach(el => el.disabled = true);
             button.textContent = "Enviando...";
-            const url = 'http://localhost:3000/signup-certificate-intro-av';
+            const url = 'https://apinew.virtap.com.br/signup-certificate-intro-av';
 
 
             const body = {
@@ -433,7 +441,7 @@
                 } else {
                     let data = await response.json();
                     if (data.errorCode === 'ALREADY_REGISTERED') {
-                        window.location.href = "/cadastro-ja-realizado.html";
+                        window.location.href = "/certificado-ja-registrado.html";
                     } else {
                         throw data;
                     }
