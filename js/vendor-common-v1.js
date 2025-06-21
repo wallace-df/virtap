@@ -23562,7 +23562,7 @@ function updatePaymentStatus(method) {
                             clearInterval(window.detectPaymentInterval);
                             window.detectPaymentInterval = null;
                             $("#submit-btn").hide();
-                            successHandler();
+                            window.successHandler();
                             redirectToNext();
                         }
 
@@ -23581,6 +23581,8 @@ function updatePaymentStatus(method) {
 function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepareFormDataFunc, purchaseEndpoint, successHandler, errorHandler) {
     window.productType = initialDetails.productType;
     window.productId = initialDetails.productId;
+    window.successHandler = successHandler;
+
     let hasEmail = (initialDetails.email && initialDetails.email.trim().length > 0 ? true : false);
     submitBtn = document.getElementById('submit-btn');
     input = document.querySelector("#phone");
