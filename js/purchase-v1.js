@@ -94,6 +94,8 @@ function init() {
       },
       success: function (response) {
         let initialDetails = response.responseData;
+        initialDetails.productType = 'course';
+        initialDetails.productId = course;
         showPaymentForm(initialDetails, () => `Virtap | ${courseName} | Comprar`, () => 'Comprar agora', (fd) => { fd.append("course", course) }, 'purchase', handleSuccess, handleError);
       }
     });

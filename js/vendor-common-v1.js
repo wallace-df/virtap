@@ -23510,6 +23510,8 @@ function fillInAddress() {
     }
 }
 window.activePayments = {};
+window.detectPaymentInterval = null;
+window.paymentDetected = false;
 
 function updatePaymentStatus(method) {
     let paymentDetails = activePayments[method];
@@ -23534,6 +23536,42 @@ function updatePaymentStatus(method) {
 
             let qrcode = new QRCode({ content: paymentDetails.qrcode, join: true });
             document.getElementById("pix-qrcode").innerHTML = qrcode.svg();
+            if (window.detectPaymentInterval === null && !window.paymentDetected) {
+                window.detectPaymentInterval = setInterval(async function () {
+                    if (window.detectPaymentInterval === null) {
+                        return;
+                    }
+
+                    try {
+
+                        let res = await fetch(`${window.apiURL}/check-payment`, {
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                email: $("#email").val(),
+                                productType: window.productType,
+                                productId: window.productId
+                            })
+                        });
+
+                        let data = await res.json();
+                        if (data.responseData === true) {
+                            window.paymentDetected = true;
+                            clearInterval(window.detectPaymentInterval);
+                            window.detectPaymentInterval = null;
+                            $("#submit-btn").hide();
+                            successHandler();
+                            redirectToNext();
+                        }
+
+                    } catch (err) {
+                        // ignore...
+                    }
+
+                }, 10000);
+            }
         }
     } else {
         $("#submit-btn").show();
@@ -23541,6 +23579,8 @@ function updatePaymentStatus(method) {
 }
 
 function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepareFormDataFunc, purchaseEndpoint, successHandler, errorHandler) {
+    window.productType = initialDetails.productType;
+    window.productId = initialDetails.productId;
     let hasEmail = (initialDetails.email && initialDetails.email.trim().length > 0 ? true : false);
     submitBtn = document.getElementById('submit-btn');
     input = document.querySelector("#phone");
@@ -23917,7 +23957,8 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
         event.preventDefault();
 
         // Prevent multiple form submissions
-        if (submitBtn.disabled || !ready) {
+        if (submitBtn.disabled || !ready || window.paymentDetected) {
+            alert("blocked hehe");
             return;
         }
 
@@ -23964,6 +24005,9 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
             prepareFormDataFunc(formData);
             window.activePayments = {};
+            clearInterval(window.detectPaymentInterval);
+            window.detectPaymentInterval = null;
+
             updatePaymentStatus();
 
             // Create the PaymentIntent

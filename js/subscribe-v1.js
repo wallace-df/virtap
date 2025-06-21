@@ -109,6 +109,8 @@ function init() {
       },
       success: function (response) {
         let initialDetails = response.responseData;
+        initialDetails.productType = 'subscription';
+        initialDetails.productId = target_plan;
         showPaymentForm(initialDetails, () => 'Virtap | Assinar Virtap Club', () => 'Assinar Virtap Club', (fd) => { fd.append("target_plan", plans[target_plan]) }, 'subscribe', handleSuccess, handleError);
       }
     });
