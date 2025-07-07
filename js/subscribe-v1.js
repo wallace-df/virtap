@@ -55,6 +55,13 @@ function handleError(response, loading) {
 
         showGenericError = false;
       }
+    } else if (response.errorCode === 'STARTER_PLAN') {
+      if (loading) {
+        $("#loading").hide();
+      }
+      $("#starter-plan").show();
+      showGenericError = false;
+
     }
   }
 
