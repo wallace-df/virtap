@@ -5785,6 +5785,7 @@ function signup() {
     formData.append('location', $txtCity.val());
     formData.append('expertise_areas', JSON.stringify(selectedAreas));
     formData.append('description', $txtDescription.val());
+    formData.append('utm_params', JSON.stringify(getUTMParams()));
 
     if ($filePicture.data('blob')) {
       formData.append('picture_file', new File([$filePicture.data('blob')], "image/jpeg"));
@@ -5833,6 +5834,7 @@ function signup() {
           'send_to': 'G-4ZFMG1F0XK',
           'event_callback': callback
         });
+        setTimeout(callback, 5000);
       }
     });
   }

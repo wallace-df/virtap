@@ -23101,46 +23101,58 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+function getNullableValue(val) {
+    if (val) {
+        val = val.trim();
+        if (val.length === 0) {
+            val = null;
+        }
+    }
+    return val;
+}
+
 function getUTMParams() {
+
     const params = new URLSearchParams(window.location.search);
-    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
+    const rawReferrer = getNullableValue(document.referrer);
+    const hasUTM = getNullableValue(params.get('utm_source')) && getNullableValue(params.get('utm_medium'));
 
-    const utmFirst = {};
-    const utmLast = {};
+    let utmParams = {};
 
-    for (const key of utmKeys) {
-        const value = params.get(key);
-
-        const firstKey = `${key}_first`;
-        if (value && !localStorage.getItem(firstKey)) {
-            localStorage.setItem(firstKey, value);
+    if (hasUTM) {
+        for (const key of utmKeys) {
+            let value = getNullableValue(params.get(key));
+            utmParams[key] = value;
         }
+    }
+    utmParams['timestamp'] = Date.now();
+    utmParams['referral_url'] = rawReferrer;
 
-        const lastKey = `${key}_last`;
-        if (value) {
-            localStorage.setItem(lastKey, value);
+    let firstUtmParams = localStorage.getItem('first_visit_utm');
+    if (!firstUtmParams) {
+        firstUtmParams = utmParams;
+        try {
+            localStorage.setItem('first_visit_utm', JSON.stringify(utmParams));
+        } catch { }
+    } else {
+        try {
+            firstUtmParams = JSON.parse(firstUtmParams);
+        } catch {
+            firstUtmParams = utmParams;
         }
-
-        let storedFirst = localStorage.getItem(firstKey);
-        let storedLast = localStorage.getItem(lastKey);
-
-        if (!storedFirst && value) {
-            storedFirst = value;
-        }
-
-        if (!storedLast && value) {
-            storedLast = value;
-        }
-
-        if (storedFirst) utmFirst[key] = storedFirst;
-        if (storedLast) utmLast[key] = storedLast;
     }
 
     return {
-        utmFirst,
-        utmLast
+        utmFirst: firstUtmParams,
+        utmLast: utmParams
     };
 }
+
+try {
+    console.log(getUTMParams());
+} catch (err) { }
+
 let plans = {
     'BASIC': 'Basic',
     'VIRTAPCLUB': 'VirtapClub'

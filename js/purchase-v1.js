@@ -4,6 +4,11 @@ function handleSuccess() {
   $("#loading").show();
   $("#sign_up").hide();
   redirectToNext();
+
+  gtag('event', 'subscription_virtapclub', {
+    'send_to': 'G-4ZFMG1F0XK',
+  });
+
 }
 
 function handleError(response, loading) {

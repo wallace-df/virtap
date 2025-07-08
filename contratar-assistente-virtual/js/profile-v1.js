@@ -99,6 +99,7 @@ function signup() {
     let formData = new FormData();
     formData.append('name', $txtName.val());
     formData.append('contact_info', JSON.stringify({ whatsapp: intl.getNumber() }));
+    formData.append('utm_params', JSON.stringify(getUTMParams()));
 
     $.ajax({
       url: window.apiURL + '/client/register-profile',
@@ -144,6 +145,7 @@ function signup() {
           'send_to': 'G-4ZFMG1F0XK',
           'event_callback': callback
         });
+        setTimeout(callback, 5000);
       }
     });
 

@@ -329,8 +329,8 @@
             </form>
             <small>
                 Ao criar uma conta você concorda com os
-                <a href="/termos.html" target="_blank">nossos termos de uso</a> e com a
-                <a href="/privacidade.html" target="_blank">política de privacidade</a>.
+                <a href="/termos" target="_blank">nossos termos de uso</a> e com a
+                <a href="/privacidade" target="_blank">política de privacidade</a>.
             </small>
         </div>
     </div>
@@ -344,6 +344,8 @@
         </div>
     </div>
     <script src="./js/intlTelInput.min.js"></script>
+    <script src="js/utils-v1.js"></script>
+
     <script>
         let phone = document.getElementById('whatsapp');
         let intl = window.intlTelInput(phone, {
@@ -352,46 +354,6 @@
             separateDialCode: true
         });
 
-        function getUTMParams() {
-            const params = new URLSearchParams(window.location.search);
-            const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
-
-            const utmFirst = {};
-            const utmLast = {};
-
-            for (const key of utmKeys) {
-                const value = params.get(key);
-
-                const firstKey = `${key}_first`;
-                if (value && !localStorage.getItem(firstKey)) {
-                    localStorage.setItem(firstKey, value);
-                }
-
-                const lastKey = `${key}_last`;
-                if (value) {
-                    localStorage.setItem(lastKey, value);
-                }
-
-                let storedFirst = localStorage.getItem(firstKey);
-                let storedLast = localStorage.getItem(lastKey);
-
-                if (!storedFirst && value) {
-                    storedFirst = value;
-                }
-
-                if (!storedLast && value) {
-                    storedLast = value;
-                }
-
-                if (storedFirst) utmFirst[key] = storedFirst;
-                if (storedLast) utmLast[key] = storedLast;
-            }
-
-            return {
-                utmFirst,
-                utmLast
-            };
-        }
 
         function showModal() {
             document.getElementById('error-modal').style.display = 'flex';
@@ -467,7 +429,7 @@
             // Desativa todos os campos e muda o texto do botão
             inputs.forEach(el => el.disabled = true);
             button.textContent = "Enviando...";
-//            const url = 'https://apinew.virtap.com.br/signup-intro-av';
+            //            const url = 'https://apinew.virtap.com.br/signup-intro-av';
             const url = 'http://localhost:3000/signup-intro-av';
 
 
@@ -475,8 +437,7 @@
                 nome: nome,
                 email: email,
                 whatsapp: intl.getNumber(),
-                utm: getUTMParams()
-
+                utm_params: getUTMParams()
             };
 
             try {
@@ -489,11 +450,18 @@
                 });
 
                 if (response.status === 200) {
-                    window.location.href = "/cadastro-confirmado.html";
+                    gtag('event', 'sign_up_free_course', {
+                        'send_to': 'G-4ZFMG1F0XK',
+                        'event_callback': function () {
+                            window.location.href = "/cadastro-confirmado";
+                        }
+                    });
+                    setTimeout(() => window.location.href = "/cadastro-confirmado", 5000);
+
                 } else {
                     let data = await response.json();
                     if (data.errorCode === 'ALREADY_REGISTERED') {
-                        window.location.href = "/cadastro-ja-realizado.html";
+                        window.location.href = "/cadastro-ja-realizado";
                     } else {
                         throw data;
                     }
