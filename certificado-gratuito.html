@@ -366,6 +366,47 @@
             document.getElementById('error-modal').style.display = 'none';
         }
 
+        function getUTMParams() {
+            const params = new URLSearchParams(window.location.search);
+            const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+
+            const utmFirst = {};
+            const utmLast = {};
+
+            for (const key of utmKeys) {
+                const value = params.get(key);
+
+                const firstKey = `${key}_first`;
+                if (value && !localStorage.getItem(firstKey)) {
+                    localStorage.setItem(firstKey, value);
+                }
+
+                const lastKey = `${key}_last`;
+                if (value) {
+                    localStorage.setItem(lastKey, value);
+                }
+
+                let storedFirst = localStorage.getItem(firstKey);
+                let storedLast = localStorage.getItem(lastKey);
+
+                if (!storedFirst && value) {
+                    storedFirst = value;
+                }
+
+                if (!storedLast && value) {
+                    storedLast = value;
+                }
+
+                if (storedFirst) utmFirst[key] = storedFirst;
+                if (storedLast) utmLast[key] = storedLast;
+            }
+
+            return {
+                utmFirst,
+                utmLast
+            };
+        }
+
         window.addEventListener('click', function (event) {
             const modal = document.getElementById('error-modal');
             const content = document.querySelector('.modal-content');

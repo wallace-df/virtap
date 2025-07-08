@@ -9,6 +9,47 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+function getUTMParams() {
+    const params = new URLSearchParams(window.location.search);
+    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+
+    const utmFirst = {};
+    const utmLast = {};
+
+    for (const key of utmKeys) {
+        const value = params.get(key);
+
+        const firstKey = `${key}_first`;
+        if (value && !localStorage.getItem(firstKey)) {
+            localStorage.setItem(firstKey, value);
+        }
+
+        const lastKey = `${key}_last`;
+        if (value) {
+            localStorage.setItem(lastKey, value);
+        }
+
+        let storedFirst = localStorage.getItem(firstKey);
+        let storedLast = localStorage.getItem(lastKey);
+
+        if (!storedFirst && value) {
+            storedFirst = value;
+        }
+
+        if (!storedLast && value) {
+            storedLast = value;
+        }
+
+        if (storedFirst) utmFirst[key] = storedFirst;
+        if (storedLast) utmLast[key] = storedLast;
+    }
+
+    return {
+        utmFirst,
+        utmLast
+    };
+}
+
 let plans = {
     'BASIC': 'Basic',
     'VIRTAPCLUB': 'VirtapClub'

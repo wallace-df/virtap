@@ -40,7 +40,7 @@ $("#txtWhatsapp").on('blur', function () {
   }
 });
 
- 
+
 $("#txtNome").on('blur', function () {
   let n = $("#txtNome").val().length;
   if (n > 0 && n < 10) {
@@ -63,7 +63,7 @@ $(document).ready(function () {
   $(".iti--allow-dropdown").css('width', '100%');
 });
 
- 
+
 function signup() {
   let $txtName = $("#txtNome");
   let $txtWhatsapp = $("#txtWhatsapp");
@@ -144,15 +144,8 @@ function signup() {
           'send_to': 'G-4ZFMG1F0XK',
           'event_callback': callback
         });
-
-        // gtag('event', 'conversion', {
-        //     'send_to': 'AW-924784320/25HBCKer7PEYEMCt_LgD',
-        //     'event_callback': callback
-        // });
       }
     });
-
-    // window.fbq('track', 'CompleteRegistration');
 
   }
 

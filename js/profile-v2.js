@@ -5833,15 +5833,7 @@ function signup() {
           'send_to': 'G-4ZFMG1F0XK',
           'event_callback': callback
         });
-
-        // gtag('event', 'conversion', {
-        //   'send_to': 'AW-924784320/25HBCKer7PEYEMCt_LgD',
-        //   'event_callback': callback
-        // });
       }
     });
-
-    // window.lintrk('track', { conversion_id: 14639236 });
-    // window.fbq('track', 'CompleteRegistration');
   }
 }
