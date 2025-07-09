@@ -13,6 +13,14 @@
     <link href="./css/intlTelInput.min.css" rel="stylesheet" />
     <link href="img/favicon.svg" type="image/svg" rel="icon">
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-4ZFMG1F0XK');
+    </script>
+
     <style>
         * {
             box-sizing: border-box;
@@ -348,7 +356,7 @@
 
     <script>
         let phone = document.getElementById('whatsapp');
-        let intl = window.intlTelInput(phone, {
+        intl = window.intlTelInput(phone, {
             autoInsertDialCode: true,
             initialCountry: "BR",
             separateDialCode: true
@@ -429,8 +437,7 @@
             // Desativa todos os campos e muda o texto do botão
             inputs.forEach(el => el.disabled = true);
             button.textContent = "Enviando...";
-            //            const url = 'https://apinew.virtap.com.br/signup-intro-av';
-            const url = 'http://localhost:3000/signup-intro-av';
+            const url = 'https://apinew.virtap.com.br/signup-intro-av';
 
 
             const body = {

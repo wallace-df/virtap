@@ -52,8 +52,8 @@ function getUTMParams() {
     }
 
     return {
-        utmFirst: firstUtmParams,
-        utmLast: utmParams
+        utm_first: firstUtmParams,
+        utm_last: utmParams
     };
 }
 
@@ -925,6 +925,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
                 formData.append("billing_details", JSON.stringify(billingDetails));
             }
             formData.append("payment_details", JSON.stringify(paymentDetails));
+            formData.append("utm_params", JSON.stringify(getUTMParams()));
 
             prepareFormDataFunc(formData);
             window.activePayments = {};
