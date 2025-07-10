@@ -2,31 +2,33 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Tenha acesso aos melhores cursos e aulas, explore oportunidades reais de trabalho e interaja com pessoas que trilham o mesmo caminho que você.">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="Tenha acesso aos melhores cursos e aulas, explore oportunidades reais de trabalho e interaja com pessoas que trilham o mesmo caminho que você.">
 
-    <title>Virtap | A melhor plataforma de ensino e oportunidades para Assistentes Virtuais</title>
+  <title>Virtap | A melhor plataforma de ensino e oportunidades para Assistentes Virtuais</title>
 
-    <link rel="canonical" href="https://www.virtap.com.br" />
+  <link rel="canonical" href="https://www.virtap.com.br" />
 
-    <link rel="stylesheet" href="css/vendor-main-v1.css">
-    <link rel="stylesheet" href="css/main-v1.css">
+  <!-- favicon -->
+  <link href="img/favicon.svg" type="image/png" rel="icon">
 
-    <link href="img/favicon.svg" type="image/svg" rel="icon">
+  <!-- all css here -->
+  <link rel="stylesheet" href="css/main-new-v1.css">
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-4ZFMG1F0XK');
-    </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-4ZFMG1F0XK');
+  </script>
 
-    <!-- Hotjar Tracking Code for https://www.virtap.com.br -->
-    <!-- <script>
+
+  <!-- Hotjar Tracking Code for https://www.virtap.com.br -->
+  <!-- <script>
         (function (h, o, t, j, a, r) {
             h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
             h._hjSettings = { hjid: 3611346, hjsv: 6 };
@@ -37,1077 +39,1297 @@
         })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
     </script> -->
 
-    <!-- Begin SessionStack code -->
-    <script type="text/javascript">
-        !function (a, b) {
-            var c = window; c.SessionStackKey = a, c[a] = c[a] || {
-                t: b,
-                q: []
-            }; for (var d = ["start", "stop", "identify", "getSessionId", "log", "setOnDataCallback", "trackEvent"], e = 0; e < d.length; e++)!function (b) {
-                c[a][b] = c[a][b] || function () {
-                    c[a].q.push([b].concat([].slice.call(arguments, 0)));
-                }
-            }(d[e]); var f = document.createElement("script"); f.async = 1, f.crossOrigin = "anonymous",
-                f.src = "https://cdn.sessionstack.com/sessionstack.js"; var g = document.getElementsByTagName("script")[0];
-            g.parentNode.insertBefore(f, g)
-        }("SessionStack", "9d1f1977a2bc4878874f4a522f1e5542");
-    </script>
-    <!-- End SessionStack Code -->
+  <!-- Begin SessionStack code -->
+  <script type="text/javascript">
+    !function (a, b) {
+      var c = window; c.SessionStackKey = a, c[a] = c[a] || {
+        t: b,
+        q: []
+      }; for (var d = ["start", "stop", "identify", "getSessionId", "log", "setOnDataCallback", "trackEvent"], e = 0; e < d.length; e++)!function (b) {
+        c[a][b] = c[a][b] || function () {
+          c[a].q.push([b].concat([].slice.call(arguments, 0)));
+        }
+      }(d[e]); var f = document.createElement("script"); f.async = 1, f.crossOrigin = "anonymous",
+        f.src = "https://cdn.sessionstack.com/sessionstack.js"; var g = document.getElementsByTagName("script")[0];
+      g.parentNode.insertBefore(f, g)
+    }("SessionStack", "9d1f1977a2bc4878874f4a522f1e5542");
+  </script>
+  <!-- End SessionStack Code -->
 </head>
 
-<body>
-    <!-- header-area -->
-    <header class="header-area">
-        <div class="main-container">
-            <div class="header-wrapper">
-                <a class="header-logo" href="."><img src="img/logo.png" alt="Logo Virtap"></a>
-                <div class="dropdown">
-                    <a class="header-login-btn" href="javascprit:void(0)" data-bs-toggle="dropdown">
-                        <span>Log in</span>
+<body class="home">
+
+  <!-- Header area -->
+  <header class="site_header">
+
+    <div class="container px_1640">
+      <nav class="d-flex justify-content-between h-100 align-items-center">
+
+        <div class="header_left d-md-none d-block w-100">
+          <div class="row w-100">
+            <div class="col-4 d-flex align-items-center">
+              <div class="toggled_menu_icon d-md-none d-block">
+                <img src="./img/hamburger.svg" class="menu_hamburger icon_24" alt="menu_hamburger">
+              </div>
+            </div>
+            <div class="col-4 d-flex justify-content-center align-items-center">
+              <a href="/" class="logo">
+                <img src="./img/logo.png" alt="logo">
+              </a>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+              <div class="dropdown">
+                <a class="header-login-btn button" href="javascprit:void(0)" data-bs-toggle="dropdown"
+                  aria-expanded="true">
+                  <span>Log in</span>
+                </a>
+                <div class="dropdown-menu login_dropdown">
+                  <div class="text-center">
+                    <h5>Sou AV</h5>
+                    <a href="https://assistentes-test.virtap.com.br">
+                      <button class="button button_transparent">
+                        <img src="img/enter.svg" alt="Login">
+                        <span>Ir para a plataforma</span>
+                      </button>
                     </a>
-                    <div class="dropdown-menu login_dropdown">
-                        <div class="text-center">
-                            <h5>Sou AV</h5>
-                            <a href="/login" target="_blank">
-                                <button>
-                                    <img src="img/enter.svg" alt="Login">
-                                    <span>Ir para a plataforma</span>
-                                </button>
-                            </a>
-                        </div>
-                        <div class="text-center">
-                            <h5>Quero contratar AV</h5>
-                            <a href="/quero-contratar-av/login" target="_blank">
-                                <button>
-                                    <img src="img/enter.svg" alt="Login">
-                                    <span>Ir para a plataforma</span>
-                                </button>
-                            </a>
-                        </div>
-                    </div>
+                  </div>
+                  <div class="text-center">
+                    <h5>Quero contratar uma AV</h5>
+                    <a href="https://clientes-test.virtap.com.br">
+                      <button class="button button_transparent">
+                        <img src="img/enter.svg" alt="Login">
+                        <span>Ir para a plataforma</span>
+                      </button>
+                    </a>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </header>
 
-    <!-- landing-hero-area -->
-    <section class="landing-hero-area">
-        <div class="main-container">
-            <div class="main-wrapper">
-                <div class="landing-hero-text-area" data-aos="fade-right">
-                    <h1>Se torne uma <span style="display: block" class="mb-3">Assistente Virtual</span> de verdade.
-                    </h1>
-                    <p>Tenha acesso aos melhores cursos e aulas, explore oportunidades reais de trabalho e interaja com
-                        pessoas que trilham o mesmo caminho que
-                        você.</p>
-                    <div class="landing-hero-btn-area">
-                        <!-- <a class="landing-hero-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfDoJhOgj3drelEsaookph1GMNi6I9keW-Qz2dOyjYSXvHMWQ/viewform" target="_blank">Encontrar um talento</a> -->
-                        <!-- <a class="landing-hero-btn" href="https://clientes.virtap.com.br" target="_blank">Encontrar um
-                            talento</a> -->
-                        <a class="landing-hero-btn landing-hero-btn" href="/cadastrar" target="_blank">Quero ser AV</a>
-                        <a class="landing-hero-btn landing-hero-btn2" href="/quero-contratar-av/" target="_blank">Quero
-                            contratar AV</a>
-                    </div>
-                </div>
-                <div class="landing-hero-img" data-aos="fade-left">
-                    <div class="landing-hero-main-img">
-                        <img src="img/banner-virtap.png" alt="Banner Virtap">
-                    </div>
-                    <div class="landing-hero-main-img2">
-                        <img class="rotate-img" src="img/economize-tempo.png" alt="Econimize tempo">
-                    </div>
-                </div>
-            </div>
+        <div class="header_left d-md-block d-none">
+          <!-- logo -->
+          <a href="/" class="logo">
+            <img src="./img/logo.png" alt="logo">
+          </a>
         </div>
-    </section>
 
-    <!-- virtap-area -->
-    <section class="virtap-area">
-        <div class="main-container">
-            <div class="row">
-                <div class="col-lg-6" data-aos="fade-right">
-                    <div class="virtap-text-item">
-                        <div class="virtap-title title pt-1">
-                            <h2>O que é uma Assistente Virtual? </h2>
-                            <p class="mb-4">Uma assistente virtual é uma profissional que tem a flexibilidade para
-                                trabalhar de casa
-                                e de qualquer lugar do mundo, oferecendo seus serviços de forma remota para um mercado
-                                com alta demanda.</p>
-
-                            <p class="mb-4"> Ela usa suas habilidades para ajudar seus clientes em várias tarefas, como
-                                compras online,
-                                pesquisa, atendimento ao cliente, reserva de hotéis e passagens, organização de agenda,
-                                dentre outras.</p>
-
-                            <p>Com apenas um computador e acesso à Internet, qualquer pessoa pode aprender do zero a se
-                                tornar uma assistente virtual.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6" data-aos="fade-left">
-                    <div class="virtap-image-item">
-                        <img src="img/o-que-e-a-virtap.png" alt="O que é a Virtap?">
-                    </div>
-                </div>
+        <div class="header_right d-md-flex d-none align-items-center h-100">
+          <a href="/contratar-assistente-virtual/" class="button button_transparent">Quero contratar uma AV</a>
+          <div class="dropdown">
+            <a class="header-login-btn button" href="javascprit:void(0)" data-bs-toggle="dropdown" aria-expanded="true">
+              <span>Log in</span>
+            </a>
+            <div class="dropdown-menu login_dropdown">
+              <div class="text-center">
+                <h5>Sou AV</h5>
+                <a href="https://assistentes-test.virtap.com.br">
+                  <button class="button button_transparent">
+                    <img src="img/enter.svg" alt="Login">
+                    <span>Ir para a plataforma</span>
+                  </button>
+                </a>
+              </div>
+              <div class="text-center">
+                <h5>Quero contratar uma AV</h5>
+                <a href="https://clientes-test.virtap.com.br">
+                  <button class="button button_transparent">
+                    <img src="img/enter.svg" alt="Login">
+                    <span>Ir para a plataforma</span>
+                  </button>
+                </a>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
 
-    <!-- vantagem-plataforma-area -->
-    <section class="vantagem-plataforma-area">
-        <div class="main-container">
-            <div class="vantagem-plataforma-title title" data-aos="fade-right" data-aos-duration="700"
-                data-aos-delay="300">
-                <h2>Por que ser Assistente Virtual?</h2>
-            </div>
-            <div class="vantagem-plataforma-wrapper">
-                <div class="vantagem-plataforma-item" data-aos="fade-right" data-aos-duration="700"
-                    data-aos-delay="300">
-
-                    <span class="vantagem-plataforma-icon"><img src="img/simples-rapido-gratuito.svg"
-                            alt="É simples, rápido e gratuito"></span>
-
-                    <h3>Mais flexibidade</h3>
-                    <p>Trabalhe em horários definidos por você e desenvolva um equilíbrio saudável entre trabalho e vida
-                        pessoal.</p>
-                    <span class="vantagem-plataforma-shap"><img src="img/proxima-vantagem-abaixo.png"
-                            alt="Próxima vantagem abaixo"></span>
-                </div>
-
-                <div class="vantagem-plataforma-item" data-aos="fade-right" data-aos-duration="700"
-                    data-aos-delay="200">
-                    <span class="vantagem-plataforma-icon"><img src="img/liberdade-para-negociar.svg"
-                            alt="Liberdade para negociar"></span>
-
-                    <h3>Mais autonomia</h3>
-                    <p>Controle seu faturamento, escale seu negócio e explore diferentes habilidades e áreas de atuação.
-                    </p>
-                    <span class="vantagem-plataforma-shap"><img src="img/proxima-vantagem-acima.png"
-                            alt="Próxima vantagem acima"></span>
-                </div>
-
-                <div class="vantagem-plataforma-item" data-aos="fade-right" data-aos-duration="700"
-                    data-aos-delay="100">
-                    <span class="vantagem-plataforma-icon"><img src="img/diferentes-especialidades.svg"
-                            alt="Diferentes especialidades"></span>
-
-                    <h3 class="vantagem-plataforma-heading">Mais liberdade</h3>
-
-                    <p>Trabalhe de casa, em qualquer lugar do mundo, e tenha acesso a um mercado global de clientes e
-                        oportunidades.</p>
-                    <!-- <span class="vantagem-plataforma-shap"><img src="img/proxima-vantagem-abaixo.png"
-                            alt="Próxima vantagem abaixo"></span> -->
-                </div>
-
-                <!-- <div class="vantagem-plataforma-item" data-aos="fade-right" data-aos-duration="700">
-                    <span class="vantagem-plataforma-icon"><img src="img/talentos-qualificados.svg"
-                            alt="Talentos qualificados"></span>
-
-
-                    <h3 class="vantagem-plataforma-heading">Talentos qualificados</h3>
-
-                    <p>Os profissionais da nossa base tem acesso aos melhores treinamentos disponíveis no mercado.
-                        Confira as qualificações no perfil de cada um.</p>
-                </div> -->
-            </div>
-        </div>
-    </section>
-
-    <!-- cada-necessidade-area -->
-    <section class="cada-necessidade-area">
-        <div class="main-container">
-            <div class="cada-necessidadetitle title" data-aos="fade-down" data-aos-duration="700" data-aos-delay="300">
-                <h2>Virtap: sua jornada de evolução profissional começa aqui</h2>
-            </div>
-
-            <div class="career_content_wrap" data-aos="fade-right">
-                <img class="w-100 d-none d-lg-block" src="img/assistente-virtual-circulo.svg"
-                    alt="Assistente Virtual (círculo)">
-                <div>
-                    <div class="career_icon_box">
-                        <div>
-                            <h3>Comece do zero</h3>
-                            <p>Aprenda se tornar uma<br> Assistente Virtual com a<br> melhor
-                                formação do mercado</p>
-                        </div>
-                        <img class="icon" src="img/comece-do-zero.svg" alt="Comece do zero">
-                    </div>
-                    <div class="career_icon_box right">
-                        <img class="icon" src="img/aprenzidado-constante.svg" alt="Aprendizado Constante">
-                        <div>
-                            <h3>Aprendizado Constante</h3>
-                            <p>Aulas frequentes de diferentes<br> temas para te ajudar na<br> evolução da sua
-                                carreira</p>
-                        </div>
-                    </div>
-                    <div class="career_icon_box right">
-                        <img class="icon" src="img/marketplace.svg" alt="Marketplace">
-                        <div>
-                            <h3>Marketplace</h3>
-                            <p>Conecte-se com clientes <br />que buscam profissionais<br> como você</p>
-                        </div>
-                    </div>
-                    <div class="career_icon_box right">
-                        <img class="icon" src="img/melhore-suas-habilidades.svg" alt="Melhore suas habilidades">
-                        <div>
-                            <h3>Melhore suas habilidades</h3>
-                            <p>Adquira novas habilidades<br> e melhore os seus conhecimentos<br> através dos nossos
-                                cursos</p>
-                        </div>
-                    </div>
-                    <div class="career_icon_box">
-                        <div>
-                            <h3>Especializações</h3>
-                            <p>Faça nossas especializações<br> e destaque-se como uma <br> Assistente
-                                Virtual Especialista</p>
-                        </div>
-                        <img class="icon" src="img/especializacoes.svg" alt="Especializações">
-                    </div>
-                    <div class="career_icon_box">
-                        <div>
-                            <h3>Comunidade</h3>
-                            <p>Interaja com profissionais<br> que estão trilhando o<br> mesmo caminho que você</p>
-                        </div>
-                        <img class="icon" src="img/comunidade.svg" alt="Comunidade">
-                    </div>
-                </div>
-            </div>
-
-            <!-- <div class="grid-2 align-items-center">
-                <div class="grid-item" data-aos="zoom-in-up">
-                    <div class="cada-necessidade-text-area cada-necessidade-text-area-one">
-                        <h3>Os melhores cursos do mercado</h3>
-                        <p>B la bla bla bla.</p>
-                    </div>
-                </div>
-                <div class="grid-item" data-aos="zoom-in-up">
-                    <div class="cada-necessidade-image">
-                        <img src="img/o-que-faz-assistente-pessoal.svg" alt="O que faz uma Assistente Pessoal?">
-                    </div>
-                </div>
-
-                <div class="grid-item" data-aos="zoom-in-up">
-                    <div class="cada-necessidade-image cada-necessidade-image-tow">
-                        <img src="img/o-que-faz-assistente-virtual.svg" alt="O que faz uma Assistente Virtual?">
-                    </div>
-                </div>
-                <div class="grid-item" data-aos="zoom-in-up">
-                    <div class="cada-necessidade-text-area cada-necessidade-text-area-tow">
-                        <h3>Aulas frequentes de diferentes temas</h3>
-
-                        <p>bla bla bla.</p>
-                    </div>
-                </div>
-
-                <div class="grid-item" data-aos="zoom-in-up">
-                    <div class="cada-necessidade-text-area cada-necessidade-text-area-three">
-                        <h3>Consiga trabalho através do nosso Marketplace</h3>
-
-                        <p>bla bla bla</p>
-                    </div>
-                </div>
-                <div class="grid-item" data-aos="zoom-in-up">
-                    <div class="cada-necessidade-image">
-                        <img src="img/o-que-faz-secretaria-executiva.svg" alt="O que faz uma Secretária Executiva?">
-                    </div>
-                </div>
-
-                <div class="grid-item" data-aos="zoom-in-up">
-                    <div class="cada-necessidade-image cada-necessidade-image-tow">
-                        <img src="img/o-que-faz-secretaria-remota.svg" alt="O que faz uma Secretária Remota?">
-                    </div>
-                </div>
-                <div class="grid-item" data-aos="zoom-in-up">
-                    <div class="cada-necessidade-text-area  cada-necessidade-text-area-last">
-                        <h3>Intereja na nossa comunidade</h3>
-
-                        <p>Os especialistas em suporte e secretariado remoto serão como seu braço direito, seja para
-                            cuidar dos seus pacientes e clientes regularmente ou para dar aquela força no atendimento em
-                            períodos de maior demanda.</p>
-                    </div>
-                </div>
-            </div> -->
-        </div>
-    </section>
-
-    <!--========== projects looking area ===========-->
-    <div class="projects_looking_area">
-        <div class="container mobile_p_0">
-            <div class="projects_looking_wrap" data-aos="fade-down" data-aos-duration="700" data-aos-delay="300">
-                <div class="row justify-content-between">
-                    <div class="col-lg-6">
-                        <div class="projects_looking_img">
-                            <img class="w-100 img" src="img/assistente-procurando-projeto.png"
-                                alt="Assistente procurando projeto">'
-                            <div class="party_blk">
-                                <img src="img/parabens.svg" alt="Parabéns">
-                                <p>Parabéns! Você recebeu uma<br> certificação em Assessoria Pessoal!</p>
-                            </div>
-                            <div class="latest_project_box">
-                                <h5>Últimos projetos publicados</h5>
-                                <ul>
-                                    <li>
-                                        <div class="icon">
-                                            <img src="img/documento.svg" alt="Documento">
-                                        </div>
-                                        <p>Busco uma assistente pessoal especialista</p>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <img src="img/documento.svg" alt="Documento">
-                                        </div>
-                                        <p>Assistente virtual para atendimento ao cliente</p>
-                                    </li>
-                                    <li>
-                                        <div class="icon">
-                                            <img src="img/documento.svg" alt="Documento">
-                                        </div>
-                                        <p>Secretária executiva para o CEO</p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="rating_box">
-                                <img class="star" src="img/5-estrelas.svg" alt="5 estrelas">
-                                <ul class="icon_list">
-                                    <li><a href="javascript:void(0)"><img src="img/certificacao-1.svg"
-                                                alt="Certificação 1"></a></li>
-                                    <li><a href="javascript:void(0)"> <img src="img/certificacao-2.svg"
-                                                alt="Certificação 2"></a>
-                                    </li>
-                                    <li><a href="javascript:void(0)"><img src="img/certificacao-3.svg"
-                                                alt="Certificação 3"></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <h2>Diversos clientes procuram por profissionais como você diariamente no nosso Marketplace
-                        </h2>
-                        <ul class="list_group">
-                            <li>Receba avaliações e torne seu perfil mais atraente</li>
-                            <li>Faça uma de nossas especializações e se destaque</li>
-                            <li>Encontre oportunidades em diferentes áreas da Assistência Virtual</li>
-                            <li>Negocie tudo diretamente com o cliente</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </nav>
     </div>
 
-    <!-- Para-quem-area -->
-    <section class="Para-quem-area">
-        <div class="main-container">
-            <div class="Para-quem-title title" data-aos="fade-up" data-aos-duration="700" data-aos-delay="300">
-                <h2>Para quem é a Virtap?</h2>
+    <!-- mobile_menu -->
+    <div class="mobile_menu d-md-none d-flex">
+      <span class="menu_innerlay toggled_menu_icon"></span>
+      <div class="mobile_menu_inner position-relative">
+        <div class="mobile_menu_top pb_30 pt_30">
+          <div class="header_left d-md-none d-block w-100">
+            <div class="row w-100">
+              <div class="col-4 d-flex align-items-center">
+                <div class="toggled_menu_icon d-md-none d-block">
+                  <img src="./img/close.svg" class="menu_hamburger icon_24 black_img" alt="close">
+                </div>
+              </div>
+              <div class="col-4 d-flex justify-content-center align-items-center">
+                <a href="/" class="logo">
+                  <img src="./img/logo.png" alt="logo">
+                </a>
+              </div>
             </div>
-            <div class="Para-quem-wrapper">
-                <div class="Para-quem-items Para-quem-item-one" data-aos="fade-up">
-                    <img src="img/para-voce.svg" alt="Para você">
-                    <h3>Pessoas que buscam trabalhar de casa </h3>
-                    <!-- <p>Trabalhe de casa e tenha tempo de qualidade para o que realmente importa .</p> -->
-                </div>
-                <div class="Para-quem-items Para-quem-item-two" data-aos="fade-down">
-                    <img src="img/para-startups-pequenas-empresas.svg" alt="Para startups e pequenas empresas">
-                    <h3>Profissionais da área administrativa</h3>
-                    <!-- <p>Liberte-se dos horários
-                        tradicionais e abrace
-                        a flexibilidade com a
-                        Virtap </p> -->
-                </div>
-                <div class="Para-quem-items Para-quem-item-three" data-aos="fade-up">
-                    <img src="img/para-profissionais-autonomos.svg" alt="Para profissionais autônomos">
-                    <h3>Assistentes Virtuais se especializando</h3>
-                    <!-- <p>Otimize sua eficiência! Delegue o atendimento aos clientes, cobranças e outras tarefas
-                        secundárias para uma secretária remota ou assistente virtual, permitindo que você se concentre
-                        em suas responsabilidades principais.</p> -->
-                </div>
-            </div>
+          </div>
         </div>
-    </section>
-
-
-    <!-- landing-testimonial-->
-    <section class="landing-testimonial-area mb-5">
-        <div class="main-container">
-            <div class="cada-necessidadetitle title" data-aos="fade-up" data-aos-duration="700" data-aos-delay="300">
-                <h2>Depoimentos</h2>
-            </div>
-            <div class="swiper landing-testimonia-swiper" data-aos="fade-down">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="testimonia-item">
-                            <div class="testimonial-image">
-                                <img src="img/client.jpeg">
-                                <h3></h3>
-                                <p>Muito simples de usar, consegui encontrar a pessoa que eu precisava para me ajudar
-                                    bem rápido.</p>
-                            </div>
-                            <div class="testimonial-rating">
-                                <div class="testimonial-ratingName">
-                                    <h6>Rafael Silva</h6>
-                                    <span>30/10/2023</span>
-                                </div>
-                                <ul>
-                                    <li><img src="img/testimonia-img-star.svg" alt="star 1"></li>
-                                    <li><img src="img/testimonia-img-star.svg" alt="star 2"></li>
-                                    <li><img src="img/testimonia-img-star.svg" alt="star 3"></li>
-                                    <li><img src="img/testimonia-img-star.svg" alt="star 4"></li>
-                                    <li><img src="img/testimonia-img-star.svg" alt="star 5"></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonia-item">
-                            <div class="testimonial-image">
-                                <img alt="Premiumly" src="img/premiumly.jpeg">
-                                <h3></h3>
-                                <p>Excelente! Publiquei o projeto e logo em seguida recebi diversas propostas, cheguei a
-                                    entrevistar 4 candidatas muito boas, e no final optamos por uma especialista na área
-                                    que buscávamos.</p>
-                            </div>
-                            <div class="testimonial-rating">
-                                <div class="testimonial-ratingName">
-                                    <h6>Premiumly Assessoria</h6>
-                                    <span>28/10/2023</span>
-                                </div>
-                                <ul>
-                                    <li><img src="img/testimonia-img-star.svg" alt="star 1"></li>
-                                    <li><img src="img/testimonia-img-star.svg" alt="star 2"></li>
-                                    <li><img src="img/testimonia-img-star.svg" alt="star 3"></li>
-                                    <li><img src="img/testimonia-img-star.svg" alt="star 4"></li>
-                                    <li><img src="img/testimonia-img-star.svg" alt="star 5"></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testimonia-item">
-                            <div class="testimonial-image">
-                                <img src="img/client.jpeg">
-                                <h3></h3>
-                                <p>Rápida e precisa nas informações.</p>
-                            </div>
-                            <div class="testimonial-rating">
-                                <div class="testimonial-ratingName">
-                                    <h6>Curadoria Ana Yajima</h6>
-                                    <span>25/10/2023</span>
-                                </div>
-                                <ul>
-                                    <li><img src="img/testimonia-img-star.svg" alt="star 1"></li>
-                                    <li><img src="img/testimonia-img-star.svg" alt="star 2"></li>
-                                    <li><img src="img/testimonia-img-star.svg" alt="star 3"></li>
-                                    <li><img src="img/testimonia-img-star.svg" alt="star 4"></li>
-                                    <li><img src="img/testimonia-img-star.svg" alt="star 5"></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-button-next story-ab-btn-next"><i class="fal fa-chevron-right"></i></div>
-                <div class="swiper-button-prev story-ab-btn-prev"><i class="fal fa-chevron-left"></i></div>
-            </div>
+        <div class="header_right pt_40 pl_12">
+          <a href="/contratar-assistente-virtual/" class="button button_transparent">
+            <span>Quero contratar uma AV</span>
+          </a>
         </div>
-    </section>
+      </div>
+    </div>
 
+  </header>
 
-    <!--========== Pricing area ===========
-    <div class="pricing_area">
-        <div class="container">
-            <div class="pricing_wrap pl_45 pr_45">
-                <div class="title_box mt_60">
-                    <div class="cada-necessidadetitle title mb-0 pb-0" data-aos="fade-up">
-                        <h2>Planos</h2>
+  <main class="main_content overflow-hidden">
+
+    <!-- Hero area -->
+    <div class="hero_area position-relative">
+
+      <img src="img/curvy_line.png" class="curvy_line" alt="curvy_line">
+
+      <div class="container px_1640">
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="hero_content" data-aos="fade-right" data-aos-delay="100">
+              <h1 class="title_50">Tudo o que você precisa<br> para se tornar uma<br> <span class="text_blue">Assistente
+                  Virtual <img src="img/text_line.png" class="text_line" alt="text_line"></span><br> de verdade</h1>
+              <p class="pt_30 pb_40">Formação profissional, comunidade, mentoria e acesso a oportunidades reais de
+                trabalho.</p>
+              <div class="hero_content_bottom d-flex align-items-center">
+                <a href="#quero-fazer-parte" class="button">
+                  <span>Quero fazer parte</span>
+                  <span class="button_icon">
+                    <img src="img/arrow-right.svg" alt="arrow-right">
+                  </span>
+                </a>
+                <img src="img/curvy_arrow.png" class="curvy_arrow ml_95 rotate_40" alt="curvy_arrow">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="hero_img" data-aos="fade-left" data-aos-delay="300">
+              <img src="img/hero_img.png" class="main_img_sm" alt="hero_img">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Review area -->
+    <div class="review_area">
+      <div class="container">
+        <div class="review_slider owl-carousel">
+          <div class="review_box pl_30 pr_30 pb_30 pt_30" data-aos="fade-left" data-aos-delay="100">
+            <div class="review_img">
+              <img src="img/review_img1.png" alt="review_img">
+            </div>
+            <p class="pt_20 pb_20">Our virtual assistant is amazing!</p>
+            <div class="review_bottom d-flex align-items-center justify-content-between pt_20">
+              <a href="javascript:void(0)">Christie Henderson</a>
+              <div class="stars d-flex align-items-center">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+              </div>
+            </div>
+          </div>
+          <div class="review_box pl_30 pr_30 pb_30 pt_30" data-aos="fade-left" data-aos-delay="300">
+            <div class="review_img">
+              <img src="img/review_img2.png" alt="review_img">
+            </div>
+            <p class="pt_20 pb_20">Our virtual assistant is amazing!</p>
+            <div class="review_bottom d-flex align-items-center justify-content-between pt_20">
+              <a href="javascript:void(0)">wayne gagnon</a>
+              <div class="stars d-flex align-items-center">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+              </div>
+            </div>
+          </div>
+          <div class="review_box pl_30 pr_30 pb_30 pt_30" data-aos="fade-left" data-aos-delay="600">
+            <div class="review_img">
+              <img src="img/review_img3.png" alt="review_img">
+            </div>
+            <p class="pt_20 pb_20">Our virtual assistant is amazing!</p>
+            <div class="review_bottom d-flex align-items-center justify-content-between pt_20">
+              <a href="javascript:void(0)">sophia bach</a>
+              <div class="stars d-flex align-items-center">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+              </div>
+            </div>
+          </div>
+          <div class="review_box pl_30 pr_30 pb_30 pt_30">
+            <div class="review_img">
+              <img src="img/review_img1.png" alt="review_img">
+            </div>
+            <p class="pt_20 pb_20">Our virtual assistant is amazing!</p>
+            <div class="review_bottom d-flex align-items-center justify-content-between pt_20">
+              <a href="javascript:void(0)">Christie Henderson</a>
+              <div class="stars d-flex align-items-center">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+              </div>
+            </div>
+          </div>
+          <div class="review_box pl_30 pr_30 pb_30 pt_30">
+            <div class="review_img">
+              <img src="img/review_img2.png" alt="review_img">
+            </div>
+            <p class="pt_20 pb_20">Our virtual assistant is amazing!</p>
+            <div class="review_bottom d-flex align-items-center justify-content-between pt_20">
+              <a href="javascript:void(0)">wayne gagnon</a>
+              <div class="stars d-flex align-items-center">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+              </div>
+            </div>
+          </div>
+          <div class="review_box pl_30 pr_30 pb_30 pt_30">
+            <div class="review_img">
+              <img src="img/review_img3.png" alt="review_img">
+            </div>
+            <p class="pt_20 pb_20">Our virtual assistant is amazing!</p>
+            <div class="review_bottom d-flex align-items-center justify-content-between pt_20">
+              <a href="javascript:void(0)">sophia bach</a>
+              <div class="stars d-flex align-items-center">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+                <img src="img/star.svg" class="icon_20" alt="star">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Assistent area -->
+    <div class="assistent_area">
+      <div class="container">
+        <div class="assistent_content">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="content" data-aos="fade-right" data-aos-delay="100">
+                <h2 class="pb_20 title_42">Quer trabalhar como assistente virtual?</h2>
+                <p>A Virtap é um ecossistema completo para quem quer viver da assistência virtual.
+                  <br><br>
+                  Criada por especialistas com mais de 10 anos de experiência na área, somos a primeira plataforma do
+                  Brasil
+                  focada exclusivamente nesse universo.
+                  <br><br>
+                  Aqui você encontra: formação completa, apoio contínuo para crescer e acesso a vagas de trabalho como
+                  AV.
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="assistent_points_right" data-aos="fade-left" data-aos-delay="200">
+                <h3 class="text-center title_32 pb_60">Assistente Virtual</h3>
+                <div class="assistent_points_wrap">
+                  <img src="img/assistente_circle.svg" class="assistente_circle" alt="assistente_circle">
+
+                  <div class="assistent_points">
+
+                    <div class="assistent_points_list_left">
+
+                      <div class="assistent_point assistent_point1 left">
+                        <div class="assistent_icon">
+                          <img src="img/assistente_icon1.svg" class="icon_26" alt="Start From Scratch">
+                        </div>
+                        <div class="assistente_info">
+                          <h3 class="title_20 pb_6">Comece Do Zero</h3>
+                          <p class="text_md">Aprenda do zero como se tornar uma Assistente Virtual com os nossos
+                            treinamentos</p>
+                        </div>
+                      </div>
+
+                      <div class="assistent_point assistent_point6 left">
+                        <div class="assistent_icon">
+                          <img src="img/assistente_icon6.svg" class="icon_32" alt="Community">
+                        </div>
+                        <div class="assistente_info">
+                          <h3 class="title_20 pb_6">Comunidade</h3>
+                          <p class="text_md">Interaja com profissionais que estão trilhando o mesmo caminho que você</p>
+                        </div>
+                      </div>
+
+                      <div class="assistent_point assistent_point5 left">
+                        <div class="assistent_icon">
+                          <img src="img/assistente_icon5.svg" class="icon_32" alt="Specializations">
+                        </div>
+                        <div class="assistente_info">
+                          <h3 class="title_20 pb_6">Especializações</h3>
+                          <p class="text_md">Escolha uma de nossas<br> especializações e destaque-se como uma Assistente
+                            Virtual
+                            Especialista</p>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="assistent_points_list_right">
+                      <div class="assistent_point assistent_point2 right">
+                        <div class="assistent_icon">
+                          <img src="img/assistente_icon2.svg" class="icon_32" alt="Marketplace">
+                        </div>
+                        <div class="assistente_info">
+                          <h3 class="title_20 pb_6">Marketplace</h3>
+                          <p class="text_md">Conecte-se com diversos clientes que buscam profissionais como você</p>
+                        </div>
+                      </div>
+
+                      <div class="assistent_point assistent_point3 right">
+                        <div class="assistent_icon">
+                          <img src="img/assistente_icon3.svg" class="icon_32" alt="Constant Learning">
+                        </div>
+                        <div class="assistente_info">
+                          <h3 class="title_20 pb_6">Aprendizado Constante</h3>
+                          <p class="text_md">Aulas frequentes de diferentes temas para te ajudar na evolução da sua
+                            carreira
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="assistent_point assistent_point4 right">
+                        <div class="assistent_icon">
+                          <img src="img/assistente_icon4.svg" class="icon_32" alt="Improve Your Skills">
+                        </div>
+                        <div class="assistente_info">
+                          <h3 class="title_20 pb_6">Melhore Suas Habilidades</h3>
+                          <p class="text_md">Adquira novas habilidades e melhore os seus conhecimentos através dos
+                            nossos
+                            cursos de extensão</p>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Certificate area -->
+    <div class="certificate_area mb_100">
+      <div class="container">
+        <div class="certificate_content">
+          <div class="row certificate_row">
+            <div class="col-lg-7" data-aos="fade-right" data-aos-delay="100">
+              <img src="img/certificate1.png" class="certificate_img main_img_sm d-md-block d-none" alt="">
+              <img src="img/certificate1_sm.png" class="certificate_img d-md-none d-block" alt="">
+            </div>
+            <div class="col-lg-5" data-aos="fade-left" data-aos-delay="300">
+              <div class="certificate_inner content">
+                <h2 class="title_42">Curso completo de assistência virtual + Certificação.</h2>
+                <p class="pt_20 pb_50">Com mais de 30 aulas, elaborado por especialistas com mais de 10 anos de
+                  experiência na área, na nossa
+                  formação você vai aprender do zero ao avançado para ser tornar uma assistente virtual de sucesso. </p>
+                <a href="#quero-fazer-parte" class="button">
+                  <span>Quero me tornar uma AV de sucesso</span>
+                  <span class="button_icon">
+                    <img src="img/arrow-right.svg" alt="arrow-right">
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="services_area pt_50" data-aos="fade-up" data-aos-delay="300">
+            <h3 class="title_32 text-center pb_100">O que você vai aprender</h3>
+
+            <div class="row">
+              <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="service_box">
+                  <span class="service_icon_bg"></span>
+                  <div class="service_wrap">
+                    <div class="service_number">
+                      <p>01</p>
+                    </div>
+                    <div class="service_content">
+                      <h4 class="title_20">Introdução</h4>
+                      <p class="text_md">Inicie sua jornada entendendo o que é assistência virtual e como se preparar
+                        para trabalhar
+                        remotamente.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="service_box">
+                  <span class="service_icon_bg"></span>
+                  <div class="service_wrap">
+                    <div class="service_number">
+                      <p>02</p>
+                    </div>
+                    <div class="service_content">
+                      <h4 class="title_20">Ferramentas e<br> Serviços</h4>
+                      <p class="text_md">Explore as principais ferramentas e tipos de serviços oferecidos por um
+                        assistente virtual.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="service_box">
+                  <span class="service_icon_bg"></span>
+                  <div class="service_wrap">
+                    <div class="service_number">
+                      <p>03</p>
+                    </div>
+                    <div class="service_content">
+                      <h4 class="title_20">Aquisição de<br> Clientas</h4>
+                      <p class="text_md">Aprenda a identificar seus clientes è a conquistar novos contatos para expandir
+                        seu negócio.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="service_box">
+                  <span class="service_icon_bg"></span>
+                  <div class="service_wrap">
+                    <div class="service_number">
+                      <p>04</p>
+                    </div>
+                    <div class="service_content">
+                      <h4 class="title_20">Precificação e<br> Estruturação</h4>
+                      <p class="text_md">Entenda como precificar seus serviços e estruturar seu negócio de assistência
+                        virtual</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="service_box">
+                  <span class="service_icon_bg"></span>
+                  <div class="service_wrap">
+                    <div class="service_number">
+                      <p>05</p>
+                    </div>
+                    <div class="service_content">
+                      <h4 class="title_20">Ferramentas e<br> Serviços</h4>
+                      <p class="text_md">Explore as principais ferramentas e tipos de serviços oferecidos por um
+                        assistente virtual.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-4 col-sm-6">
+                <div class="service_box">
+                  <span class="service_icon_bg"></span>
+                  <div class="service_wrap">
+                    <div class="service_number">
+                      <p>06</p>
+                    </div>
+                    <div class="service_content">
+                      <h4 class="title_20">Aquisição de<br> Clientas</h4>
+                      <p class="text_md">Aprenda a identificar seus clientes è a conquistar novos contatos para expandir
+                        seu negócio.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Platform area -->
+    <div class="platform_area">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5">
+            <div class="content">
+              <h2 class="title_42" data-aos="fade-up" data-aos-delay="100">Encontre vagas para Assistente Virtual na
+                nossa plataforma exclusiva.</h2>
+              <div class="d-md-none d-block pt_30 pb_20">
+                <div class="plat_form_right">
+                  <img src="img/platform_img.png" loading="lazy" alt="platform_img">
+                  <div class="platform_points">
+                    <div class="platform_point" data-aos="fade-right" data-aos-delay="100">
+                      <div class="pp_left">
+                        <h3 class="title_22">Analista administrativo</h3>
+                        <p class="pt_12 pb_12">1 ailo driras</p>
+                        <p>Preciso de um assistente virtual para me ajudar com análises de tabelas no Excel</p>
+                      </div>
+                      <div class="pp_right">
+                        <a href="javascript:void(0)" class="pp_btn">Ver projeto</a>
+                      </div>
+                    </div>
+                    <div class="platform_point" data-aos="fade-right" data-aos-delay="200">
+                      <div class="pp_left">
+                        <h3 class="title_22">Anolista administrativo</h3>
+                        <p class="pt_12 pb_12">1 ailo driras</p>
+                        <p>Presios de um assistente virtual paro me ojudar com analises de tobelas no Escel</p>
+                      </div>
+                      <div class="pp_right">
+                        <a href="javascript:void(0)" class="pp_btn">Ver projeto</a>
+                      </div>
+                    </div>
+                    <div class="platform_point" data-aos="fade-right" data-aos-delay="300">
+                      <div class="pp_left">
+                        <h3 class="title_22">Anolista administrativo</h3>
+                        <p class="pt_12 pb_12">1 ailo driras</p>
+                        <p>Presios de um assistente virtual paro me ojudar com analises de tobelas no Escel</p>
+                      </div>
+                      <div class="pp_right">
+                        <a href="javascript:void(0)" class="pp_btn">Ver projeto</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="pt_20 pb_40" data-aos="fade-up" data-aos-delay="100">Na Virtap, você encontra oportunidades
+                únicas de clientes que já entendem o valor
+                da assistência
+                virtual e buscam por profissionais como você.</p>
+              <ul class="triple_list pb_50" data-aos="fade-up" data-aos-delay="100">
+                <li>
+                  <img src="img/triple_arrow.svg" class="triple_arrow" alt="">
+                  <p class="f_600">Faça propostas ilimitadas</p>
+                </li>
+                <li>
+                  <img src="img/triple_arrow.svg" class="triple_arrow" alt="">
+                  <p class="f_600">Receba avaliações e torne seu perfil mais atraente</p>
+                </li>
+                <li>
+                  <img src="img/triple_arrow.svg" class="triple_arrow" alt="">
+                  <p class="f_600">Oportunidades de diferentes áreas da assistência virtual</p>
+                </li>
+                <li>
+                  <img src="img/triple_arrow.svg" class="triple_arrow" alt="">
+                  <p class="f_600">Negociação 100% feita entre você e o cliente, sem taxas</p>
+                </li>
+              </ul>
+              <a href="#quero-fazer-parte" class="button" data-aos="fade-up" data-aos-delay="100">
+                <span>Quero ter acesso as vagas</span>
+                <span class="button_icon">
+                  <img src="img/arrow-right.svg" alt="arrow-right">
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-7 d-md-block d-none">
+            <div class="plat_form_right">
+              <img src="img/platform_img.png" loading="lazy" alt="platform_img">
+              <div class="platform_points">
+                <div class="platform_point" data-aos="fade-right" data-aos-delay="100">
+                  <div class="pp_left">
+                    <h3 class="title_22">Anolista administrativo</h3>
+                    <p class="pt_12 pb_12">1 ailo driras</p>
+                    <p>Presios de um assistente virtual paro me ojudar com analises de tobelas no Escel</p>
+                  </div>
+                  <div class="pp_right">
+                    <a href="javascript:void(0)" class="pp_btn">Ver projeto</a>
+                  </div>
+                </div>
+                <div class="platform_point" data-aos="fade-right" data-aos-delay="200">
+                  <div class="pp_left">
+                    <h3 class="title_22">Anolista administrativo</h3>
+                    <p class="pt_12 pb_12">1 ailo driras</p>
+                    <p>Presios de um assistente virtual paro me ojudar com analises de tobelas no Escel</p>
+                  </div>
+                  <div class="pp_right">
+                    <a href="javascript:void(0)" class="pp_btn">Ver projeto</a>
+                  </div>
+                </div>
+                <div class="platform_point" data-aos="fade-right" data-aos-delay="300">
+                  <div class="pp_left">
+                    <h3 class="title_22">Anolista administrativo</h3>
+                    <p class="pt_12 pb_12">1 ailo driras</p>
+                    <p>Presios de um assistente virtual paro me ojudar com analises de tobelas no Escel</p>
+                  </div>
+                  <div class="pp_right">
+                    <a href="javascript:void(0)" class="pp_btn">Ver projeto</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mentorios area -->
+    <div class="mentorios_area">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9 mx-auto">
+            <div class="row align-items-center">
+              <div class="col-lg-6">
+                <div class="mentorios_img" data-aos="zoom-in" data-aos-delay="100">
+                  <img src="img/Mentorias_img.png" class="mentorios_img main_img_sm" alt="mentorios_img">
+                  <img src="img/Mentorias_shape.png" class="Mentorias_shape d-md-block d-none" alt="Mentorias_shape">
+                  <img src="img/Mentorias_shape_sm.png" class="Mentorias_shape d-md-none d-block" alt="Mentorias_shape">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="content" data-aos="fade-left" data-aos-delay="250">
+                  <h2 class="pb_20 title_42">Mentorias mensais ao vivo apoio contínuo na sua jornada</h2>
+                  <p>Todo mês, em encontros ao vivo com especialistas, você traz suas dúvidas, compartilha seus desafios
+                    e recebe orientações práticas de quem já viveu esse caminho.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ativa area -->
+    <div class="ativa_area">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9 mx-auto">
+            <div class="row align-items-center">
+              <div class="col-lg-6">
+                <div class="content" data-aos="fade-right" data-aos-delay="250">
+                  <h2 class="pb_20 title_42">Comunidade ativa e acolhedora</h2>
+                  <p>Cresça ao lado de quem vive o mesmo que você. Aqui, você encontra apoio, troca de experiências,
+                    amizades e parcerias reais com outras assistentes virtuais que entendem sua jornada.</p>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="ativa_img" data-aos="zoom-in" data-aos-delay="100">
+                  <img src="img/ativa_img.png" class="ativa_img_main main_img_sm" alt="ativa_img">
+                  <img src="img/ativa_shape.png" class="ativa_shape d-md-block d-none" alt="ativa_shape">
+                  <img src="img/ativa_shape_sm.png" class="ativa_shape d-md-none d-block" alt="ativa_shape">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- extras_area -->
+    <div class="extras_area">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-7">
+            <div class="extras_img" data-aos="zoom-in" data-aos-delay="100">
+              <img src="img/extras_img.png" class="main_img_sm" alt="">
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="content" data-aos="fade-left" data-aos-delay="250">
+              <h2 class="pb_20 title_42">Aulas Extras que Aceleram sua Carreira</h2>
+              <p>Além da formação principal, você tem acesso a conteúdos práticos e atualizados que vão direto ao ponto.
+                Aprenda a usar as ferramentas certas, se posicionar como uma profissional de valor e criar estratégias
+                para crescer na assistência virtual.</p>
+
+              <img src="img/extras_shape.png" class="extras_shape" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- tras_area -->
+    <div class="tras_area">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="content" data-aos="fade-right" data-aos-delay="100">
+              <h2 class="pb_20 title_42">Por trás da Virtap</h2>
+              <div class="tras_img d-md-none d-block">
+                <img src="img/tras_img_sm.png" class="mt_20 mb_20" alt="tras_img">
+              </div>
+              <p>A Virtap nasceu da experiência real de quem já viveu na pele o que é ser assistente virtual.<br><br>
+                Raquel Brito, fundadora da Virtap, <span class="f_600">começou sua jornada há 10 anos, como assistente
+                  virtual e, com o
+                  tempo,</span> construiu uma empresa especializada na área, que atende clientes no Brasil e no
+                exterior.<br><br>
+                Hoje, compartilha tudo o que aprendeu para formar novas profissionais, com uma visão prática, humana e
+                estratégica.<br><br>
+                Além de liderar a Virtap, juntamente com seus sócios, Raquel também é a professora por trás do curso —
+                <span class="f_600">trazendo uma formação direta ao ponto, baseada</span> em experiência de verdade e no
+                que o mercado realmente
+                espera.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-6 d-md-block d-none">
+            <div class="tras_img" data-aos="zoom-in" data-aos-delay="250">
+              <img src="img/tras_img.png" class="main_img_sm" alt="tras_img">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Voce area -->
+    <div class="voce_area">
+      <div class="container">
+        <div class="voce_content bg_one">
+          <h2 class="text-center title_42 pb_40" data-aos="fade-down" data-aos-delay="400">A Virtap é pra você que</h2>
+          <div class="row">
+            <div class="col-lg-4 col-md-4 col-6" data-aos="fade-right" data-aos-delay="300">
+              <div class="voce_box voce_box1">
+                <div class="voce_icon">
+                  <img src="img/voce_icon1.svg" alt="more present">
+                </div>
+                <p>Deseja estar maís presente na criaçáo dos filhos sem abrír mão da carreira</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-6" data-aos="fade-right" data-aos-delay="200">
+              <div class="voce_box voce_box2">
+                <div class="voce_icon">
+                  <img src="img/voce_icon2.svg" alt="more present">
+                </div>
+                <p>Procura crescimento de verdade e quer ser reconhecida pelo que sabe e faz</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-6" data-aos="fade-right" data-aos-delay="100">
+              <div class="voce_box voce_box3">
+                <div class="voce_icon">
+                  <img src="img/voce_icon3.svg" alt="more present">
+                </div>
+                <p>Quer mudar de rumo mas se sente perdida sobre como começar na assisténcia vírtual</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-6" data-aos="fade-left" data-aos-delay="100">
+              <div class="voce_box voce_box4">
+                <div class="voce_icon">
+                  <img src="img/voce_icon4.svg" alt="more present">
+                </div>
+                <p>Sonha em trabalhar do casa e náo quer mais perder horas no transito</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-6" data-aos="fade-left" data-aos-delay="200">
+              <div class="voce_box voce_box5">
+                <div class="voce_icon">
+                  <img src="img/voce_icon5.svg" alt="more present">
+                </div>
+                <p>Quer liberdade de horários e cansou da rotina engessada do CLT</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-6" data-aos="fade-left" data-aos-delay="300">
+              <div class="voce_box voce_box6">
+                <div class="voce_icon">
+                  <img src="img/voce_icon6.svg" alt="more present">
+                </div>
+                <p>Está desmotivada com o salario baixo e a faita de perspectiva no emprego atual</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table area -->
+    <div class="table_area">
+      <div class="container">
+        <h2 class="text-center pb_50 title_42" data-aos="fade-up" data-aos-delay="400">Por que a Virtap é diferente?
+        </h2>
+
+        <div class="table_wrap">
+
+          <div class="table_main" data-aos="fade-up" data-aos-delay="100">
+            <table>
+              <thead>
+                <tr>
+                  <th class="th1 col1">
+                  </th>
+                  <th class="th2 col2">
+                    <p>Virtap</p>
+                  </th>
+                  <th class="th3 col3">
+                    <p>Outros Cursos</p>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td1 col1">
+                    <div class="td_title">
+                      <p class="text_lg">Formação completa em Assistència Virtual</p>
+                    </div>
+                  </td>
+                  <td class="td2 col2">
+                    <div class="tik">
+                      <img src="img/tick-circle.svg" class="icon_24" alt="tick-circle">
+                    </div>
+                  </td>
+                  <td class="td3 col3">
+                    <div class="tik">
+                      <img src="img/tick-circle.svg" class="icon_24" alt="tick-circle">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="td1 col1">
+                    <div class="td_title">
+                      <p class="text_lg">Criado por quem tem mais de 10 anos de experiência real</p>
+                    </div>
+                  </td>
+                  <td class="td2 col2">
+                    <div class="tik">
+                      <img src="img/tick-circle.svg" class="icon_24" alt="tick-circle">
+                    </div>
+                  </td>
+                  <td class="td3 col3">
+                    <div class="tik">
+                      <img src="img/close-circle.svg" class="icon_24" alt="close-circle">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="td1 col1">
+                    <div class="td_title">
+                      <p class="text_lg">Plataforma com vagas reais e conexão com clientes</p>
+                    </div>
+                  </td>
+                  <td class="td2 col2">
+                    <div class="tik">
+                      <img src="img/close-circle.svg" class="icon_24" alt="close-circle">
+                    </div>
+                  </td>
+                  <td class="td3 col3">
+                    <div class="tik">
+                      <img src="img/tick-circle.svg" class="icon_24" alt="tick-circle">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="td1 col1">
+                    <div class="td_title">
+                      <p class="text_lg">Comunidade ativa e acolhedora</p>
+                    </div>
+                  </td>
+                  <td class="td2 col2">
+                    <div class="tik">
+                      <img src="img/tick-circle.svg" class="icon_24" alt="tick-circle">
+                    </div>
+                  </td>
+                  <td class="td3 col3">
+                    <div class="tik">
+                      <img src="img/tick-circle.svg" class="icon_24" alt="tick-circle">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="td1 col1">
+                    <div class="td_title">
+                      <p class="text_lg">Aulas extras sobre férramentas, estratégia e car-rėira</p>
+                    </div>
+                  </td>
+                  <td class="td2 col2">
+                    <div class="tik">
+                      <img src="img/close-circle.svg" class="icon_24" alt="close-circle">
+                    </div>
+                  </td>
+                  <td class="td3 col3">
+                    <div class="tik">
+                      <img src="img/tick-circle.svg" class="icon_24" alt="tick-circle">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="td1 col1">
+                    <div class="td_title">
+                      <p class="text_lg">Certificado de conclusão</p>
+                    </div>
+                  </td>
+                  <td class="td2 col2">
+                    <div class="tik">
+                      <img src="img/tick-circle.svg" class="icon_24" alt="tick-circle">
+                    </div>
+                  </td>
+                  <td class="td3 col3">
+                    <div class="tik">
+                      <img src="img/tick-circle.svg" class="icon_24" alt="tick-circle">
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+          <div class="lamp_wrap d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="lamp_icon">
+              <img src="img/lamp-on.svg" alt="">
+            </div>
+            <p>Na Virtap, vocé aprende com quem vive isso na prática e tem acessoeal às oportunidades para
+              transformar
+              seu aprendizado em trabalho.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Access area -->
+    <div class="access_area">
+      <div class="container">
+        <div class="access_content" id="quero-fazer-parte">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="content" data-aos="fade-right" data-aos-delay="100">
+                <h2 class="title_42">Tenha acesso completo à Virtap</h2>
+                <h3 class="pt_40 pb_50 text_blue">ASSINATURA ANUAL</h3>
+                <div class="oferta d-flex align-items-center">
+                  <div class="oferta_icon">
+                    <img src="img/gift.svg" alt="gift">
+                  </div>
+                  <h4 class="title_24 pl_25">oferta de lançamento</h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-9">
+              <div class="access_main" data-aos="fade-left" data-aos-delay="300">
+                <div class="access_left text-center bg-white pt_35 pb_35 pl_30 pr_30">
+                  <h5>De 12x de R$ 99,90</h5>
+                  <p class="p1 pt_20 pb_20">Por 12x de R$ 79,90</p>
+                  <p class="p2">Ou R$ 797,00 à vista. </p>
+                  <a href="/assinar?plano=VIRTAPCLUB" id="subscribe-button" class="button mx-auto mt_30 mb_30">
+                    <span>Quero fazer parte</span>
+                    <span class="button_icon">
+                      <img src="img/arrow-right.svg" alt="arrow-right">
+                    </span>
+                  </a>
+                  <div class="open_wrap">
+                    <p>Promoção válida por tempo limitado!</p>
+
+                    <div class="open_input">
+                      <input type="text" placeholder="Oferta encerra em" readonly>
+                      <div class="clock_wrap d-flex align-items-center">
+                        <img src="img/clock.svg" class="icon_20 flex_auto" alt="clock">
                         <p></p>
+                      </div>
                     </div>
+                  </div>
                 </div>
-                <div class="row">
-                    <div class="col-xl-6">
-                        <div class="pricing_card" data-aos="fade-right">
-                            <div class="top">
-                                <h3>Free</h3>
-                                <p>Gratuito</p>
-                            </div>
-                            <ul class="list_group">
-                                <li>Curso de introdução à Assistência Virtual</li>
-                                <li>Comunidade Virtap</li>
-                                <li>Conteúdo frequente</li>
-                            </ul>
-                        </div>
+                <div class="access_right">
+                  <div class="access_point pt_24 pb_24">
+                    <div class="access_icon">
+                      <img src="img/certificate.svg" class="icon_30 flex_auto" alt="certificate">
                     </div>
-                    <div class="col-xl-6">
-                        <div class="pricing_card annual" data-aos="fade-right">
-                            <div class="top">
-                                <h3>Vip</h3>
-                                <p>R$ 69,90/mês (cobrando anualmente)</p>
-                            </div>
-                            <ul class="list_group">
-                                <li>Formação completa em Assistência Virtual</li>
-                                <li>Comunidade Virtap</li>
-                                <li>Conteúdo frequente</li>
-                                <li>Vídeo aulas exclusivas</li>
-                                <li>Acesso ao marketplace</li>
-                            </ul>
-                        </div>
+                    <p>Formação em Assistência Virtual com + 30 aulas e certificado</p>
+                  </div>
+                  <div class="access_point pt_24 pb_24">
+                    <div class="access_icon">
+                      <img src="img/job.svg" class="icon_30 flex_auto" alt="job">
                     </div>
+                    <p>Acesso a vagas reais de trabalho</p>
+                  </div>
+                  <div class="access_point pt_24 pb_24">
+                    <div class="access_icon">
+                      <img src="img/career.svg" class="icon_30 flex_auto" alt="career">
+                    </div>
+                    <p>Mentorias e aulas extras que aceleram sua carreira</p>
+                  </div>
+                  <div class="access_point pt_24 pb_24">
+                    <div class="access_icon">
+                      <img src="img/welcoming.svg" class="icon_30 flex_auto" alt="welcoming">
+                    </div>
+                    <p>Comunidade ativa e acolhedora</p>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>-->
-
-    <!--========== singup banner area ===========-->
-    <div class="singup_banner_area">
-        <div class="container">
-            <div class="singup_banner">
-                <img class="singup_banner_img" src="img/cadastre-se.png" alt="Cadastre-se">
-                <img class="sh" src="img/virtap-simbolo-9.png" alt="Virtap símbolo 9">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="singup_banner_content">
-                            <h2>Cadastre-se agora e aprenda a trabalhar como Assistente Virtual</h2>
-                            <a href="/cadastrar" target="_blank" class="primary_button mt_50">Quero ser AV</a>
-                            <img class="sh check_sh" src="img/cadastre-se-gratuitamente.png" alt="Cadastre-se">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <!-- conquiste-tempo-area -->
-    <!-- <section class="conquiste-tempo-area">
-        <div class="conquiste-tempo-container">
-            <div class="conquiste-tempo-title title">
-                <h2>Por que ser Assistente Virtual?</h2>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 offset-3">
-                    <div class="conquiste-tempo-item conquiste-tempo-item-com">
-                        <ul class="conquiste-tempo-item-ul  conquiste-tempo-item-ul-com">
-                            <li class="conquiste-tempo-item-li conquiste-tempo-item-li-com">Desgaste em atividades
-                                repetitivas
-                            </li>
-                            <li class="conquiste-tempo-item-li conquiste-tempo-item-li-com">Sem tempo para focar na
-                                estratégia
-                                do negócio</li>
-                            <li class="conquiste-tempo-item-li conquiste-tempo-item-li-com">Desorganização e estresse
-                            </li>
-                            <li class="conquiste-tempo-item-li conquiste-tempo-item-li-com">Sem tempo para família e
-                                lazer</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <!-- Faq area -->
+    <div class="faq_area">
+      <div class="container">
+        <h2 class="title_42 text-center pb_40" data-aos="fade-up" data-aos-delay="400">FAQ</h2>
 
+        <div class="faq_content bg_one">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="accordion" data-aos="fade-right" data-aos-delay="100" id="faq_accordion">
+                <div class="accordion_item active">
+                  <button class="accordion_button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1"
+                    aria-expanded="true" aria-controls="faq1">
+                    <span class="accordion_title">Porque usar a Virtap ao invés de outras plataformas de
+                      freelancer?</span>
+                    <span class="faq_arrow">
+                      <img src="img/arrow-down.svg" class="icon_28" alt="arrow-down">
+                    </span>
+                  </button>
+                  <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faq_accordion">
+                    <div class="accordion-body">
+                      <p>According to most sources, Lorum Ipsum can be traced back to a text composed by Cicero in 45
+                        BC.
+                        Allegedly</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion_item">
+                  <button class="accordion_button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                    <span class="accordion_title">Como é o formato de trabalho com assistentes virtuais, é CLT?</span>
+                    <span class="faq_arrow">
+                      <img src="img/arrow-down.svg" class="icon_28" alt="arrow-down">
+                    </span>
+                  </button>
+                  <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faq_accordion">
+                    <div class="accordion-body">
+                      <p>According to most sources, Lorum Ipsum can be traced back to a text composed by Cicero in 45
+                        BC.
+                        Allegedly</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion_item">
+                  <button class="accordion_button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                    <span class="accordion_title">Porque usar a Virtap ao invés de outras plataformas de
+                      freelancer?</span>
+                    <span class="faq_arrow">
+                      <img src="img/arrow-down.svg" class="icon_28" alt="arrow-down">
+                    </span>
+                  </button>
+                  <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faq_accordion">
+                    <div class="accordion-body">
+                      <p>According to most sources, Lorum Ipsum can be traced back to a text composed by Cicero in 45
+                        BC.
+                        Allegedly</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion_item">
+                  <button class="accordion_button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                    <span class="accordion_title">Porque usar a Virtap ao invés de outras plataformas de
+                      freelancer?</span>
+                    <span class="faq_arrow">
+                      <img src="img/arrow-down.svg" class="icon_28" alt="arrow-down">
+                    </span>
+                  </button>
+                  <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faq_accordion">
+                    <div class="accordion-body">
+                      <p>According to most sources, Lorum Ipsum can be traced back to a text composed by Cicero in 45
+                        BC.
+                        Allegedly</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="faq_tab_content_wrap" data-aos="fade-left" data-aos-delay="250">
+                <div class="faq_tab_content text-center">
+                  <img src="img/faq_logo.png" class="faq_logo" alt="faq_logo">
+                  <h3 class="title_32 pt_50 pb_30">Garantia de 7 dias</h3>
+                  <p>Se após a inscrição na Virtap você perceber que não faz sentido pra sua jornada, é só pedir o
+                    reembolso em até 7 dias após a compra.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </section> -->
 
+      </div>
+    </div>
 
-    <!-- virtap-funciona-area -->
-    <!-- <section class="virtap-funciona-area">
-        <div class="main-container">
-            <div class="virtap-funciona-title title">
-                <h2>Como a Virtap funciona?</h2>
+    <!-- Contractar area -->
+    <div class="contractar_area position-relative">
+
+      <img src="img/contractar_bg.png" class="contractar_bg" alt="contractar_bg">
+
+      <div class="container position-relative">
+        <div class="contratar_content">
+          <div class="row">
+            <div class="col-lg-6">
+
+              <div class="d-md-block d-none">
+                <div class="contractor_boxes_wrap">
+                  <div class="contractor_box contractor_box1 text-center" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="contractor_icon">
+                      <img src="img/clipboard-text.svg" alt="">
+                    </div>
+                    <div class="contractor_info">
+                      <h2 class="pt_30 pb_15">Publique seu<br> projeto</h2>
+                      <p>Crie uma conta e publique um projeto descrevendo o que você precisa.</p>
+                    </div>
+                  </div>
+                  <div class="contractor_box contractor_box2 text-center" data-aos="zoom-in" data-aos-delay="250">
+                    <div class="contractor_icon">
+                      <img src="img/clipboard-text.svg" alt="">
+                    </div>
+                    <div class="contractor_info">
+                      <h2 class="pt_30 pb_15">Receba<br> propostas</h2>
+                      <p>Os profissionais interessados no projeto enviarão uma proposta para você.</p>
+                    </div>
+                  </div>
+                  <div class="contractor_box contractor_box3 text-center" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="contractor_icon">
+                      <img src="img/clipboard-text.svg" alt="">
+                    </div>
+                    <div class="contractor_info">
+                      <h2 class="pt_30 pb_15">Escolha até 4 profissionais</h2>
+                      <p>Os profissionais escolhidos irão contactar você e vocês negociam tudo diretamente.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-md-none d-block">
+                <div class="contractor_slider owl-carousel">
+                  <div class="contractor_box contractor_box1 text-center" data-aos="fade-left" data-aos-delay="200">
+                    <div class="contractor_icon">
+                      <img src="img/clipboard-text.svg" alt="">
+                    </div>
+                    <div class="contractor_info">
+                      <h2 class="pt_30 pb_15">Publique seu<br> projeto</h2>
+                      <p>Crie uma conta e publique um projeto descrevendo o que você precisa.</p>
+                    </div>
+                  </div>
+                  <div class="contractor_box contractor_box2 text-center" data-aos="fade-right" data-aos-delay="200">
+                    <div class="contractor_icon">
+                      <img src="img/clipboard-text.svg" alt="">
+                    </div>
+                    <div class="contractor_info">
+                      <h2 class="pt_30 pb_15">Receba<br> propostas</h2>
+                      <p>Os profissionais interessados no projeto enviarão uma proposta para você.</p>
+                    </div>
+                  </div>
+                  <div class="contractor_box contractor_box3 text-center" data-aos="fade-left" data-aos-delay="200">
+                    <div class="contractor_icon">
+                      <img src="img/clipboard-text.svg" alt="">
+                    </div>
+                    <div class="contractor_info">
+                      <h2 class="pt_30 pb_15">Escolha até 4 profissionais</h2>
+                      <p>Os profissionais escolhidos irão contactar você e vocês negociam tudo diretamente.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
-            <div class="virtap-funciona-wrapper">
-                <div class="virtap-funciona-item" data-aos="fade-right" data-aos-delay="200">
-                    <div class="virtap-funciona-img">
-                        <img src="img/publique-seu-projeto.png" alt="Publique seu projeto">
-                    </div>
-                    <h3>Publique seu projeto</h3>
-                    <p>Crie uma conta e publique um projeto descrevendo o que você precisa.</p>
-                    <img class="right_arrow" src="img/proximo.png" alt="Proximo">
-                </div>
-                <div class="virtap-funciona-item" data-aos="fade-right" data-aos-delay="100">
-                    <div class="virtap-funciona-img">
-                        <img src="img/receba-propostas.png" alt="Receba propostas">
-                    </div>
-                    <h3>Receba propostas</h3>
-                    <p>Os profissionais interessados no projeto enviarão uma proposta para você.</p>
-                    <img class="right_arrow" src="img/proximo.png" alt="Proximo">
-                </div>
-                <div class="virtap-funciona-item" data-aos="fade-right">
-                    <div class="virtap-funciona-img">
-                        <img src="img/escolha-profissionais.png" alt="Escolha profissionais">
-                    </div>
-
-                    <h3>Escolha até 4 profissionais</h3>
-                    <p>Os profissionais escolhidos irão contactar você e vocês negociam tudo diretamente.</p>
-                </div>
+            <div class="col-lg-6">
+              <div class="content" data-aos="fade-left" data-aos-delay="400">
+                <h2 class="pb_20 title_42">Precisa contratar uma<br> Assistente Virtual?</h2>
+                <h3 class="f_700 title_24 pb_20">Conectamos você com os melhores profissionais do mercado.</h3>
+                <p class="pb_50">Cresça ao lado de quem vive o mesmo que você. Aqui, você encontra apoio, troca de
+                  experiências,
+                  amizades e parcerias reais com outras assistentes virtuais que entendem sua jornada.</p>
+                <a href="/contratar-assistente-virtual/cadastrar" class="button button_transparent">
+                  <span>Encontre um talento</span>
+                  <span class="button_icon">
+                    <img src="img/arrow-right.svg" alt="arrow-right">
+                  </span>
+                </a>
+              </div>
             </div>
-            <a class="virtap-funciona-btn" href="https://clientes.virtap.com.br/" target="_blank">Encontrar um
-                talento</a>
-
+          </div>
         </div>
-    </section> -->
+      </div>
+    </div>
 
+  </main>
 
-    <!-- ninja-recomenda-area 
-    <section class="ninja-recomenda-area">
-        <div class="main-container">
-            <div class="row">
-                <div class="col-lg-5" data-aos="fade-right">
-                    <div class="ninja-recomenda-text-item">
-                        <div class="ninja-recomenda-title title">
-                            <h2>Quem countratou um ninja recomenda</h2>
-                            <p>Sao mais de 3 milhoes de clientes e profisdionais felizes</p>
-                        </div> 
-                    </div>
-                </div>
-                <div class="col-lg-7">
-                    <div class="row justify-content-center g-4 g-xxl-5">
-                        <div class="col-lg-6" data-aos="fade-right">
-                            <div class="ninja-recomenda-right-item">
-                                <div class="ninja-recomenda-user-area">
-                                    <div class="ninja-recomenda-user">
-                                        <img src="img/testimonia-img-1.png" alt="">
-                                        <div class="ninja-recomenda-user-name">
-                                            <a href="#">Christie Henderson</a>
-                                            <strong>USA</strong>
-                                        </div>
-                                    </div>
-                                    <img src="img/ninja-recomenda-user-quite.png" alt="">
-                                </div>
-                                <div class="ninja-recomenda-user-paragraph">
-                                    <p>Fui muito bem atendido o profissionalfoi muito educodo e fez um trabalho de qualidode valeu a oena arcamento frduts e nao e careiro</p>
+  <!-- Footer Section -->
+  <footer class="footer_section position-relative" data-aos="fade-up" data-aos-delay="100">
 
-                                    <h6>Servico de pedreiroana paula contratou um pedreiro em sao paulo sp</h6>
-                                </div> 
-                            </div>
-                        </div>
-                        <div class="col-lg-6" data-aos="fade-left">
-                            <div class="ninja-recomenda-right-item">
-                                <div class="ninja-recomenda-user-area">
-                                    <div class="ninja-recomenda-user">
-                                        <img src="img/testimonia-img-2.png" alt="">
-                                        <div class="ninja-recomenda-user-name">
-                                            <a href="#">Christie Henderson</a>
-                                            <strong>USA</strong>
-                                        </div>
-                                    </div>
-                                    <img src="img/ninja-recomenda-user-quite.png" alt="">
-                                </div>
-                                <div class="ninja-recomenda-user-paragraph">
-                                    <p>os profissionais sao pessaos dedicadas com seus servico tudo a wue e pedido e feito da maneira coma foi pedido  aprovado!</p>
+    <img src="img/footer_bg.png" class="footer_bg d-md-block d-none" alt="footer_bg">
+    <img src="img/footer_bg_sm.png" class="footer_bg d-md-none d-block" alt="footer_bg">
 
-                                    <h6>Servico de assistencia bruno freitas contratou uma assistencia em curitiba pr</h6>
-                                </div> 
-                            </div>
-                        </div>
-                        <div class="col-lg-6" data-aos="fade-up">
-                            <div class="ninja-recomenda-right-item ninja-recomenda-right-item-last">
-                                <div class="ninja-recomenda-user-area">
-                                    <div class="ninja-recomenda-user">
-                                        <img src="img/testimonia-img-3.png" alt="">
-                                        <div class="ninja-recomenda-user-name">
-                                            <a href="#">Christie Henderson</a>
-                                            <strong>USA</strong>
-                                        </div>
-                                    </div>
-                                    <img src="img/ninja-recomenda-user-quite.png" alt="">
-                                </div>
-                                <div class="ninja-recomenda-user-paragraph">
-                                    <p>Uma exceiente profissional pontual e acima de tudo confiavei foi bastante educoda e atenciosa com o trabalha recomendo</p>
+    <div class="container position-relative">
 
-                                    <h6>Servico de diarista renata figueirdo contratou uma diarista em rio de janeiro rj</h6>
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="row">
+
+        <div class="col-lg-3 col-md-3 col-sm-6 footer_col1">
+          <div class="footer_links">
+            <h2 class="pb_40 text-white title_22">Blog</h2>
+            <ul class="text-white">
+              <li><a href="#">O que é Assistência Virtual?</a></li>
+              <li><a href="#">10 tarefas que você pode delegar</a></li>
+              <li><a href="#">Assistente Virtual para médicos</a></li>
+              <li><a href="#">Assistente Virtual para</a></li>
+              <li><a href="#">Profissionais autonomos</a></li>
+            </ul>
+          </div>
         </div>
-    </section>
-    -->
 
-
-
-    <!-- explore-desenvolva-area -->
-    <!-- <section class="explore-desenvolva-area">
-        <div class="main-container">
-            <div class="row">
-                <div class="col-lg-4" data-aos="fade-right">
-                    <div class="explore-desenvolva-left-item">
-                        <h2>Explore e desenvolva seu talento com a Virtap</h2>
-                        <a href="/assistente-virtual/" target="_blank">Oferecer meus serviços</a>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="row gx-4 gx-xxl-4">
-                        <div class="col-lg-4" data-aos="zoom-out-down">
-                            <div class="explore-desenvolva-right-item">
-                                <img src="img/cadaste-se.svg" alt="Cadastre-se">
-                                <p>Faça seu cadastro e comece a fazer propostas para as melhores oportunidades da
-                                    Assistência Virtual.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4" data-aos="zoom-out-down">
-                            <div class="explore-desenvolva-right-item explore-desenvolva-right-item-two">
-                                <img src="img/negocie.svg" alt="Negocie">
-                                <p>Negocie tudo diretamente com o cliente, valores e condições. Não cobramos taxa sobre
-                                    o seu serviço!</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-4" data-aos="zoom-out-down">
-                            <div class="explore-desenvolva-right-item">
-                                <img src="img/treine.svg" alt="Treine">
-                                <p>Seja um "Student" e tenha acesso a treinamentos, conteúdos exclusivos e à comunidade
-                                    Virtap.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="col-lg-6 col-md-6 footer_col2">
+          <div class="footer_mid text-center text-white pl_20 pr_20">
+            <a href="javascript:void(0)" class="footer_logo mx-auto">
+              <img src="img/footer_logo.svg" alt="footer_logo">
+            </a>
+            <p class="pt_60 pb_50">A Virtap é um hub de negócios e educação que conecta clientes a profissionais da
+              assistência virtual e
+              educa esses profissionais ensinando os a se tornarem especialistas.</p>
+            <div class="social_icon d-flex align-items-center justify-content-center">
+              <a href="https://www.instagram.com/virtapbr" target="blank">
+                <img src="img/instagram.svg" class="icon_22" alt="instagram">
+              </a>
+              <a href="https://www.linkedin.com/company/virtap" target="blank">
+                <img src="img/linkedin.svg" class="icon_20" alt="linkedin">
+              </a>
             </div>
+          </div>
         </div>
-    </section> -->
 
-    <!-- comunidade-students-area -->
-    <!-- <section class="comunidade-students-area">
-        <div class="main-container">
-            <div class="comunidade-students-wrapper">
-                <div class="comunidade-students-item" data-aos="fade-down-right">
-                    <h2>Mais que uma plataforma de freelancers</h2>
-                    <p>Somos mais do que uma simples plataforma de freelancers. Nosso valor principal é a educação: os
-                        profissionais cadastrados na nossa base tem acesso ao que há de melhor em treinamento
-                        especializado.</p>
-                </div>
-                <div class="comunidade-students-map" data-aos="fade-down-left">
-                    <img class="comunidade-students-map-1" src="img/comunidade-students-map-1.png"
-                        alt="Comunidade Students 1">
-                    <img class="comunidade-students-map-2" src="img/comunidade-students-map-2.png"
-                        alt="Comunidade Students 2">
-                    <img class="comunidade-students-map-3" src="img/comunidade-students-map-3.png"
-                        alt="Comunidade Students 3">
-                    <img class="comunidade-students-map-4" src="img/comunidade-students-map-4.png"
-                        alt="Comunidade Students 4">
-                    <img class="comunidade-students-map-5" src="img/comunidade-students-map-5.png"
-                        alt="Comunidade Students 5">
-                    <img class="comunidade-students-map-6" src="img/comunidade-students-map-6.png"
-                        alt="Comunidade Students 6">
-
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7413845.64955319!2d-56.57350638033323!3d-12.565510660266487!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9c59c7ebcc28cf%3A0x295a1506f2293e63!2sBrasil!5e0!3m2!1spt-BR!2sbr!4v1686089883463!5m2!1spt-BR!2sbr"
-                        style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 footer_col3">
+          <div class="footer_box_end text-white">
+            <!-- <div class="footer_box_end_row pb_70">
+              <h3 class="title_22 pb_20 text-white">Trabalhe como<br> Assistente Virtual</h3>
+              <p><a href="/cadastrar" class="text_lg" target="_blank">Junte se à nossa rede de profissionais.</a></p>
+            </div> -->
+            <div class="footer_box_end_row">
+              <h3 class="title_22 pb_20 text-white">Contrate uma<br> Assistente Virtual</h3>
+              <p><a href="https://clientes-test.virtap.com.br" class="text_lg">Encontre um talento</a></p>
             </div>
+          </div>
         </div>
-    </section> -->
 
-    <!-- assistentes-especialistas-area
-    <section class="assistentes-especialistas-area">
-        <div class="main-container"> 
-            <div class="assistentes-especialistas-title title">
-                <h2>Assistentes virtuais especialistas</h2>
-                <p>Search and contact freelancers directly with no obligation</p>
-            </div>
-            <div class="swiper assistentes-especialistas-swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="assistentes-especialistas-item">
-                            <img src="img/assistentes-especialistas-img-1.png" alt=""> 
-                            <div class="assistentes-especialistas-text">
-                                <div class="assistentes-especialistas-name">
-                                    <a href="#">Stephanie B.</a>
-                                    <span><i class="fas fa-star"></i> 5.0 (951)</span>
-                                </div>
-                                <p>Coach mentor content writer smail busin ess support</p>
-                                <ul>
-                                    <li class="book"><i class="fas fa-book"></i></li>
-                                    <li class="star"><i class="fal fa-star"></i></li>
-                                    <li class="trophy"><i class="fas fa-trophy-alt"></i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="swiper-slide">
-                        <div class="assistentes-especialistas-item">
-                            <img src="img/assistentes-especialistas-img-2.png" alt=""> 
-                            <div class="assistentes-especialistas-text">
-                                <div class="assistentes-especialistas-name">
-                                    <a href="#">Peter M.</a>
-                                    <span><i class="fas fa-star"></i> 5.0 (3012)</span>
-                                </div>
-                                <p>Winner of pph’s webmaster of the year! se o & wordpress expert (21 years experience)</p>
-                                <ul>
-                                    <li class="book"><i class="fas fa-book"></i></li>
-                                    <li class="star"><i class="fal fa-star"></i></li> 
-                                </ul>
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="swiper-slide">
-                        <div class="assistentes-especialistas-item">
-                            <img src="img/assistentes-especialistas-img-3.png" alt=""> 
-                            <div class="assistentes-especialistas-text">
-                                <div class="assistentes-especialistas-name">
-                                    <a href="#">Zara L.</a>
-                                    <span><i class="fas fa-star"></i> 5.0 (937)</span>
-                                </div>
-                                <p>Google ads prainer qualified/ppc/ecomm ercc specialist/ google shopping/ remarke line/keyword research</p>
-                                <ul>
-                                    <li class="book"><i class="fas fa-book"></i></li>
-                                    <li class="star"><i class="fal fa-star"></i></li> 
-                                </ul>
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="swiper-slide">
-                        <div class="assistentes-especialistas-item">
-                            <img src="img/assistentes-especialistas-img-4.png" alt=""> 
-                            <div class="assistentes-especialistas-text">
-                                <div class="assistentes-especialistas-name">
-                                    <a href="#">Gajura .C</a>
-                                    <span><i class="fas fa-star"></i> 5.0 (2089)</span>
-                                </div>
-                                <p>Seo expert and experienced guest with ter on high authority sites top rated sed service</p>
-                                <ul> 
-                                    <li class="trophy"><i class="fas fa-trophy-alt"></i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="swiper-slide">
-                        <div class="assistentes-especialistas-item">
-                            <img src="img/assistentes-especialistas-img-1.png" alt=""> 
-                            <div class="assistentes-especialistas-text">
-                                <div class="assistentes-especialistas-name">
-                                    <a href="#">Stephanie B.</a>
-                                    <span><i class="fas fa-star"></i> 5.0 (951)</span>
-                                </div>
-                                <p>Coach mentor content writer smail busin ess support</p>
-                                <ul>
-                                    <li class="book"><i class="fas fa-book"></i></li>
-                                    <li class="star"><i class="fal fa-star"></i></li>
-                                    <li class="trophy"><i class="fas fa-trophy-alt"></i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="assistentes-especialistas-item">
-                            <img src="img/assistentes-especialistas-img-1.png" alt=""> 
-                            <div class="assistentes-especialistas-text">
-                                <div class="assistentes-especialistas-name">
-                                    <a href="#">Stephanie B.</a>
-                                    <span><i class="fas fa-star"></i> 5.0 (951)</span>
-                                </div>
-                                <p>Coach mentor content writer smail busin ess support</p>
-                                <ul>
-                                    <li class="book"><i class="fas fa-book"></i></li>
-                                    <li class="star"><i class="fal fa-star"></i></li>
-                                    <li class="trophy"><i class="fas fa-trophy-alt"></i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="swiper-slide">
-                        <div class="assistentes-especialistas-item">
-                            <img src="img/assistentes-especialistas-img-2.png" alt=""> 
-                            <div class="assistentes-especialistas-text">
-                                <div class="assistentes-especialistas-name">
-                                    <a href="#">Peter M.</a>
-                                    <span><i class="fas fa-star"></i> 5.0 (3012)</span>
-                                </div>
-                                <p>Winner of pph’s webmaster of the year! se o & wordpress expert (21 years experience)</p>
-                                <ul>
-                                    <li class="book"><i class="fas fa-book"></i></li>
-                                    <li class="star"><i class="fal fa-star"></i></li> 
-                                </ul>
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="swiper-slide">
-                        <div class="assistentes-especialistas-item">
-                            <img src="img/assistentes-especialistas-img-3.png" alt=""> 
-                            <div class="assistentes-especialistas-text">
-                                <div class="assistentes-especialistas-name">
-                                    <a href="#">Zara L.</a>
-                                    <span><i class="fas fa-star"></i> 5.0 (937)</span>
-                                </div>
-                                <p>Google ads prainer qualified/ppc/ecomm ercc specialist/ google shopping/ remarke line/keyword research</p>
-                                <ul>
-                                    <li class="book"><i class="fas fa-book"></i></li>
-                                    <li class="star"><i class="fal fa-star"></i></li> 
-                                </ul>
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="swiper-slide">
-                        <div class="assistentes-especialistas-item">
-                            <img src="img/assistentes-especialistas-img-4.png" alt=""> 
-                            <div class="assistentes-especialistas-text">
-                                <div class="assistentes-especialistas-name">
-                                    <a href="#">Gajura .C</a>
-                                    <span><i class="fas fa-star"></i> 5.0 (2089)</span>
-                                </div>
-                                <p>Seo expert and experienced guest with ter on high authority sites top rated sed service</p>
-                                <ul> 
-                                    <li class="trophy"><i class="fas fa-trophy-alt"></i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="swiper-slide">
-                        <div class="assistentes-especialistas-item">
-                            <img src="img/assistentes-especialistas-img-1.png" alt=""> 
-                            <div class="assistentes-especialistas-text">
-                                <div class="assistentes-especialistas-name">
-                                    <a href="#">Stephanie B.</a>
-                                    <span><i class="fas fa-star"></i> 5.0 (951)</span>
-                                </div>
-                                <p>Coach mentor content writer smail busin ess support</p>
-                                <ul>
-                                    <li class="book"><i class="fas fa-book"></i></li>
-                                    <li class="star"><i class="fal fa-star"></i></li>
-                                    <li class="trophy"><i class="fas fa-trophy-alt"></i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> 
-                </div>
-                <div class="swiper-button-next story-ab-btn-next"><i class="fal fa-chevron-right"></i></div>
-                <div class="swiper-button-prev story-ab-btn-prev"><i class="fal fa-chevron-left"></i></div>
-            </div>
+      </div>
+
+      <!-- copywrite -->
+      <div class="copywrite mt_100 pt_40 pb_40">
+
+        <div class="row">
+          <div class="col-md-6 text-left">
+            <p class="text_lg">Copyright 2025 Virtap. Todos os direitos reservados.</p>
+          </div>
+          <div class="col-lg-6 text-end">
+            <a href="/termos" class="text_lg" target="_blank">Termos & Condições</a>
+          </div>
         </div>
-    </section>-->
 
-    <!-- faq-area
-    <section class="faq-area">
-        <div class="main-container">
-            <div class="faq-title title d-lg-none">
-                <h2>FAQ</h2>
-            </div>
-            <div class="row align-items-center"> 
-                <div class="col-lg-6 order-lg-2" data-aos="fade-down">
-                    <div class="faq-image">
-                        <img src="img/faq-img.svg" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-6 order-lg-1" data-aos="fade-down">
-                    <div class="faq_item_wrapper">
-                        <div class="faq-title title d-none d-lg-block">
-                            <h2>FAQ</h2>
-                        </div>
-                        <div class="faq-item">
-                            <div class="wrapper">
-                                <ul class="accordion" id="accordion">
-                                    <li class="accordion__item is-open">
-                                        <div class="accordion__link js-accordion-link">Como é o formato de trabalho com assistentes virtuais, é CLT?</div>
-                                        <div class="accordion__submenu js-accordion-submenu" style="display: block;">
-                                            <div class="accordion__submenu-item">
-                                                <p class="accordion__submenu-link">According to most sources, Lorum Ipsum can be traced back to a text composed by Cicero in 45 BC. Allegedly</p>
-                                            </div> 
-                                        </div>
-                                    </li>
-                                    <li class="accordion__item">
-                                        <div class="accordion__link js-accordion-link">Porque usar a Virtap ao invés de outras plataformas de freelancer?</div>
-                                        <div class="accordion__submenu js-accordion-submenu" style="display: none;">
-                                            <div class="accordion__submenu-item">
-                                                <p class="accordion__submenu-link">According to most sources, Lorum Ipsum can be traced back to a text composed by Cicero in 45 BC. Allegedly</p>
-                                            </div> 
-                                        </div>
-                                    </li> 
-                                    <li class="accordion__item">
-                                        <div class="accordion__link js-accordion-link">Porque usar a Virtap ao invés de outras plataformas de freelancer?</div>
-                                        <div class="accordion__submenu js-accordion-submenu" style="display: none;">
-                                            <div class="accordion__submenu-item">
-                                                <p class="accordion__submenu-link">According to most sources, Lorum Ipsum can be traced back to a text composed by Cicero in 45 BC. Allegedly</p>
-                                            </div> 
-                                        </div>
-                                    </li>
-                                    <li class="accordion__item">
-                                        <div class="accordion__link js-accordion-link">Porque usar a Virtap ao invés de outras plataformas de freelancer?</div>
-                                        <div class="accordion__submenu js-accordion-submenu" style="display: none;">
-                                            <div class="accordion__submenu-item">
-                                                <p class="accordion__submenu-link">According to most sources, Lorum Ipsum can be traced back to a text composed by Cicero in 45 BC. Allegedly</p>
-                                            </div> 
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-
-    <!-- guru-insights-area
-    <section class="guru-insights-area">
-        <div class="main-container">
-            <div class="Para-quem-title title">
-                <h2>Guru Insights</h2>
-            </div>
-            <div class="guru-insights-wrapper">
-                <div class="guru-insights-item" data-aos="fade-right">
-                    <img src="img/guru-insights-img-1.png" alt="">
-                    <div class="guru-insights-img-text">
-                        <h6>What is front end software development?</h6>
-                        <small>02 Nov 2023</small>
-                    </div>
-                </div>
-                <div class="guru-insights-item" data-aos="fade-down">
-                    <img src="img/guru-insights-img-2.png" alt="">
-                    <div class="guru-insights-img-text">
-                        <h6>Front end versus back end developers</h6>
-                        <small>02 Nov 2023</small>
-                    </div>
-                </div>
-                <div class="guru-insights-item" data-aos="fade-left">
-                    <img src="img/guru-insights-img-3.png" alt="">
-                    <div class="guru-insights-img-text">
-                        <h6>What languages do back end developers use?</h6>
-                        <small>02 Nov 2023</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-
-    <!-- footer-area  -->
-    <footer class="footer-area" data-aos="fade-up">
-        <div class="main-container">
-            <div class="footer-title">
-                <a class="footer-logo" href="#"><img src="img/logo.png" alt="Logo Virtap"></a>
-                <p>A Virtap é um hub de negócios e educação que forma profissionais da Assistência Virtual e os conecta
-                    a clientes.</p>
-            </div>
-            <div class="row">
-                <div class="offset-md-2 col-md-4 col-5 offset-1">
-                    <div class="footer-item">
-                        <h6 class="footer-item-heading">Sobre</h6>
-                        <ul class="footer-item-ul">
-                            <li><a href="mailto:contato@virtap.com.br" target="_blank">Contato</a></li>
-                            <li><a href="https://blog.virtap.com.br/" target="_blank">Blog</a></li>
-                            <li><a href="/termos" target="_blank">Termos & condições</a></li>
-                            <li><a href="/privacidade" target="_blank">Política de privacidade</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4 col-5 offset-1">
-                    <div class="footer-item">
-                        <h6 class="footer-item-heading">Trabalhe como Assistente Virtual</h6>
-                        <ul class="footer-item-ul">
-                            <li><a href="/cadastrar" target="_blank">Junte-se à nossa rede de
-                                    profissionais.</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <span>Copyright 2025 Virtap. All Rights Reserved. </span>
-
-            </div>
-        </div>
-    </footer>
+      </div>
 
 
-    <!-- section scroling btn  -->
-    <a class="footer-button-scrol" href="/"><i class="fal fa-chevron-up"></i></a>
-    <script src="js/main-v1.js"></script>
-    <script src="js/utils-v1.js"></script>
+    </div>
+
+  </footer>
+
+  <!-- progress-wrap -->
+  <div class="progress-wrap">
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+      <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+    </svg>
+  </div>
+
+  <!-- all js here -->
+  <script src="js/main-new-v1.js"></script>
 
 </body>
 
