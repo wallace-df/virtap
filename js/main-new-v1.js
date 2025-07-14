@@ -48,7 +48,7 @@ function getNullableValue(t) { return t && 0 === (t = t.trim()).length && (t = n
 
 function getTimeUntilLaunch(simulatedNow = null) {
   const now = simulatedNow ? new Date(simulatedNow) : new Date();
-  const launch = new Date('2025-07-28T00:00:00-03:00'); // Brasília time (UTC-3)
+  const launch = new Date('2025-08-16T00:00:00-03:00'); // Brasília time (UTC-3)
 
   const diffMs = launch - now;
 
