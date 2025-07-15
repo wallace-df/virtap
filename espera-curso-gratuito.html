@@ -8,7 +8,7 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex, nofollow">
 
-    <title>Virtap | Curso Gratuito</title>
+    <title>Virtap | Curso Gratuito | Lista de espera</title>
 
     <link href="./css/intlTelInput.min.css" rel="stylesheet" />
     <link href="img/favicon.svg" type="image/svg" rel="icon">
@@ -426,6 +426,7 @@
             }
         });
 
+
         document.getElementById('signup-form').addEventListener('submit', async function (e) {
             e.preventDefault();
 
@@ -436,9 +437,10 @@
             document.getElementById('erro-email').textContent = '';
             document.getElementById('erro-whatsapp').textContent = '';
 
-            document.getElementById('nome').classList.remove('input-error');
-            document.getElementById('email').classList.remove('input-error');
-            document.getElementById('whatsapp').classList.remove('input-error');
+            form.nome.classList.remove('input-error');
+            form.email.classList.remove('input-error');
+            form.whatsapp.classList.remove('input-error');
+
 
             const nome = form.nome.value.trim();
             const email = form.email.value.trim();
@@ -471,7 +473,6 @@
 
             if (hasError) return; // Interrompe se houver erros
 
-
             const inputs = form.querySelectorAll('input, button');
             const button = form.querySelector('button');
             const originalButtonText = button.textContent;
@@ -479,8 +480,7 @@
             // Desativa todos os campos e muda o texto do botão
             inputs.forEach(el => el.disabled = true);
             button.textContent = "Enviando...";
-            const url = 'https://apinew.virtap.com.br/signup-intro-av';
-
+            const url = 'https://api.virtap.com.br/signup-waiting-list-inf';
 
             const body = {
                 nome: nome,
@@ -498,22 +498,17 @@
                     body: JSON.stringify(body)
                 });
 
+
                 if (response.status === 200) {
-                    gtag('event', 'sign_up_free_course', {
+                    gtag('event', 'sign_up_waiting_influencer', {
                         'send_to': 'G-4ZFMG1F0XK',
                         'event_callback': function () {
                             window.location.href = "/cadastro-confirmado";
                         }
                     });
                     setTimeout(() => window.location.href = "/cadastro-confirmado", 5000);
-
                 } else {
-                    let data = await response.json();
-                    if (data.errorCode === 'ALREADY_REGISTERED') {
-                        window.location.href = "/cadastro-ja-realizado";
-                    } else {
-                        throw data;
-                    }
+                    throw response;
                 }
             } catch (err) {
                 inputs.forEach(el => el.disabled = false);
@@ -522,6 +517,7 @@
                 showModal();
             }
         });
+
     </script>
 
 </body>
