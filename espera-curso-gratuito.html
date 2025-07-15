@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+
+    <title>Virtap | Curso Gratuito</title>
+
+    <link href="./css/intlTelInput.min.css" rel="stylesheet" />
+    <link href="img/favicon.svg" type="image/svg" rel="icon">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-4ZFMG1F0XK');
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #e9faff;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            padding: 40px 20px;
+            gap: 40px;
+        }
+
+
+        .video-box {
+            max-width: 540px;
+            flex: 1;
+            text-align: center;
+        }
+
+
+        .video-box img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            border: 8px solid #592baf;
+        }
+
+
+        .text-block {
+            margin-top: 10px;
+        }
+
+
+        .text-block h1 {
+            font-size: 30px;
+            font-weight: bold;
+            margin: 10px 0;
+            text-align: left;
+        }
+
+        .text-block p {
+            font-size: 20px;
+            color: #333;
+            margin: 10px 0;
+            text-align: left;
+
+        }
+
+        .form-box {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 480px;
+            width: 100%;
+            flex: 1;
+        }
+
+        .form-box .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .form-box .logo img {
+            width: 140px;
+        }
+
+        .form-box h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        .form-box form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-box input {
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .form-box button {
+            padding: 14px;
+            background-color: #592baf;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .form-box button:hover {
+            background-color: #703FB9;
+        }
+
+        .form-box small {
+            display: block;
+            margin-top: 12px;
+            font-size: 12px;
+            color: #444;
+            text-align: left;
+        }
+
+        .form-box small a {
+            color: #592baf;
+            text-decoration: none;
+        }
+
+        .form-box small a:hover {
+            color: #703FB9;
+            text-decoration: underline;
+        }
+
+        input[type="text"]:hover,
+        input[type="text"]:active,
+        input[type="text"]:focus,
+        input[type="text"]:visited,
+        input[type="text"]:focus-visible {
+            border-color: #592baf;
+            outline-color: #592baf;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 15px;
+            }
+
+            .video-box,
+            .form-box {
+                max-width: 100%;
+            }
+
+
+        }
+
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            position: relative;
+            /* necessário para o botão X funcionar */
+            background-color: white;
+            padding: 30px 20px;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-content h3 {
+            margin-top: 0;
+            color: #532E88;
+        }
+
+        .modal-content button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #532E88;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .modal-content button:hover {
+            background-color: #703FB9;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            line-height: 1;
+        }
+
+        .close-button:hover {
+            color: #333;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-8px);
+            }
+
+            50% {
+                transform: translateX(8px);
+            }
+
+            75% {
+                transform: translateX(-8px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .shake {
+            animation: shake 0.4s;
+        }
+
+        button:disabled,
+        button:disabled:hover {
+            background-color: #ccc;
+            cursor: not-allowed;
+            color: #666;
+        }
+
+
+        .error-message {
+            color: #F64B2F;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+
+        /* Classe que será adicionada a campos com erro */
+        .input-error {
+            border: 2px solid red !important;
+            outline: none;
+        }
+
+        .input-error:focus,
+        .input-error:hover {
+            border: 2px solid red !important;
+        }
+
+        #whatsapp {
+            width: 100%;
+        }
+
+        .iti--allow-dropdown {
+            margin-bottom: 16px;
+        }
+
+        ul {
+            list-style-type: none;
+            ;
+        }
+
+        @media (max-width: 767px) {
+            .text-block h1 {
+                font-size: 18px;
+            }
+
+            .text-block p {
+                font-size: 14px;
+            }
+
+            .form-box h2 {
+                font-size: 18px;
+            }
+            
+        } 
+
+        @media (min-width: 768px) and (max-width: 991px) {
+            .text-block h1 {
+                font-size: 22px;
+            }
+
+            .text-block p {
+                font-size: 16px;
+            }
+
+            .form-box h2 {
+                font-size: 22px;
+            }
+            
+            .video-box {
+                /* max-width: 750px;
+                display: flex;
+                flex-direction: column;
+                align-items: center; */
+            }
+
+            .video-box img {
+                /* width: 60%;
+                border-radius: 15px;
+                border: 8px solid #592baf; */
+            }
+
+            .text-block {
+                /* margin-top: 10px;
+                text-align: center; */
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="video-box">
+            <img src="./img/curso-gratuito.jpeg" alt="Curso gratuito Virtap">
+            <div class="text-block">
+                <h1>Descubra a nova profissão que tem transformado a vida de milhares de pessoas</h1>
+                <p>Como <strong style="color:#592baf">Assistente Virtual</strong>, você pode trabalhar de casa, fazer seus próprios horários, atender clientes do Brasil e do mundo, conquistar mais renda e qualidade de vida.</p>
+            </div>
+        </div>
+
+        <div class="form-box" id="signup-form">
+            <div class="logo">
+                <img src="/img/logo.png" alt="Virtap logo">
+            </div>
+            <h2>Entre para a lista de espera do curso gratuito + certificado</h2>
+            <form>
+                <input type="text" placeholder="Nome" id="nome">
+                <div class="error-message" id="erro-nome"></div>
+
+                <input type="text" placeholder="E-mail" id="email">
+                <div class="error-message" id="erro-email"></div>
+
+                <input type="text" placeholder="(99) 99999-9999" id="whatsapp">
+                <div class="error-message" id="erro-whatsapp"></div>
+
+                <button type="submit">Inscreva-se</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="error-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">×</span>
+            <h3>Opa! Algo deu errado 😕</h3>
+            <p>Não foi possível enviar seus dados. Por favor, tente novamente em instantes.</p>
+            <button onclick="closeModal()">Fechar</button>
+        </div>
+    </div>
+    <script src="./js/intlTelInput.min.js"></script>
+    <script src="js/utils-v1.js"></script>
+
+    <script>
+        let phone = document.getElementById('whatsapp');
+        intl = window.intlTelInput(phone, {
+            autoInsertDialCode: true,
+            initialCountry: "BR",
+            separateDialCode: true
+        });
+
+
+        function showModal() {
+            document.getElementById('error-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('error-modal').style.display = 'none';
+        }
+
+        window.addEventListener('click', function (event) {
+            const modal = document.getElementById('error-modal');
+            const content = document.querySelector('.modal-content');
+
+            if (modal.style.display === 'flex' && !content.contains(event.target)) {
+                // Em vez de fechar, dá shake
+                content.classList.add('shake');
+                setTimeout(() => {
+                    content.classList.remove('shake');
+                }, 400); // tempo da animação
+            }
+        });
+
+        document.getElementById('signup-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const form = e.target;
+
+            // Limpa mensagens antigas
+            document.getElementById('erro-nome').textContent = '';
+            document.getElementById('erro-email').textContent = '';
+            document.getElementById('erro-whatsapp').textContent = '';
+
+            document.getElementById('nome').classList.remove('input-error');
+            document.getElementById('email').classList.remove('input-error');
+            document.getElementById('whatsapp').classList.remove('input-error');
+
+            const nome = form.nome.value.trim();
+            const email = form.email.value.trim();
+            const whatsapp = form.whatsapp.value.trim();
+
+            let hasError = false;
+
+            // Validação Nome
+            if (nome.length < 10) {
+                document.getElementById('erro-nome').textContent = 'O nome deve ter pelo menos 10 caracteres.';
+                form.nome.classList.add('input-error');
+
+                hasError = true;
+            }
+
+            // Validação Email
+            if (!/^\S+@\S+\.\S+$/.test(email)) {
+                document.getElementById('erro-email').textContent = 'Digite um e-mail válido (ex: nome@dominio.com).';
+                form.email.classList.add('input-error');
+                hasError = true;
+            }
+
+            // Validação WhatsApp
+            if (!intl.isValidNumber()) {
+                document.getElementById('erro-whatsapp').textContent = 'Digite um número de WhatsApp.';
+                form.whatsapp.classList.add('input-error');
+
+                hasError = true;
+            }
+
+            if (hasError) return; // Interrompe se houver erros
+
+
+            const inputs = form.querySelectorAll('input, button');
+            const button = form.querySelector('button');
+            const originalButtonText = button.textContent;
+
+            // Desativa todos os campos e muda o texto do botão
+            inputs.forEach(el => el.disabled = true);
+            button.textContent = "Enviando...";
+            const url = 'https://apinew.virtap.com.br/signup-intro-av';
+
+
+            const body = {
+                nome: nome,
+                email: email,
+                whatsapp: intl.getNumber(),
+                utm_params: getUTMParams()
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(body)
+                });
+
+                if (response.status === 200) {
+                    gtag('event', 'sign_up_free_course', {
+                        'send_to': 'G-4ZFMG1F0XK',
+                        'event_callback': function () {
+                            window.location.href = "/cadastro-confirmado";
+                        }
+                    });
+                    setTimeout(() => window.location.href = "/cadastro-confirmado", 5000);
+
+                } else {
+                    let data = await response.json();
+                    if (data.errorCode === 'ALREADY_REGISTERED') {
+                        window.location.href = "/cadastro-ja-realizado";
+                    } else {
+                        throw data;
+                    }
+                }
+            } catch (err) {
+                inputs.forEach(el => el.disabled = false);
+                button.textContent = originalButtonText;
+                console.error(err);
+                showModal();
+            }
+        });
+    </script>
+
+</body>
+
+</html>
