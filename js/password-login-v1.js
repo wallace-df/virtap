@@ -53,10 +53,10 @@ function applyValidations() {
   });
 
   // Password
-  $password.parent().data('get-field', function () {
+  $password.closest('[data-field]').data('get-field', function () {
     let password = $password.val();
     if (!validatePassword(password)) {
-      $password.parent().addClass('error');
+      $password.closest('[data-field]').addClass('error');
       return undefined;
     }
     return password;
@@ -160,5 +160,19 @@ let email = getParameterByName('email');
 if (email && email.trim().length > 0) {
   $("#email").val(email);
 }
+
+
+
+$(document).on('click', '#togglePassword', function () {
+  const $input = $('#password');
+
+  const $btn = $(this);
+  const isVisible = $btn.data('visible');
+
+  $input.attr('type', isVisible ? 'password' : 'text');
+  $btn.data('visible', !isVisible);
+  $btn.html(getEyeSVG(!isVisible));
+
+});
 
 applyValidations();

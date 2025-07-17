@@ -64,21 +64,21 @@ function applyValidations() {
   let $confirm_password = $("#confirm_password");
 
   // New password
-  $new_password.parent().data('get-field', function () {
+  $new_password.closest('[data-field]').data('get-field', function () {
     let password = $new_password.val();
     if (!validatePassword(password)) {
-      $new_password.parent().addClass('error');
+      $new_password.closest('[data-field]').addClass('error');
       return undefined;
     }
     return password;
   });
 
   // Confirm password
-  $confirm_password.parent().data('get-field', function () {
+  $confirm_password.closest('[data-field]').data('get-field', function () {
     let new_password = $new_password.val();
     let confirm_password = $confirm_password.val();
     if (new_password !== confirm_password) {
-      $confirm_password.parent().addClass('error');
+      $confirm_password.closest('[data-field]').addClass('error');
       return undefined;
     }
     return confirm_password;
@@ -212,5 +212,18 @@ async function init() {
     handleError(err, true);
   }
 }
+
+
+$(document).on('click', '.togglePassword', function () {
+  const $input = $(this).parent().find('input');
+
+  const $btn = $(this);
+  const isVisible = $btn.data('visible');
+
+  $input.attr('type', isVisible ? 'password' : 'text');
+  $btn.data('visible', !isVisible);
+  $btn.html(getEyeSVG(!isVisible));
+
+});
 
 init();

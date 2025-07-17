@@ -23101,6 +23101,26 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+function getEyeSVG(visible) {
+    return visible
+      ? `<svg id="toggleSenha" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+               stroke-width="1.5" stroke="currentColor"
+               class="eye-icon" style="width: 24px; height: 24px; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+           <path stroke-linecap="round" stroke-linejoin="round"
+                 d="M2.25 12s3.75-6.75 9.75-6.75S21.75 12 21.75 12s-3.75 6.75-9.75 6.75S2.25 12 2.25 12z" />
+           <path stroke-linecap="round" stroke-linejoin="round"
+                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+         </svg>`
+      : `<svg id="toggleSenha" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+               stroke-width="1.5" stroke="currentColor"
+               class="eye-icon" style="width: 24px; height: 24px; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+           <path stroke-linecap="round" stroke-linejoin="round"
+                 d="M3.98 8.223a10.477 10.477 0 00-.72 1.034C2.29 10.648 1.875 12 1.875 12s3.75 6.75 9.75 6.75
+                    c1.584 0 3.073-.367 4.408-1.004M6.32 6.321C7.87 5.217 9.762 4.5 11.625 4.5
+                    c6 0 9.75 6.75 9.75 6.75s-.235.564-.722 1.293M3 3l18 18" />
+         </svg>`;
+  }
+  
 function getNullableValue(val) {
     if (val) {
         val = val.trim();

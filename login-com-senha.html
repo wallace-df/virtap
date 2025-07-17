@@ -25,7 +25,7 @@
 <body>
     <div class="sign_up">
         <div class="left_content" style="background: linear-gradient(180deg, #9CD7DB -190.19%, #FFFFFF 100%);">
-            <img src="/img/spa.png" alt="">
+            <img src="/img/hero_img.png" alt="">
             <h2><a id="next-link"></a></h2>
         </div>
         <div class="right_content">
@@ -48,8 +48,17 @@
                         <em>Por favor, informe seu email.</em>
                     </div>
                     <div class="form-group mt-3" data-field>
-                        <label for="password">Senha</label>
-                        <input type="password" class="form-control" id="password">
+                        <label for="password">Senha</label> 
+                        <div class="password-wrapper" style="position: relative; display: inline-block; width:100%">
+                            <input type="password" class="form-control" id="password" style="padding-right: 2.5rem;">
+                            <!-- Ícone SVG: olho fechado (default) -->
+                            <svg id="togglePassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="eye-icon"
+                                style="width: 24px; height: 24px; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.98 8.223a10.477 10.477 0 00-.72 1.034C2.29 10.648 1.875 12 1.875 12s3.75 6.75 9.75 6.75c1.584 0 3.073-.367 4.408-1.004M6.32 6.321C7.87 5.217 9.762 4.5 11.625 4.5c6 0 9.75 6.75 9.75 6.75s-.235.564-.722 1.293M3 3l18 18" />
+                            </svg>
+                        </div>
                         <em>Por favor, informe sua senha.</em>
                     </div>
                 </div>

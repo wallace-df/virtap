@@ -15,11 +15,15 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/subscribe-v1.css" />
 
+    <script>
+        window.apiURL = 'https://apinew.virtap.com.br';
+        window.role = 'assistant';
+    </script>
 <body>
 
     <div class="sign_up">
         <div class="left_content" style="background: linear-gradient(180deg, #9CD7DB -190.19%, #FFFFFF 100%);">
-            <img src="/img/spa.png" alt="">
+            <img src="/img/hero_img.png" alt="">
             <h2><a id="next-link"></a></h2>
         </div>
         <div class="right_content">
@@ -48,12 +52,30 @@
                 <div class="col-xs-12 col-sm-6 offset-sm-3">
                     <div class="form-group mt-3" data-field>
                         <label for="password">Nova senha</label>
-                        <input type="password" class="form-control" id="new_password">
+                        <div class="password-wrapper" style="position: relative; display: inline-block; width:100%">
+                            <input type="password" class="form-control" id="new_password" style="padding-right: 2.5rem;">
+                            <!-- Ícone SVG: olho fechado (default) -->
+                            <svg class="togglePassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="eye-icon"
+                                style="width: 24px; height: 24px; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.98 8.223a10.477 10.477 0 00-.72 1.034C2.29 10.648 1.875 12 1.875 12s3.75 6.75 9.75 6.75c1.584 0 3.073-.367 4.408-1.004M6.32 6.321C7.87 5.217 9.762 4.5 11.625 4.5c6 0 9.75 6.75 9.75 6.75s-.235.564-.722 1.293M3 3l18 18" />
+                            </svg>
+                        </div>
                         <em>Por favor, informe uma senha com ao menos 8 caracteres.</em>
                     </div>
                     <div class="form-group mt-3" data-field>
                         <label for="password">Confirme a senha</label>
-                        <input type="password" class="form-control" id="confirm_password">
+                        <div class="password-wrapper" style="position: relative; display: inline-block; width:100%">
+                            <input type="password" class="form-control" id="confirm_password" style="padding-right: 2.5rem;">
+                            <!-- Ícone SVG: olho fechado (default) -->
+                            <svg class="togglePassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="eye-icon"
+                                style="width: 24px; height: 24px; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.98 8.223a10.477 10.477 0 00-.72 1.034C2.29 10.648 1.875 12 1.875 12s3.75 6.75 9.75 6.75c1.584 0 3.073-.367 4.408-1.004M6.32 6.321C7.87 5.217 9.762 4.5 11.625 4.5c6 0 9.75 6.75 9.75 6.75s-.235.564-.722 1.293M3 3l18 18" />
+                            </svg>
+                        </div>
                         <em>As senhas não conferem.</em>
                     </div>
                 </div>
