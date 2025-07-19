@@ -11,7 +11,6 @@
   <title>Virtap | Certificado Gratuito | Cadastro já realizado</title>
 
   <link href="img/favicon.svg" type="image/svg" rel="icon">
-
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -26,7 +25,7 @@
 
     .box {
       margin-top: 20px;
-      max-width: 400px;
+      max-width: 480px;
       padding: 30px;
       background: #fff;
       border-radius: 12px;
@@ -37,12 +36,16 @@
       color: #532E88;
     }
 
+    p {
+      line-height: 1.5;
+      font-size: 20px;
+    }
+
     a:hover {
       color: #532E88;
     }
-
-    p {
-      line-height: 1.5;
+    em {
+      color: #532E88;
     }
   </style>
 </head>
@@ -52,15 +55,31 @@
     <img src="https://www.virtap.com.br/img/logo.png" alt="Virtap logo">
 
     <div class="box">
-      <h1>Cadastro já realizado!</h1>
-      <p>Identificamos que você já tem uma conta na <strong>Virtap</strong>.
-        Agora é só acessar a plataforma com seu login e emitir seu certificado do curso de Introdução à Assistência
-        Virtual.
+      <h1>Você já tem um cadastro na Virtap 🚀</h1>
+      <p>Identificamos que você já tem uma conta na <strong>Virtap</strong><span id="email-container" style="display:none"> com o e-mail <em id="email"></em></span>.</p>
+      <p>
+      Agora é só acessar a plataforma com seu login e emitir seu o certificado gratuito de Assistência Virtual.
       </p>
-      <p><a href="https://assistentes-test.virtap.com.br/curso/intro-av">Clique aqui</a> para acessar o seu certificado.
-      </p>
+      <p><a href="https://assistentes-test.virtap.com.br/curso/intro-av">Clique aqui</a> para fazer login e emitir seu certificado.</p>
     </div>
   </div>
 </body>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const email = params.get("e");
+
+  const emailEl = document.getElementById("email");
+  const containerEl = document.getElementById("email-container");
+
+  if (email && emailEl && containerEl) {
+    emailEl.textContent = email;
+    containerEl.style.display = "inline";
+  } else if (containerEl) {
+    containerEl.style.display = "none";
+  }
+});
+</script>
 
 </html>
