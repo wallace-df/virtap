@@ -464,7 +464,7 @@
                 } else {
                     let data = await response.json();
                     if (data.errorCode === 'ALREADY_REGISTERED') {
-                        window.location.href = "/certificado-ja-registrado";
+                        window.location.href = "/certificado-ja-registrado?e=" + email;
                     } else {
                         throw data;
                     }

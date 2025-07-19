@@ -473,7 +473,7 @@
                 } else {
                     let data = await response.json();
                     if (data.errorCode === 'ALREADY_REGISTERED') {
-                        window.location.href = "/cadastro-ja-realizado";
+                        window.location.href = "/cadastro-ja-realizado?e=" + email;
                     } else {
                         throw data;
                     }
