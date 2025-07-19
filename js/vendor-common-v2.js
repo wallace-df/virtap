@@ -23826,9 +23826,9 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
     let $card_expiration = $("#card-expiration");
     let $card_cvc = $("#card-cvc");
 
-    // Name
-    $name.parent().data('get-field', function () {
-        let name = $name.val();
+       // Name
+       $name.parent().data('get-field', function () {
+        let name = $name.val().trim();
         if (!validateName(name)) {
             $name.parent().addClass('error');
             return undefined;
@@ -23838,7 +23838,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
     // Email 
     $email.parent().data('get-field', function () {
-        let email = $email.val();
+        let email = $email.val().trim().toLowerCase();
         if (!validateEmail(email)) {
             $email.parent().addClass('error');
             return undefined;
@@ -23848,8 +23848,8 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
     // Confirmation email 
     $confirmation_email.parent().data('get-field', function () {
-        let email = $email.val();
-        let confirmation_email = $confirmation_email.val();
+        let email = $email.val().trim().toLowerCase();
+        let confirmation_email = $confirmation_email.val().trim().toLowerCase();
         if (email !== confirmation_email) {
             $confirmation_email.parent().addClass('error');
             return undefined;
@@ -23871,7 +23871,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
     // Address
     $address.parent().data('get-field', function () {
-        let address = $address.val();
+        let address = $address.val().trim();
         if (!validateAddress(address)) {
             $address.parent().addClass('error');
             return undefined;
@@ -23891,12 +23891,12 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
     // Complement 
     $complement.closest('[data-field]').data('get-field', function () {
-        return $complement.val();
+        return $complement.val().trim();
     });
 
     // Neighborhood
     $neighborhood.parent().data('get-field', function () {
-        let neighborhood = $neighborhood.val();
+        let neighborhood = $neighborhood.val().trim();
         if (!validateNeighborhood(neighborhood)) {
             $neighborhood.parent().addClass('error');
             return undefined;
@@ -23906,7 +23906,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
     // State
     $state.parent().data('get-field', function () {
-        let state = $state.val();
+        let state = $state.val().trim();
         if (!state) {
             $state.parent().addClass('error');
             return undefined;
@@ -23916,7 +23916,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
     // CEP
     $cep.parent().data('get-field', function () {
-        let cep = $cep.val();
+        let cep = $cep.val().trim();
         if (!validateCEP(cep)) {
             $cep.parent().addClass('error');
             return undefined;
@@ -23926,7 +23926,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
     // City 
     $city.parent().data('get-field', function () {
-        let city = $city.val();
+        let city = $city.val().trim();
         if (!city) {
             $city.parent().addClass('error');
             return undefined;
@@ -23952,7 +23952,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
     // Card number 
     $card_number.closest('[data-field]').data('get-field', function () {
-        let card_number = $card_number.val();
+        let card_number = $card_number.val().trim();
         if (!validateCreditCard(card_number)) {
             $card_number.closest('[data-field]').addClass('error');
             return undefined;
@@ -23962,7 +23962,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
     // Card holder
     $card_holder.closest('[data-field]').data('get-field', function () {
-        let card_holder = $card_holder.val();
+        let card_holder = $card_holder.val().trim();
         if (card_holder.length < 5) {
             $card_holder.closest('[data-field]').addClass('error');
             return undefined;
