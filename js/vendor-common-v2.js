@@ -23215,7 +23215,7 @@ function redirectToNext() {
 }
 
 function validateName(name) {
-    if (!name || name.trim().length < 10) {
+    if (!name || name.trim().length < 5) {
         return false;
     }
     return true;
@@ -23963,7 +23963,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
     // Card holder
     $card_holder.closest('[data-field]').data('get-field', function () {
         let card_holder = $card_holder.val();
-        if (card_holder.length < 10) {
+        if (card_holder.length < 5) {
             $card_holder.closest('[data-field]').addClass('error');
             return undefined;
         }

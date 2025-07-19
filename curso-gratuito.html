@@ -410,8 +410,8 @@
             let hasError = false;
 
             // Validação Nome
-            if (nome.length < 10) {
-                document.getElementById('erro-nome').textContent = 'O nome deve ter pelo menos 10 caracteres.';
+            if (nome.length < 5) {
+                document.getElementById('erro-nome').textContent = 'O nome deve ter pelo menos 5 caracteres.';
                 form.nome.classList.add('input-error');
 
                 hasError = true;
