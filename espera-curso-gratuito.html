@@ -8,7 +8,7 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex, nofollow">
 
-    <title>Virtap | Curso Gratuito</title>
+    <title>Virtap | Curso Gratuito | Lista de espera</title>
 
     <link href="./css/intlTelInput.min.css" rel="stylesheet" />
     <link href="img/favicon.svg" type="image/svg" rel="icon">
@@ -42,32 +42,40 @@
             gap: 40px;
         }
 
+
         .video-box {
-            max-width: 750px;
+            max-width: 760px;
             flex: 1;
+            text-align: center;
         }
 
 
         .video-box img {
             width: 100%;
+            max-width: 760px;
             border-radius: 15px;
             border: 8px solid #592baf;
         }
+
 
         .text-block {
             margin-top: 10px;
         }
 
+
         .text-block h1 {
             font-size: 32px;
             font-weight: bold;
             margin: 10px 0;
+            text-align: left;
         }
 
         .text-block p {
-            font-size: 24px;
+            font-size: 20px;
             color: #333;
             margin: 10px 0;
+            text-align: left;
+
         }
 
         .form-box {
@@ -93,12 +101,10 @@
         }
 
         .form-box h2 {
-            display: flex;
-            align-items: center;
-            gap: 20px;
             font-size: 28px;
             margin-bottom: 20px;
             color: #222;
+            text-align: center;
         }
 
         .form-box form {
@@ -168,21 +174,7 @@
                 max-width: 100%;
             }
 
-            .text-block {
-                text-align: center;
-            }
 
-            .text-block h1 {
-                font-size: 24px;
-            }
-
-            .text-block p {
-                font-size: 22px;
-            }
-
-            .form-box h2 {
-                font-size: 24px;
-            }
         }
 
 
@@ -307,6 +299,94 @@
         .iti--allow-dropdown {
             margin-bottom: 16px;
         }
+
+        ul {
+            list-style-type: none;
+            ;
+        }
+
+        @media (max-width: 480px) {
+            .text-block h1 {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .text-block h1 {
+                text-align: center;
+                /* font-size: 18px; */
+            }
+
+            .text-block p {
+                /* font-size: 14px; */
+            }
+
+            .form-box h2 {
+                /* font-size: 18px; */
+            }
+
+        }
+
+        @media (min-width: 768px) and (max-width: 991px) {
+            .text-block h1 {
+                /* font-size: 22px; */
+            }
+
+            .text-block p {
+                /* font-size: 16px; */
+            }
+
+            .form-box h2 {
+                /* font-size: 22px; */
+            }
+
+            .video-box {
+                /* max-width: 750px;
+                display: flex;
+                flex-direction: column;
+                align-items: center; */
+            }
+
+            .video-box img {
+                /* width: 60%;
+                border-radius: 15px;
+                border: 8px solid #592baf; */
+            }
+
+            .text-block {
+                /* margin-top: 10px;
+                text-align: center; */
+            }
+        }
+
+        #countdown-container {
+            background: #f9f5ff;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-family: sans-serif;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            max-width: 280px;
+            margin: 1rem auto;
+            display: block;
+        }
+
+        .countdown-label {
+            margin: 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        #countdown {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #532E88;
+        }
+
+        .text-primary {
+            color: #532E88;
+        }
     </style>
 </head>
 
@@ -316,18 +396,22 @@
         <div class="video-box">
             <img src="./img/curso-gratuito.jpeg" alt="Curso gratuito Virtap">
             <div class="text-block">
-                <h1>Curso gratuito + Certificado</h1>
-                <p>Conteúdo direto ao ponto para você dar os primeiros passos na nova profissão do futuro.</p>
+                <h1>A profissão que tem transformado a vida de milhares de pessoas</h1>
+                <p>Como <strong class="text-primary">Assistente Virtual</strong>, você pode trabalhar de casa, fazer
+                    seus próprios horários, atender clientes do Brasil e do mundo, conquistar mais renda e qualidade de
+                    vida.</p>
             </div>
         </div>
 
         <div class="form-box" id="signup-form">
             <div class="logo">
-                <img src="https://www.virtap.com.br/img/logo.png" alt="Virtap logo">
+                <img src="/img/logo.png" alt="Virtap logo">
             </div>
-            <h2>Curso gratuito liberado! <img src="/img/locker.png"/>
-            </h2>
-            <h3>Cadastre-se agora mesmo para começar</h3>
+            <h2>Garanta sua vaga no<span class="text-primary"> curso gratuito de Assistente Virtual</span></h2>
+            <div id="countdown-container">
+                <p class="countdown-label"> ⏳ O curso começa em:</p>
+                <div id="countdown"></div>
+            </div>
             <form>
                 <input type="text" placeholder="Nome" id="nome">
                 <div class="error-message" id="erro-nome"></div>
@@ -340,11 +424,6 @@
 
                 <button type="submit">Inscreva-se</button>
             </form>
-            <small>
-                Ao criar uma conta você concorda com os
-                <a href="/termos" target="_blank">nossos termos de uso</a> e com a
-                <a href="/privacidade" target="_blank">política de privacidade</a>.
-            </small>
         </div>
     </div>
 
@@ -389,6 +468,7 @@
             }
         });
 
+
         document.getElementById('signup-form').addEventListener('submit', async function (e) {
             e.preventDefault();
 
@@ -399,9 +479,10 @@
             document.getElementById('erro-email').textContent = '';
             document.getElementById('erro-whatsapp').textContent = '';
 
-            document.getElementById('nome').classList.remove('input-error');
-            document.getElementById('email').classList.remove('input-error');
-            document.getElementById('whatsapp').classList.remove('input-error');
+            form.nome.classList.remove('input-error');
+            form.email.classList.remove('input-error');
+            form.whatsapp.classList.remove('input-error');
+
 
             const nome = form.nome.value.trim();
             const email = form.email.value.trim();
@@ -434,7 +515,6 @@
 
             if (hasError) return; // Interrompe se houver erros
 
-
             const inputs = form.querySelectorAll('input, button');
             const button = form.querySelector('button');
             const originalButtonText = button.textContent;
@@ -442,8 +522,7 @@
             // Desativa todos os campos e muda o texto do botão
             inputs.forEach(el => el.disabled = true);
             button.textContent = "Enviando...";
-            const url = 'https://apinew.virtap.com.br/signup-intro-av';
-
+            const url = 'https://api.virtap.com.br/signup-waiting-list-inf';
 
             const body = {
                 nome: nome,
@@ -461,22 +540,17 @@
                     body: JSON.stringify(body)
                 });
 
+
                 if (response.status === 200) {
-                    gtag('event', 'sign_up_free_course', {
+                    gtag('event', 'sign_up_waiting_influencer', {
                         'send_to': 'G-4ZFMG1F0XK',
                         'event_callback': function () {
                             window.location.href = "/cadastro-confirmado";
                         }
                     });
                     setTimeout(() => window.location.href = "/cadastro-confirmado", 5000);
-
                 } else {
-                    let data = await response.json();
-                    if (data.errorCode === 'ALREADY_REGISTERED') {
-                        window.location.href = "/cadastro-ja-realizado";
-                    } else {
-                        throw data;
-                    }
+                    throw response;
                 }
             } catch (err) {
                 inputs.forEach(el => el.disabled = false);
@@ -485,6 +559,54 @@
                 showModal();
             }
         });
+
+        function startAccurateCountdown(targetDateStr) {
+            const countdownEl = document.getElementById("countdown");
+            const target = new Date(targetDateStr).getTime();
+
+            function pluralize(value, singular, plural) {
+                return value === 1 ? `${value} ${singular}` : `${value} ${plural}`;
+            }
+
+            function format(ms) {
+                const totalSeconds = Math.floor(ms / 1000);
+                const totalHours = Math.floor(totalSeconds / 3600);
+                const days = Math.floor(totalHours / 24);
+                const hours = totalHours % 24;
+
+                if (totalSeconds < 3600) {
+                    return "menos de 1 hora";
+                }
+
+                const dayText = pluralize(days, "dia", "dias");
+                const hourText = pluralize(hours, "hora", "horas");
+                return `${dayText} e ${hourText}`;
+            }
+
+            function tick() {
+                const now = Date.now();
+                const diff = target - now;
+
+                if (diff <= 0) {
+                    window.location.href = 'https://go.virtap.com.br/curso-gratuito-cda'
+                    return;
+                }
+
+                const thisHour = Math.floor(now / (1000 * 60 * 60));
+                if (thisHour !== lastHour) {
+                    countdownEl.textContent = format(diff);
+                    lastHour = thisHour;
+                }
+
+                requestAnimationFrame(tick);
+            }
+
+            let lastHour = -1;
+            tick();
+        }
+
+        // Contagem até 28 de julho de 2025 às 10h (horário de Brasília)
+        startAccurateCountdown("2025-07-28T10:00:00-03:00");
     </script>
 
 </body>
