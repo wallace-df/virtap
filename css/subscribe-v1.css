@@ -2247,3 +2247,58 @@ p.alert {
   display: block;
 }
 
+
+body.box-container {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  flex-direction: column;
+}
+
+body.box-container h1 {
+  color: #532E88;
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+
+.logo-img {
+  display: none
+
+}
+body.box-container .logo-img {
+  display: inline;
+}
+
+body.box-container p {
+  line-height: 1.5;
+  font-size: 1.2rem;
+  word-wrap: break-word;
+  margin: 1rem 0;
+}
+
+body.box-container em {
+  color: #532E88;
+}
+
+body.box-container a {
+  color: #532E88;
+  text-decoration: underline;
+}
+
+body.box-container a:hover {
+  font-weight: bold;
+}
+
+.box {
+  margin-top: 20px;
+  max-width: 600px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}

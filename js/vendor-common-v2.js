@@ -23211,7 +23211,7 @@ function getNext() {
 
 function redirectToNext() {
     let url = getNext();
-    setTimeout(() => document.location.href = url, 2000);
+    setTimeout(() => document.location.href = url, 4000);
 }
 
 function validateName(name) {
@@ -24072,6 +24072,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
             let formData = new FormData();
             formData.append("email", $("#email").val());
+            window.userEmail = $("#email").val();
             if (billingDetails) {
                 formData.append("billing_details", JSON.stringify(billingDetails));
             }

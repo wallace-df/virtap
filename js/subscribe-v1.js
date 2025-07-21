@@ -27,12 +27,22 @@ function handleError(response, loading) {
         showGenericError = false;
         redirectToNext();
       } else if (response.errorData.assistant_plan.toUpperCase() === 'VIRTAPCLUB') {
-        $("#sign_up").hide();
-        $("#loading").show();
-        $("#loading").html('<div><h1>Você já assinou o Virtap Club.</h1><br /><p>Redirecionando automaticamente...</p></div>');
-        $("#submit-btn").hide();
+        // $("#sign_up").hide();
+        // $("#loading").show();
+        // $("#loading").html('<div><h1>Você já assinou o Virtap Club.</h1><br /><p>Redirecionando automaticamente...</p></div>');
+        // $("#submit-btn").hide();
+
+        $(".sign_up").remove();
+        $("body").addClass("box-container");
         showGenericError = false;
-        redirectToNext();
+        if(response.errorData.loggedIn || loading) {
+          $("#membro-redir").show();
+          redirectToNext();  
+        } else {
+          $("#membro-noredir").show();
+          $("#membro-noredir").find('em').text(response.errorData.email);
+          $("#membro-noredir").find('a').attr('href', getNext());
+        }
       } else {
         console.log("Invalid assistant plan:", response.errorData.assistant_plan.toUpperCase());
       }

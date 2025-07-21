@@ -13,7 +13,7 @@ function redirectToNext(alreadyVerified) {
     $("#loading").html('<div><h1>Verificação concluída!</h1><br /><p>Redirecionando automaticamente...</p></div>');
   }
   $("#loading").show();
-  setTimeout(() => document.location.href = url, 2000);
+  setTimeout(() => document.location.href = url, 3000);
 }
 
 function handleError(response) {

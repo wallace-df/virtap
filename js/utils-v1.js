@@ -100,7 +100,7 @@ function getNext() {
 
 function redirectToNext() {
     let url = getNext();
-    setTimeout(() => document.location.href = url, 2000);
+    setTimeout(() => document.location.href = url, 4000);
 }
 
 function validateName(name) {
