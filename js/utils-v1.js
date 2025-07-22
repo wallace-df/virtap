@@ -947,8 +947,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
             if (data.responseData) {
                 if (data.responseData.charged) {
                     $("#submit-btn").hide();
-                    successHandler();
-                    redirectToNext();
+                    successHandler(data.responseData);
                 } else {
                     if (paymentDetails.method === 'credit_card') {
                         throw new Error("Failure making payment using credit card.");

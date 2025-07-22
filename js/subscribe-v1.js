@@ -1,14 +1,28 @@
 let target_plan;
 
-function handleSuccess() {
+function handleSuccess(response) {
   if (target_plan === 'BASIC') {
     $("#loading").html('<div><h1>Assinatura do plano Basic realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+    $("#loading").show();
+    $("#sign_up").hide();
+    redirectToNext();
   } else {
-    $("#loading").html('<div><h1>Assinatura do Virtap Club realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+    // $("#loading").html('<div><h1>Assinatura do Virtap Club realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
+    $(".sign_up").remove();
+    $("body").addClass("box-container");
+    if (response.loggedIn) {
+      $("#novo-membro-redir").show();
+      redirectToNext();
+    } else {
+      if (response.newUser) {
+
+      } else {
+        $("#novo-membro-com-conta-noredir").show();
+        $("#novo-membro-com-conta-noredir").find('em').text(response.email);
+        $("#novo-membro-com-conta-noredir").find('a').attr('href', getNext());
+      }
+    }
   }
-  $("#loading").show();
-  $("#sign_up").hide();
-  redirectToNext();
 }
 
 function handleError(response, loading) {
@@ -35,13 +49,13 @@ function handleError(response, loading) {
         $(".sign_up").remove();
         $("body").addClass("box-container");
         showGenericError = false;
-        if(response.errorData.loggedIn || loading) {
-          $("#membro-redir").show();
-          redirectToNext();  
+        if (response.errorData.loggedIn || loading) {
+          $("#membro-existente-redir").show();
+          redirectToNext();
         } else {
-          $("#membro-noredir").show();
-          $("#membro-noredir").find('em').text(response.errorData.email);
-          $("#membro-noredir").find('a').attr('href', getNext());
+          $("#membro-existente-noredir").show();
+          $("#membro-existente-noredir").find('em').text(response.errorData.email);
+          $("#membro-existente-noredir").find('a').attr('href', getNext());
         }
       } else {
         console.log("Invalid assistant plan:", response.errorData.assistant_plan.toUpperCase());

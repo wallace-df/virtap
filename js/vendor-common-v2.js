@@ -23629,13 +23629,12 @@ function updatePaymentStatus(method) {
                         });
 
                         let data = await res.json();
-                        if (data.responseData === true) {
+                        if (data.responseData.charged === true) {
                             window.paymentDetected = true;
                             clearInterval(window.detectPaymentInterval);
                             window.detectPaymentInterval = null;
                             $("#submit-btn").hide();
-                            window.successHandler();
-                            redirectToNext();
+                            window.successHandler(data.responseData);
                         }
 
                     } catch (err) {
@@ -23926,7 +23925,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
     // City 
     $city.parent().data('get-field', function () {
-        let city = $city.val().trim();
+        let city = $city.val();
         if (!city) {
             $city.parent().addClass('error');
             return undefined;
@@ -24039,20 +24038,20 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
         $("[data-field]").removeClass("error");
         $("p.alert").hide();
 
-        let fields = $("[data-field]");
-        let hasError = false;
-        fields.each(function (index) {
-            let func = $(this).data('get-field');
-            if (func === undefined) {
-                hasError = true;
-            } else (
-                func()
-            )
-        });
+        // let fields = $("[data-field]");
+        // let hasError = false;
+        // fields.each(function (index) {
+        //     let func = $(this).data('get-field');
+        //     if (func === undefined) {
+        //         hasError = true;
+        //     } else (
+        //         func()
+        //     )
+        // });
 
-        if (hasError) {
-            return;
-        }
+        // if (hasError) {
+        //     return;
+        // }
 
         // Disable form submission while loading
         $("#submit-btn").prop('disabled', true).text('Por favor, aguarde...');
@@ -24102,8 +24101,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
             if (data.responseData) {
                 if (data.responseData.charged) {
                     $("#submit-btn").hide();
-                    successHandler();
-                    redirectToNext();
+                    successHandler(data.responseData);
                 } else {
                     if (paymentDetails.method === 'credit_card') {
                         throw new Error("Failure making payment using credit card.");
