@@ -2277,7 +2277,7 @@ body.box-container .logo-img {
 body.box-container p {
   color: #333;
   line-height: 1.5;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   word-wrap: break-word;
   margin: 1rem 0;
 }
@@ -2287,12 +2287,13 @@ body.box-container em {
 }
 
 body.box-container a {
-  color: #532E88;
+  color: #0000ff;
   text-decoration: underline;
 }
 
 body.box-container a:hover {
-  font-weight: bold;
+  color: #532E88;
+  text-decoration: underline;
 }
 
 .box-container .box {
@@ -2302,4 +2303,5 @@ body.box-container a:hover {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  box-sizing: content-box;
 }

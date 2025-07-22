@@ -58,7 +58,12 @@ function handleError(response, loading) {
         } else {
           $("#membro-existente-noredir").show();
           $("#membro-existente-noredir").find('em').text(response.errorData.email);
-          $("#membro-existente-noredir").find('a').attr('href', getNext());
+          if (response.errorData.newUser) {
+            $('[data-has-not-logged-in]').show();
+          } else {
+            $('[data-has-logged-in]').show();
+            $("#membro-existente-noredir").find('a').attr('href', getNext());
+          }
         }
       } else {
         console.log("Invalid assistant plan:", response.errorData.assistant_plan.toUpperCase());

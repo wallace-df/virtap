@@ -20,6 +20,8 @@
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-4ZFMG1F0XK');
+        window.apiURL = 'https://apinew.virtap.com.br';
+        window.apiURL = 'http://localhost:3000';
     </script>
 
     <style>
@@ -435,7 +437,7 @@
             // Desativa todos os campos e muda o texto do botão
             inputs.forEach(el => el.disabled = true);
             button.textContent = "Enviando...";
-            const url = 'https://apinew.virtap.com.br/signup-certificate-intro-av';
+            const url = `${window.apiURL}/signup-certificate-intro-av`;
 
             const body = {
                 nome: nome,
@@ -463,8 +465,13 @@
                     setTimeout(() => window.location.href = "/certificado-registrado", 5000);
                 } else {
                     let data = await response.json();
+
                     if (data.errorCode === 'ALREADY_REGISTERED') {
-                        window.location.href = "/certificado-ja-registrado?e=" + email;
+                        if (data.errorData && data.errorData.newUser) {
+                            window.location.href = "/certificado-registrado";
+                        } else {
+                            window.location.href = "/certificado-ja-registrado?e=" + email;
+                        }
                     } else {
                         throw data;
                     }
