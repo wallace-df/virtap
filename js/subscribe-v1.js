@@ -15,6 +15,9 @@ function handleSuccess(response) {
       redirectToNext();
     } else {
       if (response.newUser) {
+        $("#novo-membro-sem-conta-noredir").show();
+        $("#novo-membro-sem-conta-noredir").find('em').text(response.email);
+        $("#novo-membro-sem-conta-noredir").find('a').attr('href', getNext());
 
       } else {
         $("#novo-membro-com-conta-noredir").show();

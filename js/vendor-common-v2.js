@@ -23621,6 +23621,7 @@ function updatePaymentStatus(method) {
                             headers: {
                                 'Content-Type': 'application/json',
                             },
+                            credentials: 'include',
                             body: JSON.stringify({
                                 email: $("#email").val(),
                                 productType: window.productType,
