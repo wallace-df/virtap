@@ -59,14 +59,23 @@
     <script src="js/utils-v1.js"></script>
     <script>
         $(document).ready(function () {
-            let next = getParameterByName('next');
-            if (next) {
-                $(".login_btn").each((i, el) => {
-                    let url = $(el).attr('href');
-                    url += '?next=' + next;
-                    $(el).attr('href', url);
-                })
-            }
+
+            const currentParams = new URLSearchParams(window.location.search);
+
+            $(".login_btn").each(function () {
+                const $button = $(this);
+                const href = $button.attr("href");
+
+                if (href) {
+                    const url = new URL(href, window.location.origin);
+
+                    currentParams.forEach((value, key) => {
+                        url.searchParams.set(key, value);
+                    });
+
+                    $button.attr("href", url.toString());
+                }
+            });
         });
     </script>
 </body>

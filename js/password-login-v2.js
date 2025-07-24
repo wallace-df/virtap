@@ -84,6 +84,43 @@ function applyValidations() {
   });
 }
 
+function updateLinks() {
+  const currentParams = new URLSearchParams(window.location.search);
+
+  $("#reset-link").each(function () {
+    const $button = $(this);
+    const url = new URL('/solicitar-nova-senha', window.location.origin);
+
+    currentParams.forEach((value, key) => {
+      url.searchParams.set(key, value);
+    });
+
+    let e = $("#email").val().trim();
+    if (e.length > 0) {
+      url.searchParams.set('email', e);
+    }
+
+    $button.attr("href", url.toString());
+  });
+
+
+  $("#google-login-link").each(function () {
+    const $button = $(this);
+    const url = new URL(`${apiURL}/auth/google/assistant`, window.location.origin);
+
+    currentParams.forEach((value, key) => {
+      url.searchParams.set(key, value);
+    });
+
+    let e = $("#email").val().trim();
+    if (e.length > 0) {
+      url.searchParams.set('email', e);
+    }
+
+    $button.attr("href", url.toString());
+  });
+}
+
 function getFields() {
 
   $("[data-field]").removeClass("error");
@@ -119,6 +156,7 @@ $(submitBtn).on('click', async (event) => {
   }
 
   $("p.alert").hide();
+  updateLinks();
 
   let fields = getFields();
   if (!fields) {
@@ -175,4 +213,8 @@ $(document).on('click', '#togglePassword', function () {
 
 });
 
+
+
 applyValidations();
+updateLinks();
+

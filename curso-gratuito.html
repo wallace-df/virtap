@@ -484,7 +484,7 @@
                     if (data.errorCode === 'ALREADY_REGISTERED') {
                         let url = "/cadastro-ja-realizado?e=" + email;
                         if (data.errorData && data.errorData.newUser) {
-                            url += '&n=1';
+                          //  url += '&n=1';
                         }
                         window.location.href = url;
                     } else {

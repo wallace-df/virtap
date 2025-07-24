@@ -474,7 +474,7 @@
                     if (data.errorCode === 'ALREADY_REGISTERED') {
                         let url = "/certificado-ja-registrado?e=" + email;
                         if (data.errorData && data.errorData.newUser) {
-                            url += '&n=1';
+                         //   url += '&n=1';
                         }
                         window.location.href = url;
                     } else {

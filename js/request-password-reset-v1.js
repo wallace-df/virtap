@@ -51,6 +51,24 @@ function applyValidations() {
 
 }
 
+function updateLinks() {
+  const currentParams = new URLSearchParams(window.location.search);
+
+  const $button = $("#google-login-link");
+  const url = new URL(`${apiURL}/auth/google/assistant`, window.location.origin);
+
+  currentParams.forEach((value, key) => {
+    url.searchParams.set(key, value);
+  });
+
+  let e = $("#email").val().trim();
+  if (e.length > 0) {
+    url.searchParams.set('email', e);
+  }
+
+  $button.attr("href", url.toString());
+}
+
 function getFields() {
   $("[data-field]").removeClass("error");
   let hasError = false;
@@ -85,7 +103,8 @@ $(submitBtn).on('click', async (event) => {
   }
 
   $("p.alert").hide();
-
+  updateLinks();
+  
   let fields = getFields();
   if (!fields) {
     return;
@@ -96,12 +115,11 @@ $(submitBtn).on('click', async (event) => {
   $("input,select").prop('disabled', true);
 
   try {
-    let email = $("#email").val()
-
+    let email = $("#email").val().trim();
     const res = await fetch(`${window.apiURL}/request-password-reset`, {
       method: "POST",
       credentials: "include",
-      body: JSON.stringify({ email: $("#email").val(), r: window.role }),
+      body: JSON.stringify({ email: email, r: window.role }),
       headers: {
         'Content-Type': 'application/json' // Não precisa se estiver usando FormData
       },
@@ -114,6 +132,7 @@ $(submitBtn).on('click', async (event) => {
 
     $("#sign_up").hide();
     $("#link-sent").show();
+    $("#google-link").show();
     $("#loading").show();
 
   } catch (err) {
