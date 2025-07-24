@@ -63,11 +63,22 @@
       <h1>Você já tem um cadastro na Virtap 🚀</h1>
       <p>Identificamos que você já tem uma conta na <strong>Virtap</strong><span id="email-container"
           style="display:none"> com o email <em id="email"></em></span>.</p>
+      <p style="display: none" class="new-user">Sua senha de acesso foi enviada para o seu email.</p>
       <p>
         Agora é só acessar a plataforma com seu login e começar o curso gratuito de Assistência Virtual.
       </p>
-      <p><a href="https://assistentes-test.virtap.com.br/curso/intro-av">Clique aqui</a> para fazer login e acessar o
+      <p><a href="https://www.virtap.com.br/login?next=curso/intro-av">Clique aqui</a> para fazer login e acessar o
         curso.</p>
+
+      <p class="new-user" style="font-size: 14px; color: #999; display: none;">
+        ⏳ Não recebeu sua senha de acesso?<br />
+        Às vezes pode demorar alguns minutinhos. Confira também sua caixa de spam!
+      </p>
+      <p style="font-size: 14px; color: #999">
+        Problemas para acessar o curso?<br /> Entre em contato com nosso suporte: <a
+          href="mailto:suporte@virtap.com.br">suporte@virtap.com.br</a>.
+      </p>
+
     </div>
   </div>
 </body>
@@ -76,9 +87,11 @@
   document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const email = params.get("e");
+    const newUser = params.get("n");
 
     const emailEl = document.getElementById("email");
     const containerEl = document.getElementById("email-container");
+    const newUserContainer = document.getElementById("new-user");
 
     if (email && emailEl && containerEl) {
       emailEl.textContent = email;
@@ -86,6 +99,14 @@
     } else if (containerEl) {
       containerEl.style.display = "none";
     }
+
+    if (newUser) {
+      document.querySelectorAll('.new-user').forEach(el => {
+        el.style.display = 'block';
+      });
+    }
+
+
   });
 </script>
 
