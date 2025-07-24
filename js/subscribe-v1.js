@@ -1,5 +1,13 @@
 let target_plan;
 
+function getNextWithLogin() {
+  let next = getParameterByName('next');
+  let url = '/login';
+  if (next && next.trim().length > 0) {
+    url += '?next=' + next;
+  }
+  return url;
+}
 function handleSuccess(response) {
   if (target_plan === 'BASIC') {
     $("#loading").html('<div><h1>Assinatura do plano Basic realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
@@ -10,19 +18,19 @@ function handleSuccess(response) {
     // $("#loading").html('<div><h1>Assinatura do Virtap Club realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
     $(".sign_up").remove();
     $("body").addClass("box-container");
-    if (response.loggedIn) {
+    if (response.loggedIn && !response.newUser) {
       $("#novo-membro-redir").show();
       redirectToNext();
     } else {
       if (response.newUser) {
-        $("#novo-membro-sem-conta-noredir").show();
-        $("#novo-membro-sem-conta-noredir").find('em').text(response.email);
-        $("#novo-membro-sem-conta-noredir").find('a').attr('href', getNext());
+        $("#novo-membro-nunca-logado-noredir").show();
+        $("#novo-membro-nunca-logado-noredir").find('em').text(response.email);
+        $("#novo-membro-nunca-logado-noredir").find('a').attr('href', getNextWithLogin());
 
       } else {
-        $("#novo-membro-com-conta-noredir").show();
-        $("#novo-membro-com-conta-noredir").find('em').text(response.email);
-        $("#novo-membro-com-conta-noredir").find('a').attr('href', getNext());
+        $("#novo-membro-ja-logado-noredir").show();
+        $("#novo-membro-ja-logado-noredir").find('em').text(response.email);
+        $("#novo-membro-ja-logado-noredir").find('a').attr('href', getNextWithLogin());
       }
     }
   }
@@ -52,7 +60,7 @@ function handleError(response, loading) {
         $(".sign_up").remove();
         $("body").addClass("box-container");
         showGenericError = false;
-        if (response.errorData.loggedIn || loading) {
+        if ((response.errorData.loggedIn && !response.errorData.newUser) || loading) {
           $("#membro-existente-redir").show();
           redirectToNext();
         } else {
@@ -62,7 +70,7 @@ function handleError(response, loading) {
             $('[data-has-not-logged-in]').show();
           } else {
             $('[data-has-logged-in]').show();
-            $("#membro-existente-noredir").find('a').attr('href', getNext());
+            $("#membro-existente-noredir").find('a').attr('href', getNextWithLogin());
           }
         }
       } else {

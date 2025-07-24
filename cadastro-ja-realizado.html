@@ -64,7 +64,7 @@
       <p>Identificamos que você já tem uma conta na <strong>Virtap</strong><span id="email-container"
           style="display:none"> com o email <em id="email"></em></span>.</p>
       <p style="display: none" class="new-user">Sua senha de acesso foi enviada para o seu email.</p>
-      <p>
+      <p class="existing-user">
         Agora é só acessar a plataforma com seu login e começar o curso gratuito de Assistência Virtual.
       </p>
       <p><a href="https://www.virtap.com.br/login?next=curso/intro-av">Clique aqui</a> para fazer login e acessar o
@@ -104,6 +104,10 @@
       document.querySelectorAll('.new-user').forEach(el => {
         el.style.display = 'block';
       });
+      document.querySelectorAll('.existing-user').forEach(el => {
+        el.style.display = 'none';
+      });
+
     }
 
 
