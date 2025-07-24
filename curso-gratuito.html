@@ -13,6 +13,7 @@
     <link href="./css/intlTelInput.min.css" rel="stylesheet" />
     <link href="img/favicon.svg" type="image/svg" rel="icon">
 
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -378,6 +379,7 @@
             document.getElementById('error-modal').style.display = 'none';
         }
 
+
         window.addEventListener('click', function (event) {
             const modal = document.getElementById('error-modal');
             const content = document.querySelector('.modal-content');
@@ -463,22 +465,28 @@
                 });
 
                 if (response.status === 200) {
+
+                    let data = await response.json();
+                    let url = "/cadastro-confirmado";
+                    if (data.responseData.hasAccount) {
+                        url = "/cadastro-ja-realizado?e=" + email;
+                    }
                     gtag('event', 'sign_up_free_course', {
                         'send_to': 'G-4ZFMG1F0XK',
                         'event_callback': function () {
-                            window.location.href = "/cadastro-confirmado";
+                            window.location.href = url;
                         }
                     });
-                    setTimeout(() => window.location.href = "/cadastro-confirmado", 5000);
-
+                    setTimeout(() => window.location.href = url, 5000);
                 } else {
                     let data = await response.json();
+
                     if (data.errorCode === 'ALREADY_REGISTERED') {
+                        let url = "/cadastro-ja-realizado?e=" + email;
                         if (data.errorData && data.errorData.newUser) {
-                            window.location.href = "/cadastro-confirmado";
-                        } else {
-                            window.location.href = "/cadastro-ja-realizado?e=" + email;
+                            url += '&n=1';
                         }
+                        window.location.href = url;
                     } else {
                         throw data;
                     }

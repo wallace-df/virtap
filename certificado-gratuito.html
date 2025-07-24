@@ -456,22 +456,27 @@
                 });
 
                 if (response.status === 200) {
+                    let data = await response.json();
+                    let url = "/certificado-registrado";
+                    if (data.responseData.hasAccount) {
+                        url = "/certificado-ja-registrado?e=" + email;
+                    }
                     gtag('event', 'sign_up_free_certificate', {
                         'send_to': 'G-4ZFMG1F0XK',
                         'event_callback': function () {
-                            window.location.href = "/certificado-registrado";
+                            window.location.href = url;
                         }
                     });
-                    setTimeout(() => window.location.href = "/certificado-registrado", 5000);
+                    setTimeout(() => window.location.href = url, 5000);
                 } else {
                     let data = await response.json();
 
                     if (data.errorCode === 'ALREADY_REGISTERED') {
+                        let url = "/certificado-ja-registrado?e=" + email;
                         if (data.errorData && data.errorData.newUser) {
-                            window.location.href = "/certificado-registrado";
-                        } else {
-                            window.location.href = "/certificado-ja-registrado?e=" + email;
+                            url += '&n=1';
                         }
+                        window.location.href = url;
                     } else {
                         throw data;
                     }
