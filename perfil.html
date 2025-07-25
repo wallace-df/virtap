@@ -8,238 +8,511 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex, nofollow">
 
-    <title>Virtap | Assistente Virtual | Cadastro</title>
+    <title>Virtap | Curso Gratuito</title>
 
+    <link href="./css/intlTelInput.min.css" rel="stylesheet" />
     <link href="img/favicon.svg" type="image/svg" rel="icon">
 
-    <link rel="stylesheet" href="css/vendor-common-v1.css" />
-    <link rel="stylesheet" href="css/profile-v1.css" />
 
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-4ZFMG1F0XK');
-
         window.apiURL = 'https://apinew.virtap.com.br';
-        window.dashboardURL = 'https://assistentes-test.virtap.com.br';
+        //window.apiURL = 'http://localhost:3000';
     </script>
 
-    <!-- Hotjar Tracking Code for https://www.virtap.com.br -->
-    <!-- <script>
-        (function (h, o, t, j, a, r) {
-            h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
-            h._hjSettings = { hjid: 3611346, hjsv: 6 };
-            a = o.getElementsByTagName('head')[0];
-            r = o.createElement('script'); r.async = 1;
-            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
-            a.appendChild(r);
-        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
-    </script> -->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    <!-- Meta Pixel Code -->
-    <script>
-        !function (f, b, e, v, n, t, s) {
-            if (f.fbq) return; n = f.fbq = function () {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-            n.queue = []; t = b.createElement(e); t.async = !0;
-            t.src = v; s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '848946150212475');
-        fbq('track', 'PageView');
-    </script>
-    <!-- End Meta Pixel Code -->
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #e9faff;
+            padding: 0;
+        }
 
-    <!-- Begin SessionStack code -->
-    <script type="text/javascript">
-        !function (a, b) {
-            var c = window; c.SessionStackKey = a, c[a] = c[a] || {
-                t: b,
-                q: []
-            }; for (var d = ["start", "stop", "identify", "getSessionId", "log", "setOnDataCallback", "trackEvent"], e = 0; e < d.length; e++)!function (b) {
-                c[a][b] = c[a][b] || function () {
-                    c[a].q.push([b].concat([].slice.call(arguments, 0)));
-                }
-            }(d[e]); var f = document.createElement("script"); f.async = 1, f.crossOrigin = "anonymous",
-                f.src = "https://cdn.sessionstack.com/sessionstack.js"; var g = document.getElementsByTagName("script")[0];
-            g.parentNode.insertBefore(f, g)
-        }("SessionStack", "9d1f1977a2bc4878874f4a522f1e5542");
-    </script>
-    <!-- End SessionStack Code -->
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            padding: 40px 20px;
+            gap: 40px;
+        }
 
+        .video-box {
+            max-width: 750px;
+            flex: 1;
+        }
+
+
+        .video-box img {
+            width: 100%;
+            border-radius: 15px;
+            border: 8px solid #592baf;
+        }
+
+        .text-block {
+            margin-top: 10px;
+        }
+
+        .text-block h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .text-block p {
+            font-size: 24px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .form-box {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 480px;
+            width: 100%;
+            flex: 1;
+        }
+
+        .form-box .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .form-box .logo img {
+            width: 140px;
+        }
+
+        .form-box h2 {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        .form-box form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-box input {
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .form-box button {
+            padding: 14px;
+            background-color: #592baf;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .form-box button:hover {
+            background-color: #703FB9;
+        }
+
+        .form-box small {
+            display: block;
+            margin-top: 12px;
+            font-size: 12px;
+            color: #444;
+            text-align: left;
+        }
+
+        .form-box small a {
+            color: #592baf;
+            text-decoration: none;
+        }
+
+        .form-box small a:hover {
+            color: #703FB9;
+            text-decoration: underline;
+        }
+
+        input[type="text"]:hover,
+        input[type="text"]:active,
+        input[type="text"]:focus,
+        input[type="text"]:visited,
+        input[type="text"]:focus-visible {
+            border-color: #592baf;
+            outline-color: #592baf;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 15px;
+            }
+
+            .video-box,
+            .form-box {
+                max-width: 100%;
+            }
+
+            .text-block {
+                text-align: center;
+            }
+
+            .text-block h1 {
+                font-size: 24px;
+            }
+
+            .text-block p {
+                font-size: 22px;
+            }
+
+            .form-box h2 {
+                font-size: 24px;
+            }
+        }
+
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            position: relative;
+            /* necessário para o botão X funcionar */
+            background-color: white;
+            padding: 30px 20px;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-content h3 {
+            margin-top: 0;
+            color: #532E88;
+        }
+
+        .modal-content button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #532E88;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .modal-content button:hover {
+            background-color: #703FB9;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            line-height: 1;
+        }
+
+        .close-button:hover {
+            color: #333;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-8px);
+            }
+
+            50% {
+                transform: translateX(8px);
+            }
+
+            75% {
+                transform: translateX(-8px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .shake {
+            animation: shake 0.4s;
+        }
+
+        button:disabled,
+        button:disabled:hover {
+            background-color: #ccc;
+            cursor: not-allowed;
+            color: #666;
+        }
+
+
+        .error-message {
+            color: #F64B2F;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+
+        /* Classe que será adicionada a campos com erro */
+        .input-error {
+            border: 2px solid red !important;
+            outline: none;
+        }
+
+        .input-error:focus,
+        .input-error:hover {
+            border: 2px solid red !important;
+        }
+
+        #whatsapp {
+            width: 100%;
+        }
+
+        .iti--allow-dropdown {
+            margin-bottom: 16px;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="sign_up">
-        <div class="left_content" style="background: linear-gradient(180deg, #9CD7DB -190.19%, #FFFFFF 100%);">
-            <img src="/img/hero_img.png" alt="">
-        </div>
-        <div class="right_content">
-            <h2>Preencha os dados abaixo para completar seu cadastro
-            </h2>
-            <form id="signupForm" onsubmit="return false" autocomplete="off">
-                <div class="upload-img">
-                    <img id="canv1" onclick="document.getElementById('finput').click(); return false"
-                        style="cursor: pointer" referrerpolicy="no-referrer"></img>
-                    <p>
-                        <a class="btn bg-secondary" onclick="document.getElementById('finput').click(); return false"
-                            style="cursor: pointer">Escolher foto</a>
-                        <input type='file' name="picture_file" accept="image/*" id="finput" onchange="upload()"
-                            style="display:none">
-                    </p>
-                </div>
-                <div class="input_from" style="margin-top: 20px">
-                    <div class="user-info assistant mt-3" id="personal">
-                        <div class="items">
-                            <div class="item">
-                                <h2 class="mb-0" style="font-size: 11pt;">Nome
-                                </h2>
-                                <input type="text" data-lpignore="true" class="form-control" placeholder="" id="txtNome"
-                                    name="name" maxlength="30" />
-                                <em>Por favor, informe um nome válido.</em>
-                            </div>
-                        </div>
-                        <div class="items" style="margin-top: 20px">
-                            <div class="item">
-                                <h2 class="mb-0" style="font-size: 11pt;">Área de atuação principal
-                                </h2>
-                                <input type="text" data-lpignore="true" class="form-control" id="txtTitle"
-                                    maxlength="50"
-                                    placeholder="Preencha este campo com sua área de atuação principal ou especialização." />
-                                <em>Por favor, informe uma área de atuação principal válida.</em>
-                            </div>
-                        </div>
 
-                        <div class="items">
-                            <div class="item">
-                                <h2 class="mb-1" style="font-size: 11pt;">Cidade/Estado
-                                </h2>
-                                <input type="text" data-lpignore="true" class="form-control" placeholder="" id="txtCity"
-                                    name="name" />
-                                <em>Por favor, informe uma localização válida.</em>
-                            </div>
-                        </div>
-
-                        <div class="items">
-                            <div class="item">
-                                <h2 class="mb-1" style="font-size: 11pt;">Telefone
-                                </h2>
-                                <input type="text" data-lpignore="true" class="form-control"
-                                    placeholder="(99) 99999-9999" id="phone" name="name" />
-                                <em>Por favor, informe um telefone válido.</em>
-                            </div>
-                        </div>
-
-                        <div class="items">
-                            <div class="item">
-                                <h2 class="mb-1" style="font-size: 11pt;">Áreas de atuação (escolha até 3)
-                                </h2>
-                                <div style="display: flex; flex-wrap: wrap;" id="areasAtuacao">
-                                    <div style="flex-grow:1; padding-right: 30px">
-                                        <label class="checkbox_item">
-                                            <input type="checkbox" class="checkbox" value="ASSISTENCIA_PESSOAL">
-                                            <p>Assistência pessoal</p>
-                                        </label>
-                                        <label class="checkbox_item">
-                                            <input type="checkbox" class="checkbox" value="SECRETARIADO_EXECUTIVO">
-                                            <p>Secretariado executivo</p>
-                                        </label>
-                                        <label class="checkbox_item">
-                                            <input type="checkbox" class="checkbox" value="SUPORTE_ADMINISTRATIVO">
-                                            <p>Suporte administrativo</p>
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="checkbox_item">
-                                            <input type="checkbox" class="checkbox" value="SECRETARIADO_REMOTO">
-                                            <p>Secretariado remoto</p>
-                                        </label>
-                                        <label class="checkbox_item">
-                                            <input type="checkbox" class="checkbox" value="SUPORTE_PARA_INFOPRODUTORES">
-                                            <p>Suporte para infoprodutores</p>
-                                        </label>
-                                        <label class="checkbox_item">
-                                            <input type="checkbox" class="checkbox" value="ENTRADA_DE_DADOS">
-                                            <p>Entrada de dados</p>
-                                        </label>
-                                    </div>
-                                </div>
-                                <em>Por favor, escolha até 3 áreas de atuação.</em>
-                            </div>
-                        </div>
-
-                        <div class="items" style="margin-top: 20px">
-                            <div class="item">
-                                <h2 class="mb-1" style="font-size: 11pt;">Sobre você</h2>
-                                <textarea class="form-control mt-0" id="txtDescription" rows="5" maxlength="5000"
-                                    placeholder="Mostre para o mundo o que você tem a oferecer como profissional. Aqui você pode contar quem é você como profissional, suas experiências, e sua forma de trabalhar."></textarea>
-                                <em>Por favor, informe uma descrição com pelo menos 100 caracteres.</em>
-                            </div>
-                        </div>
-
-                        <div class="items" style="margin-top: 20px">
-                            <div class="item">
-                                <div class="checkbox_item">
-                                    <label>
-                                        <input type="checkbox" class="checkbox" id="chkTermos">
-                                        <span>Aceito os <a href="/termos" target="_blank" class="link">termos de uso</a>
-                                            e a <a href="/privacidade" target="_blank" class="link">política de
-                                                privacidade</a>.</span>
-                                    </label>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="alert alert-danger text-center"
-                            style="line-height: 1.5; margin: 30px auto 0 auto; display: none; font-size:12pt; font-weight: normal"
-                            id="txtError"></div>
-
-                        <div class="text-center mt-2">
-                            <a onclick="signup()" class="btn btn__secondary" style="width: 200px" id="btnSignup">
-                                Cadastrar
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
-
-    <!-- Edit image modal -->
-    <div class="modal fade" id="editImageModal" tabindex="-1" role="dialog" data-bs-keyboard="false"
-        data-bs-backdrop="static">
-        <div class="modal-dialog" role="document" style="width:600px">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title">
-                        Editar image
-                    </h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
-
-                </div>
-                <div class="modal-body proceed">
-                    <div id="editImgContainer">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn bg-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn__secondary" data-confirm>Salvar</button>
-                </div>
+    <div class="container">
+        <div class="video-box">
+            <img src="./img/curso-gratuito.jpeg" alt="Curso gratuito Virtap">
+            <div class="text-block">
+                <h1>Curso gratuito + Certificado</h1>
+                <p>Conteúdo direto ao ponto para você dar os primeiros passos na nova profissão do futuro.</p>
             </div>
         </div>
+
+        <div class="form-box" id="signup-form">
+            <div class="logo">
+                <img src="https://www.virtap.com.br/img/logo.png" alt="Virtap logo">
+            </div>
+            <h2>Curso gratuito liberado! <img src="/img/locker.png" />
+            </h2>
+            <h3>Cadastre-se agora mesmo para começar</h3>
+            <form>
+                <input type="text" placeholder="Nome" id="nome">
+                <div class="error-message" id="erro-nome"></div>
+
+                <input type="text" placeholder="E-mail" id="email">
+                <div class="error-message" id="erro-email"></div>
+
+                <input type="text" placeholder="(99) 99999-9999" id="whatsapp">
+                <div class="error-message" id="erro-whatsapp"></div>
+
+                <button type="submit">Inscreva-se</button>
+            </form>
+            <small>
+                Ao criar uma conta você concorda com os
+                <a href="/termos" target="_blank">nossos termos de uso</a> e com a
+                <a href="/privacidade" target="_blank">política de privacidade</a>.
+            </small>
+        </div>
     </div>
 
-    <script src="/js/vendor-common-v2.js"></script>
-    <script src="/js/profile-v2.js"></script>
+    <div id="error-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">×</span>
+            <h3>Opa! Algo deu errado 😕</h3>
+            <p>Não foi possível enviar seus dados. Por favor, tente novamente em instantes.</p>
+            <button onclick="closeModal()">Fechar</button>
+        </div>
+    </div>
+    <script src="./js/intlTelInput.min.js"></script>
+    <script src="js/utils-v1.js"></script>
+
+    <script>
+
+        let nome = getParameterByName('nome');
+        if (nome && nome.trim().length > 0) {
+            document.getElementById('nome').value = nome;
+        }
+
+        let email = getParameterByName('email');
+        if (email && email.trim().length > 0) {
+            document.getElementById('email').value = email;
+            document.getElementById('email').disabled = true;
+            document.getElementById('email').style.display = 'none';
+        }
+
+        let phone = document.getElementById('whatsapp');
+        intl = window.intlTelInput(phone, {
+            autoInsertDialCode: true,
+            initialCountry: "BR",
+            separateDialCode: true
+        });
+
+
+        function showModal() {
+            document.getElementById('error-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('error-modal').style.display = 'none';
+        }
+
+
+        window.addEventListener('click', function (event) {
+            const modal = document.getElementById('error-modal');
+            const content = document.querySelector('.modal-content');
+
+            if (modal.style.display === 'flex' && !content.contains(event.target)) {
+                // Em vez de fechar, dá shake
+                content.classList.add('shake');
+                setTimeout(() => {
+                    content.classList.remove('shake');
+                }, 400); // tempo da animação
+            }
+        });
+
+        document.getElementById('signup-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const form = e.target;
+
+            // Limpa mensagens antigas
+            document.getElementById('erro-nome').textContent = '';
+            document.getElementById('erro-email').textContent = '';
+            document.getElementById('erro-whatsapp').textContent = '';
+
+            document.getElementById('nome').classList.remove('input-error');
+            document.getElementById('email').classList.remove('input-error');
+            document.getElementById('whatsapp').classList.remove('input-error');
+
+            const nome = form.nome.value.trim();
+            const email = form.email.value.trim();
+            const whatsapp = form.whatsapp.value.trim();
+
+            let hasError = false;
+
+            // Validação Nome
+            if (nome.length < 5) {
+                document.getElementById('erro-nome').textContent = 'O nome deve ter pelo menos 5 caracteres.';
+                form.nome.classList.add('input-error');
+
+                hasError = true;
+            }
+
+            // Validação WhatsApp
+            if (!intl.isValidNumber()) {
+                document.getElementById('erro-whatsapp').textContent = 'Digite um número de WhatsApp.';
+                form.whatsapp.classList.add('input-error');
+
+                hasError = true;
+            }
+
+            if (hasError) return; // Interrompe se houver erros
+
+
+            const inputs = form.querySelectorAll('input, button');
+            const button = form.querySelector('button');
+            const originalButtonText = button.textContent;
+
+            // Desativa todos os campos e muda o texto do botão
+            inputs.forEach(el => el.disabled = true);
+            button.textContent = "Enviando...";
+            const url = `${window.apiURL}/signup-intro-av-lg`;
+
+            const body = {
+                nome: nome,
+                email: email,
+                whatsapp: intl.getNumber(),
+                utm_params: getUTMParams()
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(body)
+                });
+
+                if (response.status === 200) {
+
+                    let data = await response.json();
+                    let url = "/perfil-criado";
+                    if (data.responseData.loggedIn) {
+                        url += '?r=1'
+                    }
+                    gtag('event', 'sign_up_free_course', {
+                        'send_to': 'G-4ZFMG1F0XK',
+                        'event_callback': function () {
+                            window.location.href = url;
+                        }
+                    });
+                    setTimeout(() => window.location.href = url, 5000);
+                }
+                else if (response.status === 400) {
+                    let data = await response.json();
+
+                    if (data.errorCode === 'ALREADY_REGISTERED') {
+                        let url = "/perfil-ja-criado";
+                        if (data.errorData && data.errorData.loggedIn) {
+                            url += '?r=1'
+                        }
+                        window.location.href = url;
+                    } else if (data.errorCode === 'NO_USER') {
+                        let url = "/nao-logado?next=curso/intro-av";
+                        window.location.href = url;
+                    }
+                    else {
+                        throw data;
+                    }
+                } else {
+                    throw new Error("Failure sending data.");
+                }
+            } catch (err) {
+                inputs.forEach(el => el.disabled = false);
+                button.textContent = originalButtonText;
+                console.error(err);
+                showModal();
+            }
+        });
+    </script>
+
 </body>
 
 </html>
