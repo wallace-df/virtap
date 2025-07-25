@@ -399,10 +399,10 @@
             document.getElementById('whatsapp').classList.remove('input-error');
 
             const nome = form.nome.value.trim();
-            const email = form.email.value.trim();
+            const email = form.email.value.trim().toLowerCase();
             const whatsapp = form.whatsapp.value.trim();
 
-            let hasError = false;
+            let hasError = false; 
 
             // Validação Nome
             if (nome.length < 5) {

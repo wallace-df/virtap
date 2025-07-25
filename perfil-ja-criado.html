@@ -66,24 +66,30 @@
     <div class="box">
       <h1>Você já tem um cadastro na Virtap 🚀</h1>
       <div id="nao-logado" style="display:none">
-        <p>Identificamos que você já tem uma conta na <strong>Virtap</strong>, mas você não está logado.</p>
+        <p>Identificamos que você já tem uma conta na <strong>Virtap</strong>, mas você não está logado<span
+            id="email-container" style="display:none"> com
+            o email <em id="email"></em></span>.</p>
         <p><a href="/login?next=curso/intro-av">Clique aqui</a> para fazer login e acessar o curso.
         </p>
       </div>
       <div id="logado" style="display:none">
-        <p>Vamos te redirecionar para o curso... 🚀</p>
+        <p>Vamos te redirecionar para o curso...</p>
       </div>
     </div>
   </div>
   <script>
     const params = new URLSearchParams(window.location.search);
     const redir = params.get("r");
+    const email = params.get("e");
     if (redir) {
       document.getElementById('logado').style.display = 'block';
       setTimeout(() => window.location.href = `${window.dashboardURL}/curso/intro-av`, 5000);
-
     } else {
       document.getElementById('nao-logado').style.display = 'block';
+      if (email && email.trim().length > 0) {
+        document.getElementById('email-container').style.display = '';
+        document.getElementById('email').innerText = email;
+      }
     }
   </script>
 </body>

@@ -588,7 +588,15 @@
                 const diff = target - now;
 
                 if (diff <= 0) {
-                    window.location.href = 'https://go.virtap.com.br/curso-gratuito-cda'
+                    const currentParams = new URLSearchParams(window.location.search);
+
+                    const url = new URL(`/curso-gratuito`, window.location.origin);
+
+                    currentParams.forEach((value, key) => {
+                        url.searchParams.set(key, value);
+                    });
+
+                    window.location.href = url.toString();
                     return;
                 }
 

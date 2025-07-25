@@ -330,7 +330,7 @@
             </div>
             <h2>Curso gratuito liberado! <img src="/img/locker.png" />
             </h2>
-            <h3>Cadastre-se agora mesmo para começar</h3>
+            <h3>Finalize seu cadastro e tenha acesso agora mesmo</h3>
             <form>
                 <input type="text" placeholder="Nome" id="nome">
                 <div class="error-message" id="erro-nome"></div>
@@ -364,6 +364,7 @@
 
     <script>
 
+        let skipEmailValidation = false;
         let nome = getParameterByName('nome');
         if (nome && nome.trim().length > 0) {
             document.getElementById('nome').value = nome;
@@ -374,6 +375,7 @@
             document.getElementById('email').value = email;
             document.getElementById('email').disabled = true;
             document.getElementById('email').style.display = 'none';
+            skipEmailValidation = true;
         }
 
         let phone = document.getElementById('whatsapp');
@@ -421,7 +423,7 @@
             document.getElementById('whatsapp').classList.remove('input-error');
 
             const nome = form.nome.value.trim();
-            const email = form.email.value.trim();
+            const email = form.email.value.trim().toLowerCase();
             const whatsapp = form.whatsapp.value.trim();
 
             let hasError = false;
@@ -432,6 +434,16 @@
                 form.nome.classList.add('input-error');
 
                 hasError = true;
+            }
+
+
+            if (!skipEmailValidation) {
+                // Validação Email
+                if (!/^\S+@\S+\.\S+$/.test(email)) {
+                    document.getElementById('erro-email').textContent = 'Digite um e-mail válido (ex: nome@dominio.com).';
+                    form.email.classList.add('input-error');
+                    hasError = true;
+                }
             }
 
             // Validação WhatsApp
@@ -467,6 +479,7 @@
                     headers: {
                         'Content-Type': 'application/json',
                     },
+                    credentials: "include",
                     body: JSON.stringify(body)
                 });
 
@@ -476,6 +489,8 @@
                     let url = "/perfil-criado";
                     if (data.responseData.loggedIn) {
                         url += '?r=1'
+                    } else {
+                        url += "?e=" + email
                     }
                     gtag('event', 'sign_up_free_course', {
                         'send_to': 'G-4ZFMG1F0XK',
@@ -492,6 +507,8 @@
                         let url = "/perfil-ja-criado";
                         if (data.errorData && data.errorData.loggedIn) {
                             url += '?r=1'
+                        } else {
+                            url += "?e=" + email
                         }
                         window.location.href = url;
                     } else if (data.errorCode === 'NO_USER') {

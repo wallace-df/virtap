@@ -14,6 +14,9 @@
 
     <link rel="stylesheet" href="css/vendor-login-v1.css">
     <link rel="stylesheet" href="css/login-v1.css">
+    <script>
+        window.apiURL = 'https://apinew.virtap.com.br';
+    </script>
 </head>
 
 <body style="background: #FFFFFF;">
@@ -35,7 +38,7 @@
                         <h3>Faça login na Virtap</h3>
                         <p>
                             <a href="https://apinew.virtap.com.br/auth/google/assistant" class="login_btn"
-                                id="login-button">
+                                id="login-button" data-google>
                                 <img src="img/google.svg" alt="">
                                 <span>Entrar com Google</span>
                             </a>
@@ -67,7 +70,10 @@
                 const href = $button.attr("href");
 
                 if (href) {
-                    const url = new URL(href, window.location.origin);
+                    let url = new URL(href, window.location.origin);
+                    if ($button.is('[data-google]')) {
+                        url = new URL(`${window.apiURL}/auth/google/assistant`, window.location.origin);
+                    }
 
                     currentParams.forEach((value, key) => {
                         url.searchParams.set(key, value);
