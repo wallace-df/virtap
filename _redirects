@@ -1,2 +1,3 @@
 /blog/* https://blog.virtap.com.br/:splat 301
-/assistente-virtual/* https://www.virtap.com.br/:splat 301
+/assistente-virtual/* /:splat 301
+/assistente-virtual / 301
