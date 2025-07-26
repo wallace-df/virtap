@@ -18,15 +18,14 @@ function handleSuccess(response) {
     // $("#loading").html('<div><h1>Assinatura do Virtap Club realizada com sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
     $(".sign_up").remove();
     $("body").addClass("box-container");
-    if (response.loggedIn && !response.newUser) {
+    if (response.loggedIn) {
       $("#novo-membro-redir").show();
       redirectToNext();
     } else {
-      if (response.newUser) {
+      if (!response.has_logged_in) {
         $("#novo-membro-nunca-logado-noredir").show();
         $("#novo-membro-nunca-logado-noredir").find('em').text(response.email);
         $("#novo-membro-nunca-logado-noredir").find('a').attr('href', getNextWithLogin());
-
       } else {
         $("#novo-membro-ja-logado-noredir").show();
         $("#novo-membro-ja-logado-noredir").find('em').text(response.email);
@@ -60,18 +59,13 @@ function handleError(response, loading) {
         $(".sign_up").remove();
         $("body").addClass("box-container");
         showGenericError = false;
-        if ((response.errorData.loggedIn && !response.errorData.newUser) || loading) {
+        if (response.errorData.loggedIn || loading) {
           $("#membro-existente-redir").show();
           redirectToNext();
         } else {
           $("#membro-existente-noredir").show();
           $("#membro-existente-noredir").find('em').text(response.errorData.email);
-          if (response.errorData.newUser) {
-            $('[data-has-not-logged-in]').show();
-          } else {
-            $('[data-has-logged-in]').show();
-            $("#membro-existente-noredir").find('a').attr('href', getNextWithLogin());
-          }
+          $("#membro-existente-noredir").find('a').attr('href', getNextWithLogin());
         }
       } else {
         console.log("Invalid assistant plan:", response.errorData.assistant_plan.toUpperCase());
