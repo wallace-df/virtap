@@ -545,10 +545,10 @@
                     gtag('event', 'sign_up_waiting_list', {
                         'send_to': 'G-4ZFMG1F0XK',
                         'event_callback': function () {
-                            window.location.href = "/cadastro-confirmado";
+                            window.location.href = "/espera-confirmada";
                         }
                     });
-                    setTimeout(() => window.location.href = "/cadastro-confirmado", 5000);
+                    setTimeout(() => window.location.href = "/espera-confirmada", 5000);
                 } else {
                     throw response;
                 }
