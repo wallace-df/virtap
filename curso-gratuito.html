@@ -149,6 +149,8 @@
             text-decoration: underline;
         }
 
+
+
         input[type="text"]:hover,
         input[type="text"]:active,
         input[type="text"]:focus,
@@ -309,6 +311,20 @@
         .iti--allow-dropdown {
             margin-bottom: 16px;
         }
+
+        .login-link {
+            font-size: 1rem;
+            padding-top: 1rem;
+            display: block;
+            text-align: center;
+            font-weight: bold;
+
+            color: #0000ff;
+        }
+
+        .login-link:hover {
+            color: #703FB9;
+        }
     </style>
 </head>
 
@@ -342,6 +358,7 @@
 
                 <button type="submit">Inscreva-se</button>
             </form>
+            <a href="/login" class="login-link"> 🔐 Já tem uma conta na Virtap? Clique aqui para entrar</a>
             <small>
                 Ao criar uma conta você concorda com os
                 <a href="/termos" target="_blank">nossos termos de uso</a> e com a
@@ -483,7 +500,7 @@
                     if (data.errorCode === 'ALREADY_REGISTERED') {
                         let url = "/cadastro-ja-realizado?e=" + email;
                         if (data.errorData && data.errorData.newUser) {
-                          //  url += '&n=1';
+                            //  url += '&n=1';
                         }
                         window.location.href = url;
                     } else {
