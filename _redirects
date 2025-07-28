@@ -1,4 +1,4 @@
 /blog/* https://blog.virtap.com.br/:splat 301
 /assistente-virtual/* /:splat 301
 /assistente-virtual / 301
-/lista-de-espera:splat /curso-gratuito:splat 301
+/lista-de-espera /curso-gratuito 301
