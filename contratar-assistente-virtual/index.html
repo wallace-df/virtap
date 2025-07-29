@@ -28,7 +28,6 @@
             'anonymize_ip': true
         });
     </script>
-
 </head>
 
 <body>
@@ -37,9 +36,33 @@
         <div class="main-container">
             <div class="header-wrapper">
                 <a class="header-logo" href="#"><img src="/img/logo.png" alt="Logo Virtap"></a>
-                <div class="dropdown">
-                    <a class="header-login-btn" href="./login" target="_blank" title="Login">Log
-                        in</a>
+                <div class="header-right">
+                    <div class="dropdown">
+                        <a class="header-login-btn" href="./login" target="_blank" title="Login">Log
+                            in</a>
+                    </div>
+                    <div class="dropdown language-dropdown">
+                        <button class="btn btn-light dropdown-toggle d-flex align-items-center" type="button"
+                            id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://flagcdn.com/w40/br.png" alt="PT" class="lang-flag me-2" />
+                            PT 
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="/contratar-assistente-virtual">
+                                    <img src="https://flagcdn.com/w40/br.png" alt="PT" class="lang-flag me-2" />
+                                    Português
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center" href="/en/">
+                                    <img src="https://flagcdn.com/w40/us.png" alt="EN" class="lang-flag me-2" />
+                                    English
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </div>
