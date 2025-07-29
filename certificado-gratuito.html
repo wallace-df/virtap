@@ -19,8 +19,9 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-        gtag('config', 'G-4ZFMG1F0XK');
-        window.apiURL = 'https://api.virtap.com.br';
+        gtag('config', 'G-4ZFMG1F0XK', {
+            'anonymize_ip': true
+        }); window.apiURL = 'https://api.virtap.com.br';
     </script>
 
     <style>
@@ -401,7 +402,7 @@
             const email = form.email.value.trim().toLowerCase();
             const whatsapp = form.whatsapp.value.trim();
 
-            let hasError = false; 
+            let hasError = false;
 
             // Validação Nome
             if (nome.length < 5) {
@@ -473,7 +474,7 @@
                     if (data.errorCode === 'ALREADY_REGISTERED') {
                         let url = "/certificado-ja-registrado?e=" + email;
                         if (data.errorData && data.errorData.newUser) {
-                         //   url += '&n=1';
+                            //   url += '&n=1';
                         }
                         window.location.href = url;
                     } else {

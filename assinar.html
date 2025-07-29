@@ -20,8 +20,9 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-        gtag('config', 'G-4ZFMG1F0XK');
-
+        gtag('config', 'G-4ZFMG1F0XK', {
+            'anonymize_ip': true
+        });
         window.apiURL = 'https://api.virtap.com.br';
         window.dashboardURL = 'https://assistentes.virtap.com.br';
     </script>

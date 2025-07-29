@@ -8,7 +8,7 @@
     <meta name="robots" content="noindex">
     <meta name="googlebot" content="noindex">
 
-    <title>Virtap | Cliente | Cadastrar</title>
+    <title>Virtap | Hire | Profile</title>
 
     <link href="/favicon.svg" type="image/svg" rel="icon">
     <link rel="stylesheet" href="css/vendor-common-v1.css" />
@@ -31,7 +31,7 @@
     <div class="sign_up">
         <div class="left_content" style="background: linear-gradient(180deg, #532E88 -190.19%, #FFFFFF 100%);">
             <img src="/img/spg.png" alt="">
-            <h1>Conecte-se com os melhores talentos da Assistência Virtual</h1>
+            <h1>Connect with the Best in Virtual Assistance</h1>
         </div>
         <div class="right_content">
             <form id="signupForm">
@@ -39,18 +39,19 @@
                     <div class="user-info assistant mt-3" id="personal">
                         <div class="items">
                             <div class="item">
-                                <div class="search__name" id="name"><strong>Nome</strong></div>
+                                <div class="search__name" id="name"><strong>Your Name</strong></div>
                                 <input type="text" class="form-control" id="txtNome" name="name" maxlength="30"
-                                    placeholder="Seu nome" />
-                                <em>Por favor, informe um nome válido.</em>
+                                    placeholder="Your name" />
+                                <em>Please enter a valid name.</em>
                             </div>
                         </div>
                         <div class="items" style="margin-top: 30px">
                             <div class="item">
-                                <div class="search__name mb-3" id="phone"><strong>WhatsApp</strong></div>
+                                <div class="search__name mb-1" id="phone" style="line-height: 1;"><strong>WhatsApp Number</strong></div>
+                                    <small style="line-height: 1;display: block;font-size: 14x; font-weight: bold;" class="mt-0 mb-2 text-muted">VAs you select will contact you here</small>
                                 <input type="text" class="form-control" id="txtWhatsapp" maxlength="30"
-                                    placeholder="(99) 99999-9999" style="width:100%" />
-                                <em>Por favor, informe um WhatsApp válido.</em>
+                                    placeholder="" style="width:100%" />
+                                <em>Please enter a valid Whatsapp number.</em>
                             </div>
                         </div>
                         <div class="items" style="margin-top: 25px">
@@ -58,9 +59,8 @@
                                 <div class="checkbox_item">
                                     <label>
                                         <input type="checkbox" class="checkbox" id="chkTermos">
-                                        <span>Aceito os <a href="/termos" target="_blank" class="link">termos de uso</a>
-                                            e a <a href="/privacidade" target="_blank" class="link">política de
-                                                privacidade</a>.</span>
+                                        <span>I agree to the <a href="/termos" target="_blank" class="link">Terms of Use</a>
+                                            and <a href="/privacidade" target="_blank" class="link">Privacy Policy</a>.</span>
                                     </label>
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                             id="txtError"></div>
                         <div class="text-center mt-2">
                             <a onclick="signup()" class="btn btn__secondary" style="width: 200px" id="btnSignup">
-                                Cadastrar
+                                Sign up
                             </a>
                         </div>
                     </div>

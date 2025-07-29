@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
+
+    <title>Virtap | Hire | Sign up</title>
+
+    <link href="/favicon.svg" type="image/svg" rel="icon">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/login-v1.css">
+</head>
+
+<body style="background: #FFFFFF;">
+
+    <main>
+        <!--========== Login 1 area ===========-->
+        <div class="login_area text-center">
+            <div class="row g-0">
+                <div class="col-lg-6"
+                    style="background: linear-gradient(180deg, #F2E9FF 0%, #F9F5FF 39.58%, rgba(243, 235, 255, 0) 100%);">
+                    <div class="left">
+                        <img class="login1_img" src="/img/o-que-faz-secretaria-executiva.svg" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 position-relative">
+
+                    <img class="sh sh3" src="/img/sh-10.png" alt="">
+                    <img class="sh sh4" src="/img/sh-11.png" alt="">
+
+                    <div class="circle_sh circle_sh3"></div>
+                    <div class="circle_sh circle_sh4"></div>
+
+                    <div class="right">
+                        <a href="./" class="login_site_logo"><img class="w-100" src="/img/logo.svg" alt=""></a>
+                        <h3>Sign up for Virtap</h3>
+                        <a href="https://api.virtap.com.br/auth/google/client?next=cadastro" class="login_btn"
+                            id="login-button"><img src="/img/google.svg" alt="">Sign up with Google</a>
+                        <p class="mt-5 fs-3"><a href="./login">Already have an account? Log in!</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- all js here -->
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script>
+        function getParameterByName(name) {
+            var regexS = "[\\?&]" + name + "=([^&#]*)",
+                regex = new RegExp(regexS),
+                results = regex.exec(window.location.search);
+            if (results == null) {
+                return "";
+            } else {
+                return decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+        }
+
+        $(document).ready(function () {
+            let next = getParameterByName('next');
+            if (next) {
+                let url = $("#login-button").attr('href');
+                url += '?next=' + next;
+                $("#login-button").attr('href', url);
+            }
+        });
+    </script>
+</body>
+
+</html>
