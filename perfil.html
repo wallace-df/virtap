@@ -333,7 +333,7 @@
             </h2>
             <h3>Finalize seu cadastro e tenha acesso agora mesmo</h3>
             <form>
-                <input type="text" placeholder="Nome" id="nome">
+                <input type="text" placeholder="Nome" id="nome" maxlength="50">
                 <div class="error-message" id="erro-nome"></div>
 
                 <input type="text" placeholder="E-mail" id="email">
@@ -368,7 +368,7 @@
         let skipEmailValidation = false;
         let nome = getParameterByName('nome');
         if (nome && nome.trim().length > 0) {
-            document.getElementById('nome').value = nome;
+            document.getElementById('nome').value = nome.substring(0, 50);
         }
 
         let email = getParameterByName('email');
