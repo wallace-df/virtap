@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1">
+
+  <!-- title -->
+  <title>Virtap | Do Zero à Assistência Pessoal</title>
+
+  <!-- favicon -->
+  <link href="/img/favicon.svg" type="image/svg" rel="icon">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-4ZFMG1F0XK');
+    gtag('config', 'AW-924784320');
+  </script>
+
+  <!-- all css here -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/css/intlTelInput.css">
+
+</head>
+
+<body>
+
+  <div class="logo-wrap">
+    <img src="img/virtap-logo.png" alt="">
+  </div>
+
+  <section class="banner">
+    <div class="container">
+      <div class="banner-content">
+        <h6><span>Do zero à Assistência Pessoal</span></h6>
+        <h1>Uma profissão em alta demanda, baixa concorrência e com possibilidade de <br class="d-none d-lg-block">
+          ganhos de até R$ 10.000</h1>
+        <p>Descubra os segredos e as oportunidades incríveis que a profissão de Assistencia Pessoal oferece e como
+          começar a trabalhar já.</p>
+        <!-- <p class="live-time">
+          LIVE
+          <span>
+            <img src="img/calendar.svg" alt="">
+            17 de Março
+            <span><img src="img/clock.svg" alt="">19h</span>
+          </span>
+        </p> -->
+        <div class="banner-btn">
+          <a href="javascript:goToGroup()" role="button" class="btn-design"><span>Quero participar</span></a>
+        </div>
+        <img src="img/banner-img.png" alt="" class="banner-img">
+      </div>
+    </div>
+    <img src="img/shape-1.svg" class="shape-1" alt="">
+    <img src="img/shape-2.svg" class="shape-2" alt="">
+    <img src="img/shape-3.svg" class="shape-3" alt="">
+    <img src="img/shape-5.svg" class="shape-5" alt="">
+    <img src="img/shape-6.svg" class="shape-6" alt="">
+    <img src="img/shape-7.svg" class="shape-7" alt="">
+    <img src="img/shape-8.svg" class="shape-8" alt="">
+  </section>
+
+  <section class="personal-assistant">
+    <div class="container">
+      <div class="row personal-assistant-box">
+        <div class="col-lg-6">
+          <div class="personal-left">
+            <img src="img/shape-9.svg" class="shape-9" alt="">
+            <h6>Quem deve participar da Live</h6>
+            <h2>Do zero à Assistência Pessoal?</h2>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="personal-right">
+            <ul>
+              <li><img src="img/arrow.svg" alt=""> Qualquer pessoa que queira trabalhar pela internet</li>
+              <li><img src="img/arrow.svg" alt=""> Assistentes Virtuais que querem ganhar mais se especializando</li>
+              <li><img src="img/arrow.svg" alt=""> Profissionais da área administrativa que querem migrar para o remoto
+              </li>
+            </ul>
+            <div>
+              <a href="javascript:goToGroup()" class="personal-btn">Quero participar</a>
+            </div>
+            <div class="d-lg-none">
+              <img class="w-100" src="img/female-img.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="img/logo.png" alt="">
+        </div>
+        <div class="footer-social">
+          <ul>
+            <li><a href="https://www.instagram.com/raquel.debritos" target="_blank"><span><img src="img/instagram.svg"
+                    alt=""></span>raquel.debritos</a></li>
+            <li><a href="https://www.youtube.com/@virtapbr" target="_blank"><span><img src="img/youtube.svg"
+                    alt=""></span>virtapbr</a></li>
+            <li><a href="https://www.virtap.com.br"><span><img src="img/world.svg"
+                    alt=""></span>https://www.virtap.com.br</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- popup code -->
+  <div class="modal fade" id="popUp" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closePopup"></button>
+        <div class="popup-body modal-body">
+          <h2>Preencha seus dados para se inscrever </h2>
+          <form id="loginForm" onsubmit="return false">
+            <div>
+              <input type="text" class="form-control input-field" id="name" placeholder="Digite seu nome"
+                data-lpignore="true">
+              <p id="name-error" class="error"><img src="img/exclamation.svg" alt=""> Informe seu nome</p>
+            </div>
+            <div>
+              <input type="text" class="form-control input-field" id="email" placeholder="Digite seu e-mail"
+                data-lpignore="true">
+              <p id="email-error" class="error"><img src="img/exclamation.svg" alt=""> Informe seu email</p>
+            </div>
+            <div>
+              <input type="text" class="form-control input-field" id="phone" data-lpignore="true" placeholder="(99) 99999-9999">
+              <p id="phone-error" class="error"><img src="img/exclamation.svg" alt=""> Informe seu telefone</p>
+            </div>
+            <div>
+              <button class="submit-btn" onclick="signup()" id="btn-continue"><img src="img/whastapp.svg" width="32px" style="margin-right: 8px"> Entrar no grupo do WhatsApp</button>
+              <p id="submit-error" class="error text-center"><img src="img/exclamation.svg" alt="">Ocorreu um erro. Por favor, tente novamente.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- all js here -->
+  <script src="/js/jquery-3.6.0.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
+  <script src="js/main-v7.js"></script>
+</body>
+
+</html> 
