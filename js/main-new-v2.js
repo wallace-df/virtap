@@ -107,3 +107,44 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+function isForeignUser() {
+  const lang = navigator.language || navigator.userLanguage;
+  const preferredLangs = navigator.languages || [];
+
+  const isNonPortuguese = !lang.startsWith('pt');
+  const prefersNoPortuguese = !preferredLangs.some(l => l.startsWith('pt'));
+
+  return isNonPortuguese && prefersNoPortuguese;
+}
+
+function dismissEnglishToast() {
+  document.getElementById('english-toast').style.display = 'none';
+}
+
+if (isForeignUser()) {
+  const toast = document.getElementById('english-toast');
+  toast.style.display = 'block';
+
+  // Aplica slide-in
+  toast.classList.add('slide-in');
+
+  // Remove slide-in após terminar a animação para evitar conflito
+  toast.addEventListener('animationend', function onSlideInEnd(e) {
+    if (e.animationName === 'slideIn') {
+      toast.classList.remove('slide-in');
+      toast.removeEventListener('animationend', onSlideInEnd);
+
+      // Após 3s, faz pulse
+      setTimeout(() => {
+        toast.classList.add('pulse-animation');
+
+        toast.addEventListener('animationend', function onPulseEnd(e) {
+          if (e.animationName === 'pulse') {
+            toast.classList.remove('pulse-animation');
+            toast.removeEventListener('animationend', onPulseEnd);
+          }
+        });
+      }, 3000);
+    }
+  });
+}
