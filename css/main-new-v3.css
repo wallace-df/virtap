@@ -18427,7 +18427,8 @@ tbody tr:last-child .col3 .tik:before {
   padding-top: 3rem;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Alinha horizontalmente */
+  justify-content: center;
+  /* Alinha horizontalmente */
   align-items: center;
 
 }
@@ -18441,12 +18442,12 @@ tbody tr:last-child .col3 .tik:before {
 }
 
 
-.contact_body a:hover{
+.contact_body a:hover {
   color: #532e88;
 }
 
 
-#english-toast {
+.hire-toast {
   display: none;
   position: fixed;
   top: 10px;
@@ -18463,32 +18464,40 @@ tbody tr:last-child .col3 .tik:before {
   margin-left: 20px;
 }
 
-#english-toast .toast-wrapper {
+#portuguese-toast {
+  top: 70px;
+}
+
+.hire-toast .toast-wrapper {
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 10px;
+  text-align: center;
 }
 
-#english-toast .cta-btn {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 8px 16px;
-  background: #FFEA00;
+.hire-toast h2 {
   color: #4B2E83;
-  border: none;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s;
+  text-align: center;
+  line-height: 1.5;
+  font-size: 2.2rem;
 }
 
-#english-toast .d-flex {
+.hire-toast h2 span {
+  font-size: 3rem;
+  vertical-align: middle;
+  margin-right: 1rem;
+}
+
+.hire-toast a{
+  margin: 0 auto;
+}
+
+.hire-toast .d-flex {
   gap: 10px;
 }
 
-#english-toast .d-flex .btn-secondary {
+.hire-toast .d-flex .btn-secondary {
   align-self: flex-start;
 }
 

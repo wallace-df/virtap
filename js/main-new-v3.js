@@ -121,8 +121,19 @@ function dismissEnglishToast() {
   document.getElementById('english-toast').style.display = 'none';
 }
 
+function dismissPortugueseToast() {
+  document.getElementById('portuguese-toast').style.display = 'none';
+}
+let toast;
+
 if (isForeignUser()) {
-  const toast = document.getElementById('english-toast');
+  toast = document.getElementById('english-toast');
+}
+else {
+  toast = document.getElementById('portuguese-toast');
+}
+
+if (toast) {
   toast.style.display = 'block';
 
   // Aplica slide-in
@@ -147,4 +158,5 @@ if (isForeignUser()) {
       }, 3000);
     }
   });
+
 }
