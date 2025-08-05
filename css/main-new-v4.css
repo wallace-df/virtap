@@ -15268,6 +15268,10 @@ h6 {
   background: #ffffff;
 }
 
+.button_transparent.secondary {
+  background-color: #b3e3e5;
+}
+
 .button_icon {
   width: 5.2rem;
   height: 5.2rem;
@@ -15276,7 +15280,7 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 3.2rem;
+  margin-left: 2rem;
   transition: 0.25s ease;
   border: 0.1rem solid #fff;
 }
@@ -15341,7 +15345,7 @@ h6 {
   width: 9.8rem;
 }
 
-.hero_content p {
+.hero_content p, .hero_content h2 {
   font-size: 2.6rem;
   font-weight: 400;
   color: #363636;
@@ -15356,6 +15360,11 @@ h6 {
 .hero_content h1 span {
   position: relative;
   display: inline-block;
+}
+
+.hero_content_bottom {
+  gap: 3rem;
+  flex-wrap: wrap;
 }
 
 .text_line {
@@ -16891,7 +16900,7 @@ tbody tr:last-child .col3 .tik:before {
     margin: 0 auto;
   }
 
-  .hero_content p {
+  .hero_content p, .hero_content h2 {
     max-width: 100%;
     padding: 3rem 0 3rem;
   }
@@ -16900,6 +16909,7 @@ tbody tr:last-child .col3 .tik:before {
     position: relative;
     width: fit-content;
     margin: 0 auto;
+    gap: 2rem;
   }
 
   .curvy_arrow {
@@ -17167,7 +17177,7 @@ tbody tr:last-child .col3 .tik:before {
     line-height: 3.2rem;
   }
 
-  .hero_content p {
+  .hero_content p , .hero_content h2{
     font-size: 1.6rem;
     line-height: 2.4rem;
     padding: 1rem 0 1.6rem;
@@ -17175,7 +17185,7 @@ tbody tr:last-child .col3 .tik:before {
 
   .button {
     height: 4.4rem;
-    padding: 0.5rem 0.5rem 0.5rem 2rem;
+    padding: 0.5rem 0.5rem 0.5r em 2rem;
     font-size: 1.5rem;
   }
 

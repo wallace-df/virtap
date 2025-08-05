@@ -130,7 +130,7 @@ if (isForeignUser()) {
   toast = document.getElementById('english-toast');
 }
 else {
-  toast = document.getElementById('portuguese-toast');
+ // toast = document.getElementById('portuguese-toast');
 }
 
 if (toast) {
