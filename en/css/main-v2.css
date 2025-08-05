@@ -415,7 +415,9 @@ section {
   width: 100%;
 }
 
-.landing-hero-text-area p {
+.landing-hero-text-area p,
+.landing-hero-text-area h2
+{
   font-weight: 400;
   font-size: 32px;
   line-height: 1.34;
@@ -2242,7 +2244,8 @@ section {
     max-width: 685px;
   }
 
-  .landing-hero-text-area p {
+  .landing-hero-text-area p,
+  .landing-hero-text-area h2{
     font-size: 30px;
   }
 
@@ -2341,12 +2344,13 @@ section {
     max-width: 574px;
     font-size: 50px;
     line-height: 1.3;
-    padding-bottom: 84px;
-    padding-bottom: 45px;
+    padding-bottom: 30px;
   }
 
-  .landing-hero-text-area p {
-    font-size: 23px;
+  .landing-hero-text-area p,
+  .landing-hero-text-area h2
+  {
+    font-size: 20px;
   }
 
   .landing-hero-img .landing-hero-main-img img {
@@ -2826,7 +2830,9 @@ section {
     font-size: 48px;
   }
 
-  .landing-hero-text-area p {
+  .landing-hero-text-area p,
+  .landing-hero-text-area h2
+  {
     font-size: 21px;
   }
 
@@ -3047,7 +3053,9 @@ section {
     max-width: 434px;
   }
 
-  .landing-hero-text-area p {
+  .landing-hero-text-area p,
+  .landing-hero-text-area h2
+  {
     font-size: 20px;
     margin-bottom: 45px;
   }
@@ -3217,7 +3225,9 @@ section {
   }
 
   .landing-hero-text-area h1,
-  .landing-hero-text-area p {
+  .landing-hero-text-area p,
+  .landing-hero-text-area h2
+  {
     margin-left: auto;
     margin-right: auto;
   }
@@ -3479,7 +3489,9 @@ section {
     padding: 145px 0 70px;
   }
 
-  .landing-hero-text-area p {
+  .landing-hero-text-area p,
+  .landing-hero-text-area h2
+  {
     font-size: 22px;
     line-height: 32px;
     margin-bottom: 30px;
@@ -4225,7 +4237,9 @@ section {
     display: flex;
   }
 
-  .landing-hero-text-area p {
+  .landing-hero-text-area p,
+  .landing-hero-text-area h2
+  {
     font-size: 18px;
     line-height: 28px;
   }
