@@ -102,7 +102,7 @@ function signup() {
     formData.append('utm_params', JSON.stringify(getUTMParams()));
 
     $.ajax({
-      url: window.apiURL + '/client/register-profile',
+      url: window.apiURL + '/client/register-profile?en=1',
       data: formData,
       processData: false,
       contentType: false,
@@ -113,26 +113,26 @@ function signup() {
       error: function (xhr, status) {
         if (xhr.status === 401) {
           $("#signupForm").find('input, .btn').prop("disabled", false).removeClass("disabled");
-          $("#btnSignup").text("Cadastrar");
+          $("#btnSignup").text("Sign Up");
           $txtError.removeClass().addClass('alert alert-warning text-center');
-          $txtError.html("Sua sessão expirou.<br/> <a class='link' href='javascript:void(0)' onclick='popupWindow(\"" + window.apiURL + "/auth/google/client?popup=true\",\"_blank\",window, 600, 400)' target='_blank' class='link'> Clique aqui para entrar novamente.</a>").show();
+          $txtError.html("Your session has expired.<br/> <a class='link' href='javascript:void(0)' onclick='popupWindow(\"" + window.apiURL + "/auth/google/client?popup=true&en=1\",\"_blank\",window, 600, 400)' target='_blank' class='link'> Click here to log in again.</a>").show();
         } else {
           try {
             let err = JSON.parse(xhr.responseText);
             if (err.errorCode === 'CLIENT_ALREADY_REGISTERED') {
 
-              $txtError.removeClass().addClass('alert alert-success  text-center');
-              $txtError.html("Você já criou uma conta.<br/> <a class='link' href='" + window.dashboardURL + "' target='_blank' class='link'> Clique aqui para acessá-la.</a>").show();
-              $("#btnSignup").text("Cadastrar");
+              $txtError.removeClass().addClass('alert alert-success text-center');
+              $txtError.html("You have already created an account.<br/> <a class='link' href='" + window.dashboardURL + "' target='_blank' class='link'> Click here to access it.</a>").show();
+              $("#btnSignup").text("Sign Up");
               return;
             }
             throw xhr;
 
           } catch (err) {
             $("#signupForm").find('input, .btn').prop("disabled", false).removeClass("disabled");
-            $("#btnSignup").text("Cadastrar");
-            $txtError.removeClass().addClass('alert alert-danger  text-center');
-            $txtError.html("Ocorreu um erro no seu cadastro.<br/> Por favor, verifique sua conexão e tente novamente.").show();
+            $("#btnSignup").text("Sign Up");
+            $txtError.removeClass().addClass('alert alert-danger text-center');
+            $txtError.html("An error occurred during your sign up.<br/> Please check your connection and try again.").show();
           }
         }
       },
