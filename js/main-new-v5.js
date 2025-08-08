@@ -117,6 +117,11 @@ function isForeignUser() {
   return isNonPortuguese && prefersNoPortuguese;
 }
 
+function dismissCookieConsentPT() {
+  document.getElementById('cookie-banner').style.display = 'none';
+  localStorage.setItem('cookie-consent-landing-pt', Date.now());
+}
+
 function dismissEnglishToast() {
   document.getElementById('english-toast').style.display = 'none';
 }
@@ -124,13 +129,14 @@ function dismissEnglishToast() {
 function dismissPortugueseToast() {
   document.getElementById('portuguese-toast').style.display = 'none';
 }
+
 let toast;
 
 if (isForeignUser()) {
   toast = document.getElementById('english-toast');
 }
 else {
- // toast = document.getElementById('portuguese-toast');
+  // toast = document.getElementById('portuguese-toast');
 }
 
 if (toast) {
@@ -159,4 +165,9 @@ if (toast) {
     }
   });
 
+}
+
+const consentDate = localStorage.getItem('cookie-consent-landing-pt');
+if (consentDate === undefined || consentDate === null) {
+  document.getElementById('cookie-banner').style.display = 'block';
 }

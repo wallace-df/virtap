@@ -15345,7 +15345,8 @@ h6 {
   width: 9.8rem;
 }
 
-.hero_content p, .hero_content h2 {
+.hero_content p,
+.hero_content h2 {
   font-size: 2.6rem;
   font-weight: 400;
   color: #363636;
@@ -16900,7 +16901,8 @@ tbody tr:last-child .col3 .tik:before {
     margin: 0 auto;
   }
 
-  .hero_content p, .hero_content h2 {
+  .hero_content p,
+  .hero_content h2 {
     max-width: 100%;
     padding: 3rem 0 3rem;
   }
@@ -17177,7 +17179,8 @@ tbody tr:last-child .col3 .tik:before {
     line-height: 3.2rem;
   }
 
-  .hero_content p , .hero_content h2{
+  .hero_content p,
+  .hero_content h2 {
     font-size: 1.6rem;
     line-height: 2.4rem;
     padding: 1rem 0 1.6rem;
@@ -18486,20 +18489,22 @@ tbody tr:last-child .col3 .tik:before {
   text-align: center;
 }
 
-.hire-toast h2 {
+.hire-toast p {
   color: #4B2E83;
   text-align: center;
   line-height: 1.5;
   font-size: 2.2rem;
+  font-weight: 700;
 }
 
-.hire-toast h2 span {
+.hire-toast p span {
   font-size: 3rem;
   vertical-align: middle;
   margin-right: 1rem;
+  font-weight: 700;
 }
 
-.hire-toast a{
+.hire-toast a {
   margin: 0 auto;
 }
 
@@ -18543,4 +18548,17 @@ tbody tr:last-child .col3 .tik:before {
 
 .pulse-animation {
   animation: pulse 0.4s ease;
+}
+
+#cookie-banner {
+  position: fixed;
+  bottom: 0;
+  background: rgba(228, 218, 243, 0.9);
+  color: #000;
+  width: 100%;
+  padding: 5px;
+  text-align: center;
+  z-index: 9999;
+  font-size: 12px;
+  display: none;
 }
