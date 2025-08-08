@@ -23749,7 +23749,8 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
     document.title = getTitleFunc();
 
-    $("#submit-btn").show().text(getButtonLabelFunc())
+    $("#submit-btn").show().text(getButtonLabelFunc());
+    $("#vindi-disclaimer").show();
     $('[data-bs-toggle="tab"]').on('show.bs.tab', function (e) {
         let method = $(e.target).data('payment-method');
         updatePaymentStatus(method);
