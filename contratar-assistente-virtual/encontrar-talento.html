@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
+
+    <title>Virtap | Encontre um talento</title>
+
+    <link href="/favicon.svg" type="image/svg+xml" rel="icon" />
+    <link href="/favicon.png" type="image/png" rel="icon" />
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/login-v1.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+
+    <style>
+        /* Container dos cards em coluna flex */
+        .cards-container {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem;
+        }
+
+
+
+        .step-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            gap: 2rem;
+            width: 100%;
+            padding: 2rem;
+        }
+
+        .step-navigation h3 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        /* Botões desabilitados */
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+
+        .btn-gray-custom {
+            background-color: #666666;
+            border-color: #666666;
+            color: white;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            font-size: 2rem;
+        }
+
+        .btn-gray-custom:hover,
+        .btn-gray-custom:focus {
+            background-color: #4d4d4d;
+            border-color: #4d4d4d;
+            color: white;
+        }
+
+        .btn-gray-custom:disabled,
+        .btn-gray-custom.disabled {
+            background-color: #bbb;
+            border-color: #bbb;
+            color: #eee;
+            cursor: not-allowed;
+            opacity: 1;
+        }
+
+        .card-custom {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(83, 46, 136, 0.1);
+            padding: 20px;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-custom:hover {
+            box-shadow: 0 8px 16px rgba(83, 46, 136, 0.2);
+            border-color: #532e88;
+        }
+
+        .card-custom.selected {
+            border-color: #532e88;
+            box-shadow: 0 0 12px rgba(83, 46, 136, 0.5);
+            background: #ede7f6;
+            /* lilás clarinho */
+        }
+
+        .card-custom i {
+            font-size: 3rem;
+            color: #532e88;
+            margin-bottom: 10px;
+        }
+
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            /* só uma coluna */
+            gap: 1rem;
+            padding: 2rem;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .cards-grid>.card-custom {
+            width: 100%;
+            max-width: none;
+            /* libera max-width */
+            height: auto;
+            /* altura conforme conteúdo */
+            margin: 0;
+            display: flex;
+            flex-direction: row;
+            /* ou coluna, conforme quiser layout interno */
+            align-items: center;
+            padding: 20px;
+            /* se quiser */
+        }
+    </style>
+
+</head>
+
+<body style="background: #FFFFFF;">
+
+    <main>
+        <!--========== Login 1 area ===========-->
+        <div class="login_area text-center">
+            <div class="row g-0">
+                <div class="col-lg-6"
+                    style="background: linear-gradient(180deg, #F2E9FF 0%, #F9F5FF 39.58%, rgba(243, 235, 255, 0) 100%);">
+                    <div class="left">
+                        <img class="login1_img" src="/img/login1.png" alt="">
+                        <h2>Encontre os melhores talentos da <br class="d-none d-md-block">Assistência Virtual</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6" style="flex-direction: column;">
+                    <div class="step-navigation d-flex align-items-center justify-content-between">
+                        <button id="btnPrev" class="btn btn-gray-custom" disabled>
+                            <i class="fa-solid fa-chevron-left me-2"></i> Voltar
+                        </button>
+
+                        <h3 class="m-0 flex-grow-1 text-center" id="stepTitle">Tipo de demandas</h3>
+
+                        <button id="btnNext" class="btn btn-gray-custom" disabled>
+                            Próximo <i class="fa-solid fa-chevron-right ms-2"></i>
+                        </button>
+                    </div>
+
+                    <div id="cardsWrapper" class="cards-container">
+                        <!-- cards da etapa atual serão renderizados aqui -->
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+        </div>
+    </main>
+
+    <!-- all js here -->
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script>
+        function getParameterByName(name) {
+            var regexS = "[\\?&]" + name + "=([^&#]*)",
+                regex = new RegExp(regexS),
+                results = regex.exec(window.location.search);
+            if (results == null) {
+                return "";
+            } else {
+                return decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+        }
+
+        $(document).ready(function () {
+            let next = getParameterByName('next');
+            if (next) {
+                let url = $("#login-button").attr('href');
+                url += '?next=' + next;
+                $("#login-button").attr('href', url);
+            }
+        });
+
+    </script>
+
+    <script>
+        $(function() {
+  const allSteps = [
+    {
+      id: 'tipo-demanda',
+      title: "Tipo de demandas",
+      cards: [
+        { value: "personal", icon: "fa-user", label: "Pessoais" },
+        { value: "professional", icon: "fa-briefcase", label: "Profissionais" },
+        { value: "both", icon: "fa-users", label: "Ambas" },
+      ],
+    },
+    {
+      id: 'demandas-pessoais',
+      title: "Demandas pessoais",
+      cards: [
+        { value: "organizacao-pessoal", icon: "fa-calendar-check", label: "Organização Pessoal" },
+        { value: "compras-presentes", icon: "fa-shopping-cart", label: "Compras e Presentes" },
+        { value: "viagens-logistica", icon: "fa-plane", label: "Viagens e Logística" },
+        { value: "suporte-administrativo", icon: "fa-file-alt", label: "Suporte Administrativo" },
+        { value: "outros-servicos-pessoais", icon: "fa-star", label: "Outros Serviços Pessoais" },
+      ],
+    },
+    {
+      id: 'demandas-profissionais',
+      title: "Demandas profissionais",
+      cards: [
+        { value: "comunicacao-atendimento", icon: "fa-comments", label: "Comunicação e Atendimento" },
+        { value: "gestao-administrativa", icon: "fa-tasks", label: "Gestão Administrativa" },
+        { value: "producao-conteudo", icon: "fa-file-alt", label: "Produção e Gestão de Conteúdo" },
+        { value: "vendas-prospeccao", icon: "fa-chart-line", label: "Vendas e Prospecção" },
+        { value: "logistica-operacoes", icon: "fa-truck", label: "Logística e Operações" },
+      ],
+    },
+    {
+      id: 'volume-trabalho',
+      title: "Volume de trabalho",
+      cards: [
+        { value: "low", icon: "fa-turtle", label: "Baixo" },
+        { value: "medium", icon: "fa-walking", label: "Médio" },
+        { value: "high", icon: "fa-running", label: "Alto" },
+      ],
+    },
+    {
+      id: 'idioma',
+      title: "Idioma",
+      cards: [
+        { value: "portuguese", icon: "fa-language", label: "Português" },
+        { value: "english", icon: "fa-globe", label: "Inglês" },
+        { value: "spanish", icon: "fa-comment", label: "Espanhol" },
+      ],
+    },
+    {
+      id: 'prazo',
+      title: "Prazo para começar",
+      cards: [
+        { value: "immediate", icon: "fa-bolt", label: "Imediato" },
+        { value: "week", icon: "fa-calendar-week", label: "Dentro de uma semana" },
+        { value: "month", icon: "fa-calendar-alt", label: "Dentro de um mês" },
+      ],
+    },
+  ];
+
+  let currentStepIndex = 0;
+  let selectedValues = {};
+  let activeSteps = [];
+
+  function buildActiveSteps() {
+    activeSteps = [ allSteps[0] ]; // sempre começa com tipo demanda
+
+    const tipo = selectedValues['tipo-demanda'];
+    if (tipo === 'personal') {
+      activeSteps.push(allSteps.find(s => s.id === 'demandas-pessoais'));
+    } else if (tipo === 'professional') {
+      activeSteps.push(allSteps.find(s => s.id === 'demandas-profissionais'));
+    } else if (tipo === 'both') {
+      activeSteps.push(allSteps.find(s => s.id === 'demandas-pessoais'));
+      activeSteps.push(allSteps.find(s => s.id === 'demandas-profissionais'));
+    }
+
+    // os demais passos fixos
+    activeSteps.push(allSteps.find(s => s.id === 'volume-trabalho'));
+    activeSteps.push(allSteps.find(s => s.id === 'idioma'));
+    activeSteps.push(allSteps.find(s => s.id === 'prazo'));
+
+    // Limpa seleções que não existem mais
+    for (const key in selectedValues) {
+      if (!activeSteps.some(s => s.id === key)) {
+        delete selectedValues[key];
+      }
+    }
+  }
+
+  function renderStep(index) {
+    if (index < 0 || index >= activeSteps.length) return;
+    currentStepIndex = index;
+    const step = activeSteps[index];
+    $('#stepTitle').text(step.title);
+
+    const $cardsWrapper = $('#cardsWrapper');
+    $cardsWrapper.fadeOut(150, () => {
+      $cardsWrapper.empty();
+
+
+      step.cards.forEach(card => {
+        const isSelected = selectedValues[step.id] === card.value;
+        const $card = $(`
+          <div class="card-custom${isSelected ? ' selected' : ''}" data-value="${card.value}">
+            <i class="fa-solid ${card.icon}"></i>
+            <h5 class="card-title mt-2">${card.label}</h5>
+          </div>
+        `);
+        $cardsWrapper.append($card);
+      });
+
+      $cardsWrapper.fadeIn(150);
+      updateButtons();
+      updateSelectedText();
+    });
+  }
+
+  function updateSelectedText() {
+    const step = activeSteps[currentStepIndex];
+    const val = selectedValues[step.id];
+    if (val) {
+      const label = step.cards.find(c => c.value === val)?.label || 'Nenhum';
+      $('#selectedValue').text(label);
+    } else {
+      $('#selectedValue').text('Nenhum');
+    }
+  }
+
+  function updateButtons() {
+    $('#btnPrev').prop('disabled', currentStepIndex === 0);
+    const val = selectedValues[activeSteps[currentStepIndex].id];
+    $('#btnNext').prop('disabled', !val || currentStepIndex === activeSteps.length - 1);
+  }
+
+  $('#cardsWrapper').on('click', '.card-custom', function() {
+    const val = $(this).data('value');
+    const step = activeSteps[currentStepIndex];
+    selectedValues[step.id] = val;
+
+    // Se for o primeiro passo, atualiza passos ativos dinamicamente
+    if (step.id === 'tipo-demanda') {
+      buildActiveSteps();
+      currentStepIndex++;
+      renderStep(currentStepIndex);
+      updateButtons();
+    } else {
+      renderStep(currentStepIndex);
+      updateButtons();
+    }
+  });
+
+  $('#btnPrev').on('click', () => {
+    if (currentStepIndex > 0) {
+      currentStepIndex--;
+      renderStep(currentStepIndex);
+    }
+  });
+
+  $('#btnNext').on('click', () => {
+    if (currentStepIndex < activeSteps.length - 1) {
+      currentStepIndex++;
+      renderStep(currentStepIndex);
+    }
+  });
+
+  // Inicializa passos ativos e renderiza o primeiro
+  buildActiveSteps();
+  renderStep(currentStepIndex);
+});
+
+    </script>
+</body>
+
+</html>
