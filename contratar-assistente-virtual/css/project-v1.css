@@ -1,0 +1,215 @@
+/* Container dos cards em coluna flex */
+.cards-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 2rem;
+}
+
+
+
+.step-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 2rem;
+    width: 100%;
+    padding: 2rem;
+    flex-direction: column;
+}
+
+.step-navigation h3 {
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Botões desabilitados */
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+.btn-gray-custom {
+    background-color: #666666;
+    border-color: #666666;
+    color: white;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    font-size: 2rem;
+}
+
+.btn-gray-custom:hover,
+.btn-gray-custom:focus {
+    background-color: #4d4d4d;
+    border-color: #4d4d4d;
+    color: white;
+}
+
+.btn-gray-custom:disabled,
+.btn-gray-custom.disabled {
+    background-color: #bbb;
+    border-color: #bbb;
+    color: #eee;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+.card-custom {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(83, 46, 136, 0.1);
+    padding: 20px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-custom:hover {
+    box-shadow: 0 8px 16px rgba(83, 46, 136, 0.2);
+    border-color: #532e88;
+}
+
+.card-custom.selected {
+    border-color: #532e88;
+    box-shadow: 0 0 12px rgba(83, 46, 136, 0.5);
+    background: #ede7f6;
+    /* lilás clarinho */
+}
+
+.card-custom i {
+    font-size: 3rem;
+    color: #532e88;
+    margin-bottom: 10px;
+}
+
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* só uma coluna */
+    gap: 1rem;
+    padding: 2rem;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.cards-grid>.card-custom {
+    width: 100%;
+    max-width: none;
+    /* libera max-width */
+    height: auto;
+    /* altura conforme conteúdo */
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    /* ou coluna, conforme quiser layout interno */
+    align-items: center;
+    padding: 20px;
+    /* se quiser */
+}
+
+#stepTitle {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.25;
+
+}
+
+@media (min-width: 768px) {
+    .step-navigation {
+        flex-direction: row;
+    }
+}
+
+
+
+/* Container dos cards já tem flex, vamos ajustar para espaço para indicador */
+.card-custom {
+    position: relative;
+    padding-left: 40px; /* espaço para o indicador */
+    /* restante do seu css */
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(83, 46, 136, 0.1);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Radio base */
+.radio-indicator {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border: 2px solid #532e88;
+    border-radius: 50%;
+    background: white;
+    box-sizing: border-box;
+}
+
+/* Ponto central quando selecionado */
+.radio-indicator.checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: #532e88;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* Indicador checkbox (quadrado) */
+.checkbox-indicator {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border: 2px solid #532e88;
+    border-radius: 4px;
+    background: white;
+    box-sizing: border-box;
+}
+
+/* Indicador checkbox selecionado - mostrando "check" com borda e background */
+.checkbox-indicator.checked {
+    background: #532e88;
+    border-color: #532e88;
+}
+
+/* Checkmark para checkbox */
+.checkbox-indicator.checked::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
