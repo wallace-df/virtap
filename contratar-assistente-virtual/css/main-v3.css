@@ -827,10 +827,12 @@ section {
 
 .virtap-area {
   padding-top: 140px;
+  padding-bottom: 20px;
   background: url(/img/virtap-bg.png);
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
+
 }
 
 .virtap-area::after {
@@ -877,8 +879,14 @@ section {
 }
 
 .cada-necessidade-area {
-  padding-top: 160px;
-  padding-bottom: 250px;
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+
+.cada-necessidade-area .virtap-funciona-btn,
+.vantagem-plataforma-area .virtap-funciona-btn
+{
+  margin: 30px 0;
 }
 
 .cada-necessidadetitle {
@@ -1049,7 +1057,8 @@ section {
 }
 
 .virtap-funciona-area {
-  padding-bottom: 160px;
+  padding-top: 60px;
+  padding-bottom: 60px;
   position: relative;
 }
 
@@ -1079,7 +1088,7 @@ section {
   box-shadow: 2px 3px 28px rgba(150, 109, 235, 0.21);
   border-radius: 60px;
   padding: 19px 48px;
-  margin-top: 66px;
+  margin-top: 10px;
   display: inline-block;
   position: relative;
   left: 50%;
@@ -1109,6 +1118,7 @@ section {
   -ms-flex-pack: justify;
   justify-content: space-between;
   padding: 0 70px;
+  padding-bottom: 20px;
 }
 
 .virtap-funciona-item {
@@ -1398,6 +1408,7 @@ section {
   gap: 0px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-auto-flow: dense;
+  padding-bottom: 30px;
 }
 
 .Para-quem-items {
@@ -1430,7 +1441,7 @@ section {
   font-weight: 400;
   font-size: 17px;
   line-height: 1.64;
-  text-align: center;
+  text-align: left;
   color: #454545;
   max-width: 370px;
   margin: 0 auto;
@@ -2268,6 +2279,7 @@ section {
 
   .virtap-funciona-wrapper {
     padding: 0;
+    padding-bottom: 20px;
   }
 
   .ninja-recomenda-user-paragraph h6,
@@ -2334,6 +2346,7 @@ section {
 
   .landing-hero-area {
     padding: 120px 0 100px;
+    padding-bottom: 30px;
   }
 
   .landing-hero-text-area {
@@ -2627,18 +2640,18 @@ section {
   }
 
   .Para-quem-items h3 {
-    font-size: 17px;
+    font-size: 20px;
     padding: 35px 0 20px;
   }
 
   .Para-quem-items p {
-    font-size: 13px;
+    font-size: 14px;
     padding-left: 15px;
     padding-right: 15px;
   }
 
   .Para-quem-area {
-    padding: 120px 0;
+    padding: 60px 0;
   }
 
   .explore-desenvolva-right-item img {
@@ -3658,10 +3671,11 @@ section {
 
   .virtap-area {
     padding-top: 60px;
+    padding-bottom: 30px;
   }
 
   .cada-necessidade-area {
-    padding-top: 45px;
+    padding-top: 40px;
   }
 
   .cada-necessidadetitle {
@@ -3776,7 +3790,7 @@ section {
   }
 
   .virtap-funciona-wrapper {
-    padding: 70px 0;
+    padding: 50px 0;
   }
 
   .virtap-funciona-item:not(:last-child) {
@@ -3832,7 +3846,7 @@ section {
   }
 
   .virtap-funciona-area {
-    padding: 100px 0;
+    padding: 30px 0;
     position: relative;
   }
 
@@ -3944,12 +3958,12 @@ section {
   }
 
   .Para-quem-area {
-    padding-top: 63px;
-    padding-bottom: 53px;
+    padding-top: 50px;
+    padding-bottom: 50px;
   }
 
   .Para-quem-items h3 {
-    font-size: 18px;
+    font-size: 20px;
     padding: 21px 0 3px;
   }
 
@@ -4085,6 +4099,7 @@ section {
 
   .Para-quem-wrapper {
     margin: 0;
+    padding-bottom: 30px;
   }
 
   .assistentes-especialistas-swiper .story-ab-btn-next {
