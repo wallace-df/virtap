@@ -57,6 +57,11 @@ $(function () {
             id: 'project-summary',
             title: "Resumo do projeto",
             cards: [] // Sem cards, aqui vai o formulário
+        },
+        {
+            id: 'contact-info',
+            title: "Seu projeto está pronto para ser publicado!<br/><br/> Informe seus dados de contato para receber propostas em 24h",
+            cards: [] // Formulário de contato
         }
     ];
 
@@ -93,7 +98,7 @@ $(function () {
         return false;
     }
 
-    // Função para salvar com atraso (debounce)l
+    // Função para salvar com atraso (debounce)
     let debounceTimer = null;
     function saveProjectDebounced() {
         updateButtons();
@@ -120,9 +125,9 @@ $(function () {
 
         let period = 'Algumas horas por dia';
         let vol = selectedValues["volume-trabalho"];
-        if (vol === 'Full-time') {
-            period = 'full-time';
-        } else if (vol === 'Part-time') {
+        if (vol === 'full-time') {
+            period = 'Full-time';
+        } else if (vol === 'part-time') {
             period = 'Meio-período';
         }
 
@@ -160,9 +165,8 @@ $(function () {
         }
 
         activeSteps.push(allSteps.find(s => s.id === 'volume-trabalho'));
-
-        // add the final summary step
         activeSteps.push(allSteps.find(s => s.id === 'project-summary'));
+        activeSteps.push(allSteps.find(s => s.id === 'contact-info'));
 
         // clean selections no longer valid
         for (const key in selectedValues) {
@@ -178,17 +182,14 @@ $(function () {
 
         if (step.id === 'project-summary') {
             // Render form inputs for title and description
-            const projectTitle = project.title;
-            const projectDescription = project.description;
-
-            const titleVal = projectTitle;
-            const descVal = projectDescription;
+            const titleVal = project.title;
+            const descVal = project.description;
 
             const $form = $(`
-                <div id="projectSummaryForm" style="text-align:left; width: 100%;">
-                    <label for="projectTitleInput"><strong>Título do projeto</strong></label><br>
-                    <input class="form-control" type="text" id="projectTitleInput" value="${titleVal}" style="width: 100%; padding: 8px; font-size: 2rem; margin-bottom: 1rem;" />
-                    <label for="projectDescriptionTextarea"><strong>Descrição do projeto</strong></label><br>
+                <div id="projectSummaryForm">
+                    <label for="projectTitleInput"><strong>Título do projeto</strong></label>
+                    <input class="form-control" type="text" id="projectTitleInput" value="${titleVal}" style="width: 100%; padding: 8px; font-size: 2rem; margin-bottom: 3rem;" />
+                    <label for="projectDescriptionTextarea"><strong>Descrição do projeto</strong></label>
                     <textarea class="form-control" id="projectDescriptionTextarea" rows="5" style="width: 100%; padding: 8px; font-size: 2rem;">${descVal}</textarea>
                 </div>
             `);
@@ -204,6 +205,48 @@ $(function () {
             });
 
             saveState();
+            return;
+        }
+        if (step.id === 'contact-info') {
+            const name = selectedValues['contact-name'] || '';
+            const email = selectedValues['contact-email'] || '';
+            const phone = selectedValues['contact-phone'] || '';
+
+            const $form = $(`
+                <div id="contactInfoForm" style="text-align:left;">
+                    <label for="contactNameInput"><strong>Nome completo</strong></label><br>
+                    <input type="text" id="contactNameInput" class="form-control" value="${name}" style="width: 100%; padding: 8px; font-size: 1.5rem; margin-bottom: 1rem;" />
+                    
+                    <label for="contactEmailInput"><strong>E-mail</strong></label><br>
+                    <input type="email" id="contactEmailInput" class="form-control" value="${email}" style="width: 100%; padding: 8px; font-size: 1.5rem; margin-bottom: 1rem;" />
+                    
+                    <label for="contactPhoneInput"><strong>Telefone</strong></label><br>
+                    <input type="tel" id="contactPhoneInput" class="form-control" value="${phone}" style="width: 100%; padding: 8px; font-size: 1.5rem; margin-bottom: 1rem;" />
+                </div>
+            `);
+
+            $cardsWrapper.append($form);
+
+            $('#contactNameInput').off().on('input', function () {
+                selectedValues['contact-name'] = $(this).val().trim();
+                saveState();
+                updateButtons();
+            });
+
+            $('#contactEmailInput').off().on('input', function () {
+                selectedValues['contact-email'] = $(this).val().trim();
+                saveState();
+                updateButtons();
+            });
+
+            $('#contactPhoneInput').off().on('input', function () {
+                selectedValues['contact-phone'] = $(this).val().trim();
+                saveState();
+                updateButtons();
+            });
+
+            updateButtons();
+
             return;
         }
         const isMulti = multiSelectSteps.includes(step.id);
@@ -230,15 +273,32 @@ $(function () {
         saveState();
     }
 
-    // === renderStep modificado para aceitar flag ===
+    // Validação simples de email
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function setContactInputsDisabled(disabled) {
+        $('#contactNameInput, #contactEmailInput, #contactPhoneInput').prop('disabled', disabled);
+    }
+
+    function setButtonsDisabled(disabled, sending = false) {
+        $('#btnPrev').prop('disabled', disabled);
+        $('#btnNext').prop('disabled', disabled);
+        if (sending) {
+            $('#btnNext').find('span').text('Enviando...');
+        } else {
+            $('#btnNext').find('span').text(currentStepIndex === activeSteps.length - 1 ? 'Enviar' : 'Próximo');
+        }
+    }
     function renderStep(index, fromNextButton = false) {
         if (index < 0 || index >= activeSteps.length) return;
         currentStepIndex = index;
         const step = activeSteps[index];
-        $('#stepTitle').text(step.title);
+        $('#stepTitle').html(step.title);
 
         // 🚀 Só gera projeto se for último passo e vier pelo botão "Próximo"
-        if (fromNextButton && index === activeSteps.length - 1) {
+        if (fromNextButton && step.id === 'project-summary') {
             project = {
                 title: generateProjectTitle(),
                 description: generateProjectDescription()
@@ -266,10 +326,23 @@ $(function () {
             $('#btnNext').prop('disabled', !Array.isArray(val) || val.length === 0 || currentStepIndex === activeSteps.length - 1);
         } else if (step.id === 'project-summary') {
             let projectTitle = $("#projectTitleInput").val().trim();
-            let projectDescription = $("#projectDescriptionTextarea").val().trim();            
+            let projectDescription = $("#projectDescriptionTextarea").val().trim();
             $('#btnNext').find('span').text('Postar projeto');
-            $('#btnNext').prop('disabled', projectTitle.length === 0 ||projectDescription.length ===0);
-        } else {
+            $('#btnNext').prop('disabled', projectTitle.length === 0 || projectDescription.length === 0);
+        }
+        else if (step.id === 'contact-info') {
+            const name = selectedValues['contact-name'] || '';
+            const email = selectedValues['contact-email'] || '';
+            const phone = selectedValues['contact-phone'] || '';
+
+            const valid = name.length > 0 && isValidEmail(email) && phone.length > 0;
+
+            $('#btnNext').prop('disabled', !valid);
+            $('#btnNext').find('span').text('Enviar');
+            return;
+        }
+
+        else {
             $('#btnNext').prop('disabled', !val);
         }
     }
@@ -313,10 +386,50 @@ $(function () {
         }
     });
 
-    $('#btnNext').on('click', () => {
+    $('#btnNext').on('click', async () => {
+        const step = activeSteps[currentStepIndex];
         if (currentStepIndex < activeSteps.length - 1) {
             currentStepIndex++;
-            renderStep(currentStepIndex, true); // <-- Passa flag para gerar projeto
+            renderStep(currentStepIndex, true);
+        } else if (step.id === 'contact-info') {
+            // Botão enviar - enviar dados para API
+            setContactInputsDisabled(true);
+            setButtonsDisabled(true, true);
+
+            const dataToSend = {
+                project,
+                contact: {
+                    name: selectedValues['contact-name'],
+                    email: selectedValues['contact-email'],
+                    phone: selectedValues['contact-phone']
+                }
+            };
+
+            try {
+                const response = await fetch('/post-project', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(dataToSend)
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(errorText || 'Erro desconhecido');
+                }
+
+                const data = await response.json();
+                localStorage.removeItem(STORAGE_KEY);
+                alert('Projeto enviado com sucesso!');
+            } catch (err) {
+                alert('Erro ao enviar projeto: ' + err.message);
+            } finally {
+                setContactInputsDisabled(false);
+                setButtonsDisabled(false);
+                updateButtons();
+            }
         }
     });
 
