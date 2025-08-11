@@ -46,7 +46,7 @@ $(function () {
         },
         {
             id: 'volume-trabalho',
-            title: "Preciso de alguém para trabalhar...",
+            title: "E alguém que trabalhe...",
             cards: [
                 { value: "full-time", icon: "fa-clock", label: "Full-time (tempo integral)" },
                 { value: "part-time", icon: "fa-hourglass-half", label: "Part-time (meio período)" },
@@ -63,13 +63,14 @@ $(function () {
     let currentStepIndex = 0;
     let selectedValues = {};
     let activeSteps = [];
-
+    let project = {}; // <-- Novo campo no estado
     const multiSelectSteps = ['demandas-pessoais', 'demandas-profissionais', 'demandas-pessoais-profissionais'];
 
     function saveState() {
         const state = {
             currentStepIndex,
             selectedValues,
+            project: project // objeto com title e description
         };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     }
@@ -83,6 +84,7 @@ $(function () {
             if (state && typeof state === 'object') {
                 selectedValues = state.selectedValues || {};
                 currentStepIndex = state.currentStepIndex || 0;
+                project = state.project || {}; // <-- Carrega projeto salvo
                 return true;
             }
         } catch (e) {
@@ -91,45 +93,62 @@ $(function () {
         return false;
     }
 
+    // Função para salvar com atraso (debounce)l
+    let debounceTimer = null;
+    function saveProjectDebounced() {
+        updateButtons();
+        if (debounceTimer) {
+            clearTimeout(debounceTimer);
+            debounceTimer = null;
+        }
+        debounceTimer = setTimeout(() => {
+            project = {
+                title: $("#projectTitleInput").val().trim(),
+                description: $("#projectDescriptionTextarea").val().trim()
+            };
+            saveState();
+        }, 400);
+    }
+
+
+    // ====== Auto-generate project title & description ======
     function generateProjectTitle() {
         const type = selectedValues["tipo-demanda"];
         let typeText = type === "personal" ? "Assistente Pessoal" :
-            type === "professional" ? "Assistente Executiva" :
-                "Assistente Pessoal e Executiva";
-        return `Preciso de ${typeText}`;
+            type === "professional" ? "Assistente Administrativo" :
+                "Assistente Pessoal e Administrativo";
+
+        let period = 'Algumas horas por dia';
+        let vol = selectedValues["volume-trabalho"];
+        if (vol === 'Full-time') {
+            period = 'full-time';
+        } else if (vol === 'Part-time') {
+            period = 'Meio-período';
+        }
+
+        return `${typeText} - ${period}`;
     }
 
     function generateProjectDescription() {
-        const workloadMap = {
-            "full-time": "tempo integral",
-            "part-time": "meio período",
-            "few-hours": "algumas horas por dia ou semana"
-        };
-        const workloadValue = selectedValues['volume-trabalho'] || 'part-time';
-        const workloadText = workloadMap[workloadValue] || "meio período";
-
-        const taskLabels = [];
+        const tasks = [];
         for (const step of activeSteps) {
-            if (!step.cards) continue;
-            const val = selectedValues[step.id];
-            if (!val) continue;
-
-            if (Array.isArray(val)) {
-                val.forEach(v => {
-                    const card = step.cards.find(c => c.value === v);
-                    if (card) taskLabels.push(card.label);
-                });
-            } else {
-                const card = step.cards.find(c => c.value === val);
-                if (card) taskLabels.push(card.label);
+            if (step.cards) {
+                const val = selectedValues[step.id];
+                if (val) {
+                    if (Array.isArray(val)) {
+                        tasks.push(...val);
+                    } else {
+                        tasks.push(val);
+                    }
+                }
             }
         }
 
-        return `Preciso de alguém (${workloadText}) para cuidar das seguintes tarefas: ${taskLabels.join(", ")}.`;
+        return `Preciso de alguém para cuidar das seguintes tarefas:\n\n• ${tasks.join("\n• ")}.`;
     }
 
     function buildActiveSteps() {
-        activeSteps = [allSteps[0]]; // always start with demand type
+        activeSteps = [allSteps[0]];
 
         const tipo = selectedValues['tipo-demanda'];
         if (tipo === 'personal') {
@@ -140,7 +159,6 @@ $(function () {
             activeSteps.push(allSteps.find(s => s.id === 'demandas-pessoais-profissionais'));
         }
 
-        // fixed steps
         activeSteps.push(allSteps.find(s => s.id === 'volume-trabalho'));
 
         // add the final summary step
@@ -160,37 +178,34 @@ $(function () {
 
         if (step.id === 'project-summary') {
             // Render form inputs for title and description
-            const projectTitle = generateProjectTitle();
-            const projectDescription = generateProjectDescription();
+            const projectTitle = project.title;
+            const projectDescription = project.description;
 
-            const titleVal = selectedValues['project-title'] || projectTitle;
-            const descVal = selectedValues['project-description'] || projectDescription;
+            const titleVal = projectTitle;
+            const descVal = projectDescription;
 
             const $form = $(`
-                <div id="projectSummaryForm" style="text-align:left; max-width:600px; margin: 0 auto;">
+                <div id="projectSummaryForm" style="text-align:left; width: 100%;">
                     <label for="projectTitleInput"><strong>Título do projeto</strong></label><br>
-                    <input type="text" id="projectTitleInput" value="${titleVal}" style="width: 100%; padding: 8px; font-size: 1.1rem; margin-bottom: 1rem;" />
+                    <input class="form-control" type="text" id="projectTitleInput" value="${titleVal}" style="width: 100%; padding: 8px; font-size: 2rem; margin-bottom: 1rem;" />
                     <label for="projectDescriptionTextarea"><strong>Descrição do projeto</strong></label><br>
-                    <textarea id="projectDescriptionTextarea" rows="5" style="width: 100%; padding: 8px; font-size: 1rem;">${descVal}</textarea>
+                    <textarea class="form-control" id="projectDescriptionTextarea" rows="5" style="width: 100%; padding: 8px; font-size: 2rem;">${descVal}</textarea>
                 </div>
             `);
 
             $cardsWrapper.append($form);
 
             // Bind inputs to selectedValues to save state live
-            $('#projectTitleInput').on('input', function () {
-                selectedValues['project-title'] = $(this).val();
-                saveState();
+            $('#projectTitleInput').off().on('input', function () {
+                saveProjectDebounced();
             });
-            $('#projectDescriptionTextarea').on('input', function () {
-                selectedValues['project-description'] = $(this).val();
-                saveState();
+            $('#projectDescriptionTextarea').off().on('input', function () {
+                saveProjectDebounced();
             });
 
             saveState();
             return;
         }
-
         const isMulti = multiSelectSteps.includes(step.id);
 
         step.cards.forEach(card => {
@@ -215,43 +230,29 @@ $(function () {
         saveState();
     }
 
-    function renderStep(index) {
+    // === renderStep modificado para aceitar flag ===
+    function renderStep(index, fromNextButton = false) {
         if (index < 0 || index >= activeSteps.length) return;
         currentStepIndex = index;
         const step = activeSteps[index];
         $('#stepTitle').text(step.title);
 
+        // 🚀 Só gera projeto se for último passo e vier pelo botão "Próximo"
+        if (fromNextButton && index === activeSteps.length - 1) {
+            project = {
+                title: generateProjectTitle(),
+                description: generateProjectDescription()
+            };
+            saveState();
+        }
+
         const $cardsWrapper = $('#cardsWrapper');
-        // Only fade on step change (optional)
         $cardsWrapper.fadeOut(150, () => {
             renderCards(step);
             $cardsWrapper.fadeIn(150);
             updateButtons();
-            updateSelectedText();
+
         });
-    }
-
-    function updateSelectedText() {
-        const step = activeSteps[currentStepIndex];
-        const val = selectedValues[step.id];
-
-        if (Array.isArray(val)) {
-            if (val.length > 0) {
-                const labels = step.cards
-                    .filter(c => val.includes(c.value))
-                    .map(c => c.label);
-                $('#selectedValue').text(labels.join(', '));
-            } else {
-                $('#selectedValue').text('Nenhum');
-            }
-        } else {
-            if (val) {
-                const label = step.cards.find(c => c.value === val)?.label || 'Nenhum';
-                $('#selectedValue').text(label);
-            } else {
-                $('#selectedValue').text('Nenhum');
-            }
-        }
     }
 
     function updateButtons() {
@@ -259,14 +260,15 @@ $(function () {
 
         const step = activeSteps[currentStepIndex];
         const val = selectedValues[step.id];
+        $('#btnNext').find('span').text('Próximo');
 
         if (multiSelectSteps.includes(step.id)) {
             $('#btnNext').prop('disabled', !Array.isArray(val) || val.length === 0 || currentStepIndex === activeSteps.length - 1);
         } else if (step.id === 'project-summary') {
-            // On last step, allow next if title and description filled
-            const titleFilled = selectedValues['project-title'] && selectedValues['project-title'].trim().length > 0;
-            const descFilled = selectedValues['project-description'] && selectedValues['project-description'].trim().length > 0;
-            $('#btnNext').prop('disabled', !(titleFilled && descFilled));
+            let projectTitle = $("#projectTitleInput").val().trim();
+            let projectDescription = $("#projectDescriptionTextarea").val().trim();            
+            $('#btnNext').find('span').text('Postar projeto');
+            $('#btnNext').prop('disabled', projectTitle.length === 0 ||projectDescription.length ===0);
         } else {
             $('#btnNext').prop('disabled', !val);
         }
@@ -290,20 +292,17 @@ $(function () {
 
             renderCards(step);
             updateButtons();
-            updateSelectedText();
 
         } else if (step.id === 'tipo-demanda') {
             selectedValues[step.id] = val;
             buildActiveSteps();
             renderCards(step);
             updateButtons();
-            updateSelectedText();
 
         } else {
             selectedValues[step.id] = val;
             renderCards(step);
             updateButtons();
-            updateSelectedText();
         }
     });
 
@@ -317,7 +316,7 @@ $(function () {
     $('#btnNext').on('click', () => {
         if (currentStepIndex < activeSteps.length - 1) {
             currentStepIndex++;
-            renderStep(currentStepIndex);
+            renderStep(currentStepIndex, true); // <-- Passa flag para gerar projeto
         }
     });
 

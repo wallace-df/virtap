@@ -4,6 +4,7 @@
     gap: 1rem;
     flex-wrap: wrap;
     margin: 2rem;
+    align-self: stretch;;
 }
 
 
