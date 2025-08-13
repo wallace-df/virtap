@@ -19,7 +19,17 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 
-
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-4ZFMG1F0XK', {
+            'anonymize_ip': true
+        });
+        window.apiURL = 'https://api.virtap.com.br';
+        window.apiURL = 'http://localhost:3000';
+    </script>
 
 </head>
 
@@ -49,7 +59,7 @@
                         </button>
                     </div>
 
-                    
+
 
                     <div id="cardsWrapper" class="cards-container">
                         <!-- cards da etapa atual serão renderizados aqui -->
@@ -63,20 +73,19 @@
         </div>
     </main>
 
+    <div id="error-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">×</span>
+            <h3>Opa! Algo deu errado 😕</h3>
+            <p>Não foi possível enviar seus dados. Por favor, tente novamente.</p>
+            <button onclick="closeModal()">Fechar</button>
+        </div>
+    </div>
+
     <!-- all js here -->
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="js/project-v1.js"></script>
     <script>
-        function getParameterByName(name) {
-            var regexS = "[\\?&]" + name + "=([^&#]*)",
-                regex = new RegExp(regexS),
-                results = regex.exec(window.location.search);
-            if (results == null) {
-                return "";
-            } else {
-                return decodeURIComponent(results[1].replace(/\+/g, " "));
-            }
-        }
 
         $(document).ready(function () {
             let next = getParameterByName('next');

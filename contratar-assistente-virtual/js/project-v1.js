@@ -1,4 +1,19 @@
+function getParameterByName(name) {
+    var regexS = "[\\?&]" + name + "=([^&#]*)",
+        regex = new RegExp(regexS),
+        results = regex.exec(window.location.search);
+    if (results == null) {
+        return "";
+    } else {
+        return decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+}
+
+
 const STORAGE_KEY = 'project-data-v1';
+let loggedEmail = getParameterByName('e');
+let loggedName = getParameterByName('n');
+
 $(function () {
 
     const allSteps = [
@@ -188,9 +203,9 @@ $(function () {
             const $form = $(`
                 <div id="projectSummaryForm">
                     <label for="projectTitleInput"><strong>Título do projeto</strong></label>
-                    <input class="form-control" type="text" id="projectTitleInput" value="${titleVal}" style="width: 100%; padding: 8px; font-size: 2rem; margin-bottom: 3rem;" />
+                    <input class="form-control" type="text" id="projectTitleInput" value="${titleVal}" />
                     <label for="projectDescriptionTextarea"><strong>Descrição do projeto</strong></label>
-                    <textarea class="form-control" id="projectDescriptionTextarea" rows="5" style="width: 100%; padding: 8px; font-size: 2rem;">${descVal}</textarea>
+                    <textarea class="form-control" id="projectDescriptionTextarea" rows="5">${descVal}</textarea>
                 </div>
             `);
 
@@ -215,13 +230,13 @@ $(function () {
             const $form = $(`
                 <div id="contactInfoForm" style="text-align:left;">
                     <label for="contactNameInput"><strong>Nome completo</strong></label><br>
-                    <input type="text" id="contactNameInput" class="form-control" value="${name}" style="width: 100%; padding: 8px; font-size: 1.5rem; margin-bottom: 1rem;" />
+                    <input type="text" id="contactNameInput" class="form-control" value="${name}" />
                     
                     <label for="contactEmailInput"><strong>E-mail</strong></label><br>
-                    <input type="email" id="contactEmailInput" class="form-control" value="${email}" style="width: 100%; padding: 8px; font-size: 1.5rem; margin-bottom: 1rem;" />
+                    <input type="email" id="contactEmailInput" class="form-control" value="${email}" />
                     
                     <label for="contactPhoneInput"><strong>Telefone</strong></label><br>
-                    <input type="tel" id="contactPhoneInput" class="form-control" value="${phone}" style="width: 100%; padding: 8px; font-size: 1.5rem; margin-bottom: 1rem;" />
+                    <input type="tel" id="contactPhoneInput" class="form-control" value="${phone}"  />
                 </div>
             `);
 
@@ -244,6 +259,15 @@ $(function () {
                 saveState();
                 updateButtons();
             });
+
+
+            if (loggedName && loggedName.trim().length > 0) {
+                $form.find('#contactNameInput').val(loggedName).trigger('input');;
+            }
+
+            if (loggedEmail && loggedEmail.trim().length > 0) {
+                $form.find('#contactEmailInput').val(loggedEmail).trigger('input');
+            }
 
             updateButtons();
 
@@ -397,16 +421,15 @@ $(function () {
             setButtonsDisabled(true, true);
 
             const dataToSend = {
-                project,
-                contact: {
-                    name: selectedValues['contact-name'],
-                    email: selectedValues['contact-email'],
-                    phone: selectedValues['contact-phone']
-                }
+                name: selectedValues['contact-name'],
+                email: selectedValues['contact-email'],
+                whatsapp: selectedValues['contact-phone'],
+                project_title: project.title,
+                project_description: project.description
             };
 
             try {
-                const response = await fetch('/post-project', {
+                const response = await fetch(`${window.apiURL}/post-project`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -422,13 +445,13 @@ $(function () {
 
                 const data = await response.json();
                 localStorage.removeItem(STORAGE_KEY);
-                alert('Projeto enviado com sucesso!');
+                //location.href = 'projeto-postado';
             } catch (err) {
-                alert('Erro ao enviar projeto: ' + err.message);
-            } finally {
+                console.log(err);
                 setContactInputsDisabled(false);
                 setButtonsDisabled(false);
                 updateButtons();
+                showModal();
             }
         }
     });
@@ -443,5 +466,29 @@ $(function () {
     } else {
         buildActiveSteps();
         renderStep(0);
+    }
+});
+
+
+
+function showModal() {
+    document.getElementById('error-modal').style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('error-modal').style.display = 'none';
+}
+
+
+window.addEventListener('click', function (event) {
+    const modal = document.getElementById('error-modal');
+    const content = document.querySelector('.modal-content');
+
+    if (modal.style.display === 'flex' && !content.contains(event.target)) {
+        // Em vez de fechar, dá shake
+        content.classList.add('shake');
+        setTimeout(() => {
+            content.classList.remove('shake');
+        }, 400); // tempo da animação
     }
 });
