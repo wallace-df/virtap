@@ -12,6 +12,7 @@
 
   <link href="/favicon.svg" type="image/svg+xml" rel="icon" />
   <link href="/favicon.png" type="image/png" rel="icon" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
     body {
@@ -55,9 +56,65 @@
     em {
       color: #532E88;
     }
+
+    .login-buttons {
+      display: inline-flex;
+      /* largura baseada no maior botão */
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      /* Ícone à esquerda */
+      padding: 10px 16px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      font-size: 14px;
+      white-space: nowrap;
+      /* evita quebra */
+      position: relative;
+      /* permite ajustes visuais */
+      min-width: max-content;
+
+
+      padding: 0.75rem 2.5rem;
+      border: .1rem solid #B6D2D5;
+      box-shadow: .2rem .3rem 3rem rgba(139, 206, 211, 0.12);
+      border-radius: 1.2rem;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 1.166;
+      color: #363636;
+      -webkit-transition: 200ms;
+      -o-transition: 200ms;
+      transition: 200ms;
+      font-weight: 800;
+    }
+
+    /* Espaço para o ícone sem empurrar o texto */
+    .btn img {
+      margin-right: 8px;
+      height: 24px;
+      width: 24px;
+      /* garante alinhamento entre botões */
+      text-align: center;
+    }
+
+    .btn:hover {
+      color: #363636;
+      background: #d0e8eb;
+    }
   </style>
   <script>
+    window.apiURL = 'https://api.virtap.com.br';
     window.dashboardURL = 'https://clientes.virtap.com.br';
+    window.apiURL = 'http://localhost:3000';
+    window.dashboardURL = 'http://localhost:8081';
   </script>
 </head>
 
@@ -65,16 +122,48 @@
   <div>
     <img src="/img/logo.png" alt="Virtap logo">
     <div class="box">
-      <h1>Projeto criado!</h1>
-      <div id="nao-logado" style="display:none">
-        <p>Seu cadastro foi confirmado mas você não está logado na <strong>Virtap</strong><span id="email-container"
-            style="display:none"> com
-            o email <em id="email"></em></span>.</p>
-        <p><a href="/login?next=curso/intro-av">Clique aqui</a> para fazer login e acessar o curso.
-        </p>
-      </div>
+      <h1>Seu projeto foi criado com sucesso!</h1>
       <div id="logado" style="display:none">
-        <p>Vamos te redirecionar para o seu projeto...</p>
+        <p>Redirecionando para o seu projeto...</p>
+      </div>
+      <div id="nao-logado" style="display:none">
+
+        <div id="nova-conta" style="display: none">
+          <p>Enviamos um email <span id="email-container-1" style="display:none"> para
+              <em id="email-1"></em></span> com um link para você criar uma senha na <strong>Virtap</strong> e
+            acompanhar as propostas do seu projeto.</p>
+          <p>Se preferir, você também pode acessar suas propostas agora mesmo usando sua conta Google:</p>
+
+          <div class="login-buttons">
+            <a href="#" class="btn btn-google">
+              <img src="/img/google-icon.svg"> Entrar com o Google
+            </a>
+          </div>
+
+
+        </div>
+
+        <div id="conta-existente" style="display: none">
+          <p>Em breve você começará a receber propostas de assistentes prontas para te ajudar.</p>
+          <p>Notamos que você já possui uma conta na
+            <strong>Virtap</strong><span id="email-container-2" style="display:none"> com o email
+              <em id="email-2"></em></span>.<br>
+
+          <p>Escolha como deseja acessar suas propostas:</p>
+
+
+          <div class="login-buttons">
+            <a href="#" class="btn btn-google">
+              <img src="/img/google-icon.svg"> Entrar com o Google
+            </a>
+            <a href="#" class="btn btn-password">
+              <img src="/img/password.svg"> Entrar com senha
+            </a>
+          </div>
+
+
+        </div>
+
       </div>
     </div>
   </div>
@@ -82,12 +171,48 @@
     const params = new URLSearchParams(window.location.search);
     const redir = params.get("r");
     const email = params.get("e");
-    // if (redir) {
-    //   document.getElementById('logado').style.display = 'block';
-    //   setTimeout(() => window.location.href = `${window.dashboardURL}/curso/intro-av`, 5000);
-    // } else {
-    //   document.getElementById('nao-logado').style.display = 'block';
-    // }
+    const p = params.get("p");
+    const pid = params.get("pid");
+    if (redir) {
+      document.getElementById('logado').style.display = 'block';
+      let url;
+      if (pid) {
+        url = `${window.dashboardURL}/projeto/${pid}`;
+      } else {
+        url = `${window.dashboardURL}/`;
+      }
+      setTimeout(() => window.location.href = url, 5000);
+    } else {
+      document.getElementById('nao-logado').style.display = 'block';
+      let next;
+      if (pid) {
+        next = `projeto/${pid}`;
+      } else {
+        next = ``;
+      }
+      if (p) {
+        document.getElementById('nova-conta').style.display = 'block';
+        if (email) {
+          document.getElementById('email-container-1').style.display = 'inline';
+          document.getElementById('email-1').innerText = email;
+        }
+      } else {
+        document.getElementById('conta-existente').style.display = 'block';
+        if (email) {
+          document.getElementById('email-container-2').style.display = 'inline';
+          document.getElementById('email-2').innerText = email;
+        }
+      }
+
+      document.querySelectorAll('.btn-password').forEach(btn => {
+        btn.href = `./login-com-senha?email=${email || ''}&next=${next}`;
+      });
+
+      document.querySelectorAll('.btn-google').forEach(btn => {
+        btn.href = `${window.apiURL}/auth/google/client?next=${next}`;
+      });
+
+    }
   </script>
 </body>
 

@@ -443,9 +443,31 @@ $(function () {
                     throw new Error(errorText || 'Erro desconhecido');
                 }
 
-                const data = await response.json();
+                let data = await response.json();
+                if (!data.responseData) {
+                    throw new Error("No response data");
+
+                }
+                data = data.responseData;
                 localStorage.removeItem(STORAGE_KEY);
-                //location.href = 'projeto-postado';
+
+                if (data.loggedIn) {
+                    let url = 'projeto-postado?r=1';
+                    if (data.projectId) {
+                        url += "&pid=" + data.projectId
+                    }
+                    location.href = url;
+
+                } else {
+                    let url = 'projeto-postado?e=' + dataToSend.email;
+                    if (data.passwordResetSent) {
+                        url += '&p=1';
+                    }
+                    if (data.projectId) {
+                        url += "&pid=" + data.projectId
+                    }
+                    location.href = url;
+                }
             } catch (err) {
                 console.log(err);
                 setContactInputsDisabled(false);

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+
+    <title>Virtap | Assistente Virtual | Solicitar nova senha</title>
+
+    <link href="/favicon.svg" type="image/svg+xml" rel="icon" />
+    <link href="/favicon.png" type="image/png" rel="icon" />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/subscribe-v1.css" />
+
+    <script>
+        window.apiURL = 'https://api.virtap.com.br';
+        window.dashboardURL = 'https://assistentes.virtap.com.br';
+        window.role = 'client';
+    </script>
+</head>
+
+
+<body>
+
+    <div class="sign_up">
+        <div class="left_content" style="background: linear-gradient(180deg, #9CD7DB -190.19%, #FFFFFF 100%);">
+            <img src="/img/o-que-faz-secretaria-executiva.svg" alt="">
+            <h2><a id="next-link"></a></h2>
+        </div>
+        <div class="right_content">
+
+            <div id="loading" style="line-height: 1; word-break: break-all; display: none; flex-direction: column;">
+                <p class="alert alert-info" id="link-sent"><strong>Solicitação recebida!</strong><br />Caso seu email
+                    esteja cadastrado na Virtap,<br /> vamos te enviar um email com um link para
+                    redefinir sua senha.</p>
+                <p class="alert alert-warning" id="google-link"><strong>Quer entrar sem senha?</strong><br />
+                    <a href="" id="google-login-link"><strong>Clique aqui</strong></a> para entrar com sua conta <strong>Google</strong>.</p>
+            </div>
+            <form id="sign_up" class="row">
+                <div class="text-center" style="margin-bottom: 2rem">
+                    <a href="/" class="login_site_logo"><img src="/img/logo.svg" alt=""></a>
+                </div>
+
+                <h1 class="text-center mb-4">Resetar senha da sua conta Virtap</h1>
+                <div class="col-xs-12 col-sm-6 offset-sm-3">
+                    <div class="form-group mt-3" data-field>
+                        <label for="email">Seu e-mail</label>
+                        <input type="text" class="form-control" id="email">
+                        <em>Por favor, informe seu e-mail.</em>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-10 offset-sm-1">
+                    <div class="mt-4 text-center">
+                        <p class="alert alert-danger" id="generic-error"><strong>Erro ao solicitar reset de
+                                senha.</strong><br />
+                            Por
+                            favor, verifique sua conexão e tente novamente.</p>
+                        <button class="btn" id="submit-btn">Resetar senha</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/vendor-common-v2.js"></script>
+    <script src="js/request-password-reset-v1.js"></script>
+
+</body>
+
+</html>
