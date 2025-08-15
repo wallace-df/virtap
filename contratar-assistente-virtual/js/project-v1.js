@@ -449,6 +449,7 @@ $(function () {
 
                 }
                 data = data.responseData;
+                console.log(data);
                 localStorage.removeItem(STORAGE_KEY);
 
                 if (data.loggedIn) {
@@ -460,8 +461,8 @@ $(function () {
 
                 } else {
                     let url = 'projeto-postado?e=' + dataToSend.email;
-                    if (data.passwordResetSent) {
-                        url += '&p=1';
+                    if (data.resetPasswordToken) {
+                        url += `&p=1&h=${data.resetPasswordToken.h}&t=${data.resetPasswordToken.t}&n=${data.resetPasswordToken.n}`;
                     }
                     if (data.projectId) {
                         url += "&pid=" + data.projectId

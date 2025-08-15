@@ -243,6 +243,7 @@ textarea.form-control {
     width: 100%;
     resize: none;
     box-sizing: border-box;
+    margin-bottom: 2rem;
 }
 
 

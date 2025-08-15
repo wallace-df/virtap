@@ -8,9 +8,10 @@ let h;
 function redirectToNext() {
   let url = getNext();
   $("#sign_up").hide();
-  $("#loading").html('<div><h1>Senha alterada sucesso!</h1><br /><p>Redirecionando automaticamente para o login...</p></div>');
+  $("#loading").html('<div><h1>Senha alterada sucesso!</h1><br /><p>Redirecionando automaticamente...</p></div>');
   $("#loading").show();
-  setTimeout(() => document.location.href = '/login-com-senha', 4000);
+
+  setTimeout(() => document.location.href = getNext(), 4000);
 }
 
 function handleError(response, loading) {
