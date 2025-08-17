@@ -1,0 +1,36 @@
+Confirmando...
+<script>
+  // Acessa os parâmetros da URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const receivedError = urlParams.get('error');
+  const receivedState = urlParams.get('state');
+
+  // Verifica se a janela pop-up foi aberta por outra página
+  if (window.opener) {
+    try {
+      // Se o parâmetro 'error' existir na URL, é uma falha
+      if (receivedError) {
+        window.opener.postMessage(
+          {
+            type: "oauth_error",
+          },
+          window.opener.location.origin
+        );
+      }
+      // Se o parâmetro 'code' existir, é um sucesso
+      else if (receivedState) {
+        window.opener.postMessage(
+          {
+            type: "oauth_success",
+            state: receivedState
+          },
+          window.opener.location.origin
+        );
+      }
+    } catch (err) {
+      // Opcional: Lide com o erro de "corte" da política de segurança
+      console.error("Erro ao enviar postMessage:", err);
+    }
+  }
+
+</script>

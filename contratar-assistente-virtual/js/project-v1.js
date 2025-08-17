@@ -10,6 +10,65 @@ function getParameterByName(name) {
 }
 
 
+function handleGoogleLogin() {
+    const generatedState = Math.random().toString(36).substring(2);
+
+       const authUrl = `https://api.virtap.com.br/auth/google/client?popup=1&next=${generatedState}`;
+    const popup = window.open(authUrl, 'oauth-popup', 'width=500,height=600');
+
+    let loginHandled = false;
+    let ctx = this;
+
+    $(this).prop('disabled', true).addClass('disabled').find('span').text('Confirmando...')
+
+    function restoreBtn() {
+        $(ctx).prop('disabled', false).removeClass('disabled').find('span').text('Confirmar com o Google')
+
+    }
+
+    // 3. Adiciona um 'ouvinte' para mensagens de sucesso/erro da pop-up
+    const messageListener = (event) => {
+        // Verifica se a origem da mensagem é confiável e se já não foi tratada
+        if (event.origin !== location.origin || loginHandled) {
+            console.log(event.origin, location.origin);
+            return;
+        }
+
+        const { type, state } = event.data;
+
+        // Valida o 'state' para prevenir ataques CSRF
+        if (state === generatedState) {
+            loginHandled = true;
+            restoreBtn();
+
+            if (type === 'oauth_success') {
+                alert('eba!');
+            } else if (type === 'oauth_error') {
+                alert('poxa!');
+            }
+
+            // Garante que a pop-up seja fechada após o processamento
+            if (popup && !popup.closed) {
+                popup.close();
+            }
+        }
+    };
+    window.addEventListener('message', messageListener, false);
+
+    // 4. Inicia um 'ouvinte' para detectar se o pop-up foi fechado pelo usuário
+    const checkPopupClosed = setInterval(() => {
+        if (popup.closed) {
+            clearInterval(checkPopupClosed);
+            window.removeEventListener('message', messageListener, false);
+
+            if (!loginHandled) {
+                restoreBtn();
+                alert('cancelou!');
+            }
+        }
+    }, 500);
+}
+
 const STORAGE_KEY = 'project-data-v1';
 let loggedEmail = getParameterByName('e');
 let loggedName = getParameterByName('n');
@@ -75,7 +134,7 @@ $(function () {
         },
         {
             id: 'contact-info',
-            title: "Seu projeto está pronto para ser publicado!<br/><br/> Informe seus dados de contato para receber propostas em 24h",
+            title: "Seu projeto foi salvo com sucesso!",
             cards: [] // Formulário de contato
         }
     ];
@@ -229,6 +288,15 @@ $(function () {
 
             const $form = $(`
                 <div id="contactInfoForm" style="text-align:left;">
+                <p>Para publicar seu projeto e receber propostas, precisamos confirmar seu email<p/>
+
+                <div class="login-buttons">
+                    <a class="btn btn-google" id="btn-google">
+                        <img src="/img/google-icon.svg"> <span>Confirmar com o Google</span>
+                    </a>
+                </div>
+
+                <!--
                     <label for="contactNameInput"><strong>Nome completo</strong></label><br>
                     <input type="text" id="contactNameInput" class="form-control" value="${name}" />
                     
@@ -236,7 +304,7 @@ $(function () {
                     <input type="email" id="contactEmailInput" class="form-control" value="${email}" />
                     
                     <label for="contactPhoneInput"><strong>Telefone</strong></label><br>
-                    <input type="tel" id="contactPhoneInput" class="form-control" value="${phone}"  />
+                    <input type="tel" id="contactPhoneInput" class="form-control" value="${phone}"  />-->
                 </div>
             `);
 
@@ -270,6 +338,8 @@ $(function () {
             }
 
             updateButtons();
+
+            $("#btn-google").off().on('click', handleGoogleLogin);
 
             return;
         }
