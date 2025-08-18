@@ -39,12 +39,12 @@ function handleGoogleLogin() {
         if (state === generatedState) {
             loginHandled = true;
             restoreBtn();
-
+ 
             if (type === 'oauth_success') {
                 currentStepIndex++;
                 renderStep(currentStepIndex, false, { name, email, newUser });
             } else if (type === 'oauth_error') {
-                alert('poxa!');
+                showModal();
             }
 
             // Garante que a pop-up seja fechada após o processamento
