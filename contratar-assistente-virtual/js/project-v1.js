@@ -87,7 +87,7 @@ const allSteps = [
     },
     {
         id: 'demandas-pessoais',
-        title: "Tarefas que preciso",
+        title: "Quero ajuda com as seguintes tarefas...",
         cards: [
             { value: "organizacao-pessoal", icon: "fa-calendar-check", label: "Organização Pessoal" },
             { value: "compras-presentes", icon: "fa-shopping-cart", label: "Compras e Presentes" },
@@ -98,7 +98,7 @@ const allSteps = [
     },
     {
         id: 'demandas-profissionais',
-        title: "Tarefas que preciso",
+        title: "Quero delegar as seguintes tarefas...",
         cards: [
             { value: "comunicacao-atendimento", icon: "fa-comments", label: "Comunicação e Atendimento" },
             { value: "gestao-administrativa", icon: "fa-tasks", label: "Gestão Administrativa" },
@@ -109,7 +109,7 @@ const allSteps = [
     },
     {
         id: 'demandas-pessoais-profissionais',
-        title: "Tarefas que preciso",
+        title: "Quero delegar as seguintes tarefas...",
         cards: [
             { value: "organizacao-pessoal", icon: "fa-calendar-check", label: "Organização Pessoal" },
             { value: "suporte-administrativo", icon: "fa-file-alt", label: "Suporte Administrativo" },
@@ -261,17 +261,20 @@ function renderCards(step, extra) {
     const $cardsWrapper = $('#cardsWrapper');
     $cardsWrapper.empty();
 
+    $("#right-container").css('align-self','auto');
+
     if (step.id === 'project-summary') {
         // Render form inputs for title and description
         const titleVal = project.title.substring(0, 50);
         const descVal = project.description.substring(0, 5000);
+        $("#right-container").css('align-self','stretch');
 
         const $form = $(`
                 <div id="projectSummaryForm">
                     <label for="projectTitleInput"><strong>Título do projeto</strong></label>
                     <input class="form-control" type="text" id="projectTitleInput" value="${titleVal}" maxlength="50" />
                     <label for="projectDescriptionTextarea"><strong>Descrição do projeto</strong></label>
-                    <textarea class="form-control" id="projectDescriptionTextarea" rows="5" maxlength="5000">${descVal}</textarea>
+                    <textarea class="form-control" id="projectDescriptionTextarea" rows="10" maxlength="5000">${descVal}</textarea>
                 </div>
             `);
 
