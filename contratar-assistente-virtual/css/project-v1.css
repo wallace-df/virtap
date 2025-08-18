@@ -20,7 +20,17 @@
     gap: 2rem;
     width: 100%;
     padding: 2rem;
-    flex-direction: column;
+    flex-direction: row;
+    position: sticky;
+    bottom: 0;
+    /* ou a altura que você quiser, ex: 10px abaixo do topo */
+    background: white;
+    /* para não ficar sobreposto com cards */
+    z-index: 10;
+    /* para não sumir atrás dos outros elementos */
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.25;
 }
 
 .step-navigation h3 {
@@ -125,6 +135,7 @@ button:disabled {
     font-weight: 700;
     line-height: 1.25;
     color: #532e88;
+    margin-top: 10px;
 
 }
 
@@ -341,7 +352,7 @@ textarea.form-control {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin: 10px auto;
+    margin: 20px auto;
     align-items: center;
 }
 
@@ -370,12 +381,13 @@ textarea.form-control {
     min-width: max-content;
 
 
-    padding: 0.75rem 2.5rem;
+    padding: 10px 20px;
     border: .1rem solid #B6D2D5;
     box-shadow: .2rem .3rem 3rem rgba(139, 206, 211, 0.12);
     border-radius: 1.2rem;
     font-weight: 500;
-    font-size: 14px;;
+    font-size: 15px;
+    ;
     line-height: 1.166;
     color: #363636;
     -webkit-transition: 200ms;
@@ -397,3 +409,12 @@ textarea.form-control {
     color: #363636;
     background: #d0e8eb;
 }
+
+/* .step-navigation .btn:active,
+.step-navigation .btn:focus,
+.step-navigation .btn:visited,
+.step-navigation .btn:focus-within {
+    color: #363636;
+    border: .1rem solid #B6D2D5;
+
+} */
