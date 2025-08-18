@@ -122,102 +122,22 @@
   <div>
     <img src="/img/logo.png" alt="Virtap logo">
     <div class="box">
-      <h1>Seu projeto foi criado com sucesso!</h1>
-      <div id="logado" style="display:none">
-        <p>Redirecionando para o seu projeto...</p>
-      </div>
-      <div id="nao-logado" style="display:none">
-
-        <div id="nova-conta" style="display: none">
-          <p>Em breve você começará a receber propostas de assistentes prontas para te ajudar.</p>
-          <p>Criamos uma conta na <strong>Virtap</strong> para você<span id="email-container-1"
-              style="display:none"> com o email
-              <em id="email-1"></em></span>.<br>
-
-          <p>Para ver suas propostas, escolha como deseja entrar:</p>
-
-          <div class="login-buttons">
-            <a href="#" class="btn btn-google">
-              <img src="/img/google-icon.svg"> Entrar com o Google
-            </a>
-            <a href="#" class="btn btn-password">
-              <img src="/img/password.svg"> Criar uma senha
-            </a>
-          </div>
-
-
-        </div>
-
-        <div id="conta-existente" style="display: none">
-          <p>Em breve você começará a receber propostas de assistentes prontas para te ajudar.</p>
-          <p>Notamos que você já possui uma conta na
-            <strong>Virtap</strong><span id="email-container-2" style="display:none"> com o email
-              <em id="email-2"></em></span>.<br>
-
-          <p>Escolha como deseja acessar suas propostas:</p>
-
-
-          <div class="login-buttons">
-            <a href="#" class="btn btn-google">
-              <img src="/img/google-icon.svg"> Entrar com o Google
-            </a>
-            <a href="#" class="btn btn-password">
-              <img src="/img/password.svg"> Entrar com senha
-            </a>
-          </div>
-
-
-        </div>
-
+      <h1>Projeto publicado com sucesso!</h1>
+      <div id="logado">
+        <p>Redirecionando automaticamente...</p>
       </div>
     </div>
   </div>
   <script>
     const params = new URLSearchParams(window.location.search);
-    const redir = params.get("r");
-    const email = params.get("e");
-    const p = params.get("p");
     const pid = params.get("pid");
-    if (redir) {
-      document.getElementById('logado').style.display = 'block';
-      let url;
-      if (pid) {
-        url = `${window.dashboardURL}/projeto/${pid}`;
-      } else {
-        url = `${window.dashboardURL}/`;
-      }
-      setTimeout(() => window.location.href = url, 5000);
+    let url;
+    if (pid) {
+      url = `${window.dashboardURL}/projeto/${pid}`;
     } else {
-      document.getElementById('nao-logado').style.display = 'block';
-      let next;
-      if (pid) {
-        next = `projeto/${pid}`;
-      } else {
-        next = ``;
-      }
-      if (p) {
-        document.getElementById('nova-conta').style.display = 'block';
-        if (email) {
-          document.getElementById('email-container-1').style.display = 'inline';
-          document.getElementById('email-1').innerText = email;
-        }
-      } else {
-        document.getElementById('conta-existente').style.display = 'block';
-        if (email) {
-          document.getElementById('email-container-2').style.display = 'inline';
-          document.getElementById('email-2').innerText = email;
-        }
-      }
-
-      document.querySelectorAll('.btn-password').forEach(btn => {
-        btn.href = `./login-com-senha?email=${email || ''}&next=${next}`;
-      });
-
-      document.querySelectorAll('.btn-google').forEach(btn => {
-        btn.href = `${window.apiURL}/auth/google/client?next=${next}`;
-      });
-
+      url = `${window.dashboardURL}/`;
     }
+    setTimeout(() => window.location.href = url, 3000);
   </script>
 </body>
 

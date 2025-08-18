@@ -283,6 +283,7 @@ textarea.form-control {
     width: 90%;
     text-align: center;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    font-size: 17px;
 }
 
 .modal-content h3 {
@@ -299,6 +300,7 @@ textarea.form-control {
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    font-size: 14px;
 }
 
 .modal-content button:hover {
@@ -410,6 +412,10 @@ textarea.form-control {
     background: #d0e8eb;
 }
 
+.cards-container .small {
+    font-size: 15px;
+    color: #7d99ff;
+}
 /* .step-navigation .btn:active,
 .step-navigation .btn:focus,
 .step-navigation .btn:visited,

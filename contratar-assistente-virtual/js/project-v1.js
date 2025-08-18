@@ -30,11 +30,10 @@ function handleGoogleLogin() {
     const messageListener = (event) => {
         // Verifica se a origem da mensagem é confiável e se já não foi tratada
         if (event.origin !== location.origin || loginHandled) {
-            console.log(event.origin, location.origin);
             return;
         }
 
-        const { type, state } = event.data;
+        const { type, state, name, email, newUser } = event.data;
 
         // Valida o 'state' para prevenir ataques CSRF
         if (state === generatedState) {
@@ -43,8 +42,7 @@ function handleGoogleLogin() {
 
             if (type === 'oauth_success') {
                 currentStepIndex++;
-                renderStep(currentStepIndex);
-
+                renderStep(currentStepIndex, false, { name, email, newUser });
             } else if (type === 'oauth_error') {
                 alert('poxa!');
             }
@@ -59,21 +57,23 @@ function handleGoogleLogin() {
 
     // 4. Inicia um 'ouvinte' para detectar se o pop-up foi fechado pelo usuário
     const checkPopupClosed = setInterval(() => {
-        if (popup.closed) {
-            clearInterval(checkPopupClosed);
-            window.removeEventListener('message', messageListener, false);
+        try {
+            if (popup.closed) {
+                clearInterval(checkPopupClosed);
+                window.removeEventListener('message', messageListener, false);
 
-            if (!loginHandled) {
-                restoreBtn();
+                if (!loginHandled) {
+                    restoreBtn();
+                }
             }
+
+        } catch (err) {
+
         }
     }, 500);
 }
 
 const STORAGE_KEY = 'project-data-v1';
-let loggedEmail = getParameterByName('e');
-let loggedName = getParameterByName('n');
-
 
 const allSteps = [
     {
@@ -87,7 +87,7 @@ const allSteps = [
     },
     {
         id: 'demandas-pessoais',
-        title: "Para as seguintes tarefas...",
+        title: "Tarefas que preciso",
         cards: [
             { value: "organizacao-pessoal", icon: "fa-calendar-check", label: "Organização Pessoal" },
             { value: "compras-presentes", icon: "fa-shopping-cart", label: "Compras e Presentes" },
@@ -98,7 +98,7 @@ const allSteps = [
     },
     {
         id: 'demandas-profissionais',
-        title: "Para as seguintes tarefas...",
+        title: "Tarefas que preciso",
         cards: [
             { value: "comunicacao-atendimento", icon: "fa-comments", label: "Comunicação e Atendimento" },
             { value: "gestao-administrativa", icon: "fa-tasks", label: "Gestão Administrativa" },
@@ -109,7 +109,7 @@ const allSteps = [
     },
     {
         id: 'demandas-pessoais-profissionais',
-        title: "Para as seguintes tarefas...",
+        title: "Tarefas que preciso",
         cards: [
             { value: "organizacao-pessoal", icon: "fa-calendar-check", label: "Organização Pessoal" },
             { value: "suporte-administrativo", icon: "fa-file-alt", label: "Suporte Administrativo" },
@@ -120,11 +120,11 @@ const allSteps = [
     },
     {
         id: 'volume-trabalho',
-        title: "E alguém que trabalhe...",
+        title: "Volume de trabalho",
         cards: [
             { value: "full-time", icon: "fa-clock", label: "Full-time (tempo integral)" },
             { value: "part-time", icon: "fa-hourglass-half", label: "Part-time (meio período)" },
-            { value: "few-hours", icon: "fa-calendar-day", label: "Algumas horas por dia ou semana" },
+            { value: "few-hours", icon: "fa-calendar-day", label: "Não tenho certeza" },
         ],
     },
     {
@@ -134,12 +134,12 @@ const allSteps = [
     },
     {
         id: 'email-confirmation',
-        title: "Seu projeto foi salvo com sucesso!",
+        title: "Estamos quase lá",
         cards: [] // Formulário de contato
     },
     {
         id: 'contact-info',
-        title: "Último passo para receber propostas",
+        title: "Publique seu projeto",
         cards: [] // Formulário de contato
     },
 
@@ -203,15 +203,15 @@ function generateProjectTitle() {
         type === "professional" ? "Assistente Administrativo" :
             "Assistente Pessoal e Administrativo";
 
-    let period = 'Algumas horas por dia';
+    let period = '';
     let vol = selectedValues["volume-trabalho"];
     if (vol === 'full-time') {
-        period = 'Full-time';
+        period = ' - Full-time';
     } else if (vol === 'part-time') {
-        period = 'Meio-período';
+        period = ' - Meio-período';
     }
 
-    return `${typeText} - ${period}`;
+    return `${typeText}${period}`;
 }
 
 function generateProjectDescription() {
@@ -257,21 +257,21 @@ function buildActiveSteps() {
     }
 }
 
-function renderCards(step) {
+function renderCards(step, extra) {
     const $cardsWrapper = $('#cardsWrapper');
     $cardsWrapper.empty();
 
     if (step.id === 'project-summary') {
         // Render form inputs for title and description
-        const titleVal = project.title;
-        const descVal = project.description;
+        const titleVal = project.title.substring(0, 50);
+        const descVal = project.description.substring(0, 5000);
 
         const $form = $(`
                 <div id="projectSummaryForm">
                     <label for="projectTitleInput"><strong>Título do projeto</strong></label>
-                    <input class="form-control" type="text" id="projectTitleInput" value="${titleVal}" />
+                    <input class="form-control" type="text" id="projectTitleInput" value="${titleVal}" maxlength="50" />
                     <label for="projectDescriptionTextarea"><strong>Descrição do projeto</strong></label>
-                    <textarea class="form-control" id="projectDescriptionTextarea" rows="5">${descVal}</textarea>
+                    <textarea class="form-control" id="projectDescriptionTextarea" rows="5" maxlength="5000">${descVal}</textarea>
                 </div>
             `);
 
@@ -292,7 +292,7 @@ function renderCards(step) {
     if (step.id === 'email-confirmation') {
         const $form = $(`
             <div id="contactInfoForm" style="text-align:center;">
-                <p>Para publicar seu projeto, precisamos confirmar seu cadastro.<p/>
+                <p>Finalize seu cadastro para publicar seu projeto.<br/> <span class="small">Leva menos de um minuto!</small></p>
 
                 <div class="login-buttons">
                     <a class="btn btn-google" id="btn-google">
@@ -302,39 +302,65 @@ function renderCards(step) {
             </div>
         `);
 
+
+        if (extra && extra.sessionExpired) {
+            $("#stepTitle").html("Sua sessão expirou por segurança");
+            $form.find('p').html('Mas não se preocupe: seu projeto ja está salvo!<br/>Por favor, finalize novamente seu cadastro para publicá-lo.<br/>');
+        }
+
         $cardsWrapper.append($form);
         $("#btn-google").off().on('click', handleGoogleLogin);
         return;
     }
 
     if (step.id === 'contact-info') {
-        const name = selectedValues['contact-name'] || loggedName || '';
+        const name = selectedValues['contact-name'] || extra.name || '';
         const phone = selectedValues['contact-phone'] || '';
 
-        const $form = $(`
+        if (extra.newUser === '1') {
+            const $form = $(`
             <div id="contactInfoForm" style="text-align:center;">
                 <p>Para receber propostas, precisamos apenas do seu nome e Whatsapp.<p/>
 
-                <label for="contactNameInput"><strong>Nome completo</strong></label><br>
+                <label for="contactNameInput"><strong>Nome</strong></label><br>
                 <input type="text" id="contactNameInput" class="form-control" value="${name}" />
-                
+
                 <label for="contactPhoneInput"><strong>Telefone</strong></label><br>
                 <input type="tel" id="contactPhoneInput" class="form-control" value="${phone}"  />
+
+                <label for="contactNameEmail"><strong>E-mail</strong></label><br>
+                <input type="text" id="contactEmailInput" class="form-control" value="${extra.email}" readonly />
+
             </div>
             `);
 
-        $cardsWrapper.append($form);
+            $cardsWrapper.append($form);
 
-        $('#contactNameInput').off().on('input', function () {
-            selectedValues['contact-name'] = $(this).val().trim();
-            updateButtons();
-        });
+            $('#contactNameInput').off().on('input', function () {
+                selectedValues['contact-name'] = $(this).val().trim();
+                updateButtons();
+            }).trigger('input');
 
-        $('#contactPhoneInput').off().on('input', function () {
-            selectedValues['contact-phone'] = $(this).val().trim();
-            updateButtons();
-        });
+            $('#contactPhoneInput').off().on('input', function () {
+                selectedValues['contact-phone'] = $(this).val().trim();
+                updateButtons();
+            }).trigger('input');
 
+
+        } else {
+            const $form = $(`
+            <div id="contactInfoForm" data-existing-user style="text-align:center;">
+            <p>Bem-vindo(a) de volta, <strong data-name></strong>!<br/>
+            <label for="contactNameEmail"><strong>Seu e-mail</strong></label><br>
+            <input type="text" id="contactEmailInput" class="form-control" value="${extra.email}" readonly /><br/>
+
+                Para publicar seu projeto, clique no botão <strong>Publicar</strong>.<p/>
+            </div>
+            `);
+            $form.find('[data-name]').text(extra.name);
+            $cardsWrapper.append($form);
+
+        }
         updateButtons();
         return;
     }
@@ -381,13 +407,12 @@ function setButtonsDisabled(disabled, sending = false) {
         $('#btnNext').find('span').text(currentStepIndex === activeSteps.length - 1 ? 'Enviar' : 'Próximo');
     }
 }
-function renderStep(index, fromNextButton = false) {
+function renderStep(index, fromNextButton = false, extra) {
     if (index < 0 || index >= activeSteps.length) return;
     currentStepIndex = index;
     const step = activeSteps[index];
     $('#stepTitle').html(step.title);
 
-    // 🚀 Só gera projeto se for último passo e vier pelo botão "Próximo"
     if (fromNextButton && step.id === 'project-summary') {
         project = {
             title: generateProjectTitle(),
@@ -397,10 +422,13 @@ function renderStep(index, fromNextButton = false) {
     }
 
     const $cardsWrapper = $('#cardsWrapper');
+    setButtonsDisabled(true);
     $cardsWrapper.fadeOut(150, () => {
-        renderCards(step);
-        $cardsWrapper.fadeIn(150);
-        updateButtons();
+        renderCards(step, extra);
+        $cardsWrapper.fadeIn(150, () => {
+            setButtonsDisabled(false);
+            updateButtons();
+        });
 
     });
 }
@@ -418,19 +446,27 @@ function updateButtons() {
     } else if (step.id === 'project-summary') {
         let projectTitle = $("#projectTitleInput").val().trim();
         let projectDescription = $("#projectDescriptionTextarea").val().trim();
-        $('#btnNext').find('span').text('Salvar');
         $('#btnNext').prop('disabled', projectTitle.length === 0 || projectDescription.length === 0);
     }
     else if (step.id === 'email-confirmation') {
         $('#btnNext').hide();
     } else if (step.id === 'contact-info') {
-        const name = selectedValues['contact-name'] || '';
-        const phone = selectedValues['contact-phone'] || '';
 
-        const valid = name.length > 0 && phone.length > 0;
+        let $f = $("#contactInfoForm");
+        if ($f.is('[data-existing-user]')) {
+            $('#btnNext').prop('disabled', false);
+            $('#btnNext').find('span').text('Publicar');
 
-        $('#btnNext').prop('disabled', !valid);
-        $('#btnNext').find('span').text('Postar');
+        } else {
+            const name = selectedValues['contact-name'] || '';
+            const phone = selectedValues['contact-phone'] || '';
+
+            const valid = name.length > 0 && phone.length > 0;
+
+            $('#btnNext').prop('disabled', !valid);
+            $('#btnNext').find('span').text('Publicar');
+
+        }
         return;
     } else {
         $('#btnNext').prop('disabled', !val);
@@ -487,11 +523,12 @@ $('#btnNext').on('click', async () => {
         setButtonsDisabled(true, true);
 
         const dataToSend = {
-            name: selectedValues['contact-name'],
-            email: selectedValues['contact-email'],
-            whatsapp: selectedValues['contact-phone'],
+            name: $("#contactNameInput").val(),
+            email: $("#contactEmailInput").val(),
+            whatsapp: $("#contactPhoneInput").val(),
             project_title: project.title,
-            project_description: project.description
+            project_description: project.description,
+            utm_params: getUTMParams()
         };
 
         try {
@@ -505,8 +542,16 @@ $('#btnNext').on('click', async () => {
             });
 
             if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(errorText || 'Erro desconhecido');
+                if (response.status === 401) {
+                    throw {
+                        errorCode: 'NOT_AUTHORIZED'
+                    }
+                } else if (response.status === 400) {
+                    throw await response.json();
+                } else {
+                    const errorText = await response.text();
+                    throw new Error(errorText || 'Erro desconhecido');
+                }
             }
 
             let data = await response.json();
@@ -518,29 +563,24 @@ $('#btnNext').on('click', async () => {
             console.log(data);
             localStorage.removeItem(STORAGE_KEY);
 
-            if (data.loggedIn) {
-                let url = 'projeto-postado?r=1';
-                if (data.projectId) {
-                    url += "&pid=" + data.projectId
-                }
-                location.href = url;
-
-            } else {
-                let url = 'projeto-postado?e=' + dataToSend.email;
-                if (data.resetPasswordToken) {
-                    url += `&p=1&h=${data.resetPasswordToken.h}&t=${data.resetPasswordToken.t}&n=${data.resetPasswordToken.n}`;
-                }
-                if (data.projectId) {
-                    url += "&pid=" + data.projectId
-                }
-                location.href = url;
+            let url = 'projeto-postado';
+            if (data.projectId) {
+                url += "?pid=" + data.projectId
             }
+            location.href = url;
         } catch (err) {
             console.log(err);
             setContactInputsDisabled(false);
             setButtonsDisabled(false);
             updateButtons();
-            showModal();
+
+            if (err && err.errorCode === 'NOT_AUTHORIZED') {
+                currentStepIndex--;
+                renderStep(currentStepIndex, false, { sessionExpired: true });
+
+            } else {
+                showModal();
+            }
         }
     }
 });

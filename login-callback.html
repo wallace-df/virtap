@@ -4,6 +4,9 @@ Confirmando...
   const urlParams = new URLSearchParams(window.location.search);
   const receivedError = urlParams.get('error');
   const receivedState = urlParams.get('state');
+  const receivedName = urlParams.get('name');
+  const receivedEmail = urlParams.get('email');
+  const receivedNew = urlParams.get('new');
 
   // Verifica se a janela pop-up foi aberta por outra página
   if (window.opener) {
@@ -22,7 +25,10 @@ Confirmando...
         window.opener.postMessage(
           {
             type: "oauth_success",
-            state: receivedState
+            state: receivedState,
+            name: receivedName,
+            email: receivedEmail,
+            newUser: receivedNew
           },
           window.opener.location.origin
         );
