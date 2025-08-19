@@ -544,7 +544,7 @@ $('#btnNext').on('click', async () => {
         const dataToSend = {
             name: $("#contactNameInput").val(),
             email: $("#contactEmailInput").val(),
-            whatsapp: intl.getNumber(),
+            whatsapp: (intl && intl.isValidNumber() ? intl.getNumber() : null),
             project_title: project.title,
             project_description: project.description,
             utm_params: getUTMParams()
