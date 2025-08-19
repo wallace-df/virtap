@@ -1,32 +1,32 @@
-/* Container dos cards em coluna flex */
+html {
+    font-size: 15px;
+}
+
+.login_area h3 {
+    margin: 0 0 2rem 0;
+}
+
 .cards-container {
     display: inline-flex;
     gap: 1rem;
     flex-wrap: wrap;
-    margin: 2rem;
-    align-self: stretch;
+    margin-top: 1.5rem;
     flex-direction: column;
-    /* height: 100%; */
-
 }
 
 .step-navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
     gap: 2rem;
     width: 100%;
-    padding: 2rem;
+    padding: 0 2rem 2rem 2rem;
     flex-direction: row;
     position: sticky;
     bottom: 0;
-    /* ou a altura que você quiser, ex: 10px abaixo do topo */
     background: white;
-    /* para não ficar sobreposto com cards */
     z-index: 10;
-    /* para não sumir atrás dos outros elementos */
-    font-size: 24px;
+    font-size: 1rem;
     font-weight: 700;
     line-height: 1.25;
 }
@@ -36,7 +36,6 @@
     font-weight: 600;
 }
 
-/* Botões desabilitados */
 button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -44,13 +43,10 @@ button:disabled {
 
 .card-custom {
     position: relative;
-    padding-left: 40px;
-    /* espaço para o indicador */
-    /* restante do seu css */
     background: #fff;
     border: 1px solid #ddd;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(83, 46, 136, 0.1);
+    border-radius: 0.8rem;
+    box-shadow: 0 0.267rem 0.533rem rgba(83, 46, 136, 0.1); 
     cursor: pointer;
     transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
     text-align: center;
@@ -59,25 +55,26 @@ button:disabled {
     flex-direction: row;
     justify-content: left;
     align-items: center;
-    padding: 20px;
+    padding: 1rem; 
 }
 
 .card-custom:hover {
-    box-shadow: 0 8px 16px rgba(83, 46, 136, 0.2);
+    box-shadow: 0 0.533rem 1.067rem rgba(83, 46, 136, 0.2);
     border-color: #532e88;
 }
+
 
 .card-custom.selected {
     border-color: #532e88;
-    box-shadow: 0 0 12px rgba(83, 46, 136, 0.5);
+    box-shadow: 0 0 0.75rem rgba(83, 46, 136, 0.5);
     background: #ede7f6;
-    /* lilás clarinho */
 }
 
 .card-custom h5 {
-    margin-left: 30px;
+    margin-left: 2rem;
+    font-size: 1rem;
+    ;
 }
-
 
 .cards-grid {
     display: grid;
@@ -100,17 +97,15 @@ button:disabled {
     flex-direction: row;
     /* ou coluna, conforme quiser layout interno */
     align-items: left;
-    padding: 10px 20px;
+    padding: 1rem 2rem;
     /* se quiser */
 }
 
 #stepTitle {
-    font-size: 24px;
+    font-size: 1.8rem;
     font-weight: 700;
     line-height: 1.25;
     color: #532e88;
-    margin-top: 10px;
-
 }
 
 @media (min-width: 768px) {
@@ -119,70 +114,65 @@ button:disabled {
     }
 }
 
-/* Radio base */
 .radio-indicator {
     position: absolute;
     top: 50%;
-    left: 15px;
+    left: 1rem;
     transform: translateY(-50%);
-    width: 18px;
-    height: 18px;
-    border: 2px solid #532e88;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 0.125rem solid #532e88;
     border-radius: 50%;
     background: white;
     box-sizing: border-box;
 }
 
-/* Ponto central quando selecionado */
 .radio-indicator.checked::after {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 8px;
-    height: 8px;
+    width: 0.75rem;
+    height: 0.75rem;
     background: #532e88;
     border-radius: 50%;
     transform: translate(-50%, -50%);
 }
 
-
-/* Indicador checkbox (quadrado) */
 .checkbox-indicator {
     position: absolute;
     top: 50%;
-    left: 15px;
+    left: 1rem;
     transform: translateY(-50%);
-    width: 18px;
-    height: 18px;
-    border: 2px solid #532e88;
-    border-radius: 4px;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 0.125rem solid #532e88;
+    border-radius: 0.25rem;
     background: white;
     box-sizing: border-box;
 }
 
-/* Indicador checkbox selecionado - mostrando "check" com borda e background */
 .checkbox-indicator.checked {
     background: #532e88;
     border-color: #532e88;
 }
 
-/* Checkmark para checkbox */
 .checkbox-indicator.checked::after {
     content: '';
     position: absolute;
-    left: 5px;
-    top: 1px;
-    width: 5px;
-    height: 10px;
+    left: 0.416rem;
+    top: 0.083rem;
+    width: 0.416rem;
+    height: 0.831rem;
     border: solid white;
-    border-width: 0 2px 2px 0;
+    border-width: 0 0.166rem 0.166rem 0;
     transform: rotate(45deg);
 }
 
 label {
     margin-top: 2rem;
-    font-size: 16px;
+    margin-bottom: 0.25rem;
+    font-size: 1.25rem;
     font-weight: bold;
 }
 
@@ -190,8 +180,8 @@ input.form-control,
 textarea.form-control {
     border-radius: 1rem;
     width: 100%;
-    padding: 8px;
-    font-size: 15px;
+    padding: 0.75rem;
+    font-size: 1rem;
 }
 
 #projectSummaryForm {
@@ -229,30 +219,31 @@ textarea.form-control {
     position: relative;
     /* necessário para o botão X funcionar */
     background-color: white;
-    padding: 30px 20px;
-    border-radius: 12px;
+    padding: 2rem;
+    border-radius: 1.25rem;
     max-width: 400px;
     width: 90%;
     text-align: center;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    font-size: 17px;
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
+    font-size: 1.125rem;
 }
 
 .modal-content h3 {
     margin-top: 0;
     color: #532E88;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
 }
 
 .modal-content button {
-    margin-top: 20px;
-    padding: 10px 20px;
+    margin-top: 1.25rem;
+    padding: 0.75rem 1.5rem;
     background-color: #532E88;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 0.9rem;
 }
 
 .modal-content button:hover {
@@ -261,9 +252,9 @@ textarea.form-control {
 
 .close-button {
     position: absolute;
-    top: 12px;
-    right: 16px;
-    font-size: 26px;
+    top: 0.75rem;
+    right: 1rem;
+    font-size: 2rem;
     font-weight: bold;
     color: #999;
     cursor: pointer;
@@ -281,15 +272,15 @@ textarea.form-control {
     }
 
     25% {
-        transform: translateX(-8px);
+        transform: translateX(-0.5rem);
     }
 
     50% {
-        transform: translateX(8px);
+        transform: translateX(0.5rem);
     }
 
     75% {
-        transform: translateX(-8px);
+        transform: translateX(0.5rem);
     }
 
     100% {
@@ -305,15 +296,15 @@ textarea.form-control {
 .login-buttons {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin: 20px auto;
+    gap: 0.5rem;
+    margin: 1rem auto;
     align-items: center;
 }
 
 
 .login-buttons .btn {
-    font-size: 15px;
-    padding: 10px 20px;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
 }
 
 
@@ -322,39 +313,27 @@ textarea.form-control {
     align-items: center;
     justify-content: flex-start;
     /* Ícone à esquerda */
-    padding: 10px 16px;
+    padding: 0.75rem 1.5rem;
     text-decoration: none;
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    font-size: 14px;
+    color: #363636;
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 1.166;
     white-space: nowrap;
     /* evita quebra */
     position: relative;
     /* permite ajustes visuais */
     min-width: max-content;
-
-
-    padding: 10px 20px;
-    border: .1rem solid #B6D2D5;
-    box-shadow: .2rem .3rem 3rem rgba(139, 206, 211, 0.12);
+    border: 0.1rem solid #B6D2D5;
     border-radius: 1.2rem;
-    font-weight: 500;
-    font-size: 15px;
-    ;
-    line-height: 1.166;
-    color: #363636;
-    -webkit-transition: 200ms;
-    -o-transition: 200ms;
+    box-shadow: 0.2rem 0.3rem 3rem rgba(139, 206, 211, 0.12);
     transition: 200ms;
-    font-weight: 800;
 }
 
-/* Espaço para o ícone sem empurrar o texto */
 .btn img {
-    margin-right: 8px;
-    height: 24px;
-    width: 24px;
+    margin-right: 0.5rem;
+    height: 1.5rem;
+    width: 1.5rem;
     /* garante alinhamento entre botões */
     text-align: center;
 }
@@ -365,18 +344,9 @@ textarea.form-control {
 }
 
 .cards-container .small {
-    font-size: 15px;
+    font-size: 1rem;
     color: #7d99ff;
 }
-
-/* .step-navigation .btn:active,
-.step-navigation .btn:focus,
-.step-navigation .btn:visited,
-.step-navigation .btn:focus-within {
-    color: #363636;
-    border: .1rem solid #B6D2D5;
-
-} */
 
 #right-container.full {
     align-self: stretch;
@@ -388,15 +358,15 @@ textarea.form-control {
 
 [data-lastpass-icon-root],
 [data-lastpass-root] {
-  display: none !important;
+    display: none !important;
 }
 
 .iti {
-    display:block;
+    display: block;
 }
 
 .iti__selected-dial-code {
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .iti__country-list {
