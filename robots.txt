@@ -23,6 +23,7 @@ Disallow: /privacidade.html
 Disallow: /contratar-assistente-virtual/cadastrar.html
 Disallow: /contratar-assistente-virtual/login.html
 Disallow: /contratar-assistente-virtual/perfil.html
+Disallow: /contratar-assistente-virtual/postar-projeto.html
 
 Disallow: /assinar
 Disallow: /cadastrar
@@ -48,3 +49,4 @@ Disallow: /privacidade
 Disallow: /contratar-assistente-virtual/cadastrar
 Disallow: /contratar-assistente-virtual/login
 Disallow: /contratar-assistente-virtual/perfil
+Disallow: /contratar-assistente-virtual/postar-projeto

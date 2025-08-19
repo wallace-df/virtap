@@ -39,7 +39,7 @@ function handleGoogleLogin() {
         if (state === generatedState) {
             loginHandled = true;
             restoreBtn();
- 
+
             if (type === 'oauth_success') {
                 currentStepIndex++;
                 renderStep(currentStepIndex, false, { name, email, newUser });
@@ -87,7 +87,7 @@ const allSteps = [
     },
     {
         id: 'demandas-pessoais',
-        title: "Quero ajuda com as seguintes tarefas...",
+        title: "Quero delegar as seguintes tarefas...",
         cards: [
             { value: "organizacao-pessoal", icon: "fa-calendar-check", label: "Organização Pessoal" },
             { value: "compras-presentes", icon: "fa-shopping-cart", label: "Compras e Presentes" },
@@ -123,7 +123,7 @@ const allSteps = [
         title: "Volume de trabalho",
         cards: [
             { value: "full-time", icon: "fa-clock", label: "Full-time (tempo integral)" },
-            { value: "part-time", icon: "fa-hourglass-half", label: "Part-time (meio período)" },
+            { value: "part-time", icon: "fa-hourglass-half", label: "Algumas horas" },
             { value: "few-hours", icon: "fa-calendar-day", label: "Não tenho certeza" },
         ],
     },
@@ -149,6 +149,8 @@ let currentStepIndex = 0;
 let selectedValues = {};
 let activeSteps = [];
 let project = {}; // <-- Novo campo no estado
+let intl = null;
+
 const multiSelectSteps = ['demandas-pessoais', 'demandas-profissionais', 'demandas-pessoais-profissionais'];
 
 function saveState() {
@@ -261,20 +263,20 @@ function renderCards(step, extra) {
     const $cardsWrapper = $('#cardsWrapper');
     $cardsWrapper.empty();
 
-    $("#right-container").css('align-self','auto');
+    $("#right-container").removeClass('full');
 
     if (step.id === 'project-summary') {
         // Render form inputs for title and description
         const titleVal = project.title.substring(0, 50);
         const descVal = project.description.substring(0, 5000);
-        $("#right-container").css('align-self','stretch');
+        $("#right-container").addClass('full');
 
         const $form = $(`
                 <div id="projectSummaryForm">
                     <label for="projectTitleInput"><strong>Título do projeto</strong></label>
                     <input class="form-control" type="text" id="projectTitleInput" value="${titleVal}" maxlength="50" />
                     <label for="projectDescriptionTextarea"><strong>Descrição do projeto</strong></label>
-                    <textarea class="form-control" id="projectDescriptionTextarea" rows="10" maxlength="5000">${descVal}</textarea>
+                    <textarea class="form-control" id="projectDescriptionTextarea" rows="11" maxlength="5000">${descVal}</textarea>
                 </div>
             `);
 
@@ -322,16 +324,16 @@ function renderCards(step, extra) {
 
         if (extra.newUser === '1') {
             const $form = $(`
-            <div id="contactInfoForm" style="text-align:center;">
-                <p>Para receber propostas, precisamos apenas do seu nome e Whatsapp.<p/>
+            <div id="contactInfoForm" style="text-align:center; max-width: 400px">
+                <p>Para que você possa receber propostas, complete seus dados abaixo.<p/>
 
-                <label for="contactNameInput"><strong>Nome</strong></label><br>
+                <label for="contactNameInput" class="d-block" style="text-align:left">Nome</label>
                 <input type="text" id="contactNameInput" class="form-control" value="${name}" />
 
-                <label for="contactPhoneInput"><strong>Telefone</strong></label><br>
-                <input type="tel" id="contactPhoneInput" class="form-control" value="${phone}"  />
+                <label for="contactPhoneInput" class="d-block" style="text-align:left">Whatsapp</label>
+                <input type="tel" id="contactPhoneInput" class="form-control" value="${phone}" placeholder="(99) 99999-9999"  />
 
-                <label for="contactNameEmail"><strong>E-mail</strong></label><br>
+                <label for="contactNameEmail" class="d-block" style="text-align:left">E-mail</label>
                 <input type="text" id="contactEmailInput" class="form-control" value="${extra.email}" readonly />
 
             </div>
@@ -339,25 +341,40 @@ function renderCards(step, extra) {
 
             $cardsWrapper.append($form);
 
+
+            intl = window.intlTelInput(document.getElementById('contactPhoneInput'), {
+                autoInsertDialCode: true,
+                initialCountry: "BR",
+                separateDialCode: true,
+                utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
+            });
+
             $('#contactNameInput').off().on('input', function () {
                 selectedValues['contact-name'] = $(this).val().trim();
                 updateButtons();
             }).trigger('input');
 
             $('#contactPhoneInput').off().on('input', function () {
-                selectedValues['contact-phone'] = $(this).val().trim();
+                selectedValues['contact-phone'] = (intl.isValidNumber() ? intl.getNumber() : "")
                 updateButtons();
             }).trigger('input');
 
 
+            $("#contactPhoneInput").on('blur', function () {
+                let number = intl.getNumber();
+                intl.setNumber(number);
+            });
+
+
         } else {
             const $form = $(`
-            <div id="contactInfoForm" data-existing-user style="text-align:center;">
-            <p>Bem-vindo(a) de volta, <strong data-name></strong>!<br/>
-            <label for="contactNameEmail"><strong>Seu e-mail</strong></label><br>
-            <input type="text" id="contactEmailInput" class="form-control" value="${extra.email}" readonly /><br/>
+            <div id="contactInfoForm" data-existing-user style="text-align:center; max-width: 400px">
+                <p>Bem-vindo(a) de volta, <strong data-name></strong>!</p>
 
-                Para publicar seu projeto, clique no botão <strong>Publicar</strong>.<p/>
+                <label for="contactNameEmail" class="d-block" style="text-align:left">Seu e-mail:</label>
+                <input type="text" id="contactEmailInput" class="form-control" value="${extra.email}" readonly disabled data-lpignore="true" />
+
+                <p class="mt-4">Para publicar seu projeto, clique no botão <strong>Publicar</strong>.<p/>
             </div>
             `);
             $form.find('[data-name]').text(extra.name);
@@ -383,8 +400,7 @@ function renderCards(step, extra) {
         const $card = $(`
                 <div class="card-custom${isSelected ? ' selected' : ''}" data-value="${card.value}">
                     <div class="${indicatorClass}${isSelected ? ' checked' : ''}"></div>
-                    <i class="fa-solid ${card.icon}"></i>
-                    <h5 class="card-title mt-2">${card.label}</h5>
+                    <h5 class="card-title">${card.label}</h5>
                 </div>
             `);
         $cardsWrapper.append($card);
@@ -449,7 +465,7 @@ function updateButtons() {
     } else if (step.id === 'project-summary') {
         let projectTitle = $("#projectTitleInput").val().trim();
         let projectDescription = $("#projectDescriptionTextarea").val().trim();
-        $('#btnNext').prop('disabled', projectTitle.length === 0 || projectDescription.length === 0);
+        $('#btnNext').prop('disabled', projectTitle.length < 10 || projectDescription.length < 50);
     }
     else if (step.id === 'email-confirmation') {
         $('#btnNext').hide();
@@ -464,7 +480,7 @@ function updateButtons() {
             const name = selectedValues['contact-name'] || '';
             const phone = selectedValues['contact-phone'] || '';
 
-            const valid = name.length > 0 && phone.length > 0;
+            const valid = name.length >= 5 && phone.length > 0;
 
             $('#btnNext').prop('disabled', !valid);
             $('#btnNext').find('span').text('Publicar');
@@ -528,7 +544,7 @@ $('#btnNext').on('click', async () => {
         const dataToSend = {
             name: $("#contactNameInput").val(),
             email: $("#contactEmailInput").val(),
-            whatsapp: $("#contactPhoneInput").val(),
+            whatsapp: intl.getNumber(),
             project_title: project.title,
             project_description: project.description,
             utm_params: getUTMParams()

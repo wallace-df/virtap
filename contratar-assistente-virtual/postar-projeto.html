@@ -13,11 +13,10 @@
     <link href="/favicon.svg" type="image/svg+xml" rel="icon" />
     <link href="/favicon.png" type="image/png" rel="icon" />
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="../css/intlTelInput.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/login-v1.css">
     <link rel="stylesheet" href="css/project-v1.css">
-
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
     <script>
@@ -30,7 +29,17 @@
         window.apiURL = 'https://api.virtap.com.br';
         window.apiURL = 'http://localhost:3000';
     </script>
-
+    <!-- Hotjar Tracking Code for https://www.virtap.com.br -->
+    <script>
+        (function (h, o, t, j, a, r) {
+            h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+            h._hjSettings = { hjid: 3611346, hjsv: 6 };
+            a = o.getElementsByTagName('head')[0];
+            r = o.createElement('script'); r.async = 1;
+            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+    </script>
 </head>
 
 <body style="background: #FFFFFF;">
@@ -41,9 +50,10 @@
             <div class="row g-0">
                 <div class="col-lg-6"
                     style="background: linear-gradient(180deg, #F2E9FF 0%, #F9F5FF 39.58%, rgba(243, 235, 255, 0) 100%);">
-                    <div class="left">
+                    <div class="left" style="padding:20px; height: auto">
 
-                        <h3 style="font-size: 28px; margin-bottom: 2rem;">Assistentes qualificadas prontas para te ajudar</h3>
+                        <h3 style="font-size: 28px; margin-bottom: 2rem;">Assistentes qualificadas prontas para te
+                            ajudar</h3>
                         <div class="mt-0 border rounded overflow-hidden">
                             <video autoplay loop muted playsinline class="w-100 h-auto">
                                 <source src="./img/talentos.webm" type="video/webm">

@@ -1,6 +1,6 @@
 /* Container dos cards em coluna flex */
 .cards-container {
-    display: flex;
+    display: inline-flex;
     gap: 1rem;
     flex-wrap: wrap;
     margin: 2rem;
@@ -9,8 +9,6 @@
     /* height: 100%; */
 
 }
-
-
 
 .step-navigation {
     display: flex;
@@ -44,46 +42,24 @@ button:disabled {
     cursor: not-allowed;
 }
 
-
-.btn-gray-custom {
-    background-color: #666666;
-    border-color: #666666;
-    color: white;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-    font-size: 2rem;
-}
-
-.btn-gray-custom:hover,
-.btn-gray-custom:focus {
-    background-color: #4d4d4d;
-    border-color: #4d4d4d;
-    color: white;
-}
-
-.btn-gray-custom:disabled,
-.btn-gray-custom.disabled {
-    background-color: #bbb;
-    border-color: #bbb;
-    color: #eee;
-    cursor: not-allowed;
-    opacity: 1;
-}
-
 .card-custom {
+    position: relative;
+    padding-left: 40px;
+    /* espaço para o indicador */
+    /* restante do seu css */
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(83, 46, 136, 0.1);
-    padding: 10px 20px;
     cursor: pointer;
     transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
     text-align: center;
-    width: 100%;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: left;
     align-items: center;
+    padding: 20px;
 }
 
 .card-custom:hover {
@@ -98,10 +74,8 @@ button:disabled {
     /* lilás clarinho */
 }
 
-.card-custom i {
-    font-size: 3rem;
-    color: #532e88;
-    margin-bottom: 10px;
+.card-custom h5 {
+    margin-left: 30px;
 }
 
 
@@ -125,7 +99,7 @@ button:disabled {
     display: flex;
     flex-direction: row;
     /* ou coluna, conforme quiser layout interno */
-    align-items: center;
+    align-items: left;
     padding: 10px 20px;
     /* se quiser */
 }
@@ -143,30 +117,6 @@ button:disabled {
     .step-navigation {
         flex-direction: row;
     }
-}
-
-
-
-/* Container dos cards já tem flex, vamos ajustar para espaço para indicador */
-.card-custom {
-    position: relative;
-    padding-left: 40px;
-    /* espaço para o indicador */
-    /* restante do seu css */
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(83, 46, 136, 0.1);
-    cursor: pointer;
-    transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
-    text-align: center;
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
 }
 
 /* Radio base */
@@ -232,6 +182,8 @@ button:disabled {
 
 label {
     margin-top: 2rem;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 input.form-control,
@@ -239,7 +191,7 @@ textarea.form-control {
     border-radius: 1rem;
     width: 100%;
     padding: 8px;
-    font-size: 2rem;
+    font-size: 15px;
 }
 
 #projectSummaryForm {
@@ -416,6 +368,7 @@ textarea.form-control {
     font-size: 15px;
     color: #7d99ff;
 }
+
 /* .step-navigation .btn:active,
 .step-navigation .btn:focus,
 .step-navigation .btn:visited,
@@ -424,3 +377,28 @@ textarea.form-control {
     border: .1rem solid #B6D2D5;
 
 } */
+
+#right-container.full {
+    align-self: stretch;
+}
+
+#right-container.full .cards-container {
+    display: flex;
+}
+
+[data-lastpass-icon-root],
+[data-lastpass-root] {
+  display: none !important;
+}
+
+.iti {
+    display:block;
+}
+
+.iti__selected-dial-code {
+    font-size: 16px;
+}
+
+.iti__country-list {
+    z-index: 12;
+}
