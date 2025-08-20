@@ -502,9 +502,11 @@ function renderStep(index, fromNextButton = false, extra) {
 
     const $cardsWrapper = $('#cardsWrapper');
     setButtonsDisabled(true);
+    $("#stepTitle").css('visibility','hidden');
     $cardsWrapper.fadeOut(150, () => {
         renderCards(step, extra);
         $cardsWrapper.fadeIn(150, () => {
+            $("#stepTitle").css('visibility','visible');
             setButtonsDisabled(false);
             updateButtons();
         });
