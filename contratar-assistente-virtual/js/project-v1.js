@@ -273,22 +273,57 @@ function renderCards(step, extra) {
 
         const $form = $(`
                 <div id="projectSummaryForm">
-                    <label for="projectTitleInput" style="margin-top: 0"><strong>Título do projeto</strong></label>
-                    <input class="form-control" type="text" id="projectTitleInput" value="${titleVal}" maxlength="50" />
-                    <label for="projectDescriptionTextarea"><strong>Descrição do projeto</strong></label>
-                    <textarea class="form-control" id="projectDescriptionTextarea" rows="11" maxlength="5000">${descVal}</textarea>
+                    <div class="form-group">
+                        <label for="projectTitleInput" style="margin-top: 0"><strong>Título do projeto</strong></label>
+                        <input class="form-control" type="text" id="projectTitleInput" value="${titleVal}" maxlength="50" />
+                        <em>Nome deve ter pelo menos 10 caracteres.</em>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectDescriptionTextarea"><strong>Descrição do projeto</strong></label>
+                        <textarea class="form-control" id="projectDescriptionTextarea" rows="11" maxlength="5000">${descVal}</textarea>
+                        <em>Descrição deve ter pelo menos 50 caracteres.</em>
+                    </div>
                 </div>
             `);
 
         $cardsWrapper.append($form);
 
+        $("#projectTitleInput").off().on('blur', function () {
+            let txt = $(this).val();
+            if (txt.trim().length < 10) {
+                $(this).closest('.form-group').addClass('error');
+            } else {
+                $(this).closest('.form-group').removeClass('error');
+            }
+        });
+
+        $("#projectDescriptionTextarea").off().on('blur', function () {
+            let txt = $(this).val();
+            if (txt.trim().length < 50) {
+                $(this).closest('.form-group').addClass('error');
+            } else {
+                $(this).closest('.form-group').removeClass('error');
+            }
+        });
+
         // Bind inputs to selectedValues to save state live
-        $('#projectTitleInput').off().on('input', function () {
+        $('#projectTitleInput').on('input', function () {
             saveProjectDebounced();
-        });
-        $('#projectDescriptionTextarea').off().on('input', function () {
+            let txt = $(this).val();
+            if (txt.trim().length >= 10) {
+                $(this).closest('.form-group').removeClass('error');
+            }
+
+        }).trigger('blur');
+
+        $('#projectDescriptionTextarea').on('input', function () {
             saveProjectDebounced();
-        });
+            let txt = $(this).val();
+            if (txt.trim().length >= 50) {
+                $(this).closest('.form-group').removeClass('error');
+            }
+
+        }).trigger('blur');
 
         saveState();
         return;
@@ -326,7 +361,6 @@ function renderCards(step, extra) {
             const $form = $(`
             <div id="contactInfoForm" style="text-align:left; max-width: 400px">
                 <p class="text-center">Para que você possa receber propostas, complete seus dados abaixo.</p>
-
 
                 <div class="form-group">
                     <label for="contactNameInput" class="d-block" style="text-align:left">Nome</label>
@@ -380,11 +414,20 @@ function renderCards(step, extra) {
 
             $('#contactNameInput').on('input', function () {
                 selectedValues['contact-name'] = $(this).val().trim();
+                let txt = $(this).val();
+                if (txt.trim().length >= 5) {
+                    $(this).closest('.form-group').removeClass('error');
+                }
                 updateButtons();
             }).trigger('input').trigger('blur');
 
             $('#contactPhoneInput').on('input', function () {
-                selectedValues['contact-phone'] = (intl.isValidNumber() ? intl.getNumber() : "")
+                if (intl.isValidNumber()) {
+                    selectedValues['contact-phone'] = intl.getNumber();
+                    $(this).closest('.form-group').removeClass('error');
+                } else {
+                    selectedValues['contact-phone'] = ""
+                }
                 updateButtons();
             }).trigger('input');
 

@@ -123,7 +123,7 @@ button:disabled {
 }
 
 .card-custom h5 {
-    margin-left: 2rem;
+    margin-left: 1.4rem;
     font-size: 1rem;
     ;
 }
@@ -163,11 +163,11 @@ button:disabled {
 .radio-indicator {
     position: absolute;
     top: 50%;
-    left: 1rem;
+    left: 0.7rem; /* 1rem * 0.7 */
     transform: translateY(-50%);
-    width: 1.5rem;
-    height: 1.5rem;
-    border: 0.125rem solid #532e88;
+    width: 1.05rem;  /* 1.5rem * 0.7 */
+    height: 1.05rem; /* 1.5rem * 0.7 */
+    border: 0.0875rem solid #532e88; /* 0.125rem * 0.7 */
     border-radius: 50%;
     background: white;
     box-sizing: border-box;
@@ -178,22 +178,23 @@ button:disabled {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 0.75rem;
-    height: 0.75rem;
+    width: 0.525rem;  /* 0.75rem * 0.7 */
+    height: 0.525rem; /* 0.75rem * 0.7 */
     background: #532e88;
     border-radius: 50%;
     transform: translate(-50%, -50%);
 }
 
+
 .checkbox-indicator {
     position: absolute;
     top: 50%;
-    left: 1rem;
+    left: 0.7rem; /* 1rem * 0.7 */
     transform: translateY(-50%);
-    width: 1.5rem;
-    height: 1.5rem;
-    border: 0.125rem solid #532e88;
-    border-radius: 0.25rem;
+    width: 1.05rem;  /* 1.5rem * 0.7 */
+    height: 1.05rem; /* 1.5rem * 0.7 */
+    border: 0.0875rem solid #532e88; /* 0.125rem * 0.7 */
+    border-radius: 0.175rem; /* 0.25rem * 0.7 */
     background: white;
     box-sizing: border-box;
 }
@@ -206,14 +207,15 @@ button:disabled {
 .checkbox-indicator.checked::after {
     content: '';
     position: absolute;
-    left: 0.416rem;
-    top: 0.083rem;
-    width: 0.416rem;
-    height: 0.831rem;
+    left: 0.291rem;  /* 0.416rem * 0.7 */
+    top: 0.058rem;   /* 0.083rem * 0.7 */
+    width: 0.291rem; /* 0.416rem * 0.7 */
+    height: 0.582rem;/* 0.831rem * 0.7 */
     border: solid white;
-    border-width: 0 0.166rem 0.166rem 0;
+    border-width: 0 0.116rem 0.116rem 0; /* 0.166rem * 0.7 */
     transform: rotate(45deg);
 }
+
 
 label {
     margin-top: 1rem;
@@ -226,7 +228,7 @@ input.form-control,
 textarea.form-control {
     border-radius: 0.75rem;
     width: 100%;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.75rem;
     font-size: 1rem;
 }
 
@@ -244,7 +246,6 @@ textarea.form-control {
     width: 100%;
     resize: none;
     box-sizing: border-box;
-    margin-bottom: 2rem;
 }
 
 
@@ -443,7 +444,8 @@ em {
     display: block;
 }
 
-.form-group.error input
+.form-group.error input,
+.form-group.error textarea
 {
     color: #F64B2F;
     border-color: #F64B2F;
@@ -454,6 +456,9 @@ em {
         /* box-shadow: none */
 }
 
+.form-group.error textarea:focus,
+.form-group.error textarea:active,
+.form-group.error textarea:hover,
 .form-group.error input:focus,
 .form-group.error input:hover,
 .form-group.errorinput:active {
