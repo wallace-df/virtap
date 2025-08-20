@@ -324,23 +324,33 @@ function renderCards(step, extra) {
 
         if (extra.newUser === '1') {
             const $form = $(`
-            <div id="contactInfoForm" style="text-align:center; max-width: 400px">
-                <p>Para que você possa receber propostas, complete seus dados abaixo.<p/>
+            <div id="contactInfoForm" style="text-align:left; max-width: 400px">
+                <p class="text-center">Para que você possa receber propostas, complete seus dados abaixo.</p>
 
-                <label for="contactNameInput" class="d-block" style="text-align:left">Nome</label>
-                <input type="text" id="contactNameInput" class="form-control" value="${name}" />
 
-                <label for="contactPhoneInput" class="d-block" style="text-align:left">Whatsapp</label>
-                <input type="tel" id="contactPhoneInput" class="form-control" value="${phone}" placeholder="(99) 99999-9999"  />
+                <div class="form-group">
+                    <label for="contactNameInput" class="d-block" style="text-align:left">Nome</label>
+                    <input type="text" id="contactNameInput" class="form-control" value="${name.substring(0, 30)}" maxlength="30" />
+                    <em>Nome deve ter pelo menos 5 caracteres.</em>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactPhoneInput" class="d-block" style="text-align:left">Whatsapp</label>
+                    <input type="tel" id="contactPhoneInput" class="form-control" value="${phone}" placeholder="(99) 99999-9999"  />
+                    <em>Número incorreto.</em>
+                </div>
 
-                <label for="contactNameEmail" class="d-block" style="text-align:left">E-mail</label>
-                <input type="text" id="contactEmailInput" class="form-control" value="${extra.email}" readonly />
+                <div class="form-group">
+                    <label for="contactNameEmail" class="d-block" style="text-align:left">E-mail</label>
+                    <input type="text" id="contactEmailInput" class="form-control" value="${extra.email}" readonly />
+                </div>
 
             </div>
             `);
 
             $cardsWrapper.append($form);
 
+            $("#contactPhoneInput").find('.form-group').removeClass('error');
 
             intl = window.intlTelInput(document.getElementById('contactPhoneInput'), {
                 autoInsertDialCode: true,
@@ -349,21 +359,35 @@ function renderCards(step, extra) {
                 utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/utils.js",
             });
 
-            $('#contactNameInput').off().on('input', function () {
+            $("#contactNameInput").off().on('blur', function () {
+                let txt = $(this).val();
+                if (txt.trim().length < 5) {
+                    $(this).closest('.form-group').addClass('error');
+                } else {
+                    $(this).closest('.form-group').removeClass('error');
+                }
+            });
+
+            $("#contactPhoneInput").off().on('blur', function () {
+                let number = intl.getNumber();
+                intl.setNumber(number);
+                if (!intl.isValidNumber()) {
+                    $(this).closest('.form-group').addClass('error');
+                } else {
+                    $(this).closest('.form-group').removeClass('error');
+                }
+            });
+
+            $('#contactNameInput').on('input', function () {
                 selectedValues['contact-name'] = $(this).val().trim();
                 updateButtons();
-            }).trigger('input');
+            }).trigger('input').trigger('blur');
 
-            $('#contactPhoneInput').off().on('input', function () {
+            $('#contactPhoneInput').on('input', function () {
                 selectedValues['contact-phone'] = (intl.isValidNumber() ? intl.getNumber() : "")
                 updateButtons();
             }).trigger('input');
 
-
-            $("#contactPhoneInput").on('blur', function () {
-                let number = intl.getNumber();
-                intl.setNumber(number);
-            });
 
 
         } else {
