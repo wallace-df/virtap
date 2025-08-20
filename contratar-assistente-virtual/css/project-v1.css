@@ -1,9 +1,33 @@
+/* html {
+    font-size: 10px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 991px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+
+@media (min-width: 1300px) {
+    html {
+        font-size: 15px;
+    }
+} */
+
 html {
-    font-size: 15px;
+    font-size: clamp(0.8rem, 0.5vw + 0.5rem, 3rem);
 }
 
 .login_area h3 {
     margin: 0 0 2rem 0;
+    font-size: 2.5rem;
 }
 
 .cards-container {
@@ -46,7 +70,7 @@ button:disabled {
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 0.8rem;
-    box-shadow: 0 0.267rem 0.533rem rgba(83, 46, 136, 0.1); 
+    box-shadow: 0 0.267rem 0.533rem rgba(83, 46, 136, 0.1);
     cursor: pointer;
     transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
     text-align: center;
@@ -55,7 +79,7 @@ button:disabled {
     flex-direction: row;
     justify-content: left;
     align-items: center;
-    padding: 1rem; 
+    padding: 1rem;
 }
 
 .card-custom:hover {
@@ -106,12 +130,6 @@ button:disabled {
     font-weight: 700;
     line-height: 1.25;
     color: #532e88;
-}
-
-@media (min-width: 768px) {
-    .step-navigation {
-        flex-direction: row;
-    }
 }
 
 .radio-indicator {
@@ -180,7 +198,7 @@ input.form-control,
 textarea.form-control {
     border-radius: 1rem;
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.5rem 1rem;
     font-size: 1rem;
 }
 
@@ -361,6 +379,9 @@ textarea.form-control {
     display: none !important;
 }
 
+#contactInfoForm p {
+    font-size: 1.25rem;
+}
 .iti {
     display: block;
 }

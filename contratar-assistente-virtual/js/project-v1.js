@@ -273,7 +273,7 @@ function renderCards(step, extra) {
 
         const $form = $(`
                 <div id="projectSummaryForm">
-                    <label for="projectTitleInput"><strong>Título do projeto</strong></label>
+                    <label for="projectTitleInput" style="margin-top: 0"><strong>Título do projeto</strong></label>
                     <input class="form-control" type="text" id="projectTitleInput" value="${titleVal}" maxlength="50" />
                     <label for="projectDescriptionTextarea"><strong>Descrição do projeto</strong></label>
                     <textarea class="form-control" id="projectDescriptionTextarea" rows="11" maxlength="5000">${descVal}</textarea>
