@@ -25,9 +25,37 @@ html {
     font-size: clamp(0.8rem, 0.5vw + 0.5rem, 3rem);
 }
 
+#left {
+    padding: 2rem;
+    height: auto;
+}
+
+#right-container {
+    padding: 0 2rem 2rem 2rem;
+}
+
+
 .login_area h3 {
     margin: 0 0 2rem 0;
-    font-size: 2.5rem;
+    font-size: 2rem;
+}
+
+@media (max-width: 767px) {
+
+    #left {
+        padding: 1rem 1rem 2rem 1rem;
+        height: auto;
+    }
+
+    #right-container {
+        padding: 0 1rem 2rem 1rem;
+    }
+
+    .login_area h3 {
+        font-size: 1.5rem;
+        line-height: 1.15;
+        margin: 0 0 1rem 0;
+    }
 }
 
 .cards-container {
@@ -382,6 +410,7 @@ textarea.form-control {
 #contactInfoForm p {
     font-size: 1.25rem;
 }
+
 .iti {
     display: block;
 }
