@@ -87,35 +87,34 @@ const allSteps = [
     },
     {
         id: 'demandas-pessoais',
-        title: "Quero delegar as seguintes tarefas...",
+        title: "Quero alguém que cuide de...",
         cards: [
-            { value: "organizacao-pessoal", icon: "fa-calendar-check", label: "Organização Pessoal" },
-            { value: "compras-presentes", icon: "fa-shopping-cart", label: "Compras e Presentes" },
-            { value: "viagens-logistica", icon: "fa-plane", label: "Viagens e Logística" },
-            { value: "suporte-administrativo", icon: "fa-file-alt", label: "Suporte Administrativo" },
-            { value: "outros-servicos-pessoais", icon: "fa-star", label: "Outros Serviços Pessoais" },
-        ],
+            { value: "agenda-compromissos", icon: "fa-calendar-check", label: "Compromissos e Agenda Pessoal" },
+            { value: "financeiro-lembretes", icon: "fa-shopping-cart", label: "Pagamentos, Cotações e Lembretes" },
+            { value: "viagens-logistica", icon: "fa-plane", label: "Viagens, Hotéis e Reservas" },
+            { value: "documentacao-seguros", icon: "fa-file-alt", label: "Documentação e Seguros de Veículos" },
+            { value: "tarefas-diarias", icon: "fa-star", label: "Tarefas do Dia a Dia" }],
     },
     {
         id: 'demandas-profissionais',
-        title: "Quero delegar as seguintes tarefas...",
+        title: "Quero alguém para realizar...",
         cards: [
-            { value: "comunicacao-atendimento", icon: "fa-comments", label: "Comunicação e Atendimento" },
-            { value: "gestao-administrativa", icon: "fa-tasks", label: "Gestão Administrativa" },
-            { value: "producao-conteudo", icon: "fa-file-alt", label: "Produção e Gestão de Conteúdo" },
-            { value: "vendas-prospeccao", icon: "fa-chart-line", label: "Vendas e Prospecção" },
-            { value: "logistica-operacoes", icon: "fa-truck", label: "Logística e Operações" },
+            { value: "gestao-comunicacao", icon: "fa-comments", label: "Gestão de Agenda e E-mails" },
+            { value: "suporte-administrativo", icon: "fa-tasks", label: "Suporte Administrativo" },
+            { value: "atendimento-cliente", icon: "fa-file-alt", label: "Atendimento ao Cliente" },
+            { value: "apoio-financeiro", icon: "fa-chart-line", label: "Apoio Financeiro" },
+            { value: "logistica-viagens", icon: "fa-plane", label: "Logística de Viagens e Eventos" }
         ],
     },
     {
         id: 'demandas-pessoais-profissionais',
-        title: "Quero delegar as seguintes tarefas...",
+        title: "Quero alguém que cuide de...",
         cards: [
-            { value: "organizacao-pessoal", icon: "fa-calendar-check", label: "Organização Pessoal" },
+            { value: "agenda-compromissos", icon: "fa-calendar-check", label: "Gestão de Agenda e Compromissos" },
+            { value: "tarefas-diarias", icon: "fa-star", label: "Tarefas Pessoais do Dia a Dia" },
+            { value: "financeiro-lembretes", icon: "fa-shopping-cart", label: "Pagamentos, Finanças e Lembretes" },
             { value: "suporte-administrativo", icon: "fa-file-alt", label: "Suporte Administrativo" },
-            { value: "viagens-logistica", icon: "fa-plane", label: "Viagens e Logística" },
-            { value: "comunicacao-atendimento", icon: "fa-comments", label: "Comunicação e Atendimento" },
-            { value: "compras-presentes", icon: "fa-shopping-cart", label: "Compras e Presentes" },
+            { value: "viagens-reservas", icon: "fa-plane", label: "Viagens, Hotéis e Reservas" }
         ],
     },
     {
@@ -123,8 +122,8 @@ const allSteps = [
         title: "Volume de trabalho",
         cards: [
             { value: "full-time", icon: "fa-clock", label: "Full-time (tempo integral)" },
-            { value: "part-time", icon: "fa-hourglass-half", label: "Algumas horas" },
-            { value: "few-hours", icon: "fa-calendar-day", label: "Não tenho certeza" },
+            { value: "few-hours", icon: "fa-hourglass-half", label: "Algumas horas" },
+            { value: "not-sure", icon: "fa-calendar-day", label: "Não tenho certeza" },
         ],
     },
     {
@@ -198,7 +197,6 @@ function saveProjectDebounced() {
 }
 
 
-// ====== Auto-generate project title & description ======
 function generateProjectTitle() {
     const type = selectedValues["tipo-demanda"];
     let typeText = type === "personal" ? "Assistente Pessoal" :
@@ -209,8 +207,6 @@ function generateProjectTitle() {
     let vol = selectedValues["volume-trabalho"];
     if (vol === 'full-time') {
         period = ' - Full-time';
-    } else if (vol === 'part-time') {
-        period = ' - Meio-período';
     }
 
     return `${typeText}${period}`;
@@ -218,17 +214,14 @@ function generateProjectTitle() {
 
 function generateProjectDescription() {
     const tasks = [];
-    for (const step of activeSteps) {
-        if (step.cards) {
-            const val = selectedValues[step.id];
-            if (val) {
-                if (Array.isArray(val)) {
-                    tasks.push(...val);
-                } else {
-                    tasks.push(val);
-                }
-            }
-        }
+    const step = activeSteps[1];
+    if (step.cards) {
+        const values = selectedValues[step.id];
+        values.forEach(val => {
+            let description = step.cards.find(v => v.value === val);
+            tasks.push(description.label);
+
+        });
     }
 
     return `Preciso de alguém para cuidar das seguintes tarefas:\n\n• ${tasks.join("\n• ")}.`;
