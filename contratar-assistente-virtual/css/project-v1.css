@@ -392,7 +392,8 @@ textarea.form-control {
 
 .cards-container .small {
     font-size: 1rem;
-    color: #7d99ff;
+    color: #81CFD3;
+    font-weight: normal;
 }
 
 #right-container.full {

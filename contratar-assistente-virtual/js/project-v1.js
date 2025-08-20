@@ -272,7 +272,7 @@ function renderCards(step, extra) {
                         <em>Nome deve ter pelo menos 10 caracteres.</em>
                     </div>
                     <div class="form-group">
-                        <label for="projectDescriptionTextarea"><strong>Descrição do projeto</strong></label>
+                        <label for="projectDescriptionTextarea"><strong>Descrição do projeto <span class="small">(complemente ou edite seu projeto)</span></strong></label>
                         <textarea class="form-control" id="projectDescriptionTextarea" rows="11" maxlength="5000">${descVal}</textarea>
                         <em>Descrição deve ter pelo menos 50 caracteres.</em>
                     </div>
