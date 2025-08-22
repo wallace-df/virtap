@@ -171,3 +171,14 @@ const consentDate = localStorage.getItem('cookie-consent-landing-pt');
 if (consentDate === undefined || consentDate === null) {
   document.getElementById('cookie-banner').style.display = 'block';
 }
+
+
+const emailLink = document.getElementById("email-link");
+const popover = new bootstrap.Popover(emailLink);
+
+emailLink.addEventListener("click", () => {
+    navigator.clipboard.writeText(emailLink.textContent).then(() => {
+        popover.show();
+        setTimeout(() => popover.hide(), 1500);
+    });
+});

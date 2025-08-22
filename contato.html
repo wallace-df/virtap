@@ -8,14 +8,64 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex, nofollow">
 
-    <title>Virtap | Página não encontrada</title>
+    <title>Virtap | Contato</title>
 
     <link rel="stylesheet" href="/css/vendor-main-v1.css">
     <link rel="stylesheet" href="/css/main-v1.css">
 
     <link href="/favicon.svg" type="image/svg+xml" rel="icon" />
     <link href="/favicon.png" type="image/png" rel="icon" />
-  </head>
+    <style>
+        .contact.card {
+            margin-top: 4rem;
+            border-radius: 4rem;
+            padding: 2rem;
+            text-align: center;
+            border: 0.1rem solid #f2eafd;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.5rem;
+
+        }
+
+        .contact.card img {
+            width: 3rem;
+        }
+
+
+        .contact_body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Alinha horizontalmente */
+            align-items: center;
+
+        }
+
+        .contact_body .wrapper {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+        }
+
+        .contact_body .wrapper p {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .contact_body a {
+            color: #333;
+        }
+
+        .contact_body a:hover {
+            color: #532e88;
+        }
+    </style>
+</head>
 
 <body>
     <!-- header-area -->
@@ -53,22 +103,20 @@
     <!-- virtap-area -->
     <section class="virtap-area mt-5">
         <div class="main-container mt-5">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="virtap-text-item text-center">
-                        <div class="virtap-title title">
-                            <h1>Página não encontrada</h1>
-                        </div>
-                        <a class="mt-3 fs-3" style="display: block" href="/"><i class="fa fa-home"></i> Voltar para
-                            homepage</a>
-                    </div>
-                </div>
-                <div class="col-lg-6" data-aos="fade-left">
-                    <div class="virtap-image-item" style="text-align: right">
-                        <img src="/img/nao-encontrada.jpg" alt="Não encontrada">
-                        <a
-                            href="https://www.freepik.com/free-vector/error-404-concept-landing-page_4660894.htm#query=404&position=2&from_view=search&track=sph">Image
-                            by pikisuperstar</a> on Freepik
+            <h1 class="title text-center" style="margin-top: 7rem">Entre com contato com a Virtap</h1>
+            <div class="contact card">
+                <div class="contact_body">
+                    <div class="wrapper">
+
+                        <p><img src="/img/notification_mail.png">
+
+                            <a href="#" id="email" style="cursor:pointer;" data-bs-toggle="popover" data-bs-trigger="manual"
+                                data-bs-placement="top" data-bs-content="Copiado!">
+                                contato@virtap.com.br
+                            </a>
+                        </p>
+                        <p><img src="/img/logos_whatsapp-icon.svg"> <a href="https://wa.me/+5548988089062"
+                                target="_blank">(48) 98808-9062</a></p>
                     </div>
                 </div>
             </div>
@@ -79,18 +127,17 @@
         <div class="main-container">
             <div class="footer-title">
                 <a class="footer-logo" href="#"><img src="/img/logo.png" alt="Logo Virtap"></a>
-                <p>A Virtap é um hub de negócios e educação que forma profissionais da Assistência Virtual e os conecta
-                    a clientes.</p>
+                <p>A Virtap é um hub especializado em formar e conectar Assistentes Virtuais qualificadas com clientes
+                    que desejam suporte personalizado e de qualidade.</p>
             </div>
             <div class="row">
                 <div class="offset-md-2 col-md-4 col-5 offset-1">
                     <div class="footer-item">
                         <h6 class="footer-item-heading">Sobre</h6>
                         <ul class="footer-item-ul">
-                            <li><a rel="nofollow" href="/contato">Contato</a></li>
                             <li><a href="https://blog.virtap.com.br/" target="_blank">Blog</a></li>
-                            <li><a rel="nofollow" href="/termos" target="_blank">Termos & condições</a></li>
-                            <li><a rel="nofollow" href="/privacidade" target="_blank">Política de privacidade</a></li>
+                            <li><a href="/termos" target="_blank">Termos & condições</a></li>
+                            <li><a href="/privacidade" target="_blank">Política de privacidade</a></li>
                         </ul>
                     </div>
                 </div>
@@ -114,6 +161,17 @@
     <!-- section scroling btn  -->
     <a class="footer-button-scrol" href="/"><i class="fal fa-chevron-up"></i></a>
     <script src="/js/main-v2.js"></script>
+    <script>
+        const email = document.getElementById("email");
+        const popover = new bootstrap.Popover(email);
+
+        email.addEventListener("click", () => {
+            navigator.clipboard.writeText(email.textContent).then(() => {
+                popover.show();
+                setTimeout(() => popover.hide(), 1500);
+            });
+        });
+    </script>
 </body>
 
 </html>

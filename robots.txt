@@ -19,6 +19,7 @@ Disallow: /solicitar-nova-senha.html
 Disallow: /verificar-conta.html
 Disallow: /termos.html
 Disallow: /privacidade.html
+Disallow: /contato.html
 
 Disallow: /contratar-assistente-virtual/cadastrar.html
 Disallow: /contratar-assistente-virtual/login.html
@@ -45,6 +46,7 @@ Disallow: /solicitar-nova-senha
 Disallow: /verificar-conta
 Disallow: /termos
 Disallow: /privacidade
+Disallow: /contato
 
 Disallow: /contratar-assistente-virtual/cadastrar
 Disallow: /contratar-assistente-virtual/login
