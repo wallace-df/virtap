@@ -502,11 +502,11 @@ function renderStep(index, fromNextButton = false, extra) {
 
     const $cardsWrapper = $('#cardsWrapper');
     setButtonsDisabled(true);
-    $("#stepTitle").css('visibility','hidden');
+    $("#stepTitle").css('visibility', 'hidden');
     $cardsWrapper.fadeOut(150, () => {
         renderCards(step, extra);
         $cardsWrapper.fadeIn(150, () => {
-            $("#stepTitle").css('visibility','visible');
+            $("#stepTitle").css('visibility', 'visible');
             setButtonsDisabled(false);
             updateButtons();
         });
@@ -648,7 +648,15 @@ $('#btnNext').on('click', async () => {
             if (data.projectId) {
                 url += "?pid=" + data.projectId
             }
-            location.href = url;
+            let callback = function () {
+                location.href = url;
+            };
+
+            gtag('event', 'sign_up_client', {
+                'send_to': 'G-4ZFMG1F0XK',
+                'event_callback': callback
+            });
+            setTimeout(callback, 5000);
         } catch (err) {
             console.log(err);
             setContactInputsDisabled(false);
