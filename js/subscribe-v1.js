@@ -31,7 +31,7 @@ function handleSuccess(response) {
         $("#novo-membro-ja-logado-noredir").find('em').text(response.email);
         $("#novo-membro-ja-logado-noredir").find('a').attr('href', getNextWithLogin());
       }
-    }
+    }  
   }
 }
 
