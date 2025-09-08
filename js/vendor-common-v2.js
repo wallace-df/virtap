@@ -23103,7 +23103,7 @@ function getParameterByName(name, url) {
 
 function getEyeSVG(visible) {
     return visible
-      ? `<svg id="toggleSenha" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+        ? `<svg id="toggleSenha" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                stroke-width="1.5" stroke="currentColor"
                class="eye-icon" style="width: 24px; height: 24px; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
            <path stroke-linecap="round" stroke-linejoin="round"
@@ -23111,7 +23111,7 @@ function getEyeSVG(visible) {
            <path stroke-linecap="round" stroke-linejoin="round"
                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
          </svg>`
-      : `<svg id="toggleSenha" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+        : `<svg id="toggleSenha" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                stroke-width="1.5" stroke="currentColor"
                class="eye-icon" style="width: 24px; height: 24px; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
            <path stroke-linecap="round" stroke-linejoin="round"
@@ -23119,8 +23119,8 @@ function getEyeSVG(visible) {
                     c1.584 0 3.073-.367 4.408-1.004M6.32 6.321C7.87 5.217 9.762 4.5 11.625 4.5
                     c6 0 9.75 6.75 9.75 6.75s-.235.564-.722 1.293M3 3l18 18" />
          </svg>`;
-  }
-  
+}
+
 function getNullableValue(val) {
     if (val) {
         val = val.trim();
@@ -23608,6 +23608,15 @@ function updatePaymentStatus(method) {
 
             let qrcode = new QRCode({ content: paymentDetails.qrcode, join: true });
             document.getElementById("pix-qrcode").innerHTML = qrcode.svg();
+            $("#copy-pix-btn").data('pix-code', paymentDetails.qrcode);
+            $("#copy-pix-btn").off().on('click', async function () {
+                try {
+                    let text = $(this).data('pix-code');
+                    await navigator.clipboard.writeText(text);
+                } catch (err) {
+                }
+            });
+
             if (window.detectPaymentInterval === null && !window.paymentDetected) {
                 window.detectPaymentInterval = setInterval(async function () {
                     if (window.detectPaymentInterval === null) {
@@ -23827,8 +23836,8 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
     let $card_expiration = $("#card-expiration");
     let $card_cvc = $("#card-cvc");
 
-       // Name
-       $name.parent().data('get-field', function () {
+    // Name
+    $name.parent().data('get-field', function () {
         let name = $name.val().trim();
         if (!validateName(name)) {
             $name.parent().addClass('error');

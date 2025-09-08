@@ -166,7 +166,12 @@
             <div id="pix-details" style="display: none">
                 <p><strong>Para pagar, escaneie o QR Code abaixo:</strong></p>
                 <p id="pix-qrcode" class="mt-2 text-center"></p>
-                <p class="mt-2 text-muted" style="line-height: 1.25;">Aguardando o pagamento... Assim que confirmado,
+                <div class="text-center mb-3">
+                    <a class="btn bg-secondary" id="copy-pix-btn" data-bs-toggle="popover" data-bs-content="Copiado!"
+                        data-bs-trigger="manual" data-bs-placement="top">Copiar código PIX</a>
+                </div>
+                <p class="mt-2 text-muted text-center" style="line-height: 1.25;">Aguardando o pagamento...<br /> Assim
+                    que confirmado,
                     seu acesso será liberado e você receberá um e-mail de confirmação.</p>
             </div>
         </div>

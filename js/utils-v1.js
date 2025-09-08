@@ -497,6 +497,7 @@ function updatePaymentStatus(method) {
 
             let qrcode = new QRCode({ content: paymentDetails.qrcode, join: true });
             document.getElementById("pix-qrcode").innerHTML = qrcode.svg();
+            $("#copy-pix-btn").data('pix-code',paymentDetails.qrcode);
         }
     } else {
         $("#submit-btn").show();
