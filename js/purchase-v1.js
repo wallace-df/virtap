@@ -130,7 +130,7 @@ function init() {
 
   function loadPaymentForm() {
     $.ajax({
-      url: window.apiURL + '/purchase?course=' + course,
+      url: window.apiURL + '/purchase?course=' + course + "&rsrc=" + (getParameterByName('rsrc') || ''),
       processData: false,
       contentType: false,
       type: 'GET',
@@ -144,7 +144,7 @@ function init() {
         let initialDetails = response.responseData;
         initialDetails.productType = 'course';
         initialDetails.productId = course;
-        showPaymentForm(initialDetails, () => `Virtap | ${courseName} | Comprar`, () => 'Comprar agora', (fd) => { fd.append("course", course) }, 'purchase', handleSuccess, handleError);
+        showPaymentForm(initialDetails, () => `Virtap | ${courseName} | Comprar`, () => 'Comprar agora', (fd) => { fd.append("course", course) }, 'purchase' + "?rsrc=" + (getParameterByName('rsrc') || ''), handleSuccess, handleError);
         if (course === 'form-ap') {
           $('h2').text(`Você está adquirindo a Formação AExpert`);
         }
