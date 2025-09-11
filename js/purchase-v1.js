@@ -86,6 +86,12 @@ function handleError(response, loading) {
 
         showGenericError = false;
       }
+    } else if (response.errorCode === 'INVALID_RESOURCE_TOKEN') {
+      if (loading) {
+        $("#loading").hide();
+      }
+      $("#invalid-link").show();
+      showGenericError = false;
     }
   }
 
@@ -106,7 +112,9 @@ function handleError(response, loading) {
 function init() {
   course = getCourse();
   let courseName;
-  if (course === 'form-ap') {
+  if (course === 'form-av') {
+    courseName = 'Formação AV';
+  } else if (course === 'form-ap') {
     courseName = 'Formação AExpert';
   } else {
     console.log('Invalid course: ', course);
@@ -145,7 +153,9 @@ function init() {
         initialDetails.productType = 'course';
         initialDetails.productId = course;
         showPaymentForm(initialDetails, () => `Virtap | ${courseName} | Comprar`, () => 'Comprar agora', (fd) => { fd.append("course", course) }, 'purchase' + "?rsrc=" + (getParameterByName('rsrc') || ''), handleSuccess, handleError);
-        if (course === 'form-ap') {
+        if (course === 'form-av') {
+          $('h2').text(`Você está adquirindo a Formação Assistente Virtual`);
+        } else if(course === 'form-ap') {
           $('h2').text(`Você está adquirindo a Formação AExpert`);
         }
       }
