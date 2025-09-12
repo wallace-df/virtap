@@ -46,7 +46,6 @@
         .bpFabWrapper {
             bottom: 5rem !important;
         }
-
     </style>
 </head>
 
@@ -99,8 +98,8 @@
                         administrativas e facilitar o seu dia a dia.
                     </h2>
                     <div class="landing-hero-btn-area">
-                        <a rel="nofollow" class="landing-hero-btn" href="./postar-projeto"
-                            title="Encontre um talento" target="_blank">Encontre um talento</a>
+                        <a rel="nofollow" class="landing-hero-btn" href="./postar-projeto" title="Encontre um talento"
+                            target="_blank" data-post-link>Encontre um talento</a>
                     </div>
                 </div>
                 <div class="landing-hero-img" data-aos="fade-left">
@@ -340,7 +339,7 @@
                 </div>
             </div>
             <a rel="nofollow" class="virtap-funciona-btn" href="./postar-projeto" target="_blank"
-                title="Encontre um talento">Poste seu projeto</a>
+                title="Encontre um talento" data-post-link>Poste seu projeto</a>
         </div>
     </section>
 
@@ -381,7 +380,7 @@
             </div>
 
             <a rel="nofollow" class="virtap-funciona-btn" href="./postar-projeto" target="_blank"
-                title="Encontre um talento">Encontre um
+                title="Encontre um talento" data-post-link>Encontre um
                 talento</a>
         </div>
     </section>
@@ -407,8 +406,8 @@
                             <li>Agendamento de compromissos</li>
                             <li>Ajuda na escolha de presentes</li>
                         </ul>
-                        <a rel="nofollow" class="virtap-funciona-btn" href="./postar-projeto/" target="_blank"
-                            title="Encontre um talento">Quero contratar</a>
+                        <a rel="nofollow" class="virtap-funciona-btn" href="./postar-projeto" target="_blank"
+                            title="Encontre um talento" data-post-link>Solicitar assistente</a>
                     </div>
                 </div>
                 <div class="grid-item" data-aos="zoom-in-up">
@@ -438,7 +437,7 @@
                             <li>Tarefas administrativas no geral</li>
                         </ul>
                         <a rel="nofollow" class="virtap-funciona-btn" href="./postar-projeto" target="_blank"
-                            title="Encontre um talento">Quero contratar</a>
+                            title="Encontre um talento" data-post-link>Solicitar assistente</a>
                     </div>
                 </div>
 
@@ -458,7 +457,7 @@
                             <li>Logística de viagens</li>
                         </ul>
                         <a rel="nofollow" class="virtap-funciona-btn" href="./postar-projeto" target="_blank"
-                            title="Encontre um talento">Quero contratar</a>
+                            title="Encontre um talento" data-post-link>Solicitar assistente</a>
                     </div>
                 </div>
                 <div class="grid-item" data-aos="zoom-in-up">
@@ -488,7 +487,7 @@
                             <li>Emissão e preenchimento de documentos</li>
                         </ul>
                         <a rel="nofollow" class="virtap-funciona-btn" href="./postar-projeto" target="_blank"
-                            title="Encontre um talento">Quero contratar</a>
+                            title="Encontre um talento" data-post-link>Solicitar assistente</a>
                     </div>
                 </div>
             </div>
@@ -556,7 +555,7 @@
             </div>
 
             <a rel="nofollow" class="virtap-funciona-btn" href="./postar-projeto" target="_blank"
-                title="Encontre um talento">Poste seu projeto</a>
+                title="Encontre um talento" data-post-link>Poste seu projeto</a>
 
         </div>
     </section>
@@ -703,7 +702,31 @@
 
     <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
     <script src="https://files.bpcontent.cloud/2025/09/07/16/20250907162036-XAYOM7LK.js" defer></script>
-    
+    <script>
+        const currentParams = new URLSearchParams(window.location.search);
+        const elements = document.querySelectorAll("[data-post-link]");
+
+        // Verifica se a URL atual tem parâmetros
+        if (currentParams.toString()) {
+            elements.forEach(element => {
+                // Pega o href existente do elemento
+                const existingHref = element.href;
+
+                if (existingHref) {
+                    // Cria um novo objeto URL com base no href existente
+                    const url = new URL(existingHref, window.location.origin);
+
+                    // Anexa os parâmetros da URL atual no href
+                    currentParams.forEach((value, key) => {
+                        url.searchParams.set(key, value);
+                    });
+
+                    // Atualiza o href do elemento com a nova URL completa
+                    element.href = url.toString();
+                }
+            });
+        }
+    </script>
 
 </body>
 
