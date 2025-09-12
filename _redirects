@@ -6,5 +6,11 @@
 /curso-gratuito /curso-assistente-virtual 301
 /live/do-zero-a-assistencia-pessoal /formacoes/assistencia-pessoal 301
 /live/do-zero-a-assistencia-pessoal/ /formacoes/assistencia-pessoal 301
-/o-que-fazemos /contratar-assistente-virtual
-/o-que-fazemos/ /contratar-assistente-virtual
+/o-que-fazemos /contratar-assistente-virtual  301
+/o-que-fazemos/ /contratar-assistente-virtual  301
+/ajuda /contato  301
+/ajuda/ /contato  301
+/cookie-policy /privacidade  301
+/cookie-policy/ /privacidade  301
+/feed https://blog.virtap.com.br/feed/ 301
+/feed/ https://blog.virtap.com.br/feed/ 301
