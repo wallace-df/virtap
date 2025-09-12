@@ -31,7 +31,7 @@ function handleSuccess(response) {
         $("#novo-membro-ja-logado-noredir").find('em').text(response.email);
         $("#novo-membro-ja-logado-noredir").find('a').attr('href', getNextWithLogin());
       }
-    }  
+    }
   }
 }
 
@@ -95,7 +95,12 @@ function handleError(response, loading) {
       }
       $("#starter-plan").show();
       showGenericError = false;
-
+    } else if (response.errorCode === 'INVALID_RESOURCE_TOKEN') {
+      if (loading) {
+        $("#loading").hide();
+      }
+      $("#invalid-link").show();
+      showGenericError = false;
     }
   }
 
@@ -138,7 +143,7 @@ function init() {
 
   function loadPaymentForm() {
     $.ajax({
-      url: window.apiURL + '/subscribe?plan=' + plans[target_plan],
+      url: window.apiURL + '/subscribe?plan=' + plans[target_plan] + "&rsrc=" + (getParameterByName('rsrc') || ''),
       processData: false,
       contentType: false,
       type: 'GET',
@@ -152,7 +157,7 @@ function init() {
         let initialDetails = response.responseData;
         initialDetails.productType = 'subscription';
         initialDetails.productId = target_plan;
-        showPaymentForm(initialDetails, () => 'Virtap | Assinar Virtap Club', () => 'Assinar Virtap Club', (fd) => { fd.append("target_plan", plans[target_plan]) }, 'subscribe', handleSuccess, handleError);
+        showPaymentForm(initialDetails, () => 'Virtap | Assinar Virtap Club', () => 'Assinar Virtap Club', (fd) => { fd.append("target_plan", plans[target_plan]) }, 'subscribe' + "?rsrc=" + (getParameterByName('rsrc') || ''), handleSuccess, handleError);
       }
     });
   }
