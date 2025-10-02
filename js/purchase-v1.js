@@ -1,11 +1,11 @@
-let course;
+let productsIdentifier;
+let purchaseDetails;
+
 function getNextWithLogin() {
   let next = getParameterByName('next');
   let url = '/login';
   if (next && next.trim().length > 0) {
     url += '?next=' + next;
-  } else {
-    url += '?next=curso/' + course
   }
   return url;
 }
@@ -21,8 +21,6 @@ function redirectToNext() {
       url += '/' + next;
 
     }
-  } else {
-    url += '/curso/' + course
   }
   setTimeout(() => document.location.href = url, 4000)
 }
@@ -44,7 +42,7 @@ function handleSuccess(response) {
       $("#novo-membro-ja-logado-noredir").find('a').attr('href', getNextWithLogin());
     }
   }
-  gtag('event', 'purchased_course_' + course, {
+  gtag('event', 'purchased', {
     'send_to': 'G-4ZFMG1F0XK',
   });
 }
@@ -110,17 +108,7 @@ function handleError(response, loading) {
 }
 
 function init() {
-  course = getCourse();
-  let courseName;
-  if (course === 'form-av') {
-    courseName = 'Formação AV';
-  } else if (course === 'form-ap') {
-    courseName = 'Formação AExpert';
-  } else {
-    console.log('Invalid course: ', course);
-    handleError(null, true);
-    return;
-  }
+  productsIdentifier = getParameterByName('p') || '';
 
   function loadTemplate() {
     $.ajax({
@@ -138,7 +126,7 @@ function init() {
 
   function loadPaymentForm() {
     $.ajax({
-      url: window.apiURL + '/purchase?course=' + course + "&rsrc=" + (getParameterByName('rsrc') || ''),
+      url: window.apiURL + '/purchase?p=' + productsIdentifier + "&rsrc=" + (getParameterByName('rsrc') || ''),
       processData: false,
       contentType: false,
       type: 'GET',
@@ -150,14 +138,10 @@ function init() {
       },
       success: function (response) {
         let initialDetails = response.responseData;
-        initialDetails.productType = 'course';
-        initialDetails.productId = course;
-        showPaymentForm(initialDetails, () => `Virtap | ${courseName} | Comprar`, () => 'Comprar agora', (fd) => { fd.append("course", course) }, 'purchase' + "?rsrc=" + (getParameterByName('rsrc') || ''), handleSuccess, handleError);
-        if (course === 'form-av') {
-          $('h2').text(`Você está adquirindo a Formação Assistente Virtual`);
-        } else if(course === 'form-ap') {
-          $('h2').text(`Você está adquirindo a Formação AExpert`);
-        }
+        initialDetails.payment_config = initialDetails.purchase_details.paymentConfig['vindi'];
+        showPaymentForm(initialDetails, () => `Virtap | Comprar`, () => 'Comprar agora', (fd) => { }, 'purchase?p=' + (productsIdentifier || '') + "&rsrc=" + (getParameterByName('rsrc') || ''), handleSuccess, handleError);
+
+        $('h2').text(`Você está adquirindo: ${JSON.stringify(initialDetails.purchase_details.orderItems)}.`);
       }
     });
   }

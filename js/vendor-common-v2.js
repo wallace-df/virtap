@@ -23660,8 +23660,7 @@ function updatePaymentStatus(method) {
 }
 
 function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepareFormDataFunc, purchaseEndpoint, successHandler, errorHandler) {
-    window.productType = initialDetails.productType;
-    window.productId = initialDetails.productId;
+    window.orderItems = initialDetails.purchase_details.orderItems;
     window.successHandler = successHandler;
 
     let hasEmail = (initialDetails.email && initialDetails.email.trim().length > 0 ? true : false);

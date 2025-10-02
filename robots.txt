@@ -8,6 +8,7 @@ Disallow: /certificado-gratuito.html
 Disallow: /certificado-registrado.html
 Disallow: /certificado-ja-registrado.html
 Disallow: /comprar-curso.html
+Disallow: /comprar.html
 Disallow: /espera-confirmada.html
 Disallow: /lista-de-espera.html
 Disallow: /login.html
@@ -33,6 +34,7 @@ Disallow: /curso-gratuito
 Disallow: /certificado-gratuito
 Disallow: /certificado-registrado
 Disallow: /certificado-ja-registrado
+Disallow: /comprar
 Disallow: /comprar-curso
 Disallow: /espera-confirmada
 Disallow: /lista-de-espera
