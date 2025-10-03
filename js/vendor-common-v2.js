@@ -23633,8 +23633,7 @@ function updatePaymentStatus(method) {
                             credentials: 'include',
                             body: JSON.stringify({
                                 email: $("#email").val(),
-                                productType: window.productType,
-                                productId: window.productId
+                                orderId: window.orderId
                             })
                         });
 
