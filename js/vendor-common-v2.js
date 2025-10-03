@@ -24040,7 +24040,6 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
         // Prevent multiple form submissions
         if (submitBtn.disabled || !ready || window.paymentDetected) {
-            alert("blocked hehe");
             return;
         }
 
@@ -24118,13 +24117,18 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
                     let invoice = data.responseData.invoice;
                     if (!invoice) {
-                        throw new Error("Failure getting invoice details.");
+                        throw new Error("Failure getting invoice.");
                     }
                     let details = invoice.details;
                     if (!details) {
                         throw new Error("Failure getting invoice details.");
                     }
+                    let orderId = data.responseData.orderId;
+                    if (!orderId) {
+                        throw new Error("Failure getting order ID.");
+                    }
 
+                    window.orderId = orderId;
                     let paymentMethod = details.payment_method;
                     if (paymentMethod === "boleto") {
                         let slip = details.slip;
@@ -24139,6 +24143,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
                         window.activePayments['boleto'] = {
                             barcode: typeable_barcode
                         };
+                        window.orderId = orderId;
                         updatePaymentStatus('boleto');
                     } else if (paymentMethod === "pix") {
                         let pix = details.pix;
