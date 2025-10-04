@@ -84,7 +84,14 @@ function handleError(response, loading) {
 
         showGenericError = false;
       }
-    } else if (response.errorCode === 'INVALID_RESOURCE_TOKEN') {
+    } else if (response.errorCode === 'STARTER_PLAN') {
+      if (loading) {
+        $("#loading").hide();
+      }
+      $("#starter-plan").show();
+      showGenericError = false;
+    }    
+    else if (response.errorCode === 'INVALID_RESOURCE_TOKEN') {
       if (loading) {
         $("#loading").hide();
       }
