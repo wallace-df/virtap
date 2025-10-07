@@ -148,7 +148,7 @@ function init() {
         initialDetails.payment_config = initialDetails.purchase_details.paymentConfig['vindi'];
         showPaymentForm(initialDetails, () => `Virtap | Comprar`, () => 'Comprar agora', (fd) => { }, 'purchase?p=' + (productsIdentifier || '') + "&rsrc=" + (getParameterByName('rsrc') || ''), handleSuccess, handleError);
 
-        $('h2').text(`Você está adquirindo: ${JSON.stringify(initialDetails.purchase_details.orderItems)}.`);
+        $('h2').text(`Você está adquirindo: ${JSON.stringify(initialDetails.purchase_details.orderDetails.details.reference)}.`);
       }
     });
   }
