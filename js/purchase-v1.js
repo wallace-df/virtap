@@ -83,8 +83,13 @@ function handleError(response, loading) {
         }
       } else {
         if (loading) {
-          $("#loading-error").find('h1').text('Você já tem parte desse combo');
-          $("#loading-error").find('p').html('Você já possui acesso a um ou mais produtos deste combo.<br/>Entre em contato com o suporte para obter condições especiais');
+          showProduct(response.errorData.orderReference);
+          $(".sign_up").show();
+          $(".logo-img").hide();
+          $("#loading").hide();
+          $("#loading-error").hide();
+          showGenericError = false;
+          $("#access-conflict").show().find('strong').text('Compra não disponível');
         } else {
           showGenericError = false;
           $("#access-conflict").show();
@@ -167,6 +172,10 @@ function productName(orderRef) {
   }
 }
 
+function showProduct(orderRef) {
+  $('h2').html(`Você está adquirindo: <br/><br/>${productName(orderRef)}`);
+}
+
 function init() {
   productsIdentifier = getParameterByName('p') || '';
 
@@ -200,7 +209,7 @@ function init() {
         let initialDetails = response.responseData;
 
         try {
-          $('h2').html(`Você está adquirindo: <br/><br/>${productName(initialDetails.purchase_details.orderDetails.reference)}`);
+          showProduct(initialDetails.purchase_details.orderDetails.reference);
           initialDetails.payment_config = initialDetails.purchase_details.paymentConfig['vindi'];
           showPaymentForm(initialDetails, () => `Virtap | Comprar`, () => 'Comprar agora', (fd) => { }, 'purchase?p=' + (productsIdentifier || '') + "&rsrc=" + (getParameterByName('rsrc') || ''), handleSuccess, handleError);
           $("#loading").hide();
