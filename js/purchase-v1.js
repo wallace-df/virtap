@@ -28,18 +28,19 @@ function redirectToNext() {
 function handleSuccess(response) {
   $(".sign_up").remove();
   $("body").addClass("box-container");
+  $(".logo-img").show();
   if (response.loggedIn) {
-    $("#novo-membro-redir").show();
+    $("#compra-feita-redir").show();
     redirectToNext();
   } else {
     if (!response.has_logged_in) {
-      $("#novo-membro-nunca-logado-noredir").show();
-      $("#novo-membro-nunca-logado-noredir").find('em').text(response.email);
-      $("#novo-membro-nunca-logado-noredir").find('a').attr('href', getNextWithLogin());
+      $("#compra-feita-acesso-enviado").show();
+      $("#compra-feita-acesso-enviado").find('em').text(response.email);
+      $("#compra-feita-acesso-enviado").find('a').attr('href', getNextWithLogin());
     } else {
-      $("#novo-membro-ja-logado-noredir").show();
-      $("#novo-membro-ja-logado-noredir").find('em').text(response.email);
-      $("#novo-membro-ja-logado-noredir").find('a').attr('href', getNextWithLogin());
+      $("#compra-feita-no-redir").show();
+      $("#compra-feita-no-redir").find('em').text(response.email);
+      $("#compra-feita-no-redir").find('a').attr('href', getNextWithLogin());
     }
   }
   gtag('event', 'purchased', {
@@ -53,65 +54,117 @@ function handleError(response, loading) {
   let showGenericError = true;
 
   if (response) {
-    if (response.errorCode === 'ALREADY_PURCHASED') {
-      $(".sign_up").remove();
-      $("body").addClass("box-container");
-      showGenericError = false;
-      if (response.errorData.loggedIn || loading) {
-        $("#membro-existente-redir").show();
-        redirectToNext();
+    if (response.errorCode === 'ALREADY_PURCHASED' || response.errorCode === 'ALREADY_SUBSCRIBED') {
+      let orderItems = null;
+      if (response.errorData) {
+        orderItems = response.errorData.orderItems || [];
+      }
+
+      if (orderItems.length === 1) {
+        $(".sign_up").remove();
+        $(".logo-img").show();
+        $("#loading").hide();
+        $("#loading-error").hide();
+        $("body").addClass("box-container");
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'auto'
+        });
+        showGenericError = false;
+
+        if ((response.errorData.loggedIn || loading)) {
+          $("#acesso-ja-liberado-redir").show();
+          redirectToNext();
+        } else {
+          $("#acesso-ja-liberado-no-redir").show();
+          $("#acesso-ja-liberado-no-redir").find('em').text(response.errorData.email);
+          $("#acesso-ja-liberado-no-redir").find('a').attr('href', getNextWithLogin());
+        }
       } else {
-        $("#membro-existente-noredir").show();
-        $("#membro-existente-noredir").find('em').text(response.errorData.email);
-        $("#membro-existente-noredir").find('a').attr('href', getNextWithLogin());
+        if (loading) {
+          $("#loading-error").find('h1').text('Você já tem parte desse combo');
+          $("#loading-error").find('p').html('Você já possui acesso a um ou mais produtos deste combo.<br/>Entre em contato com o suporte para obter condições especiais');
+        } else {
+          showGenericError = false;
+          $("#access-conflict").show();
+        }
       }
 
     } else if (response.errorCode === 'INVALID_ASSISTANT_STATUS') {
       if (response.errorData.status === 1) {
         if (loading) {
-          $("#loading").hide();
+          // ok
+          $("#loading-error").find('h1').text('Seu cadastro ainda está em análise');
+          $("#loading-error").find('p').text('Por favor, aguarde a aprovação do seu cadastro.');
+        } else {
+          // ok
+          $("#under-review-profile").show();
+          $("#under-review-profile").find('[data-email]').text(response.errorData.email).show();
+          showGenericError = false;
         }
-        $("#under-review-profile").show();
-        $("#under-review-profile").find('[data-email]').text(response.errorData.email).show();
-
-        showGenericError = false;
       } else if (response.errorData.status === 3) {
         if (loading) {
-          $("#loading").hide();
+          // ok
+          $("#loading-error").find('h1').text('Seu cadastro foi desativado');
+          $("#loading-error").find('p').text('Por favor, entre em contato com o suporte.');
+        } else {
+          // ok
+          $("#inactive-profile").show();
+          $("#inactive-profile").find('[data-email]').text(response.errorData.email).show();
+          showGenericError = false;
         }
-        $("#inactive-profile").show();
-        $("#inactive-profile").find('[data-email]').text(response.errorData.email).show();
-
-        showGenericError = false;
       }
     } else if (response.errorCode === 'STARTER_PLAN') {
       if (loading) {
-        $("#loading").hide();
+        // ok
+        $("#loading-error").find('h1').text('Você está no plano Starter');
+        $("#loading-error").find('p').text('Por favor, solicite o upgrade com o suporte.');
+      } else {
+        // ok
+        $("#starter-plan").show();
+        showGenericError = false;
       }
-      $("#starter-plan").show();
-      showGenericError = false;
-    }    
-    else if (response.errorCode === 'INVALID_RESOURCE_TOKEN') {
+    } else if (response.errorCode === 'INVALID_RESOURCE_TOKEN') {
       if (loading) {
-        $("#loading").hide();
+        // ok
+        $("#loading-error").find('h1').text('Link de pagamento inválido');
+        $("#loading-error").find('p').text('Por favor, solicite outro link com o suporte.');
+      } else {
+        // ok
+        $("#invalid-link").show();
+        showGenericError = false;
       }
-      $("#invalid-link").show();
-      showGenericError = false;
     }
   }
 
   if (showGenericError) {
     if (loading) {
+      $(".logo-img").show();
       $("#loading").hide();
       $("#loading-error").show();
+      $("body").addClass("box-container");
     } else {
       $("#generic-error").show();
     }
   }
 
   return true;
+}
 
-
+function productName(orderRef) {
+  switch (orderRef) {
+    case 'FORMACAO_AV':
+      return "Formação em Assistência Virtual"
+    case 'FORMACAO_AEXPERT':
+      return "Formação AExpert"
+    case 'ASSINATURA_PROFESSIONAL_TRI':
+      return "Assinatura Professional Trimestral"
+      case 'KIT_STARTER':
+        return "Curso Destravando Clientes<br/>1 mês de acesso à plataforma de vagas"
+      default:
+      throw new Error("Invalid order ref:" + orderRef)
+  }
 }
 
 function init() {
@@ -145,10 +198,19 @@ function init() {
       },
       success: function (response) {
         let initialDetails = response.responseData;
-        initialDetails.payment_config = initialDetails.purchase_details.paymentConfig['vindi'];
-        showPaymentForm(initialDetails, () => `Virtap | Comprar`, () => 'Comprar agora', (fd) => { }, 'purchase?p=' + (productsIdentifier || '') + "&rsrc=" + (getParameterByName('rsrc') || ''), handleSuccess, handleError);
 
-        $('h2').text(`Você está adquirindo: ${JSON.stringify(initialDetails.purchase_details.orderDetails.details.reference)}.`);
+        try {
+          $('h2').html(`Você está adquirindo: <br/><br/>${productName(initialDetails.purchase_details.orderDetails.reference)}`);
+          initialDetails.payment_config = initialDetails.purchase_details.paymentConfig['vindi'];
+          showPaymentForm(initialDetails, () => `Virtap | Comprar`, () => 'Comprar agora', (fd) => { }, 'purchase?p=' + (productsIdentifier || '') + "&rsrc=" + (getParameterByName('rsrc') || ''), handleSuccess, handleError);
+          $("#loading").hide();
+          $(".sign_up").show();
+
+        } catch (err) {
+          console.log(err);
+          handleError(response, true);
+        }
+
       }
     });
   }

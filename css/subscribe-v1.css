@@ -1372,10 +1372,16 @@ Sign Up Pages
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 90vh;
+  height: 100vh;
   text-align: center;
 }
 
+
+#loading h1 {
+  color: #532E88;
+  font-size: 2rem;
+  margin: 1rem 0;
+}
 .upload-img .btn {
   padding: 5px 10px;
 }
@@ -1868,10 +1874,10 @@ table {
     display: block;
   }
 
-  .loading,
+  /* .loading,
   #loading {
     display: block;
-  }
+  } */
 
   .left_content h2 {
     /* bottom: -10%; */

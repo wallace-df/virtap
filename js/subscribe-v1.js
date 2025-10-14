@@ -19,17 +19,17 @@ function handleSuccess(response) {
     $(".sign_up").remove();
     $("body").addClass("box-container");
     if (response.loggedIn) {
-      $("#novo-membro-redir").show();
+      $("#compra-feita-redir").show();
       redirectToNext();
     } else {
       if (!response.has_logged_in) {
-        $("#novo-membro-nunca-logado-noredir").show();
-        $("#novo-membro-nunca-logado-noredir").find('em').text(response.email);
-        $("#novo-membro-nunca-logado-noredir").find('a').attr('href', getNextWithLogin());
+        $("#compra-feita-acesso-enviado").show();
+        $("#compra-feita-acesso-enviado").find('em').text(response.email);
+        $("#compra-feita-acesso-enviado").find('a').attr('href', getNextWithLogin());
       } else {
-        $("#novo-membro-ja-logado-noredir").show();
-        $("#novo-membro-ja-logado-noredir").find('em').text(response.email);
-        $("#novo-membro-ja-logado-noredir").find('a').attr('href', getNextWithLogin());
+        $("#compra-feita-no-redir").show();
+        $("#compra-feita-no-redir").find('em').text(response.email);
+        $("#compra-feita-no-redir").find('a').attr('href', getNextWithLogin());
       }
     }
   }
@@ -60,12 +60,12 @@ function handleError(response, loading) {
         $("body").addClass("box-container");
         showGenericError = false;
         if (response.errorData.loggedIn || loading) {
-          $("#membro-existente-redir").show();
+          $("#acesso-ja-liberado-redir").show();
           redirectToNext();
         } else {
-          $("#membro-existente-noredir").show();
-          $("#membro-existente-noredir").find('em').text(response.errorData.email);
-          $("#membro-existente-noredir").find('a').attr('href', getNextWithLogin());
+          $("#acesso-ja-liberado-no-redir").show();
+          $("#acesso-ja-liberado-no-redir").find('em').text(response.errorData.email);
+          $("#acesso-ja-liberado-no-redir").find('a').attr('href', getNextWithLogin());
         }
       } else {
         console.log("Invalid assistant plan:", response.errorData.assistant_plan.toUpperCase());

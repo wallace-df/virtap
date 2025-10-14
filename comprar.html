@@ -32,29 +32,42 @@
 </head>
 
 <body>
-    <img class="logo-img" src="/img/logo.png" alt="Virtap logo" />
+    <!-- ok-->
+    <img class="logo-img" src="/img/logo.png" alt="Virtap logo" style="display:none" />
+    <div id="loading" style="line-height: 1; word-break: break-all;">
+        <h1>Por favor, aguarde...<p class="mt-2"></p>
+            <div class="spinner-border text-primary" role="status"><span class="sr-only"></span></div>
+        </h1>
+    </div>
     <!-- ok -->
-    <div id="novo-membro-redir" style="display: none">
+    <div id="loading-error" style="display: none">
         <div class="box">
-            <h1>🎉 Compra realizada com sucesso!</h1>
+            <h1>Erro ao carregar página</h1>
+            <p>Verifique sua conexão e tente novamente.<br /> Se o erro persistir, por favor, contate o suporte.</p>
+        </div>
+    </div>
+    <!-- ok -->
+    <div id="compra-feita-redir" style="display: none">
+        <div class="box">
+            <h1>Compra realizada com sucesso!</h1>
             <p>Redirecionando automaticamente...</p>
         </div>
     </div>
     <!-- FIXME: review to account for multiple products -->
-    <div id="membro-existente-redir" style="display: none">
+    <div id="acesso-ja-liberado-redir" style="display: none">
         <div class="box">
-            <h1>🎉 Você já tem acesso a este curso!</h1>
-            <p>Redirecionando automaticamente...</p>
+            <h1>Compra já efetuada</h1>
+            <p>Identificamos que você já realizou a compra deste produto.<br /> Vamos te redirecionar automaticamente...</p>
         </div>
     </div>
     <!-- FIXME: review to account for multiple products -->
-    <div id="membro-existente-noredir" style="display: none">
+    <div id="acesso-ja-liberado-no-redir" style="display: none">
         <div class="box">
-            <h1>🎉 Você já tem acesso a este curso!</h1>
-            <p>Identificamos que você já tem acesso a este curso com o email
+            <h1>Compra já efetuada</h1>
+            <p>Identificamos que você já realizou a compra deste produto com o email
                 <em></em></span>.
             </p>
-            <p><a>Clique aqui</a> para fazer login e acessar o curso.</p>
+            <p><a>Clique aqui</a> para fazer login e acessar sua conta.</p>
             <p style="font-size: 14px; color: #999">
                 Problemas para acessar sua conta?<br>
                 Entre em contato com nosso suporte: <a href="mailto:suporte@virtap.com.br">suporte@virtap.com.br</a>.
@@ -62,9 +75,9 @@
         </div>
     </div>
     <!-- ok -->
-    <div id="novo-membro-ja-logado-noredir" style="display: none">
+    <div id="compra-feita-no-redir" style="display: none">
         <div class="box">
-            <h1>🎉 Compra realizada com sucesso!</h1>
+            <h1>Compra realizada com sucesso!</h1>
             <p>Identificamos que você já tem uma conta na <strong>Virtap</strong> com o email <em></em></span>.</p>
             <p><a>Clique aqui</a> para fazer login e acessar sua conta.</p>
             <p style="font-size: 14px; color: #999">
@@ -75,9 +88,9 @@
         </div>
     </div>
     <!-- ok -->
-    <div id="novo-membro-nunca-logado-noredir" style="display: none">
+    <div id="compra-feita-acesso-enviado" style="display: none">
         <div class="box">
-            <h1>🎉 Compra realizada com sucesso!</h1>
+            <h1>Compra realizada com sucesso!</h1>
             <p>Seus dados de acesso foram enviados para <em></em>.</p>
             <p style="font-size: 14px; color: #999">
                 ⏳ Não recebeu ainda?<br>
@@ -89,21 +102,13 @@
         </div>
     </div>
 
-    <div class="sign_up">
+    <div class="sign_up" style="display: none">
         <div class="left_content" style="background: linear-gradient(180deg, #9CD7DB -190.19%, #FFFFFF 100%);">
-            <img src="/img/hero_img.png" alt="">
+            <!-- <img src="/img/hero_img.png" alt=""> -->
+            <img src="/img/logo.png" alt="Virtap logo" />
             <h2></h2>
         </div>
         <div class="right_content">
-            <div id="loading" style="line-height: 1; word-break: break-all;">
-                <h1>Por favor, aguarde...<p class="mt-2"></p>
-                    <div class="spinner-border text-primary" role="status"><span class="sr-only"></span></div>
-                </h1>
-            </div>
-            <div class="text-center">
-                <p class="alert alert-danger" id="loading-error"><strong>Erro ao carregar página.</strong><br /> Por
-                    favor, verifique sua conexão e tente novamente.</p>
-            </div>
             <div id="payment-container"></div>
         </div>
     </div>
