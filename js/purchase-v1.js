@@ -185,8 +185,9 @@ function productName(orderRef) {
       return "<ul><li>Assinatura Professional Trimestral</li></ul>";
     case 'ASSINATURA_ELITE_TRI':
       return "<ul><li>Assinatura Elite Trimestral</li></ul>";
+      // FIXME: improve name.
     case 'KIT_STARTER':
-      return "Curso Destravando Clientes<br/>1 mês de acesso";
+      return "<ul><li>Curso Destravando Clientes<br/>1 mês de teste do marketplace</li></ul>";
     case 'VIRTAP_CLUB':
       return "<ul><li>Formação em Assistência Virtual</li><li>Mentorias mensais em grupo<li/><li>1 ano de acesso ao marketplace sem limitações</li></ul>";
     default:
