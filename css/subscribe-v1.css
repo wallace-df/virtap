@@ -1340,7 +1340,7 @@ Sign Up Pages
 .left_content img {
   /* position: relative;
   top: 12%; */
-  margin-top:12%;
+  margin-top: 12%;
 }
 
 .left_content h2 {
@@ -1351,7 +1351,17 @@ Sign Up Pages
   bottom: 18%; */
   padding-left: 30px;
   padding-right: 30px;
-  font-size:25px;
+  font-size: 25px;
+
+}
+
+.left_content h2 ul {
+  font-size: 1.25rem;
+  color: #512d89;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 auto;
 }
 
 .right_content {
@@ -1382,6 +1392,7 @@ Sign Up Pages
   font-size: 2rem;
   margin: 1rem 0;
 }
+
 .upload-img .btn {
   padding: 5px 10px;
 }
@@ -2013,7 +2024,7 @@ table {
   }
 
   .left_content h2 {
-    margin-top:1rem;
+    margin-top: 1rem;
     /* bottom: -25%; */
   }
 }
@@ -2214,13 +2225,12 @@ textarea.form-control {
 
 .form-group.error label {
   color: #F64B2F
-      /* box-shadow: none */
+    /* box-shadow: none */
 }
 
-.form-group.error input
-{
-    color: #F64B2F;
-    border-color: #F64B2F;
+.form-group.error input {
+  color: #F64B2F;
+  border-color: #F64B2F;
 }
 
 .form-group.error input:focus,
@@ -2237,12 +2247,12 @@ textarea.form-control {
 
 
 p.alert {
-	display: none;
-} 
+  display: none;
+}
 
 .login_site_logo {
-	display: inline-block;
-	width: 18rem;
+  display: inline-block;
+  width: 18rem;
 }
 
 .iti--separate-dial-code .iti__selected-flag {
@@ -2274,8 +2284,8 @@ body.box-container h1 {
 
 .logo-img {
   display: none
-
 }
+
 body.box-container .logo-img {
   display: inline;
 }

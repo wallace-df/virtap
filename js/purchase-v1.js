@@ -53,6 +53,11 @@ function handleError(response, loading) {
 
   let showGenericError = true;
 
+  $(".sign_up").show();
+  $(".logo-img").hide();
+  $("#loading").hide();
+  $("#loading-error").hide();
+
   if (response) {
     if (response.errorCode === 'ALREADY_PURCHASED' || response.errorCode === 'ALREADY_SUBSCRIBED') {
       let orderItems = null;
@@ -84,10 +89,6 @@ function handleError(response, loading) {
       } else {
         if (loading) {
           showProduct(response.errorData.orderReference);
-          $(".sign_up").show();
-          $(".logo-img").hide();
-          $("#loading").hide();
-          $("#loading-error").hide();
           showGenericError = false;
           $("#access-conflict").show().find('strong').text('Compra não disponível');
         } else {
@@ -140,6 +141,9 @@ function handleError(response, loading) {
         $("#invalid-link").show();
         showGenericError = false;
       }
+    } else if (response.errorCode === 'ALREADY_SUBSCRIBED_HIGHER_PLAN') {
+      $("#higher-plan").show();
+      showGenericError = false;
     }
   }
 
@@ -160,14 +164,16 @@ function handleError(response, loading) {
 function productName(orderRef) {
   switch (orderRef) {
     case 'FORMACAO_AV':
-      return "Formação em Assistência Virtual"
+      return "Formação em Assistência Virtual<br/>Mentorias mensais em grupo"
     case 'FORMACAO_AEXPERT':
-      return "Formação AExpert"
+      return "Formação AExpert<br/>Mentorias mensais em grupo"
     case 'ASSINATURA_PROFESSIONAL_TRI':
-      return "Assinatura Professional Trimestral"
-      case 'KIT_STARTER':
-        return "Curso Destravando Clientes<br/>1 mês de acesso à plataforma de vagas"
-      default:
+      return "Assinatura Professional Trimestral";
+    case 'KIT_STARTER':
+      return "Curso Destravando Clientes<br/>1 mês de acesso";
+    case 'VIRTAP_CLUB':
+      return "<ul><li>Formação em Assistência Virtual</li><li>Mentorias mensais em grupo<li/><li>1 ano de acesso ao marketplace sem limitações</li></ul>";
+    default:
       throw new Error("Invalid order ref:" + orderRef)
   }
 }
