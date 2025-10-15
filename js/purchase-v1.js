@@ -68,7 +68,9 @@ function handleError(response, loading) {
   $("#loading-error").hide();
 
   if (response) {
-    showProduct(response.errorData.orderReference);
+    if (response.errorData) {
+      showProduct(response.errorData.orderReference);
+    }
     if (response.errorCode === 'INVALID_ORDER_REFERENCE') {
       if (loading) {
         $(".sign_up").remove();
@@ -138,7 +140,6 @@ function handleError(response, loading) {
       showGenericError = false;
     } else if (response.errorCode === 'INVALID_RESOURCE_TOKEN') {
       if (loading) {
-        // ok
         $("#loading-error").find('h1').text('Link de pagamento inválido');
         $("#loading-error").find('p').text('Por favor, solicite outro link com o suporte.');
       } else {
