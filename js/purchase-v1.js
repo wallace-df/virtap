@@ -71,7 +71,7 @@ function handleError(response, loading) {
     if (response.errorData) {
       showProduct(response.errorData.orderReference);
     }
-    if (response.errorCode === 'INVALID_ORDER_REFERENCE') {
+    if (response.errorCode === 'INVALID_ORDER_REFERENCE' || response.errorCode === 'TRIAL_NOT_ALLOWED') {
       if (loading) {
         $(".sign_up").remove();
         $(".logo-img").show();
