@@ -1,6 +1,7 @@
 let productsIdentifier;
 let purchaseDetails;
 
+// ok
 function getNextWithLogin() {
   let next = getParameterByName('next');
   let url = '/login';
@@ -10,6 +11,7 @@ function getNextWithLogin() {
   return url;
 }
 
+// ok
 function redirectToNext() {
   let next = getParameterByName('next');
   let url = window.dashboardURL;
@@ -25,10 +27,16 @@ function redirectToNext() {
   setTimeout(() => document.location.href = url, 4000)
 }
 
+// ok
 function handleSuccess(response) {
   $(".sign_up").remove();
   $("body").addClass("box-container");
   $(".logo-img").show();
+  window.scroll({
+    top: 0,
+    left: 0,
+    behavior: 'auto'
+  });
   if (response.loggedIn) {
     $("#compra-feita-redir").show();
     redirectToNext();
@@ -43,6 +51,7 @@ function handleSuccess(response) {
       $("#compra-feita-no-redir").find('a').attr('href', getNextWithLogin());
     }
   }
+  // FIXME: adjust tracking event.
   gtag('event', 'purchased', {
     'send_to': 'G-4ZFMG1F0XK',
   });
@@ -59,12 +68,31 @@ function handleError(response, loading) {
   $("#loading-error").hide();
 
   if (response) {
-    if (response.errorCode === 'ALREADY_PURCHASED' || response.errorCode === 'ALREADY_SUBSCRIBED') {
+    showProduct(response.errorData.orderReference);
+    if (response.errorCode === 'INVALID_ORDER_REFERENCE') {
+      if (loading) {
+        $(".sign_up").remove();
+        $(".logo-img").show();
+        $("#loading-error").show();
+        $("body").addClass("box-container");
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'auto'
+        });
+        showGenericError = false;
+        $("#loading-error").find('h1').text('Produto não disponível');
+        $("#loading-error").find('p').html('O produto que você tentou adquirir não está disponível.<br/>Por favor, entre em contato com o suporte.');
+
+      } else {
+        $("#not-available").show();
+        showGenericError = false;
+      }
+    } else if (response.errorCode === 'ALREADY_PURCHASED' || response.errorCode === 'ALREADY_SUBSCRIBED') {
       let orderItems = null;
       if (response.errorData) {
         orderItems = response.errorData.orderItems || [];
       }
-
       if (orderItems.length === 1) {
         $(".sign_up").remove();
         $(".logo-img").show();
@@ -88,7 +116,6 @@ function handleError(response, loading) {
         }
       } else {
         if (loading) {
-          showProduct(response.errorData.orderReference);
           showGenericError = false;
           $("#access-conflict").show().find('strong').text('Compra não disponível');
         } else {
@@ -96,59 +123,45 @@ function handleError(response, loading) {
           $("#access-conflict").show();
         }
       }
-
     } else if (response.errorCode === 'INVALID_ASSISTANT_STATUS') {
       if (response.errorData.status === 1) {
-        if (loading) {
-          // ok
-          $("#loading-error").find('h1').text('Seu cadastro ainda está em análise');
-          $("#loading-error").find('p').text('Por favor, aguarde a aprovação do seu cadastro.');
-        } else {
-          // ok
-          $("#under-review-profile").show();
-          $("#under-review-profile").find('[data-email]').text(response.errorData.email).show();
-          showGenericError = false;
-        }
+        $("#under-review-profile").show();
+        $("#under-review-profile").find('[data-email]').text(response.errorData.email).show();
+        showGenericError = false;
       } else if (response.errorData.status === 3) {
-        if (loading) {
-          // ok
-          $("#loading-error").find('h1').text('Seu cadastro foi desativado');
-          $("#loading-error").find('p').text('Por favor, entre em contato com o suporte.');
-        } else {
-          // ok
-          $("#inactive-profile").show();
-          $("#inactive-profile").find('[data-email]').text(response.errorData.email).show();
-          showGenericError = false;
-        }
-      }
-    } else if (response.errorCode === 'STARTER_PLAN') {
-      if (loading) {
-        // ok
-        $("#loading-error").find('h1').text('Você está no plano Starter');
-        $("#loading-error").find('p').text('Por favor, solicite o upgrade com o suporte.');
-      } else {
-        // ok
-        $("#starter-plan").show();
+        $("#inactive-profile").show();
+        $("#inactive-profile").find('[data-email]').text(response.errorData.email).show();
         showGenericError = false;
       }
+    } else if (response.errorCode === 'STARTER_PLAN') {
+      $("#starter-plan").show();
+      showGenericError = false;
     } else if (response.errorCode === 'INVALID_RESOURCE_TOKEN') {
       if (loading) {
         // ok
         $("#loading-error").find('h1').text('Link de pagamento inválido');
         $("#loading-error").find('p').text('Por favor, solicite outro link com o suporte.');
       } else {
-        // ok
         $("#invalid-link").show();
         showGenericError = false;
       }
     } else if (response.errorCode === 'ALREADY_SUBSCRIBED_HIGHER_PLAN') {
+      if (loading) {
+        $("#higher-plan").show().find('strong:first-child').text('Compra não disponível');
+
+      }
+      $("#higher-plan").find('[data-email]').text(response.errorData.email);
+      $("#higher-plan").find('[data-plan-name]').text(response.errorData.current_subscription.product_id);
+      $("#higher-plan").find('a').attr('href', getNext());
       $("#higher-plan").show();
+
       showGenericError = false;
     }
   }
 
   if (showGenericError) {
     if (loading) {
+      $(".sign_up").remove();
       $(".logo-img").show();
       $("#loading").hide();
       $("#loading-error").show();
@@ -164,11 +177,13 @@ function handleError(response, loading) {
 function productName(orderRef) {
   switch (orderRef) {
     case 'FORMACAO_AV':
-      return "Formação em Assistência Virtual<br/>Mentorias mensais em grupo"
+      return "<ul><li>Formação em Assistência Virtual</li><li>Mentorias mensais em grupo<li/></ul>";
     case 'FORMACAO_AEXPERT':
-      return "Formação AExpert<br/>Mentorias mensais em grupo"
+      return "<ul><li>Formação AExpert</li><li>Mentorias mensais em grupo<li/></ul>";
     case 'ASSINATURA_PROFESSIONAL_TRI':
-      return "Assinatura Professional Trimestral";
+      return "<ul><li>Assinatura Professional Trimestral</li></ul>";
+    case 'ASSINATURA_ELITE_TRI':
+      return "<ul><li>Assinatura Elite Trimestral</li></ul>";
     case 'KIT_STARTER':
       return "Curso Destravando Clientes<br/>1 mês de acesso";
     case 'VIRTAP_CLUB':
@@ -179,7 +194,9 @@ function productName(orderRef) {
 }
 
 function showProduct(orderRef) {
-  $('h2').html(`Você está adquirindo: <br/><br/>${productName(orderRef)}`);
+  if (orderRef) {
+    $('h2').html(`Você está adquirindo: <br/><br/>${productName(orderRef)}`);
+  }
 }
 
 function init() {
