@@ -3,7 +3,6 @@ Disallow: /assinar.html
 Disallow: /cadastrar.html
 Disallow: /cadastro-confirmado.html
 Disallow: /cadastro-ja-realizado.html
-Disallow: /curso-gratuito.html
 Disallow: /certificado-gratuito.html
 Disallow: /certificado-registrado.html
 Disallow: /certificado-ja-registrado.html
@@ -30,7 +29,6 @@ Disallow: /assinar
 Disallow: /cadastrar
 Disallow: /cadastro-confirmado
 Disallow: /cadastro-ja-realizado
-Disallow: /curso-gratuito
 Disallow: /certificado-gratuito
 Disallow: /certificado-registrado
 Disallow: /certificado-ja-registrado

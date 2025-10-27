@@ -178,17 +178,17 @@ function handleError(response, loading) {
 function productName(orderRef) {
   switch (orderRef) {
     case 'FORMACAO_AV':
-      return "<ul><li>Formação em Assistência Virtual</li><li>Mentorias mensais em grupo<li/></ul>";
+      return "<ul><li>Formação em Assistência Virtual</li></ul>";
     case 'FORMACAO_AEXPERT':
-      return "<ul><li>Formação AExpert</li><li>Mentorias mensais em grupo<li/></ul>";
+      return "<ul><li>Formação AExpert</li></ul>";
     case 'ASSINATURA_PROFESSIONAL_TRI':
       return "<ul><li>Assinatura Professional Trimestral</li></ul>";
     case 'ASSINATURA_ELITE_TRI':
       return "<ul><li>Assinatura Elite Trimestral</li></ul>";
     case 'VIRTAP_STARTER_KIT':
-      return "<ul><li>Curso Destravando Clientes<br/>1 mês de teste do marketplace</li></ul>";
+      return "<ul><li>Virtap Starter Kit</li></ul>";
     case 'VIRTAP_CLUB':
-      return "<ul><li>Formação em Assistência Virtual</li><li>Mentorias mensais em grupo<li/><li>1 ano de acesso ao marketplace sem limitações</li></ul>";
+      return "<ul><li>Virtap Club</li></ul>";
     default:
       throw new Error("Invalid order ref:" + orderRef)
   }
@@ -196,7 +196,7 @@ function productName(orderRef) {
 
 function showProduct(orderRef) {
   if (orderRef) {
-    $('h2').html(`Você está adquirindo: <br/><br/>${productName(orderRef)}`);
+    $('h2').html(`Você está adquirindo: <br/>${productName(orderRef)}`).css('font-size', '24px');
   }
 }
 
