@@ -157,6 +157,14 @@ function handleError(response, loading) {
       $("#higher-plan").show();
 
       showGenericError = false;
+    } else if(response.errorCode === 'METODO_VIRTAP_CLIENTES_NOT_ALLOWED') {
+      if(loading) {
+        showGenericError = false;
+        $("#clientes-not-allowed").show().find('strong:first').text('Compra não disponível');
+      } else {
+        $("#clientes-not-allowed").show();
+        showGenericError = false;  
+      }
     }
   }
 
@@ -181,14 +189,16 @@ function productName(orderRef) {
       return "<ul><li>Formação em Assistência Virtual</li></ul>";
     case 'FORMACAO_AEXPERT':
       return "<ul><li>Formação AExpert</li></ul>";
+    case 'METODO_VIRTAP_CLIENTES':
+      return "<ul><li>Método Virtap de Conquistar Clientes</li></ul>";
     case 'ASSINATURA_PROFESSIONAL_TRI':
       return "<ul><li>Assinatura Professional Trimestral</li></ul>";
     case 'ASSINATURA_ELITE_TRI':
       return "<ul><li>Assinatura Elite Trimestral</li></ul>";
     case 'VIRTAP_STARTER_KIT':
-      return "<ul><li>Virtap Starter Kit</li></ul>";
+      return "<ul><li>Método Virtap de Conquistar Clientes</li><li>30 dias de acesso ao marketplace</li></ul>";
     case 'VIRTAP_CLUB':
-      return "<ul><li>Virtap Club</li></ul>";
+      return "<ul><li>Formação em Assistência Virtual</li><li>12 meses de acesso premium ao marketplace</li><li>Aulas extras e sessões com especialistas</li></ul>";
     default:
       throw new Error("Invalid order ref:" + orderRef)
   }
