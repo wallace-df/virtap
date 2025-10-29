@@ -196,9 +196,9 @@ function productName(orderRef) {
     case 'ASSINATURA_ELITE_TRI':
       return "<ul><li>Assinatura Elite Trimestral</li></ul>";
     case 'VIRTAP_STARTER_KIT':
-      return "<ul><li>Método Virtap de Conquistar Clientes</li><li>30 dias de acesso ao marketplace</li></ul>";
+      return "<ul><li>Método Virtap de Conquistar Clientes</li><li>30 dias de acesso à plataforma de vagas</li></ul>";
     case 'VIRTAP_CLUB':
-      return "<ul><li>Formação em Assistência Virtual</li><li>12 meses de acesso premium ao marketplace</li><li>Aulas extras e sessões com especialistas</li></ul>";
+      return "<ul><li>Formação em Assistência Virtual</li><li>12 meses de acesso premium à plataforma de vagas</li><li>Aulas extras e sessões com especialistas</li></ul>";
     default:
       throw new Error("Invalid order ref:" + orderRef)
   }
