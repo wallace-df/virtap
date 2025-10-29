@@ -192,7 +192,7 @@ function productName(orderRef) {
     case 'METODO_VIRTAP_CLIENTES':
       return "<ul><li>Método Virtap de Conquistar Clientes</li></ul>";
     case 'ASSINATURA_PROFESSIONAL_TRI':
-      return "<ul><li>Assinatura Professional Trimestral</li></ul>";
+      return "<ul><li>Assinatura Profissional Trimestral</li></ul>";
     case 'ASSINATURA_ELITE_TRI':
       return "<ul><li>Assinatura Elite Trimestral</li></ul>";
     case 'VIRTAP_STARTER_KIT':
