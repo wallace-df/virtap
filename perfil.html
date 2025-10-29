@@ -31,6 +31,11 @@
             box-sizing: border-box;
         }
 
+        html {
+            font-size: 15px;
+        }
+
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -43,42 +48,42 @@
             justify-content: center;
             align-items: flex-start;
             flex-wrap: wrap;
-            padding: 40px 20px;
-            gap: 40px;
+            padding: 2rem;
+            gap: 4rem;
         }
 
         .video-box {
-            max-width: 750px;
+            max-width: 600px;
             flex: 1;
         }
 
 
         .video-box img {
             width: 100%;
-            border-radius: 15px;
-            border: 8px solid #592baf;
+            border-radius: 2rem;
+            border: 0.5rem solid #592baf;
         }
 
         .text-block {
-            margin-top: 10px;
+            margin-top: 1rem;
         }
 
         .text-block h1 {
-            font-size: 32px;
+            font-size: 2rem;
             font-weight: bold;
-            margin: 10px 0;
+            margin: 1rem 0 0 0;
         }
 
         .text-block p {
-            font-size: 24px;
+            font-size: 1.5rem;
             color: #333;
-            margin: 10px 0;
+            margin: 1rem 0;
         }
 
         .form-box {
             background-color: white;
-            border-radius: 12px;
-            padding: 30px;
+            border-radius: 1rem;
+            padding: 2rem;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             max-width: 480px;
             width: 100%;
@@ -88,8 +93,8 @@
         .form-box .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
             justify-content: center;
         }
 
@@ -100,10 +105,11 @@
         .form-box h2 {
             display: flex;
             align-items: center;
-            gap: 20px;
-            font-size: 28px;
-            margin-bottom: 20px;
+            gap: 1.5rem;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
             color: #222;
+            text-align: center;
         }
 
         .form-box form {
@@ -111,22 +117,26 @@
             flex-direction: column;
         }
 
+        .form-box h3 {
+            margin: 0 0 1rem 0;
+        }
+
         .form-box input {
-            padding: 12px;
-            margin-bottom: 15px;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
             border: 2px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 0.5rem;
+            font-size: 1rem;
         }
 
         .form-box button {
-            padding: 14px;
+            padding: 1rem;
             background-color: #592baf;
             color: white;
-            font-size: 16px;
+            font-size: 1rem;
             font-weight: bold;
             border: none;
-            border-radius: 8px;
+            border-radius: 0.5rem;
             cursor: pointer;
         }
 
@@ -136,10 +146,11 @@
 
         .form-box small {
             display: block;
-            margin-top: 12px;
-            font-size: 12px;
+            margin-top: 1rem;
+            font-size: 0.75rem;
             color: #444;
             text-align: left;
+            text-align: center;
         }
 
         .form-box small a {
@@ -161,33 +172,38 @@
             outline-color: #592baf;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1200px) {
+            .container {
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 991px) {
             .container {
                 flex-direction: column;
                 align-items: center;
-                padding: 30px 15px;
+                padding: 2rem;
             }
 
             .video-box,
             .form-box {
-                max-width: 100%;
+                text-align: center;
             }
 
             .text-block {
                 text-align: center;
             }
 
-            .text-block h1 {
-                font-size: 24px;
+            .video-box img {
+                max-width: 600px;
+                margin: 0 auto;
             }
 
-            .text-block p {
-                font-size: 22px;
+            .form-box {
+                max-width: 500px;
+                margin: 0 auto;
             }
 
-            .form-box h2 {
-                font-size: 24px;
-            }
         }
 
 
@@ -209,8 +225,8 @@
             position: relative;
             /* necessário para o botão X funcionar */
             background-color: white;
-            padding: 30px 20px;
-            border-radius: 12px;
+            padding: 2rem;
+            border-radius: 1rem;
             max-width: 400px;
             width: 90%;
             text-align: center;
@@ -220,16 +236,21 @@
         .modal-content h3 {
             margin-top: 0;
             color: #532E88;
+            font-size: 1.5rem;
         }
 
         .modal-content button {
-            margin-top: 20px;
-            padding: 10px 20px;
+            margin-top: 0;
+            padding: 0.75rem 2rem;
             background-color: #532E88;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 0.5rem;
             cursor: pointer;
+        }
+
+        .modal-content p {
+            font-size: 1rem;
         }
 
         .modal-content button:hover {
@@ -238,9 +259,9 @@
 
         .close-button {
             position: absolute;
-            top: 12px;
-            right: 16px;
-            font-size: 26px;
+            top: 0.8rem;
+            right: 1rem;
+            font-size: 2rem;
             font-weight: bold;
             color: #999;
             cursor: pointer;
@@ -288,9 +309,10 @@
 
         .error-message {
             color: #F64B2F;
-            font-size: 14px;
-            margin-top: -10px;
-            margin-bottom: 10px;
+            font-size: 0.8rem;
+            margin-top: -0.9rem;
+            margin-bottom: 0.9rem;
+            text-align: left;
         }
 
 
@@ -310,7 +332,46 @@
         }
 
         .iti--allow-dropdown {
-            margin-bottom: 16px;
+            margin-bottom: 1rem;
+        }
+
+        .login-link {
+            font-size: 0.9rem;
+            padding-top: 1rem;
+            display: block;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .login-link a {
+            color: #0000ff;
+        }
+
+        .login-link a:hover {
+            color: #703FB9;
+        }
+
+        ul {
+            margin-top: 1rem;
+            display: inline-block;
+            padding: 0;
+            list-style: none;
+        }
+
+        ul li {
+            text-align: left;
+            color: #532E88;
+            font-size: 1.2rem;
+            position: relative;
+            padding-left: 1.5em;
+            margin-bottom: 0.3rem;
+        }
+
+        ul li::before {
+            content: "🟣";
+            position: absolute;
+            left: 0;
+            top: 0;
         }
     </style>
 </head>
@@ -321,8 +382,18 @@
         <div class="video-box">
             <img src="./img/curso-gratuito.jpeg" alt="Curso gratuito Virtap">
             <div class="text-block">
-                <h1>Curso gratuito + Certificado</h1>
-                <p>Conteúdo direto ao ponto para você dar os primeiros passos na nova profissão do futuro.</p>
+                <h1>Aprenda como ser Assistente Virtual e trabalhar de casa agora</h1>
+                <ul>
+                    <li>Curso 100% gratuito</li>
+                    <li>Aprenda do zero, no seu ritmo, mesmo sem experiência</li>
+                    <li>Certificado de conclusão incluso</li>
+                    <li>Descubra o que é Assistência Virtual</li>
+                    <li>Saiba o que é preciso para trabalhar como AV</li>
+                    <li>Por que você deveria se tornar AV</li>
+                    <li>Quanto você pode ganhar na profissão</li>
+                    <li>Como conseguir seus primeiros clientes</li>
+                    <li>Como ser uma AV de sucesso</li>
+                </ul>
             </div>
         </div>
 
@@ -356,7 +427,7 @@
     <div id="error-modal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal()">×</span>
-            <h3>Opa! Algo deu errado 😕</h3>
+            <h3>Ops! Algo deu errado 😕</h3>
             <p>Não foi possível enviar seus dados. Por favor, tente novamente em instantes.</p>
             <button onclick="closeModal()">Fechar</button>
         </div>
