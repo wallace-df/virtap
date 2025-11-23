@@ -16,15 +16,18 @@
   <link href="/favicon.svg" type="image/svg+xml" rel="icon" />
   <link href="/favicon.png" type="image/png" rel="icon" />
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-4ZFMG1F0XK');
-    gtag('config', 'AW-924784320');
+
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
   </script>
+  <!-- End Google Tag Manager -->
 
   <!-- all css here -->
   <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -143,12 +146,15 @@
               <p id="email-error" class="error"><img src="img/exclamation.svg" alt=""> Informe seu email</p>
             </div>
             <div>
-              <input type="text" class="form-control input-field" id="phone" data-lpignore="true" placeholder="(99) 99999-9999">
+              <input type="text" class="form-control input-field" id="phone" data-lpignore="true"
+                placeholder="(99) 99999-9999">
               <p id="phone-error" class="error"><img src="img/exclamation.svg" alt=""> Informe seu telefone</p>
             </div>
             <div>
-              <button class="submit-btn" onclick="signup()" id="btn-continue"><img src="img/whastapp.svg" width="32px" style="margin-right: 8px"> Entrar no grupo do WhatsApp</button>
-              <p id="submit-error" class="error text-center"><img src="img/exclamation.svg" alt="">Ocorreu um erro. Por favor, tente novamente.</p>
+              <button class="submit-btn" onclick="signup()" id="btn-continue"><img src="img/whastapp.svg" width="32px"
+                  style="margin-right: 8px"> Entrar no grupo do WhatsApp</button>
+              <p id="submit-error" class="error text-center"><img src="img/exclamation.svg" alt="">Ocorreu um erro. Por
+                favor, tente novamente.</p>
             </div>
           </form>
         </div>
@@ -163,4 +169,4 @@
   <script src="js/main-v7.js"></script>
 </body>
 
-</html> 
+</html>
