@@ -16,19 +16,24 @@
     <link rel="stylesheet" href="css/vendor-common-v1.css" />
     <link rel="stylesheet" href="css/subscribe-v1.css" />
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-4ZFMG1F0XK', {
-            'anonymize_ip': true
-        });
         window.apiURL = 'https://api.virtap.com.br';
         window.dashboardURL = 'https://assistentes.virtap.com.br';
         window.apiURL = 'http://localhost:3000';
         window.dashboardURL = 'http://localhost:8080';
     </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
+    </script>
+    <!-- End Google Tag Manager -->ß
 </head>
 
 <body>
