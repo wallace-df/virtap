@@ -549,11 +549,9 @@
                     if (data.responseData.hasAccount) {
                         url = "/cadastro-ja-realizado?e=" + email;
                     }
-                    gtag('event', 'sign_up_free_course', {
-                        'send_to': 'G-4ZFMG1F0XK',
-                        'event_callback': function () {
-                            window.location.href = url;
-                        }
+                    window.dataLayer.push({
+                        'event': 'sign_up_free_course', // O Acionador do GTM
+                        'redir_url': url        // A URL que o GTM irá ler
                     });
                     setTimeout(() => window.location.href = url, 5000);
                 } else {
