@@ -56,13 +56,14 @@ function collectFormData() {
 }
 
 
-function goToGroup() { gtag('event', 'go_to_whatsapp_page', {
-    'send_to': 'G-4ZFMG1F0XK',
-    'event_callback': function() {
-        location.href = 'https://chat.whatsapp.com/IekSadZ5zm21MKage9G1Vx';
-    }
-  });
-
+function goToGroup() {     
+    let url = 'https://chat.whatsapp.com/IekSadZ5zm21MKage9G1Vx';
+    window.dataLayer.push({
+        'event': 'ga_event',
+        'ga_event_name': 'go_to_whatsapp_page',
+        'redir_url': url
+    });
+    setTimeout(() => window.location.href = url, 5000);
 } 
 
 function signup() {

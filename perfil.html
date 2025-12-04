@@ -570,11 +570,11 @@
                     } else {
                         url += "?e=" + email
                     }
-                    gtag('event', 'sign_up_free_course', {
-                        'send_to': 'G-4ZFMG1F0XK',
-                        'event_callback': function () {
-                            window.location.href = url;
-                        }
+                    //fixme
+                    window.dataLayer.push({
+                        'event': 'ga_event',
+                        'ga_event_name': 'sign_up_free_course4',
+                        'redir_url': url
                     });
                     setTimeout(() => window.location.href = url, 5000);
                 }

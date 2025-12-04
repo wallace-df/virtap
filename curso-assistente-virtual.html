@@ -550,8 +550,9 @@
                         url = "/cadastro-ja-realizado?e=" + email;
                     }
                     window.dataLayer.push({
-                        'event': 'sign_up_free_course', // O Acionador do GTM
-                        'redir_url': url        // A URL que o GTM irá ler
+                        'event': 'ga_event',
+                        'ga_event_name': 'sign_up_free_course',
+                        'redir_url': url
                     });
                     setTimeout(() => window.location.href = url, 5000);
                 } else {
