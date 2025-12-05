@@ -52,9 +52,9 @@ function handleSuccess(response) {
     }
   }
   // FIXME: adjust tracking event.
-  gtag('event', 'purchased', {
-    'send_to': 'G-4ZFMG1F0XK',
-  });
+  // gtag('event', 'purchased', {
+  //   'send_to': 'G-4ZFMG1F0XK',
+  // });
 }
 
 function handleError(response, loading) {
