@@ -14,15 +14,18 @@
     <link href="/favicon.svg" type="image/svg+xml" rel="icon" />
     <link href="/favicon.png" type="image/png" rel="icon" />
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZFMG1F0XK"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-4ZFMG1F0XK', {
-            'anonymize_ip': true
-        });
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
     </script>
+    <!-- End Google Tag Manager -->
 
     <style>
         * {
@@ -545,11 +548,11 @@
 
 
                 if (response.status === 200) {
-                    gtag('event', 'sign_up_waiting_list', {
-                        'send_to': 'G-4ZFMG1F0XK',
-                        'event_callback': function () {
-                            window.location.href = "/espera-confirmada";
-                        }
+                    
+                    window.dataLayer.push({
+                        'event': 'ga_event',
+                        'ga_event_name': 'sign_up_waiting_list',
+                        'redir_url': url
                     });
                     setTimeout(() => window.location.href = "/espera-confirmada", 5000);
                 } else {

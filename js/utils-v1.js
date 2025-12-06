@@ -472,7 +472,10 @@ function fillInAddress() {
         }
     }
 }
+
 window.activePayments = {};
+window.detectPaymentInterval = null;
+window.paymentDetected = false;
 
 function updatePaymentStatus(method) {
     let paymentDetails = activePayments[method];
@@ -497,7 +500,50 @@ function updatePaymentStatus(method) {
 
             let qrcode = new QRCode({ content: paymentDetails.qrcode, join: true });
             document.getElementById("pix-qrcode").innerHTML = qrcode.svg();
-            $("#copy-pix-btn").data('pix-code',paymentDetails.qrcode);
+            $("#copy-pix-btn").data('pix-code', paymentDetails.qrcode);
+            $("#copy-pix-btn").off().on('click', async function () {
+                try {
+                    let text = $(this).data('pix-code');
+                    await navigator.clipboard.writeText(text);
+                } catch (err) {
+                }
+            });
+
+            if (window.detectPaymentInterval === null && !window.paymentDetected) {
+                window.detectPaymentInterval = setInterval(async function () {
+                    if (window.detectPaymentInterval === null) {
+                        return;
+                    }
+
+                    try {
+
+                        let res = await fetch(`${window.apiURL}/check-payment`, {
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            credentials: 'include',
+                            body: JSON.stringify({
+                                email: $("#email").val(),
+                                orderId: window.orderId
+                            })
+                        });
+
+                        let data = await res.json();
+                        if (data.responseData.charged === true) {
+                            window.paymentDetected = true;
+                            clearInterval(window.detectPaymentInterval);
+                            window.detectPaymentInterval = null;
+                            $("#submit-btn").hide();
+                            window.successHandler(data.responseData);
+                        }
+
+                    } catch (err) {
+                        // ignore...
+                    }
+
+                }, 10000);
+            }
         }
     } else {
         $("#submit-btn").show();
@@ -505,6 +551,9 @@ function updatePaymentStatus(method) {
 }
 
 function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepareFormDataFunc, purchaseEndpoint, successHandler, errorHandler) {
+    window.orderItems = initialDetails.purchase_details.orderItems;
+    window.successHandler = successHandler;
+
     let hasEmail = (initialDetails.email && initialDetails.email.trim().length > 0 ? true : false);
     submitBtn = document.getElementById('submit-btn');
     input = document.querySelector("#phone");
@@ -576,6 +625,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
     let price = (initialDetails.payment_config.installments[0].amount / 100).toFixed(2).replace('.', ',');
     $("#sign_up").find('[data-price]').text(`R$ ${price}`);
     $("#sign_up").find('[data-payment-method]').attr('data-price', initialDetails.payment_config.installments[0].amount);
+
     $("#name").val(initialDetails.name);
     $("#cpf_cnpj").val(initialDetails.cpf_cnpj);
     $("#email").val(initialDetails.email);
@@ -596,15 +646,15 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
         hasBillingDetails = true;
     }
 
-    // 'Virtap | Assistente Virtual | Comprar curso';
     document.title = getTitleFunc();
 
-    //'Comprar agora'
-    $("#submit-btn").show().text(getButtonLabelFunc())
+    $("#submit-btn").show().text(getButtonLabelFunc());
+    $("#vindi-disclaimer").show();
     $('[data-bs-toggle="tab"]').on('show.bs.tab', function (e) {
         let method = $(e.target).data('payment-method');
         updatePaymentStatus(method);
     });
+
     $("#loading").hide();
     $("#sign_up").show();
     setTimeout(() => $("#name").focus(), 300);
@@ -776,7 +826,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
     // City 
     $city.parent().data('get-field', function () {
-        let city = $city.val().trim();
+        let city = $city.val();
         if (!city) {
             $city.parent().addClass('error');
             return undefined;
@@ -881,27 +931,27 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
         event.preventDefault();
 
         // Prevent multiple form submissions
-        if (submitBtn.disabled || !ready) {
+        if (submitBtn.disabled || !ready || window.paymentDetected) {
             return;
         }
 
         $("[data-field]").removeClass("error");
         $("p.alert").hide();
 
-        let fields = $("[data-field]");
-        let hasError = false;
-        fields.each(function (index) {
-            let func = $(this).data('get-field');
-            if (func === undefined) {
-                hasError = true;
-            } else (
-                func()
-            )
-        });
+        // let fields = $("[data-field]");
+        // let hasError = false;
+        // fields.each(function (index) {
+        //     let func = $(this).data('get-field');
+        //     if (func === undefined) {
+        //         hasError = true;
+        //     } else (
+        //         func()
+        //     )
+        // });
 
-        if (hasError) {
-            return;
-        }
+        // if (hasError) {
+        //     return;
+        // }
 
         // Disable form submission while loading
         $("#submit-btn").prop('disabled', true).text('Por favor, aguarde...');
@@ -916,12 +966,12 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
                 return;
             }
 
-
             let billingDetails = fields.billingDetails;
             let paymentDetails = fields.paymentDetails;
 
             let formData = new FormData();
             formData.append("email", $("#email").val());
+            window.userEmail = $("#email").val();
             if (billingDetails) {
                 formData.append("billing_details", JSON.stringify(billingDetails));
             }
@@ -930,6 +980,9 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
             prepareFormDataFunc(formData);
             window.activePayments = {};
+            clearInterval(window.detectPaymentInterval);
+            window.detectPaymentInterval = null;
+
             updatePaymentStatus();
 
             // Create the PaymentIntent
@@ -956,13 +1009,18 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
                     let invoice = data.responseData.invoice;
                     if (!invoice) {
-                        throw new Error("Failure getting invoice details.");
+                        throw new Error("Failure getting invoice.");
                     }
                     let details = invoice.details;
                     if (!details) {
                         throw new Error("Failure getting invoice details.");
                     }
+                    let orderId = data.responseData.orderId;
+                    if (!orderId) {
+                        throw new Error("Failure getting order ID.");
+                    }
 
+                    window.orderId = orderId;
                     let paymentMethod = details.payment_method;
                     if (paymentMethod === "boleto") {
                         let slip = details.slip;
@@ -977,6 +1035,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
                         window.activePayments['boleto'] = {
                             barcode: typeable_barcode
                         };
+                        window.orderId = orderId;
                         updatePaymentStatus('boleto');
                     } else if (paymentMethod === "pix") {
                         let pix = details.pix;
@@ -992,6 +1051,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
                             qrcode: qrcode_original_path
                         };
                         updatePaymentStatus('pix');
+
                     } else {
                         throw new Error("Unsupported payment method:" + paymentMethod);
                     }
@@ -1011,11 +1071,10 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
             $("#submit-btn").prop('disabled', false).text(getButtonLabelFunc());
             $("input,select").prop('disabled', false);
             $(".nav-link").removeClass("disabled");
+
             if (loggedInUser) {
                 $("#email").prop('disabled', true);
             }
         }
     });
-
 }
-

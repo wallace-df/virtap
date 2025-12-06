@@ -16,6 +16,13 @@
     <link rel="stylesheet" href="css/vendor-common-v1.css" />
     <link rel="stylesheet" href="css/subscribe-v1.css" />
 
+    <script>
+        window.apiURL = 'https://api.virtap.com.br';
+        window.dashboardURL = 'https://assistentes.virtap.com.br';
+        window.apiURL = 'http://localhost:3000';
+        window.dashboardURL = 'http://localhost:8080';
+    </script>
+
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
             w[l] = w[l] || []; w[l].push({
@@ -26,38 +33,47 @@
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
     </script>
-    <!-- End Google Tag Manager -->
-    <script>
-        window.apiURL = 'https://api.virtap.com.br';
-        window.dashboardURL = 'https://assistentes.virtap.com.br';
-    </script>
+    <!-- End Google Tag Manager -->ß
 </head>
 
 <body>
-    <img class="logo-img" src="/img/logo.png" alt="Virtap logo" />
+    <!-- ok-->
+    <img class="logo-img" src="/img/logo.png" alt="Virtap logo" style="display:none" />
+    <div id="loading" style="line-height: 1; word-break: break-all;">
+        <h1>Por favor, aguarde...<p class="mt-2"></p>
+            <div class="spinner-border text-primary" role="status"><span class="sr-only"></span></div>
+        </h1>
+    </div>
     <!-- ok -->
-    <div id="novo-membro-redir" style="display: none">
+    <div id="loading-error" style="display: none">
         <div class="box">
-            <h1>🎉 Agora você faz parte do Virtap Club</h1>
+            <h1>Erro ao carregar página</h1>
+            <p>Verifique sua conexão e tente novamente.<br /> Se o erro persistir, por favor, contate o suporte.</p>
+        </div>
+    </div>
+    <!-- ok -->
+    <div id="compra-feita-redir" style="display: none">
+        <div class="box">
+            <h1>Compra realizada com sucesso!</h1>
             <p>Redirecionando automaticamente...</p>
         </div>
     </div>
     <!-- ok -->
-    <div id="membro-existente-redir" style="display: none">
+    <div id="acesso-ja-liberado-redir" style="display: none">
         <div class="box">
-            <h1>Você já é membro do Virtap Club 🚀</h1>
-            <p>Redirecionando automaticamente...</p>
+            <h1>Acesso já liberado</h1>
+            <p>Identificamos que você já tem acesso a este produto.<br /> Vamos te redirecionar automaticamente...
+            </p>
         </div>
     </div>
     <!-- ok -->
-    <div id="membro-existente-noredir" style="display: none">
+    <div id="acesso-ja-liberado-no-redir" style="display: none">
         <div class="box">
-            <h1>Você já é membro do Virtap Club 🚀</h1>
-            <p>Identificamos que você já faz parte do <strong class="text-primary">Virtap Club</strong> com o email
+            <h1>Acesso já liberado</h1>
+            <p>Identificamos que você já tem acesso a este produto com o email
                 <em></em></span>.
             </p>
-            <p><a>Clique aqui</a> para fazer login e acessar todos os benefícios do <strong class="text-primary">Virtap
-                    Club</strong>!</p>
+            <p><a>Clique aqui</a> para fazer login e acessar sua conta.</p>
             <p style="font-size: 14px; color: #999">
                 Problemas para acessar sua conta?<br>
                 Entre em contato com nosso suporte: <a href="mailto:suporte@virtap.com.br">suporte@virtap.com.br</a>.
@@ -65,12 +81,12 @@
         </div>
     </div>
     <!-- ok -->
-    <div id="novo-membro-ja-logado-noredir" style="display: none">
+    <div id="compra-feita-no-redir" style="display: none">
         <div class="box">
-            <h1>🎉 Agora você faz parte do Virtap Club</h1>
+            <h1>Parabéns! Sua compra foi confirmada!</h1>
             <p>Identificamos que você já tem uma conta na <strong>Virtap</strong> com o email <em></em></span>.</p>
-            <p><a>Clique aqui</a> para fazer login e acessar todos os benefícios do <strong class="text-primary">Virtap
-                    Club</strong>!</p>
+            <p><a>Clique aqui</a> para fazer login e acessar sua conta.</p>
+            <p>Te enviamos também um email de confirmação.</p>
             <p style="font-size: 14px; color: #999">
                 Problemas para acessar sua conta?<br>
                 Entre em contato com nosso suporte: <a href="mailto:suporte@virtap.com.br">suporte@virtap.com.br</a>.
@@ -79,11 +95,10 @@
         </div>
     </div>
     <!-- ok -->
-    <div id="novo-membro-nunca-logado-noredir" style="display: none">
+    <div id="compra-feita-acesso-enviado" style="display: none">
         <div class="box">
-            <h1>🎉 Agora você faz parte do Virtap Club</h1>
-            <p>Enviamos o login e senha para acessar todos os benefícios do <strong class="text-primary">Virtap
-                    Club</strong> para o seu email <em></em>.</p>
+            <h1>Parabéns! Sua compra foi confirmada!</h1>
+            <p>Enviamos um email para <em></em> com todas as instruções de acesso e os próximos passos.</p>
             <p style="font-size: 14px; color: #999">
                 ⏳ Não recebeu ainda?<br>
                 Às vezes pode demorar alguns minutinhos. Confira também sua caixa de spam!
@@ -94,21 +109,13 @@
         </div>
     </div>
 
-    <div class="sign_up">
+    <div class="sign_up" style="display: none">
         <div class="left_content" style="background: linear-gradient(180deg, #9CD7DB -190.19%, #FFFFFF 100%);">
-            <img src="/img/hero_img.png" alt="">
-            <h2>Você está assinando o plano anual Virtap Club</h2>
+            <!-- <img src="/img/hero_img.png" alt=""> -->
+            <img src="/img/logo.png" alt="Virtap logo" />
+            <h2></h2>
         </div>
         <div class="right_content">
-            <div id="loading" style="line-height: 1; word-break: break-all;">
-                <h1>Por favor, aguarde...<p class="mt-2"></p>
-                    <div class="spinner-border text-primary" role="status"><span class="sr-only"></span></div>
-                </h1>
-            </div>
-            <div class="text-center">
-                <p class="alert alert-danger" id="loading-error"><strong>Erro ao carregar página.</strong><br /> Por
-                    favor, verifique sua conexão e tente novamente.</p>
-            </div>
             <div id="payment-container"></div>
         </div>
     </div>
@@ -117,7 +124,7 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaGDtiIgu7ZxJvRZzcYeSn25LRdUgzS7k&callback=initAutocomplete&libraries=places&v=weekly"
         defer></script>
     <script src="/js/vendor-common-v2.js"></script>
-    <script src="/js/subscribe-v1.js"></script>
+    <script src="/js/purchase-v1.js"></script>
 </body>
 
 </html>

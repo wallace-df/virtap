@@ -16,16 +16,18 @@
 
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({
-                'gtm.start':
-                    new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
+        w[l] = w[l] || []; w[l].push({
+            'gtm.start':
+                new Date().getTime(), event: 'gtm.js'
+        }); var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
     </script>
     <!-- End Google Tag Manager -->
+
     <script>
+        window.apiURL = 'https://api.virtap.com.br';
         window.apiURL = 'https://api.virtap.com.br';
     </script>
 
@@ -466,11 +468,11 @@
                     if (data.responseData.hasAccount) {
                         url = "/certificado-ja-registrado?e=" + email;
                     }
-                    gtag('event', 'sign_up_free_certificate', {
-                        'send_to': 'G-4ZFMG1F0XK',
-                        'event_callback': function () {
-                            window.location.href = url;
-                        }
+
+                    window.dataLayer.push({
+                        'event': 'ga_event',
+                        'ga_event_name': 'sign_up_free_certificate',
+                        'redir_url': url
                     });
                     setTimeout(() => window.location.href = url, 5000);
                 } else {
