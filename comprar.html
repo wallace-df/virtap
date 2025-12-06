@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+
+    <title>Virtap</title>
+
+    <link href="/favicon.svg" type="image/svg+xml" rel="icon" />
+    <link href="/favicon.png" type="image/png" rel="icon" />
+
+    <link rel="stylesheet" href="css/vendor-common-v1.css" />
+    <link rel="stylesheet" href="css/subscribe-v1.css" />
+
+    <script>
+        window.apiURL = 'https://api.virtap.com.br';
+        window.dashboardURL = 'https://assistentes.virtap.com.br';
+        window.apiURL = 'http://localhost:3000';
+        window.dashboardURL = 'http://localhost:8080';
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
+    </script>
+    <!-- End Google Tag Manager -->ß
+</head>
+
+<body>
+    <!-- ok-->
+    <img class="logo-img" src="/img/logo.png" alt="Virtap logo" style="display:none" />
+    <div id="loading" style="line-height: 1; word-break: break-all;">
+        <h1>Por favor, aguarde...<p class="mt-2"></p>
+            <div class="spinner-border text-primary" role="status"><span class="sr-only"></span></div>
+        </h1>
+    </div>
+    <!-- ok -->
+    <div id="loading-error" style="display: none">
+        <div class="box">
+            <h1>Erro ao carregar página</h1>
+            <p>Verifique sua conexão e tente novamente.<br /> Se o erro persistir, por favor, contate o suporte.</p>
+        </div>
+    </div>
+    <!-- ok -->
+    <div id="compra-feita-redir" style="display: none">
+        <div class="box">
+            <h1>Compra realizada com sucesso!</h1>
+            <p>Redirecionando automaticamente...</p>
+        </div>
+    </div>
+    <!-- ok -->
+    <div id="acesso-ja-liberado-redir" style="display: none">
+        <div class="box">
+            <h1>Acesso já liberado</h1>
+            <p>Identificamos que você já tem acesso a este produto.<br /> Vamos te redirecionar automaticamente...
+            </p>
+        </div>
+    </div>
+    <!-- ok -->
+    <div id="acesso-ja-liberado-no-redir" style="display: none">
+        <div class="box">
+            <h1>Acesso já liberado</h1>
+            <p>Identificamos que você já tem acesso a este produto com o email
+                <em></em></span>.
+            </p>
+            <p><a>Clique aqui</a> para fazer login e acessar sua conta.</p>
+            <p style="font-size: 14px; color: #999">
+                Problemas para acessar sua conta?<br>
+                Entre em contato com nosso suporte: <a href="mailto:suporte@virtap.com.br">suporte@virtap.com.br</a>.
+            </p>
+        </div>
+    </div>
+    <!-- ok -->
+    <div id="compra-feita-no-redir" style="display: none">
+        <div class="box">
+            <h1>Parabéns! Sua compra foi confirmada!</h1>
+            <p>Identificamos que você já tem uma conta na <strong>Virtap</strong> com o email <em></em></span>.</p>
+            <p><a>Clique aqui</a> para fazer login e acessar sua conta.</p>
+            <p>Te enviamos também um email de confirmação.</p>
+            <p style="font-size: 14px; color: #999">
+                Problemas para acessar sua conta?<br>
+                Entre em contato com nosso suporte: <a href="mailto:suporte@virtap.com.br">suporte@virtap.com.br</a>.
+            </p>
+
+        </div>
+    </div>
+    <!-- ok -->
+    <div id="compra-feita-acesso-enviado" style="display: none">
+        <div class="box">
+            <h1>Parabéns! Sua compra foi confirmada!</h1>
+            <p>Enviamos um email para <em></em> com todas as instruções de acesso e os próximos passos.</p>
+            <p style="font-size: 14px; color: #999">
+                ⏳ Não recebeu ainda?<br>
+                Às vezes pode demorar alguns minutinhos. Confira também sua caixa de spam!
+                <br>
+                Se ainda tiver problemas, entre em contato com nosso suporte: <a
+                    href="mailto:suporte@virtap.com.br">suporte@virtap.com.br</a>.
+            </p>
+        </div>
+    </div>
+
+    <div class="sign_up" style="display: none">
+        <div class="left_content" style="background: linear-gradient(180deg, #9CD7DB -190.19%, #FFFFFF 100%);">
+            <!-- <img src="/img/hero_img.png" alt=""> -->
+            <img src="/img/logo.png" alt="Virtap logo" />
+            <h2></h2>
+        </div>
+        <div class="right_content">
+            <div id="payment-container"></div>
+        </div>
+    </div>
+
+    
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaGDtiIgu7ZxJvRZzcYeSn25LRdUgzS7k&callback=initAutocomplete&libraries=places&v=weekly"
+        defer></script>
+    <script src="/js/vendor-common-v2.js"></script>
+    <script src="/js/purchase-v1.js"></script>
+</body>
+
+</html>
