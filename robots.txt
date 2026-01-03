@@ -28,6 +28,8 @@ Disallow: /contratar-assistente-virtual/postar-projeto.html
 Disallow: /en/login.html
 Disallow: /en/login-with-email.html
 Disallow: /en/profile.html
+Disallow: /en/request-new-password.html
+Disallow: /en/reset-password.html
 
 Disallow: /assinar
 Disallow: /cadastrar
@@ -58,3 +60,5 @@ Disallow: /contratar-assistente-virtual/postar-projeto
 Disallow: /en/login
 Disallow: /en/login-with-email
 Disallow: /en/profile
+Disallow: /en/request-new-password
+Disallow: /en/reset-password
