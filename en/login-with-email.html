@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -8,7 +8,7 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex, nofollow">
 
-    <title>Virtap | Cliente | Entrar com senha</title>
+    <title>Virtap | Hire | Login with email</title>
 
     <link href="/favicon.svg" type="image/svg+xml" rel="icon" />
     <link href="/favicon.png" type="image/png" rel="icon" />
@@ -18,7 +18,7 @@
 
     <script>
         window.apiURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://api.virtap.com.br';
-        window.dashboardURL = window.location.hostname === 'localhost' ? 'http://localhost:8081' : 'https://clientes.virtap.com.br';
+        window.dashboardURL = window.location.hostname === 'localhost' ? 'http://localhost:8081' : 'https://hire.virtap.com.br';
         window.role = 'client';
     </script>
 </head>
@@ -31,28 +31,28 @@
         </div>
         <div class="right_content">
             <div id="loading" style="line-height: 1; word-break: break-all;display:none">
-                <h1>Por favor, aguarde...<p class="mt-2"></p>
-                    <div class="spinner-border" role="status"><span class="sr-only"></span></div>
+                <h1>Please wait...<p class="mt-2"></p>
+                    <div class="spinner-border text-primary" role="status"><span class="sr-only"></span></div>
                 </h1>
             </div>
 
             <form id="sign_up" class="row">
                 <div class="text-center" style="margin-bottom: 2rem">
-                    <a href="./" class="login_site_logo"><img src="/img/logo.svg" alt=""></a>
+                    <a href="/" class="login_site_logo"><img src="/img/logo.svg" alt=""></a>
                 </div>
 
-                <h1 class="text-center mb-4">Entre na sua conta Virtap</h1>
+                <h1 class="text-center mb-4">Log in to your Virtap account</h1>
                 <div class="col-xs-12 col-sm-6 offset-sm-3">
                     <div class="form-group" data-field>
-                        <label for="email">E-mail</label>
-                        <input type="email" class="form-control" id="email" placeholder="seu@email.com">
-                        <em>Por favor, informe seu email.</em>
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="your@email.com">
+                        <em>Please enter your email.</em>
                     </div>
                     <div class="form-group mt-3" data-field>
-                        <label for="password">Senha</label>
+                        <label for="password">Password</label>
                         <div class="password-wrapper" style="position: relative; display: inline-block; width:100%">
                             <input type="password" class="form-control" id="password" style="padding-right: 2.5rem;">
-                            <!-- Ícone SVG: olho fechado (default) -->
+                            <!-- SVG icon: closed eye (default) -->
                             <svg id="togglePassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="eye-icon"
                                 style="width: 24px; height: 24px; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
@@ -60,34 +60,42 @@
                                     d="M3.98 8.223a10.477 10.477 0 00-.72 1.034C2.29 10.648 1.875 12 1.875 12s3.75 6.75 9.75 6.75c1.584 0 3.073-.367 4.408-1.004M6.32 6.321C7.87 5.217 9.762 4.5 11.625 4.5c6 0 9.75 6.75 9.75 6.75s-.235.564-.722 1.293M3 3l18 18" />
                             </svg>
                         </div>
-                        <em>Por favor, informe sua senha.</em>
+                        <em>Please enter your password.</em>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-10 offset-sm-1">
                     <div class="mt-4 text-center">
-                        <p class="alert alert-danger" id="generic-error"><strong>Erro ao efetuar login.</strong><br />
-                            Por favor, verifique sua conexão e tente novamente.</p>
-                        <p class="alert alert-danger" id="invalid-credentials"><strong>Usuário/senha
-                                inválidos.</strong><br />Por favor, verifique seus dados e tente novamente.
-                            <br><br>
-                            Ou <a href="" id="google-login-link"><strong>clique aqui</strong></a> para entrar com sua
-                            conta <strong>Google</strong>.
+                        <p class="alert alert-danger" id="generic-error">
+                            <strong>Error logging in.</strong><br />
+                            Please check your connection and try again.
                         </p>
-                        <p class="alert alert-warning" id="expired-password"><strong>Sua senha expirou.</strong><br />
-                            Enviamos um email com um link para redefinir sua senha.</p>
-                        <p class="alert alert-info" id="not-verified"><strong>Conta ainda não verificada.</strong><br />
-                            Enviamos um email com um link para verificar sua conta.</p>
+                        <p class="alert alert-danger" id="invalid-credentials">
+                            <strong>Invalid email or password.</strong><br />
+                            Please check your details and try again.
+                            <br><br>
+                            Or <a href="" id="google-login-link"><strong>click here</strong></a> to continue with your
+                            <strong>Google</strong> account.
+                        </p>
+                        <p class="alert alert-warning" id="expired-password">
+                            <strong>Your password has expired.</strong><br />
+                            We’ve sent you an email with a link to reset your password.
+                        </p>
+                        <p class="alert alert-info" id="not-verified">
+                            <strong>Account not yet verified.</strong><br />
+                            We’ve sent you an email with a link to verify your account.
+                        </p>
                         <button class="btn" id="submit-btn">Log in</button>
-                        <p class="mt-3"><a href="solicitar-nova-senha" class="regular-link" id="reset-link">Esqueci
-                            minha
-                            senha</a></p>
-                </div>
+                        <p class="mt-3">
+                            <a href="request-new-password" class="regular-link" id="reset-link">
+                                Forgot my password
+                            </a>
+                        </p>
+                    </div>
 
                 </div>
             </form>
         </div>
     </div>
-
 
     <script src="/js/vendor-common-v2.js"></script>
     <script src="js/password-login-v2.js"></script>
