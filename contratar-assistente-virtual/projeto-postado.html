@@ -111,8 +111,8 @@
     }
   </style>
   <script>
-    window.apiURL = 'https://api.virtap.com.br';
-    window.dashboardURL = 'https://clientes.virtap.com.br';
+    window.apiURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://api.virtap.com.br';
+    window.dashboardURL = window.location.hostname === 'localhost' ? 'http://localhost:8081' : 'https://clientes.virtap.com.br';
   </script>
 </head>
 

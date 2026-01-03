@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="/css/subscribe-v1.css" />
 
     <script>
-        window.apiURL = 'https://api.virtap.com.br';
-        window.dashboardURL = 'https://clientes.virtap.com.br';
+        window.apiURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://api.virtap.com.br';
+        window.dashboardURL = window.location.hostname === 'localhost' ? 'http://localhost:8081' : 'https://clientes.virtap.com.br';
         window.role = 'client';
     </script>
 </head>
@@ -38,7 +38,9 @@
                     esteja cadastrado na Virtap,<br /> vamos te enviar um email com um link para
                     redefinir sua senha.</p>
                 <p class="alert alert-warning" id="google-link"><strong>Quer entrar sem senha?</strong><br />
-                    <a href="" id="google-login-link"><strong>Clique aqui</strong></a> para entrar com sua conta <strong>Google</strong>.</p>
+                    <a href="" id="google-login-link"><strong>Clique aqui</strong></a> para entrar com sua conta
+                    <strong>Google</strong>.
+                </p>
             </div>
             <form id="sign_up" class="row">
                 <div class="text-center" style="margin-bottom: 2rem">
