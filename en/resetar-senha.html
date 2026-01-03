@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+
+    <title>Virtap | Cliente | Redefinir senha</title>
+
+    <link href="/favicon.svg" type="image/svg+xml" rel="icon" />
+    <link href="/favicon.png" type="image/png" rel="icon" />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/subscribe-v1.css" />
+
+    <script>
+        window.apiURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://api.virtap.com.br';
+        window.dashboardURL = window.location.hostname === 'localhost' ? 'http://localhost:8081' : 'https://clientes.virtap.com.br';
+        window.role = 'client';
+    </script>
+<body>
+
+    <div class="sign_up">
+        <div class="left_content" style="background: linear-gradient(180deg, #9CD7DB -190.19%, #FFFFFF 100%);">
+            <img src="/img/o-que-faz-secretaria-executiva.svg" alt="">
+            <h2><a id="next-link"></a></h2>
+        </div>
+        <div class="right_content">
+            <div id="loading" style="line-height: 1; word-break: break-all;">
+                <h1>Por favor, aguarde...<p class="mt-2"></p>
+                    <div class="spinner-border" role="status"><span class="sr-only"></span></div>
+                </h1>
+            </div>
+            <div class="text-center">
+                <p class="alert alert-danger" id="loading-error"><strong>Erro ao carregar página.</strong><br /> Por
+                    favor, verifique sua conexão e tente novamente.</p>
+                <p class="alert alert-danger" id="invalid-parameters"><strong>Link incorreto.</strong><br />O link que
+                    você acessou está incorreto.</p>
+                <p class="alert alert-warning" id="invalid-link"><strong>Link inválido ou
+                        expirado.</strong><br /><a href="" id="new-link">Clique aqui</a> para solicitar um novo.
+                </p>
+            </div>
+
+            <form id="sign_up" class="row" style="display:none">
+
+                <div class="text-center" style="margin-bottom: 2rem">
+                    <a href="./" class="login_site_logo"><img src="/img/logo.svg" alt=""></a>
+                </div>
+
+                <h1 class="text-center mb-4">Resetar senha da sua conta Virtap</h1>
+                <div class="col-xs-12 col-sm-6 offset-sm-3">
+                    <div class="form-group mt-3" data-field>
+                        <label for="password">Nova senha</label>
+                        <div class="password-wrapper" style="position: relative; display: inline-block; width:100%">
+                            <input type="password" class="form-control" id="new_password"
+                                style="padding-right: 2.5rem;">
+                            <!-- Ícone SVG: olho fechado (default) -->
+                            <svg class="togglePassword" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="eye-icon"
+                                style="width: 24px; height: 24px; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.98 8.223a10.477 10.477 0 00-.72 1.034C2.29 10.648 1.875 12 1.875 12s3.75 6.75 9.75 6.75c1.584 0 3.073-.367 4.408-1.004M6.32 6.321C7.87 5.217 9.762 4.5 11.625 4.5c6 0 9.75 6.75 9.75 6.75s-.235.564-.722 1.293M3 3l18 18" />
+                            </svg>
+                        </div>
+                        <em>Por favor, informe uma senha com ao menos 8 caracteres.</em>
+                    </div>
+                    <div class="form-group mt-3" data-field>
+                        <label for="password">Confirme a senha</label>
+                        <div class="password-wrapper" style="position: relative; display: inline-block; width:100%">
+                            <input type="password" class="form-control" id="confirm_password"
+                                style="padding-right: 2.5rem;">
+                            <!-- Ícone SVG: olho fechado (default) -->
+                            <svg class="togglePassword" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="eye-icon"
+                                style="width: 24px; height: 24px; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.98 8.223a10.477 10.477 0 00-.72 1.034C2.29 10.648 1.875 12 1.875 12s3.75 6.75 9.75 6.75c1.584 0 3.073-.367 4.408-1.004M6.32 6.321C7.87 5.217 9.762 4.5 11.625 4.5c6 0 9.75 6.75 9.75 6.75s-.235.564-.722 1.293M3 3l18 18" />
+                            </svg>
+                        </div>
+                        <em>As senhas não conferem.</em>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-10 offset-sm-1">
+                    <div class="mt-4 text-center">
+                        <button class="btn" id="submit-btn">Resetar</button>
+                        <p class="alert alert-danger mt-4" id="generic-error"><strong>Erro ao resetar
+                                senha.</strong><br /> Por
+                            favor, verifique sua conexão e tente novamente.</p>
+                        <p class="alert alert-warning mt-4" id="expired-link"><strong>Link inválido ou
+                                expirado.</strong><br /><a href="" id="new-link2">Clique aqui</a> para solicitar um
+                            novo.
+                        </p>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/js/vendor-common-v2.js"></script>
+    <script src="./js/reset-password-v2.js"></script>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-//ok
+// ok
 function handleError(response) {
   console.log(response);
   let showGenericError = true;
@@ -29,11 +29,11 @@ function applyValidations() {
     return email;
   });
 
-  // Blur validation.
+  // Blur validation
   $("[data-field]").each(function () {
     let $field = $(this);
     $(this).find('input,select').on('blur', function () {
-      let val = $(this).val()
+      let val = $(this).val();
 
       if ($field.is('[data-optional]')) {
         if (!val || val.trim().length === 0) {
@@ -46,7 +46,7 @@ function applyValidations() {
         $field.removeClass('error');
         $field.data('get-field')();
       }
-    })
+    });
   });
 
 }
@@ -55,7 +55,7 @@ function updateLinks() {
   const currentParams = new URLSearchParams(window.location.search);
 
   const $button = $("#google-login-link");
-  const url = new URL(`${apiURL}/auth/google/client`, window.location.origin);
+  const url = new URL(`${apiURL}/auth/google/client?en=1`, window.location.origin);
 
   currentParams.forEach((value, key) => {
     url.searchParams.set(key, value);
@@ -93,8 +93,8 @@ function getFields() {
 }
 
 $(submitBtn).on('click', async (event) => {
-  // We don't want to let default form submission happen here,
-  // which would refresh the page.
+  // We don't want to allow the default form submission,
+  // which would refresh the page
   event.preventDefault();
 
   // Prevent multiple form submissions
@@ -104,24 +104,24 @@ $(submitBtn).on('click', async (event) => {
 
   $("p.alert").hide();
   updateLinks();
-  
+
   let fields = getFields();
   if (!fields) {
     return;
   }
 
   // Disable form submission while loading
-  $("#submit-btn").prop('disabled', true).text('Por favor, aguarde...');
+  $("#submit-btn").prop('disabled', true).text('Please wait...');
   $("input,select").prop('disabled', true);
 
   try {
     let email = $("#email").val().trim();
-    const res = await fetch(`${window.apiURL}/request-password-reset`, {
+    const res = await fetch(`${window.apiURL}/request-password-reset?en=1`, {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({ email: email, r: window.role }),
       headers: {
-        'Content-Type': 'application/json' // Não precisa se estiver usando FormData
+        'Content-Type': 'application/json'
       },
     });
 
@@ -137,9 +137,8 @@ $(submitBtn).on('click', async (event) => {
 
   } catch (err) {
     handleError(err);
-  }
-  finally {
-    $("#submit-btn").prop('disabled', false).text('Resetar senha');
+  } finally {
+    $("#submit-btn").prop('disabled', false).text('Reset password');
     $("input,select").prop('disabled', false);
   }
 });
