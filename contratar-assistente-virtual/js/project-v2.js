@@ -40,11 +40,13 @@ function handleGoogleLogin() {
             loginHandled = true;
             restoreBtn();
 
-            if (type === 'oauth_success') {
-                currentStepIndex++;
-                renderStep(currentStepIndex, false, { name, email, newUser });
-            } else if (type === 'oauth_error') {
-                showModal();
+            if (currentStepIndex === 4) {
+                if (type === 'oauth_success') {
+                    currentStepIndex++;
+                    renderStep(currentStepIndex, false, { name, email, newUser });
+                } else if (type === 'oauth_error') {
+                    showModal();
+                }
             }
 
             // Garante que a pop-up seja fechada após o processamento
