@@ -4,18 +4,18 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Guia Prático: A Profissão de Assistência Virtual</title>
+	<title>O que é a profissão de Assistência Virtual | Virtap</title>
 
 	<!-- Meta Tags SEO -->
 	<meta name="description"
-		content="Descubra como iniciar na carreira de Assistência Virtual. Guia prático sobre o que faz, quanto ganha e como trabalhar de casa com flexibilidade total.">
+		content="Guia prático sobre a profissão de Assistência Virtual: o que faz, quanto ganha e como trabalhar de casa.">
 	<meta name="keywords"
 		content="assistente virtual, trabalho remoto, home office, renda extra, profissão digital, secretariado remoto">
 	<meta name="author" content="Virtap">
 	<meta name="robots" content="index, follow">
 
 	<!-- Open Graph (Redes Sociais) -->
-	<meta property="og:title" content="Guia Prático: A Profissão de Assistência Virtual">
+	<meta property="og:title" content="O que é a profissão de Assistência Virtual | Virtap">
 	<meta property="og:description"
 		content="Trabalhe de qualquer lugar ajudando empresas a otimizar rotinas administrativas. Saiba mais!">
 	<meta property="og:type" content="website">
@@ -148,7 +148,8 @@
 			<div class="container">
 				<header class="section-header reveal">
 					<h2>O que é preciso para começar trabalhar como Assistente Virtual?</h2>
-					<p>Você não precisa de uma estrutura complicada.<br> Com alguns recursos básicos e vontade de aprender,
+					<p>Você não precisa de uma estrutura complicada.<br> Com alguns recursos básicos e vontade de
+						aprender,
 						já é possível dar os primeiros passos.</p>
 				</header>
 				<div class="grid grid-3">
@@ -190,7 +191,8 @@
 						</div>
 						<div class="req-item">
 							<i class="fas fa-check-circle" aria-hidden="true"></i>
-							<p><strong>Intermediário:</strong> Profissionais com alguma experiência costumam faturar entre R$ 4.000 e R$ 8.000 por mês</p>
+							<p><strong>Intermediário:</strong> Profissionais com alguma experiência costumam faturar
+								entre R$ 4.000 e R$ 8.000 por mês</p>
 						</div>
 						<div class="req-item">
 							<i class="fas fa-check-circle" aria-hidden="true"></i>
@@ -245,9 +247,10 @@
 			<div class="container reveal" style="text-align: center;">
 				<div class="section-header" style="margin-bottom: 30px;">
 					<h2>Quer trabalhar como Assistente Virtual?</h2>
-					<p>Nosso <strong class="text-blue">curso gratuito</strong> explica, de maneira simples, como é trabalhar como Assistente Virtual e como dar os primeiros passos.</p>
+					<p>Nosso <strong class="text-blue">curso gratuito</strong> explica, de maneira simples, como é
+						trabalhar como Assistente Virtual e como dar os primeiros passos.</p>
 				</div>
-				<a href="#" class="btn">Quero ter acesso ao curso gratuito</a>
+				<a href="/curso-assistente-virtual"  data-link class="btn">Quero ter acesso ao curso gratuito</a>
 			</div>
 		</section>
 	</main>
@@ -259,6 +262,30 @@
 
 	<script src="js/utils-v1.js"></script>
 	<script>
+
+		const currentParams = new URLSearchParams(window.location.search);
+		const elements = document.querySelectorAll("[data-link]");
+
+		if (currentParams.toString()) {
+			elements.forEach(element => {
+				// Pega o href existente do elemento
+				const existingHref = element.href;
+
+				if (existingHref) {
+					// Cria um novo objeto URL com base no href existente
+					const url = new URL(existingHref, window.location.origin);
+
+					// Anexa os parâmetros da URL atual no href
+					currentParams.forEach((value, key) => {
+						url.searchParams.set(key, value);
+					});
+
+					// Atualiza o href do elemento com a nova URL completa
+					element.href = url.toString();
+				}
+			});
+		}
+
 		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 			anchor.addEventListener('click', function (e) {
 				e.preventDefault();
