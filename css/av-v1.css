@@ -1,0 +1,395 @@
+:root {
+  --white: #ffffff;
+  --blue: #532e88;
+  --blueGradient: linear-gradient(93.52deg, #7047ac 0%, #532e88 100%);
+  --light-blue: #effafb;
+  --light-gradient: linear-gradient(180deg, #f8f4ff 0%, rgba(248, 244, 255, 0) 100%);
+  --body: #545454;
+  --primaryfont: "Be Vietnam Pro", sans-serif;
+  --radius: 70px;
+  --shadow: 0 15px 45px rgba(83, 46, 136, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--primaryfont);
+  color: var(--body);
+  line-height: 1.7;
+  background: #fff;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Montserrat", sans-serif;
+  color: var(--blue);
+  font-weight: 800;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 25px;
+}
+
+/* HEADER DE NAVEGAÇÃO (O principal) */
+header.main-header {
+  padding: 20px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+}
+
+.nav-flex {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.logo {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--blue);
+  text-decoration: none;
+  letter-spacing: -1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo span {
+  color: #7047ac;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--blueGradient);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1rem;
+}
+
+/* HERO SECTION */
+.hero {
+  background: var(--light-gradient);
+  text-align: center;
+  padding: 180px 20px 140px;
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+}
+
+.hero h1 {
+  font-size: 3.4rem;
+  margin-bottom: 25px;
+  line-height: 1.15;
+}
+
+.hero p {
+  max-width: 820px;
+  margin: 0 auto 35px;
+  font-size: 1.25rem;
+  color: var(--body);
+}
+
+/* BOTÃO GERAL */
+.btn {
+  background: var(--blueGradient);
+  color: #fff;
+  padding: 20px 45px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 800;
+  text-transform: uppercase;
+  display: inline-block;
+  transition: .3s;
+  box-shadow: 0 10px 25px rgba(83, 46, 136, .2);
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(83, 46, 136, .3);
+}
+
+/* SEÇÕES */
+.section {
+  padding: 100px 0;
+}
+
+.bg-light-blue {
+  background: var(--light-blue);
+}
+
+.bg-gradient-soft {
+  background: var(--light-gradient);
+}
+
+.section-rounded {
+  border-radius: var(--radius);
+  margin: 40px 0;
+}
+
+/* Cabeçalhos das secções corrigidos */
+.section-header {
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 60px;
+  position: relative;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  z-index: 1;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+/* GRIDS */
+.grid {
+  display: grid;
+  gap: 30px;
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* CARDS */
+.card {
+  background: #fff;
+  padding: 45px 35px;
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+  transition: .4s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 60px rgba(83, 46, 136, 0.12);
+}
+
+.icon-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  background: var(--blueGradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+/* GANHOS SECTION */
+.earnings-banner {
+  background: var(--blueGradient);
+  color: white;
+  padding: 60px;
+  border-radius: 40px;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.earnings-banner h3 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.earnings-banner .price {
+  font-size: 3.5rem;
+  font-weight: 800;
+  display: block;
+  margin: 10px 0;
+  line-height: 1.2;
+}
+
+.nowrap-price {
+  white-space: nowrap;
+}
+
+/* REQUISITOS LIST */
+.req-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 20px;
+  text-align: left;
+  width: 100%;
+}
+
+.req-item i {
+  color: #7047ac;
+  font-size: 1.2rem;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+/* VÍDEO DEPOIMENTOS */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.video-card {
+  background: #000;
+  border-radius: 35px;
+  aspect-ratio: 16/9;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.video-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+  transition: 0.3s;
+  display: block;
+}
+
+.play-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 3.5rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.video-card:hover img {
+  transform: scale(1.05);
+  opacity: 0.6;
+}
+
+/* REVEAL ANIMATION */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVIDADE - Ajustada para 1024px */
+@media (max-width: 1024px) {
+
+  .grid-3,
+  .grid-4,
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .earnings-content h2 {
+    text-align: center !important;
+  }
+
+  .earnings-content p.subtitle {
+    text-align: center !important;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+  }
+
+  .req-item {
+    justify-content: flex-start;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero {
+    padding-top: 140px;
+  }
+
+  .section {
+    padding: 70px 0;
+  }
+
+  .earnings-banner {
+    padding: 40px 20px;
+  }
+
+  .earnings-banner .price {
+    font-size: 2.5rem;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 18px 20px;
+    font-size: 0.95rem;
+  }
+
+  .earnings-banner .price {
+    font-size: 2.2rem;
+  }
+}
