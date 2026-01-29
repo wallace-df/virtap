@@ -323,6 +323,7 @@ header.main-header {
   /* Ajuste visual do triângulo */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s ease;
+  opacity: 0.8;
 }
 
 .video-card:hover .play-icon {
