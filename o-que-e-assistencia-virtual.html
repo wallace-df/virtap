@@ -223,21 +223,30 @@
 				</header>
 
 				<div class="video-grid">
-					<article class="video-card reveal">
-						<img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600"
-							alt="Profissional de assistência virtual trabalhando em casa">
-						<div class="play-overlay" aria-label="Reproduzir vídeo"><i class="fas fa-play-circle"></i></div>
-					</article>
-					<article class="video-card reveal">
-						<img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600"
-							alt="Assistente virtual organizada em seu espaço de trabalho">
-						<div class="play-overlay" aria-label="Reproduzir vídeo"><i class="fas fa-play-circle"></i></div>
-					</article>
-					<article class="video-card reveal">
-						<img src="https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=600"
-							alt="Depoimento de sucesso trabalhando de forma remota">
-						<div class="play-overlay" aria-label="Reproduzir vídeo"><i class="fas fa-play-circle"></i></div>
-					</article>
+					<div class="video-card reveal" onclick="toggleVideo(this)">
+						<video preload="metadata">
+							<source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+						</video>
+						<div class="video-overlay">
+							<div class="play-icon"><i class="fas fa-play"></i></div>
+						</div>
+					</div>
+					<div class="video-card reveal" onclick="toggleVideo(this)">
+						<video preload="metadata">
+							<source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+						</video>
+						<div class="video-overlay">
+							<div class="play-icon"><i class="fas fa-play"></i></div>
+						</div>
+					</div>
+					<div class="video-card reveal" onclick="toggleVideo(this)">
+						<video preload="metadata" >
+							<source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+						</video>
+						<div class="video-overlay">
+							<div class="play-icon"><i class="fas fa-play"></i></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -250,7 +259,7 @@
 					<p>Nosso <strong class="text-blue">curso gratuito</strong> explica, de maneira simples, como é
 						trabalhar como Assistente Virtual e como dar os primeiros passos.</p>
 				</div>
-				<a href="/curso-assistente-virtual"  data-link class="btn">Quero ter acesso ao curso gratuito</a>
+				<a href="/curso-assistente-virtual" data-link class="btn">Quero ter acesso ao curso gratuito</a>
 			</div>
 		</section>
 	</main>
@@ -284,6 +293,20 @@
 					element.href = url.toString();
 				}
 			});
+		}
+
+		function toggleVideo(container) {
+			const video = container.querySelector('video');
+
+			if (video.paused) {
+				video.play();
+				container.classList.add('is-playing');
+				video.setAttribute('controls', 'true');
+			} else {
+				video.pause();
+				container.classList.remove('is-playing');
+				video.removeAttribute('controls');
+			}
 		}
 
 		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
