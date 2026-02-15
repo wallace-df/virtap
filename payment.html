@@ -20,18 +20,24 @@
         <input type="email" class="form-control" id="confirmation_email" placeholder="seu@email.com">
         <em>O email digitado não confere.</em>
     </div>
+    <div class="form-group mb-3" data-field="phone" data-auto-fillable>
+        <label for="phone">Telefone</label>
+        <input type="text" class="form-control" id="phone" placeholder="(99) 99999-9999">
+        <em>Por favor, informe um teleffone válido.</em>
+    </div>
     <div class="form-group mb-3" data-field="cpf_cnpj" data-auto-fillable>
         <label for="cpf_cnpj">CPF/CNPJ (para nota fiscal)</label>
         <input type="text" class="form-control" id="cpf_cnpj" placeholder="999.999.999-99">
         <em>Por favor, informe um CPF/CNPJ válido.</em>
     </div>
-    <div class="form-group mb-3" data-field="address" data-auto-fillable>
+
+    <!-- <div class="form-group mb-3" data-field="address" data-auto-fillable>
         <label for="address">Endereço (para nota fiscal)</label>
         <input type="text" class="form-control" id="address" placeholder="Av. Paulista "
             onblur="javascript:void($('#full-address').collapse('show'))">
         <em>Por favor, informe um endereço válido.</em>
-    </div>
-    <div id="full-address" class="collapse">
+    </div> -->
+    <!-- <div id="full-address" class="collapse">
         <div class="row gx-3">
             <div class="col-md-6">
                 <div class="form-group mb-3" data-field="address_number">
@@ -122,7 +128,7 @@
             </div>
         </div>
 
-    </div>
+    </div> -->
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-link active" data-bs-toggle="tab" href="#nav-card" role="tab" aria-controls="nav-card"
@@ -222,7 +228,8 @@
         <br /><br /><a>Clique aqui</a> para acessar sua conta.
     </p>
     <p class="alert alert-info mt-4 mb-4" id="clientes-not-allowed"><strong>Não foi possível realizar a
-            compra</strong><br /> Este curso é exclusivo para quem tem acesso ativo à plataforma de vagas.<br/> Temos uma oferta especial para novos membros. Entre em contato com o suporte para garantir sua vaga.
+            compra</strong><br /> Este curso é exclusivo para quem tem acesso ativo à plataforma de vagas.<br /> Temos
+        uma oferta especial para novos membros. Entre em contato com o suporte para garantir sua vaga.
     </p>
     <p class="alert alert-info mt-4 mb-4" id="not-available"><strong>Produto não disponível</strong><br />O produto
         que você está tentando comprar não está mais disponível.<br>Por favor,

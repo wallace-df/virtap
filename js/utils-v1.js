@@ -564,9 +564,9 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
         separateDialCode: true
     });
 
-    if (initAutocompleteAfterPaymentForm) {
-        initAutocomplete();
-    }
+    // if (initAutocompleteAfterPaymentForm) {
+    //     initAutocomplete();
+    // }
 
 
     let $cardContainer = $('[data-card-container');
@@ -610,11 +610,11 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
     $cardContainer.append($container);
 
-    // Evento de mudança na UF
-    $('#state').change(function () {
-        const ufSelecionado = $(this).val();  // Pega a UF selecionada
-        populateMunicipios(ufSelecionado);    // Chama a função para popular os municípios
-    });
+    // // Evento de mudança na UF
+    // $('#state').change(function () {
+    //     const ufSelecionado = $(this).val();  // Pega a UF selecionada
+    //     populateMunicipios(ufSelecionado);    // Chama a função para popular os municípios
+    // });
 
     let $installments = $("#installments");
     $installments.empty();
@@ -627,7 +627,6 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
     $("#sign_up").find('[data-payment-method]').attr('data-price', initialDetails.payment_config.installments[0].amount);
 
     $("#name").val(initialDetails.name);
-    $("#cpf_cnpj").val(initialDetails.cpf_cnpj);
     $("#email").val(initialDetails.email);
     $("#email").prop('disabled', hasEmail);
 
@@ -639,11 +638,6 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
     } else {
         $("#confirmation_email").closest('.form-group').show();
         $("#login-note").hide();
-    }
-
-    if (initialDetails.billing_details) {
-        $("[data-auto-fillable]").hide();
-        hasBillingDetails = true;
     }
 
     document.title = getTitleFunc();
@@ -713,13 +707,13 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
     let $email = $("#email");
     let $confirmation_email = $("#confirmation_email");
     let $cpf_cnpj = $("#cpf_cnpj");
-    let $address = $("#address");
-    let $address_number = $("#address_number");
-    let $complement = $("#complement");
-    let $neighborhood = $("#neighborhood");
-    let $state = $("#state");
-    let $cep = $("#cep");
-    let $city = $("#city");
+    // let $address = $("#address");
+    // let $address_number = $("#address_number");
+    // let $complement = $("#complement");
+    // let $neighborhood = $("#neighborhood");
+    // let $state = $("#state");
+    // let $cep = $("#cep");
+    // let $city = $("#city");
     let $phone = $("#phone");
     let $card_number = $("#card-number");
     let $card_holder = $("#card-holder");
@@ -769,70 +763,70 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
         return cpf_cnpj;
     });
 
-    // Address
-    $address.parent().data('get-field', function () {
-        let address = $address.val().trim();
-        if (!validateAddress(address)) {
-            $address.parent().addClass('error');
-            return undefined;
-        }
-        return address;
-    });
+    // // Address
+    // $address.parent().data('get-field', function () {
+    //     let address = $address.val().trim();
+    //     if (!validateAddress(address)) {
+    //         $address.parent().addClass('error');
+    //         return undefined;
+    //     }
+    //     return address;
+    // });
 
-    // Address number
-    $address_number.parent().data('get-field', function () {
-        let address_number = $address_number.val();
-        if (!validateAddressNumber(address_number)) {
-            $address_number.parent().addClass('error');
-            return undefined;
-        }
-        return address_number;
-    });
+    // // Address number
+    // $address_number.parent().data('get-field', function () {
+    //     let address_number = $address_number.val();
+    //     if (!validateAddressNumber(address_number)) {
+    //         $address_number.parent().addClass('error');
+    //         return undefined;
+    //     }
+    //     return address_number;
+    // });
 
-    // Complement 
-    $complement.closest('[data-field]').data('get-field', function () {
-        return $complement.val().trim();
-    });
+    // // Complement 
+    // $complement.closest('[data-field]').data('get-field', function () {
+    //     return $complement.val().trim();
+    // });
 
-    // Neighborhood
-    $neighborhood.parent().data('get-field', function () {
-        let neighborhood = $neighborhood.val().trim();
-        if (!validateNeighborhood(neighborhood)) {
-            $neighborhood.parent().addClass('error');
-            return undefined;
-        }
-        return neighborhood;
-    });
+    // // Neighborhood
+    // $neighborhood.parent().data('get-field', function () {
+    //     let neighborhood = $neighborhood.val().trim();
+    //     if (!validateNeighborhood(neighborhood)) {
+    //         $neighborhood.parent().addClass('error');
+    //         return undefined;
+    //     }
+    //     return neighborhood;
+    // });
 
-    // State
-    $state.parent().data('get-field', function () {
-        let state = $state.val().trim();
-        if (!state) {
-            $state.parent().addClass('error');
-            return undefined;
-        }
-        return state;
-    });
+    // // State
+    // $state.parent().data('get-field', function () {
+    //     let state = $state.val().trim();
+    //     if (!state) {
+    //         $state.parent().addClass('error');
+    //         return undefined;
+    //     }
+    //     return state;
+    // });
 
-    // CEP
-    $cep.parent().data('get-field', function () {
-        let cep = $cep.val().trim();
-        if (!validateCEP(cep)) {
-            $cep.parent().addClass('error');
-            return undefined;
-        }
-        return cep;
-    });
+    // // CEP
+    // $cep.parent().data('get-field', function () {
+    //     let cep = $cep.val().trim();
+    //     if (!validateCEP(cep)) {
+    //         $cep.parent().addClass('error');
+    //         return undefined;
+    //     }
+    //     return cep;
+    // });
 
-    // City 
-    $city.parent().data('get-field', function () {
-        let city = $city.val();
-        if (!city) {
-            $city.parent().addClass('error');
-            return undefined;
-        }
-        return city;
-    });
+    // // City 
+    // $city.parent().data('get-field', function () {
+    //     let city = $city.val();
+    //     if (!city) {
+    //         $city.parent().addClass('error');
+    //         return undefined;
+    //     }
+    //     return city;
+    // });
 
     // Phone 
     $phone.closest('[data-field]').data('get-field', function () {
@@ -924,6 +918,14 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
             }
         })
     });
+
+    if (initialDetails.billing_details) {
+        $("#cpf_cnpj").val(initialDetails.billing_details.cpf_cnpj).trigger('blur');
+    }
+
+    if(initialDetails.hasProfile) {
+        $('[data-field="phone"]').attr('data-optional',true).hide();
+    }
 
     $(submitBtn).on('click', async (event) => {
         // We don't want to let default form submission happen here,
