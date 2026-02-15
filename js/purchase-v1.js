@@ -118,7 +118,7 @@ function handleError(response, loading) {
         }
       } else {
         if (loading) {
-          showGenericError = false;
+           showGenericError = false;
           $("#access-conflict").show().find('strong').text('Compra não disponível');
         } else {
           showGenericError = false;

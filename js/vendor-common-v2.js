@@ -23740,11 +23740,11 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
     if (hasEmail) {
         loggedInUser = initialDetails.email;
-        $("#confirmation_email").closest('.form-group').hide();
-        $("#confirmation_email").val(initialDetails.email);
+        // $("#confirmation_email").closest('.form-group').hide();
+        // $("#confirmation_email").val(initialDetails.email);
         $("#login-note").show();
     } else {
-        $("#confirmation_email").closest('.form-group').show();
+        // $("#confirmation_email").closest('.form-group').show();
         $("#login-note").hide();
     }
 
@@ -23813,7 +23813,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
     let $name = $("#name");
     let $email = $("#email");
-    let $confirmation_email = $("#confirmation_email");
+    // let $confirmation_email = $("#confirmation_email");
     let $cpf_cnpj = $("#cpf_cnpj");
     // let $address = $("#address");
     // let $address_number = $("#address_number");
@@ -23848,16 +23848,16 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
         return email;
     });
 
-    // Confirmation email 
-    $confirmation_email.parent().data('get-field', function () {
-        let email = $email.val().trim().toLowerCase();
-        let confirmation_email = $confirmation_email.val().trim().toLowerCase();
-        if (email !== confirmation_email) {
-            $confirmation_email.parent().addClass('error');
-            return undefined;
-        }
-        return email;
-    });
+    // // Confirmation email 
+    // $confirmation_email.parent().data('get-field', function () {
+    //     let email = $email.val().trim().toLowerCase();
+    //     let confirmation_email = $confirmation_email.val().trim().toLowerCase();
+    //     if (email !== confirmation_email) {
+    //         $confirmation_email.parent().addClass('error');
+    //         return undefined;
+    //     }
+    //     return email;
+    // });
 
     // CPF/CNPJ
     $cpf_cnpj.parent().data('get-field', function () {
@@ -24033,6 +24033,7 @@ function showPaymentForm(initialDetails, getTitleFunc, getButtonLabelFunc, prepa
 
     if(initialDetails.hasProfile) {
         $('[data-field="phone"]').attr('data-optional',true).hide();
+        $('[data-field="cpf_cnpj"]').parent().attr('class', 'col-md-12');
     }
 
 
