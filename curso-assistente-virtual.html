@@ -27,7 +27,7 @@
     <!-- End Google Tag Manager -->
 
     <script>
-        window.apiURL = 'https://api.virtap.com.br';
+        window.apiURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://api.virtap.com.br';
     </script>
 
     <style>
@@ -407,7 +407,7 @@
             </div>
             <h2>Curso 100% gratuito para dar o primeiro passo na Assistência Virtual</h2>
             <form>
-                <input type="text" placeholder="Nome" id="nome" maxlength="50">
+                <input type="text" placeholder="Nome" id="nome" maxlength="30">
                 <div class="error-message" id="erro-nome"></div>
 
                 <input type="text" placeholder="E-mail" id="email">

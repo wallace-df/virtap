@@ -27,7 +27,7 @@
         gtag('config', 'G-4ZFMG1F0XK', {
             'anonymize_ip': true
         });
-        window.apiURL = 'https://api.virtap.com.br';
+        window.apiURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://api.virtap.com.br';
     </script>
     <!-- Hotjar Tracking Code for https://www.virtap.com.br -->
     <script>

@@ -17,10 +17,8 @@
     <link rel="stylesheet" href="css/subscribe-v1.css" />
 
     <script>
-        window.apiURL = 'https://api.virtap.com.br';
+        window.apiURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://api.virtap.com.br';
         window.dashboardURL = 'https://assistentes.virtap.com.br';
-        window.apiURL = 'http://localhost:3000';
-        window.dashboardURL = 'http://localhost:8080';
     </script>
 
     <!-- Google Tag Manager -->
@@ -33,7 +31,7 @@
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
     </script>
-    <!-- End Google Tag Manager -->ß
+    <!-- End Google Tag Manager -->
 </head>
 
 <body>

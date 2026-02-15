@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/vendor-login-v1.css">
     <link rel="stylesheet" href="css/login-v1.css">
     <script>
-        window.apiURL = 'https://api.virtap.com.br';
+        window.apiURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://api.virtap.com.br';
     </script>
 </head>
 
@@ -51,7 +51,7 @@
                             </a>
                         </p>
 
-                        <!-- <p class="mt-5 fs-3"><a href="/cadastrar">Não tem uma conta? Cadastre-se grátis!</a></p> -->
+                        <p class="mt-5 fs-3"><a href="/curso-assistente-virtual">Não tem uma conta? Comece gratuitamente!</a></p>
                     </div>
                 </div>
             </div>

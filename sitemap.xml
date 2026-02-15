@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset 
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+      xmlns:xhtml="http://www.w3.org/1999/xhtml"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Home -->
+  <url>
+    <loc>https://www.virtap.com.br/</loc>
+    <lastmod>2026-01-28T23:35:40+00:00</lastmod>
+    <priority>1.00</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.virtap.com.br/en/"/>
+  </url>
+
+  <!-- Contratar Assistente Virtual -->
+  <url>
+    <loc>https://www.virtap.com.br/contratar-assistente-virtual/</loc>
+    <lastmod>2026-01-28T23:35:40+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Curso Assistente Virtual -->
+  <url>
+    <loc>https://www.virtap.com.br/curso-assistente-virtual/</loc>
+    <lastmod>2026-01-28T23:35:40+00:00</lastmod>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- O que e Assistencia Virtual -->
+  <url>
+    <loc>https://www.virtap.com.br/o-que-e-assistencia-virtual/</loc>
+    <lastmod>2026-01-28T23:35:40+00:00</lastmod>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Página em inglês (Home) -->
+  <url>
+    <loc>https://www.virtap.com.br/en/</loc>
+    <lastmod>2026-01-28T23:35:40+00:00</lastmod>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.virtap.com.br/"/>
+  </url>
+
+</urlset>

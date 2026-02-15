@@ -25,6 +25,12 @@ Disallow: /contratar-assistente-virtual/login.html
 Disallow: /contratar-assistente-virtual/perfil.html
 Disallow: /contratar-assistente-virtual/postar-projeto.html
 
+Disallow: /en/login.html
+Disallow: /en/login-with-email.html
+Disallow: /en/profile.html
+Disallow: /en/request-new-password.html
+Disallow: /en/reset-password.html
+
 Disallow: /assinar
 Disallow: /cadastrar
 Disallow: /cadastro-confirmado
@@ -50,3 +56,9 @@ Disallow: /contratar-assistente-virtual/cadastrar
 Disallow: /contratar-assistente-virtual/login
 Disallow: /contratar-assistente-virtual/perfil
 Disallow: /contratar-assistente-virtual/postar-projeto
+
+Disallow: /en/login
+Disallow: /en/login-with-email
+Disallow: /en/profile
+Disallow: /en/request-new-password
+Disallow: /en/reset-password

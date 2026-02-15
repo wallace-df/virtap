@@ -139,7 +139,7 @@ $(submitBtn).on('click', async (event) => {
     handleError(err);
   }
   finally {
-    $("#submit-btn").prop('disabled', false).text('Log in');
+    $("#submit-btn").prop('disabled', false).text('Resetar senha');
     $("input,select").prop('disabled', false);
   }
 });

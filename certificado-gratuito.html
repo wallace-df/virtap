@@ -25,9 +25,9 @@
     })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
     </script>
     <!-- End Google Tag Manager -->
-
+    
     <script>
-        window.apiURL = 'https://api.virtap.com.br';
+        window.apiURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://api.virtap.com.br';
     </script>
 
     <style>
