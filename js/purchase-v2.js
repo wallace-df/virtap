@@ -118,7 +118,7 @@ function handleError(response, loading) {
         }
       } else {
         if (loading) {
-          showGenericError = false;
+           showGenericError = false;
           $("#access-conflict").show().find('strong').text('Compra não disponível');
         } else {
           showGenericError = false;
@@ -195,9 +195,11 @@ function productName(orderRef) {
       return "<ul><li>Assinatura Profissional Trimestral</li></ul>";
     case 'ASSINATURA_ELITE_TRI':
       return "<ul><li>Assinatura Elite Trimestral</li></ul>";
-    case 'VIRTAP_STARTER_KIT':
-      return "<ul><li>Método Virtap de Conquistar Clientes</li><li>30 dias de acesso à plataforma de vagas</li></ul>";
-    case 'VIRTAP_CLUB':
+      case 'VIRTAP_STARTER_KIT':
+        return "<ul><li>Método Virtap de Conquistar Clientes</li><li>30 dias de acesso à plataforma de vagas</li></ul>";
+        case 'VIRTAP_ALL_IN_ONE':
+          return "<ul><li>Formação em Assistência Virtual</li><li>Formação AExpert</li><li>Mentorias em Grupo Ao Vivo</li><li>Método Virtap de Conquistar Clientes</li><li>3 Meses de Acesso a Vagas de Trabalho</li></ul>";
+          case 'VIRTAP_CLUB':
       return "<ul><li>Formação em Assistência Virtual</li><li>12 meses de acesso premium à plataforma de vagas</li><li>Aulas extras e sessões com especialistas</li></ul>";
     default:
       throw new Error("Invalid order ref:" + orderRef)
@@ -215,7 +217,7 @@ function init() {
 
   function loadTemplate() {
     $.ajax({
-      url: "/payment.html",
+      url: "/payment.html?v=2",
       method: "GET",
       success: function (data) {
         $("#payment-container").html(data);

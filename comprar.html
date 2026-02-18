@@ -14,7 +14,7 @@
     <link href="/favicon.png" type="image/png" rel="icon" />
 
     <link rel="stylesheet" href="css/vendor-common-v1.css" />
-    <link rel="stylesheet" href="css/subscribe-v1.css" />
+    <link rel="stylesheet" href="css/subscribe-v1.css?v=1" />
 
     <script>
         window.apiURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://api.virtap.com.br';
@@ -111,6 +111,7 @@
         <div class="left_content" style="background: linear-gradient(180deg, #9CD7DB -190.19%, #FFFFFF 100%);">
             <!-- <img src="/img/hero_img.png" alt=""> -->
             <img src="/img/logo.png" alt="Virtap logo" />
+            <img src="img/hero_img.png" style="max-width: 400px"/>
             <h2></h2>
         </div>
         <div class="right_content">
@@ -118,11 +119,11 @@
         </div>
     </div>
 
-    <script
+    <!-- <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaGDtiIgu7ZxJvRZzcYeSn25LRdUgzS7k&callback=initAutocomplete&libraries=places&v=weekly"
-        defer></script>
-    <script src="/js/vendor-common-v2.js"></script>
-    <script src="/js/purchase-v1.js"></script>
+        defer></script> -->
+    <script src="/js/vendor-common-v2.js?v=2"></script>
+    <script src="/js/purchase-v2.js"></script> 
 </body>
 
 </html>

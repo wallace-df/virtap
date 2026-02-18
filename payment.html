@@ -15,114 +15,30 @@
             </span>
         </div>
     </div>
-    <div class="form-group mb-3" data-auto-fillable data-field="confirmation_email" data-not-empty>
+    <!-- <div class="form-group mb-3" data-auto-fillable data-field="confirmation_email" data-not-empty>
         <label for="email">Confirme seu e-mail</label>
         <input type="email" class="form-control" id="confirmation_email" placeholder="seu@email.com">
         <em>O email digitado não confere.</em>
-    </div>
-    <div class="form-group mb-3" data-field="cpf_cnpj" data-auto-fillable>
-        <label for="cpf_cnpj">CPF/CNPJ (para nota fiscal)</label>
-        <input type="text" class="form-control" id="cpf_cnpj" placeholder="999.999.999-99">
-        <em>Por favor, informe um CPF/CNPJ válido.</em>
-    </div>
-    <div class="form-group mb-3" data-field="address" data-auto-fillable>
-        <label for="address">Endereço (para nota fiscal)</label>
-        <input type="text" class="form-control" id="address" placeholder="Av. Paulista "
-            onblur="javascript:void($('#full-address').collapse('show'))">
-        <em>Por favor, informe um endereço válido.</em>
-    </div>
-    <div id="full-address" class="collapse">
-        <div class="row gx-3">
-            <div class="col-md-6">
-                <div class="form-group mb-3" data-field="address_number">
-                    <label for="number">Número</label>
-                    <input type="number" class="form-control" id="address_number" placeholder="9999999" min="0">
-                    <em>Por favor, informe um número válido.</em>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group mb-3" data-field="complement">
-                    <label for="complement">Complemento</label>
-                    <input type="text" class="form-control" id="complement" placeholder="Apto 999">
-                </div>
+    </div> -->
+
+    <div class="row gx-3">
+        <div class="col-md-6">
+            <div class="form-group mb-3" data-field="phone" data-auto-fillable>
+                <label for="phone">Telefone</label>
+                <input type="text" class="form-control" id="phone" placeholder="(99) 99999-9999">
+                <em>Por favor, informe um teleffone válido.</em>
             </div>
         </div>
-        <div class="row gx-3">
-            <div class="col-md-6">
-                <div class="form-group mb-3" data-field="neighborhood">
-                    <label for="neighborhood">Bairro</label>
-                    <input type="text" class="form-control" id="neighborhood" placeholder="Jardim Paulista">
-                    <em>Por favor, informe um bairro válido.</em>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group mb-3" data-field="zipcode">
-                    <label for="cep">CEP</label>
-                    <input type="text" class="form-control" id="cep" placeholder="99999-999" maxlength="9">
-                    <em>Por favor, informe um CEP válido.</em>
-                </div>
-            </div>
-
-            <div class="row gx-3">
-                <div class="col-md-6">
-                    <div class="form-group mb-3" data-field="state">
-                        <label for="state">Estado</label>
-                        <select class="form-control" name="uf" id="state" value="">
-                            <option></option>
-                            <option value="AL">Alagoas</option>
-                            <option value="AC">Acre</option>
-                            <option value="AM">Amazonas</option>
-                            <option value="AP">Amapá</option>
-                            <option value="BA">Bahia</option>
-                            <option value="CE">Ceará</option>
-                            <option value="DF">Distrito Federal</option>
-                            <option value="ES">Espírito Santo</option>
-                            <option value="GO">Goiás</option>
-                            <option value="MA">Maranhão</option>
-                            <option value="MG">Minas Gerais</option>
-                            <option value="MS">Mato Grosso do Sul</option>
-                            <option value="MT">Mato Grosso</option>
-                            <option value="PA">Pará</option>
-                            <option value="PB">Paraíba</option>
-                            <option value="PE">Pernambuco</option>
-                            <option value="PR">Paraná</option>
-                            <option value="RJ">Rio de Janeiro</option>
-                            <option value="RN">Rio Grande do Norte</option>
-                            <option value="RS">Rio Grande do Sul</option>
-                            <option value="RO">Rondônia</option>
-                            <option value="RR">Roraima</option>
-                            <option value="SC">Santa Catarina</option>
-                            <option value="SE">Sergipe</option>
-                            <option value="SP">São Paulo</option>
-                            <option value="PI">Piauí</option>
-                            <option value="TO">Tocantins</option>
-                        </select>
-                        <em>Por favor, informe um estado válido.</em>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group mb-3" data-field="city">
-                        <label for="city">Cidade</label>
-                        <select type="text" class="form-control" id="city"></select>
-                        <em>Por favor, informe uma cidade válida.</em>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="row gx-3">
-
-                <div class="col-md-6">
-                    <div class="form-group mb-3" data-field="phone">
-                        <label for="phone">Telefone</label>
-                        <input type="text" class="form-control" id="phone" placeholder="(99) 99999-9999">
-                        <em>Por favor, informe um teleffone válido.</em>
-                    </div>
-                </div>
+        <div class="col-md-6">
+            <div class="form-group mb-3" data-field="cpf_cnpj" data-auto-fillable>
+                <label for="cpf_cnpj">CPF/CNPJ</label>
+                <input type="text" class="form-control" id="cpf_cnpj" placeholder="999.999.999-99">
+                <em>Por favor, informe um CPF/CNPJ válido.</em>
             </div>
         </div>
-
     </div>
+
+   
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-link active" data-bs-toggle="tab" href="#nav-card" role="tab" aria-controls="nav-card"
@@ -168,9 +84,11 @@
                 <p id="pix-qrcode" class="mt-2 text-center"></p>
                 <div class="text-center mb-3">
                     <a class="btn bg-secondary" id="copy-pix-btn" data-bs-toggle="popover" data-bs-content="Copiado!"
-                        data-bs-trigger="manual" data-bs-placement="top">Copiar código PIX</a>
+                        data-bs-trigger="manual" data-bs-placement="top">Copiar código
+                        PIX</a>
                 </div>
-                <p class="mt-2 text-muted text-center" style="line-height: 1.25;">Aguardando o pagamento...<br /> Assim
+                <p class="mt-2 text-muted text-center" style="line-height: 1.25;">Aguardando o pagamento...<br />
+                    Assim
                     que confirmado,
                     seu acesso será liberado e você receberá um e-mail de confirmação.</p>
             </div>
@@ -184,8 +102,10 @@
                 <p><strong>Para pagar, escaneie ou digite o código de barras abaixo:</strong></p>
                 <p id="slip-barcode" class="mt-2"></p>
                 <p id="slip-number" class="fw-bold"></p>
-                <p class="mt-2 text-muted" style="line-height: 1.25;">Obs: o boleto pode levar até 3 dias úteis para ser
-                    compensado. Assim que o pagamento for confirmado, seu acesso será liberado e você receberá um e-mail
+                <p class="mt-2 text-muted" style="line-height: 1.25;">Obs: o boleto pode levar até 3 dias úteis para
+                    ser
+                    compensado. Assim que o pagamento for confirmado, seu acesso será liberado e você receberá um
+                    e-mail
                     de confirmação.</p>
             </div>
         </div>
@@ -222,14 +142,15 @@
         <br /><br /><a>Clique aqui</a> para acessar sua conta.
     </p>
     <p class="alert alert-info mt-4 mb-4" id="clientes-not-allowed"><strong>Não foi possível realizar a
-            compra</strong><br /> Este curso é exclusivo para quem tem acesso ativo à plataforma de vagas.<br/> Temos uma oferta especial para novos membros. Entre em contato com o suporte para garantir sua vaga.
+            compra</strong><br /> Este curso é exclusivo para quem tem acesso ativo à plataforma de vagas.<br /> Temos
+        uma oferta especial para novos membros. Entre em contato com o suporte para garantir sua vaga.
     </p>
     <p class="alert alert-info mt-4 mb-4" id="not-available"><strong>Produto não disponível</strong><br />O produto
         que você está tentando comprar não está mais disponível.<br>Por favor,
         entre em contato com o suporte.</p>
     </p>
 
-    <button class="btn" id="submit-btn" style="display:none"></button>
+    <button class="btn btn-green" id="submit-btn" style="display:none"></button>
 </div>
 <div id="vindi-disclaimer" class="text-center fw-bold" style="display: none">
     <p>🔒 Pagamento 100% seguro.<br />

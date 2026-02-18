@@ -129,7 +129,7 @@ function init() {
 
   function loadTemplate() {
     $.ajax({
-      url: "/payment.html",
+      url: "/payment.html?v=2",
       method: "GET",
       success: function (data) {
         $("#payment-container").html(data);
