@@ -1006,3 +1006,251 @@ footer .footer_btn {
 .back-to-top i {
 	color: #fff;
 }
+
+
+
+
+.aexpert-value-section {
+  --aexpert-purple: #522E88;
+  --aexpert-blue: #81CFD3;
+  --aexpert-white: #ffffff;
+
+  padding: 48px 16px;
+  background: var(--aexpert-white);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.aexpert-value-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  gap: 32px;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.aexpert-card-left,
+.aexpert-card-right {
+  background: var(--aexpert-white);
+  border-radius: 24px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.aexpert-card-left {
+  flex: 1 1 320px;
+  padding: 32px 32px 24px;
+}
+
+.aexpert-card-right {
+  flex: 0 1 320px;
+  border: 2px solid var(--aexpert-blue);
+  padding: 32px 28px 28px;
+}
+
+.aexpert-section-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--aexpert-purple);
+  margin: 0 0 8px;
+}
+
+.aexpert-heading {
+  font-size: 24px;
+  line-height: 1.3;
+  margin: 0 0 24px;
+  color: #0f172a;
+}
+
+.aexpert-highlight-aexpert {
+  color: var(--aexpert-purple);
+}
+
+/* Lista em faixas, parecido com o print */
+.aexpert-value-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+}
+
+.aexpert-item {
+  background: #f5f7fa;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.aexpert-item:last-child {
+  border-bottom: none;
+}
+
+.aexpert-item-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 16px;
+}
+
+.aexpert-item-main .aexpert-item-row {
+  background: rgba(82, 46, 136, 0.06); /* leve destaque pra AExpert */
+}
+
+.aexpert-icon-main,
+.aexpert-icon-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--aexpert-blue);
+  color: #ffffff;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.aexpert-item-text {
+  flex: 1;
+}
+
+.aexpert-item-title {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #111827;
+}
+
+/* Selo de bônus SEMPRE embaixo do texto */
+.aexpert-bonus-tag {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--aexpert-blue);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.aexpert-total-line {
+  margin: 16px 16px 0;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 14px;
+  color: #111827;
+}
+
+/* Card de preço inspirado no print */
+.aexpert-card-right-header {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.aexpert-prelaunch-pill {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 999px;
+  background: var(--aexpert-blue);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.aexpert-card-right-body {
+  text-align: center;
+}
+
+.aexpert-right-subtitle {
+  font-size: 14px;
+  color: #111827;
+  margin: 8px 0 16px;
+}
+
+.aexpert-price-main {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--aexpert-purple);
+}
+
+.aexpert-price-original {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.aexpert-price-original span {
+  text-decoration: line-through;
+}
+
+.aexpert-discount-pill {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 6px 18px;
+  border-radius: 999px;
+  background: var(--aexpert-blue);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.aexpert-cta-button {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 12px 32px;
+  border-radius: 999px;
+  background: var(--aexpert-blue);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(129, 207, 211, 0.5);
+}
+
+.aexpert-cta-button:hover {
+  filter: brightness(0.95);
+}
+
+.aexpert-urgency-text {
+  font-size: 13px;
+  color: #111827;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .aexpert-card-right {
+    flex: 1 1 100%;
+  }
+}
+
+/* --- Ajustes finos da seção AExpert --- */
+
+/* 1) Itens da lista SEM fundo cinza (fundo totalmente branco) */
+.aexpert-item,
+.aexpert-item-row,
+.aexpert-item-text {
+  background-color: #ffffff !important;
+}
+
+/* Se estiver vindo alguma cor de <li> global, isso zera: */
+.aexpert-value-list li {
+  background-color: #ffffff !important;
+}
+
+/* 2) Card da oferta principal (esquerda) com borda + sombra suave */
+.aexpert-card-left {
+  background-color: #ffffff !important;
+  border-radius: 24px !important;
+  border: 1px solid rgba(129, 207, 211, 0.35) !important; /* azul #81CFD3 bem suave */
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.10) !important;
+}
+
+/* 3) Card de preço (direita) com borda azul forte + sombra maior */
+.aexpert-card-right {
+  background-color: #ffffff !important;
+  border-radius: 24px !important;
+  border: 2px solid #81CFD3 !important; /* contorno azul mais forte */
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18) !important;
+}
+
+/* Garantir que o fundo geral atrás dos cards não esteja cinza demais */
+.aexpert-value-section {
+  background-color: #ffffff !important;
+}
