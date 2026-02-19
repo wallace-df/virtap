@@ -257,6 +257,7 @@ h4{
 	margin-top: 6rem;
 	counter-reset: my-counter; 
 	max-width: 120rem;
+	font-size: 2.2rem;
 }
 .timeline_wrap::before{
 	position: absolute;
@@ -1284,7 +1285,7 @@ footer .footer_btn {
 
 
 h2{
-	font-size: 3.4rem; /* antes 4.2 */
+	font-size: 4rem; /* antes 4.2 */
 }
 
 h3{
