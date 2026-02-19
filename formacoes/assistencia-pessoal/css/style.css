@@ -1175,6 +1175,9 @@ footer .footer_btn {
     color: var(--aexpert-purple);
 }
 
+.aexpert-total-line strong {
+	text-decoration: line-through;
+}
 /* =========================
    CARD PREÇO
 ========================= */
