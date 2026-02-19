@@ -15,6 +15,7 @@
 }
 html{
 	font-size: 62.5%;
+	scroll-behavior: smooth;
 }
 a, button, img{
 	-webkit-transition: 0.3s;
@@ -231,7 +232,7 @@ h4{
 	background: linear-gradient(180deg, #B0E3E7 0%, #8BCED3 100%);
 	-webkit-box-shadow: .2rem .3rem 2.8rem rgba(193, 224, 226, 0.14);
 	        box-shadow: .2rem .3rem 2.8rem rgba(193, 224, 226, 0.14);
-	border-radius: 6.0rem 3.5rem .4rem 6.0rem;
+	border-radius: 6.0rem;
 	outline: 0.1rem solid #8BCED3;
 	outline-offset: 1rem;
 	margin: 1rem;
@@ -1024,6 +1025,8 @@ footer .footer_btn {
   padding: 3em 1.2em 4.5em;
   background: var(--aexpert-white);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 /* =========================
@@ -1060,13 +1063,14 @@ footer .footer_btn {
 .aexpert-card-right {
   flex: 0 1 24em;
   padding: 2.6em 2.2em 2.2em;
-
+  display: flex;
+  align-items: center;
   border-top: 0.08em solid #81CFD3;
   border-left: 0.08em solid #81CFD3;
   border-right: 0.28em solid #81CFD3;
   border-bottom: 0.28em solid #81CFD3;
 
-  box-shadow: 0 1.4em 3.2em rgba(15, 23, 42, 0.18);
+  box-shadow: 0 2.4em 4.2em rgba(15, 23, 42, 0.18);
 }
 
 /* =========================
@@ -1105,7 +1109,6 @@ footer .footer_btn {
 
 .aexpert-item {
   background: #ffffff;
-  border-bottom: 0.06em solid #e5e7eb;
 }
 
 .aexpert-item:last-child {
@@ -1120,7 +1123,14 @@ footer .footer_btn {
 }
 
 .aexpert-item-main .aexpert-item-row {
-  background: rgba(82, 46, 136, 0.06);
+  background: #b79dde;
+  padding: 1em;
+  margin-bottom: 0.8em;
+  font-size: 1.2em;
+  color: #fff;
+}
+.aexpert-item-main .aexpert-item-title {
+	color: #fff;
 }
 
 .aexpert-icon-main,
@@ -1137,8 +1147,11 @@ footer .footer_btn {
   flex-shrink: 0;
 }
 
+.aexpert-icon-main {
+	background-color: var(--aexpert-purple);
+}
 .aexpert-item-title {
-  font-size: 0.9em;
+  font-size: 1em;
   line-height: 1.5;
   color: #111827;
 }
@@ -1155,11 +1168,11 @@ footer .footer_btn {
 }
 
 .aexpert-total-line {
-  margin: 1.2em 1.2em 0;
-  padding-top: 0.9em;
-  border-top: 0.06em solid #e5e7eb;
-  font-size: 0.85em;
-  color: #111827;
+    margin: 1.2em 1.2em 0;
+    padding-top: 0.9em;
+    border-top: 0.06em solid #e5e7eb;
+    font-size: 1.25em;
+    color: var(--aexpert-purple);
 }
 
 /* =========================
@@ -1186,21 +1199,21 @@ footer .footer_btn {
 }
 
 .aexpert-right-subtitle {
-  font-size: 0.85em;
+  font-size: 1.10em;
   color: #111827;
   margin: 0.6em 0 1em;
 }
 
 /* 🔥 PREÇO MAIS PROTAGONISTA */
 .aexpert-price-main {
-  font-size: 2.4em;
+  font-size: 2.2em;
   font-weight: 800;
   color: var(--aexpert-purple);
 }
 
 .aexpert-price-original {
-  font-size: 0.8em;
-  color: #6b7280;
+  font-size: 1.12em;
+  color: #333;
   margin-bottom: 0.6em;
 }
 
@@ -1209,34 +1222,48 @@ footer .footer_btn {
 }
 
 .aexpert-discount-pill {
-  display: inline-block;
-  margin-bottom: 1.2em;
-  padding: 0.35em 1.2em;
-  border-radius: 999px;
-  background: var(--aexpert-blue);
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 0.75em;
+	display: inline-block;
+    margin-bottom: 1.2em;
+    padding: 0.35em 1.2em;
+    border-radius: 999px;
+    background: var(--aexpert-blue);
+    color: #ffffff;
+    font-weight: 600;
 }
 
 .aexpert-cta-button {
   display: inline-block;
-  margin-bottom: 0.8em;
+  margin-top: 1em;
+  margin-bottom: 1em;
   padding: 0.8em 2.2em;
   border-radius: 999px;
-  background: var(--aexpert-blue);
+  background: var(--aexpert-purple);
   color: #ffffff;
   font-weight: 700;
   font-size: 0.9em;
   text-decoration: none;
-  box-shadow: 0 0.8em 1.8em rgba(129, 207, 211, 0.5);
+  box-shadow: 0 0.8em 1.8em #b79dde;
 }
 
 .aexpert-cta-button:hover {
-  filter: brightness(0.95);
-}
+	/* Melhora o brilho e sobe o botão levemente */
+	filter: brightness(1.1);
+	transform: translateY(-3px);
+	
+	/* Expande a sombra para reforçar a elevação */
+	box-shadow: 0 1.2em 2.2em #b79dde;
+	
+	color: #fff;
+  }
+  
+  /* Opcional: Efeito de clique (active) */
+  .aexpert-cta-button:active {
+	transform: translateY(-1px);
+	box-shadow: 0 0.5em 1.2em #b79dde;
+  }
 
 .aexpert-urgency-text {
+	margin-top:1em;
   font-size: 0.75em;
   color: #111827;
 }
@@ -1269,6 +1296,6 @@ h4{
 	font-size: 4.8rem; /* antes 6rem */
 }
 .button{
-	font-size: 2rem; /* antes 2.4 */
+	font-size: 2.4rem; /* antes 2.4 */
 	padding: 1.8rem 4rem;
 }
