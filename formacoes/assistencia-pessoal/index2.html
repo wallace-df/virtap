@@ -60,8 +60,7 @@
                                 <h5>Formação Assessora Expert</h5>
                             </div>
                             <h1>Domine a profissão que permite faturar R$ 10.000/mês trabalhando de onde quiser</h1>
-                            <a href="#offer"
-                                class="button">Garanta sua
+                            <a href="#offer" class="button">Garanta sua
                                 vaga com 60% de desconto até 24/02!</a>
                         </div>
                     </div>
@@ -268,7 +267,7 @@
                         </div>
 
 
-                        <a href="#checkout" class="aexpert-cta-button">
+                        <a href="https://www.virtap.com.br/comprar?rsrc=123" id="checkout-button" class="aexpert-cta-button">
                             Quero garantir minha vaga
                         </a>
 
@@ -593,8 +592,7 @@
                             </h2>
                         </div>
                         <div class="col-lg-12 mt_35 text-lg-center">
-                            <a href="#offer"
-                                class="button">QUERO MINHA VAGA COM 60% OFF (Até 24/02)</a>
+                            <a href="#offer" class="button">QUERO MINHA VAGA COM 60% OFF (Até 24/02)</a>
                         </div>
                     </div>
                 </div>
@@ -715,77 +713,18 @@
 
 
     <script>
-        /**
-         * Este código foi desenvolvido por Pablo Cabral.
-         * Website: https://www.pablocabral.com.br
-         * Contato: contato@pablocabral.com.br
-         */
+        const currentParams = new URLSearchParams(window.location.search);
+        const button = document.getElementById("checkout-button");
 
-        // lista de plataformas
-        var platforms = ["hotmart", "kiwify"];
+        if (button && button.href) {
+            const url = new URL(button.href, window.location.origin);
 
-        // obter a query string atual
-        var queryString = window.location.search;
+            currentParams.forEach((value, key) => {
+                url.searchParams.set(key, value); // sobrescreve se já existir
+            });
 
-        // extrair todos os parâmetros de utm da query string
-        var utmParams = {};
-        queryString.substr(1).split("&").forEach(function (item) {
-            var param = item.split("=");
-            if (param[0].startsWith("utm_")) {
-                utmParams[param[0]] = param[1];
-            }
-        });
-
-        // verificar se não há parâmetros de utm na query string e adicionar utm_source e utm_medium usando o referenciador
-        if (Object.keys(utmParams).length === 0) {
-            var referrer = document.referrer;
-            if (referrer) {
-                var domain = new URL(referrer).hostname;
-                utmParams["utm_source"] = domain;
-                utmParams["utm_medium"] = "Referencia";
-            }
+            button.href = url.toString();
         }
-
-        // criar uma string com todas as utms separadas por "|"
-        var utmString = Object.keys(utmParams)
-            .map(function (key) {
-                return key.substr(4) + "=" + utmParams[key];
-            })
-            .join("|");
-
-        // encontrar todos os links que contenham uma das plataformas na lista
-        var links = document.getElementsByTagName("a");
-        for (var i = 0; i < links.length; i++) {
-            for (var j = 0; j < platforms.length; j++) {
-                if (links[i].href.indexOf(platforms[j]) !== -1) {
-                    // adicionar as utms da query string ao href do link
-                    var linkUrl = new URL(links[i].href);
-                    var oldHref = links[i].href;
-                    for (var param in utmParams) {
-                        linkUrl.searchParams.set(param, utmParams[param]);
-                    }
-
-                    // adicionar a string de utms separadas por "|" ao href
-                    linkUrl.searchParams.set("sck", utmString);
-
-                    // decodificar o link antes de adicioná-lo ao href
-                    links[i].href = decodeURI(linkUrl.toString());
-
-                    // exibir as URLs antigas e atualizadas no console
-                    console.log("Antes: " + oldHref);
-                    console.log("Depois: " + links[i].href);
-
-                    // adicionar o "?" ou "&" dependendo se já existe ou não uma query string
-                    if (links[i].href.indexOf("?") === -1) {
-                        links[i].href += "?";
-                    } else {
-                        links[i].href += "&";
-                    }
-                    break;
-                }
-            }
-        }
-
     </script>
 </body>
 
