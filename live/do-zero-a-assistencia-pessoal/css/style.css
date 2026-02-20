@@ -255,6 +255,14 @@ textarea:focus {
 	text-transform: capitalize;
 }
 
+.banner-btn:hover span {
+	color: var(--dark);
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
+	background: -o-linear-gradient(top, #fff 0%, #fff 100%);
+	background: linear-gradient(180deg, #fff 0%, #fff 100%);
+}
+
+
 .banner-btn .btn-design::after {
 	content: "";
 	height: 1.2rem;
@@ -325,7 +333,7 @@ textarea:focus {
 }
 
 .personal-assistant-box h6 {
-	font-size: 2rem;
+	font-size: 3rem;
 	line-height: 1.5;
 	color: #532E88;
 	margin-bottom: 2.2rem;
@@ -371,18 +379,27 @@ textarea:focus {
 }
 
 .personal-assistant-box .personal-btn {
-	display: inline-block;
-	padding: 2.3rem 6rem;
-	font-size: 2.4rem;
-	line-height: 3.4rem;
-	font-weight: 700;
-	color: var(--dark);
-	border-radius: 5rem;
-	background: rgb(176, 227, 231);
-	background: linear-gradient(0deg, rgba(176, 227, 231, 1) 0%, rgba(139, 206, 211, 1) 100%);
-	margin-top: 2.4rem;
-	text-transform: capitalize;
+    display: inline-block;
+    padding: 2.1rem 5.8rem; /* Ajustado levemente para compensar a borda de 2px */
+    font-size: 2.4rem;
+    line-height: 3.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    border-radius: 5rem;
+    background: #532E88;
+    border: 2px solid #532E88; /* Borda já nasce aqui */
+    margin-top: 2.4rem;
+    text-transform: capitalize;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
+
+.personal-assistant-box .personal-btn:hover {
+    background: transparent; /* O fundo "some", revelando o branco da página */
+    color: #532E88; /* O texto assume o seu roxo */
+    /* A borda #532E88 que já existia agora define o contorno do botão */
+}
+
 
 footer {
 	background-color: #F5F2FA;
@@ -489,7 +506,7 @@ footer {
 	border: none;
 	margin-bottom: 1.5rem;
 }
- 
+
 .popup-body .submit-btn.disabled {
 	opacity: 0.5;
 }
@@ -643,7 +660,7 @@ p.error {
 	}
 
 	.personal-assistant-box h6 {
-		font-size: 3rem;
+		font-size: 4rem;
 	}
 
 	.personal-assistant-box .personal-right {
@@ -743,3 +760,30 @@ p.error {
 .iti {
 	width: 100% !important;
 }
+
+.expert {
+	display: -webkit-inline-box;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-column-gap: 1.6rem;
+	-moz-column-gap: 1.6rem;
+	column-gap: 1.6rem;
+	padding: 1.5rem 3rem 1.5rem 1.8rem;
+	background-color: #8BCED3;
+	border-radius: 1.6rem;
+}
+
+.expert img {
+	width: 4.2rem;
+}
+
+.expert h5 {
+	font-size: 3rem;
+	font-weight: 500;
+	color: var(--dark);
+	text-transform: uppercase;
+}
+
