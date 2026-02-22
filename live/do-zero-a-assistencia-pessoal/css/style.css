@@ -201,7 +201,7 @@ textarea:focus {
 }
 
 .banner-content p {
-	font-size: 2.2rem;
+	font-size: 2.6rem;
 	line-height: 3.4rem;
 	color: var(--white);
 	max-width: 66rem;
@@ -379,25 +379,29 @@ textarea:focus {
 }
 
 .personal-assistant-box .personal-btn {
-    display: inline-block;
-    padding: 2.1rem 5.8rem; /* Ajustado levemente para compensar a borda de 2px */
-    font-size: 2.4rem;
-    line-height: 3.4rem;
-    font-weight: 700;
-    color: #ffffff;
-    border-radius: 5rem;
-    background: #532E88;
-    border: 2px solid #532E88; /* Borda já nasce aqui */
-    margin-top: 2.4rem;
-    text-transform: capitalize;
-    transition: all 0.3s ease;
-    cursor: pointer;
+	display: inline-block;
+	padding: 2.1rem 5.8rem;
+	/* Ajustado levemente para compensar a borda de 2px */
+	font-size: 2.4rem;
+	line-height: 3.4rem;
+	font-weight: 700;
+	color: #ffffff;
+	border-radius: 5rem;
+	background: #532E88;
+	border: 2px solid #532E88;
+	/* Borda já nasce aqui */
+	margin-top: 2.4rem;
+	text-transform: capitalize;
+	transition: all 0.3s ease;
+	cursor: pointer;
 }
 
 .personal-assistant-box .personal-btn:hover {
-    background: transparent; /* O fundo "some", revelando o branco da página */
-    color: #532E88; /* O texto assume o seu roxo */
-    /* A borda #532E88 que já existia agora define o contorno do botão */
+	background: transparent;
+	/* O fundo "some", revelando o branco da página */
+	color: #532E88;
+	/* O texto assume o seu roxo */
+	/* A borda #532E88 que já existia agora define o contorno do botão */
 }
 
 
@@ -458,7 +462,7 @@ footer {
 
 .popup-body h2 {
 	margin-top: 2rem;
-	font-size: 3.4rem;
+	font-size: 4rem;
 	line-height: 6rem;
 	margin-bottom: 1.5rem;
 }
@@ -480,12 +484,18 @@ footer {
 	margin-bottom: 1rem;
 }
 
+.popup-body strong {
+	font-size: 2.4rem;
+	text-align: left;
+	margin-bottom: 1rem;
+	display: block;
+}
+
 .popup-body form input {
-	padding: 3rem;
-	margin-bottom: 1.4rem;
+	padding: 2rem;
 	border: .1rem solid #0000001a;
 	border-radius: 1.6rem;
-	font-size: 2rem;
+	font-size: 2.2rem;
 }
 
 .popup-body form input:focus {
@@ -498,17 +508,25 @@ footer {
 	font-size: 2.4rem;
 	line-height: 3.4rem;
 	font-weight: 700;
-	color: var(--dark);
+	color: #fff;
 	border-radius: 5rem;
-	background: rgb(176, 227, 231);
-	background: linear-gradient(0deg, rgba(176, 227, 231, 1) 0%, rgba(139, 206, 211, 1) 100%);
+	background: #532E88;
+	border: 2px solid #532E88;
 	margin-top: 1rem;
-	border: none;
 	margin-bottom: 1.5rem;
+	cursor: pointer;
 }
+
+.submit-btn:hover {
+	border: 2px solid #532E88;
+	background: transparent;
+	color: #532E88;
+}
+
 
 .popup-body .submit-btn.disabled {
 	opacity: 0.5;
+	pointer-events: none;
 }
 
 .popup-body a {
@@ -524,6 +542,9 @@ p.error {
 	opacity: 0;
 	max-width: 100%;
 	text-align: left;
+	font-style: italic;
+	display: block;
+	margin-bottom: 1rem;
 }
 
 .input-error {
@@ -787,3 +808,10 @@ p.error {
 	text-transform: uppercase;
 }
 
+.iti__flag-container {
+	font-size: 2.2rem;
+}
+
+#submit-error {
+	display: none
+}

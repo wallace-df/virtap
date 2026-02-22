@@ -19,8 +19,8 @@ let $phone = $("#phone");
 
 $name.on('blur', function () {
     if ($name.val().trim().length < 5) {
-        $("#name-error").css('opacity', 1);
-        $name.addClass('input-error');
+        // $("#name-error").css('opacity', 1);
+        // $name.addClass('input-error');
     } else {
         $("#name-error").css('opacity', 0);
         $name.removeClass('input-error');
@@ -29,8 +29,8 @@ $name.on('blur', function () {
 
 $email.on('blur', function () {
     if ($email.val().trim().length === 0 || !validateEmail($email.val().trim())) {
-        $("#email-error").css('opacity', 1);
-        $email.addClass('input-error');
+        // $("#email-error").css('opacity', 1);
+        // $email.addClass('input-error');
     } else {
         $("#email-error").css('opacity', 0);
         $email.removeClass('input-error');
@@ -43,8 +43,8 @@ $phone.on('blur', function () {
         $phone.removeClass("input-error");
         $("#phone-error").css('opacity', 0);
     } else {
-        $phone.addClass("input-error");
-        $("#phone-error").css('opacity', 1);
+        // $phone.addClass("input-error");
+        // $("#phone-error").css('opacity', 1);
     }
 });
 
@@ -56,7 +56,7 @@ function collectFormData() {
 }
 
 
-function goToGroup() {     
+function goToGroup() {
     let url = 'https://chat.whatsapp.com/IekSadZ5zm21MKage9G1Vx';
     window.dataLayer.push({
         'event': 'ga_event',
@@ -64,9 +64,9 @@ function goToGroup() {
         'redir_url': url
     });
     setTimeout(() => window.location.href = url, 5000);
-} 
+}
 
-function signup() {
+async function signup() {
     let valid = true;
     let focusElement = null;
 
@@ -110,49 +110,51 @@ function signup() {
         }
 
         function enableUI() {
-            $("#btn-continue").prop('disabled', false).text('Continuar').removeClass('disabled');
+            $("#btn-continue").prop('disabled', false).text('Confirmar').removeClass('disabled');
             $("#closePopup").prop('disabled', false);
             $("form").find('input').prop('disabled', false);
         }
 
 
         disableUI();
-        $("#submit-error").css('opacity', 0);
+        $("#submit-error").hide();
 
-        var fd = new FormData();
-        fd.append('entry.890504879', $name.val());
-        fd.append('entry.447662442', $email.val());
-        fd.append('entry.1486622628', intl.getNumber());
+        const url = `${window.apiURL}/signup-form-ap-launch`;
+        const body = {
+            name: $name.val().trim(),
+            email: $email.val().trim(),
+            whatsapp: intl.getNumber(),
+            utm_params: getUTMParams()
+        };
 
-        $.ajax({
-            url: 'https://docs.google.com/forms/u/1/d/e/1FAIpQLSdabSRX4pEshouWHX1CxMHYo8T7xeKByRy5cZnnfkl6yE4sdA/formResponse',
-            data: fd,
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            success: function (result) {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body)
+            });
+
+
+            if (response.status === 200) {
                 location.href = 'https://chat.whatsapp.com/IekSadZ5zm21MKage9G1Vx';
 
-            },
-            error: function (request, status, errorThrown) {
-                location.href = 'https://chat.whatsapp.com/IekSadZ5zm21MKage9G1Vx';
+                // window.dataLayer.push({
+                //     'event': 'ga_event',
+                //     'ga_event_name': 'sign_up_waiting_list',
+                //     'redir_url': url
+                // });
+                // setTimeout(() => window.location.href = "/espera-confirmada", 5000);
+            } else {
+                throw response;
             }
-        });
-
-        // $.ajax({
-        //     url: "https://nocodeform.io/f/6671f7d5a2b15fe1fa291f38",
-        //     method: "POST",
-        //     dataType: 'json',
-        //     contentType: 'application/json',
-        //     data: JSON.stringify({
-        //         name: $name.val(),
-        //         email: $email.val(),
-        //         phone: intl.getNumber()
-        //     }),
-
-        //
-        // });
-
+        } catch (err) {
+            $("#submit-error").show().css('opacity', 1);
+            console.log(err);
+            enableUI();
+            // location.href = 'https://chat.whatsapp.com/IekSadZ5zm21MKage9G1Vx';
+        }
 
     } else {
         focusElement.focus();
@@ -160,3 +162,56 @@ function signup() {
 
     return false;
 }
+
+
+function getNullableValue(val) {
+    if (val) {
+        val = val.trim();
+        if (val.length === 0) {
+            val = null;
+        }
+    }
+    return val;
+}
+
+function getUTMParams() {
+
+    const params = new URLSearchParams(window.location.search);
+    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
+    const rawReferrer = getNullableValue(document.referrer);
+    const hasUTM = getNullableValue(params.get('utm_source')) && getNullableValue(params.get('utm_medium'));
+
+    let utmParams = {};
+
+    if (hasUTM) {
+        for (const key of utmKeys) {
+            let value = getNullableValue(params.get(key));
+            utmParams[key] = value;
+        }
+    }
+    utmParams['timestamp'] = Date.now();
+    utmParams['referral_url'] = rawReferrer;
+
+    let firstUtmParams = localStorage.getItem('first_visit_utm');
+    if (!firstUtmParams) {
+        firstUtmParams = utmParams;
+        try {
+            localStorage.setItem('first_visit_utm', JSON.stringify(utmParams));
+        } catch { }
+    } else {
+        try {
+            firstUtmParams = JSON.parse(firstUtmParams);
+        } catch {
+            firstUtmParams = utmParams;
+        }
+    }
+
+    return {
+        utm_first: firstUtmParams,
+        utm_last: utmParams
+    };
+}
+
+try {
+    console.log(getUTMParams());
+} catch (err) { }

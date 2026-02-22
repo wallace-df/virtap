@@ -26,6 +26,10 @@
           'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
   </script>
+  <script>
+    window.apiURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://api.virtap.com.br';
+  </script>
+
   <!-- End Google Tag Manager -->
 
   <!-- all css here -->
@@ -165,7 +169,7 @@
   <script src="/js/jquery-3.6.0.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
-  <script src="js/main-v7.js"></script>
+  <script src="js/main-v8.js"></script>
 </body>
 
 </html>

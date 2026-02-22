@@ -28,6 +28,11 @@
   </script>
   <!-- End Google Tag Manager -->
 
+  <script>
+    window.apiURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://api.virtap.com.br';
+  </script>
+
+
   <!-- all css here -->
   <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/style.css" rel="stylesheet" type="text/css">
@@ -137,30 +142,29 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closePopup"></button>
         <div class="popup-body modal-body">
           <h2>🔴 Garanta sua vaga na Masterclass Gratuita</h2>
-          <p style="text-align: left; margin: 0 auto">📅 Aula 100% online e ao vivo<br>
-            💰 Como começar do zero e chegar a R$ 10.000/mês<br>
-            🔒 Grupo exclusivo com acesso e lembretes</p>
           <form id="loginForm" onsubmit="return false">
             <div>
+              <strong>Nome</strong>
               <input type="text" class="form-control input-field" id="name" placeholder="Digite seu nome"
                 data-lpignore="true">
-              <p id="name-error" class="error"><img src="img/exclamation.svg" alt=""> Informe seu nome</p>
+              <p id="name-error" class="error"><img src="img/exclamation.svg" alt=""> Nome inválido.</p>
             </div>
-            <div>
+            <div class="mt-1">
+              <strong>E-mail</strong>
               <input type="text" class="form-control input-field" id="email" placeholder="Digite seu e-mail"
                 data-lpignore="true">
-              <p id="email-error" class="error"><img src="img/exclamation.svg" alt=""> Informe seu email</p>
+              <p id="email-error" class="error"><img src="img/exclamation.svg" alt=""> Email incorreto.</p>
             </div>
-            <div>
+            <div class="mt-1">
+              <strong>WhatsApp</strong>
               <input type="text" class="form-control input-field" id="phone" data-lpignore="true"
                 placeholder="(99) 99999-9999">
-              <p id="phone-error" class="error"><img src="img/exclamation.svg" alt=""> Informe seu telefone</p>
+              <p id="phone-error" class="error"><img src="img/exclamation.svg" alt=""> Whatsapp incorreto.</p>
             </div>
             <div>
-              <button class="submit-btn" onclick="signup()" id="btn-continue"><img src="img/whastapp.svg" width="32px"
-                  style="margin-right: 8px"> Entrar no grupo do WhatsApp</button>
-              <p id="submit-error" class="error text-center"><img src="img/exclamation.svg" alt="">Ocorreu um erro. Por
-                favor, tente novamente.</p>
+              <button class="submit-btn" onclick="signup()" id="btn-continue"> Confirmar</button>
+              <p id="submit-error" class="error text-center"><img src="img/exclamation.svg" alt=""> Não foi possível
+                confirmar sua vaga. Por favor, verifique sua conexão e tente novamente.</p>
             </div>
           </form>
         </div>
@@ -172,7 +176,7 @@
   <script src="/js/jquery-3.6.0.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.1.1/build/js/intlTelInput.min.js"></script>
-  <script src="js/main-v7.js"></script>
+  <script src="js/main-v8.js"></script>
 </body>
 
 </html>
