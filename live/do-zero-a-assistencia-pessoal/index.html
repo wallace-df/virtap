@@ -28,11 +28,12 @@
           'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
   </script>
+  <!-- End Google Tag Manager -->
+
   <script>
     window.apiURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://api.virtap.com.br';
   </script>
 
-  <!-- End Google Tag Manager -->
 
   <!-- all css here -->
   <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -50,13 +51,16 @@
   <section class="banner">
     <div class="container">
       <div class="banner-content">
-        <h6><span>Do zero à Assistência Pessoal</span></h6>
+        <div class="expert">
+          <h5>🔴 MASTERCLASS GRATUITA AO VIVO: Do Zero à Assistência Pessoal</h5>
+        </div>
+
         <h1>Uma profissão em alta demanda, baixa concorrência e com possibilidade de <br class="d-none d-lg-block">
           ganhos de até R$ 10.000</h1>
         <p>Descubra os segredos e as oportunidades incríveis que a profissão de Assistencia Pessoal oferece e como
           começar a trabalhar já.</p>
         <!-- <p class="live-time">
-          LIVE
+          🔴 LIVE
           <span>
             <img src="img/calendar.svg" alt="">
             17 de Março
@@ -64,7 +68,8 @@
           </span>
         </p> -->
         <div class="banner-btn">
-          <a href="javascript:goToGroup()" role="button" class="btn-design"><span>Quero participar</span></a>
+          <a href="javascript:collectFormData()" role="button" class="btn-design"><span>🔥 Garantir Minha
+              Vaga</span></a>
         </div>
         <img src="img/banner-img.png" alt="" class="banner-img">
       </div>
@@ -81,14 +86,14 @@
   <section class="personal-assistant">
     <div class="container">
       <div class="row personal-assistant-box">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
           <div class="personal-left">
             <img src="img/shape-9.svg" class="shape-9" alt="">
-            <h6>Quem deve participar da Live</h6>
-            <h2>Do zero à Assistência Pessoal?</h2>
+            <h6>Quem deve participar da Masterclass</h6>
+            <h2>Do Zero à Assistência Pessoal</h2>
           </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-8">
           <div class="personal-right">
             <ul>
               <li><img src="img/arrow.svg" alt=""> Qualquer pessoa que queira trabalhar pela internet</li>
@@ -97,7 +102,7 @@
               </li>
             </ul>
             <div>
-              <a href="javascript:goToGroup()" class="personal-btn">Quero participar</a>
+              <a href="javascript:collectFormData()" class="personal-btn">🔥 Garantir Minha Vaga</a>
             </div>
             <div class="d-lg-none">
               <img class="w-100" src="img/female-img.png" alt="">
@@ -138,28 +143,30 @@
       <div class="modal-content">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closePopup"></button>
         <div class="popup-body modal-body">
-          <h2>Preencha seus dados para se inscrever </h2>
+          <h2>🔴 Garanta sua vaga na Masterclass Gratuita</h2>
           <form id="loginForm" onsubmit="return false">
             <div>
+              <strong>Nome</strong>
               <input type="text" class="form-control input-field" id="name" placeholder="Digite seu nome"
                 data-lpignore="true">
-              <p id="name-error" class="error"><img src="img/exclamation.svg" alt=""> Informe seu nome</p>
+              <p id="name-error" class="error"><img src="img/exclamation.svg" alt=""> Nome inválido.</p>
             </div>
-            <div>
+            <div class="mt-1">
+              <strong>E-mail</strong>
               <input type="text" class="form-control input-field" id="email" placeholder="Digite seu e-mail"
                 data-lpignore="true">
-              <p id="email-error" class="error"><img src="img/exclamation.svg" alt=""> Informe seu email</p>
+              <p id="email-error" class="error"><img src="img/exclamation.svg" alt=""> Email incorreto.</p>
             </div>
-            <div>
+            <div class="mt-1">
+              <strong>WhatsApp</strong>
               <input type="text" class="form-control input-field" id="phone" data-lpignore="true"
                 placeholder="(99) 99999-9999">
-              <p id="phone-error" class="error"><img src="img/exclamation.svg" alt=""> Informe seu telefone</p>
+              <p id="phone-error" class="error"><img src="img/exclamation.svg" alt=""> Whatsapp incorreto.</p>
             </div>
             <div>
-              <button class="submit-btn" onclick="signup()" id="btn-continue"><img src="img/whastapp.svg" width="32px"
-                  style="margin-right: 8px"> Entrar no grupo do WhatsApp</button>
-              <p id="submit-error" class="error text-center"><img src="img/exclamation.svg" alt="">Ocorreu um erro. Por
-                favor, tente novamente.</p>
+              <button class="submit-btn" onclick="signup()" id="btn-continue"> Confirmar</button>
+              <p id="submit-error" class="error text-center"><img src="img/exclamation.svg" alt=""> Não foi possível
+                confirmar sua vaga. Por favor, verifique sua conexão e tente novamente.</p>
             </div>
           </form>
         </div>
