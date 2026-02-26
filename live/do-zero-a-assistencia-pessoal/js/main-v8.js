@@ -57,7 +57,7 @@ function collectFormData() {
 
 
 function goToGroup() {
-    let url = 'https://chat.whatsapp.com/IekSadZ5zm21MKage9G1Vx';
+    let url = 'https://chat.whatsapp.com/BwUQnl75COHF4LxAYWUtP0';
     window.dataLayer.push({
         'event': 'ga_event',
         'ga_event_name': 'go_to_whatsapp_page',
@@ -138,7 +138,7 @@ async function signup() {
 
 
             if (response.status === 200) {
-                location.href = 'https://chat.whatsapp.com/IekSadZ5zm21MKage9G1Vx';
+                goToGroup();
 
                 // window.dataLayer.push({
                 //     'event': 'ga_event',
@@ -153,7 +153,6 @@ async function signup() {
             $("#submit-error").show().css('opacity', 1);
             console.log(err);
             enableUI();
-            // location.href = 'https://chat.whatsapp.com/IekSadZ5zm21MKage9G1Vx';
         }
 
     } else {
