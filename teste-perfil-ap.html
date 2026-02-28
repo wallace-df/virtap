@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico Assessora Expert ⭐ | Virtap</title>
+    <style>
+        :root {
+            --virtap-purple: #532e88;
+            --virtap-cyan: #b3e3e5;
+            --error: #e74c3c;
+            --text: #2d2d2d;
+            --bg: #f9f9f9;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #quiz-container {
+            background: var(--white);
+            width: 100%;
+            max-width: 600px;
+            padding: 2rem 3rem 3rem 3rem;
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(83, 46, 136, 0.12);
+            border-bottom: 10px solid var(--virtap-purple);
+            position: relative;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            height: 30px;
+            margin-bottom: 1rem;
+        }
+
+        .back-link {
+            color: var(--virtap-purple);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        h2 {
+            color: var(--virtap-purple);
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        p.subheader {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .option-btn {
+            display: block;
+            width: 100%;
+            padding: 1.2rem;
+            margin-bottom: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: var(--white);
+            text-align: left;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .option-btn.selected,
+        .option-btn.selected:hover {
+            border-color: var(--virtap-purple);
+            background-color: #f6f3fa;
+            box-shadow: 0 0 0 1px var(--virtap-purple);
+            background-color: var(--virtap-cyan);
+            border-color: var(--virtap-purple);
+
+        }
+
+        .option-btn.multi.active {
+            background-color: var(--virtap-cyan);
+            border-color: var(--virtap-purple);
+        }
+
+        input {
+            width: 100%;
+            padding: 1.1rem;
+            margin-bottom: 0.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            outline: none;
+        }
+
+        input.invalid {
+            border-color: var(--error) !important;
+            background-color: #fff5f5;
+        }
+
+        .error-msg {
+            color: var(--error);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: none;
+            font-weight: 700;
+        }
+
+        .error-msg.show {
+            display: block;
+        }
+
+        .next-btn {
+            background: var(--virtap-purple);
+            color: white;
+            border: none;
+            padding: 1.3rem;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            margin-top: 1rem;
+        }
+
+        /* Estilos do Resultado */
+        .profile-badge {
+            color: var(--virtap-purple);
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .math-box {
+            background: #f4f1f8;
+            padding: 2rem;
+            border-radius: 20px;
+            margin-top: 1.5rem;
+            border-left: 8px solid var(--virtap-cyan);
+            margin-bottom: 2rem;
+        }
+
+        .math-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .math-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .math-item .label-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .math-item .label-text {
+            font-size: 1.2rem;
+            color: var(--virtap-purple);
+            font-weight: 800;
+        }
+
+        .math-item .value-text {
+            font-size: 1.1rem;
+            color: #444;
+            padding-left: 28px;
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .iti {
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Efeito de hover suave nos botões de opção */
+        .option-btn:hover {
+            border-color: var(--virtap-purple);
+            background-color: #f6f3fa;
+        }
+
+        /* Feedback visual no botão principal */
+        .next-btn:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+            transition: 0.2s;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css">
+</head>
+
+<body>
+
+    <div id="quiz-container">
+        <div class="header-nav" style="display:none" id="header-nav">
+            <div id="back-btn" class="back-link" onclick="goBack()">← Voltar</div>
+        </div>
+
+        <div class="step active" id="step1">
+            <h2>Diagnóstico Assessora Expert ⭐</h2>
+            <p class="subheader">Preencha os dados abaixo para iniciar seu diagnóstico personalizado.</p>
+            <input type="text" id="name" placeholder="Seu nome">
+            <div id="err-name" class="error-msg">Por favor, digite seu nome.</div>
+            <input type="number" id="age" placeholder="Sua idade" maxlength="3" min="10" max="100" step="1">
+            <div id="err-age" class="error-msg">Informe sua idade para continuar.</div>
+            <input type="tel" id="whatsapp" placeholder="Seu WhatsApp (DDD + Número)">
+            <div id="err-whatsapp" class="error-msg">Digite um WhatsApp válido.</div>
+            <button class="next-btn" onclick="validateStep1()">Avançar</button>
+        </div>
+
+        <div class="step" id="step2">
+            <h2>Qual seu momento profissional hoje?</h2>
+            <div id="options-momento">
+                <button class="option-btn" data-val="CLT Extra" onclick="handleMomento('CLT Extra')">Trabalho CLT e
+                    quero uma renda extra</button>
+                <button class="option-btn" data-val="CLT Transição" onclick="handleMomento('CLT Transição')">Trabalho
+                    CLT, mas quero fazer transição de carreira</button>
+                <button class="option-btn" data-val="Desempregada" onclick="handleMomento('Desempregada')">Estou
+                    desempregada / Buscando recolocação</button>
+                <button class="option-btn" data-val="Aposentada" onclick="handleMomento('Aposentada')">Sou aposentada(o)
+                    e quero uma nova ocupação.</button>
+                <button class="option-btn" data-val="Especializar" onclick="handleMomento('Especializar')">Já atuo como
+                    Assistente e quero me especializar.</button>
+            </div>
+        </div>
+
+        <div class="step" id="step3">
+            <h2>O que mais te incomoda hoje?</h2>
+            <p class="subheader" style="font-size: 1rem;">Selecione uma ou mais opções:</p>
+            <div id="options-dor">
+                <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Falta de tempo')">Sinto falta de
+                    flexibilidade.</button>
+                <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Longe da família')">Passo tempo
+                    demais fora de casa e longe da minha família.</button>
+                <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Renda estagnada')">Minha renda está
+                    travada.</button>
+                <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Falta reconhecimento')">Me sinto
+                    estagnada em uma profissão desvalorizada.</button>
+            </div>
+            <div id="err-dor" class="error-msg">Selecione pelo menos um incômodo.</div>
+            <button class="next-btn" onclick="validateStep3()">Avançar</button>
+        </div>
+
+        <div class="step" id="step4">
+            <h2>Sua renda mensal hoje:</h2>
+            <div id="options-renda">
+                <button class="option-btn" data-val="1800" onclick="selectOption('renda', '1800', 5)">Até R$
+                    1.800</button>
+                <button class="option-btn" data-val="2500-3000" onclick="selectOption('renda', '2500-3000', 5)">R$ 2.500
+                    a R$ 3.000</button>
+                <button class="option-btn" data-val="3000-5000" onclick="selectOption('renda', '3000-5000', 5)">R$ 3.000
+                    a R$ 5.000</button>
+                <button class="option-btn" data-val="5000+" onclick="selectOption('renda', '5000+', 5)">Acima de R$
+                    5.000</button>
+            </div>
+        </div>
+
+        <div class="step" id="step5">
+            <h2>Sua experiência com organização:</h2>
+            <div id="options-perfil">
+                <button class="option-btn" data-val="iniciante" onclick="selectOption('perfil', 'iniciante', 6)">Não
+                    tenho experiência (Começo do Zero)</button>
+                <button class="option-btn" data-val="informal" onclick="selectOption('perfil', 'informal', 6)">Já faço
+                    tarefas para amigos ou conhecidos</button>
+                <button class="option-btn" data-val="elite" onclick="selectOption('perfil', 'elite', 6)">Já trabalho no
+                    Administrativo ou Assistente</button>
+            </div>
+        </div>
+
+        <div class="step" id="step6">
+            <h2>Qual seu salário ideal para viver bem?</h2>
+            <div id="options-alvo">
+                <button class="option-btn" data-val="3000" onclick="selectOption('alvo', 3000, 7)">R$ 3.000</button>
+                <button class="option-btn" data-val="5000" onclick="selectOption('alvo', 5000, 7)">R$ 5.000</button>
+                <button class="option-btn" data-val="10000" onclick="selectOption('alvo', 10000, 7)">R$ 10.000 ou
+                    mais</button>
+            </div>
+        </div>
+
+        <div class="step" id="step7">
+            <h2>O que mais te trava hoje?</h2>
+            <p class="subheader" style="font-size: 1rem;">Selecione uma ou mais opções:</p>
+            <button class="option-btn multi" onclick="toggleMulti(this, 'Não sei como começar')">Não sei como
+                começar</button>
+            <button class="option-btn multi" onclick="toggleMulti(this, 'Medo de não conseguir clientes')">Tenho medo de
+                não conseguir clientes</button>
+            <button class="option-btn multi" onclick="toggleMulti(this, 'Dúvida se dá dinheiro')">Dúvida se dá para
+                ganhar dinheiro de verdade</button>
+            <button class="option-btn multi" onclick="toggleMulti(this, 'Dificuldade tecnologia')">Dificuldade com as
+                tecnologias e ferramentas</button>
+            <div id="err-multi" class="error-msg">Por favor, selecione pelo menos um motivo.</div>
+            <button class="next-btn" onclick="validateStep7()">Ver Resultado Final</button>
+        </div>
+
+        <div class="step" id="stepResult">
+            <div class="result-card">
+                <span id="res-badge" class="profile-badge"></span>
+                <p id="res-desc" class="subheader"></p>
+
+                <h3 style="color:var(--virtap-purple); font-size: 1.4rem; margin-bottom: 0;">📍 Metas para faturar <span
+                        id="res-alvo"></span>:</h3>
+
+                <div class="math-box" id="res-content">
+                </div>
+
+                <button class="next-btn" onclick="location.reload()">REFAZER DIAGNÓSTICO</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+
+    <script>
+
+        const inputWhatsapp = document.querySelector("#whatsapp");
+        const iti = window.intlTelInput(inputWhatsapp, {
+            initialCountry: "br",
+            separateDialCode: true,
+            autoPlaceholder: "aggressive",
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
+        });
+
+        let data = { insegurancas: [], dores: [] };
+        let currentStep = 1;
+        let skipRenda = false;
+
+        // Atalho Enter
+        document.addEventListener('keypress', (e) => { if (e.key === 'Enter' && currentStep === 1) validateStep1(); });
+
+        function validateStep1() {
+            const n = document.getElementById('name'), a = document.getElementById('age'), w = document.getElementById('whatsapp');
+            document.querySelectorAll('.error-msg, input').forEach(el => el.classList.remove('show', 'invalid'));
+            let v = true;
+            if (n.value.length < 3) { n.classList.add('invalid'); document.getElementById('err-name').classList.add('show'); v = false; }
+            if (!a.value || a.value < 10 || a.value > 100) { a.classList.add('invalid'); document.getElementById('err-age').classList.add('show'); v = false; }
+            // Substitua a validação antiga por esta:
+            if (!iti.isValidNumber()) {
+                inputWhatsapp.classList.add('invalid');
+                document.getElementById('err-whatsapp').classList.add('show');
+                v = false;
+            } else {
+                data.whatsapp = iti.getNumber(); // Salva o número formatado
+            }
+            if (v) { data.nome = n.value; data.idade = a.value; goToStep(2); }
+        }
+
+        function handleMomento(val) {
+            data.momento = val;
+            skipRenda = (val === 'Desempregada');
+            if (skipRenda) data.renda = '0';
+            goToStep(3);
+        }
+
+        function selectOption(key, value, next) {
+            data[key] = value;
+            (key === 'dor' && skipRenda) ? goToStep(5) : goToStep(next);
+        }
+
+        function toggleMulti(btn, val) {
+            btn.classList.toggle('active');
+            data.insegurancas.includes(val) ? data.insegurancas = data.insegurancas.filter(i => i !== val) : data.insegurancas.push(val);
+        }
+
+        function toggleMultiDor(btn, val) {
+            btn.classList.toggle('active');
+            btn.classList.toggle('selected'); // Mantém o estilo visual
+            if (data.dores.includes(val)) {
+                data.dores = data.dores.filter(d => d !== val);
+            } else {
+                data.dores.push(val);
+            }
+        }
+
+        function validateStep3() {
+            if (data.dores.length === 0) {
+                document.getElementById('err-dor').classList.add('show');
+            } else {
+                // Se desempregada (definido no step anterior), pula a renda (step 4)
+                (skipRenda) ? goToStep(5) : goToStep(4);
+            }
+        }
+        function validateStep7() { (data.insegurancas.length === 0) ? document.getElementById('err-multi').classList.add('show') : showResult(); }
+
+        function goToStep(s) {
+            currentStep = s;
+
+            // Limpa erros residuais de passos anteriores
+            document.querySelectorAll('.error-msg').forEach(el => el.classList.remove('show'));
+            document.querySelectorAll('input').forEach(el => el.classList.remove('invalid'));
+
+            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+            document.getElementById((s === 'result') ? 'stepResult' : 'step' + s).classList.add('active');
+            if (s === 1 || s === 'result') {
+                document.getElementById('header-nav').style.display = 'none';
+            } else {
+
+                document.getElementById('header-nav').style.display = 'flex';
+            }
+            document.getElementById('back-btn').style.display = (s === 1 || s === 'result') ? 'none' : 'flex';
+            updateVisuals();
+            window.scrollTo(0, 0);
+        }
+
+        function goBack() { (currentStep === 5 && skipRenda) ? goToStep(3) : (currentStep > 1) ? goToStep(currentStep - 1) : null; }
+
+        function updateVisuals() {
+            // Remove a seleção de todos antes de marcar os corretos
+            document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected', 'active'));
+
+            for (let k in data) {
+                // Se for uma lista (Step 3 e 7), marca cada item da lista
+                if (Array.isArray(data[k])) {
+                    data[k].forEach(val => {
+                        const btn = document.querySelector(`button[data-val="${val}"]`) ||
+                            document.querySelector(`button[onclick*="'${val}'"]`);
+                        if (btn) btn.classList.add('selected', 'active');
+                    });
+                } else {
+                    // Se for texto único (outros passos), marca o botão correspondente
+                    const btn = document.querySelector(`button[data-val="${data[k]}"]`) ||
+                        document.querySelector(`button[onclick*="'${data[k]}'"]`);
+                    if (btn) btn.classList.add('selected');
+                }
+            }
+        }
+
+        function showResult() {
+            goToStep('result');
+            const badge = document.getElementById('res-badge'), desc = document.getElementById('res-desc'), alvoDisp = document.getElementById('res-alvo'), content = document.getElementById('res-content');
+            alvoDisp.innerText = "R$ " + data.alvo.toLocaleString();
+            const prenome = data.nome.split(' ')[0];
+
+            let pInfo = {};
+            if (data.perfil === 'iniciante') {
+                badge.innerText = "Diamante Bruto 💎";
+                desc.innerText = `Olá ${prenome}, você está no melhor momento para começar! Mesmo sem experiência, você pode aprender do jeito certo desde o dia 1, sem vícios. Na Masterclass, vou te mostrar o passo a passo para dominar a rotina e atrair seus primeiros clientes com segurança.`;
+                pInfo = { f: "Apoio Básico e Organização", v: 1500 };
+            } else if (data.perfil === 'informal') {
+                badge.innerText = "Assistente em Potencial 🚀";
+                desc.innerText = `Olá ${prenome}, você já realiza tarefas de uma Assistente Pessoal para amigos ou conhecidos, mas ainda não profissionalizou isso. Na Masterclass, vamos transformar esse seu "jeitinho" em um negócio lucrativo e estruturado para você ser valorizada.`;
+                pInfo = { f: "Gestão de Rotina e Processos", v: 2500 };
+            } else {
+                badge.innerText = "Assistente de Elite ⭐";
+                desc.innerText = `Olá ${prenome}, você já tem a bagagem técnica! O que te falta agora é precificar de forma estratégica e se posicionar como uma profissional Premium para atrair clientes de alto ticket. Na Masterclass, vou te revelar como escalar seu faturamento de forma inteligente.`;
+                pInfo = { f: "Assessoria Premium (VIP)", v: 5000 };
+            }
+
+            content.innerHTML = `
+            <div class="math-item">
+                <div class="label-group"><span>✅</span><span class="label-text">Focar em:</span></div>
+                <span class="value-text">${pInfo.f}</span>
+            </div>
+            <div class="math-item">
+                <div class="label-group"><span>💰</span><span class="label-text">Valor médio:</span></div>
+                <span class="value-text">R$ ${pInfo.v.toLocaleString()} /cliente</span>
+            </div>
+            <div class="math-item">
+                <div class="label-group"><span>🎯</span><span class="label-text">Sua Meta:</span></div>
+                <span class="value-text">Ter ${Math.ceil(data.alvo / pInfo.v)} cliente(s) ativos.</span>
+            </div>
+        `;
+        }
+    </script>
+</body>
+
+</html>
