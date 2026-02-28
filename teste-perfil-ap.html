@@ -49,6 +49,16 @@
             position: relative;
         }
 
+        #quiz-container.processing .option-btn,
+        #quiz-container.processing .next-btn,
+        #quiz-container.processing .back-link {
+            pointer-events: none;
+            /* Impede cliques e hovers */
+            opacity: 0.8;
+            /* Dá um aspecto levemente desbotado */
+            cursor: default;
+        }
+
         .header-nav {
             display: flex;
             align-items: center;
@@ -59,11 +69,22 @@
         .back-link {
             color: var(--virtap-purple);
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1.2rem;
+            /* Aumentei levemente (era 1rem) */
             cursor: pointer;
             display: none;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            /* Adiciona o traço embaixo para destacar que é clicável */
+            padding: 5px 0;
+            /* Aumenta a área de toque para facilitar no celular */
+            transition: opacity 0.2s;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+            /* Efeito visual simples ao passar o mouse */
+            filter: brightness(0.8);
         }
 
         .step {
@@ -162,6 +183,13 @@
             margin-top: 1rem;
         }
 
+        .next-btn:disabled {
+            background-color: #a1a1a1 !important;
+            cursor: not-allowed;
+            filter: none;
+            transform: none;
+        }
+
         /* Estilos do Resultado */
         .profile-badge {
             color: var(--virtap-purple);
@@ -241,6 +269,22 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css">
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <script>
+        window.apiURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://api.virtap.com.br';
+    </script>
 </head>
 
 <body>
@@ -255,9 +299,9 @@
             <p class="subheader">Preencha os dados abaixo para iniciar seu diagnóstico personalizado.</p>
             <input type="text" id="name" placeholder="Seu nome">
             <div id="err-name" class="error-msg">Por favor, digite seu nome</div>
-            <input type="number" id="age" placeholder="Sua idade" maxlength="3" min="10" max="100" step="1">
-            <div id="err-age" class="error-msg">Informe sua idade para continuar</div>
-            <input type="tel" id="whatsapp" placeholder="Seu WhatsApp (DDD + Número)">
+            <input type="email" id="email" placeholder="Seu melhor e-mail">
+            <div id="err-email" class="error-msg">Por favor, insira um e-mail válido.</div>
+            <input type="tel" id="whatsapp" placeholder="(99) 99999-9999">
             <div id="err-whatsapp" class="error-msg">Digite um WhatsApp válido</div>
             <button class="next-btn" onclick="validateStep1()">Avançar</button>
         </div>
@@ -310,13 +354,15 @@
         </div>
 
         <div class="step" id="step5">
-            <h2>Sua experiência com tarefas como organizar emails, marcar compromissos, fazer pesquisas e compras on-line:</h2>
+            <h2>Sua experiência com tarefas como organizar emails, marcar compromissos, fazer pesquisas e compras
+                on-line:</h2>
             <div id="options-perfil">
                 <button class="option-btn" data-val="iniciante" onclick="selectOption('perfil', 'iniciante', 6)">Não
                     tenho experiência</button>
                 <button class="option-btn" data-val="informal" onclick="selectOption('perfil', 'informal', 6)">Já faço
                     isso para amigos ou conhecidos</button>
-                <button class="option-btn" data-val="elite" onclick="selectOption('perfil', 'elite', 6)">Tenho experiência profissional</button>
+                <button class="option-btn" data-val="elite" onclick="selectOption('perfil', 'elite', 6)">Tenho
+                    experiência profissional</button>
             </div>
         </div>
 
@@ -342,7 +388,9 @@
             <button class="option-btn multi" onclick="toggleMulti(this, 'Dificuldade tecnologia')">Dificuldade com as
                 tecnologias e ferramentas</button>
             <div id="err-multi" class="error-msg">Por favor, selecione pelo menos um motivo</div>
-            <button class="next-btn" onclick="validateStep7()">Ver Resultado Final</button>
+            <div id="err-api" class="error-msg" style="text-align:center;margin-top:1rem; font-size:1rem">Ocorreu um
+                erro. Tente novamente.</div>
+            <button id="btn-final" class="next-btn" onclick="validateStep7()">Ver Resultado Final</button>
         </div>
 
         <div class="step" id="stepResult">
@@ -368,33 +416,52 @@
         const iti = window.intlTelInput(inputWhatsapp, {
             initialCountry: "br",
             separateDialCode: true,
-            autoPlaceholder: "aggressive",
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
         });
 
+        inputWhatsapp.autocomplete = "tel";
         let data = { insegurancas: [], dores: [] };
         let currentStep = 1;
         let skipRenda = false;
+        let isProcessing = false;
 
         // Atalho Enter
         document.addEventListener('keypress', (e) => { if (e.key === 'Enter' && currentStep === 1) validateStep1(); });
 
+
         function validateStep1() {
-            const n = document.getElementById('name'), a = document.getElementById('age'), w = document.getElementById('whatsapp');
+            const n = document.getElementById('name'),
+                e = document.getElementById('email'); // Mudou de age para email
+
             document.querySelectorAll('.error-msg, input').forEach(el => el.classList.remove('show', 'invalid'));
             let v = true;
+
+            // Regex simples para validar e-mail
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
             if (n.value.length < 3) { n.classList.add('invalid'); document.getElementById('err-name').classList.add('show'); v = false; }
-            if (!a.value || a.value < 10 || a.value > 100) { a.classList.add('invalid'); document.getElementById('err-age').classList.add('show'); v = false; }
-            // Substitua a validação antiga por esta:
+
+            // Nova validação de E-mail
+            if (!emailRegex.test(e.value)) {
+                e.classList.add('invalid');
+                document.getElementById('err-email').classList.add('show');
+                v = false;
+            }
+
             if (!iti.isValidNumber()) {
-                inputWhatsapp.classList.add('invalid');
+                document.getElementById('whatsapp').classList.add('invalid');
                 document.getElementById('err-whatsapp').classList.add('show');
                 v = false;
-            } else {
-                data.whatsapp = iti.getNumber(); // Salva o número formatado
             }
-            if (v) { data.nome = n.value; data.idade = a.value; goToStep(2); }
+
+            if (v) {
+                data.nome = n.value;
+                data.email = e.value; // Salva o e-mail no objeto
+                data.whatsapp = iti.getNumber();
+                goToStep(2);
+            }
         }
+
 
         function handleMomento(val) {
             data.momento = val;
@@ -404,16 +471,19 @@
         }
 
         function selectOption(key, value, next) {
+            if (isProcessing) return;
             data[key] = value;
             (key === 'dor' && skipRenda) ? goToStep(5) : goToStep(next);
         }
 
         function toggleMulti(btn, val) {
+            if (isProcessing) return;
             btn.classList.toggle('active');
             data.insegurancas.includes(val) ? data.insegurancas = data.insegurancas.filter(i => i !== val) : data.insegurancas.push(val);
         }
 
         function toggleMultiDor(btn, val) {
+            if (isProcessing) return;
             btn.classList.toggle('active');
             btn.classList.toggle('selected'); // Mantém o estilo visual
             if (data.dores.includes(val)) {
@@ -431,7 +501,66 @@
                 (skipRenda) ? goToStep(5) : goToStep(4);
             }
         }
-        function validateStep7() { (data.insegurancas.length === 0) ? document.getElementById('err-multi').classList.add('show') : showResult(); }
+
+        async function validateStep7() {
+            const container = document.getElementById('quiz-container');
+            const btn = document.getElementById('btn-final');
+            const errApi = document.getElementById('err-api');
+
+            document.getElementById('err-multi').classList.remove('show');
+            errApi.classList.remove('show');
+
+            if (data.insegurancas.length === 0) {
+                document.getElementById('err-multi').classList.add('show');
+                return;
+            }
+
+            // Estado de "Aguarde"
+            isProcessing = true;
+            container.classList.add('processing'); // Remove hovers e cliques visualmente
+            btn.disabled = true;
+            btn.innerText = "Processando Diagnóstico...";
+            errApi.classList.remove('show');
+
+            console.log(data);
+
+            const url = `${window.apiURL}/signup-form-ap-launch`;
+            let utm = getUTMParams();
+            const body = {
+                name: data.nome,
+                email: data.email,
+                whatsapp: data.whatsapp,
+                utm_params: utm.has_utm ? utm : undefined
+            };
+
+            try {
+
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(body)
+                });
+
+                if (response.ok) {
+                    btn.disabled = false;
+                    isProcessing = false;
+                    container.classList.remove('processing');
+                    showResult(); // Só mostra o resultado se a API responder OK
+                } else {
+                    throw new Error();
+                }
+            } catch (error) {
+                // Se der erro, volta o botão e mostra mensagem vermelha
+                btn.disabled = false;
+                isProcessing = false;
+                container.classList.remove('processing');
+                btn.innerText = "Ver Resultado Final";
+                errApi.classList.add('show');
+            }
+        }
+
 
         function goToStep(s) {
             currentStep = s;
@@ -512,6 +641,86 @@
             </div>
         `;
         }
+
+
+        function getNullableValue(val) {
+            if (val) {
+                val = val.trim();
+                if (val.length === 0) {
+                    val = null;
+                }
+            }
+            return val;
+        }
+
+        function getUTMParams() {
+
+            const params = new URLSearchParams(window.location.search);
+            const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
+            const rawReferrer = getNullableValue(document.referrer);
+            const hasUTM = getNullableValue(params.get('utm_source')) && getNullableValue(params.get('utm_medium'));
+
+            let utmParams = {};
+
+            if (hasUTM) {
+                for (const key of utmKeys) {
+                    let value = getNullableValue(params.get(key));
+                    utmParams[key] = value;
+                }
+            }
+            utmParams['timestamp'] = Date.now();
+            utmParams['referral_url'] = rawReferrer;
+
+            let firstUtmParams = localStorage.getItem('first_visit_utm');
+            if (!firstUtmParams) {
+                firstUtmParams = utmParams;
+                try {
+                    localStorage.setItem('first_visit_utm', JSON.stringify(utmParams));
+                } catch { }
+            } else {
+                try {
+                    firstUtmParams = JSON.parse(firstUtmParams);
+                } catch {
+                    firstUtmParams = utmParams;
+                }
+            }
+
+
+            return {
+                utm_first: firstUtmParams,
+                utm_last: utmParams,
+                has_utm: !!hasUTM
+            };
+        }
+
+        try {
+            console.log(getUTMParams());
+        } catch (err) { }
+
+
+        window.addEventListener('load', () => {
+            // 1. Pega os parâmetros da URL (ex: ?nome=João&email=teste@abc.com&tel=11999999999)
+            const urlParams = new URLSearchParams(window.location.search);
+
+            const nomeUrl = urlParams.get('nome');
+            const emailUrl = urlParams.get('email');
+            const zapUrl = urlParams.get('zap') || urlParams.get('tel'); // Aceita os dois nomes
+
+            // 2. Preenche os campos se eles existirem na URL
+            if (nomeUrl) document.getElementById('name').value = nomeUrl;
+            if (emailUrl) document.getElementById('email').value = emailUrl;
+
+            if (zapUrl) {
+                const inputZap = document.getElementById('whatsapp');
+                inputZap.value = zapUrl;
+
+                // Se estiver usando o intl-tel-input, avisa a biblioteca para formatar o número
+                if (typeof iti !== 'undefined') {
+                    iti.setNumber(zapUrl);
+                }
+            }
+        });
+
     </script>
 </body>
 
