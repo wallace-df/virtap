@@ -545,7 +545,14 @@
                             utm_params: getUTMParams().has_utm ? getUTMParams() : undefined
                         })
                     });
-                    if (response.ok) { showResult(); } else { throw new Error(); }
+                    if (response.ok) {
+
+                        btn.disabled = false; isProcessing = false; container.classList.remove('processing');
+                        btn.innerText = "Ver Resultado Final"; errApi.classList.add('show');
+                        showResult();
+                    } else {
+                        throw new Error();
+                    }
                 } catch (error) {
                     btn.disabled = false; isProcessing = false; container.classList.remove('processing');
                     btn.innerText = "Ver Resultado Final"; errApi.classList.add('show');
