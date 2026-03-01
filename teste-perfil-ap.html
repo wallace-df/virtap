@@ -137,6 +137,10 @@
             font-weight: 500;
         }
 
+        p.pre {
+            white-space: pre-line;
+        }
+
         .option-btn {
             display: block;
             width: 100%;
@@ -431,7 +435,7 @@
             <div class="step" id="stepResult">
                 <div class="result-card">
                     <span id="res-badge" class="profile-badge"></span>
-                    <p id="res-desc" class="subheader"></p>
+                    <p id="res-desc" class="subheader pre"></p>
                     <h3 style="color:var(--virtap-purple); font-size: 1.4rem; margin-bottom: 0;">📍 Metas para faturar
                         <span id="res-alvo"></span>:
                     </h3>
@@ -628,7 +632,9 @@
                 pInfo = { f: "Gestão de Rotina e Processos", v: 2500 };
             } else {
                 badge.innerText = "Assistente de Elite ⭐";
-                desc.innerText = `Olá ${prenome}, você já tem a bagagem técnica! O que te falta agora é precificar de forma estratégica e se posicionar como uma profissional Premium para atrair clientes de alto ticket. Na Masterclass, vou te revelar como escalar seu faturamento de forma inteligente.`;
+                desc.innerText = `Olá ${prenome}! 
+                 Seu diagnóstico é cristalino: você é uma Assistente de Elite. Você já tem a bagagem técnica, sabe como o mercado funciona e já domina a execução. O que te falta agora não é trabalhar mais, é se posicionar melhor. Você precisa precificar de forma estratégica e construir um posicionamento Premium para atrair clientes que pagam pelo seu valor, e não apenas pelo seu tempo. 
+                 Na Masterclass, vou te revelar como escalar seu faturamento de forma inteligente.`;
                 pInfo = { f: "Assessoria Premium (VIP)", v: 5000 };
             }
 
