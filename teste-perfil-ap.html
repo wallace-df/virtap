@@ -11,7 +11,7 @@
     <link href="/favicon.svg" type="image/svg+xml" rel="icon" />
     <link href="/favicon.png" type="image/png" rel="icon" />
 
-    <title>Diagnóstico Assessora Expert ⭐ | Virtap</title>
+    <title>Teste de Perfil da Assessora Expert ⭐ | Virtap</title>
     <style>
         :root {
             --virtap-purple: #532e88;
@@ -27,13 +27,13 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        body {
+
+        #quiz-wrapper {
             background-color: var(--bg);
             color: var(--text);
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             margin: 0;
             padding: 20px;
         }
@@ -41,7 +41,7 @@
         #quiz-container {
             background: var(--white);
             width: 100%;
-            max-width: 600px;
+            max-width: 680px;
             padding: 2rem 3rem 3rem 3rem;
             border-radius: 25px;
             box-shadow: 0 20px 40px rgba(83, 46, 136, 0.12);
@@ -96,9 +96,34 @@
             animation: slideIn 0.4s ease-out;
         }
 
+        h1 {
+            color: var(--virtap-purple);
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            text-align: center;
+
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+            /* Ou a cor de fundo do seu site para não sobrepor transparente */
+            z-index: 1000;
+            margin-bottom: 5px;
+            /* Aproxima o título do quiz */
+            padding: 15px 0;
+            /* Espaçamento interno do título */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        h1>p {
+            color: #333;
+            font-size: 1.2rem;
+        }
+
         h2 {
             color: var(--virtap-purple);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-bottom: 1.2rem;
             font-weight: 800;
             line-height: 1.2;
@@ -289,122 +314,130 @@
 
 <body>
 
-    <div id="quiz-container">
-        <div class="header-nav" style="display:none" id="header-nav">
-            <div id="back-btn" class="back-link" onclick="goBack()">← Voltar</div>
-        </div>
-
-        <div class="step active" id="step1">
-            <h2>Diagnóstico Assessora Expert ⭐</h2>
-            <p class="subheader">Preencha os dados abaixo para iniciar seu diagnóstico personalizado.</p>
-            <input type="text" id="name" placeholder="Seu nome">
-            <div id="err-name" class="error-msg">Por favor, digite seu nome</div>
-            <input type="email" id="email" placeholder="Seu melhor e-mail">
-            <div id="err-email" class="error-msg">Por favor, insira um e-mail válido.</div>
-            <input type="tel" id="whatsapp" placeholder="(99) 99999-9999">
-            <div id="err-whatsapp" class="error-msg">Digite um WhatsApp válido</div>
-            <button class="next-btn" onclick="validateStep1()">Avançar</button>
-        </div>
-
-        <div class="step" id="step2">
-            <h2>Qual seu momento profissional hoje?</h2>
-            <div id="options-momento">
-                <button class="option-btn" data-val="CLT Extra" onclick="handleMomento('CLT Extra')">Trabalho CLT e
-                    quero uma renda extra</button>
-                <button class="option-btn" data-val="CLT Transição" onclick="handleMomento('CLT Transição')">Trabalho
-                    CLT, mas quero fazer transição de carreira</button>
-                <button class="option-btn" data-val="Desempregada" onclick="handleMomento('Desempregada')">Estou
-                    desempregada / Buscando recolocação</button>
-                <button class="option-btn" data-val="Aposentada" onclick="handleMomento('Aposentada')">Sou aposentada(o)
-                    e quero uma nova ocupação</button>
-                <button class="option-btn" data-val="Especializar" onclick="handleMomento('Especializar')">Já atuo como
-                    Assistente e quero me especializar</button>
+    <h1>Descubra seu Perfil de Assessora ⭐<p>Qual é o plano ideal para você faturar de R$ 3 mil a R$ 10 mil mensais?</p>
+    </h1>
+    <div id="quiz-wrapper">
+        <div id="quiz-container">
+            <div class="header-nav" style="display:none" id="header-nav">
+                <div id="back-btn" class="back-link" onclick="goBack()">← Voltar</div>
             </div>
-        </div>
 
-        <div class="step" id="step3">
-            <h2>O que mais te incomoda hoje?</h2>
-            <p class="subheader" style="font-size: 1rem;">Selecione uma ou mais opções:</p>
-            <div id="options-dor">
-                <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Falta de tempo')">Falta de
-                    flexibilidade</button>
-                <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Longe da família')">Passo tempo
-                    demais fora de casa e longe da minha família</button>
-                <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Renda estagnada')">Minha renda está
-                    travada</button>
-                <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Falta reconhecimento')">Me sinto
-                    estagnada em uma profissão desvalorizada</button>
-            </div>
-            <div id="err-dor" class="error-msg">Selecione pelo menos um incômodo</div>
-            <button class="next-btn" onclick="validateStep3()">Avançar</button>
-        </div>
-
-        <div class="step" id="step4">
-            <h2>Sua renda mensal hoje:</h2>
-            <div id="options-renda">
-                <button class="option-btn" data-val="1800" onclick="selectOption('renda', '1800', 5)">Até R$
-                    1.800</button>
-                <button class="option-btn" data-val="2500-3000" onclick="selectOption('renda', '2500-3000', 5)">R$ 2.500
-                    a R$ 3.000</button>
-                <button class="option-btn" data-val="3000-5000" onclick="selectOption('renda', '3000-5000', 5)">R$ 3.000
-                    a R$ 5.000</button>
-                <button class="option-btn" data-val="5000+" onclick="selectOption('renda', '5000+', 5)">Acima de R$
-                    5.000</button>
-            </div>
-        </div>
-
-        <div class="step" id="step5">
-            <h2>Sua experiência com tarefas como organizar emails, marcar compromissos, fazer pesquisas e compras
-                on-line:</h2>
-            <div id="options-perfil">
-                <button class="option-btn" data-val="iniciante" onclick="selectOption('perfil', 'iniciante', 6)">Não
-                    tenho experiência</button>
-                <button class="option-btn" data-val="informal" onclick="selectOption('perfil', 'informal', 6)">Já faço
-                    isso para amigos ou conhecidos</button>
-                <button class="option-btn" data-val="elite" onclick="selectOption('perfil', 'elite', 6)">Tenho
-                    experiência profissional</button>
-            </div>
-        </div>
-
-        <div class="step" id="step6">
-            <h2>Qual seu salário mensal ideal?</h2>
-            <div id="options-alvo">
-                <button class="option-btn" data-val="3000" onclick="selectOption('alvo', 3000, 7)">R$ 3.000</button>
-                <button class="option-btn" data-val="5000" onclick="selectOption('alvo', 5000, 7)">R$ 5.000</button>
-                <button class="option-btn" data-val="10000" onclick="selectOption('alvo', 10000, 7)">R$ 10.000 ou
-                    mais</button>
-            </div>
-        </div>
-
-        <div class="step" id="step7">
-            <h2>O que mais te trava hoje?</h2>
-            <p class="subheader" style="font-size: 1rem;">Selecione uma ou mais opções:</p>
-            <button class="option-btn multi" onclick="toggleMulti(this, 'Não sei como começar')">Não sei como
-                começar</button>
-            <button class="option-btn multi" onclick="toggleMulti(this, 'Medo de não conseguir clientes')">Tenho medo de
-                não conseguir clientes</button>
-            <button class="option-btn multi" onclick="toggleMulti(this, 'Dúvida se dá dinheiro')">Dúvida se dá para
-                ganhar dinheiro de verdade</button>
-            <button class="option-btn multi" onclick="toggleMulti(this, 'Dificuldade tecnologia')">Dificuldade com as
-                tecnologias e ferramentas</button>
-            <div id="err-multi" class="error-msg">Por favor, selecione pelo menos um motivo</div>
-            <div id="err-api" class="error-msg" style="text-align:center;margin-top:1rem; font-size:1rem">Ocorreu um
-                erro. Tente novamente.</div>
-            <button id="btn-final" class="next-btn" onclick="validateStep7()">Ver Resultado Final</button>
-        </div>
-
-        <div class="step" id="stepResult">
-            <div class="result-card">
-                <span id="res-badge" class="profile-badge"></span>
-                <p id="res-desc" class="subheader"></p>
-
-                <h3 style="color:var(--virtap-purple); font-size: 1.4rem; margin-bottom: 0;">📍 Metas para faturar <span
-                        id="res-alvo"></span>:</h3>
-
-                <div class="math-box" id="res-content">
+            <div class="step active" id="step1">
+                <h2>Qual seu momento profissional hoje?</h2>
+                <div id="options-momento">
+                    <button class="option-btn" data-val="CLT Extra" onclick="handleMomento('CLT Extra')">Trabalho CLT e
+                        quero uma renda extra</button>
+                    <button class="option-btn" data-val="CLT Transição"
+                        onclick="handleMomento('CLT Transição')">Trabalho
+                        CLT, mas quero fazer transição de carreira</button>
+                    <button class="option-btn" data-val="Desempregada" onclick="handleMomento('Desempregada')">Estou
+                        desempregada / Buscando recolocação</button>
+                    <button class="option-btn" data-val="Aposentada" onclick="handleMomento('Aposentada')">Sou
+                        aposentada(o)
+                        e quero uma nova ocupação</button>
+                    <button class="option-btn" data-val="Especializar" onclick="handleMomento('Especializar')">Já atuo
+                        como
+                        Assistente e quero me especializar</button>
                 </div>
+            </div>
 
-                <button class="next-btn" onclick="location.reload()">REFAZER DIAGNÓSTICO</button>
+            <div class="step" id="step2">
+                <h2>O que mais te incomoda hoje?</h2>
+                <p class="subheader" style="font-size: 1rem;">Selecione uma ou mais opções:</p>
+                <div id="options-dor">
+                    <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Falta de tempo')">Falta de
+                        flexibilidade</button>
+                    <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Longe da família')">Passo tempo
+                        demais fora de casa e longe da minha família</button>
+                    <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Renda estagnada')">Minha renda
+                        está
+                        travada</button>
+                    <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Falta reconhecimento')">Me sinto
+                        estagnada em uma profissão desvalorizada</button>
+                </div>
+                <div id="err-dor" class="error-msg">Selecione pelo menos um incômodo</div>
+                <button class="next-btn" onclick="validateStep2()">Avançar</button>
+            </div>
+
+            <div class="step" id="step3">
+                <h2>Sua renda mensal hoje:</h2>
+                <div id="options-renda">
+                    <button class="option-btn" data-val="1800" onclick="selectOption('renda', '1800', 4)">Até R$
+                        1.800</button>
+                    <button class="option-btn" data-val="2500-3000" onclick="selectOption('renda', '2500-3000', 4)">R$
+                        2.500
+                        a R$ 3.000</button>
+                    <button class="option-btn" data-val="3000-5000" onclick="selectOption('renda', '3000-5000', 4)">R$
+                        3.000
+                        a R$ 5.000</button>
+                    <button class="option-btn" data-val="5000+" onclick="selectOption('renda', '5000+', 4)">Acima de R$
+                        5.000</button>
+                </div>
+            </div>
+
+            <div class="step" id="step4">
+                <h2>Sua experiência com tarefas online:</h2>
+                <div id="options-perfil">
+                    <button class="option-btn" data-val="iniciante" onclick="selectOption('perfil', 'iniciante', 5)">Não
+                        tenho experiência</button>
+                    <button class="option-btn" data-val="informal" onclick="selectOption('perfil', 'informal', 5)">Já
+                        faço
+                        isso para amigos</button>
+                    <button class="option-btn" data-val="elite" onclick="selectOption('perfil', 'elite', 5)">Tenho
+                        experiência profissional</button>
+                </div>
+            </div>
+
+            <div class="step" id="step5">
+                <h2>Qual seu salário mensal ideal?</h2>
+                <div id="options-alvo">
+                    <button class="option-btn" data-val="3000" onclick="selectOption('alvo', 3000, 6)">R$ 3.000</button>
+                    <button class="option-btn" data-val="5000" onclick="selectOption('alvo', 5000, 6)">R$ 5.000</button>
+                    <button class="option-btn" data-val="10000" onclick="selectOption('alvo', 10000, 6)">R$ 10.000 ou
+                        mais</button>
+                </div>
+            </div>
+
+            <div class="step" id="step6">
+                <h2>O que mais te trava hoje?</h2>
+                <p class="subheader" style="font-size: 1rem;">Selecione uma ou mais opções:</p>
+                <button class="option-btn multi" onclick="toggleMulti(this, 'Não sei como começar')">Não sei como
+                    começar</button>
+                <button class="option-btn multi" onclick="toggleMulti(this, 'Medo de não conseguir clientes')">Tenho
+                    medo de
+                    não conseguir clientes</button>
+                <button class="option-btn multi" onclick="toggleMulti(this, 'Dúvida se dá dinheiro')">Dúvida se dá para
+                    ganhar dinheiro de verdade</button>
+                <button class="option-btn multi" onclick="toggleMulti(this, 'Dificuldade tecnologia')">Dificuldade com
+                    tecnologias</button>
+                <div id="err-multi" class="error-msg">Por favor, selecione pelo menos um motivo</div>
+                <button class="next-btn" onclick="validateStep6()">Avançar</button>
+            </div>
+
+            <div class="step" id="step7">
+                <h2>Seu perfil está pronto! ✨</h2>
+                <p class="subheader">Preencha os dados abaixo para ver seu perfil.</p>
+                <input type="text" id="name" placeholder="Seu nome">
+                <div id="err-name" class="error-msg">Por favor, digite seu nome</div>
+                <input type="email" id="email" placeholder="Seu melhor e-mail">
+                <div id="err-email" class="error-msg">Por favor, insira um e-mail válido.</div>
+                <input type="tel" id="whatsapp" placeholder="(99) 99999-9999">
+                <div id="err-whatsapp" class="error-msg">Digite um WhatsApp válido</div>
+                <div id="err-api" class="error-msg" style="text-align:center;margin-top:1rem; font-size:1rem">Ocorreu um
+                    erro. Tente novamente.</div>
+                <button id="btn-final" class="next-btn" onclick="validateStep7AndSend()">Ver Resultado Final</button>
+            </div>
+
+            <div class="step" id="stepResult">
+                <div class="result-card">
+                    <span id="res-badge" class="profile-badge"></span>
+                    <p id="res-desc" class="subheader"></p>
+                    <h3 style="color:var(--virtap-purple); font-size: 1.4rem; margin-bottom: 0;">📍 Metas para faturar
+                        <span id="res-alvo"></span>:
+                    </h3>
+                    <div class="math-box" id="res-content"></div>
+                    <button class="next-btn" onclick="location.reload()">REFAZER TESTE</button>
+                </div>
             </div>
         </div>
     </div>
@@ -425,50 +458,9 @@
         let skipRenda = false;
         let isProcessing = false;
 
-        // Atalho Enter
-        document.addEventListener('keypress', (e) => { if (e.key === 'Enter' && currentStep === 1) validateStep1(); });
-
-
-        function validateStep1() {
-            const n = document.getElementById('name'),
-                e = document.getElementById('email'); // Mudou de age para email
-
-            document.querySelectorAll('.error-msg, input').forEach(el => el.classList.remove('show', 'invalid'));
-            let v = true;
-
-            // Regex simples para validar e-mail
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-            if (n.value.length < 3) { n.classList.add('invalid'); document.getElementById('err-name').classList.add('show'); v = false; }
-
-            // Nova validação de E-mail
-            if (!emailRegex.test(e.value)) {
-                e.classList.add('invalid');
-                document.getElementById('err-email').classList.add('show');
-                v = false;
-            }
-
-            if (!iti.isValidNumber()) {
-                document.getElementById('whatsapp').classList.add('invalid');
-                document.getElementById('err-whatsapp').classList.add('show');
-                v = false;
-            }
-
-            if (v) {
-                data.nome = n.value;
-                data.email = e.value; // Salva o e-mail no objeto
-                data.whatsapp = iti.getNumber();
-                goToStep(2);
-            }
-        }
-
-
-        function handleMomento(val) {
-            data.momento = val;
-            skipRenda = (val === 'Desempregada');
-            if (skipRenda) data.renda = '0';
-            goToStep(3);
-        }
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && currentStep === 7) validateStep7AndSend();
+        });
 
         function selectOption(key, value, next) {
             if (isProcessing) return;
@@ -493,74 +485,73 @@
             }
         }
 
-        function validateStep3() {
+        function handleMomento(val) {
+            data.momento = val;
+            skipRenda = (val === 'Desempregada');
+            if (skipRenda) data.renda = '0';
+            goToStep(2);
+        }
+
+        function validateStep2() {
             if (data.dores.length === 0) {
                 document.getElementById('err-dor').classList.add('show');
             } else {
-                // Se desempregada (definido no step anterior), pula a renda (step 4)
-                (skipRenda) ? goToStep(5) : goToStep(4);
+                (skipRenda) ? goToStep(4) : goToStep(3);
             }
         }
 
-        async function validateStep7() {
-            const container = document.getElementById('quiz-container');
-            const btn = document.getElementById('btn-final');
-            const errApi = document.getElementById('err-api');
-
-            document.getElementById('err-multi').classList.remove('show');
-            errApi.classList.remove('show');
-
+        function validateStep6() {
             if (data.insegurancas.length === 0) {
                 document.getElementById('err-multi').classList.add('show');
                 return;
             }
-
-            // Estado de "Aguarde"
-            isProcessing = true;
-            container.classList.add('processing'); // Remove hovers e cliques visualmente
-            btn.disabled = true;
-            btn.innerText = "Processando Diagnóstico...";
-            errApi.classList.remove('show');
-
-            console.log(data);
-
-            const url = `${window.apiURL}/signup-form-ap-launch`;
-            let utm = getUTMParams();
-            const body = {
-                name: data.nome,
-                email: data.email,
-                whatsapp: data.whatsapp,
-                utm_params: utm.has_utm ? utm : undefined
-            };
-
-            try {
-
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(body)
-                });
-
-                if (response.ok) {
-                    btn.disabled = false;
-                    isProcessing = false;
-                    container.classList.remove('processing');
-                    showResult(); // Só mostra o resultado se a API responder OK
-                } else {
-                    throw new Error();
-                }
-            } catch (error) {
-                // Se der erro, volta o botão e mostra mensagem vermelha
-                btn.disabled = false;
-                isProcessing = false;
-                container.classList.remove('processing');
-                btn.innerText = "Ver Resultado Final";
-                errApi.classList.add('show');
-            }
+            goToStep(7);
         }
 
+        async function validateStep7AndSend() {
+            const n = document.getElementById('name'),
+                e = document.getElementById('email'),
+                btn = document.getElementById('btn-final'),
+                errApi = document.getElementById('err-api'),
+                container = document.getElementById('quiz-container');
+
+            document.querySelectorAll('.error-msg, input').forEach(el => el.classList.remove('show', 'invalid'));
+            let v = true;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (n.value.length < 3) { n.classList.add('invalid'); document.getElementById('err-name').classList.add('show'); v = false; }
+            if (!emailRegex.test(e.value)) { e.classList.add('invalid'); document.getElementById('err-email').classList.add('show'); v = false; }
+            if (!iti.isValidNumber()) { document.getElementById('whatsapp').classList.add('invalid'); document.getElementById('err-whatsapp').classList.add('show'); v = false; }
+
+            if (v) {
+                data.nome = n.value;
+                data.email = e.value;
+                data.whatsapp = iti.getNumber();
+
+                isProcessing = true;
+                container.classList.add('processing');
+                btn.disabled = true;
+                btn.innerText = "Processando...";
+
+                const url = `${window.apiURL}/signup-form-ap-launch`;
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            name: data.nome,
+                            email: data.email,
+                            whatsapp: data.whatsapp,
+                            utm_params: getUTMParams().has_utm ? getUTMParams() : undefined
+                        })
+                    });
+                    if (response.ok) { showResult(); } else { throw new Error(); }
+                } catch (error) {
+                    btn.disabled = false; isProcessing = false; container.classList.remove('processing');
+                    btn.innerText = "Ver Resultado Final"; errApi.classList.add('show');
+                }
+            }
+        }
 
         function goToStep(s) {
             currentStep = s;
@@ -582,7 +573,15 @@
             window.scrollTo(0, 0);
         }
 
-        function goBack() { (currentStep === 5 && skipRenda) ? goToStep(3) : (currentStep > 1) ? goToStep(currentStep - 1) : null; }
+
+        function goBack() {
+            if (currentStep === 4 && skipRenda) {
+                goToStep(2);
+            }
+            else if (currentStep > 1) {
+                goToStep(currentStep - 1)
+            }
+        }
 
         function updateVisuals() {
             // Remove a seleção de todos antes de marcar os corretos
