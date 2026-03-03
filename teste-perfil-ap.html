@@ -329,16 +329,16 @@
             <div class="step active" id="step1">
                 <h2>Qual é a sua realidade profissional hoje?</h2>
                 <div id="options-momento">
-                    <button class="option-btn" data-val="CLT Extra" onclick="handleMomento('CLT Extra')">Trabalho CLT e
-                        quero uma renda extra</button>
+                    <button class="option-btn" data-val="CLT Extra" onclick="handleMomento('CLT Extra')">Trabalho CLT, mas
+                        busco uma renda extra</button>
                     <button class="option-btn" data-val="CLT Transição"
                         onclick="handleMomento('CLT Transição')">Trabalho
-                        CLT, mas quero fazer transição de carreira</button>
+                        CLT, mas quero fazer uma transição de carreira</button>
                     <button class="option-btn" data-val="Desempregada" onclick="handleMomento('Desempregada')">Estou
                         desempregada / Buscando recolocação</button>
                     <button class="option-btn" data-val="Aposentada" onclick="handleMomento('Aposentada')">Sou
                         aposentada
-                        e quero uma nova ocupação</button>
+                        e busco uma nova ocupação</button>
                     <button class="option-btn" data-val="Especializar" onclick="handleMomento('Especializar')">Já atuo
                         como
                         Assistente e quero me especializar</button>
@@ -346,38 +346,42 @@
             </div>
 
             <div class="step" id="step2">
-                <h2>O que mais de frusta hoje?</h2>
-                <p class="subheader" style="font-size: 1rem;">Selecione uma ou mais opções:</p>
-                <div id="options-dor">
-                    <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Falta de tempo')">A falta de flexibilidade (ter horários engessados)</button>
-                    <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Longe da família')">Passo tempo
-                        demais fora de casa e longe da minha família</button>
-                    <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Renda estagnada')">Sinto que ganho pouco</button>
-                    <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Falta reconhecimento')">Me sinto
-                        estagnada em uma profissão desvalorizada</button>
-                </div>
-                <div id="err-dor" class="error-msg">Selecione pelo menos uma opção.</div>
-                <button class="next-btn" onclick="validateStep2()">Avançar</button>
-            </div>
-
-            <div class="step" id="step3">
-                <h2>Qual sua renda mensal hoje?</h2>
+                <h2>Qual é a sua renda mensal hoje?</h2>
                 <div id="options-renda">
-                    <button class="option-btn" data-val="1800" onclick="selectOption('renda', '1800', 4)">Até R$
+                    <button class="option-btn" data-val="1800" onclick="selectOption('renda', '1800', 3)">Até R$
                         1.800</button>
-                    <button class="option-btn" data-val="2500-3000" onclick="selectOption('renda', '2500-3000', 4)">R$
-                        De 2.500
+                    <button class="option-btn" data-val="2500-3000" onclick="selectOption('renda', '2500-3000', 3)">
+                        De R$ 2.500
                         até R$ 3.000</button>
-                    <button class="option-btn" data-val="3000-5000" onclick="selectOption('renda', '3000-5000', 4)">R$
-                        De 3.001
+                    <button class="option-btn" data-val="3000-5000" onclick="selectOption('renda', '3000-5000', 3)">
+                        De R$ 3.001
                         até R$ 5.000</button>
-                    <button class="option-btn" data-val="5000+" onclick="selectOption('renda', '5000+', 4)">Acima de R$
+                    <button class="option-btn" data-val="5000+" onclick="selectOption('renda', '5000+', 3)">Acima de R$
                         5.000</button>
                 </div>
             </div>
 
+            <div class="step" id="step3">
+                <h2>O que mais te frustra hoje na sua realidade?</h2>
+                <p class="subheader" style="font-size: 1rem;">Selecione uma ou mais opções:</p>
+                <div id="options-dor">
+                    <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Sem renda estável')">Não tenho
+                        uma fonte de renda estável</button>
+                    <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Falta de tempo')">Falta de
+                        flexibilidade e horários rígidos</button>
+                    <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Longe da família')">Passo tempo
+                        demais fora de casa e longe da minha família</button>
+                    <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Renda estagnada')">Sinto que
+                        ganho pouco</button>
+                    <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Falta reconhecimento')">Me sinto desvalorizada como profissional e pouco reconhecida</button>
+                </div>
+                <div id="err-dor" class="error-msg">Selecione pelo menos uma opção.</div>
+                <button class="next-btn" onclick="validateStep3()">Avançar</button>
+            </div>
+
             <div class="step" id="step4">
-                <h2>Qual sua experiência em tarefas como organizar e-mails, marcar compromissos, pesquisas ou compras online?</h2>
+                <h2>Qual sua experiência em tarefas como organizar e-mails, marcar compromissos, pesquisas ou compras
+                    online?</h2>
                 <div id="options-perfil">
                     <button class="option-btn" data-val="iniciante" onclick="selectOption('perfil', 'iniciante', 5)">Não
                         tenho experiência</button>
@@ -454,7 +458,7 @@
         });
 
         inputWhatsapp.autocomplete = "tel";
-        let data = { insegurancas: [], dores: [] };
+        let data = { insegurancas: [], dores: [], renda: 0 };
         let currentStep = 1;
         let skipRenda = false;
         let isProcessing = false;
@@ -466,7 +470,7 @@
         function selectOption(key, value, next) {
             if (isProcessing) return;
             data[key] = value;
-            (key === 'dor' && skipRenda) ? goToStep(5) : goToStep(next);
+            goToStep(next);
         }
 
         function toggleMulti(btn, val) {
@@ -489,15 +493,19 @@
         function handleMomento(val) {
             data.momento = val;
             skipRenda = (val === 'Desempregada');
-            if (skipRenda) data.renda = '0';
-            goToStep(2);
+            if (skipRenda) {
+                goToStep(3);
+            }
+            else {
+                goToStep(2);
+            }
         }
 
-        function validateStep2() {
+        function validateStep3() {
             if (data.dores.length === 0) {
                 document.getElementById('err-dor').classList.add('show');
             } else {
-                (skipRenda) ? goToStep(4) : goToStep(3);
+                goToStep(4);
             }
         }
 
@@ -583,8 +591,8 @@
 
 
         function goBack() {
-            if (currentStep === 4 && skipRenda) {
-                goToStep(2);
+            if (currentStep === 3 && skipRenda) {
+                goToStep(1);
             }
             else if (currentStep > 1) {
                 goToStep(currentStep - 1)
