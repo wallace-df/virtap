@@ -129,6 +129,12 @@
             line-height: 1.2;
         }
 
+        ul li {
+            font-size: 1.1rem;
+            line-height: 1.2;
+            font-weight: 600;
+        }
+
         p.subheader {
             color: #555;
             font-size: 1.1rem;
@@ -329,7 +335,8 @@
             <div class="step active" id="step1">
                 <h2>Qual é a sua realidade profissional hoje?</h2>
                 <div id="options-momento">
-                    <button class="option-btn" data-val="CLT Extra" onclick="handleMomento('CLT Extra')">Trabalho CLT, mas
+                    <button class="option-btn" data-val="CLT Extra" onclick="handleMomento('CLT Extra')">Trabalho CLT,
+                        mas
                         busco uma renda extra</button>
                     <button class="option-btn" data-val="CLT Transição"
                         onclick="handleMomento('CLT Transição')">Trabalho
@@ -373,53 +380,87 @@
                         demais fora de casa e longe da minha família</button>
                     <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Renda estagnada')">Sinto que
                         ganho pouco</button>
-                    <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Falta reconhecimento')">Me sinto desvalorizada como profissional e pouco reconhecida</button>
+                    <button class="option-btn multi-dor" onclick="toggleMultiDor(this, 'Falta reconhecimento')">Me sinto
+                        desvalorizada como profissional e pouco reconhecida</button>
                 </div>
                 <div id="err-dor" class="error-msg">Selecione pelo menos uma opção.</div>
                 <button class="next-btn" onclick="validateStep3()">Avançar</button>
             </div>
 
             <div class="step" id="step4">
-                <h2>Qual sua experiência em tarefas como organizar e-mails, marcar compromissos, pesquisas ou compras
-                    online?</h2>
-                <div id="options-perfil">
-                    <button class="option-btn" data-val="iniciante" onclick="selectOption('perfil', 'iniciante', 5)">Não
-                        tenho experiência</button>
-                    <button class="option-btn" data-val="informal" onclick="selectOption('perfil', 'informal', 5)">Já
-                        faço
-                        isso para amigos</button>
-                    <button class="option-btn" data-val="elite" onclick="selectOption('perfil', 'elite', 5)">Tenho
-                        experiência profissional na área</button>
-                </div>
-            </div>
-
-            <div class="step" id="step5">
-                <h2>Qual seu salário mensal ideal?</h2>
+                <h2>Qual seu objetivo de ganho mensal?</h2>
                 <div id="options-alvo">
-                    <button class="option-btn" data-val="3000" onclick="selectOption('alvo', 3000, 6)">R$ 3.000</button>
-                    <button class="option-btn" data-val="5000" onclick="selectOption('alvo', 5000, 6)">R$ 5.000</button>
-                    <button class="option-btn" data-val="10000" onclick="selectOption('alvo', 10000, 6)">R$ 10.000 ou
+                    <button class="option-btn" data-val="3000" onclick="selectOption('alvo', 3000, 5)">R$ 3.000</button>
+                    <button class="option-btn" data-val="5000" onclick="selectOption('alvo', 5000, 5)">R$ 5.000</button>
+                    <button class="option-btn" data-val="10000" onclick="selectOption('alvo', 10000, 5)">R$ 10.000 ou
                         mais</button>
                 </div>
             </div>
 
+            <div class="step" id="step5">
+                <h2>Você já realizou alguma das tarefas abaixo?</h2>
+                <ul>
+                    <li>Pesquisar e reservar passagens aéreas ou hotéis</li>
+                    <li>Organizar e-mails</li>
+                    <li>Agendar um médico ou exame</li>
+                    <li>Comprar um produto online</li>
+                    <li>Resolver algum problema por telefone</li>
+                </ul>
+                <div id="options-perfil">
+                    <button class="option-btn" data-val="iniciante"
+                        onclick="selectOption('perfil', 'iniciante', 6)">Nunca fiz</button>
+                    <button class="option-btn" data-val="informal" onclick="selectOption('perfil', 'informal', 6)">Já
+                        fiz para mim/família/amigos, mas nunca cobrei por isso
+                    </button>
+                    <button class="option-btn" data-val="elite" onclick="selectOption('perfil', 'elite', 6)">Já fiz
+                        algumas dessas atividades de forma profissional</button>
+                </div>
+            </div>
+
             <div class="step" id="step6">
-                <h2>O que mais te trava hoje?</h2>
+                <h2>Se você tivesse que apontar o seu maior obstáculo hoje, qual seria?</h2>
                 <p class="subheader" style="font-size: 1rem;">Selecione uma ou mais opções:</p>
-                <button class="option-btn multi" onclick="toggleMulti(this, 'Não sei como começar')">Não sei como
-                    começar</button>
-                <button class="option-btn multi" onclick="toggleMulti(this, 'Medo de não conseguir clientes')">Tenho
+                <button class="option-btn multi" onclick="toggeMultiObstaculo(this, 'Não sei como começar')">Não faço
+                    ideia de
+                    por onde começar</button>
+                <button class="option-btn multi"
+                    onclick="toggeMultiObstaculo(this, 'Medo de não conseguir clientes')">Tenho
                     medo de
                     não conseguir clientes</button>
-                <button class="option-btn multi" onclick="toggleMulti(this, 'Dúvida se dá dinheiro')">Dúvida se dá para
+                <button class="option-btn multi" onclick="toggeMultiObstaculo(this, 'Dúvida se dá dinheiro')">Ainda
+                    tenho
+                    dúvidas se dá para
                     ganhar dinheiro de verdade</button>
-                <button class="option-btn multi" onclick="toggleMulti(this, 'Dificuldade tecnologia')">Dificuldade com
-                    tecnologias</button>
+                <button class="option-btn multi"
+                    onclick="toggeMultiObstaculo(this, 'Dificuldade tecnologia')">Insegurança com
+                    as tecnologias e ferramentas digitais
+                </button>
                 <div id="err-multi" class="error-msg">Por favor, selecione pelo menos um motivo</div>
                 <button class="next-btn" onclick="validateStep6()">Avançar</button>
             </div>
 
             <div class="step" id="step7">
+                <h2>Para atingir seu objetivo financeiro, qual é o seu nível de preparo para investir em conhecimento e
+                    capacitação?</h2>
+                <div id="options-perfil">
+                    <button class="option-btn" data-val="Pronto"
+                        onclick="selectOption('investimento', 'pronto', 8)">Estou pronta para investir
+                        agora</button>
+                    <button class="option-btn" data-val="Parcelamento cartão"
+                        onclick="selectOption('investimento', 'parcelamento', 8)">Posso investir, mas preciso
+                        parcelar no cartão
+                    </button>
+                    <button class="option-btn" data-val="Parcelamento boleto"
+                        onclick="selectOption('investimento', 'ajuda-financeira', 8)">Quero muito, mas
+                        precisaria parcelar no boleto/pix
+                    </button>
+                    <button class="option-btn" data-val="Apenas gratuito"
+                        onclick="selectOption('investimento', 'apenas-gratuito', 8)">No momento, só posso
+                        consumir conteúdos gratuitos</button>
+                </div>
+            </div>
+
+            <div class="step" id="step8">
                 <h2>Seu perfil está pronto! ✨</h2>
                 <p class="subheader">Preencha os dados abaixo para ver seu perfil.</p>
                 <input type="text" id="name" placeholder="Seu nome">
@@ -430,7 +471,7 @@
                 <div id="err-whatsapp" class="error-msg">Digite um WhatsApp válido</div>
                 <div id="err-api" class="error-msg" style="text-align:center;margin-top:1rem; font-size:1rem">Ocorreu um
                     erro. Tente novamente.</div>
-                <button id="btn-final" class="next-btn" onclick="validateStep7AndSend()">Ver Resultado Final</button>
+                <button id="btn-final" class="next-btn" onclick="validateStep8AndSend()">Ver Resultado Final</button>
             </div>
 
             <div class="step" id="stepResult">
@@ -467,16 +508,21 @@
             if (e.key === 'Enter' && currentStep === 7) validateStep7AndSend();
         });
 
+        function handleMomento(val) {
+            data.momento = val;
+            skipRenda = (val === 'Desempregada');
+            if (skipRenda) {
+                goToStep(3);
+            }
+            else {
+                goToStep(2);
+            }
+        }
+
         function selectOption(key, value, next) {
             if (isProcessing) return;
             data[key] = value;
             goToStep(next);
-        }
-
-        function toggleMulti(btn, val) {
-            if (isProcessing) return;
-            btn.classList.toggle('active');
-            data.insegurancas.includes(val) ? data.insegurancas = data.insegurancas.filter(i => i !== val) : data.insegurancas.push(val);
         }
 
         function toggleMultiDor(btn, val) {
@@ -490,14 +536,15 @@
             }
         }
 
-        function handleMomento(val) {
-            data.momento = val;
-            skipRenda = (val === 'Desempregada');
-            if (skipRenda) {
-                goToStep(3);
-            }
-            else {
-                goToStep(2);
+        function toggeMultiObstaculo(btn, val) {
+            if (isProcessing) return;
+            btn.classList.toggle('active');
+            btn.classList.toggle('selected'); // Mantém o estilo visual
+
+            if (data.insegurancas.includes(val)) {
+                data.insegurancas = data.insegurancas.filter(d => d !== val);
+            } else {
+                data.insegurancas.push(val);
             }
         }
 
@@ -517,7 +564,7 @@
             goToStep(7);
         }
 
-        async function validateStep7AndSend() {
+        async function validateStep8AndSend() {
             const n = document.getElementById('name'),
                 e = document.getElementById('email'),
                 btn = document.getElementById('btn-final'),
@@ -589,7 +636,6 @@
             window.scrollTo(0, 0);
         }
 
-
         function goBack() {
             if (currentStep === 3 && skipRenda) {
                 goToStep(1);
@@ -658,7 +704,6 @@
             </div>
         `;
         }
-
 
         function getNullableValue(val) {
             if (val) {
