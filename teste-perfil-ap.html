@@ -443,15 +443,15 @@
                 <h2>Para atingir seu objetivo financeiro, qual é o seu nível de preparo para investir em conhecimento e
                     capacitação?</h2>
                 <div id="options-perfil">
-                    <button class="option-btn" data-val="Pronto"
+                    <button class="option-btn" data-val="pronto"
                         onclick="selectOption('investimento', 'pronto', 8)">Estou pronta para investir
                         agora</button>
-                    <button class="option-btn" data-val="Parcelamento cartão"
-                        onclick="selectOption('investimento', 'parcelamento', 8)">Posso investir, mas preciso
+                    <button class="option-btn" data-val="parcelamento-cartao"
+                        onclick="selectOption('investimento', 'parcelamento-cartao', 8)">Posso investir, mas preciso
                         parcelar no cartão
                     </button>
-                    <button class="option-btn" data-val="Parcelamento boleto"
-                        onclick="selectOption('investimento', 'ajuda-financeira', 8)">Quero muito, mas
+                    <button class="option-btn" data-val="parcelamento-pix"
+                        onclick="selectOption('investimento', 'parcelamento-pix', 8)">Quero muito, mas
                         precisaria parcelar no boleto/pix
                     </button>
                     <button class="option-btn" data-val="Apenas gratuito"
@@ -580,10 +580,6 @@
             if (!iti.isValidNumber()) { document.getElementById('whatsapp').classList.add('invalid'); document.getElementById('err-whatsapp').classList.add('show'); v = false; }
 
             if (v) {
-                data.nome = n.value;
-                data.email = e.value;
-                data.whatsapp = iti.getNumber();
-
                 isProcessing = true;
                 container.classList.add('processing');
                 btn.disabled = true;
@@ -595,17 +591,18 @@
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
-                            name: data.nome,
-                            email: data.email,
-                            whatsapp: data.whatsapp,
-                            utm_params: getUTMParams().has_utm ? getUTMParams() : undefined
+                            name: n.value,
+                            email: e.value,
+                            whatsapp:iti.getNumber(),
+                            utm_params: getUTMParams().has_utm ? getUTMParams() : undefined,
+                            extra_attributes: data
                         })
                     });
                     if (response.ok) {
 
                         btn.disabled = false; isProcessing = false; container.classList.remove('processing');
                         btn.innerText = "Ver Resultado Final"; errApi.classList.add('show');
-                        showResult();
+                        showResult(n.value);
                     } else {
                         throw new Error();
                     }
@@ -666,11 +663,11 @@
             }
         }
 
-        function showResult() {
+        function showResult(nome) {
             goToStep('result');
             const badge = document.getElementById('res-badge'), desc = document.getElementById('res-desc'), alvoDisp = document.getElementById('res-alvo'), content = document.getElementById('res-content');
             alvoDisp.innerText = "R$ " + data.alvo.toLocaleString();
-            const prenome = data.nome.split(' ')[0];
+            const prenome = nome.split(' ')[0];
 
             let pInfo = {};
             if (data.perfil === 'iniciante') {
