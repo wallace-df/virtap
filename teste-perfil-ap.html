@@ -688,19 +688,19 @@
                 desc.innerText = `${prenome}, você está no melhor momento para começar! Mesmo sem experiência, você pode aprender do jeito certo desde o dia 1.
 
                 Na Masterclass, vou te mostrar exatamente o que faz uma Assistente Pessoal e como começar sem cometer os erros de quem tenta sozinha.`;
-                pInfo = { f: "Apoio Básico e Organização", v: 1500 };
+                pInfo = { f: "Apoio Básico e Organização", v: 375 };
             } else if (data.perfil === 'informal') {
                 badge.innerText = "Assistente em Potencial 🚀";
                 desc.innerText = `${prenome}, você já realiza tarefas de uma Assistente Pessoal, mas ainda não profissionalizou isso. 
 
                 Na Masterclass, vou te mostrar como organizar o que você já faz em serviços profissionais e onde encontrar clientes que demandam seu trabalho.`;
-                pInfo = { f: "Gestão de Rotina e Processos", v: 2500 };
+                pInfo = { f: "Gestão de Rotina e Processos", v: 675 };
             } else {
                 badge.innerText = "Assistente de Elite ⭐";
                 desc.innerText = `${prenome}, seu diagnóstico é cristalino: você pode se tornar uma Assistente de Elite! Você já tem a bagagem técnica, agora o que te falta é se especializar e posicionar de forma estratégica.
 
                 Na Masterclass, vou te revelar quem são e onde encontrar os clientes que pagam pelo seu valor.`;
-                pInfo = { f: "Assessoria Premium (VIP)", v: 5000 };
+                pInfo = { f: "Assessoria Premium (VIP)", v: 1200 };
             }
 
             content.innerHTML = `
@@ -714,7 +714,7 @@
             </div>
             <div class="math-item">
                 <div class="label-group"><span>🎯</span><span class="label-text">Sua Meta:</span></div>
-                <span class="value-text">Ter ${Math.ceil(data.alvo / pInfo.v)} cliente(s) ativos.</span>
+                <span class="value-text">Ter ${Math.ceil(data.alvo / pInfo.v)} clientes ativos.</span>
             </div>
         `;
         }
