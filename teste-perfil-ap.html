@@ -324,7 +324,7 @@
 
 <body>
 
-    <h1>Descubra seu Perfil de Assessora ⭐<p>Qual é o plano ideal para você faturar de R$ 3 mil a R$ 10 mil mensais?</p>
+    <h1>Descubra seu Potencial como Assessora  ⭐<p>Qual é o plano ideal para você faturar de R$ 3 mil a R$ 10 mil mensais?</p>
     </h1>
     <div id="quiz-wrapper">
         <div id="quiz-container">
@@ -482,7 +482,7 @@
                         <span id="res-alvo"></span>:
                     </h3>
                     <div class="math-box" id="res-content"></div>
-                    <button class="next-btn" onclick="location.reload()">REFAZER TESTE</button>
+                    <!-- <button class="next-btn" onclick="location.reload()">REFAZER TESTE</button> -->
                 </div>
             </div>
         </div>
@@ -666,7 +666,7 @@
         function showResult(nome) {
             goToStep('result');
             const badge = document.getElementById('res-badge'), desc = document.getElementById('res-desc'), alvoDisp = document.getElementById('res-alvo'), content = document.getElementById('res-content');
-            alvoDisp.innerText = "R$ " + data.alvo.toLocaleString();
+            alvoDisp.innerText = "R$ " + data.alvo.toLocaleString().replace(',', '.');
             const prenome = nome.split(' ')[0];
 
             let pInfo = {};
@@ -674,19 +674,19 @@
                 badge.innerText = "Diamante Bruto 💎";
                 desc.innerText = `${prenome}, você está no melhor momento para começar! Mesmo sem experiência, você pode aprender do jeito certo desde o dia 1.
 
-                Na Masterclass, vou te mostrar exatamente o que faz uma Assistente Pessoal e quem são os clientes que precisam de você agora. Você vai descobrir quanto pode ganhar logo no início e o passo a passo de como começar com total segurança, atraindo seus primeiros clientes sem cometer os erros de quem tenta sozinha.`;
+                Na Masterclass, vou te mostrar exatamente o que faz uma Assistente Pessoal e como começar sem cometer os erros de quem tenta sozinha.`;
                 pInfo = { f: "Apoio Básico e Organização", v: 1500 };
             } else if (data.perfil === 'informal') {
                 badge.innerText = "Assistente em Potencial 🚀";
-                desc.innerText = `${prenome}, você já realiza tarefas de uma Assistente Pessoal, mas ainda não profissionalizou isso. Na Masterclass, vamos transformar esse seu "jeitinho" em um negócio lucrativo e estruturado.
+                desc.innerText = `${prenome}, você já realiza tarefas de uma Assistente Pessoal, mas ainda não profissionalizou isso. 
 
-                Vou te mostrar como organizar o que você já faz em serviços profissionais e onde encontrar clientes que realmente valorizam seu trabalho. Você vai entender como escalar quanto pode ganhar e o caminho definitivo para deixar de ser uma "quebra-galho" e se tornar uma profissional de agenda cheia.`;
+                Na Masterclass, vou te mostrar como organizar o que você já faz em serviços profissionais e onde encontrar clientes que demandam seu trabalho.`;
                 pInfo = { f: "Gestão de Rotina e Processos", v: 2500 };
             } else {
                 badge.innerText = "Assistente de Elite ⭐";
-                desc.innerText = `${prenome}, seu diagnóstico é cristalino: você é uma Assistente de Elite. Você já tem a bagagem técnica, agora o que te falta é se posicionar de forma estratégica.
+                desc.innerText = `${prenome}, seu diagnóstico é cristalino: você pode se tornar uma Assistente de Elite! Você já tem a bagagem técnica, agora o que te falta é se especializar e posicionar de forma estratégica.
 
-                Na Masterclass, o foco para você será a transição para a Assessoria VIP. Vou te revelar quem são os clientes premium que pagam pelo seu valor e não apenas pelo seu tempo. Vamos ajustar o que você faz para uma entrega de alto nível, permitindo que você escale quanto ganha sem precisar trabalhar mais horas.`;
+                Na Masterclass, vou te revelar quem são e onde encontrar os clientes que pagam pelo seu valor.`;
                 pInfo = { f: "Assessoria Premium (VIP)", v: 5000 };
             }
 
@@ -697,7 +697,7 @@
             </div>
             <div class="math-item">
                 <div class="label-group"><span>💰</span><span class="label-text">Valor médio:</span></div>
-                <span class="value-text">R$ ${pInfo.v.toLocaleString()} /cliente</span>
+                <span class="value-text">R$ ${pInfo.v.toLocaleString().replace(',','.')} /cliente</span>
             </div>
             <div class="math-item">
                 <div class="label-group"><span>🎯</span><span class="label-text">Sua Meta:</span></div>
