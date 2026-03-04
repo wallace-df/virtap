@@ -324,7 +324,8 @@
 
 <body>
 
-    <h1>Descubra seu Potencial como Assessora  ⭐<p>Qual é o plano ideal para você faturar de R$ 3 mil a R$ 10 mil mensais?</p>
+    <h1>Descubra seu Potencial como Assessora ⭐<p>Qual é o plano ideal para você faturar de R$ 3 mil a R$ 10 mil
+            mensais?</p>
     </h1>
     <div id="quiz-wrapper">
         <div id="quiz-container">
@@ -418,22 +419,34 @@
             </div>
 
             <div class="step" id="step6">
-                <h2>Se você tivesse que apontar o seu maior obstáculo hoje, qual seria?</h2>
+                <h2>Pensando na sua realidade atual, quais são os maiores desafios no trabalho remoto?</h2>
                 <p class="subheader" style="font-size: 1rem;">Selecione uma ou mais opções:</p>
-                <button class="option-btn multi" onclick="toggeMultiObstaculo(this, 'Não sei como começar')">Não faço
-                    ideia de
-                    por onde começar</button>
-                <button class="option-btn multi"
-                    onclick="toggeMultiObstaculo(this, 'Medo de não conseguir clientes')">Tenho
-                    medo de
-                    não conseguir clientes</button>
-                <button class="option-btn multi" onclick="toggeMultiObstaculo(this, 'Dúvida se dá dinheiro')">Ainda
-                    tenho
-                    dúvidas se dá para
-                    ganhar dinheiro de verdade</button>
-                <button class="option-btn multi"
-                    onclick="toggeMultiObstaculo(this, 'Dificuldade tecnologia')">Insegurança com
-                    as tecnologias e ferramentas digitais
+                <button class="option-btn multi" onclick="toggeMultiObstaculo(this, 'Não sei por onde começar')">
+                    Não sei por onde começar
+                </button>
+
+                <button class="option-btn multi" onclick="toggeMultiObstaculo(this, 'Conquistar clientes')">
+                    Tenho dificuldade em conquistar clientes
+                </button>
+
+                <button class="option-btn multi" onclick="toggeMultiObstaculo(this, 'Renda instável')">
+                    Já tenho clientes, mas minha renda é instável
+                </button>
+
+                <button class="option-btn multi" onclick="toggeMultiObstaculo(this, 'Precificação')">
+                    Sinto que cobro abaixo do meu valor
+                </button>
+
+                <button class="option-btn multi" onclick="toggeMultiObstaculo(this, 'Especialização')">
+                    Quero me especializar, mas não sei qual caminho seguir
+                </button>
+
+                <button class="option-btn multi" onclick="toggeMultiObstaculo(this, 'Tecnologia')">
+                    Tenho insegurança com ferramentas e tecnologia
+                </button>
+
+                <button class="option-btn multi" onclick="toggeMultiObstaculo(this, 'Posicionamento')">
+                    Falta clareza sobre como me posicionar no mercado
                 </button>
                 <div id="err-multi" class="error-msg">Por favor, selecione pelo menos um motivo</div>
                 <button class="next-btn" onclick="validateStep6()">Avançar</button>
@@ -593,7 +606,7 @@
                         body: JSON.stringify({
                             name: n.value,
                             email: e.value,
-                            whatsapp:iti.getNumber(),
+                            whatsapp: iti.getNumber(),
                             utm_params: getUTMParams().has_utm ? getUTMParams() : undefined,
                             extra_attributes: data
                         })
@@ -697,7 +710,7 @@
             </div>
             <div class="math-item">
                 <div class="label-group"><span>💰</span><span class="label-text">Valor médio:</span></div>
-                <span class="value-text">R$ ${pInfo.v.toLocaleString().replace(',','.')} /cliente</span>
+                <span class="value-text">R$ ${pInfo.v.toLocaleString().replace(',', '.')} /cliente</span>
             </div>
             <div class="math-item">
                 <div class="label-group"><span>🎯</span><span class="label-text">Sua Meta:</span></div>
