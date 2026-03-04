@@ -324,8 +324,7 @@
 
 <body>
 
-    <h1>Descubra seu Potencial como Assessora ⭐<p>Qual é o plano ideal para você faturar de R$ 3 mil a R$ 10 mil
-            mensais?</p>
+    <h1>Descubra seu Potencial como Assessora ⭐
     </h1>
     <div id="quiz-wrapper">
         <div id="quiz-container">
@@ -491,10 +490,10 @@
                 <div class="result-card">
                     <span id="res-badge" class="profile-badge"></span>
                     <p id="res-desc" class="subheader pre"></p>
-                    <h3 style="color:var(--virtap-purple); font-size: 1.4rem; margin-bottom: 0;">📍 Metas para faturar
+                    <h3 style="color:var(--virtap-purple); font-size: 1.4rem; margin-bottom: 0; display:none">📍 Metas para faturar
                         <span id="res-alvo"></span>:
                     </h3>
-                    <div class="math-box" id="res-content"></div>
+                    <!-- <div class="math-box" id="res-content">Em breve va</div> -->
                     <!-- <button class="next-btn" onclick="location.reload()">REFAZER TESTE</button> -->
                 </div>
             </div>
@@ -682,41 +681,80 @@
             alvoDisp.innerText = "R$ " + data.alvo.toLocaleString().replace(',', '.');
             const prenome = nome.split(' ')[0];
 
+
+            let analise = "";
+
+            if (data.perfil === 'iniciante') {
+                if (data.alvo <= 3000) {
+                    analise = "É super possível ganhar R$ 3.000/mês começando do jeito certo. Você tem o caminho livre para construir sua base com segurança.";
+                } else if (data.alvo <= 5000) {
+                    analise = "Atingir R$ 5.000/mês é possível. O melhor caminho é se desenvolver profissionalmente e fortalecer a qualidade do seu serviço. Clientes que pagam mais costumam buscar exatamente isso.";
+                } else {
+                    analise = "Para chegar aos R$ 10.000, você precisará se especializar muito e focar em atingir clientes VIPs desde o primeiro dia.";
+                }
+            }
+
+            else if (data.perfil === 'informal') {
+                if (data.alvo <= 3000) {
+                    analise = "É super possível ganhar R$ 3.000/mês e você já está em vantagem sobre quem é iniciante. O segredo aqui é profissionalizar o que você já faz.";
+                } else if (data.alvo <= 5000) {
+                    analise = "Atingir R$ 5.000/mês é uma meta muito viável. Você precisa de um método para aprimorar e profissionalizar o que você já faz e aprender a cobrar pelo o seu trabalho.";
+                } else {
+                    analise = "O caminho para os 10k exige que você saia do operacional comum, se especialize e busque clientes Premium.";
+                }
+            }
+
+            else { // Experiente / Profissional
+                if (data.alvo <= 3000) {
+                    analise = "Com as suas habilidades, a meta de R$ 3.000/mês já deveria ter sido atingida. Você precisa aprender precificar seu trabalho de forma correta e atingir os clientes certos. ";
+                } else if (data.alvo <= 5000) {
+                    analise = "É super viável. Como sua carreira já está mais consolidada, o foco agora é escala e organização da agenda.";
+                } else {
+                    analise = "Totalmente viável. O próximo passo é refinar sua especialização para atingir exclusivamente clientes Premium.";
+                }
+            }
+
             let pInfo = {};
             if (data.perfil === 'iniciante') {
                 badge.innerText = "Diamante Bruto 💎";
                 desc.innerText = `${prenome}, você está no melhor momento para começar! Mesmo sem experiência, você pode aprender do jeito certo desde o dia 1.
 
+                ${analise}
+
                 Na Masterclass, vou te mostrar exatamente o que faz uma Assistente Pessoal e como começar sem cometer os erros de quem tenta sozinha.`;
                 pInfo = { f: "Apoio Básico e Organização", v: 375 };
             } else if (data.perfil === 'informal') {
-                badge.innerText = "Assistente em Potencial 🚀";
-                desc.innerText = `${prenome}, você já realiza tarefas de uma Assistente Pessoal, mas ainda não profissionalizou isso. 
+                badge.innerText = "Assistente Pessoal Nata 🚀";
+                desc.innerText = `${prenome}, você já realiza tarefas de uma Assistente Pessoal. Você tem o dom, agora só falta se profissionalizar e cobrar por isso. 
+
+                ${analise}
 
                 Na Masterclass, vou te mostrar como organizar o que você já faz em serviços profissionais e onde encontrar clientes que demandam seu trabalho.`;
                 pInfo = { f: "Gestão de Rotina e Processos", v: 675 };
             } else {
                 badge.innerText = "Assistente de Elite ⭐";
-                desc.innerText = `${prenome}, seu diagnóstico é cristalino: você pode se tornar uma Assistente de Elite! Você já tem a bagagem técnica, agora o que te falta é se especializar e posicionar de forma estratégica.
+                desc.innerText = `${prenome}, seu diagnóstico é cristalino: você pode se tornar uma Assistente de Elite! O que te falta é se especializar e se posicionar de forma estratégica.
+
+                ${analise}
 
                 Na Masterclass, vou te revelar quem são e onde encontrar os clientes que pagam pelo seu valor.`;
                 pInfo = { f: "Assessoria Premium (VIP)", v: 1200 };
             }
 
-            content.innerHTML = `
-            <div class="math-item">
-                <div class="label-group"><span>✅</span><span class="label-text">Focar em:</span></div>
-                <span class="value-text">${pInfo.f}</span>
-            </div>
-            <div class="math-item">
-                <div class="label-group"><span>💰</span><span class="label-text">Valor médio:</span></div>
-                <span class="value-text">R$ ${pInfo.v.toLocaleString().replace(',', '.')} /cliente</span>
-            </div>
-            <div class="math-item">
-                <div class="label-group"><span>🎯</span><span class="label-text">Sua Meta:</span></div>
-                <span class="value-text">Ter ${Math.ceil(data.alvo / pInfo.v)} clientes ativos.</span>
-            </div>
-        `;
+            //     content.innerHTML = `
+            //     <div class="math-item">
+            //         <div class="label-group"><span>✅</span><span class="label-text">Focar em:</span></div>
+            //         <span class="value-text">${pInfo.f}</span>
+            //     </div>
+            //     <div class="math-item">
+            //         <div class="label-group"><span>💰</span><span class="label-text">Valor médio:</span></div>
+            //         <span class="value-text">R$ ${pInfo.v.toLocaleString().replace(',', '.')} /cliente</span>
+            //     </div>
+            //     <div class="math-item">
+            //         <div class="label-group"><span>🎯</span><span class="label-text">Sua Meta:</span></div>
+            //         <span class="value-text">Ter ${Math.ceil(data.alvo / pInfo.v)} clientes ativos.</span>
+            //     </div>
+            // `;
         }
 
         function getNullableValue(val) {
