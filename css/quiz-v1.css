@@ -1,0 +1,316 @@
+:root {
+  --virtap-purple: #532e88;
+  --virtap-cyan: #b3e3e5;
+  --error: #e74c3c;
+  --text: #2d2d2d;
+  --bg: #f9f9f9;
+  --white: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+#quiz-wrapper {
+  background-color: var(--bg);
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 20px;
+}
+
+#quiz-container {
+  background: var(--white);
+  width: 100%;
+  max-width: 680px;
+  padding: 2rem 3rem 3rem 3rem;
+  border-radius: 25px;
+  box-shadow: 0 20px 40px rgba(83, 46, 136, 0.12);
+  border-bottom: 10px solid var(--virtap-purple);
+  position: relative;
+}
+
+#quiz-container.processing .option-btn,
+#quiz-container.processing .next-btn,
+#quiz-container.processing .back-link {
+  pointer-events: none;
+  /* Impede cliques e hovers */
+  opacity: 0.8;
+  /* Dá um aspecto levemente desbotado */
+  cursor: default;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  margin-bottom: 1rem;
+}
+
+.back-link {
+  color: var(--virtap-purple);
+  font-weight: 700;
+  font-size: 1.2rem;
+  /* Aumentei levemente (era 1rem) */
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  /* Adiciona o traço embaixo para destacar que é clicável */
+  padding: 5px 0;
+  /* Aumenta a área de toque para facilitar no celular */
+  transition: opacity 0.2s;
+}
+
+.back-link:hover {
+  opacity: 0.7;
+  /* Efeito visual simples ao passar o mouse */
+  filter: brightness(0.8);
+}
+
+.step {
+  display: none;
+}
+
+.step.active {
+  display: block;
+  animation: slideIn 0.4s ease-out;
+}
+
+h1 {
+  color: var(--virtap-purple);
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  /* Ou a cor de fundo do seu site para não sobrepor transparente */
+  z-index: 1000;
+  margin-bottom: 5px;
+  /* Aproxima o título do quiz */
+  padding: 15px 0;
+  /* Espaçamento interno do título */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+h1>p {
+  color: #333;
+  font-size: 1.2rem;
+}
+
+h2 {
+  color: var(--virtap-purple);
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+ul li {
+  font-size: 1.1rem;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+p.subheader {
+  color: #555;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+p.pre {
+  white-space: pre-line;
+}
+
+.option-btn {
+  display: block;
+  width: 100%;
+  padding: 1.2rem;
+  margin-bottom: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  background: var(--white);
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.option-btn.selected,
+.option-btn.selected:hover {
+  border-color: var(--virtap-purple);
+  background-color: #f6f3fa;
+  box-shadow: 0 0 0 1px var(--virtap-purple);
+  background-color: var(--virtap-cyan);
+  border-color: var(--virtap-purple);
+
+}
+
+.option-btn.multi.active {
+  background-color: var(--virtap-cyan);
+  border-color: var(--virtap-purple);
+}
+
+input {
+  width: 100%;
+  padding: 1.1rem;
+  margin-bottom: 0.5rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  outline: none;
+}
+
+input.invalid {
+  border-color: var(--error) !important;
+  background-color: #fff5f5;
+}
+
+.error-msg {
+  color: var(--error);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  display: none;
+  font-weight: 700;
+}
+
+.error-msg.show {
+  display: block;
+}
+
+.next-btn {
+  background: var(--virtap-purple);
+  color: white;
+  border: none;
+  padding: 1.3rem;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin-top: 1rem;
+  text-decoration: none;
+}
+
+.next-btn:disabled {
+  background-color: #a1a1a1 !important;
+  cursor: not-allowed;
+  filter: none;
+  transform: none;
+}
+
+/* Estilos do Resultado */
+.profile-badge {
+  color: var(--virtap-purple);
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.math-box {
+  background: #f4f1f8;
+  padding: 2rem;
+  border-radius: 20px;
+  margin-top: 1.5rem;
+  border-left: 8px solid var(--virtap-cyan);
+  margin-bottom: 2rem;
+}
+
+.math-item {
+  margin-bottom: 1.5rem;
+}
+
+.math-item:last-child {
+  margin-bottom: 0;
+}
+
+.math-item .label-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.math-item .label-text {
+  font-size: 1.2rem;
+  color: var(--virtap-purple);
+  font-weight: 800;
+}
+
+.math-item .value-text {
+  font-size: 1.1rem;
+  color: #444;
+  padding-left: 28px;
+  display: block;
+}
+
+.result-preview {
+  width: 100%;
+  max-width: 500px;
+  height: 200px;
+  overflow: hidden;
+  filter: blur(2px);
+  margin: auto;
+
+  border: 1px solid var(--virtap-purple);
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+
+  background: #fff;
+  padding: 1rem;
+
+}
+
+.result-preview>div {
+  width: 800px;
+  /* tamanho base do layout */
+  height: 400px;
+  transform-origin: top left;
+  transform: scale(0.5);
+  /* reduz proporcionalmente */
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.iti {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+/* Efeito de hover suave nos botões de opção */
+.option-btn:hover {
+  border-color: var(--virtap-purple);
+  background-color: #f6f3fa;
+}
+
+/* Feedback visual no botão principal */
+.next-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  transition: 0.2s;
+}
