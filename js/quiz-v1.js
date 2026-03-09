@@ -218,8 +218,8 @@ const RESULTS = {
 
 
 const FLOWS = {
-    iniciar: [1, 2, 3, 4, 5, 6, 7],   // quiz atual
-    avancado: [8, 9, 10, 11, 7]     // quem já trabalha
+    iniciante: [1, 2, 3, 4, 5, 6, 7],   // quiz atual
+    atuante: [8, 9, 10, 11, 7]     // quem já trabalha
 };
 
 let currentFlow = [];
@@ -235,11 +235,11 @@ function choosePath(path) {
     }
 
     if (path === 'quer-comecar') {
-        currentFlow = FLOWS.iniciar;
+        currentFlow = FLOWS.iniciante;
     }
 
     if (path === 'ja-trabalha') {
-        currentFlow = FLOWS.avancado;
+        currentFlow = FLOWS.atuante;
     }
 
     flowIndex = 0;
@@ -291,7 +291,7 @@ function nextStep() {
 
 function goToStep(s) {
     currentStep = s;
-    
+
     // Mostra a tela correta
     document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
     const targetStep = document.getElementById('step' + s);
@@ -304,7 +304,7 @@ function goToStep(s) {
     // 1. For o passo inicial (s === 0)
     // 2. OU se for o ÚLTIMO passo do fluxo atual (Resultado)
     const isLastStep = (flowIndex === currentFlow.length - 1);
-    
+
     if (s === 0) {
         if (headerNav) headerNav.style.display = 'none';
     } else {
@@ -366,10 +366,15 @@ function calculateResult() {
 }
 
 function showResult() {
-    const result = calculateResult();
-    const resultData = RESULTS[result];
-    document.getElementById("result-title").innerText = resultData.title;
-    document.getElementById("result-text").innerHTML = resultData.text;
+    if (currentFlow === FLOWS.iniciante) {
+        const result = calculateResult();
+        const resultData = RESULTS[result];
+        document.getElementById("result-title").innerText = resultData.title;
+        document.getElementById("result-text").innerHTML = resultData.text;
+
+    } else {
+        alert("ops!");
+    }
 }
 
 function getCursoLink() {
