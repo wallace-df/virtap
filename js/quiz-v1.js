@@ -1,3 +1,4 @@
+let userPath = null;
 let data = {
     quiz: [],
     scores: {
@@ -12,18 +13,10 @@ let isProcessing = false;
 const RESULTS = {
 
     AP: {
-        title: "1️⃣ Resultado: Assistente Pessoal / Executiva (AP)",
-        text: `
-<p><strong>Seu perfil predominante</strong></p>
+        title: "Assistente Pessoal / Executiva",
+        text: `<p>Suas respostas mostram facilidade para tomar iniciativa, resolver pendências e ajudar a organizar a rotina de alguém. </p>
 
-<p><strong>Assistente Pessoal / Executiva</strong></p>
-
-<p>Suas respostas mostram facilidade para tomar iniciativa, resolver pendências e ajudar a organizar a rotina de alguém.</p>
-
-<p>Esse perfil costuma se destacar quando trabalha próximo da rotina de um cliente, ajudando a resolver diferentes demandas do dia a dia.</p>
-
-<p><strong>Exemplos de atividades desse perfil</strong></p>
-
+<p>Esse perfil costuma se destacar quando trabalha próximo da rotina de um cliente, ajudando a resolver diferentes demandas do dia a dia, como:</p>
 <ul>
 <li>organizar agenda e compromissos</li>
 <li>pesquisar viagens, reservas ou serviços</li>
@@ -34,27 +27,22 @@ const RESULTS = {
 
 <p>Muitas vezes essa profissional se torna um <strong>braço direito do cliente</strong>.</p>
 
-<p><strong>Próximo passo recomendado</strong></p>
+<p><strong class="main-text">Próximo passo recomendado</strong></p>
 
-<p>Se você quer seguir nessa direção, o próximo passo é aprender como estruturar esse tipo de serviço e trabalhar profissionalmente com clientes.</p>
+<p>O próximo passo é aprender como estruturar esse tipo de serviço e trabalhar profissionalmente com clientes.</p>
 
-<p>👉 <strong>Formação Assistente Pessoal / Executiva</strong></p>
+<button class="next-btn" onclick="window.location.href=getFormacaoAExpertLink()">
+👉 Formação Asessora Pessoal Expert
+</button>
+
 `
     },
 
     SR: {
-        title: "2️⃣ Resultado: Secretária Remota (SR)",
-        text: `
-<p><strong>Seu perfil predominante</strong></p>
+        title: "Secretária Remota (SR)",
+        text: `<p>Suas respostas mostram facilidade para comunicação, organização de atendimentos e relacionamento com pessoas.</p>
 
-<p><strong>Secretária Remota</strong></p>
-
-<p>Suas respostas mostram facilidade para comunicação, organização de atendimentos e relacionamento com pessoas.</p>
-
-<p>Esse perfil costuma se destacar ajudando empresas ou profissionais a manter o contato com clientes organizado e funcionando bem.</p>
-
-<p><strong>Exemplos de atividades desse perfil</strong></p>
-
+<p>Esse perfil costuma se destacar ajudando empresas ou profissionais a manter o contato com clientes organizado e funcionando bem. As principais atividades incluem:</p>
 <ul>
 <li>responder mensagens de clientes</li>
 <li>organizar agenda de atendimentos</li>
@@ -65,16 +53,18 @@ const RESULTS = {
 
 <p>Esse tipo de profissional ajuda o negócio a <strong>funcionar com mais organização e agilidade no atendimento</strong>.</p>
 
-<p><strong>Próximo passo recomendado</strong></p>
+<p class="main-text">Próximo passo recomendado</p>
 
 <p>Se você quer seguir nessa direção, o próximo passo é aprender como estruturar um serviço de atendimento remoto para clientes.</p>
 
-<p>👉 <strong>Formação Secretária Remota</strong></p>
+<button class="next-btn" onclick="window.location.href=getFormacaoAExpertLink()">
+👉 Formação Assistencia Virtual
+</button>
 `
     },
 
     AA: {
-        title: "3️⃣ Resultado: Assistente Administrativa (AA)",
+        title: "Assistente Administrativa (AA)",
         text: `
 <p><strong>Seu perfil predominante</strong></p>
 
@@ -227,9 +217,37 @@ const RESULTS = {
 };
 
 
+const FLOWS = {
+    iniciar: [1, 2, 3, 4, 5, 6, 7],   // quiz atual
+    avancado: [8, 9, 10, 11, 7]     // quem já trabalha
+};
 
+let currentFlow = [];
+let flowIndex = 0;
 
-function selectAnswer(profile, nextStep, el) {
+function choosePath(path) {
+
+    userPath = path;
+
+    if (path === 'nao-conhece') {
+        showCursoGratis();
+        return;
+    }
+
+    if (path === 'quer-comecar') {
+        currentFlow = FLOWS.iniciar;
+    }
+
+    if (path === 'ja-trabalha') {
+        currentFlow = FLOWS.avancado;
+    }
+
+    flowIndex = 0;
+
+    goToStep(currentFlow[flowIndex]);
+}
+
+function selectAnswer(profile, el) {
     if (isProcessing) return;
 
     const prev = data.quiz[currentStep];
@@ -246,37 +264,67 @@ function selectAnswer(profile, nextStep, el) {
         .forEach(btn => btn.classList.remove('selected'));
 
     el.classList.add('selected');
-    if (nextStep === 7) {
-        showResult();
-    }
 
     setTimeout(() => {
-        goToStep(nextStep);
+        nextStep();
     }, 150);
+}
+
+
+function nextStep() {
+    flowIndex++;
+
+    if (flowIndex >= currentFlow.length) {
+        return;
+    }
+
+    const nextStepNumber = currentFlow[flowIndex];
+
+    // Se for o último passo do fluxo, disparar showResult
+    if (flowIndex === currentFlow.length - 1) {
+        showResult();
+
+    }
+
+    goToStep(nextStepNumber);
 }
 
 function goToStep(s) {
     currentStep = s;
-
-    // Limpa erros residuais de passos anteriores
-    document.querySelectorAll('.error-msg').forEach(el => el.classList.remove('show'));
-    document.querySelectorAll('input').forEach(el => el.classList.remove('invalid'));
-
+    
+    // Mostra a tela correta
     document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
-    document.getElementById((s === 'result') ? 'stepResult' : 'step' + s).classList.add('active');
-    if (s === 0 || s === 1 || s === 'result') {
-        document.getElementById('header-nav').style.display = 'none';
+    const targetStep = document.getElementById('step' + s);
+    if (targetStep) targetStep.classList.add('active');
+
+    const headerNav = document.getElementById('header-nav');
+
+    // REGRA DINÂMICA:
+    // Esconde o header se:
+    // 1. For o passo inicial (s === 0)
+    // 2. OU se for o ÚLTIMO passo do fluxo atual (Resultado)
+    const isLastStep = (flowIndex === currentFlow.length - 1);
+    
+    if (s === 0) {
+        if (headerNav) headerNav.style.display = 'none';
     } else {
-        document.getElementById('header-nav').style.display = 'flex';
+        if (headerNav) headerNav.style.display = 'flex';
     }
-    document.getElementById('back-btn').style.display = (s === 1 || s === 'result') ? 'none' : 'flex';
+
     updateVisuals();
     window.scrollTo(0, 0);
 }
 
 function goBack() {
-    if (currentStep > 0) { // Mudou de 1 para 0
-        goToStep(currentStep - 1)
+    if (flowIndex > 0) {
+        // Se estiver no meio do quiz, volta um passo no fluxo
+        flowIndex--;
+        goToStep(currentFlow[flowIndex]);
+    } else {
+        // Se estiver no primeiro passo do quiz (index 0), volta para a tela inicial
+        goToStep(0);
+        // Esconde o botão voltar e o header ao chegar no step 0
+        document.getElementById('header-nav').style.display = 'none';
     }
 }
 
@@ -318,16 +366,105 @@ function calculateResult() {
 }
 
 function showResult() {
-
     const result = calculateResult();
-
     const resultData = RESULTS[result];
+    document.getElementById("result-title").innerText = resultData.title;
+    document.getElementById("result-text").innerHTML = resultData.text;
+}
 
+function getCursoLink() {
+
+    const utm = getUTMParams();
+
+    let params = new URLSearchParams();
+
+    if (utm.has_utm) {
+
+        const source = getNullableValue(utm.utm_last.utm_source);
+        const medium = getNullableValue(utm.utm_last.utm_medium);
+        const campaign = getNullableValue(utm.utm_last.utm_campaign);
+        const content = getNullableValue(utm.utm_last.utm_content);
+
+        if (source) params.set('utm_source', source);
+        if (medium) params.set('utm_medium', medium);
+        if (campaign) params.set('utm_campaign', campaign);
+        if (content) params.set('utm_content', content);
+
+    } else {
+
+        params.set('utm_source', 'virtap');
+        params.set('utm_medium', 'quiz');
+        params.set('utm_campaign', 'curso-gratuito');
+        params.set('utm_content', 'quiz-principal');
+
+    }
+
+    return "/curso-assistente-virtual?" + params.toString();
+}
+
+function getFormacaoAExpertLink() {
+
+    const utm = getUTMParams();
+
+    let params = new URLSearchParams();
+
+    if (utm.has_utm) {
+
+        const source = getNullableValue(utm.utm_last.utm_source);
+        const medium = getNullableValue(utm.utm_last.utm_medium);
+        const campaign = getNullableValue(utm.utm_last.utm_campaign);
+        const content = getNullableValue(utm.utm_last.utm_content);
+
+        if (source) params.set('utm_source', source);
+        if (medium) params.set('utm_medium', medium);
+        if (campaign) params.set('utm_campaign', campaign);
+        if (content) params.set('utm_content', content);
+
+    } else {
+
+        params.set('utm_source', 'virtap');
+        params.set('utm_medium', 'quiz');
+        params.set('utm_campaign', 'formacao-aexpert');
+        params.set('utm_content', 'quiz-principal');
+
+    }
+
+    return "/formacoes/assistencia-pessoal?" + params.toString();
+}
+
+function showCursoGratis() {
+
+    // esconde todos os steps
+    document.querySelectorAll('.step')
+        .forEach(el => el.classList.remove('active'));
+
+    // define título
     document.getElementById("result-title").innerText =
-        resultData.title;
+        "Comece do jeito certo!";
 
-    document.getElementById("result-text").innerHTML =
-        resultData.text;
+    // define conteúdo
+    document.getElementById("result-text").innerHTML = `
+<p>Se você ainda não conhece a profissão de <strong>Assistente Virtual</strong>, o primeiro passo é entender como ela funciona.</p>
+
+<p>Preparamos um <strong>curso 100% gratuito</strong> onde explicamos:</p>
+
+<ul>
+<li>O que faz uma Assistente Virtual</li>
+<li>O que é preciso para trabalhar </li>
+<li>Quanto é possível ganhar</li>
+<li>Como começar a trabalhar</li>
+</ul>
+
+<br>
+
+<button class="next-btn" onclick="window.location.href=getCursoLink()">
+👉 Acessar o Curso Gratuito
+</button>
+`;
+
+    document.getElementById("step7").classList.add("active");
+    document.getElementById('header-nav').style.display = 'flex';
+
 }
 
 function getNullableValue(val) {

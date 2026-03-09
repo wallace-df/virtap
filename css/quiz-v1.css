@@ -51,13 +51,17 @@
   margin-bottom: 1rem;
 }
 
+.main-text {
+  color: var(--virtap-purple);
+  font-size: 1.2rem;;
+}
+
 .back-link {
   color: var(--virtap-purple);
   font-weight: 700;
   font-size: 1.2rem;
   /* Aumentei levemente (era 1rem) */
   cursor: pointer;
-  display: none;
   align-items: center;
   gap: 8px;
   /* Adiciona o traço embaixo para destacar que é clicável */
@@ -117,7 +121,7 @@ h2 {
 ul li {
   font-size: 1.1rem;
   line-height: 1.2;
-  font-weight: 600;
+  font-weight: normal;
 }
 
 p.subheader {
@@ -132,6 +136,9 @@ p.pre {
   white-space: pre-line;
 }
 
+p {
+  font-size: 1.1rem;
+}
 .option-btn {
   display: block;
   width: 100%;
