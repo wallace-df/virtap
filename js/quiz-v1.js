@@ -1,14 +1,21 @@
-let userPath = null;
+const FLOWS = {
+    iniciante: [1, 2, 3, 4, 5, 6, 7],
+    atuante: [8, 9, 10, 11, 12]
+};
+
 let data = {
     quiz: [],
     scores: {
         AP: 0,
         SR: 0,
         AA: 0
+    },
+    intentions: {
+        dor: null,
+        perfil: null,
+        ambicao: null
     }
 };
-let currentStep = 0;
-let isProcessing = false;
 
 const RESULTS = {
 
@@ -217,52 +224,50 @@ const RESULTS = {
 };
 
 
-const FLOWS = {
-    iniciante: [1, 2, 3, 4, 5, 6, 7],   // quiz atual
-    atuante: [8, 9, 10, 11, 7]     // quem já trabalha
-};
-
+let userPath = null;
+let currentStep = 0;
 let currentFlow = [];
 let flowIndex = 0;
 
 function choosePath(path) {
-
     userPath = path;
-
     if (path === 'nao-conhece') {
         showCursoGratis();
         return;
     }
-
     if (path === 'quer-comecar') {
         currentFlow = FLOWS.iniciante;
     }
-
-    if (path === 'ja-trabalha') {
+    else if (path === 'ja-trabalha') {
         currentFlow = FLOWS.atuante;
     }
 
     flowIndex = 0;
-
     goToStep(currentFlow[flowIndex]);
 }
 
+
 function selectAnswer(profile, el) {
-    if (isProcessing) return;
-
     const prev = data.quiz[currentStep];
+    data.quiz[currentStep] = profile;
 
-    if (prev) {
-        data.scores[prev]--;
+    // 2. Lógica de Separação de Modelos
+    if (currentFlow === FLOWS.iniciar) {
+        if (prev && data.scores[prev] !== undefined) {
+            data.scores[prev]--;
+        }
+        if (data.scores[profile] !== undefined) {
+            data.scores[profile]++;
+        }
+    }
+    else if (currentFlow === FLOWS.avancado) {
+        if (currentStep === 8) data.intentions.areaAtual = profile;
+        if (currentStep === 9) data.intentions.dor = profile;
+        if (currentStep === 10) data.intentions.perfilValidacao = profile;
+        if (currentStep === 11) data.intentions.ambicao = profile;
     }
 
-    data.quiz[currentStep] = profile;
-    data.scores[profile]++;
-
-    // Agora o 'el' está definido e você pode manipular as classes
-    el.parentElement.querySelectorAll('.option-btn')
-        .forEach(btn => btn.classList.remove('selected'));
-
+    el.parentElement.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
     el.classList.add('selected');
 
     setTimeout(() => {
@@ -271,19 +276,25 @@ function selectAnswer(profile, el) {
 }
 
 
+function goBack() {
+    if (flowIndex > 0) {
+        flowIndex--;
+        goToStep(currentFlow[flowIndex]);
+    } else {
+        goToStep(0);
+        document.getElementById('header-nav').style.display = 'none';
+    }
+}
+
 function nextStep() {
     flowIndex++;
-
     if (flowIndex >= currentFlow.length) {
         return;
     }
 
     const nextStepNumber = currentFlow[flowIndex];
-
-    // Se for o último passo do fluxo, disparar showResult
     if (flowIndex === currentFlow.length - 1) {
         showResult();
-
     }
 
     goToStep(nextStepNumber);
@@ -298,13 +309,6 @@ function goToStep(s) {
     if (targetStep) targetStep.classList.add('active');
 
     const headerNav = document.getElementById('header-nav');
-
-    // REGRA DINÂMICA:
-    // Esconde o header se:
-    // 1. For o passo inicial (s === 0)
-    // 2. OU se for o ÚLTIMO passo do fluxo atual (Resultado)
-    const isLastStep = (flowIndex === currentFlow.length - 1);
-
     if (s === 0) {
         if (headerNav) headerNav.style.display = 'none';
     } else {
@@ -315,18 +319,7 @@ function goToStep(s) {
     window.scrollTo(0, 0);
 }
 
-function goBack() {
-    if (flowIndex > 0) {
-        // Se estiver no meio do quiz, volta um passo no fluxo
-        flowIndex--;
-        goToStep(currentFlow[flowIndex]);
-    } else {
-        // Se estiver no primeiro passo do quiz (index 0), volta para a tela inicial
-        goToStep(0);
-        // Esconde o botão voltar e o header ao chegar no step 0
-        document.getElementById('header-nav').style.display = 'none';
-    }
-}
+
 
 function updateVisuals() {
     // 1. Primeiro, limpamos qualquer seleção visual
@@ -348,7 +341,6 @@ function updateVisuals() {
         }
     }
 }
-
 
 function calculateResult() {
 
@@ -373,11 +365,11 @@ function showResult() {
         document.getElementById("result-text").innerHTML = resultData.text;
 
     } else {
-        alert("ops!");
+        // outro flow..
     }
 }
 
-function getCursoLink() {
+function getFreeCourseLink() {
 
     const utm = getUTMParams();
 
@@ -462,7 +454,7 @@ function showCursoGratis() {
 
 <br>
 
-<button class="next-btn" onclick="window.location.href=getCursoLink()">
+<button class="next-btn" onclick="window.location.href=getFreeCourseLink()">
 👉 Acessar o Curso Gratuito
 </button>
 `;
