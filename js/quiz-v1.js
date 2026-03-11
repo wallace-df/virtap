@@ -20,91 +20,82 @@ let data = {
 const RESULTS = {
 
     AP: {
-        title: "<span>Você pode brilhar como:</span>Assistente Pessoal / Executiva",
-        text: `<p>Suas respostas mostram facilidade para tomar iniciativa, resolver pendências e ajudar a organizar a rotina de alguém. </p>
-
-        <p>Este perfil representa a área mais nobre da Assistência Virtual, onde frequentemente a profissional atua como braço direito de grandes empresários e executivos,  ajudando a resolver diferentes demandas do dia a dia, tais como:</p>
-<ul>
-<li>Organizar agenda e compromissos</li>
-<li>Pesquisar viagens, reservas ou serviços</li>
-<li>Resolver tarefas pessoais ou administrativas</li>
-<li>Acompanhar pendências importantes</li>
-<li>Ajudar o cliente a priorizar decisões e compromissos</li>
-</ul>
-
-<p>Por ser uma função de alta especialização e confiança, aqui se encontram os maiores potenciais de ganho do mercado, permitindo faturamentos que podem superar R$ 10.000,00 mensais.</p>
-
-<p class="main-text">O próximo passo para você</p>
-<p>
-Para profissionais que buscam este posicionamento de elite, a recomendação é a <strong>Formação AExpert</strong>.</p><p>Este é o treinamento de referência no mercado, desenvolvido especificamente para capacitar especialistas com as técnicas, ferramentas e habilidades necessárias para atender os clientes de mais alto padrão.</p>
-
-<button class="next-btn" onclick="window.location.href=getFormacaoAExpertLink()">
-👉 Formação AExpert
-</button>
-
-`
+        title: "<span>Você pode brilhar como:</span>Assessora Pessoal",
+        text: `
+        <p>Suas respostas mostram facilidade para tomar iniciativa, resolver pendências e ajudar a organizar a rotina de alguém: habilidades indispensáveis para uma Assessora Pessoal.</p>
+        <p>A Assessoria Pessoal é uma das áreas mais valorizadas da Assistência Virtual, onde profissionais bem posicionadas  podem faturar R$ 10.000 ou mais por mês.</p>
+    
+        <p> A profissional atua com grande proximidade e confiança junto ao cliente, muitas vezes como um verdadeiro braço direito na organização e resolução de demandas do dia a dia, tais como:</p>
+        <ul>
+        <li>Organizar agenda e compromissos</li>
+        <li>Reservar viagens e hospedagens</li>
+        <li>Pesquisar prestadores de serviços</li>
+        <li>Fazer pagamentos</li>
+        <li>Escolher e comprar presentes</li>
+        </ul>
+ 
+        <p class="main-text">O próximo passo para você</p>
+        <p>Como Assessora Pessoal, você atua em um nível de responsabilidade extremo, onde apenas profissionais de confiança absoluta conseguem se destacar.</p>
+        <p>A <strong>Formação AExpert</strong> é a referência máxima no mercado de alto nível, criada exatamente para desenvolver competências, habilidades e técnicas que clientes exigentes realmente valorizam.</p>
+        <p>É uma experiência de aprendizado feita para quem deseja atuar com excelência, sofisticação e autoridade, elevando sua carreira ao mais alto padrão do mercado.</p>
+        
+        <button class="next-btn" onclick="window.location.href=getFormacaoAExpertLink()">
+        👉 Conheça a Formação AExpert
+        </button>
+    `
     },
 
     SR: {
         title: "<span>Você pode brilhar como:</span>Secretária Remota",
-        text: `<p>Suas respostas mostram facilidade para comunicação, organização de atendimentos e relacionamento com pessoas.</p>
+        text: `
+        <p>Suas respostas mostram facilidade para comunicação, atendimento e relacionamento com pessoas.</p>
+        <p>Esse perfil costuma se destacar ajudando empresas ou profissionais a manter o contato com clientes organizado e funcionando bem.</p>
 
-<p>Esse perfil costuma se destacar ajudando empresas ou profissionais a manter o contato com clientes organizado e funcionando bem.</p>
+        <p>As principais atividades de uma Secretária Remota incluem:</p>
+        <ul>
+        <li>Responder mensagens de clientes</li>
+        <li>Organizar agenda de compromissos</li>
+        <li>Acompanhar solicitações e retornos</li>
+        <li>Garantir que todos os clientes sejam bem atendidos</li>
+        </ul>
+        <p>Esse tipo de profissional ajuda o negócio a funcionar com mais organização e agilidade.</p>
 
-<p>As principais atividades de uma Secretária Remota incluem:</p>
-<ul>
-<li>Responder mensagens de clientes</li>
-<li>Organizar agenda de atendimentos</li>
-<li>Confirmar compromissos e reuniões</li>
-<li>Acompanhar solicitações e retornos</li>
-<li>Garantir que todos os clientes sejam bem atendidos</li>
-</ul>
+        <p class="main-text">O próximo passo para você</p>
+        <p>Para atuar como Secretária Remota, o seu próximo passo é dominar a base operacional do atendimento digital.</p>
+        <p>Na <strong>Formação em Assistência Virtual</strong> da Virtap, você terá acesso a todas as técnicas e ferramentas essenciais para profissionalizar seu serviço e encantar seus futuros clientes.</p>
 
-<p>Esse tipo de profissional ajuda o negócio a funcionar com mais organização e agilidade no atendimento.</p>
-
-<p class="main-text">O próximo passo para você</p>
-<p>Para atuar como Secretária Remota, o seu próximo passo é dominar a base operacional do atendimento digital.</p>
-<p>Na <strong>Formação em Assistência Virtual</strong> da Virtap, você terá acesso a todas as técnicas e ferramentas essenciais para profissionalizar seu serviço e encantar seus futuros clientes.</p>
-
-<button class="next-btn" onclick="window.location.href=getFormacaoAExpertLink()">
-👉 Formação em Assistência Virtual
-</button>
-`
+        <button class="next-btn" onclick="window.location.href=getFormacaoAExpertLink()">
+        👉 Formação em Assistência Virtual
+        </button>
+    `
     },
 
     AA: {
-        title: "Assistente Administrativa (AA)",
+        title: "<span>Você pode brilhar como:</span>Assistente Administrativa",
         text: `
-<p><strong>Seu perfil predominante</strong></p>
+        <p>Suas respostas mostram forte organização, atenção aos detalhes e facilidade para lidar com rotinas estruturadas.</p>
+        <p>Esse perfil se destaca cuidando da parte administrativa e garantindo que informações e processos estejam sempre organizados.</p>
 
-<p><strong>Assistente Administrativa</strong></p>
+        <p>Uma Assistente Administrativa atua em tarefas como:</p>
+        <ul>
+            <li>Organizar planilhas e controles</li>
+            <li>Gerenciar documentos e arquivos</li>
+            <li>Acompanhar prazos administrativos</li>
+            <li>Estruturar processos e rotinas</li>
+            <li>Manter registros e dados organizados</li>
+        </ul>
 
-<p>Suas respostas mostram forte organização, atenção aos detalhes e facilidade para lidar com rotinas estruturadas.</p>
-
-<p>Esse perfil costuma se destacar cuidando da parte administrativa e garantindo que informações e processos estejam organizados.</p>
-
-<p><strong>Exemplos de atividades desse perfil</strong></p>
-
-<ul>
-<li>organizar planilhas e controles</li>
-<li>gerenciar documentos e arquivos</li>
-<li>acompanhar prazos administrativos</li>
-<li>estruturar processos e rotinas</li>
-<li>manter registros e dados organizados</li>
-</ul>
-
-<p>Esse tipo de profissional ajuda empresas e profissionais a <strong>manter tudo funcionando de forma organizada</strong>.</p>
-
-<p><strong>Próximo passo recomendado</strong></p>
-
-<p>Se você quer seguir nessa direção, o próximo passo é aprender como estruturar serviços administrativos remotos para clientes.</p>
-
-<p>👉 <strong>Formação Assistente Administrativa</strong></p>
+        <p class="main-text">O próximo passo para você</p>
+        <p>Para atuar como Assistente Administrativa, é essencial aprender a estruturar seus serviços de forma remota e profissional.</p>
+        <p>Na <strong>Formação em Assistência Virtual</strong> da Virtap, você terá acesso a todas as técnicas e ferramentas essenciais para profissionalizar seu serviço e encantar seus futuros clientes.</p>
+        <button class="next-btn" onclick="window.location.href=getFormacaoAExpertLink()">
+        👉 Formação em Assistência Virtual
+        </button>
 `
     },
 
     AP_SR: {
-        title: "4️⃣ Resultado: Perfil Híbrido (Assistente Pessoal + Secretária Remota)",
+        title: "VocêPerfil Híbrido (Assistente Pessoal + Secretária Remota)",
         text: `
 <p><strong>Seu perfil predominante</strong></p>
 
@@ -124,7 +115,7 @@ Para profissionais que buscam este posicionamento de elite, a recomendação é 
 <li>ajudar o cliente a manter tudo funcionando</li>
 </ul>
 
-<p>Esse tipo de profissional costuma atuar ajudando clientes a <strong>ganhar tempo e manter tudo organizado ao mesmo tempo</strong>.</p>
+        <p>Por ser uma função de alta especialização e confiança, aqui se encontram os maiores potenciais de ganho do mercado, permitindo faturamentos que podem superar R$ 10.000,00 mensais.</p>
 
 <p><strong>Próximo passo recomendado</strong></p>
 
@@ -193,33 +184,30 @@ Para profissionais que buscam este posicionamento de elite, a recomendação é 
     },
 
     ALL: {
-        title: "7️⃣ Resultado: Perfil Versátil de Assistente Virtual",
+        title: "<span>Você pode brilhar como:</span>Assistente Virtual Versátil",
         text: `
-<p><strong>Seu perfil predominante</strong></p>
 
-<p><strong>Perfil Versátil de Assistente Virtual</strong></p>
+<p>Suas respostas revelam um perfil dinâmico, com uma habilidade natural para transitar entre diferentes áreas e resolver problemas de forma ágil.</p>
 
-<p>Suas respostas mostram habilidades distribuídas entre organização, resolução de tarefas e comunicação.</p>
-
-<p>Esse é um perfil bastante comum em quem está começando na área de assistência virtual.</p>
-
-<p><strong>Exemplos de atividades desse perfil</strong></p>
-
+<p>Este é o perfil mais versátil e estratégico para o mercado atual. Você atua como o motor de produtividade do cliente, conectando todas as pontas do negócio. Sua facilidade em resolver múltiplas demandas faz de você uma peça indispensável em áreas como:</p>
 <ul>
-<li>organização de agenda</li>
-<li>atendimento a clientes</li>
-<li>controle de planilhas</li>
-<li>acompanhamento de tarefas</li>
-<li>apoio administrativo geral</li>
+<li>Organização de agendas e compromissos diários</li>
+<li>Atendimento e suporte aos clientes do negócio</li>
+<li>Controle de planilhas e processos administrativos</li>
+<li>Gestão de fluxos de trabalho e prazos internos</li>
+<li>Execução de rotinas digitais e tarefas operacionais</li>
+<li>Acompanhamento proativo de pendências e projetos</li>
 </ul>
 
-<p>Profissionais com esse perfil costumam começar oferecendo diferentes tipos de suporte e depois se especializam.</p>
+<p>Ser versátil agora é sua maior vantagem estratégica. Essa experiência prepara você para o próximo nível: a Assistência Executiva. É nessa transição que você deixa de ser apenas um suporte para se tornar o braço direito de grandes empresários, acessando os maiores ganhos da área.</p>
 
-<p><strong>Próximo passo recomendado</strong></p>
+<p><strong>O próximo passo para você</strong></p>
 
-<p>O próximo passo é aprender como transformar essas habilidades em um serviço profissional como Assistente Virtual.</p>
-
-<p>👉 <strong>Formação Assistente Virtual</strong></p>
+<p>
+Ter um perfil versátil é o seu maior trunfo, mas para faturar alto você precisa de método. A Formação Assistente Virtual entrega as técnicas e ferramentas essenciais para você sair do zero, conquistar seus primeiros clientes e construir uma carreira com total liberdade e segurança.</p>
+<button class="next-btn" onclick="window.location.href=getFormacaoAExpertLink()">
+👉 Formação em Assistência Virtual
+</button>
 `
     }
 
