@@ -53,8 +53,12 @@
 
 .main-text {
   color: var(--virtap-purple);
-  font-size: 1.2rem;;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 2rem;
+  margin-bottom: 0;
 }
+
 
 .back-link {
   color: var(--virtap-purple);
@@ -118,6 +122,12 @@ h2 {
   line-height: 1.2;
 }
 
+h2>span {
+  color: #333;
+  display: block;
+  margin-bottom:0.5rem;
+
+}
 ul li {
   font-size: 1.1rem;
   line-height: 1.2;
@@ -264,6 +274,10 @@ input.invalid {
   color: #444;
   padding-left: 28px;
   display: block;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .result-preview {

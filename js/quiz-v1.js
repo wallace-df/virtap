@@ -20,52 +20,54 @@ let data = {
 const RESULTS = {
 
     AP: {
-        title: "Assistente Pessoal / Executiva",
+        title: "<span>Você pode brilhar como:</span>Assistente Pessoal / Executiva",
         text: `<p>Suas respostas mostram facilidade para tomar iniciativa, resolver pendências e ajudar a organizar a rotina de alguém. </p>
 
-<p>Esse perfil costuma se destacar quando trabalha próximo da rotina de um cliente, ajudando a resolver diferentes demandas do dia a dia, como:</p>
+        <p>Este perfil representa a área mais nobre da Assistência Virtual, onde frequentemente a profissional atua como braço direito de grandes empresários e executivos,  ajudando a resolver diferentes demandas do dia a dia, tais como:</p>
 <ul>
-<li>organizar agenda e compromissos</li>
-<li>pesquisar viagens, reservas ou serviços</li>
-<li>resolver tarefas pessoais ou administrativas</li>
-<li>acompanhar pendências importantes</li>
-<li>ajudar o cliente a priorizar decisões e compromissos</li>
+<li>Organizar agenda e compromissos</li>
+<li>Pesquisar viagens, reservas ou serviços</li>
+<li>Resolver tarefas pessoais ou administrativas</li>
+<li>Acompanhar pendências importantes</li>
+<li>Ajudar o cliente a priorizar decisões e compromissos</li>
 </ul>
 
-<p>Muitas vezes essa profissional se torna um <strong>braço direito do cliente</strong>.</p>
+<p>Por ser uma função de alta especialização e confiança, aqui se encontram os maiores potenciais de ganho do mercado, permitindo faturamentos que podem superar R$ 10.000,00 mensais.</p>
 
-<p><strong class="main-text">Próximo passo recomendado</strong></p>
-
-<p>O próximo passo é aprender como estruturar esse tipo de serviço e trabalhar profissionalmente com clientes.</p>
+<p class="main-text">O próximo passo para você</p>
+<p>
+Para profissionais que buscam este posicionamento de elite, a recomendação é a <strong>Formação AExpert</strong>.</p><p>Este é o treinamento de referência no mercado, desenvolvido especificamente para capacitar especialistas com as técnicas, ferramentas e habilidades necessárias para atender os clientes de mais alto padrão.</p>
 
 <button class="next-btn" onclick="window.location.href=getFormacaoAExpertLink()">
-👉 Formação Asessora Pessoal Expert
+👉 Formação AExpert
 </button>
 
 `
     },
 
     SR: {
-        title: "Secretária Remota (SR)",
+        title: "<span>Você pode brilhar como:</span>Secretária Remota",
         text: `<p>Suas respostas mostram facilidade para comunicação, organização de atendimentos e relacionamento com pessoas.</p>
 
-<p>Esse perfil costuma se destacar ajudando empresas ou profissionais a manter o contato com clientes organizado e funcionando bem. As principais atividades incluem:</p>
+<p>Esse perfil costuma se destacar ajudando empresas ou profissionais a manter o contato com clientes organizado e funcionando bem.</p>
+
+<p>As principais atividades de uma Secretária Remota incluem:</p>
 <ul>
-<li>responder mensagens de clientes</li>
-<li>organizar agenda de atendimentos</li>
-<li>confirmar compromissos e reuniões</li>
-<li>acompanhar solicitações e retornos</li>
-<li>garantir que todos os clientes sejam bem atendidos</li>
+<li>Responder mensagens de clientes</li>
+<li>Organizar agenda de atendimentos</li>
+<li>Confirmar compromissos e reuniões</li>
+<li>Acompanhar solicitações e retornos</li>
+<li>Garantir que todos os clientes sejam bem atendidos</li>
 </ul>
 
-<p>Esse tipo de profissional ajuda o negócio a <strong>funcionar com mais organização e agilidade no atendimento</strong>.</p>
+<p>Esse tipo de profissional ajuda o negócio a funcionar com mais organização e agilidade no atendimento.</p>
 
-<p class="main-text">Próximo passo recomendado</p>
-
-<p>Se você quer seguir nessa direção, o próximo passo é aprender como estruturar um serviço de atendimento remoto para clientes.</p>
+<p class="main-text">O próximo passo para você</p>
+<p>Para atuar como Secretária Remota, o seu próximo passo é dominar a base operacional do atendimento digital.</p>
+<p>Na <strong>Formação em Assistência Virtual</strong> da Virtap, você terá acesso a todas as técnicas e ferramentas essenciais para profissionalizar seu serviço e encantar seus futuros clientes.</p>
 
 <button class="next-btn" onclick="window.location.href=getFormacaoAExpertLink()">
-👉 Formação Assistencia Virtual
+👉 Formação em Assistência Virtual
 </button>
 `
     },
@@ -252,7 +254,7 @@ function selectAnswer(profile, el) {
     data.quiz[currentStep] = profile;
 
     // 2. Lógica de Separação de Modelos
-    if (currentFlow === FLOWS.iniciar) {
+    if (currentFlow === FLOWS.iniciante) {
         if (prev && data.scores[prev] !== undefined) {
             data.scores[prev]--;
         }
@@ -260,7 +262,7 @@ function selectAnswer(profile, el) {
             data.scores[profile]++;
         }
     }
-    else if (currentFlow === FLOWS.avancado) {
+    else if (currentFlow === FLOWS.atuante) {
         if (currentStep === 8) data.intentions.areaAtual = profile;
         if (currentStep === 9) data.intentions.dor = profile;
         if (currentStep === 10) data.intentions.perfilValidacao = profile;
@@ -361,7 +363,7 @@ function showResult() {
     if (currentFlow === FLOWS.iniciante) {
         const result = calculateResult();
         const resultData = RESULTS[result];
-        document.getElementById("result-title").innerText = resultData.title;
+        document.getElementById("result-title").innerHTML = resultData.title;
         document.getElementById("result-text").innerHTML = resultData.text;
 
     } else {
