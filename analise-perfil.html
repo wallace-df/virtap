@@ -29,8 +29,8 @@
 
 <body>
 
-    <h1>Qual área da Assistência Virtual combina com você? ⭐
-        <p>Responda algumas perguntas rápidas e descubra qual caminho profissional combina mais com você.</p>
+    <h1>Qual o próximo passo pra você como Assistência Virtual? ⭐
+        <p>Responda algumas perguntas rápidas e veja como avançar na sua carreira.</p>
     </h1>
     <div id="quiz-wrapper">
         <div id="quiz-container">
@@ -44,7 +44,7 @@
                     Quero conhecer melhor a profissão de Assistente Virtual
                 </button>
                 <button class="option-btn" onclick="choosePath('quer-comecar')">
-                    Já conheço a profissão e quero começar a trabalhar
+                    Quero começar a trabalhar como Assistente Virtual
                 </button>
                 <button class="option-btn" onclick="choosePath('ja-trabalha')">
                     Já trabalho como Assistente Virtual
@@ -52,87 +52,85 @@
             </div>
 
             <div class="step" id="step1">
-                <h2>Qual frase mais combina com você?</h2>
-                <button class="option-btn" onclick="selectAnswer('AA',this)">
-                    Sou muito detalhista com horários, prazos e não deixo nenhum dado passar batido.
+                <h2>Qual dessas áreas melhor descreve sua experiência profissional?</h2>
+                <button class="option-btn" onclick="selectAnswer('Executivo', this)">
+                    Secretariado Executivo / Concierge / Assessoria Especializada
                 </button>
-                <button class="option-btn" onclick="selectAnswer('AP',this)">
-                    Tenho facilidade em antecipar necessidades e encontrar soluções antes mesmo de me
-                    pedirem.
+
+                <button class="option-btn" onclick="selectAnswer('Administrativo', this)">
+                    Administrativo / Financeiro / Operacional
                 </button>
-                <button class="option-btn" onclick="selectAnswer('SR',this)">
-                    Sei conversar com diferentes tipos de pessoas e resolver conflitos com paciência.
+
+                <button class="option-btn" onclick="selectAnswer('Atendimento', this)">
+                    Atendimento ao Cliente / Suporte / Vendas
+                </button>
+
+                <button class="option-btn" onclick="selectAnswer(null, this)">
+                    Nenhuma das anteriores
                 </button>
             </div>
 
             <div class="step" id="step2">
-                <h2>Como você prefere trabalhar no dia a dia?</h2>
-                <button class="option-btn" onclick="selectAnswer('AP',this)">
-                    Prefiro tomar iniciativa quando vejo algo que precisa ser feito.
-                </button>
-                <button class="option-btn" onclick="selectAnswer('AA',this)">
-                    Prefiro ter uma lista clara do que fazer e seguir o passo a passo.
-                </button>
-                <button class="option-btn" onclick="selectAnswer('SR',this)">
-                    Prefiro atender as demandas conforme elas vão chegando.
-                </button>
+                <h2>O que mais te incomoda dentre as opções abaixo?</h2>
+                <button class="option-btn" onclick="selectAnswer('AA',this)">Informações espalhadas, desorganizadas ou
+                    sem um padrão definido.</button>
+                <button class="option-btn" onclick="selectAnswer('AP',this)">Ter que esperar os outros para resolver
+                    algo que eu já poderia ter feito.</button>
+                <button class="option-btn" onclick="selectAnswer('SR',this)">Ver alguém sendo mal atendido ou ficando
+                    sem uma resposta clara.</button>
             </div>
 
             <div class="step" id="step3">
-                <h2>Com quais tarefas você mais se identifica?</h2>
-                <button class="option-btn" onclick="selectAnswer('SR',this)">
-                    Responder clientes no WhatsApp, tirar dúvidas e prestar informações.
-                </button>
-                <button class="option-btn" onclick="selectAnswer('AP',this)">
-                    Pesquisar uma viagem, comprar um presente ou cotar um serviço para a casa.
-                </button>
-                <button class="option-btn" onclick="selectAnswer('AA',this)">
-                    Organizar a agenda de reuniões, preencher planilhas e organizar documentos.
-                </button>
+                <h2>Se um grupo de amigos vai viajar, qual é a sua função natural?</h2>
+                <button class="option-btn" onclick="selectAnswer('AA',this)">Eu cuido do roteiro detalhado, das reservas
+                    e do controle dos gastos.</button>
+                <button class="option-btn" onclick="selectAnswer('AP',this)">Eu resolvo os imprevistos na hora: se o
+                    pneu fura ou o hotel cancela, eu dou um jeito.</button>
+                <button class="option-btn" onclick="selectAnswer('SR',this)">Eu sou quem mantém o clima bom e resolve as
+                    pequenas brigas ou dúvidas de todos.</button>
             </div>
 
             <div class="step" id="step4">
-                <h2>Como você lida com demandas urgentes e diferentes ao mesmo tempo?</h2>
-                <button class="option-btn" onclick="selectAnswer('AP',this)">
-                    Filtro o que é mais prioritário e resolvo uma por uma.
-                </button>
-                <button class="option-btn" onclick="selectAnswer('SR',this)">
-                    Tento dar uma satisfação rápida para todos os envolvidos enquanto começo a processar os pedidos.
-                </button>
-                <button class="option-btn" onclick="selectAnswer('AA',this)">
-                    Prefiro terminar o que já estava fazendo antes de assumir as novas urgências.
-                </button>
+                <h2>Se você tivesse o dia livre para ajudar alguém, o que preferiria fazer?</h2>
+                <button class="option-btn" onclick="selectAnswer('AA',this)">Organizar uma biblioteca de livros,
+                    documentos ou uma planilha financeira.</button>
+                <button class="option-btn" onclick="selectAnswer('AP',this)">Resolver burocracias de rua, pesquisar e
+                    comprar o melhor presente ou planejar uma festa.</button>
+                <button class="option-btn" onclick="selectAnswer('SR',this)">Ficar no chat tirando dúvidas de pessoas ou
+                    ensinando alguém a usar um aplicativo.</button>
             </div>
 
             <div class="step" id="step5">
-                <h2>Uma tarefa urgente trava por falta de uma informação do cliente, que está inacessível. Qual sua
-                    atitude?</h2>
-                <button class="option-btn" onclick="selectAnswer('AA',this)">
-                    Registro o problema e aguardo a instrução oficial do cliente para garantir que a solução seja a
-                    correta.
-                </button>
-                <button class="option-btn" onclick="selectAnswer('SR',this)">
-                    Aviso os envolvidos para ganhar tempo e deixo as opções prontas para o cliente decidir depois.
-                </button>
-                <button class="option-btn" onclick="selectAnswer('AP',this)">
-                    Tomo uma decisão com base no que já conheço do cliente e resolvo para não perder o prazo.
-                </button>
+                <h2>Como você toma decisões quando está em dúvida?</h2>
+                <button class="option-btn" onclick="selectAnswer('AA',this)">Analiso todos os dados e regras antes de
+                    dar qualquer passo para não errar.</button>
+                <button class="option-btn" onclick="selectAnswer('AP',this)">Decido rápido com base no que parece mais
+                    prático e eficiente no momento.</button>
+                <button class="option-btn" onclick="selectAnswer('SR',this)">Consulto as pessoas envolvidas para
+                    garantir que a decisão não vai chatear ninguém.</button>
             </div>
 
             <div class="step" id="step6">
-                <h2>Se você pudesse escolher um lema de trabalho, qual seria?</h2>
-                <button class="option-btn" onclick="selectAnswer('AP',this);">
-                    Pode deixar comigo, eu resolvo.
-                </button>
-                <button class="option-btn" onclick="selectAnswer('AA',this)">
-                    O que é bem planejado e conferido não precisa ser refeito.
-                </button>
-                <button class="option-btn" onclick="selectAnswer('SR',this)">
-                    Informação certa, na hora certa, para a pessoa certa.
-                </button>
+                <h2>No que você mais presta atenção quando entra em uma loja ou site?</h2>
+                <button class="option-btn" onclick="selectAnswer('SR',this)">Na educação, na gentileza e na rapidez do
+                    atendimento humano.</button>
+                <button class="option-btn" onclick="selectAnswer('AA',this)">Na organização dos produtos, nos preços
+                    claros e na facilidade de achar as regras.</button>
+                <button class="option-btn" onclick="selectAnswer('AP',this)">Na eficiência: se eu consigo resolver o que
+                    eu queria sem burocracia.</button>
             </div>
 
             <div class="step" id="step7">
+                <h2>Qual frase mais se parece com o seu jeito de ser?</h2>
+                <button class="option-btn" onclick="selectAnswer('AA',this)">"Um lugar para cada coisa e cada coisa no
+                    seu lugar."</button>
+                <button class="option-btn" onclick="selectAnswer('AP',this)">"Feito é melhor que perfeito, mas resolvido
+                    é melhor que tudo."</button>
+                <button class="option-btn" onclick="selectAnswer('SR',this)">"Trate os outros como você gostaria de ser
+                    tratado."</button>
+            </div>
+
+            <div class="step" id="step8">
                 <h2 id="result-title" class="text-center"></h2>
                 <div id="result-text"></div>
             </div>

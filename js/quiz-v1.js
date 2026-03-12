@@ -1,10 +1,11 @@
 const FLOWS = {
-    iniciante: [1, 2, 3, 4, 5, 6, 7],
+    iniciante: [1, 2, 3, 4, 5, 6, 7, 8],
     atuante: [8, 9, 10, 11, 12]
 };
 
 let data = {
     quiz: [],
+    experience: null,
     scores: {
         AP: 0,
         SR: 0,
@@ -221,6 +222,7 @@ let flowIndex = 0;
 
 function choosePath(path) {
     userPath = path;
+    data.quiz[currentStep] = path;
     if (path === 'nao-conhece') {
         showCursoGratis();
         return;
@@ -236,18 +238,20 @@ function choosePath(path) {
     goToStep(currentFlow[flowIndex]);
 }
 
-
 function selectAnswer(profile, el) {
     const prev = data.quiz[currentStep];
     data.quiz[currentStep] = profile;
 
-    // 2. Lógica de Separação de Modelos
     if (currentFlow === FLOWS.iniciante) {
-        if (prev && data.scores[prev] !== undefined) {
-            data.scores[prev]--;
-        }
-        if (data.scores[profile] !== undefined) {
-            data.scores[profile]++;
+        if (currentStep === 1) {
+            data.experience = profile;
+        } else {
+            if (prev && data.scores[prev] !== undefined) {
+                data.scores[prev]--;
+            }
+            if (data.scores[profile] !== undefined) {
+                data.scores[profile]++;
+            }
         }
     }
     else if (currentFlow === FLOWS.atuante) {
@@ -264,7 +268,6 @@ function selectAnswer(profile, el) {
         nextStep();
     }, 150);
 }
-
 
 function goBack() {
     if (flowIndex > 0) {
@@ -305,26 +308,20 @@ function goToStep(s) {
         if (headerNav) headerNav.style.display = 'flex';
     }
 
-    updateVisuals();
+    updateSelection();
     window.scrollTo(0, 0);
 }
 
+function updateSelection() {
+    document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
 
-
-function updateVisuals() {
-    // 1. Primeiro, limpamos qualquer seleção visual
-    document.querySelectorAll('.option-btn')
-        .forEach(btn => btn.classList.remove('selected'));
-
-    // 2. Pegamos a resposta salva para o passo ATUAL
     const answer = data.quiz[currentStep];
-    if (!answer) return;
+    if (!answer) {
+        return;
+    }
 
-    // 3. Buscamos o botão clicado, mas APENAS dentro do passo ativo
     const activeStepEl = document.getElementById('step' + currentStep);
-
     if (activeStepEl) {
-        // Busca o botão que tem o profile correto dentro da div da pergunta atual
         const btn = activeStepEl.querySelector(`button[onclick*="'${answer}'"]`);
         if (btn) {
             btn.classList.add('selected');
@@ -340,7 +337,7 @@ function calculateResult() {
     if (SR > AP && SR > AA) return "SR";
     if (AA > AP && AA > SR) return "AA";
 
-    if (AP === SR && AP > AA) return "AP_SR";
+    if (AP === SR && AP > AA) return "AP";
     if (AP === AA && AP > SR) return "AP_AA";
     if (SR === AA && SR > AP) return "SR_AA";
 
@@ -357,6 +354,41 @@ function showResult() {
     } else {
         // outro flow..
     }
+}
+
+function showCursoGratis() {
+
+    // esconde todos os steps
+    document.querySelectorAll('.step')
+        .forEach(el => el.classList.remove('active'));
+
+    // define título
+    document.getElementById("result-title").innerText =
+        "Comece do jeito certo!";
+
+    // define conteúdo
+    document.getElementById("result-text").innerHTML = `
+<p>Se você ainda não conhece a profissão de <strong>Assistente Virtual</strong>, o primeiro passo é entender como ela funciona.</p>
+
+<p>Para você começar da melhor forma possível, preparamos um <strong>curso 100% gratuito</strong> onde explicamos:</p>
+
+<ul>
+<li>O que faz uma Assistente Virtual</li>
+<li>O que é preciso para trabalhar </li>
+<li>Quanto é possível ganhar</li>
+<li>Como começar a trabalhar</li>
+</ul>
+
+<br>
+
+<button class="next-btn" onclick="window.location.href=getFreeCourseLink()">
+👉 Acessar o Curso Gratuito
+</button>
+`;
+
+    document.getElementById("step8").classList.add("active");
+    document.getElementById('header-nav').style.display = 'flex';
+
 }
 
 function getFreeCourseLink() {
@@ -417,41 +449,6 @@ function getFormacaoAExpertLink() {
     }
 
     return "/formacoes/assistencia-pessoal?" + params.toString();
-}
-
-function showCursoGratis() {
-
-    // esconde todos os steps
-    document.querySelectorAll('.step')
-        .forEach(el => el.classList.remove('active'));
-
-    // define título
-    document.getElementById("result-title").innerText =
-        "Comece do jeito certo!";
-
-    // define conteúdo
-    document.getElementById("result-text").innerHTML = `
-<p>Se você ainda não conhece a profissão de <strong>Assistente Virtual</strong>, o primeiro passo é entender como ela funciona.</p>
-
-<p>Para você começar da melhor forma possível, preparamos um <strong>curso 100% gratuito</strong> onde explicamos:</p>
-
-<ul>
-<li>O que faz uma Assistente Virtual</li>
-<li>O que é preciso para trabalhar </li>
-<li>Quanto é possível ganhar</li>
-<li>Como começar a trabalhar</li>
-</ul>
-
-<br>
-
-<button class="next-btn" onclick="window.location.href=getFreeCourseLink()">
-👉 Acessar o Curso Gratuito
-</button>
-`;
-
-    document.getElementById("step7").classList.add("active");
-    document.getElementById('header-nav').style.display = 'flex';
-
 }
 
 function getNullableValue(val) {
