@@ -433,7 +433,7 @@ function showCursoGratis() {
     document.getElementById("result-text").innerHTML = `
 <p>Se você ainda não conhece a profissão de <strong>Assistente Virtual</strong>, o primeiro passo é entender como ela funciona.</p>
 
-<p>Preparamos um <strong>curso 100% gratuito</strong> onde explicamos:</p>
+<p>Para você começar da melhor forma possível, preparamos um <strong>curso 100% gratuito</strong> onde explicamos:</p>
 
 <ul>
 <li>O que faz uma Assistente Virtual</li>
