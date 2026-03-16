@@ -125,9 +125,287 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
     const redirecionado = precisaDeP5(desejo, p2, p3, exp) && p5 === 'existente';
     const desejoFinal   = redirecionado ? perfil : desejo;
     const unanime       = p2 === p3;
-    const secundario    = p2 === perfil ? p3 : p2; // traço não-predominante
+    const secundario    = p2 === perfil ? p3 : p2;
 
     const incluso = `\n\nAh, e tem algo importante: na formação, todas as competências estão inclusas — Suporte, Administrativo e AP. Não importa onde você está hoje. Se precisar desenvolver, a gente desenvolve juntas. Se já tiver bagagem, a gente estrutura e potencializa.`;
+
+    let copy = '';
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // DESEJO: AP
+    // ─────────────────────────────────────────────────────────────────────────
+    if (desejoFinal === 'AP') {
+
+        if (exp === 'elite') {
+
+            if (perfil === 'AP' && unanime) {
+                // ✅ Match total: bagagem elite + perfil 100% AP
+                copy = `TODO: bagagem de secretária executiva confirmada + perfil unânime AP → já tem tudo, só precisa estruturar para o digital. Tom: confirmação e posicionamento no topo.`;
+
+            } else if (perfil === 'AP' && secundario === 'AA') {
+                // ✅ Match forte: bagagem elite + AP predominante + traço AA reforça
+                copy = `TODO: bagagem de secretária executiva + AP predominante com traço de organização (AA) → base real, traço AA é complementar e reforça o perfil AP. Tom: bagagem confirmada, afinar autonomia estratégica.`;
+
+            } else if (perfil === 'AP' && secundario === 'SR') {
+                // ✅ Match forte: bagagem elite + AP predominante + traço SR reforça
+                copy = `TODO: bagagem de secretária executiva + AP predominante com traço de comunicação (SR) → base real, traço SR adiciona empatia valiosa. Tom: bagagem confirmada, afinar decisão estratégica.`;
+
+            } else if (perfil === 'AA') {
+                // ⚠️ Gap: bagagem elite mas perfil esfriou para AA
+                copy = `TODO: bagagem de secretária executiva + perfil atual AA → já operou nesse nível mas esfriou. Tom: reconectar com o perfil que já foi seu, não construir do zero.`;
+
+            } else if (perfil === 'SR') {
+                // ⚠️ Gap: bagagem elite mas perfil esfriou para SR
+                copy = `TODO: bagagem de secretária executiva + perfil atual SR → já operou nesse nível mas esfriou. Tom: reconectar com o perfil que já foi seu, não construir do zero.`;
+            }
+
+        } else if (exp === 'atendimento') {
+
+            if (perfil === 'AP' && unanime) {
+                // ✅ Match total: atendimento + perfil 100% AP
+                copy = `TODO: experiência em atendimento + perfil unânime AP → sabe ler pessoas e já age com autonomia. Tom: confirmação, estruturar para o digital.`;
+
+            } else if (perfil === 'AP' && secundario === 'AA') {
+                // ✅ Match forte: atendimento + AP predominante + traço AA reforça
+                copy = `TODO: experiência em atendimento + AP predominante com traço AA → instinto certo + organização complementar. Tom: reforçar autonomia estratégica, traço AA é vantagem.`;
+
+            } else if (perfil === 'AP' && secundario === 'SR') {
+                // ✅ Match forte: atendimento + AP predominante + traço SR reforça
+                copy = `TODO: experiência em atendimento + AP predominante com traço SR → instinto certo + comunicação complementar. Tom: desenvolver decisão estratégica, traço SR é vantagem.`;
+
+            } else if (perfil === 'AA') {
+                // ⚠️ Gap: atendimento + perfil AA → precisa desenvolver autonomia
+                copy = `TODO: experiência em atendimento + perfil AA → opera mais em organização do que antecipação. Tom: gap real mas treinável, formação resolve.`;
+
+            } else if (perfil === 'SR') {
+                // ⚠️ Gap: atendimento + perfil SR → precisa desenvolver estratégia
+                copy = `TODO: experiência em atendimento + perfil SR → opera mais em comunicação do que decisão estratégica. Tom: gap real mas treinável, base de atendimento é vantagem.`;
+            }
+
+        } else if (exp === 'adm') {
+
+            if (perfil === 'AP' && unanime) {
+                // ✅ Match total: adm + perfil 100% AP
+                copy = `TODO: experiência adm + perfil unânime AP → visão sistêmica + autonomia estratégica. Tom: confirmação, estruturar para o digital.`;
+
+            } else if (perfil === 'AP' && secundario === 'AA') {
+                // ✅ Match forte: adm + AP predominante + traço AA reforça
+                copy = `TODO: experiência adm + AP predominante com traço AA → base técnica + organização complementar. Tom: afinar consistência da antecipação, traço AA é solidez.`;
+
+            } else if (perfil === 'AP' && secundario === 'SR') {
+                // ✅ Match forte: adm + AP predominante + traço SR reforça
+                copy = `TODO: experiência adm + AP predominante com traço SR → base técnica + comunicação complementar. Tom: afinar autonomia estratégica, traço SR é versatilidade.`;
+
+            } else if (perfil === 'AA') {
+                // ⚠️ Gap: adm + perfil AA → tem base técnica mas falta autonomia
+                copy = `TODO: experiência adm + perfil AA → base técnica certa, mas opera mais em organização do que antecipação. Tom: gap é a camada de decisão, formação desenvolve isso.`;
+
+            } else if (perfil === 'SR') {
+                // ⚠️ Gap: adm + perfil SR → tem base técnica mas falta estratégia
+                copy = `TODO: experiência adm + perfil SR → base técnica real, mas opera mais em comunicação do que gestão estratégica. Tom: gap treinável, base técnica já é vantagem.`;
+            }
+
+        } else if (exp === 'sem') {
+
+            if (perfil === 'AP' && unanime) {
+                // ✅ Match total: sem exp + perfil 100% AP
+                copy = `TODO: sem experiência + perfil unânime AP → não tem histórico mas tem o perfil certo. Tom: raridade do perfil sem experiência, formação constrói a estrutura.`;
+
+            } else if (perfil === 'AP' && secundario === 'AA') {
+                // ✅ Match forte: sem exp + AP predominante + traço AA
+                copy = `TODO: sem experiência + AP predominante com traço AA → perfil certo com organização complementar. Tom: formação constrói estrutura ao redor do instinto certo.`;
+
+            } else if (perfil === 'AP' && secundario === 'SR') {
+                // ✅ Match forte: sem exp + AP predominante + traço SR
+                copy = `TODO: sem experiência + AP predominante com traço SR → perfil certo com comunicação complementar. Tom: formação desenvolve consistência estratégica.`;
+
+            } else if (perfil === 'AA') {
+                // ⚠️ Gap: sem exp + perfil AA → gap real para AP
+                copy = `TODO: sem experiência + perfil AA → gap real entre organização e autonomia AP. Tom: desafiador mas treinável, formação constrói do zero.`;
+
+            } else if (perfil === 'SR') {
+                // ⚠️ Gap maior: sem exp + perfil SR → maior gap para AP
+                copy = `TODO: sem experiência + perfil SR → maior gap para AP. Tom: desafiador, formação constrói do zero, comunicação é ponto de partida.`;
+            }
+        }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // DESEJO: AA
+    // ─────────────────────────────────────────────────────────────────────────
+    } else if (desejoFinal === 'AA') {
+
+        if (exp === 'elite') {
+
+            if (perfil === 'AP') {
+                // 🔼 Upgrade: elite + perfil AP quer AA → subvaloriza
+                copy = `TODO: bagagem elite + perfil AP quer AA → já opera acima do que pede. Tom: AA é sólido para começar, mas mapa do topo já está na mão.`;
+
+            } else if (perfil === 'AA' && unanime) {
+                // ✅ Match total: elite + perfil 100% AA
+                copy = `TODO: bagagem elite + perfil unânime AA → bagagem confirma e perfil confirma. Tom: fortalecer diferencial, posicionar nos bastidores.`;
+
+            } else if (perfil === 'AA' && secundario === 'AP') {
+                // ✅ Match forte: elite + AA predominante + traço AP reforça
+                copy = `TODO: bagagem elite + AA predominante com traço AP → organização + iniciativa complementar. Tom: traço AP te torna ainda mais completa.`;
+
+            } else if (perfil === 'AA' && secundario === 'SR') {
+                // ✅ Match forte: elite + AA predominante + traço SR reforça
+                copy = `TODO: bagagem elite + AA predominante com traço SR → organização + comunicação complementar. Tom: combinação rara, fortalecer base técnica.`;
+
+            } else if (perfil === 'SR') {
+                // ⚠️ Gap: elite + perfil SR quer AA → precisa desenvolver lado técnico
+                copy = `TODO: bagagem elite + perfil SR quer AA → opera mais em comunicação do que processos. Tom: desenvolver lado técnico sem perder habilidade de comunicação.`;
+            }
+
+        } else if (exp === 'atendimento') {
+
+            if (perfil === 'AP') {
+                copy = `TODO: atendimento + perfil AP quer AA → já opera acima do que pede. Tom: AA sólido para começar, mapa do topo na mão.`;
+
+            } else if (perfil === 'AA' && unanime) {
+                copy = `TODO: atendimento + perfil unânime AA → experiência e perfil confirmam. Tom: fortalecer diferencial técnico.`;
+
+            } else if (perfil === 'AA' && secundario === 'AP') {
+                copy = `TODO: atendimento + AA predominante com traço AP → organização + iniciativa. Tom: traço AP torna ainda mais completa.`;
+
+            } else if (perfil === 'AA' && secundario === 'SR') {
+                copy = `TODO: atendimento + AA predominante com traço SR → organização + comunicação. Tom: combinação valiosa nos bastidores.`;
+
+            } else if (perfil === 'SR') {
+                copy = `TODO: atendimento + perfil SR quer AA → gap técnico. Tom: desenvolver lado administrativo sem perder facilidade com pessoas.`;
+            }
+
+        } else if (exp === 'adm') {
+
+            if (perfil === 'AP') {
+                copy = `TODO: adm + perfil AP quer AA → já opera acima do que pede. Tom: AA direto, mas perfil pode ir além.`;
+
+            } else if (perfil === 'AA' && unanime) {
+                copy = `TODO: adm + perfil unânime AA → experiência e perfil confirmam. Tom: trazer para o digital, fortalecer.`;
+
+            } else if (perfil === 'AA' && secundario === 'AP') {
+                copy = `TODO: adm + AA predominante com traço AP → organização + iniciativa. Tom: não só estrutura, previne problemas.`;
+
+            } else if (perfil === 'AA' && secundario === 'SR') {
+                copy = `TODO: adm + AA predominante com traço SR → organização + comunicação. Tom: combinação rara e valiosa.`;
+
+            } else if (perfil === 'SR') {
+                copy = `TODO: adm + perfil SR quer AA → gap técnico. Tom: desenvolver lado técnico, comunicação já é vantagem.`;
+            }
+
+        } else if (exp === 'sem') {
+
+            if (perfil === 'AP') {
+                copy = `TODO: sem exp + perfil AP quer AA → já opera acima do que pede. Tom: AA direto, mas perfil pode ir além.`;
+
+            } else if (perfil === 'AA' && unanime) {
+                copy = `TODO: sem exp + perfil unânime AA → perfil confirma. Tom: formação constrói base, perfil certo para AA.`;
+
+            } else if (perfil === 'AA' && secundario === 'AP') {
+                copy = `TODO: sem exp + AA predominante com traço AP → perfil certo + iniciativa. Tom: formação estrutura, traço AP abre portas.`;
+
+            } else if (perfil === 'AA' && secundario === 'SR') {
+                copy = `TODO: sem exp + AA predominante com traço SR → perfil certo + comunicação. Tom: combinação rara para quem está começando.`;
+
+            } else if (perfil === 'SR') {
+                copy = `TODO: sem exp + perfil SR quer AA → gap técnico. Tom: comunicação é metade do caminho, formação constrói o resto.`;
+            }
+        }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // DESEJO: SR
+    // ─────────────────────────────────────────────────────────────────────────
+    } else if (desejoFinal === 'SR') {
+
+        if (exp === 'elite') {
+
+            if (perfil === 'AP') {
+                copy = `TODO: elite + perfil AP quer SR → vai muito além do Suporte básico. Tom: lapidar, porta de entrada mas teto é mais alto.`;
+
+            } else if (perfil === 'AA') {
+                copy = `TODO: elite + perfil AA quer SR → organização + histórico forte. Tom: atende bem e mantém tudo estruturado, diferencial raro.`;
+
+            } else if (perfil === 'SR' && unanime) {
+                copy = `TODO: elite + perfil unânime SR → histórico + perfil confirmam. Tom: padrão de excelência que poucos no Suporte têm.`;
+
+            } else if (perfil === 'SR' && secundario === 'AP') {
+                copy = `TODO: elite + SR predominante com traço AP → comunicação + iniciativa. Tom: não só responde, resolve antes de escalar.`;
+
+            } else if (perfil === 'SR' && secundario === 'AA') {
+                copy = `TODO: elite + SR predominante com traço AA → comunicação + organização. Tom: atende bem e mantém tudo no lugar, combinação rara.`;
+            }
+
+        } else if (exp === 'atendimento') {
+
+            if (perfil === 'AP') {
+                copy = `TODO: atendimento + perfil AP quer SR → vai além do Suporte. Tom: entrada sólida, perfil pode ir mais longe.`;
+
+            } else if (perfil === 'AA') {
+                copy = `TODO: atendimento + perfil AA quer SR → comunicação + organização técnica. Tom: acima da média no Suporte.`;
+
+            } else if (perfil === 'SR' && unanime) {
+                copy = `TODO: atendimento + perfil unânime SR → zona natural confirmada. Tom: fortalecer dom, estruturar para o digital.`;
+
+            } else if (perfil === 'SR' && secundario === 'AP') {
+                copy = `TODO: atendimento + SR predominante com traço AP → comunicação + iniciativa. Tom: não só responde, resolve.`;
+
+            } else if (perfil === 'SR' && secundario === 'AA') {
+                copy = `TODO: atendimento + SR predominante com traço AA → comunicação + organização. Tom: combinação valiosa.`;
+            }
+
+        } else if (exp === 'adm') {
+
+            if (perfil === 'AP') {
+                copy = `TODO: adm + perfil AP quer SR → clareza de processos + autonomia. Tom: entrada sólida, perfil vai além.`;
+
+            } else if (perfil === 'AA') {
+                copy = `TODO: adm + perfil AA quer SR → organização técnica no Suporte. Tom: não só atende, estrutura para não repetir o problema.`;
+
+            } else if (perfil === 'SR' && unanime) {
+                copy = `TODO: adm + perfil unânime SR → processos + comunicação. Tom: entrar rápido, combinação forte.`;
+
+            } else if (perfil === 'SR' && secundario === 'AP') {
+                copy = `TODO: adm + SR predominante com traço AP → comunicação + iniciativa. Tom: atende e antecipa, diferencial raro.`;
+
+            } else if (perfil === 'SR' && secundario === 'AA') {
+                copy = `TODO: adm + SR predominante com traço AA → comunicação + organização. Tom: atende bem e mantém tudo no lugar.`;
+            }
+
+        } else if (exp === 'sem') {
+
+            if (perfil === 'AP') {
+                copy = `TODO: sem exp + perfil AP quer SR → autonomia e iniciativa desde o início. Tom: entrada estruturada, perfil pode ir além.`;
+
+            } else if (perfil === 'AA') {
+                copy = `TODO: sem exp + perfil AA quer SR → organização te destaca no Suporte. Tom: acima da média desde o primeiro cliente.`;
+
+            } else if (perfil === 'SR' && unanime) {
+                copy = `TODO: sem exp + perfil unânime SR → perfil certo para começar. Tom: formação estrutura o dom natural.`;
+
+            } else if (perfil === 'SR' && secundario === 'AP') {
+                copy = `TODO: sem exp + SR predominante com traço AP → comunicação + iniciativa. Tom: mapa para ir além desde o início.`;
+
+            } else if (perfil === 'SR' && secundario === 'AA') {
+                copy = `TODO: sem exp + SR predominante com traço AA → comunicação + organização. Tom: combinação rara para quem está começando.`;
+            }
+        }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // REDIRECIONADO (p5 = 'existente')
+    // ─────────────────────────────────────────────────────────────────────────
+    } else if (redirecionado) {
+
+        if (desejoFinal === 'AA') {
+            copy = `TODO: queria AP mas escolheu começar com o que tem → perfil AA. Tom: escolha inteligente, formação AV Administrativa, caminho para AP fica aberto.`;
+
+        } else if (desejoFinal === 'SR') {
+            copy = `TODO: queria AP mas escolheu começar com o que tem → perfil SR. Tom: escolha inteligente, formação AV Suporte, caminho para AP fica aberto.`;
+        }
+    }
+
+    const formacao = getFormacao(desejoFinal);
+    return { formacao, mensagem: copy + incluso };
+}
 
     let copy = '';
 
