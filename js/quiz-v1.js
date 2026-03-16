@@ -1,506 +1,407 @@
+// ─── FLOWS ────────────────────────────────────────────────────────────────────
+// step-result é um ID virtual que dispara showResult() e não existe no HTML.
+
 const FLOWS = {
-    iniciante: [1, 2, 3, 4, 5, 6, 7, 8],
-    atuante: [8, 9, 10, 11, 12]
+    iniciante: ['step1', 'step2', 'step3', 'step4', 'step5', 'step-result'],
+    atuante:   ['step8', 'step9', 'step10', 'step11', 'step-result'],
 };
 
-let data = {
-    quiz: [],
-    experience: null,
-    scores: {
-        AP: 0,
-        SR: 0,
-        AA: 0
-    },
-    intentions: {
-        dor: null,
-        perfil: null,
-        ambicao: null
-    }
+// ─── STATE ────────────────────────────────────────────────────────────────────
+
+const state = {
+    flow:      null,  // 'iniciante' | 'atuante'
+    flowIndex: 0,
+
+    // Flow iniciante
+    experience: null, // 'Executivo' | 'Administrativo' | 'Atendimento' | null
+    desejo:     null, // 'AP' | 'AA' | 'SR'
+    p2:         null, // 'AP' | 'AA' | 'SR'
+    p3:         null, // 'AP' | 'AA' | 'SR'
+    p5:         null, // 'desafio' | 'existente' | null (condicional)
+
+    // Flow atuante
+    areaAtual:       null,
+    dor:             null,
+    perfilValidacao: null,
+    ambicao:         null,
 };
 
-const RESULTS = {
+// ─── DADOS ────────────────────────────────────────────────────────────────────
 
+const EXP_MAP = {
+    'Executivo':      'elite',
+    'Administrativo': 'adm',
+    'Atendimento':    'atendimento',
+    null:             'sem',
+};
+
+const FORMACOES = {
+    AP: { label: 'Conheça a Formação AExpert',      path: '/formacoes/assistencia-pessoal' },
+    AV: { label: 'Formação em Assistência Virtual', path: '/formacoes/assistencia-virtual' },
+};
+
+function getFormacao(perfil) {
+    return perfil === 'AP' ? FORMACOES.AP : FORMACOES.AV;
+}
+
+const RESULTS_ATUANTE = {
     AP: {
         title: "<span>Você pode brilhar como:</span>Assessora Pessoal",
         text: `
-        <p>Suas respostas mostram facilidade para tomar iniciativa, resolver pendências e ajudar a organizar a rotina de alguém: habilidades indispensáveis para uma Assessora Pessoal.</p>
-        <p>A Assessoria Pessoal é uma das áreas mais valorizadas da Assistência Virtual, onde profissionais bem posicionadas  podem faturar R$ 10.000 ou mais por mês.</p>
-    
-        <p> A profissional atua com grande proximidade e confiança junto ao cliente, muitas vezes como um verdadeiro braço direito na organização e resolução de demandas do dia a dia, tais como:</p>
-        <ul>
-        <li>Organizar agenda e compromissos</li>
-        <li>Reservar viagens e hospedagens</li>
-        <li>Pesquisar prestadores de serviços</li>
-        <li>Fazer pagamentos</li>
-        <li>Escolher e comprar presentes</li>
-        </ul>
- 
-        <p class="main-text">O próximo passo para você</p>
-        <p>Como Assessora Pessoal, você atua em um nível de responsabilidade extremo, onde apenas profissionais de confiança absoluta conseguem se destacar.</p>
-        <p>A <strong>Formação AExpert</strong> é a referência máxima no mercado de alto nível, criada exatamente para desenvolver competências, habilidades e técnicas que clientes exigentes realmente valorizam.</p>
-        <p>É uma experiência de aprendizado feita para quem deseja atuar com excelência, sofisticação e autoridade, elevando sua carreira ao mais alto padrão do mercado.</p>
-        
-        <button class="next-btn" onclick="window.location.href=getFormacaoAExpertLink()">
-        👉 Conheça a Formação AExpert
-        </button>
-    `
+            <p>Suas respostas mostram facilidade para tomar iniciativa, resolver pendências e ajudar a organizar a rotina de alguém: habilidades indispensáveis para uma Assessora Pessoal.</p>
+            <p>A Assessoria Pessoal é uma das áreas mais valorizadas da Assistência Virtual, onde profissionais bem posicionadas podem faturar R$ 10.000 ou mais por mês.</p>
+            <p class="main-text">O próximo passo para você</p>
+            <p>A <strong>Formação AExpert</strong> é a referência máxima no mercado de alto nível, criada exatamente para desenvolver competências que clientes exigentes realmente valorizam.</p>
+            <button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-pessoal')">👉 Conheça a Formação AExpert</button>
+        `
     },
-
     SR: {
         title: "<span>Você pode brilhar como:</span>Secretária Remota",
         text: `
-        <p>Suas respostas mostram facilidade para comunicação, atendimento e relacionamento com pessoas.</p>
-        <p>Esse perfil costuma se destacar ajudando empresas ou profissionais a manter o contato com clientes organizado e funcionando bem.</p>
-
-        <p>As principais atividades de uma Secretária Remota incluem:</p>
-        <ul>
-        <li>Responder mensagens de clientes</li>
-        <li>Organizar agenda de compromissos</li>
-        <li>Acompanhar solicitações e retornos</li>
-        <li>Garantir que todos os clientes sejam bem atendidos</li>
-        </ul>
-        <p>Esse tipo de profissional ajuda o negócio a funcionar com mais organização e agilidade.</p>
-
-        <p class="main-text">O próximo passo para você</p>
-        <p>Para atuar como Secretária Remota, o seu próximo passo é dominar a base operacional do atendimento digital.</p>
-        <p>Na <strong>Formação em Assistência Virtual</strong> da Virtap, você terá acesso a todas as técnicas e ferramentas essenciais para profissionalizar seu serviço e encantar seus futuros clientes.</p>
-
-        <button class="next-btn" onclick="window.location.href=getFormacaoAExpertLink()">
-        👉 Formação em Assistência Virtual
-        </button>
-    `
+            <p>Suas respostas mostram facilidade para comunicação, atendimento e relacionamento com pessoas.</p>
+            <p class="main-text">O próximo passo para você</p>
+            <p>Na <strong>Formação em Assistência Virtual</strong> da Virtap, você terá acesso a todas as técnicas e ferramentas essenciais para profissionalizar seu serviço.</p>
+            <button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-virtual')">👉 Formação em Assistência Virtual</button>
+        `
     },
-
     AA: {
         title: "<span>Você pode brilhar como:</span>Assistente Administrativa",
         text: `
-        <p>Suas respostas mostram forte organização, atenção aos detalhes e facilidade para lidar com rotinas estruturadas.</p>
-        <p>Esse perfil se destaca cuidando da parte administrativa e garantindo que informações e processos estejam sempre organizados.</p>
-
-        <p>Uma Assistente Administrativa atua em tarefas como:</p>
-        <ul>
-            <li>Organizar planilhas e controles</li>
-            <li>Gerenciar documentos e arquivos</li>
-            <li>Acompanhar prazos administrativos</li>
-            <li>Estruturar processos e rotinas</li>
-            <li>Manter registros e dados organizados</li>
-        </ul>
-
-        <p class="main-text">O próximo passo para você</p>
-        <p>Para atuar como Assistente Administrativa, é essencial aprender a estruturar seus serviços de forma remota e profissional.</p>
-        <p>Na <strong>Formação em Assistência Virtual</strong> da Virtap, você terá acesso a todas as técnicas e ferramentas essenciais para profissionalizar seu serviço e encantar seus futuros clientes.</p>
-        <button class="next-btn" onclick="window.location.href=getFormacaoAExpertLink()">
-        👉 Formação em Assistência Virtual
-        </button>
-`
+            <p>Suas respostas mostram forte organização, atenção aos detalhes e facilidade para lidar com rotinas estruturadas.</p>
+            <p class="main-text">O próximo passo para você</p>
+            <p>Na <strong>Formação em Assistência Virtual</strong> da Virtap, você terá acesso a todas as técnicas e ferramentas essenciais para profissionalizar seu serviço.</p>
+            <button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-virtual')">👉 Formação em Assistência Virtual</button>
+        `
     },
-
     AP_SR: {
-        title: "VocêPerfil Híbrido (Assistente Pessoal + Secretária Remota)",
+        title: "<span>Seu perfil:</span>Assistente Pessoal com habilidade em atendimento",
         text: `
-<p><strong>Seu perfil predominante</strong></p>
-
-<p><strong>Assistente Pessoal com habilidade em atendimento</strong></p>
-
-<p>Suas respostas mostram facilidade tanto para resolver tarefas quanto para lidar com pessoas e comunicação.</p>
-
-<p>Esse é um perfil bastante comum em quem trabalha como Assistente Virtual.</p>
-
-<p><strong>Exemplos de atividades desse perfil</strong></p>
-
-<ul>
-<li>organizar agenda e compromissos</li>
-<li>responder clientes e mensagens</li>
-<li>acompanhar solicitações e pendências</li>
-<li>organizar demandas do dia a dia</li>
-<li>ajudar o cliente a manter tudo funcionando</li>
-</ul>
-
-        <p>Por ser uma função de alta especialização e confiança, aqui se encontram os maiores potenciais de ganho do mercado, permitindo faturamentos que podem superar R$ 10.000,00 mensais.</p>
-
-<p><strong>Próximo passo recomendado</strong></p>
-
-<p>O próximo passo é aprender como estruturar esses serviços e transformar essas habilidades em um trabalho profissional.</p>
-
-<p>👉 <strong>Formação Assistente Virtual</strong></p>
-`
+            <p>Suas respostas mostram facilidade tanto para resolver tarefas quanto para lidar com pessoas e comunicação.</p>
+            <p class="main-text">Próximo passo recomendado</p>
+            <button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-virtual')">👉 Formação Assistente Virtual</button>
+        `
     },
-
     AP_AA: {
-        title: "5️⃣ Resultado: Perfil Híbrido (Assistente Executiva + Administrativa)",
+        title: "<span>Seu perfil:</span>Assistente Executiva com forte organização administrativa",
         text: `
-<p><strong>Seu perfil predominante</strong></p>
-
-<p><strong>Assistente Executiva com forte organização administrativa</strong></p>
-
-<p>Suas respostas mostram facilidade para resolver tarefas e também para estruturar processos e organizar informações.</p>
-
-<p><strong>Exemplos de atividades desse perfil</strong></p>
-
-<ul>
-<li>organizar agenda e compromissos</li>
-<li>controlar planilhas e informações</li>
-<li>acompanhar prazos e tarefas</li>
-<li>organizar documentos importantes</li>
-<li>estruturar rotinas administrativas</li>
-</ul>
-
-<p>Esse tipo de profissional ajuda o cliente a <strong>manter organização tanto nas tarefas quanto nos processos</strong>.</p>
-
-<p><strong>Próximo passo recomendado</strong></p>
-
-<p>O próximo passo é aprender como estruturar serviços administrativos e executivos para trabalhar com clientes.</p>
-
-<p>👉 <strong>Formação Assistente Executiva</strong></p>
-`
+            <p>Suas respostas mostram facilidade para resolver tarefas e também para estruturar processos e organizar informações.</p>
+            <p class="main-text">Próximo passo recomendado</p>
+            <button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-virtual')">👉 Formação Assistente Executiva</button>
+        `
     },
-
     SR_AA: {
-        title: "6️⃣ Resultado: Perfil Híbrido (Secretária Remota + Administrativa)",
+        title: "<span>Seu perfil:</span>Secretária Remota com organização administrativa",
         text: `
-<p><strong>Seu perfil predominante</strong></p>
-
-<p><strong>Secretária Remota com organização administrativa</strong></p>
-
-<p>Suas respostas mostram facilidade para comunicação e atendimento, combinada com organização e atenção aos detalhes.</p>
-
-<p><strong>Exemplos de atividades desse perfil</strong></p>
-
-<ul>
-<li>responder clientes e organizar atendimentos</li>
-<li>controlar agenda e compromissos</li>
-<li>atualizar planilhas e registros</li>
-<li>acompanhar solicitações de clientes</li>
-<li>manter informações organizadas</li>
-</ul>
-
-<p>Esse tipo de profissional ajuda o negócio a <strong>manter atendimento e organização funcionando juntos</strong>.</p>
-
-<p><strong>Próximo passo recomendado</strong></p>
-
-<p>O próximo passo é aprender como estruturar serviços de atendimento e organização administrativa para clientes.</p>
-
-<p>👉 <strong>Formação Secretária Remota</strong></p>
-`
+            <p>Suas respostas mostram facilidade para comunicação e atendimento, combinada com organização e atenção aos detalhes.</p>
+            <p class="main-text">Próximo passo recomendado</p>
+            <button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-virtual')">👉 Formação Secretária Remota</button>
+        `
     },
-
     ALL: {
         title: "<span>Você pode brilhar como:</span>Assistente Virtual Versátil",
         text: `
-
-<p>Suas respostas revelam um perfil dinâmico, com uma habilidade natural para transitar entre diferentes áreas e resolver problemas de forma ágil.</p>
-
-<p>Este é o perfil mais versátil e estratégico para o mercado atual. Você atua como o motor de produtividade do cliente, conectando todas as pontas do negócio. Sua facilidade em resolver múltiplas demandas faz de você uma peça indispensável em áreas como:</p>
-<ul>
-<li>Organização de agendas e compromissos diários</li>
-<li>Atendimento e suporte aos clientes do negócio</li>
-<li>Controle de planilhas e processos administrativos</li>
-<li>Gestão de fluxos de trabalho e prazos internos</li>
-<li>Execução de rotinas digitais e tarefas operacionais</li>
-<li>Acompanhamento proativo de pendências e projetos</li>
-</ul>
-
-<p>Ser versátil agora é sua maior vantagem estratégica. Essa experiência prepara você para o próximo nível: a Assistência Executiva. É nessa transição que você deixa de ser apenas um suporte para se tornar o braço direito de grandes empresários, acessando os maiores ganhos da área.</p>
-
-<p><strong>O próximo passo para você</strong></p>
-
-<p>
-Ter um perfil versátil é o seu maior trunfo, mas para faturar alto você precisa de método. A Formação Assistente Virtual entrega as técnicas e ferramentas essenciais para você sair do zero, conquistar seus primeiros clientes e construir uma carreira com total liberdade e segurança.</p>
-<button class="next-btn" onclick="window.location.href=getFormacaoAExpertLink()">
-👉 Formação em Assistência Virtual
-</button>
-`
-    }
-
+            <p>Suas respostas revelam um perfil dinâmico, com habilidade natural para transitar entre diferentes áreas e resolver problemas de forma ágil.</p>
+            <p>Ser versátil agora é sua maior vantagem estratégica. Essa experiência prepara você para o próximo nível: a Assistência Executiva.</p>
+            <p class="main-text">O próximo passo para você</p>
+            <p>A <strong>Formação Assistente Virtual</strong> entrega as técnicas e ferramentas essenciais para você conquistar seus primeiros clientes com total liberdade e segurança.</p>
+            <button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-virtual')">👉 Formação em Assistência Virtual</button>
+        `
+    },
 };
 
+// ─── LÓGICA DO QUIZ ───────────────────────────────────────────────────────────
 
-let userPath = null;
-let currentStep = 0;
-let currentFlow = [];
-let flowIndex = 0;
-
-function choosePath(path) {
-    userPath = path;
-    data.quiz[currentStep] = path;
-    if (path === 'nao-conhece') {
-        showCursoGratis();
-        return;
-    }
-    if (path === 'quer-comecar') {
-        currentFlow = FLOWS.iniciante;
-    }
-    else if (path === 'ja-trabalha') {
-        currentFlow = FLOWS.atuante;
-    }
-
-    flowIndex = 0;
-    goToStep(currentFlow[flowIndex]);
+function calcularPerfil(p2, p3) {
+    if (p2 === p3) return p2;
+    return ['AP', 'AA', 'SR'].find(p => p === p2 || p === p3);
 }
 
-function selectAnswer(profile, el) {
-    const prev = data.quiz[currentStep];
-    data.quiz[currentStep] = profile;
-
-    if (currentFlow === FLOWS.iniciante) {
-        if (currentStep === 1) {
-            data.experience = profile;
-        } else {
-            if (prev && data.scores[prev] !== undefined) {
-                data.scores[prev]--;
-            }
-            if (data.scores[profile] !== undefined) {
-                data.scores[profile]++;
-            }
-        }
-    }
-    else if (currentFlow === FLOWS.atuante) {
-        if (currentStep === 8) data.intentions.areaAtual = profile;
-        if (currentStep === 9) data.intentions.dor = profile;
-        if (currentStep === 10) data.intentions.perfilValidacao = profile;
-        if (currentStep === 11) data.intentions.ambicao = profile;
-    }
-
-    el.parentElement.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
-    el.classList.add('selected');
-
-    setTimeout(() => {
-        nextStep();
-    }, 150);
+function precisaDeP5(desejo, p2, p3, exp) {
+    return desejo === 'AP' && calcularPerfil(p2, p3) !== 'AP' && exp !== 'sem';
 }
 
-function goBack() {
-    if (flowIndex > 0) {
-        flowIndex--;
-        goToStep(currentFlow[flowIndex]);
-    } else {
-        goToStep(0);
-        document.getElementById('header-nav').style.display = 'none';
-    }
+function processarQuiz(desejo, p2, p3, exp, p5 = null) {
+    const perfil        = calcularPerfil(p2, p3);
+    const redirecionado = precisaDeP5(desejo, p2, p3, exp) && p5 === 'existente';
+    const desejoFinal   = redirecionado ? perfil : desejo;
+
+    const gancho = {
+        elite: {
+            AP: `Sua trajetória como secretária executiva já te coloca no nível que os grandes players buscam.`,
+            AA: `Sua bagagem como secretária executiva vai muito além do que o AA exige — e isso é uma vantagem enorme.`,
+            SR: `Sua experiência como secretária executiva te dá um padrão de excelência que poucos profissionais de Suporte têm.`,
+        },
+        atendimento: {
+            AP: `Quem passou por atendimento de verdade sabe ler pessoas — e essa é uma das habilidades mais raras no mundo AP.`,
+            AA: `Sua experiência com pessoas e rotinas é exatamente o que as empresas digitais precisam nos bastidores.`,
+            SR: `Atendimento é a sua zona natural. No digital, isso vale ouro.`,
+        },
+        adm: {
+            AP: `Sua vivência em processos e rotinas te dá uma visão sistêmica que poucos APs têm — e que todo grande player precisa.`,
+            AA: `Processos, organização, controle — você já faz isso. Agora é só trazer para o digital.`,
+            SR: `Ter clareza de processos faz de você uma profissional de Suporte muito acima da média.`,
+        },
+        sem: {
+            AP: `Mesmo sem experiência formal, seu perfil revela que você já pensa de forma estratégica e antecipatória.`,
+            AA: `Você está começando do zero — e no digital isso significa que não tem nada pra desaprender.`,
+            SR: `Todo mundo começa de algum lugar. O seu começo vai ser mais estruturado do que a maioria.`,
+        },
+    };
+
+    const copies = {
+        AP: {
+            AP: g => `${g}\n\nVocê já tem o que o mercado de elite procura. O que está faltando não é talento — é estrutura para empacotar isso no digital.\n\nA Formação AP vai pegar tudo que você já construiu e transformar em um posicionamento que os grandes players não conseguem ignorar. Você não começa do zero. Você começa do topo.`,
+            AA: g => `${g}\n\nVocê tem organização e precisão — duas qualidades que toda AP precisa. Mas o nível AP exige também antecipar, tomar decisões e operar com autonomia estratégica.\n\nEsse é exatamente o gap que a Formação AP resolve. Você não está longe — está a uma estrutura de distância.`,
+            SR: g => `${g}\n\nVocê tem comunicação e empatia — e isso é mais valioso do que parece no mundo AP. Mas existe um gap real entre o Suporte e a Assessoria Pessoal: autonomia, antecipação e gestão estratégica.\n\nA boa notícia? Esse gap é treinável. A Formação AP foi feita exatamente para transformar potencial em competência de elite.`,
+        },
+        AA: {
+            AP: g => `${g}\n\nAA é um caminho sólido — mas seus resultados mostram que você já opera num nível acima do que está pedindo. Você pensa estrategicamente, antecipa problemas e age com autonomia.\n\nVocê entra pelo Administrativo agora, tudo bem. Mas já vai com o mapa do topo na mão — e o próximo passo vai chegar mais rápido do que imagina.`,
+            AA: g => `${g}\n\nÉ exatamente isso que as empresas digitais precisam nos bastidores: alguém que chega e coloca tudo em ordem sem que ninguém precise pedir.\n\nA Formação vai fortalecer esse seu diferencial natural e te dar as ferramentas para transformar isso numa carreira real, com clientes que te valorizam de verdade.`,
+            SR: g => `${g}\n\nVocê tem facilidade com pessoas e comunicação — uma qualidade real. Mas a Assistência Administrativa exige também um lado técnico: processos, organização, estrutura de bastidores.\n\nEsse é o gap que a Formação resolve. Você vai desenvolver a parte técnica sem perder o que já tem de melhor.`,
+        },
+        SR: {
+            AP: g => `${g}\n\nSuporte é uma porta de entrada direta — mas seus resultados mostram que você já carrega o perfil de quem opera muito acima disso.\n\nVocê vai entrar pelo Suporte agora, tudo bem. Mas vamos lapidar tudo que você já tem. O topo não está longe — está esperando você chegar.`,
+            AA: g => `${g}\n\nSua organização e raciocínio técnico te dariam um desempenho excelente no Suporte — e também te abrem portas muito maiores.\n\nA Formação vai te dar clareza sobre onde você pode realmente chegar. Suporte hoje, sim — mas com o mapa completo na mão.`,
+            SR: g => `${g}\n\nPessoas que sabem se comunicar e lidar com gente são disputadas no mercado digital. Você tem esse dom de forma natural.\n\nA Formação vai reforçar esse diferencial e te dar estrutura para entrar rápido — sendo a voz em que os clientes confiam e que as marcas brigam para ter.`,
+        },
+    };
+
+    const copiesRedirecionado = {
+        AA: g => `Você decidiu começar com o que já tem — e é uma escolha inteligente.\n\n${g}\n\nEsse é o seu ponto de partida real. A Formação AV Administrativa vai estruturar essas habilidades para o digital e te colocar em movimento rápido. E quando você quiser dar o próximo passo em direção ao AP, o caminho já vai estar aberto.`,
+        SR: g => `Você decidiu começar com o que já tem — e é uma escolha inteligente.\n\n${g}\n\nEsse é o seu ponto de partida real. A Formação AV Suporte vai colocar essas habilidades para trabalhar no digital imediatamente. E quando você quiser ir além, a estrutura já estará lá esperando.`,
+    };
+
+    const incluso = `\n\nAh, e tem algo importante: na formação, todas as competências estão inclusas — Suporte, Administrativo e AP. Não importa onde você está hoje. Se precisar desenvolver, a gente desenvolve juntas. Se já tiver bagagem, a gente estrutura e potencializa.`;
+
+    const g        = gancho[exp][desejoFinal];
+    const copy     = redirecionado ? copiesRedirecionado[desejoFinal](g) : copies[desejoFinal][perfil](g);
+    const formacao = getFormacao(desejoFinal);
+
+    return { formacao, mensagem: copy + incluso };
 }
 
-function nextStep() {
-    flowIndex++;
-    if (flowIndex >= currentFlow.length) {
-        return;
-    }
-
-    const nextStepNumber = currentFlow[flowIndex];
-    if (flowIndex === currentFlow.length - 1) {
-        showResult();
-    }
-
-    goToStep(nextStepNumber);
+function calcularResultadoAtuante() {
+    const votos  = [state.dor, state.perfilValidacao, state.ambicao];
+    const scores = { AP: 0, AA: 0, SR: 0 };
+    votos.forEach(v => { if (v && v in scores) scores[v]++; });
+    const { AP, AA, SR } = scores;
+    if (AP > AA && AP > SR)   return 'AP';
+    if (AA > AP && AA > SR)   return 'AA';
+    if (SR > AP && SR > AA)   return 'SR';
+    if (AP === SR && AP > AA) return 'AP_SR';
+    if (AP === AA && AP > SR) return 'AP_AA';
+    if (SR === AA && SR > AP) return 'SR_AA';
+    return 'ALL';
 }
 
-function goToStep(s) {
-    currentStep = s;
+// ─── NAVEGAÇÃO ────────────────────────────────────────────────────────────────
 
-    // Mostra a tela correta
+function startFlow(flowName) {
+    state.flow      = flowName;
+    state.flowIndex = 0;
+    navigateTo(FLOWS[flowName][0]);
+}
+
+function navigateTo(stepId) {
     document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
-    const targetStep = document.getElementById('step' + s);
-    if (targetStep) targetStep.classList.add('active');
-
-    const headerNav = document.getElementById('header-nav');
-    if (s === 0) {
-        if (headerNav) headerNav.style.display = 'none';
-    } else {
-        if (headerNav) headerNav.style.display = 'flex';
-    }
-
-    updateSelection();
+    document.getElementById(stepId)?.classList.add('active');
+    document.getElementById('header-nav').style.display = stepId === 'step0' ? 'none' : 'flex';
     window.scrollTo(0, 0);
 }
 
-function updateSelection() {
-    document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
+function advance() {
+    const flow = FLOWS[state.flow];
+    state.flowIndex++;
+    if (state.flowIndex >= flow.length) return;
 
-    const answer = data.quiz[currentStep];
-    if (!answer) {
+    let nextId = flow[state.flowIndex];
+
+    // Pula step5 (P5 condicional) se não se aplicar
+    if (nextId === 'step5') {
+        const exp = EXP_MAP[state.experience] ?? 'sem';
+        if (!precisaDeP5(state.desejo, state.p2, state.p3, exp)) {
+            state.flowIndex++;
+            if (state.flowIndex >= flow.length) return;
+            nextId = flow[state.flowIndex];
+        }
+    }
+
+    if (nextId === 'step-result') {
+        showResult();
         return;
     }
 
-    const activeStepEl = document.getElementById('step' + currentStep);
-    if (activeStepEl) {
-        const btn = activeStepEl.querySelector(`button[onclick*="'${answer}'"]`);
-        if (btn) {
-            btn.classList.add('selected');
+    navigateTo(nextId);
+}
+
+function goBack() {
+    if (state.flowIndex > 0) {
+        state.flowIndex--;
+
+        // Pula step5 para trás se não se aplica
+        if (FLOWS[state.flow][state.flowIndex] === 'step5') {
+            const exp = EXP_MAP[state.experience] ?? 'sem';
+            if (!precisaDeP5(state.desejo, state.p2, state.p3, exp)) {
+                state.flowIndex--;
+            }
         }
+
+        navigateTo(FLOWS[state.flow][state.flowIndex]);
+    } else {
+        navigateTo('step0');
     }
 }
 
-function calculateResult() {
+// ─── HANDLERS ─────────────────────────────────────────────────────────────────
 
-    const { AP, SR, AA } = data.scores;
-
-    if (AP > SR && AP > AA) return "AP";
-    if (SR > AP && SR > AA) return "SR";
-    if (AA > AP && AA > SR) return "AA";
-
-    if (AP === SR && AP > AA) return "AP";
-    if (AP === AA && AP > SR) return "AP_AA";
-    if (SR === AA && SR > AP) return "SR_AA";
-
-    return "ALL";
+function choosePath(path, el) {
+    if (el) {
+        el.closest('.step').querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        el.classList.add('selected');
+    }
+    setTimeout(() => {
+        if (path === 'nao-conhece') { showCursoGratis(); return; }
+        startFlow(path === 'quer-comecar' ? 'iniciante' : 'atuante');
+    }, 150);
 }
 
-function showResult() {
-    if (currentFlow === FLOWS.iniciante) {
-        const result = calculateResult();
-        const resultData = RESULTS[result];
-        document.getElementById("result-title").innerHTML = resultData.title;
-        document.getElementById("result-text").innerHTML = resultData.text;
+function selectAnswer(value, el) {
+    const stepId = FLOWS[state.flow][state.flowIndex];
 
-    } else {
-        // outro flow..
+    if (state.flow === 'iniciante') {
+        if (stepId === 'step1') state.experience = value;
+        if (stepId === 'step2') state.desejo     = value;
+        if (stepId === 'step3') state.p2         = value;
+        if (stepId === 'step4') state.p3         = value;
+        if (stepId === 'step5') state.p5         = value;
+    }
+
+    if (state.flow === 'atuante') {
+        if (stepId === 'step8')  state.areaAtual       = value;
+        if (stepId === 'step9')  state.dor             = value;
+        if (stepId === 'step10') state.perfilValidacao = value;
+        if (stepId === 'step11') state.ambicao         = value;
+    }
+
+    el.closest('.step').querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    setTimeout(() => advance(), 150);
+}
+
+// ─── RESULTADO ────────────────────────────────────────────────────────────────
+
+function showResult() {
+    if (state.flow === 'iniciante') {
+        const exp       = EXP_MAP[state.experience] ?? 'sem';
+        const resultado = processarQuiz(state.desejo, state.p2, state.p3, exp, state.p5);
+
+        document.getElementById('result-title').innerHTML = 'Veja o que encontramos para você';
+        document.getElementById('result-text').innerHTML  =
+            resultado.mensagem
+                .split('\n\n')
+                .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
+                .join('') +
+            `<button class="next-btn" onclick="window.location.href=getLink('${resultado.formacao.path}')">
+                👉 ${resultado.formacao.label}
+             </button>`;
+
+        navigateTo('step6');
+    }
+
+    if (state.flow === 'atuante') {
+        const key        = calcularResultadoAtuante();
+        const resultData = RESULTS_ATUANTE[key];
+        document.getElementById('result-title').innerHTML = resultData.title;
+        document.getElementById('result-text').innerHTML  = resultData.text;
+        navigateTo('step12');
     }
 }
 
 function showCursoGratis() {
-
-    // esconde todos os steps
-    document.querySelectorAll('.step')
-        .forEach(el => el.classList.remove('active'));
-
-    // define título
-    document.getElementById("result-title").innerText =
-        "Comece do jeito certo!";
-
-    // define conteúdo
-    document.getElementById("result-text").innerHTML = `
-<p>Se você ainda não conhece a profissão de <strong>Assistente Virtual</strong>, o primeiro passo é entender como ela funciona.</p>
-
-<p>Para você começar da melhor forma possível, preparamos um <strong>curso 100% gratuito</strong> onde explicamos:</p>
-
-<ul>
-<li>O que faz uma Assistente Virtual</li>
-<li>O que é preciso para trabalhar </li>
-<li>Quanto é possível ganhar</li>
-<li>Como começar a trabalhar</li>
-</ul>
-
-<br>
-
-<button class="next-btn" onclick="window.location.href=getFreeCourseLink()">
-👉 Acessar o Curso Gratuito
-</button>
-`;
-
-    document.getElementById("step8").classList.add("active");
+    document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+    document.getElementById('result-title').innerText = 'Comece do jeito certo!';
+    document.getElementById('result-text').innerHTML  = `
+        <p>Se você ainda não conhece a profissão de <strong>Assistente Virtual</strong>, o primeiro passo é entender como ela funciona.</p>
+        <p>Para você começar da melhor forma possível, preparamos um <strong>curso 100% gratuito</strong> onde explicamos:</p>
+        <ul>
+            <li>O que faz uma Assistente Virtual</li>
+            <li>O que é preciso para trabalhar</li>
+            <li>Quanto é possível ganhar</li>
+            <li>Como começar a trabalhar</li>
+        </ul>
+        <br>
+        <button class="next-btn" onclick="window.location.href=getFreeCourseLink()">
+            👉 Acessar o Curso Gratuito
+        </button>
+    `;
+    document.getElementById('step6').classList.add('active');
     document.getElementById('header-nav').style.display = 'flex';
+}
 
+// ─── UTM ──────────────────────────────────────────────────────────────────────
+
+function getLink(path) {
+    const utm    = getUTMParams();
+    const params = new URLSearchParams();
+
+    if (utm.has_utm) {
+        const s  = getNullableValue(utm.utm_last.utm_source);
+        const m  = getNullableValue(utm.utm_last.utm_medium);
+        const c  = getNullableValue(utm.utm_last.utm_campaign);
+        const ct = getNullableValue(utm.utm_last.utm_content);
+        if (s)  params.set('utm_source',   s);
+        if (m)  params.set('utm_medium',   m);
+        if (c)  params.set('utm_campaign', c);
+        if (ct) params.set('utm_content',  ct);
+    } else {
+        params.set('utm_source',   'virtap');
+        params.set('utm_medium',   'quiz');
+        params.set('utm_campaign', 'formacao');
+        params.set('utm_content',  'quiz-principal');
+    }
+
+    return path + '?' + params.toString();
 }
 
 function getFreeCourseLink() {
-
-    const utm = getUTMParams();
-
-    let params = new URLSearchParams();
-
-    if (utm.has_utm) {
-
-        const source = getNullableValue(utm.utm_last.utm_source);
-        const medium = getNullableValue(utm.utm_last.utm_medium);
-        const campaign = getNullableValue(utm.utm_last.utm_campaign);
-        const content = getNullableValue(utm.utm_last.utm_content);
-
-        if (source) params.set('utm_source', source);
-        if (medium) params.set('utm_medium', medium);
-        if (campaign) params.set('utm_campaign', campaign);
-        if (content) params.set('utm_content', content);
-
-    } else {
-
-        params.set('utm_source', 'virtap');
-        params.set('utm_medium', 'quiz');
-        params.set('utm_campaign', 'curso-gratuito');
-        params.set('utm_content', 'quiz-principal');
-
-    }
-
-    return "/curso-assistente-virtual?" + params.toString();
+    return getLink('/curso-assistente-virtual');
 }
 
+// Mantido para compatibilidade com botões legados no RESULTS_ATUANTE
 function getFormacaoAExpertLink() {
-
-    const utm = getUTMParams();
-
-    let params = new URLSearchParams();
-
-    if (utm.has_utm) {
-
-        const source = getNullableValue(utm.utm_last.utm_source);
-        const medium = getNullableValue(utm.utm_last.utm_medium);
-        const campaign = getNullableValue(utm.utm_last.utm_campaign);
-        const content = getNullableValue(utm.utm_last.utm_content);
-
-        if (source) params.set('utm_source', source);
-        if (medium) params.set('utm_medium', medium);
-        if (campaign) params.set('utm_campaign', campaign);
-        if (content) params.set('utm_content', content);
-
-    } else {
-
-        params.set('utm_source', 'virtap');
-        params.set('utm_medium', 'quiz');
-        params.set('utm_campaign', 'formacao-aexpert');
-        params.set('utm_content', 'quiz-principal');
-
-    }
-
-    return "/formacoes/assistencia-pessoal?" + params.toString();
+    return getLink('/formacoes/assistencia-pessoal');
 }
 
 function getNullableValue(val) {
     if (val) {
         val = val.trim();
-        if (val.length === 0) {
-            val = null;
-        }
+        if (val.length === 0) val = null;
     }
     return val;
 }
 
 function getUTMParams() {
-
-    const params = new URLSearchParams(window.location.search);
-    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
+    const params      = new URLSearchParams(window.location.search);
+    const utmKeys     = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
     const rawReferrer = getNullableValue(document.referrer);
-    const hasUTM = getNullableValue(params.get('utm_source')) && getNullableValue(params.get('utm_medium'));
+    const hasUTM      = getNullableValue(params.get('utm_source')) && getNullableValue(params.get('utm_medium'));
 
     let utmParams = {};
-
     if (hasUTM) {
-        for (const key of utmKeys) {
-            let value = getNullableValue(params.get(key));
-            utmParams[key] = value;
-        }
+        utmKeys.forEach(key => { utmParams[key] = getNullableValue(params.get(key)); });
     }
-    utmParams['timestamp'] = Date.now();
-    utmParams['referral_url'] = rawReferrer;
+    utmParams.timestamp    = Date.now();
+    utmParams.referral_url = rawReferrer;
 
     let firstUtmParams = localStorage.getItem('first_visit_utm');
     if (!firstUtmParams) {
         firstUtmParams = utmParams;
-        try {
-            localStorage.setItem('first_visit_utm', JSON.stringify(utmParams));
-        } catch { }
+        try { localStorage.setItem('first_visit_utm', JSON.stringify(utmParams)); } catch {}
     } else {
-        try {
-            firstUtmParams = JSON.parse(firstUtmParams);
-        } catch {
-            firstUtmParams = utmParams;
-        }
+        try { firstUtmParams = JSON.parse(firstUtmParams); } catch { firstUtmParams = utmParams; }
     }
 
-
-    return {
-        utm_first: firstUtmParams,
-        utm_last: utmParams,
-        has_utm: !!hasUTM
-    };
+    return { utm_first: firstUtmParams, utm_last: utmParams, has_utm: !!hasUTM };
 }
 
-try {
-    console.log(getUTMParams());
-} catch (err) { }
+try { console.log(getUTMParams()); } catch {}
