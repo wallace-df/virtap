@@ -1,25 +1,18 @@
 // ─── FLOWS ────────────────────────────────────────────────────────────────────
-// step-result é um ID virtual que dispara showResult() e não existe no HTML.
-
 const FLOWS = {
     iniciante: ['step1', 'step2', 'step3', 'step4', 'step5', 'step-result'],
     atuante:   ['step8', 'step9', 'step10', 'step11', 'step-result'],
 };
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
-
 const state = {
-    flow:      null,  // 'iniciante' | 'atuante'
+    flow:      null,
     flowIndex: 0,
-
-    // Flow iniciante
-    experience: null, // 'Executivo' | 'Administrativo' | 'Atendimento' | null
-    desejo:     null, // 'AP' | 'AA' | 'SR'
-    p2:         null, // 'AP' | 'AA' | 'SR'
-    p3:         null, // 'AP' | 'AA' | 'SR'
-    p5:         null, // 'desafio' | 'existente' | null (condicional)
-
-    // Flow atuante
+    experience: null,
+    desejo:     null,
+    p2:         null,
+    p3:         null,
+    p5:         null,
     areaAtual:       null,
     dor:             null,
     perfilValidacao: null,
@@ -27,7 +20,6 @@ const state = {
 };
 
 // ─── DADOS ────────────────────────────────────────────────────────────────────
-
 const EXP_MAP = {
     'Executivo':      'elite',
     'Administrativo': 'adm',
@@ -101,7 +93,7 @@ const RESULTS_ATUANTE = {
         title: "<span>Você pode brilhar como:</span>Assistente Virtual Versátil",
         text: `
             <p>Suas respostas revelam um perfil dinâmico, com habilidade natural para transitar entre diferentes áreas e resolver problemas de forma ágil.</p>
-            <p>Ser versátil agora é sua maior vantagem estratégica. Essa experiência prepara você para o próximo nível: a Assistência Executiva.</p>
+            <p>Ser versátil agora é sua maior vantagem estratégica.</p>
             <p class="main-text">O próximo passo para você</p>
             <p>A <strong>Formação Assistente Virtual</strong> entrega as técnicas e ferramentas essenciais para você conquistar seus primeiros clientes com total liberdade e segurança.</p>
             <button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-virtual')">👉 Formação em Assistência Virtual</button>
@@ -127,7 +119,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
     const unanime       = p2 === p3;
     const secundario    = p2 === perfil ? p3 : p2;
 
-    const incluso = `\n\nAh, e tem algo importante: na formação, todas as competências estão inclusas — Suporte, Administrativo e AP. Não importa onde você está hoje. Se precisar desenvolver, a gente desenvolve juntas. Se já tiver bagagem, a gente estrutura e potencializa.`;
+    const incluso = ``;
 
     let copy = '';
 
@@ -220,11 +212,11 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 copy = `TODO: sem experiência + AP predominante com traço SR → perfil certo com comunicação complementar. Tom: formação desenvolve consistência estratégica.`;
 
             } else if (perfil === 'AA') {
-                // ⚠️ Gap: sem exp + perfil AA → gap real para AP
+                // ⚠️ Gap: sem exp + perfil AA
                 copy = `TODO: sem experiência + perfil AA → gap real entre organização e autonomia AP. Tom: desafiador mas treinável, formação constrói do zero.`;
 
             } else if (perfil === 'SR') {
-                // ⚠️ Gap maior: sem exp + perfil SR → maior gap para AP
+                // ⚠️ Gap maior: sem exp + perfil SR
                 copy = `TODO: sem experiência + perfil SR → maior gap para AP. Tom: desafiador, formação constrói do zero, comunicação é ponto de partida.`;
             }
         }
@@ -238,22 +230,22 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
 
             if (perfil === 'AP') {
                 // 🔼 Upgrade: elite + perfil AP quer AA → subvaloriza
-                copy = `TODO: bagagem elite + perfil AP quer AA → já opera acima do que pede. Tom: AA é sólido para começar, mas mapa do topo já está na mão.`;
+                copy = `TODO: bagagem elite + perfil AP quer AA → já opera acima do que pede. Tom: AA sólido para começar, mapa do topo na mão.`;
 
             } else if (perfil === 'AA' && unanime) {
                 // ✅ Match total: elite + perfil 100% AA
-                copy = `TODO: bagagem elite + perfil unânime AA → bagagem confirma e perfil confirma. Tom: fortalecer diferencial, posicionar nos bastidores.`;
+                copy = `TODO: bagagem elite + perfil unânime AA → bagagem e perfil confirmam. Tom: fortalecer diferencial, posicionar nos bastidores.`;
 
             } else if (perfil === 'AA' && secundario === 'AP') {
                 // ✅ Match forte: elite + AA predominante + traço AP reforça
-                copy = `TODO: bagagem elite + AA predominante com traço AP → organização + iniciativa complementar. Tom: traço AP te torna ainda mais completa.`;
+                copy = `TODO: bagagem elite + AA predominante com traço AP → organização + iniciativa complementar. Tom: traço AP torna ainda mais completa.`;
 
             } else if (perfil === 'AA' && secundario === 'SR') {
                 // ✅ Match forte: elite + AA predominante + traço SR reforça
                 copy = `TODO: bagagem elite + AA predominante com traço SR → organização + comunicação complementar. Tom: combinação rara, fortalecer base técnica.`;
 
             } else if (perfil === 'SR') {
-                // ⚠️ Gap: elite + perfil SR quer AA → precisa desenvolver lado técnico
+                // ⚠️ Gap: elite + perfil SR quer AA
                 copy = `TODO: bagagem elite + perfil SR quer AA → opera mais em comunicação do que processos. Tom: desenvolver lado técnico sem perder habilidade de comunicação.`;
             }
 
@@ -407,268 +399,6 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
     return { formacao, mensagem: copy + incluso };
 }
 
-    let copy = '';
-
-    // ─────────────────────────────────────────────────────────────────────────
-    // DESEJO: AP
-    // ─────────────────────────────────────────────────────────────────────────
-    if (desejoFinal === 'AP') {
-
-        // ── exp: elite ───────────────────────────────────────────────────────
-        if (exp === 'elite') {
-
-            if (perfil === 'AP' && unanime) {
-                // Caso 1: elite + AP unânime → já tem tudo, só estruturar
-                copy = `Sua trajetória como secretária executiva fala por si. Você já operou no nível que o mercado de AP exige — responsabilidade real, proximidade com quem decide, autonomia para resolver.\n\nE seus resultados confirmam: seu perfil hoje ainda carrega essa pegada. O que está faltando não é talento nem bagagem. É estrutura para posicionar tudo isso no digital.\n\nA Formação AP vai pegar o que você já construiu e transformar em um posicionamento que os grandes players não conseguem ignorar. Você não começa do zero. Você começa do topo.`;
-
-            } else if (perfil === 'AP' && secundario === 'AA') {
-                // Caso 2a: elite + AP predominante + traço AA → reforçar autonomia
-                copy = `Sua trajetória como secretária executiva é real — você sabe o que é estar perto de quem decide e ter responsabilidade de verdade.\n\nMas seus resultados mostram algo importante: parte de você ainda opera mais no modo organização e processos do que em antecipação e autonomia estratégica. Sua bagagem é o ponto de partida certo — só que essa habilidade de AP precisa ser reforçada para você atuar com segurança nesse nível.\n\nE tem mais: seus traços de organização te tornam ainda mais completa — as melhores APs não só resolvem, elas estruturam.\n\nÉ exatamente isso que a Formação AP faz: pega quem já tem base e afina o que falta para chegar ao topo com consistência.`;
-
-            } else if (perfil === 'AP' && secundario === 'SR') {
-                // Caso 2b: elite + AP predominante + traço SR → reforçar estratégia
-                copy = `Sua trajetória como secretária executiva é real — você sabe o que é estar perto de quem decide e ter responsabilidade de verdade.\n\nMas seus resultados mostram algo importante: parte de você ainda opera mais no modo comunicação e atendimento do que em antecipação e decisão estratégica. Sua bagagem é o ponto de partida certo — só que essa habilidade de AP precisa ser reforçada para você atuar com segurança nesse nível.\n\nE tem mais: sua habilidade de se conectar com pessoas te dá uma camada rara de empatia que os grandes players valorizam em quem cuida dos seus bastidores.\n\nÉ exatamente isso que a Formação AP faz: pega quem já tem base e afina o que falta para chegar ao topo com consistência.`;
-
-            } else if (perfil === 'AA') {
-                // Caso 3a: elite + perfil AA → esfriou, reconectar via organização
-                copy = `Sua trajetória como secretária executiva mostra que você já operou nesse nível — você sabe o que é ter responsabilidade real e estar perto de quem decide.\n\nMas seus resultados mostram que, hoje, seu modo de operação está mais voltado para organização e processos do que para antecipação e autonomia estratégica. Isso acontece. Às vezes a rotina esfria o que a gente tem de melhor.\n\nA Formação AP existe exatamente para isso: não construir do zero, mas reconectar você com um perfil que já é seu — e estruturá-lo para o digital.`;
-
-            } else if (perfil === 'SR') {
-                // Caso 3b: elite + perfil SR → esfriou, reconectar via comunicação
-                copy = `Sua trajetória como secretária executiva mostra que você já operou nesse nível — você sabe o que é ter responsabilidade real e estar perto de quem decide.\n\nMas seus resultados mostram que, hoje, seu modo de operação está mais voltado para comunicação e atendimento do que para antecipação e decisão estratégica. Isso acontece. Às vezes a rotina direciona a gente para um lado e a gente vai junto.\n\nA Formação AP existe exatamente para isso: não construir do zero, mas reconectar você com um perfil que já é seu — e estruturá-lo para o digital.`;
-            }
-
-        // ── exp: atendimento ─────────────────────────────────────────────────
-        } else if (exp === 'atendimento') {
-
-            if (perfil === 'AP' && unanime) {
-                copy = `Quem passou por atendimento de verdade sabe ler pessoas — e essa é uma das habilidades mais raras no mundo AP.\n\nE seus resultados confirmam que você vai além disso: você antecipa, age com autonomia e resolve antes de ser pedida. Esse é o perfil que os grandes players disputam.\n\nA Formação AP vai estruturar esse talento para o digital e te posicionar no nível em que você já opera.`;
-
-            } else if (perfil === 'AP' && secundario === 'AA') {
-                copy = `Quem passou por atendimento de verdade sabe ler pessoas — e essa é uma das habilidades mais raras no mundo AP.\n\nSeus resultados mostram que você tem o instinto certo, e ainda carrega traços de organização que te tornam ainda mais completa. Mas o nível AP exige consistência em antecipação e autonomia estratégica — e é isso que precisa ser desenvolvido.\n\nA Formação AP vai construir essa base sem que você perca o que já tem de melhor.`;
-
-            } else if (perfil === 'AP' && secundario === 'SR') {
-                copy = `Quem passou por atendimento de verdade sabe ler pessoas — e essa é uma das habilidades mais raras no mundo AP.\n\nSeus resultados mostram que você tem instinto de resolução, e sua facilidade de comunicação te torna ainda mais completa. Mas o nível AP exige que você vá além do atendimento: antecipação, decisão e gestão estratégica da rotina do cliente.\n\nA Formação AP vai desenvolver essa camada e te posicionar onde você quer chegar.`;
-
-            } else if (perfil === 'AA') {
-                copy = `Quem passou por atendimento de verdade sabe ler pessoas — e essa é uma das habilidades mais raras no mundo AP.\n\nMas seus resultados mostram que, hoje, você opera mais no modo organização do que no modo antecipação e autonomia. Isso não é um problema — é o gap que a Formação AP resolve. Você tem o ponto de partida certo. Falta a estrutura para chegar ao nível que você quer.`;
-
-            } else if (perfil === 'SR') {
-                copy = `Quem passou por atendimento de verdade sabe ler pessoas — e essa é uma das habilidades mais raras no mundo AP.\n\nMas seus resultados mostram que você ainda opera principalmente no modo comunicação e resposta. Para o nível AP, você precisa desenvolver antecipação, autonomia e gestão estratégica da rotina do cliente.\n\nEsse gap é exatamente o que a Formação AP resolve — e a sua base de atendimento é o melhor ponto de partida para isso.`;
-            }
-
-        // ── exp: adm ─────────────────────────────────────────────────────────
-        } else if (exp === 'adm') {
-
-            if (perfil === 'AP' && unanime) {
-                copy = `Sua vivência em processos e rotinas te dá uma visão sistêmica que poucos APs têm — e que todo grande player precisa.\n\nE seus resultados confirmam: você já pensa de forma estratégica e age com autonomia. Você tem a base técnica e o perfil certo. O que falta é estruturar tudo isso para o digital.\n\nA Formação AP vai fazer exatamente isso — e você vai chegar lá mais rápido do que imagina.`;
-
-            } else if (perfil === 'AP' && secundario === 'AA') {
-                copy = `Sua vivência em processos e rotinas te dá uma visão sistêmica que poucos APs têm — e que todo grande player precisa.\n\nSeus resultados mostram que você tem o perfil certo, e seus traços de organização te tornam ainda mais sólida. Mas o nível AP exige que a antecipação e a autonomia sejam consistentes — não só presentes.\n\nA Formação AP vai afinar isso e te posicionar com segurança no mercado de elite.`;
-
-            } else if (perfil === 'AP' && secundario === 'SR') {
-                copy = `Sua vivência em processos e rotinas te dá uma visão sistêmica que poucos APs têm — e que todo grande player precisa.\n\nSeus resultados mostram que você tem o perfil certo, e sua facilidade de comunicação te torna ainda mais versátil. Mas o nível AP exige que a antecipação e a autonomia estratégica sejam o seu modo principal de operar.\n\nA Formação AP vai desenvolver essa consistência e te posicionar onde você quer chegar.`;
-
-            } else if (perfil === 'AA') {
-                copy = `Sua vivência em processos e rotinas te dá uma visão sistêmica que poucos APs têm — e que todo grande player precisa.\n\nMas seus resultados mostram que, hoje, você opera mais no modo organização do que no modo antecipação e autonomia estratégica. Você tem a base técnica certa — o que falta é desenvolver a camada de decisão e proatividade que o nível AP exige.\n\nÉ exatamente esse o trabalho da Formação AP.`;
-
-            } else if (perfil === 'SR') {
-                copy = `Sua vivência em processos e rotinas te dá uma visão sistêmica que poucos APs têm — e que todo grande player precisa.\n\nMas seus resultados mostram que, hoje, você opera mais no modo comunicação e resposta do que em antecipação e gestão estratégica. Para o nível AP, esse gap precisa ser desenvolvido — e a boa notícia é que sua base técnica já coloca você à frente.\n\nA Formação AP vai construir o que falta sem partir do zero.`;
-            }
-
-        // ── exp: sem ─────────────────────────────────────────────────────────
-        } else if (exp === 'sem') {
-
-            if (perfil === 'AP' && unanime) {
-                copy = `Mesmo sem experiência formal, seus resultados revelam algo claro: você já pensa de forma estratégica, antecipa problemas e age com autonomia. Esse é o perfil que os grandes players buscam.\n\nO que você não tem ainda é a bagagem prática e a estrutura para posicionar isso no digital — e é exatamente isso que a Formação AP constrói.\n\nVocê começa sem histórico, mas com o perfil certo. Isso é mais raro do que parece.`;
-
-            } else if (perfil === 'AP' && secundario === 'AA') {
-                copy = `Mesmo sem experiência formal, seus resultados mostram que você já pensa de forma estratégica — e ainda carrega traços de organização que te tornam mais completa.\n\nMas o nível AP exige que a antecipação e a autonomia sejam consistentes. Você tem o instinto certo — a Formação AP vai construir a estrutura ao redor dele.\n\nVocê não começa do zero. Você começa com o perfil certo.`;
-
-            } else if (perfil === 'AP' && secundario === 'SR') {
-                copy = `Mesmo sem experiência formal, seus resultados mostram que você já pensa de forma estratégica — e ainda tem facilidade de comunicação que te torna ainda mais versátil.\n\nMas o nível AP exige que a antecipação e a autonomia sejam o seu modo principal de operar. A Formação AP vai desenvolver essa consistência e te dar a estrutura para chegar lá.\n\nVocê tem o perfil certo. Falta o caminho — e a gente tem ele.`;
-
-            } else if (perfil === 'AA') {
-                copy = `Você está começando do zero — e no digital isso significa que não tem nada pra desaprender.\n\nSeus resultados mostram que você opera mais no modo organização do que em antecipação e autonomia estratégica. Esse gap é real, mas é totalmente treinável.\n\nA Formação AP foi feita para construir esse perfil do zero, com direção certa. Você não precisa estar pronta agora. Só precisa começar.`;
-
-            } else if (perfil === 'SR') {
-                copy = `Você está começando do zero — e no digital isso significa que não tem nada pra desaprender.\n\nSeus resultados mostram que você opera mais no modo comunicação e atendimento do que em antecipação e decisão estratégica. Esse é o maior gap para o nível AP — e também o mais trabalhável quando se tem o método certo.\n\nA Formação AP vai construir essa base com você, do começo ao topo.`;
-            }
-        }
-
-    // ─────────────────────────────────────────────────────────────────────────
-    // DESEJO: AA
-    // ─────────────────────────────────────────────────────────────────────────
-    } else if (desejoFinal === 'AA') {
-
-        if (exp === 'elite') {
-
-            if (perfil === 'AP') {
-                copy = `Sua bagagem como secretária executiva vai muito além do que o AA exige — e isso é uma vantagem enorme.\n\nAA é um caminho sólido, mas seus resultados mostram que você já opera num nível acima do que está pedindo. Você pensa estrategicamente, antecipa problemas e age com autonomia.\n\nVocê entra pelo Administrativo agora, tudo bem. Mas já vai com o mapa do topo na mão — e o próximo passo vai chegar mais rápido do que imagina.`;
-
-            } else if (perfil === 'AA' && unanime) {
-                copy = `Sua bagagem como secretária executiva vai muito além do que o AA exige — e seus resultados confirmam: você tem o perfil técnico e organizado que os bastidores das empresas digitais precisam.\n\nÉ exatamente isso que a Formação vai fortalecer: sua capacidade de organizar processos, estruturar rotinas e se tornar indispensável nos bastidores de quem decide.`;
-
-            } else if (perfil === 'AA' && secundario === 'AP') {
-                copy = `Sua bagagem como secretária executiva vai muito além do que o AA exige — e seus resultados confirmam que você tem o perfil técnico certo, com traços de iniciativa que te tornam ainda mais completa.\n\nA Formação vai fortalecer sua base de organização e processos — e quem sabe, com o tempo, esse lado estratégico te leve ainda mais longe.`;
-
-            } else if (perfil === 'AA' && secundario === 'SR') {
-                copy = `Sua bagagem como secretária executiva vai muito além do que o AA exige — e seus resultados mostram que você combina organização com facilidade de comunicação. Essa é uma combinação rara nos bastidores.\n\nA Formação vai fortalecer sua base técnica e te posicionar como a profissional que as empresas digitais disputam.`;
-
-            } else if (perfil === 'SR') {
-                copy = `Sua bagagem como secretária executiva traz uma base forte — mas seus resultados mostram que, hoje, você opera mais no modo comunicação e atendimento do que em processos e estrutura administrativa.\n\nEsse é o gap que a Formação resolve. Você vai desenvolver o lado técnico sem perder o que já tem de melhor: a habilidade de se conectar com as pessoas.`;
-            }
-
-        } else if (exp === 'atendimento') {
-
-            if (perfil === 'AP') {
-                copy = `Sua experiência com pessoas e rotinas é exatamente o que as empresas digitais precisam nos bastidores.\n\nMas seus resultados mostram que você vai além do AA — você já pensa estrategicamente e age com autonomia. AA é um caminho sólido para começar, mas o mapa do topo já está na sua mão.\n\nA Formação vai estruturar essa base e te mostrar até onde você pode chegar.`;
-
-            } else if (perfil === 'AA' && unanime) {
-                copy = `Sua experiência com pessoas e rotinas é exatamente o que as empresas digitais precisam nos bastidores.\n\nE seus resultados confirmam: você tem o perfil técnico e organizado para isso. A Formação vai fortalecer esse diferencial e te dar as ferramentas para transformar isso numa carreira real, com clientes que te valorizam de verdade.`;
-
-            } else if (perfil === 'AA' && secundario === 'AP') {
-                copy = `Sua experiência com pessoas e rotinas é exatamente o que as empresas digitais precisam nos bastidores.\n\nSeus resultados mostram um perfil técnico e organizado, com traços de iniciativa que te tornam ainda mais completa. A Formação vai fortalecer sua base administrativa e quem sabe abrir portas para o próximo nível.`;
-
-            } else if (perfil === 'AA' && secundario === 'SR') {
-                copy = `Sua experiência com pessoas e rotinas é exatamente o que as empresas digitais precisam nos bastidores.\n\nSeus resultados mostram que você combina organização com facilidade de relacionamento — uma combinação rara e valiosa. A Formação vai fortalecer sua parte técnica e te posicionar como referência nos bastidores.`;
-
-            } else if (perfil === 'SR') {
-                copy = `Sua experiência com atendimento e pessoas é uma base real — mas seus resultados mostram que você opera mais no modo comunicação do que em processos e estrutura administrativa.\n\nEsse é o gap que a Formação resolve. Você vai desenvolver o lado técnico sem abrir mão do que já tem de melhor: a facilidade de se conectar com as pessoas.`;
-            }
-
-        } else if (exp === 'adm') {
-
-            if (perfil === 'AP') {
-                copy = `Processos, organização, controle — você já faz isso. Agora é só trazer para o digital.\n\nMas seus resultados mostram que você vai além da parte técnica — você já pensa estrategicamente e age com autonomia. AA é um caminho direto, mas seu perfil pode te levar mais longe do que você imagina.\n\nA Formação vai estruturar o que você já tem e te mostrar as possibilidades.`;
-
-            } else if (perfil === 'AA' && unanime) {
-                copy = `Processos, organização, controle — você já faz isso. Agora é só trazer para o digital.\n\nE seus resultados confirmam que você tem exatamente o perfil para isso. A Formação vai fortalecer essa sua habilidade natural e te dar as ferramentas para transformar isso numa carreira real, com clientes que te valorizam de verdade.`;
-
-            } else if (perfil === 'AA' && secundario === 'AP') {
-                copy = `Processos, organização, controle — você já faz isso. Agora é só trazer para o digital.\n\nSeus resultados mostram um perfil técnico e organizado, com traços de iniciativa que te tornam ainda mais completa. Você não só estrutura — você antecipa. Isso é raro e muito valorizado.`;
-
-            } else if (perfil === 'AA' && secundario === 'SR') {
-                copy = `Processos, organização, controle — você já faz isso. Agora é só trazer para o digital.\n\nSeus resultados mostram que você combina organização com facilidade de comunicação — o que te torna ainda mais valiosa nos bastidores. A Formação vai fortalecer essa base e te posicionar como referência.`;
-
-            } else if (perfil === 'SR') {
-                copy = `Sua vivência em processos e rotinas é uma base real para o AA — mas seus resultados mostram que você opera mais no modo comunicação do que em estrutura técnica e organização.\n\nEsse é o gap que a Formação resolve. Você vai desenvolver a parte técnica sem perder sua facilidade de se comunicar — e essa combinação é exatamente o que os bastidores das empresas digitais precisam.`;
-            }
-
-        } else if (exp === 'sem') {
-
-            if (perfil === 'AP') {
-                copy = `Você está começando do zero — e no digital isso significa que não tem nada pra desaprender.\n\nMas seus resultados mostram que você já pensa estrategicamente e age com autonomia. AA é um caminho direto e sólido, mas seu perfil pode te levar muito além disso.\n\nA Formação vai estruturar sua base e te mostrar até onde você pode chegar.`;
-
-            } else if (perfil === 'AA' && unanime) {
-                copy = `Você está começando do zero — e no digital isso significa que não tem nada pra desaprender.\n\nE seus resultados mostram que você tem exatamente o perfil para o AA: organizada, técnica, detalhista. A Formação vai transformar essas características em uma carreira real, com clientes que te valorizam de verdade.`;
-
-            } else if (perfil === 'AA' && secundario === 'AP') {
-                copy = `Você está começando do zero — e no digital isso significa que não tem nada pra desaprender.\n\nSeus resultados mostram um perfil técnico e organizado, com traços de iniciativa que te tornam ainda mais completa. A Formação vai construir sua base administrativa e te mostrar as possibilidades que esse perfil abre.`;
-
-            } else if (perfil === 'AA' && secundario === 'SR') {
-                copy = `Você está começando do zero — e no digital isso significa que não tem nada pra desaprender.\n\nSeus resultados mostram que você combina organização com facilidade de comunicação — uma combinação rara e muito valorizada. A Formação vai construir sua base técnica e te posicionar nos bastidores onde esse perfil brilha.`;
-
-            } else if (perfil === 'SR') {
-                copy = `Você está começando do zero — e no digital isso significa que não tem nada pra desaprender.\n\nSeus resultados mostram que você opera mais no modo comunicação do que em processos e estrutura. Esse gap é real, mas é totalmente treinável — e a boa notícia é que sua facilidade de se conectar com as pessoas já é metade do caminho.\n\nA Formação vai construir o lado técnico que falta para você chegar no AA com segurança.`;
-            }
-        }
-
-    // ─────────────────────────────────────────────────────────────────────────
-    // DESEJO: SR
-    // ─────────────────────────────────────────────────────────────────────────
-    } else if (desejoFinal === 'SR') {
-
-        if (exp === 'elite') {
-
-            if (perfil === 'AP') {
-                copy = `Sua experiência como secretária executiva te dá um padrão de excelência que poucos profissionais de Suporte têm.\n\nE seus resultados mostram que você vai muito além do Suporte básico — você antecipa, age com autonomia e resolve antes de ser pedida. Suporte é uma porta de entrada, mas seu perfil pode te levar muito mais longe.\n\nA Formação vai lapidar tudo isso e te posicionar bem acima da média desde o primeiro cliente.`;
-
-            } else if (perfil === 'AA') {
-                copy = `Sua experiência como secretária executiva te dá um padrão de excelência que poucos profissionais de Suporte têm.\n\nSeus resultados mostram que você combina esse histórico com organização e atenção técnica — o que te torna ainda mais valiosa no Suporte. Você não só atende bem, você mantém tudo registrado e no lugar.\n\nA Formação vai fortalecer esse diferencial e te posicionar como referência no atendimento digital.`;
-
-            } else if (perfil === 'SR' && unanime) {
-                copy = `Sua experiência como secretária executiva te dá um padrão de excelência que poucos profissionais de Suporte têm.\n\nE seus resultados confirmam: você tem o perfil comunicativo e empático que o mercado de Suporte precisa. A Formação vai fortalecer esse dom e te dar a estrutura para ser a voz em que os clientes confiam.`;
-
-            } else if (perfil === 'SR' && secundario === 'AP') {
-                copy = `Sua experiência como secretária executiva te dá um padrão de excelência que poucos profissionais de Suporte têm.\n\nSeus resultados mostram que você tem o perfil comunicativo certo, com traços de iniciativa que te destacam ainda mais. Você não só atende — você resolve antes que o problema escale.\n\nA Formação vai fortalecer esse diferencial e te posicionar como referência.`;
-
-            } else if (perfil === 'SR' && secundario === 'AA') {
-                copy = `Sua experiência como secretária executiva te dá um padrão de excelência que poucos profissionais de Suporte têm.\n\nSeus resultados mostram que você combina comunicação com organização — uma combinação rara no Suporte. Você atende bem e ainda mantém tudo no lugar.\n\nA Formação vai fortalecer esse perfil e te posicionar como a profissional que as marcas disputam.`;
-            }
-
-        } else if (exp === 'atendimento') {
-
-            if (perfil === 'AP') {
-                copy = `Atendimento é a sua zona natural. No digital, isso vale ouro.\n\nMas seus resultados mostram que você vai além do Suporte — você antecipa, age com autonomia e resolve antes de ser pedida. Suporte é uma entrada sólida, mas seu perfil pode te levar muito mais longe do que você imagina.\n\nA Formação vai lapidar o que você já tem e te mostrar até onde é possível chegar.`;
-
-            } else if (perfil === 'AA') {
-                copy = `Atendimento é a sua zona natural. No digital, isso vale ouro.\n\nE seus resultados mostram que você ainda combina isso com organização e atenção técnica — o que te torna uma profissional de Suporte muito acima da média. Você atende bem e ainda mantém tudo estruturado.\n\nA Formação vai fortalecer esse diferencial e te posicionar como referência no atendimento digital.`;
-
-            } else if (perfil === 'SR' && unanime) {
-                copy = `Atendimento é a sua zona natural. No digital, isso vale ouro.\n\nE seus resultados confirmam: você tem exatamente o perfil que o mercado de Suporte precisa. A Formação vai fortalecer esse dom e te dar a estrutura para ser a voz em que os clientes confiam — e que as marcas brigam para ter.`;
-
-            } else if (perfil === 'SR' && secundario === 'AP') {
-                copy = `Atendimento é a sua zona natural. No digital, isso vale ouro.\n\nSeus resultados mostram o perfil comunicativo certo, com traços de iniciativa que te destacam. Você não só responde — você resolve. A Formação vai fortalecer esse diferencial e te posicionar como referência.`;
-
-            } else if (perfil === 'SR' && secundario === 'AA') {
-                copy = `Atendimento é a sua zona natural. No digital, isso vale ouro.\n\nSeus resultados mostram que você combina comunicação com organização — uma combinação rara e muito valorizada no Suporte. A Formação vai fortalecer essa base e te posicionar como a profissional que as marcas disputam.`;
-            }
-
-        } else if (exp === 'adm') {
-
-            if (perfil === 'AP') {
-                copy = `Ter clareza de processos faz de você uma profissional de Suporte muito acima da média.\n\nMas seus resultados mostram que você vai além — você antecipa, age com autonomia e resolve antes de ser pedida. Suporte é uma entrada sólida, mas seu perfil pode te levar muito mais longe.\n\nA Formação vai lapidar esse potencial e te mostrar até onde é possível chegar.`;
-
-            } else if (perfil === 'AA') {
-                copy = `Ter clareza de processos faz de você uma profissional de Suporte muito acima da média.\n\nE seus resultados confirmam: você tem o perfil técnico e organizado que transforma um bom atendimento em um atendimento excelente. Você não só resolve — você estrutura para que o problema não se repita.\n\nA Formação vai fortalecer esse diferencial e te posicionar como referência.`;
-
-            } else if (perfil === 'SR' && unanime) {
-                copy = `Ter clareza de processos faz de você uma profissional de Suporte muito acima da média.\n\nE seus resultados confirmam que você tem o perfil comunicativo e empático para isso. A Formação vai fortalecer essa combinação e te dar a estrutura para entrar rápido no mercado — sendo a voz em que os clientes confiam.`;
-
-            } else if (perfil === 'SR' && secundario === 'AP') {
-                copy = `Ter clareza de processos faz de você uma profissional de Suporte muito acima da média.\n\nSeus resultados mostram o perfil comunicativo certo, com traços de iniciativa que te destacam. Você atende, resolve e ainda antecipa o que pode dar errado. A Formação vai fortalecer essa combinação rara.`;
-
-            } else if (perfil === 'SR' && secundario === 'AA') {
-                copy = `Ter clareza de processos faz de você uma profissional de Suporte muito acima da média.\n\nSeus resultados mostram que você combina comunicação com organização — o que te torna ainda mais valiosa. Você atende bem e ainda mantém tudo no lugar. A Formação vai fortalecer esse perfil e te posicionar como referência.`;
-            }
-
-        } else if (exp === 'sem') {
-
-            if (perfil === 'AP') {
-                copy = `Todo mundo começa de algum lugar. O seu começo vai ser mais estruturado do que a maioria.\n\nSeus resultados mostram que você já pensa estrategicamente e age com autonomia — o que vai te destacar no Suporte desde o início. Mas seu perfil pode te levar bem além disso.\n\nA Formação vai te dar a base para entrar com confiança e te mostrar até onde é possível crescer.`;
-
-            } else if (perfil === 'AA') {
-                copy = `Todo mundo começa de algum lugar. O seu começo vai ser mais estruturado do que a maioria.\n\nSeus resultados mostram que você tem organização e atenção técnica — qualidades que vão te destacar no Suporte. Você não só atende, você estrutura. A Formação vai construir sua base e te posicionar acima da média desde o primeiro cliente.`;
-
-            } else if (perfil === 'SR' && unanime) {
-                copy = `Todo mundo começa de algum lugar. O seu começo vai ser mais estruturado do que a maioria.\n\nE seus resultados mostram que você tem exatamente o perfil que o mercado de Suporte precisa: comunicativa, empática, boa com pessoas. A Formação vai fortalecer esse dom e te dar a estrutura para entrar rápido no mercado — sendo a voz em que os clientes confiam.`;
-
-            } else if (perfil === 'SR' && secundario === 'AP') {
-                copy = `Todo mundo começa de algum lugar. O seu começo vai ser mais estruturado do que a maioria.\n\nSeus resultados mostram o perfil comunicativo certo, com traços de iniciativa que te tornam ainda mais completa. Você vai entrar no Suporte, mas já com o mapa para ir além. A Formação vai fortalecer esse diferencial.`;
-
-            } else if (perfil === 'SR' && secundario === 'AA') {
-                copy = `Todo mundo começa de algum lugar. O seu começo vai ser mais estruturado do que a maioria.\n\nSeus resultados mostram que você combina comunicação com organização — uma combinação rara para quem está começando. A Formação vai fortalecer essa base e te posicionar com consistência no mercado digital.`;
-            }
-        }
-
-    // ─────────────────────────────────────────────────────────────────────────
-    // REDIRECIONADO (p5 = 'existente'): desejo era AP mas escolheu usar o que tem
-    // ─────────────────────────────────────────────────────────────────────────
-    } else if (redirecionado) {
-
-        if (desejoFinal === 'AA') {
-            copy = `Você decidiu começar com o que já tem — e é uma escolha inteligente.\n\nSua base é real e vai te colocar em movimento rápido. A Formação AV Administrativa vai estruturar essas habilidades para o digital. E quando você quiser dar o próximo passo em direção ao AP, o caminho já vai estar aberto.`;
-
-        } else if (desejoFinal === 'SR') {
-            copy = `Você decidiu começar com o que já tem — e é uma escolha inteligente.\n\nSua base é real e vai te colocar em movimento rápido. A Formação AV Suporte vai colocar essas habilidades para trabalhar no digital imediatamente. E quando você quiser ir além, a estrutura já estará lá esperando.`;
-        }
-    }
-
-    const formacao = getFormacao(desejoFinal);
-    return { formacao, mensagem: copy + incluso };
-}
-
 function calcularResultadoAtuante() {
     const votos  = [state.dor, state.perfilValidacao, state.ambicao];
     const scores = { AP: 0, AA: 0, SR: 0 };
@@ -705,7 +435,6 @@ function advance() {
 
     let nextId = flow[state.flowIndex];
 
-    // Pula step5 (P5 condicional) se não se aplicar
     if (nextId === 'step5') {
         const exp = EXP_MAP[state.experience] ?? 'sem';
         if (!precisaDeP5(state.desejo, state.p2, state.p3, exp)) {
@@ -727,7 +456,6 @@ function goBack() {
     if (state.flowIndex > 0) {
         state.flowIndex--;
 
-        // Pula step5 para trás se não se aplica
         if (FLOWS[state.flow][state.flowIndex] === 'step5') {
             const exp = EXP_MAP[state.experience] ?? 'sem';
             if (!precisaDeP5(state.desejo, state.p2, state.p3, exp)) {
@@ -748,10 +476,8 @@ function choosePath(path, el) {
         el.closest('.step').querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
         el.classList.add('selected');
     }
-    setTimeout(() => {
-        if (path === 'nao-conhece') { showCursoGratis(); return; }
-        startFlow(path === 'quer-comecar' ? 'iniciante' : 'atuante');
-    }, 150);
+    if (path === 'nao-conhece') { showCursoGratis(); return; }
+    startFlow(path === 'quer-comecar' ? 'iniciante' : 'atuante');
 }
 
 function selectAnswer(value, el) {
@@ -800,8 +526,8 @@ function showResult() {
     if (state.flow === 'atuante') {
         const key        = calcularResultadoAtuante();
         const resultData = RESULTS_ATUANTE[key];
-        document.getElementById('result-title').innerHTML = resultData.title;
-        document.getElementById('result-text').innerHTML  = resultData.text;
+        document.getElementById('result-title-atuante').innerHTML = resultData.title;
+        document.getElementById('result-text-atuante').innerHTML  = resultData.text;
         navigateTo('step12');
     }
 }
@@ -856,7 +582,6 @@ function getFreeCourseLink() {
     return getLink('/curso-assistente-virtual');
 }
 
-// Mantido para compatibilidade com botões legados no RESULTS_ATUANTE
 function getFormacaoAExpertLink() {
     return getLink('/formacoes/assistencia-pessoal');
 }
