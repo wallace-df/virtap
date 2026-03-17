@@ -1,34 +1,34 @@
 // ─── FLOWS ────────────────────────────────────────────────────────────────────
 const FLOWS = {
     iniciante: ['step1', 'step2', 'step3', 'step4', 'step5', 'step-result'],
-    atuante:   ['step8', 'step9', 'step10', 'step11', 'step-result'],
+    atuante: ['step8', 'step9', 'step10', 'step11', 'step-result'],
 };
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
 const state = {
-    flow:      null,
+    flow: null,
     flowIndex: 0,
     experience: null,
-    desejo:     null,
-    p2:         null,
-    p3:         null,
-    p5:         null,
-    areaAtual:       null,
-    dor:             null,
+    desejo: null,
+    p2: null,
+    p3: null,
+    p5: null,
+    areaAtual: null,
+    dor: null,
     perfilValidacao: null,
-    ambicao:         null,
+    ambicao: null,
 };
 
 // ─── DADOS ────────────────────────────────────────────────────────────────────
 const EXP_MAP = {
-    'Executivo':      'elite',
+    'Executivo': 'elite',
     'Administrativo': 'adm',
-    'Atendimento':    'atendimento',
-    null:             'sem',
+    'Atendimento': 'atendimento',
+    null: 'sem',
 };
 
 const FORMACOES = {
-    AP: { label: 'Conheça a Formação AExpert',      path: '/formacoes/assistencia-pessoal' },
+    AP: { label: 'Conheça a Formação AExpert', path: '/formacoes/assistencia-pessoal' },
     AV: { label: 'Formação em Assistência Virtual', path: '/formacoes/assistencia-virtual' },
 };
 
@@ -113,11 +113,11 @@ function precisaDeP5(desejo, p2, p3, exp) {
 }
 
 function processarQuiz(desejo, p2, p3, exp, p5 = null) {
-    const perfil        = calcularPerfil(p2, p3);
+    const perfil = calcularPerfil(p2, p3);
     const redirecionado = precisaDeP5(desejo, p2, p3, exp) && p5 === 'existente';
-    const desejoFinal   = redirecionado ? perfil : desejo;
-    const unanime       = p2 === p3;
-    const secundario    = p2 === perfil ? p3 : p2;
+    const desejoFinal = redirecionado ? perfil : desejo;
+    const unanime = p2 === p3;
+    const secundario = p2 === perfil ? p3 : p2;
 
     const incluso = ``;
 
@@ -133,19 +133,15 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
             if (perfil === 'AP' && unanime) {
                 // ✅ Match total: bagagem elite + perfil 100% AP
                 copy = `TODO: bagagem de secretária executiva confirmada + perfil unânime AP → já tem tudo, só precisa estruturar para o digital. Tom: confirmação e posicionamento no topo.`;
-
             } else if (perfil === 'AP' && secundario === 'AA') {
                 // ✅ Match forte: bagagem elite + AP predominante + traço AA reforça
                 copy = `TODO: bagagem de secretária executiva + AP predominante com traço de organização (AA) → base real, traço AA é complementar e reforça o perfil AP. Tom: bagagem confirmada, afinar autonomia estratégica.`;
-
             } else if (perfil === 'AP' && secundario === 'SR') {
                 // ✅ Match forte: bagagem elite + AP predominante + traço SR reforça
                 copy = `TODO: bagagem de secretária executiva + AP predominante com traço de comunicação (SR) → base real, traço SR adiciona empatia valiosa. Tom: bagagem confirmada, afinar decisão estratégica.`;
-
             } else if (perfil === 'AA') {
                 // ⚠️ Gap: bagagem elite mas perfil esfriou para AA
                 copy = `TODO: bagagem de secretária executiva + perfil atual AA → já operou nesse nível mas esfriou. Tom: reconectar com o perfil que já foi seu, não construir do zero.`;
-
             } else if (perfil === 'SR') {
                 // ⚠️ Gap: bagagem elite mas perfil esfriou para SR
                 copy = `TODO: bagagem de secretária executiva + perfil atual SR → já operou nesse nível mas esfriou. Tom: reconectar com o perfil que já foi seu, não construir do zero.`;
@@ -221,9 +217,9 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
             }
         }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // DESEJO: AA
-    // ─────────────────────────────────────────────────────────────────────────
+        // ─────────────────────────────────────────────────────────────────────────
+        // DESEJO: AA
+        // ─────────────────────────────────────────────────────────────────────────
     } else if (desejoFinal === 'AA') {
 
         if (exp === 'elite') {
@@ -304,9 +300,9 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
             }
         }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // DESEJO: SR
-    // ─────────────────────────────────────────────────────────────────────────
+        // ─────────────────────────────────────────────────────────────────────────
+        // DESEJO: SR
+        // ─────────────────────────────────────────────────────────────────────────
     } else if (desejoFinal === 'SR') {
 
         if (exp === 'elite') {
@@ -382,9 +378,9 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
             }
         }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // REDIRECIONADO (p5 = 'existente')
-    // ─────────────────────────────────────────────────────────────────────────
+        // ─────────────────────────────────────────────────────────────────────────
+        // REDIRECIONADO (p5 = 'existente')
+        // ─────────────────────────────────────────────────────────────────────────
     } else if (redirecionado) {
 
         if (desejoFinal === 'AA') {
@@ -400,13 +396,13 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
 }
 
 function calcularResultadoAtuante() {
-    const votos  = [state.dor, state.perfilValidacao, state.ambicao];
+    const votos = [state.dor, state.perfilValidacao, state.ambicao];
     const scores = { AP: 0, AA: 0, SR: 0 };
     votos.forEach(v => { if (v && v in scores) scores[v]++; });
     const { AP, AA, SR } = scores;
-    if (AP > AA && AP > SR)   return 'AP';
-    if (AA > AP && AA > SR)   return 'AA';
-    if (SR > AP && SR > AA)   return 'SR';
+    if (AP > AA && AP > SR) return 'AP';
+    if (AA > AP && AA > SR) return 'AA';
+    if (SR > AP && SR > AA) return 'SR';
     if (AP === SR && AP > AA) return 'AP_SR';
     if (AP === AA && AP > SR) return 'AP_AA';
     if (SR === AA && SR > AP) return 'SR_AA';
@@ -416,7 +412,7 @@ function calcularResultadoAtuante() {
 // ─── NAVEGAÇÃO ────────────────────────────────────────────────────────────────
 
 function startFlow(flowName) {
-    state.flow      = flowName;
+    state.flow = flowName;
     state.flowIndex = 0;
     navigateTo(FLOWS[flowName][0]);
 }
@@ -485,17 +481,17 @@ function selectAnswer(value, el) {
 
     if (state.flow === 'iniciante') {
         if (stepId === 'step1') state.experience = value;
-        if (stepId === 'step2') state.desejo     = value;
-        if (stepId === 'step3') state.p2         = value;
-        if (stepId === 'step4') state.p3         = value;
-        if (stepId === 'step5') state.p5         = value;
+        if (stepId === 'step2') state.desejo = value;
+        if (stepId === 'step3') state.p2 = value;
+        if (stepId === 'step4') state.p3 = value;
+        if (stepId === 'step5') state.p5 = value;
     }
 
     if (state.flow === 'atuante') {
-        if (stepId === 'step8')  state.areaAtual       = value;
-        if (stepId === 'step9')  state.dor             = value;
+        if (stepId === 'step8') state.areaAtual = value;
+        if (stepId === 'step9') state.dor = value;
         if (stepId === 'step10') state.perfilValidacao = value;
-        if (stepId === 'step11') state.ambicao         = value;
+        if (stepId === 'step11') state.ambicao = value;
     }
 
     el.closest('.step').querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
@@ -507,11 +503,11 @@ function selectAnswer(value, el) {
 
 function showResult() {
     if (state.flow === 'iniciante') {
-        const exp       = EXP_MAP[state.experience] ?? 'sem';
+        const exp = EXP_MAP[state.experience] ?? 'sem';
         const resultado = processarQuiz(state.desejo, state.p2, state.p3, exp, state.p5);
 
         document.getElementById('result-title').innerHTML = 'Veja o que encontramos para você';
-        document.getElementById('result-text').innerHTML  =
+        document.getElementById('result-text').innerHTML =
             resultado.mensagem
                 .split('\n\n')
                 .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
@@ -524,10 +520,10 @@ function showResult() {
     }
 
     if (state.flow === 'atuante') {
-        const key        = calcularResultadoAtuante();
+        const key = calcularResultadoAtuante();
         const resultData = RESULTS_ATUANTE[key];
         document.getElementById('result-title-atuante').innerHTML = resultData.title;
-        document.getElementById('result-text-atuante').innerHTML  = resultData.text;
+        document.getElementById('result-text-atuante').innerHTML = resultData.text;
         navigateTo('step12');
     }
 }
@@ -535,7 +531,7 @@ function showResult() {
 function showCursoGratis() {
     document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
     document.getElementById('result-title').innerText = 'Comece do jeito certo!';
-    document.getElementById('result-text').innerHTML  = `
+    document.getElementById('result-text').innerHTML = `
         <p>Se você ainda não conhece a profissão de <strong>Assistente Virtual</strong>, o primeiro passo é entender como ela funciona.</p>
         <p>Para você começar da melhor forma possível, preparamos um <strong>curso 100% gratuito</strong> onde explicamos:</p>
         <ul>
@@ -556,23 +552,23 @@ function showCursoGratis() {
 // ─── UTM ──────────────────────────────────────────────────────────────────────
 
 function getLink(path) {
-    const utm    = getUTMParams();
+    const utm = getUTMParams();
     const params = new URLSearchParams();
 
     if (utm.has_utm) {
-        const s  = getNullableValue(utm.utm_last.utm_source);
-        const m  = getNullableValue(utm.utm_last.utm_medium);
-        const c  = getNullableValue(utm.utm_last.utm_campaign);
+        const s = getNullableValue(utm.utm_last.utm_source);
+        const m = getNullableValue(utm.utm_last.utm_medium);
+        const c = getNullableValue(utm.utm_last.utm_campaign);
         const ct = getNullableValue(utm.utm_last.utm_content);
-        if (s)  params.set('utm_source',   s);
-        if (m)  params.set('utm_medium',   m);
-        if (c)  params.set('utm_campaign', c);
-        if (ct) params.set('utm_content',  ct);
+        if (s) params.set('utm_source', s);
+        if (m) params.set('utm_medium', m);
+        if (c) params.set('utm_campaign', c);
+        if (ct) params.set('utm_content', ct);
     } else {
-        params.set('utm_source',   'virtap');
-        params.set('utm_medium',   'quiz');
+        params.set('utm_source', 'virtap');
+        params.set('utm_medium', 'quiz');
         params.set('utm_campaign', 'formacao');
-        params.set('utm_content',  'quiz-principal');
+        params.set('utm_content', 'quiz-principal');
     }
 
     return path + '?' + params.toString();
@@ -595,22 +591,22 @@ function getNullableValue(val) {
 }
 
 function getUTMParams() {
-    const params      = new URLSearchParams(window.location.search);
-    const utmKeys     = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
+    const params = new URLSearchParams(window.location.search);
+    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
     const rawReferrer = getNullableValue(document.referrer);
-    const hasUTM      = getNullableValue(params.get('utm_source')) && getNullableValue(params.get('utm_medium'));
+    const hasUTM = getNullableValue(params.get('utm_source')) && getNullableValue(params.get('utm_medium'));
 
     let utmParams = {};
     if (hasUTM) {
         utmKeys.forEach(key => { utmParams[key] = getNullableValue(params.get(key)); });
     }
-    utmParams.timestamp    = Date.now();
+    utmParams.timestamp = Date.now();
     utmParams.referral_url = rawReferrer;
 
     let firstUtmParams = localStorage.getItem('first_visit_utm');
     if (!firstUtmParams) {
         firstUtmParams = utmParams;
-        try { localStorage.setItem('first_visit_utm', JSON.stringify(utmParams)); } catch {}
+        try { localStorage.setItem('first_visit_utm', JSON.stringify(utmParams)); } catch { }
     } else {
         try { firstUtmParams = JSON.parse(firstUtmParams); } catch { firstUtmParams = utmParams; }
     }
@@ -618,4 +614,4 @@ function getUTMParams() {
     return { utm_first: firstUtmParams, utm_last: utmParams, has_utm: !!hasUTM };
 }
 
-try { console.log(getUTMParams()); } catch {}
+try { console.log(getUTMParams()); } catch { }
