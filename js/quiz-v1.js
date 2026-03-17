@@ -109,7 +109,7 @@ function calcularPerfil(p2, p3) {
 }
 
 function precisaDeP5(desejo, p2, p3, exp) {
-    return desejo === 'AP' && calcularPerfil(p2, p3) !== 'AP' && exp !== 'sem';
+    return desejo === 'AP' && calcularPerfil(p2, p3) !== 'AP' && exp !== 'elite';
 }
 
 function processarQuiz(desejo, p2, p3, exp, p5 = null) {
