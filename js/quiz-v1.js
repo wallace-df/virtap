@@ -109,7 +109,7 @@ function calcularPerfil(p2, p3) {
 }
 
 function precisaDeP5(desejo, p2, p3, exp) {
-    return desejo === 'AP' && calcularPerfil(p2, p3) !== 'AP' && exp !== 'elite';
+    return desejo === 'AP' && calcularPerfil(p2, p3) !== 'AP' && exp !== 'elite' && exp !== 'sem';
 }
 
 function processarQuiz(desejo, p2, p3, exp, p5 = null) {
@@ -129,94 +129,65 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
     if (desejoFinal === 'AP') {
 
         if (exp === 'elite') {
-
             if (perfil === 'AP' && unanime) {
-                // ✅ Match total: bagagem elite + perfil 100% AP
-                copy = `TODO: bagagem de secretária executiva confirmada + perfil unânime AP → já tem tudo, só precisa estruturar para o digital. Tom: confirmação e posicionamento no topo.`;
+                copy = `QUER SER AP: bagagem de secretária executiva + perfil de AP → já tem tudo, só precisa estruturar para o digital.`;
             } else if (perfil === 'AP' && secundario === 'AA') {
-                // ✅ Match forte: bagagem elite + AP predominante + traço AA reforça
-                copy = `TODO: bagagem de secretária executiva + AP predominante com traço de organização (AA) → base real, traço AA é complementar e reforça o perfil AP. Tom: bagagem confirmada, afinar autonomia estratégica.`;
+                copy = `QUER SER AP: bagagem de secretária executiva + perfil AP com traço administrativo → lapidar perfil.`;
             } else if (perfil === 'AP' && secundario === 'SR') {
-                // ✅ Match forte: bagagem elite + AP predominante + traço SR reforça
-                copy = `TODO: bagagem de secretária executiva + AP predominante com traço de comunicação (SR) → base real, traço SR adiciona empatia valiosa. Tom: bagagem confirmada, afinar decisão estratégica.`;
-            } else if (perfil === 'AA') {
-                // ⚠️ Gap: bagagem elite mas perfil esfriou para AA
-                copy = `TODO: bagagem de secretária executiva + perfil atual AA → já operou nesse nível mas esfriou. Tom: reconectar com o perfil que já foi seu, não construir do zero.`;
+                copy = `QUER SER AP: bagagem de secretária executiva + perfil AP com traço de atendimento → lapidar perfil.`;
+            } else if (perfil === 'AA' && unanime) {
+                copy = `QUER SER AP: bagagem de secretária executiva + perfil administrativo → desenvolver o perfil.`;
+            } else if (perfil === 'AA' && secundario === 'SR') {
+                copy = `QUER SER AP: bagagem de secretária executiva + perfil administrativo/atendimento → desenvolver o perfil.`;
             } else if (perfil === 'SR') {
-                // ⚠️ Gap: bagagem elite mas perfil esfriou para SR
-                copy = `TODO: bagagem de secretária executiva + perfil atual SR → já operou nesse nível mas esfriou. Tom: reconectar com o perfil que já foi seu, não construir do zero.`;
-            }
-
-        } else if (exp === 'atendimento') {
-
-            if (perfil === 'AP' && unanime) {
-                // ✅ Match total: atendimento + perfil 100% AP
-                copy = `TODO: experiência em atendimento + perfil unânime AP → sabe ler pessoas e já age com autonomia. Tom: confirmação, estruturar para o digital.`;
-
-            } else if (perfil === 'AP' && secundario === 'AA') {
-                // ✅ Match forte: atendimento + AP predominante + traço AA reforça
-                copy = `TODO: experiência em atendimento + AP predominante com traço AA → instinto certo + organização complementar. Tom: reforçar autonomia estratégica, traço AA é vantagem.`;
-
-            } else if (perfil === 'AP' && secundario === 'SR') {
-                // ✅ Match forte: atendimento + AP predominante + traço SR reforça
-                copy = `TODO: experiência em atendimento + AP predominante com traço SR → instinto certo + comunicação complementar. Tom: desenvolver decisão estratégica, traço SR é vantagem.`;
-
-            } else if (perfil === 'AA') {
-                // ⚠️ Gap: atendimento + perfil AA → precisa desenvolver autonomia
-                copy = `TODO: experiência em atendimento + perfil AA → opera mais em organização do que antecipação. Tom: gap real mas treinável, formação resolve.`;
-
-            } else if (perfil === 'SR') {
-                // ⚠️ Gap: atendimento + perfil SR → precisa desenvolver estratégia
-                copy = `TODO: experiência em atendimento + perfil SR → opera mais em comunicação do que decisão estratégica. Tom: gap real mas treinável, base de atendimento é vantagem.`;
+                copy = `QUER SER AP: bagagem de secretária executiva + perfil de atendimento → desenvolver o perfil.`;
             }
 
         } else if (exp === 'adm') {
 
             if (perfil === 'AP' && unanime) {
-                // ✅ Match total: adm + perfil 100% AP
-                copy = `TODO: experiência adm + perfil unânime AP → visão sistêmica + autonomia estratégica. Tom: confirmação, estruturar para o digital.`;
-
+                copy = `QUER SER AP: experiência adm + perfil de AP →  estruturar para o digital, experiencia com adm é plus`;
             } else if (perfil === 'AP' && secundario === 'AA') {
-                // ✅ Match forte: adm + AP predominante + traço AA reforça
-                copy = `TODO: experiência adm + AP predominante com traço AA → base técnica + organização complementar. Tom: afinar consistência da antecipação, traço AA é solidez.`;
-
+                copy = `QUER SER AP: experiência adm + perfil de AP com traço administrativo → lapidar perfil, experiencia com adm é plus.`;
             } else if (perfil === 'AP' && secundario === 'SR') {
-                // ✅ Match forte: adm + AP predominante + traço SR reforça
-                copy = `TODO: experiência adm + AP predominante com traço SR → base técnica + comunicação complementar. Tom: afinar autonomia estratégica, traço SR é versatilidade.`;
-
-            } else if (perfil === 'AA') {
-                // ⚠️ Gap: adm + perfil AA → tem base técnica mas falta autonomia
-                copy = `TODO: experiência adm + perfil AA → base técnica certa, mas opera mais em organização do que antecipação. Tom: gap é a camada de decisão, formação desenvolve isso.`;
-
+                copy = `QUER SER AP: experiência adm + perfil de AP com traço de atendimento → lapidar perfil, experiencia com adm é plus.`;
+            } else if (perfil === 'AA' && unanime) {
+                copy = `QUER SER AP: experiência adm + perfil administrativo → desenvolver perfil, experiencia com adm é plus.`;
+            } else if (perfil === 'AA' && secundario === 'SR') {
+                copy = `QUER SER AP: experiência adm + perfil administrativo/atendimento → desenvolver o perfil, experiencia com adm é plus.`;
             } else if (perfil === 'SR') {
-                // ⚠️ Gap: adm + perfil SR → tem base técnica mas falta estratégia
-                copy = `TODO: experiência adm + perfil SR → base técnica real, mas opera mais em comunicação do que gestão estratégica. Tom: gap treinável, base técnica já é vantagem.`;
+                copy = `QUER SER AP: experiência adm + perfil de atendimento → desenvolver perfil, experiencia com adm é plus.`;
             }
 
-        } else if (exp === 'sem') {
-
+        } else if (exp === 'atendimento') {
             if (perfil === 'AP' && unanime) {
-                // ✅ Match total: sem exp + perfil 100% AP
-                copy = `TODO: sem experiência + perfil unânime AP → não tem histórico mas tem o perfil certo. Tom: raridade do perfil sem experiência, formação constrói a estrutura.`;
-
+                copy = `QUER SER AP: experiência atendimento + perfil de AP →  estruturar para o digital, experiencia com atendimento é plus`;
             } else if (perfil === 'AP' && secundario === 'AA') {
-                // ✅ Match forte: sem exp + AP predominante + traço AA
-                copy = `TODO: sem experiência + AP predominante com traço AA → perfil certo com organização complementar. Tom: formação constrói estrutura ao redor do instinto certo.`;
-
+                copy = `QUER SER AP: experiência atendimento + perfil de AP com traço administrativo → lapidar perfil, experiencia com atendimento é plus.`;
             } else if (perfil === 'AP' && secundario === 'SR') {
-                // ✅ Match forte: sem exp + AP predominante + traço SR
-                copy = `TODO: sem experiência + AP predominante com traço SR → perfil certo com comunicação complementar. Tom: formação desenvolve consistência estratégica.`;
-
-            } else if (perfil === 'AA') {
-                // ⚠️ Gap: sem exp + perfil AA
-                copy = `TODO: sem experiência + perfil AA → gap real entre organização e autonomia AP. Tom: desafiador mas treinável, formação constrói do zero.`;
-
+                copy = `QUER SER AP: experiência atendimento + perfil de AP com traço de atendimento → lapidar perfil, experiencia com atendimento é plus.`;
+            } else if (perfil === 'AA' && unanime) {
+                copy = `QUER SER AP: experiência atendimento + perfil administrativo → desenvolver perfil, experiencia com atendimento é plus.`;
+            } else if (perfil === 'AA' && secundario === 'SR') {
+                copy = `QUER SER AP: experiência atendimento + perfil administrativo/atendimento → desenvolver o perfil, experiencia com atendimento é plus.`;
             } else if (perfil === 'SR') {
-                // ⚠️ Gap maior: sem exp + perfil SR
-                copy = `TODO: sem experiência + perfil SR → maior gap para AP. Tom: desafiador, formação constrói do zero, comunicação é ponto de partida.`;
+                copy = `QUER SER AP: experiência atendimento + perfil de atendimento → desenvolver perfil, experiencia com atendimento é plus.`;
+            }
+        } else if (exp === 'sem') {
+            if (perfil === 'AP' && unanime) {
+                copy = `QUER SER AP: sem experiência + perfil de AP →  estruturar para o digital`;
+            } else if (perfil === 'AP' && secundario === 'AA') {
+                copy = `QUER SER AP: sem experiência + perfil de AP com traço administrativo → lapidar perfil`;
+            } else if (perfil === 'AP' && secundario === 'SR') {
+                copy = `QUER SER AP: sem experiência + perfil de AP com traço de atendimento → lapidar perfil`;
+            } else if (perfil === 'AA' && unanime) {
+                copy = `QUER SER AP: sem experiência + perfil administrativo → desenvolver perfil.`;
+            } else if (perfil === 'AA' && secundario === 'SR') {
+                copy = `QUER SER AP: sem experiência + perfil administrativo/atendimento → desenvolver o perfil.`;
+            } else if (perfil === 'SR') {
+                copy = `QUER SER AP: sem experiência + perfil de atendimento → desenvolver perfil.`;
             }
         }
-
         // ─────────────────────────────────────────────────────────────────────────
         // DESEJO: AA
         // ─────────────────────────────────────────────────────────────────────────
