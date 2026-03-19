@@ -40,7 +40,7 @@ const RESULTS_ATUANTE = {
     AP: {
         title: "<span>Você pode brilhar como:</span>Assessora Pessoal",
         text: `
-            <p>Suas respostas mostram facilidade para tomar iniciativa, resolver pendências e ajudar a organizar a rotina de alguém: habilidades indispensáveis para uma Assessora Pessoal.</p>
+            <p>Suas respostas mostram tendência para tomar iniciativa, resolver pendências e ajudar a organizar a rotina de alguém: habilidades indispensáveis para uma Assessora Pessoal.</p>
             <p>A Assessoria Pessoal é uma das áreas mais valorizadas da Assistência Virtual, onde profissionais bem posicionadas podem faturar R$ 10.000 ou mais por mês.</p>
             <p class="main-text">O próximo passo para você</p>
             <p>A <strong>Formação AExpert</strong> é a referência máxima no mercado de alto nível, criada exatamente para desenvolver competências que clientes exigentes realmente valorizam.</p>
@@ -121,6 +121,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
 
     const incluso = ``;
 
+    let titulo = '';
     let copy = '';
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -130,7 +131,26 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
 
         if (exp === 'elite') {
             if (perfil === 'AP' && unanime) {
-                copy = `QUER SER AP: bagagem de secretária executiva + perfil de AP → já tem tudo, só precisa estruturar para o digital.`;
+                titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
+                copy =
+                    `
+                <p>Suas respostas mostram facilidade para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas.</p>
+                <p>Somado à sua experiência profissional, seu perfil se encaixa de forma muito natural na Assessoria Pessoal.</p>                
+                <p>Essa é a atuação mais estratégica da área, onde você pode atuar como braço direito de empresários e executivos, apoiando em diferentes demandas do dia a dia, como:</p>
+                <ul>
+                  <li>Organização de agenda e compromissos</li>
+                  <li>Pesquisa de viagens, reservas e serviços</li>
+                  <li>Resolução de tarefas pessoais e administrativas</li>
+                  <li>Acompanhamento de pendências importantes</li>
+                  <li>Apoio na priorização de decisões e compromissos</li>
+                </ul>
+                <p>Por envolver confiança, proximidade e capacidade de execução, essa é considerada a área mais nobre da Assistência Virtual, onde profissionais bem posicionadas conseguem faturar R$ 10.000 mensais ou mais.</p>
+
+                <p class="main-text">O próximo passo para você</p>
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade extremo, onde apenas profissionais de confiança absoluta conseguem se destacar.</p>
+                <p>A <strong>Formação AExpert</strong> é a referência máxima no mercado de alto nível, criada exatamente para desenvolver competências, habilidades e técnicas que clientes exigentes realmente valorizam.</p>
+                <p>É uma experiência de aprendizado feita para quem deseja atuar com excelência, sofisticação e autoridade, elevando sua carreira ao mais alto padrão do mercado.</p>                
+                `;
             } else if (perfil === 'AP' && secundario === 'AA') {
                 copy = `QUER SER AP: bagagem de secretária executiva + perfil AP com traço administrativo → lapidar perfil.`;
             } else if (perfil === 'AP' && secundario === 'SR') {
@@ -363,7 +383,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
     }
 
     const formacao = getFormacao(desejoFinal);
-    return { formacao, mensagem: copy + incluso };
+    return { formacao, titulo, mensagem: copy + incluso };
 }
 
 function calcularResultadoAtuante() {
@@ -477,11 +497,11 @@ function showResult() {
         const exp = EXP_MAP[state.experience] ?? 'sem';
         const resultado = processarQuiz(state.desejo, state.p2, state.p3, exp, state.p5);
 
-        document.getElementById('result-title').innerHTML = 'Veja o que encontramos para você';
+        document.getElementById('result-title').innerHTML = resultado.titulo;
         document.getElementById('result-text').innerHTML =
             resultado.mensagem
                 .split('\n\n')
-                .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
+                .map(p => `<p>${p.replace(/\n/g, '')}</p>`)
                 .join('') +
             `<button class="next-btn" onclick="window.location.href=getLink('${resultado.formacao.path}')">
                 👉 ${resultado.formacao.label}

@@ -37,7 +37,7 @@
             <div class="header-nav" style="display:none" id="header-nav">
                 <div id="back-btn" class="back-link" onclick="goBack()">← Voltar</div>
             </div>
-        
+
             <!-- step0: situação atual -->
             <div class="step active" id="step0">
                 <h2>Qual sua situação atual?</h2>
@@ -51,10 +51,10 @@
                     Já trabalho como Assistente Virtual
                 </button>
             </div>
-        
+
             <!-- step1: experiência (P4) -->
             <div class="step" id="step1">
-                <h2>Qual dessas áreas melhor descreve sua experiência profissional?</h2>
+                <h2>Em qual dessas áreas você já atuou?</h2>
                 <button class="option-btn" onclick="selectAnswer('Executivo', this)">
                     Secretariado Executivo / Concierge / Assessoria Especializada
                 </button>
@@ -68,49 +68,49 @@
                     Nenhuma das anteriores
                 </button>
             </div>
-        
+
             <!-- step2: desejo (P1) -->
             <div class="step" id="step2">
-                <h2>O que você busca hoje?</h2>
+                <h2>Que tipo de tarefa você prefere?</h2>
                 <button class="option-btn" onclick="selectAnswer('AP', this)">
-                    Ser o braço direito de um grande player — cuidar da agenda, decisões e bastidores da vida do cliente.
+                    Cuidar da agenda e demandas pessoais de um cliente.
                 </button>
                 <button class="option-btn" onclick="selectAnswer('AA', this)">
-                    Organizar processos, rotinas e estrutura de empresas digitais.
+                    Organizar processos, planilhas e documentos de empresas.
                 </button>
                 <button class="option-btn" onclick="selectAnswer('SR', this)">
-                    Trabalhar na linha de frente com suporte e atendimento ao público.
+                    Prestar suporte e atendimento ao público.
                 </button>
             </div>
-        
+
             <!-- step3: perfil comportamental (P2) -->
             <div class="step" id="step3">
-                <h2>Como você resolve um problema?</h2>
+                <h2>Como você lida com um problema?</h2>
                 <button class="option-btn" onclick="selectAnswer('AP', this)">
                     Antecipando: vejo o erro antes de acontecer.
                 </button>
                 <button class="option-btn" onclick="selectAnswer('AA', this)">
-                    Organizando: crio um processo ou planilha para não repetir o erro.
+                    Organizando: crio um documento para não repetir o erro.
                 </button>
                 <button class="option-btn" onclick="selectAnswer('SR', this)">
                     Comunicando: resolvo rápido conversando com as pessoas.
                 </button>
             </div>
-        
+
             <!-- step4: ambiente (P3) -->
             <div class="step" id="step4">
-                <h2>No trabalho, você prefere...</h2>
+                <h2>Em momentos de pressão, o que você faz?</h2>
                 <button class="option-btn" onclick="selectAnswer('AP', this)">
-                    Alta confiança — lidar com a vida, agenda e decisões do cliente.
+                    Defino prioridades e decido o que precisa ser resolvido primeiro.
                 </button>
                 <button class="option-btn" onclick="selectAnswer('AA', this)">
-                    Focar nos bastidores e na estrutura técnica do negócio.
+                    Organizo as tarefas para ter mais clareza do que precisa ser feito.
                 </button>
                 <button class="option-btn" onclick="selectAnswer('SR', this)">
-                    Dinamismo e contato direto com o público ou alunos.
+                    Começo a responder e agir conforme as demandas vão chegando.
                 </button>
             </div>
-        
+
             <!-- step5: P5 condicional (só aparece quando desejo=AP, perfil<AP, exp≠sem) -->
             <div class="step" id="step5">
                 <h2>Só mais uma coisa antes do seu resultado...</h2>
@@ -119,19 +119,20 @@
                     Isso não é um problema — mas é uma informação importante para te direcionar certo.
                 </p>
                 <button class="option-btn" onclick="selectAnswer('desafio', this)">
-                    Quero me desafiar e chegar no nível de Assessoria Pessoal, mesmo que precise desenvolver novas habilidades.
+                    Quero me desafiar e chegar no nível de Assessoria Pessoal, mesmo que precise desenvolver novas
+                    habilidades.
                 </button>
                 <button class="option-btn" onclick="selectAnswer('existente', this)">
                     Prefiro começar usando as habilidades que já tenho e crescer a partir delas.
                 </button>
             </div>
-        
+
             <!-- step6: resultado flow iniciante -->
             <div class="step" id="step6">
                 <h2 id="result-title" class="text-center"></h2>
                 <div id="result-text"></div>
             </div>
-        
+
             <!-- step8–11: flow atuante -->
             <div class="step" id="step8">
                 <h2>Qual frase mais combina com você?</h2>
@@ -145,7 +146,7 @@
                     Sei conversar com diferentes tipos de pessoas e resolver conflitos com paciência.
                 </button>
             </div>
-        
+
             <div class="step" id="step9">
                 <h2>Como você prefere trabalhar no dia a dia?</h2>
                 <button class="option-btn" onclick="selectAnswer('AP', this)">
@@ -158,7 +159,7 @@
                     Prefiro atender as demandas conforme elas vão chegando.
                 </button>
             </div>
-        
+
             <div class="step" id="step10">
                 <h2>Com quais tarefas você mais se identifica?</h2>
                 <button class="option-btn" onclick="selectAnswer('SR', this)">
@@ -171,7 +172,7 @@
                     Organizar arquivos, preencher planilhas e emitir documentos.
                 </button>
             </div>
-        
+
             <div class="step" id="step11">
                 <h2>Como você lida com demandas urgentes e diferentes ao mesmo tempo?</h2>
                 <button class="option-btn" onclick="selectAnswer('AP', this)">
@@ -184,13 +185,14 @@
                     Prefiro terminar o que já estava fazendo antes de assumir as novas urgências.
                 </button>
             </div>
-        
+
             <!-- step12: resultado flow atuante -->
             <div class="step" id="step12">
                 <h2 id="result-title-atuante"></h2>
                 <div id="result-text-atuante"></div>
             </div>
-        </div>    </div>
+        </div>
+    </div>
     <script src="/js/quiz-v1.js"></script>
 </body>
 
