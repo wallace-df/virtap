@@ -134,15 +134,16 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
-                <p>Suas respostas mostram facilidade para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas.</p>
+                <p>Suas respostas mostram inclinação para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas.</p>
                 <p>Somado à sua experiência profissional, seu perfil se encaixa de forma muito natural na Assessoria Pessoal.</p>                
+
                 <p>Essa é a atuação mais estratégica da área, onde você pode atuar como braço direito de empresários e executivos, apoiando em diferentes demandas do dia a dia, como:</p>
                 <ul>
-                  <li>Organização de agenda e compromissos</li>
-                  <li>Pesquisa de viagens, reservas e serviços</li>
-                  <li>Resolução de tarefas pessoais e administrativas</li>
-                  <li>Acompanhamento de pendências importantes</li>
-                  <li>Apoio na priorização de decisões e compromissos</li>
+                    <li>Organização de agenda e compromissos</li>
+                    <li>Pesquisa de viagens, reservas e serviços</li>
+                    <li>Resolução de tarefas pessoais e administrativas</li>
+                    <li>Acompanhamento de pendências importantes</li>
+                    <li>Apoio na priorização de decisões e compromissos</li>
                 </ul>
                 <p>Por envolver confiança, proximidade e capacidade de execução, essa é considerada a área mais nobre da Assistência Virtual, onde profissionais bem posicionadas conseguem faturar R$ 10.000 mensais ou mais.</p>
 
@@ -152,15 +153,99 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 <p>É uma experiência de aprendizado feita para quem deseja atuar com excelência, sofisticação e autoridade, elevando sua carreira ao mais alto padrão do mercado.</p>                
                 `;
             } else if (perfil === 'AP' && secundario === 'AA') {
-                copy = `QUER SER AP: bagagem de secretária executiva + perfil AP com traço administrativo → lapidar perfil.`;
+                titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
+                copy =
+                    `
+                <p>Suas respostas mostram inclinação para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas.</p>
+                <p>Somado à sua experiência profissional, seu perfil se encaixa de forma muito natural na Assessoria Pessoal.</p>                
+
+                <p>Essa é a atuação mais estratégica da área, onde você pode atuar como braço direito de empresários e executivos, apoiando em diferentes demandas do dia a dia, como:</p>
+                <ul>
+                    <li>Organização de agenda e compromissos</li>
+                    <li>Pesquisa de viagens, reservas e serviços</li>
+                    <li>Resolução de tarefas pessoais e administrativas</li>
+                    <li>Acompanhamento de pendências importantes</li>
+                    <li>Apoio na priorização de decisões e compromissos</li>
+                </ul>
+                <p>Por envolver confiança, proximidade e capacidade de execução, essa é considerada a área mais nobre da Assistência Virtual, onde profissionais bem posicionadas conseguem faturar R$ 10.000 mensais ou mais.</p>
+                <p class="main-text">O próximo passo para você</p>
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas organizar e executar, mas também antecipar, decidir e conduzir prioridades com segurança.</p>
+                <p>Para alcançar esse nível de atuação com consistência, é essencial desenvolver e refinar competências ligadas à tomada de decisão, autonomia e visão estratégica no apoio ao cliente.</p>
+                <p>A <strong>Formação AExpert</strong> é a referência máxima no mercado de alto nível, criada exatamente para desenvolver essas competências, habilidades e técnicas que clientes exigentes realmente valorizam.</p>
+                <p>É uma experiência de aprendizado feita para quem deseja evoluir sua atuação com mais clareza, segurança e autoridade, elevando sua carreira ao mais alto padrão do mercado.</p>                 
+                `;
             } else if (perfil === 'AP' && secundario === 'SR') {
-                copy = `QUER SER AP: bagagem de secretária executiva + perfil AP com traço de atendimento → lapidar perfil.`;
+                titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
+                copy =
+                    `
+                <p>Suas respostas mostram inclinação para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas.</p>
+                <p>Somado à sua experiência profissional, seu perfil se encaixa de forma muito natural na Assessoria Pessoal.</p>                
+ 
+                <p>Essa é a atuação mais estratégica da área, onde você pode atuar como braço direito de empresários e executivos, apoiando em diferentes demandas do dia a dia, como:</p>
+                <ul>
+                    <li>Organização de agenda e compromissos</li>
+                    <li>Pesquisa de viagens, reservas e serviços</li>
+                    <li>Resolução de tarefas pessoais e administrativas</li>
+                    <li>Acompanhamento de pendências importantes</li>
+                    <li>Apoio na priorização de decisões e compromissos</li>
+                </ul>
+                <p>Por envolver confiança, proximidade e capacidade de execução, essa é considerada a área mais nobre da Assistência Virtual, onde profissionais bem posicionadas conseguem faturar R$ 10.000 mensais ou mais.</p>
+
+                <p class="main-text">O próximo passo para você</p>
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas se comunicar e responder demandas, mas também antecipar, decidir e conduzir prioridades com segurança.</p>
+                <p>Para alcançar esse nível de atuação com consistência, é essencial desenvolver maior clareza na priorização, autonomia nas decisões e uma postura mais estratégica no apoio ao cliente.</p>
+                <p>A <strong>Formação AExpert</strong> é a referência máxima no mercado de alto nível, criada exatamente para desenvolver essas competências, habilidades e técnicas que clientes exigentes realmente valorizam.</p>
+                <p>É uma experiência de aprendizado feita para quem deseja evoluir sua atuação com mais clareza, segurança e autoridade, elevando sua carreira ao mais alto padrão do mercado.</p>
+                `;
             } else if (perfil === 'AA' && unanime) {
-                copy = `QUER SER AP: bagagem de secretária executiva + perfil administrativo → desenvolver o perfil.`;
+                titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
+                copy = `
+                <p>Suas respostas mostram um forte interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia.</p>
+                <p>Somado à sua experiência profissional, existe um alinhamento claro com a atuação em Assessoria Pessoal.</p>                
+
+                <p>Essa é a atuação mais estratégica da área, onde você pode atuar como braço direito de empresários e executivos, apoiando em diferentes demandas do dia a dia, como:</p>
+                <ul>
+                    <li>Organização de agenda e compromissos</li>
+                    <li>Pesquisa de viagens, reservas e serviços</li>
+                    <li>Resolução de tarefas pessoais e administrativas</li>
+                    <li>Acompanhamento de pendências importantes</li>
+                    <li>Apoio na priorização de decisões e compromissos</li>
+                </ul>
+                <p>Por envolver confiança, proximidade e capacidade de execução, essa é considerada a área mais nobre da Assistência Virtual, onde profissionais bem posicionadas conseguem faturar R$ 10.000 mensais ou mais.</p>
+
+                <p class="main-text">O próximo passo para você</p>
+                <p>Sua experiência em secretariado executivo mostra que você já esteve próxima desse nível de atuação, com visão e responsabilidade mais estratégicas.</p>
+                <p>Ao mesmo tempo, seu momento atual indica uma atuação mais voltada à organização e execução, o que pode acabar limitando seu posicionamento nesse nível mais alto.</p>
+                <p>Para avançar nessa direção, é importante desenvolver novamente a autonomia, a tomada de decisão e a condução de prioridades junto ao cliente.</p>
+                <p>A <strong>Formação AExpert</strong> foi criada exatamente para esse movimento, ajudando você a resgatar e estruturar esse posicionamento com mais clareza, segurança e consistência no mercado digital.</p>
+                <p>É uma experiência de aprendizado feita para quem deseja voltar a atuar com mais proximidade, confiança e relevância, elevando sua carreira ao mais alto padrão do mercado.</p>
+            `;
             } else if (perfil === 'AA' && secundario === 'SR') {
-                copy = `QUER SER AP: bagagem de secretária executiva + perfil administrativo/atendimento → desenvolver o perfil.`;
             } else if (perfil === 'SR') {
-                copy = `QUER SER AP: bagagem de secretária executiva + perfil de atendimento → desenvolver o perfil.`;
+                titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
+                copy =
+                    `
+                    <p>Suas respostas mostram um forte interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia.</p>
+                    <p>Somado à sua experiência profissional, existe um alinhamento claro com a atuação em Assessoria Pessoal  / Executiva.</p>                
+
+                    <p>Essa é a atuação mais estratégica da área, onde você pode atuar como braço direito de empresários e executivos, apoiando em diferentes demandas do dia a dia, como:</p>
+                    <ul>
+                        <li>Organização de agenda e compromissos</li>
+                        <li>Pesquisa de viagens, reservas e serviços</li>
+                        <li>Resolução de tarefas pessoais e administrativas</li>
+                        <li>Acompanhamento de pendências importantes</li>
+                        <li>Apoio na priorização de decisões e compromissos</li>
+                    </ul>
+
+                    <p>Por envolver confiança, proximidade e capacidade de execução, essa é considerada a área mais nobre da Assistência Virtual, onde profissionais bem posicionadas conseguem faturar R$ 10.000 mensais ou mais.</p>
+                    <p class="main-text">O próximo passo para você</p>
+                    <p>Sua experiência em secretariado executivo mostra que você já esteve próxima desse nível de atuação, com visão e responsabilidade mais estratégicas.</p>
+                    <p>Ao mesmo tempo, seu momento atual indica uma atuação com foco em atendimento e resposta a demandas, o que pode acabar te mantendo em uma posição mais reativa no dia a dia.</p>
+                    <p>Para retomar uma atuação como Assessora Pessoal / Executiva, é importante avançar novamente para um papel mais próximo do cliente, com autonomia para antecipar, decidir e conduzir prioridades.</p>
+
+                    <p>A <strong>Formação AExpert</strong> foi criada exatamente para esse movimento, ajudando você a resgatar esse posicionamento e transformar sua experiência em uma atuação mais estratégica, valorizada e bem posicionada no mercado digital.</p>
+                    <p>É uma experiência de aprendizado feita para quem deseja voltar a atuar com mais proximidade, confiança e relevância, elevando sua carreira ao mais alto padrão do mercado.</p>
+                `;
             }
 
         } else if (exp === 'adm') {
