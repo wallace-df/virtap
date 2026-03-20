@@ -144,11 +144,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
         `;
 
         if (exp === 'elite') {
-            let expPref =
-                `
-            <p>Somado à sua experiência profissional, seu perfil se encaixa de forma muito natural na Assessoria Pessoal / Executiva.</p>
-            `;
-
+            let expPref = `<p>Somado à sua experiência profissional, seu perfil se encaixa de forma muito natural na Assessoria Pessoal / Executiva.</p>`;
             if (perfil === 'AP' && unanime) {
                 titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
