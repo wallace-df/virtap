@@ -221,6 +221,28 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 <p>É uma experiência de aprendizado feita para quem deseja voltar a atuar com mais proximidade, confiança e relevância, elevando sua carreira ao mais alto padrão do mercado.</p>
             `;
             } else if (perfil === 'AA' && secundario === 'SR') {
+                titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
+                copy = `
+                <p>Suas respostas mostram um forte interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia.</p>
+                <p>Somado à sua experiência profissional, existe um alinhamento claro com a atuação em Assessoria Pessoal / Executiva.</p>                
+
+                <p>Essa é a atuação mais estratégica da área, onde você pode atuar como braço direito de empresários e executivos, apoiando em diferentes demandas do dia a dia, como:</p>
+                <ul>
+                    <li>Organização de agenda e compromissos</li>
+                    <li>Pesquisa de viagens, reservas e serviços</li>
+                    <li>Resolução de tarefas pessoais e administrativas</li>
+                    <li>Acompanhamento de pendências importantes</li>
+                    <li>Apoio na priorização de decisões e compromissos</li>
+                </ul>
+                <p>Por envolver confiança, proximidade e capacidade de execução, essa é considerada a área mais nobre da Assistência Virtual, onde profissionais bem posicionadas conseguem faturar R$ 10.000 mensais ou mais.</p>
+
+                <p class="main-text">O próximo passo para você</p>
+                <p>Sua experiência em secretariado executivo mostra que você já esteve próxima desse nível de atuação, com visão e responsabilidade mais estratégicas.</p>
+                <p>Ao mesmo tempo, seu momento atual combina organização de tarefas com atendimento e resposta a demandas, o que pode acabar te mantendo em uma rotina mais operacional e reativa no dia a dia.</p>
+                <p>Para retomar uma atuação como Assessora Pessoal  / Executiva, é importante avançar novamente para um papel mais próximo do cliente, com autonomia para antecipar, decidir e conduzir prioridades com clareza.</p>
+                <p>A <strong>Formação AExpert</strong> foi criada exatamente para esse movimento, ajudando você a transformar essa base em uma atuação mais estratégica, estruturada e valorizada no mercado digital.</p>
+                <p>É uma experiência de aprendizado feita para quem deseja voltar a atuar com mais proximidade, confiança e relevância, elevando sua carreira ao mais alto padrão do mercado.</p>
+                `
             } else if (perfil === 'SR') {
                 titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
@@ -247,7 +269,6 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                     <p>É uma experiência de aprendizado feita para quem deseja voltar a atuar com mais proximidade, confiança e relevância, elevando sua carreira ao mais alto padrão do mercado.</p>
                 `;
             }
-
         } else if (exp === 'adm') {
 
             if (perfil === 'AP' && unanime) {
