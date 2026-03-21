@@ -213,7 +213,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                     `
                 ${expPref}
                 ${infoBlock}                
-                <p>Sua base administrativa é um diferencial, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                <p>Sua base administrativa amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
             `;
             } else if (perfil === 'AP' && secundario === 'SR') {
@@ -222,7 +222,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                     `
                 ${expPref}
                 ${infoBlock}                
-                <p>Sua base administrativa é um diferencial, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar, comunicar e responder, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                <p>Sua base administrativa amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar e comunicar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
                 `;
             } else if (perfil === 'AA' && unanime) {
@@ -230,15 +230,15 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 copy = `
                 ${expEvl}
                 ${infoBlock}                
-                <p>Sua base administrativa é um diferencial, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                <p>Sua base administrativa amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
                 `;
-            } else if (perfil === 'AA' && secundario === 'SR' || perfil === 'SR') {
+            } else {
                 titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
                 ${expEvl}
                 ${infoBlock}                
-                <p>Sua base administrativa é um diferencial, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar, comunicar e responder, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                <p>Sua base administrativa amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar e comunicar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
                 `;
             }
