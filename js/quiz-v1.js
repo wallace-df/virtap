@@ -153,7 +153,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${expPref}
                 ${infoBlock}                
                 <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade extremo, onde apenas profissionais de confiança absoluta conseguem se destacar.</p>
-                <p>No seu caso, o próximo passo é estruturar e posicionar essa experiência no mercado digital, transformando o que você já sabe fazer em uma atuação clara, valorizada e bem definida.</p>
+                <p>No seu caso, o próximo passo é estruturar e posicionar sua experiência no mercado digital, transformando o que você já sabe fazer em uma atuação clara, valorizada e bem definida.</p>
                 <p>A <strong>Formação AExpert</strong> é a referência máxima no mercado de alto nível, criada exatamente para quem deseja organizar essa base com método, posicionamento e as competências que clientes exigentes realmente valorizam.</p>                
                 `;
             } else if (perfil === 'AP' && secundario === 'AA') {
@@ -180,24 +180,24 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
             } else if (perfil === 'AA' && unanime) {
                 titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
-                <p>Suas respostas mostram um forte interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia.</p>
+                <p>Suas respostas mostram um interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia.</p>
                 ${expPref}
                 ${infoBlock}
                 <p>Sua experiência em secretariado executivo mostra que você já esteve próxima desse nível de atuação, com visão e responsabilidade mais estratégicas.</p>
                 <p>Ao mesmo tempo, seu momento atual indica uma atuação mais voltada à organização e execução, o que pode acabar limitando seu posicionamento nesse nível mais alto.</p>
-                <p>Para avançar nessa direção, é importante desenvolver novamente a autonomia, a tomada de decisão e a condução de prioridades junto ao cliente.</p>
-                <p>A <strong>Formação AExpert</strong> foi criada exatamente para esse movimento, ajudando você a resgatar e estruturar esse posicionamento com mais clareza, segurança e consistência no mercado digital.</p>
+                <p>Para atuar como Assessora Pessoal / Executiva, é muito importante que você resgate a autonomia, a tomada de decisão e a condução de prioridades junto ao cliente.</p>
+                <p>A <strong>Formação AExpert</strong> foi criada exatamente para isso, ajudando você a resgatar e estruturar esse posicionamento com mais clareza, segurança e consistência no mercado digital.</p>
             `;
             } else if (perfil === 'AA' && secundario === 'SR') {
                 titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
-                <p>Suas respostas mostram um forte interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia.</p>
+                <p>Suas respostas mostram um interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia.</p>
                 ${expPref}
                 ${infoBlock}
                 <p>Sua experiência em secretariado executivo mostra que você já esteve próxima desse nível de atuação, com visão e responsabilidade mais estratégicas.</p>
                 <p>Ao mesmo tempo, seu momento atual combina organização de tarefas com atendimento e resposta a demandas, o que pode acabar te mantendo em uma rotina mais operacional e reativa no dia a dia.</p>
-                <p>Para retomar uma atuação como Assessora Pessoal  / Executiva, é importante avançar novamente para um papel mais próximo do cliente, com autonomia para antecipar, decidir e conduzir prioridades com clareza.</p>
-                <p>A <strong>Formação AExpert</strong> foi criada exatamente para esse movimento, ajudando você a transformar essa base em uma atuação mais estratégica, estruturada e valorizada no mercado digital.</p>
+                <p>Para atuar Assessora Pessoal  / Executiva, é muito importante que você assuma um papel mais próximo do cliente, com autonomia para antecipar, decidir e conduzir prioridades.</p>
+                <p>A <strong>Formação AExpert</strong> foi criada exatamente para isso, ajudando você a transformar essa base em uma atuação mais estratégica, estruturada e valorizada no mercado digital.</p>
                 `
             } else if (perfil === 'SR') {
 
@@ -208,8 +208,8 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${infoBlock}
                 <p>Sua experiência em secretariado executivo mostra que você já esteve próxima desse nível de atuação, com visão e responsabilidade mais estratégicas.</p>
                 <p>Ao mesmo tempo, seu momento atual indica uma atuação com foco em atendimento e resposta a demandas, o que pode acabar te mantendo em uma posição mais reativa no dia a dia.</p>
-                <p>Para retomar uma atuação como Assessora Pessoal / Executiva, é importante avançar novamente para um papel mais próximo do cliente, com autonomia para antecipar, decidir e conduzir prioridades.</p>
-                <p>A <strong>Formação AExpert</strong> foi criada exatamente para esse movimento, ajudando você a resgatar esse posicionamento e transformar sua experiência em uma atuação mais estratégica, valorizada e bem posicionada no mercado digital.</p>
+                <p>Para atuar como Assessora Pessoal / Executiva, é muito importante que você assuma um papel mais próximo do cliente, com autonomia para antecipar, decidir e conduzir prioridades.</p>
+                <p>A <strong>Formação AExpert</strong> foi criada exatamente para isso, ajudando você a resgatar esse posicionamento e transformar sua experiência em uma atuação mais estratégica, valorizada e bem posicionada no mercado digital.</p>
             `;
             }
         } else if (exp === 'adm') {
