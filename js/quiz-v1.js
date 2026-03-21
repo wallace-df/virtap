@@ -228,59 +228,20 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
             } else if (perfil === 'AA' && unanime) {
                 titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
+                ${expEvl}
                 ${infoBlock}                
                 <p>Sua base administrativa é um diferencial, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
                 `;
-            } else if (perfil === 'AA' && secundario === 'SR') {
+            } else if (perfil === 'AA' && secundario === 'SR' || perfil === 'SR') {
                 titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
-                    < p > Suas respostas mostram um forte interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia.</p >
-    <p>Somado à sua experiência profissional, existe um alinhamento claro com a atuação em Assessoria Pessoal / Executiva.</p>                
-
-    <p>Essa é a atuação mais estratégica da área, onde você pode atuar como braço direito de empresários e executivos, apoiando em diferentes demandas do dia a dia, como:</p>
-    <ul>
-        <li>Organização de agenda e compromissos</li>
-        <li>Pesquisa de viagens, reservas e serviços</li>
-        <li>Resolução de tarefas pessoais e administrativas</li>
-        <li>Acompanhamento de pendências importantes</li>
-        <li>Apoio na priorização de decisões e compromissos</li>
-    </ul>
-    <p>Por envolver confiança, proximidade e capacidade de execução, essa é considerada a área mais nobre da Assistência Virtual, onde profissionais bem posicionadas conseguem faturar R$ 10.000 mensais ou mais.</p>
-
-    <p class="main-text">O próximo passo para você</p>
-    <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, que exige mais do que organização e resposta às demandas.</p>
-    <p>Hoje, sua atuação combina execução e atendimento, o que pode te manter em um papel mais operacional e reativo.</p>
-    <p>O próximo passo é direcionar essa experiência para uma atuação mais estratégica, com maior proximidade, autonomia e condução de prioridades.</p>
-    <p>A <strong>Formação AExpert</strong> foi criada exatamente para estruturar essa evolução com mais clareza, consistência e posicionamento.</p>
-    <p>É uma experiência de aprendizado feita para quem deseja evoluir com mais segurança e autoridade no mercado.</p>
-                `
-            } else if (perfil === 'SR') {
-                titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
-                copy =
-                    `
-                    < p > Suas respostas mostram um forte interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia.</p >
-        <p>Somado à sua experiência profissional, existe um alinhamento claro com a atuação em Assessoria Pessoal / Executiva.</p>                
-
-        <p>Essa é a atuação mais estratégica da área, onde você pode atuar como braço direito de empresários e executivos, apoiando em diferentes demandas do dia a dia, como:</p>
-        <ul>
-            <li>Organização de agenda e compromissos</li>
-            <li>Pesquisa de viagens, reservas e serviços</li>
-            <li>Resolução de tarefas pessoais e administrativas</li>
-            <li>Acompanhamento de pendências importantes</li>
-            <li>Apoio na priorização de decisões e compromissos</li>
-        </ul>
-
-        <p>Por envolver confiança, proximidade e capacidade de execução, essa é considerada a área mais nobre da Assistência Virtual, onde profissionais bem posicionadas conseguem faturar R$ 10.000 mensais ou mais.</p>
-        <p class="main-text">O próximo passo para você</p>
-        <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, que vai além do atendimento e resposta às demandas.</p>
-        <p>Hoje, sua atuação tende a ser mais reativa. O próximo passo é evoluir para uma posição mais estratégica, com maior autonomia e condução de prioridades.</p>
-
-        <p>A <strong>Formação AExpert</strong> foi criada exatamente para desenvolver essa evolução com mais clareza, consistência e posicionamento.</p>
-        <p>É uma experiência de aprendizado feita para quem deseja evoluir com mais segurança e autoridade no mercado.</p>
+                ${expEvl}
+                ${infoBlock}                
+                <p>Sua base administrativa é um diferencial, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar, comunicar e responder, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                ${aexpertPre}
                 `;
             }
-
         } else if (exp === 'atendimento') {
             if (perfil === 'AP' && unanime) {
                 copy = `QUER SER AP: experiência atendimento + perfil de AP →  estruturar para o digital, experiencia com atendimento é plus`;
