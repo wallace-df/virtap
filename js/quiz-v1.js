@@ -142,172 +142,100 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
 
         <p class="main-text">O próximo passo para você</p>
         `;
+        let aexpertPre =
+            `
+            <p>O seu próximo passo é organizar tudo o que você já sabe fazer, aprimorar habilidades indispensáveis, se posicionar e precificar corretamente no mercado digital.</p>
+            <p>A <strong>Formação AExpert</strong> te orienta em cada etapa desse processo, mostrando quais habilidades desenvolver, como precificar seu trabalho e como atrair e reter bons clientes.</p>
+            `;
 
         if (exp === 'elite') {
-            let expPref = `<p>Somado à sua experiência profissional, seu perfil se encaixa de forma muito natural na Assessoria Pessoal / Executiva.</p>`;
+            let expPref = `p>Suas respostas mostram aptidão para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas. Somado à sua experiência profissional, seu perfil se encaixa de forma muito natural na Assessoria Pessoal / Executiva.</p>`;
+            let expEvl = `<p>Suas respostas mostram um interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia, exatamente o que faz uma Assessora Pessoal / Executiva.</p>`;
             if (perfil === 'AP' && unanime) {
                 titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
-                <p>Suas respostas mostram aptidão para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas.</p>
                 ${expPref}
                 ${infoBlock}                
-                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade extremo, onde apenas profissionais de confiança absoluta conseguem se destacar.</p>
-                <p>No seu caso, o próximo passo é estruturar e posicionar sua experiência no mercado digital, transformando o que você já sabe fazer em uma atuação clara, valorizada e bem definida.</p>
-                <p>A <strong>Formação AExpert</strong> é a referência máxima no mercado de alto nível, criada exatamente para quem deseja organizar essa base com método, posicionamento e as competências que clientes exigentes realmente valorizam.</p>                
-                `;
+                <p>Sua experiência profissional mostra que você já esteve próxima desse nível de atuação, tornando sua transição muito mais fácil.</p>
+                ${aexpertPre}
+            `;
             } else if (perfil === 'AP' && secundario === 'AA') {
                 titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
-                <p>Suas respostas mostram aptidão para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas.</p>
                 ${expPref}
                 ${infoBlock}                
-                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas organizar e executar, mas também antecipar, decidir e conduzir prioridades.</p>
-                <p>Para alcançar esse nível de atuação com consistência, é essencial refinar e fortalecer suas competências ligadas à tomada de decisão, autonomia e visão estratégica no apoio ao cliente.</p>
-                <p>A <strong>Formação AExpert</strong> é a referência máxima no mercado de alto nível, criada exatamente para aprimorar essas competências e habilidades que clientes exigentes realmente valorizam.</p>                `;
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas organizar e executar, mas também antecipar, decidir e conduzir prioridades.</p>                
+               ${aexpertPre}
+            `;
             } else if (perfil === 'AP' && secundario === 'SR') {
                 titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
-                <p>Suas respostas mostram aptidão para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas.</p>
                 ${expPref}
                 ${infoBlock}                
                 <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas se comunicar e responder demandas, mas também antecipar, decidir e conduzir prioridades.</p>
-                <p>Para alcançar esse nível de atuação com consistência, é essencial que você desenvolva maior clareza na priorização, autonomia nas decisões e uma postura mais estratégica no apoio ao cliente.</p>
-                <p>A <strong>Formação AExpert</strong> é a referência máxima no mercado de alto nível, criada exatamente para desenvolver essas competências e habilidades que clientes exigentes realmente valorizam.</p>
+                ${aexpertPre}
                 `;
             } else if (perfil === 'AA' && unanime) {
                 titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
-                <p>Suas respostas mostram um interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia.</p>
-                ${expPref}
+                ${expEvl}
                 ${infoBlock}
-                <p>Sua experiência em secretariado executivo mostra que você já esteve próxima desse nível de atuação, com visão e responsabilidade mais estratégicas.</p>
-                <p>Ao mesmo tempo, seu momento atual indica uma atuação mais voltada à organização e execução, o que pode acabar limitando seu posicionamento nesse nível mais alto.</p>
-                <p>Para atuar como Assessora Pessoal / Executiva, é muito importante que você resgate a autonomia, a tomada de decisão e a condução de prioridades junto ao cliente.</p>
-                <p>A <strong>Formação AExpert</strong> foi criada exatamente para isso, ajudando você a resgatar e estruturar esse posicionamento com mais clareza, segurança e consistência no mercado digital.</p>
-            `;
+                <p>Sua experiência profissional mostra que você já esteve próxima desse nível de atuação, mas seu momento atual indica uma atuação mais voltada à organização e execução, o que pode acabar limitando seu posicionamento nesse nível mais alto.</p>
+                ${aexpertPre}
+           `;
             } else if (perfil === 'AA' && secundario === 'SR') {
                 titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
-                <p>Suas respostas mostram um interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia.</p>
-                ${expPref}
+                ${expEvl}
                 ${infoBlock}
-                <p>Sua experiência em secretariado executivo mostra que você já esteve próxima desse nível de atuação, com visão e responsabilidade mais estratégicas.</p>
-                <p>Ao mesmo tempo, seu momento atual combina organização de tarefas com atendimento e resposta a demandas, o que pode acabar te mantendo em uma rotina mais operacional e reativa no dia a dia.</p>
-                <p>Para atuar Assessora Pessoal  / Executiva, é muito importante que você assuma um papel mais próximo do cliente, com autonomia para antecipar, decidir e conduzir prioridades.</p>
-                <p>A <strong>Formação AExpert</strong> foi criada exatamente para isso, ajudando você a transformar essa base em uma atuação mais estratégica, estruturada e valorizada no mercado digital.</p>
+                <p>Sua experiência profissional mostra que você já esteve próxima desse nível de atuação, mas seu momento atual combina organização de tarefas com atendimento e resposta a demandas, o que pode acabar te mantendo em uma rotina mais operacional e reativa no dia a dia.</p>
+                ${aexpertPre}
                 `
             } else if (perfil === 'SR') {
-
                 titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
-                <p>Suas respostas mostram um forte interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia.</p>
-                ${expPref}
+                ${expEvl}
                 ${infoBlock}
-                <p>Sua experiência em secretariado executivo mostra que você já esteve próxima desse nível de atuação, com visão e responsabilidade mais estratégicas.</p>
-                <p>Ao mesmo tempo, seu momento atual indica uma atuação com foco em atendimento e resposta a demandas, o que pode acabar te mantendo em uma posição mais reativa no dia a dia.</p>
-                <p>Para atuar como Assessora Pessoal / Executiva, é muito importante que você assuma um papel mais próximo do cliente, com autonomia para antecipar, decidir e conduzir prioridades.</p>
-                <p>A <strong>Formação AExpert</strong> foi criada exatamente para isso, ajudando você a resgatar esse posicionamento e transformar sua experiência em uma atuação mais estratégica, valorizada e bem posicionada no mercado digital.</p>
-            `;
+                <p>Sua experiência profissional mostra que você já esteve próxima desse nível de atuação, mas seu momento atual indica uma atuação com foco em atendimento e resposta a demandas, o que pode acabar te mantendo em uma posição mais reativa no dia a dia.</p>
+                ${aexpertPre}
+                `;
             }
         } else if (exp === 'adm') {
+            let expPref = `<p>Suas respostas mostram aptidão para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas, características muito alinhadas à atuação em Assessoria Pessoal / Executiva.</p>`;
+            let expEvl = `<p>Suas respostas mostram um interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia, exatamente o que faz um Assessora Pessoal / Executiva.</p>`;
 
-            if (perfil === 'AP' && unanime) {
+            if (perfil === 'AP' && (unanime || secundario === 'AA')) {
                 titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
-                <p>Suas respostas mostram inclinação para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas, o que se encaixa de forma muito natural na Assessoria Pessoal / Executiva.</p>                
-
-                <p>Essa é a atuação mais estratégica da Assistência Virtual, onde você pode atuar como braço direito de empresários e executivos, apoiando em diferentes demandas do dia a dia, como:</p>
-                <ul>
-                    <li>Organização de agenda e compromissos</li>
-                    <li>Pesquisa de viagens, reservas e serviços</li>
-                    <li>Resolução de tarefas pessoais e administrativas</li>
-                    <li>Acompanhamento de pendências importantes</li>
-                    <li>Apoio na priorização de decisões e compromissos</li>
-                </ul>
-                <p>Por envolver confiança, proximidade e capacidade de execução, essa é considerada a área mais nobre da Assistência Virtual, onde profissionais bem posicionadas conseguem faturar R$ 10.000 mensais ou mais.</p>
-
-                <p class="main-text">O próximo passo para você</p>
-                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas executar, mas também antecipar, decidir e conduzir prioridades com segurança.</p>
-                <p>Quando combinada com sua base administrativa, isso cria um potencial ainda maior para atuar de forma mais completa e estratégica.</p>
-                <p>O próximo passo é evoluir para uma atuação com mais autonomia, proximidade e condução de prioridades junto ao cliente.</p>
-                <p>A <strong>Formação AExpert</strong> é a referência máxima no mercado de alto nível, criada exatamente para quem deseja atuar com mais estratégia, autonomia e autoridade, elevando sua carreira ao mais alto padrão do mercado.</p>                
-    `;
-            } else if (perfil === 'AP' && secundario === 'AA') {
-                titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
-                copy =
-                    `
-    <p>Suas respostas mostram inclinação para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas.</p>
-    <p>Somado à sua experiência profissional, seu perfil se encaixa de forma muito natural na Assessoria Pessoal.</p>                
-
-    <p>Essa é a atuação mais estratégica da área, onde você pode atuar como braço direito de empresários e executivos, apoiando em diferentes demandas do dia a dia, como:</p>
-    <ul>
-        <li>Organização de agenda e compromissos</li>
-        <li>Pesquisa de viagens, reservas e serviços</li>
-        <li>Resolução de tarefas pessoais e administrativas</li>
-        <li>Acompanhamento de pendências importantes</li>
-        <li>Apoio na priorização de decisões e compromissos</li>
-    </ul>
-    <p>Por envolver confiança, proximidade e capacidade de execução, essa é considerada a área mais nobre da Assistência Virtual, onde profissionais bem posicionadas conseguem faturar R$ 10.000 mensais ou mais.</p>
-
-    <p class="main-text">O próximo passo para você</p>
-    <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas organizar e executar, mas também antecipar, decidir e conduzir prioridades com segurança.</p>
-    <p>Hoje, sua atuação tende a se apoiar mais na organização e execução. O próximo passo é avançar para um papel mais estratégico, com maior autonomia na condução das demandas do cliente.</p>
-    <p>A <strong>Formação AExpert</strong> é a referência máxima no mercado de alto nível, criada exatamente para desenvolver essa evolução com mais clareza, consistência e posicionamento.</p>
-    <p>É uma experiência de aprendizado feita para quem deseja evoluir sua atuação com mais autoridade e direcionamento no mercado.</p>                 
-    `;
+                ${expPref}
+                ${infoBlock}                
+                <p>Sua base administrativa é um diferencial, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                ${aexpertPre}
+            `;
             } else if (perfil === 'AP' && secundario === 'SR') {
                 titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
-    <p>Suas respostas mostram inclinação para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas.</p>
-    <p>Somado à sua experiência profissional, seu perfil se encaixa de forma muito natural na Assessoria Pessoal.</p>                
- 
-    <p>Essa é a atuação mais estratégica da área, onde você pode atuar como braço direito de empresários e executivos, apoiando em diferentes demandas do dia a dia, como:</p>
-    <ul>
-        <li>Organização de agenda e compromissos</li>
-        <li>Pesquisa de viagens, reservas e serviços</li>
-        <li>Resolução de tarefas pessoais e administrativas</li>
-        <li>Acompanhamento de pendências importantes</li>
-        <li>Apoio na priorização de decisões e compromissos</li>
-    </ul>
-    <p>Por envolver confiança, proximidade e capacidade de execução, essa é considerada a área mais nobre da Assistência Virtual, onde profissionais bem posicionadas conseguem faturar R$ 10.000 mensais ou mais.</p>
-
-    <p class="main-text">O próximo passo para você</p>
-    <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas se comunicar e responder demandas, mas também antecipar, decidir e conduzir prioridades com segurança.</p>
-    <p>Hoje, sua atuação tende a ser mais reativa, focada na resposta às demandas. O próximo passo é evoluir para uma atuação mais estratégica, com maior antecipação e condução das prioridades do cliente.</p>
-    <p>A <strong>Formação AExpert</strong> é a referência máxima no mercado de alto nível, criada exatamente para desenvolver essa evolução com mais clareza, consistência e posicionamento.</p>
-    <p>É uma experiência de aprendizado feita para quem deseja evoluir sua atuação com mais autoridade e direcionamento no mercado.</p>
-    `;
+                ${expPref}
+                ${infoBlock}                
+                <p>Sua base administrativa é um diferencial, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar, comunicar e responder, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                ${aexpertPre}
+                `;
             } else if (perfil === 'AA' && unanime) {
                 titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
-    <p>Suas respostas mostram um forte interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia.</p>
-    <p>Somado à sua experiência profissional, existe um alinhamento claro com a atuação em Assessoria Pessoal.</p>                
-
-    <p>Essa é a atuação mais estratégica da área, onde você pode atuar como braço direito de empresários e executivos, apoiando em diferentes demandas do dia a dia, como:</p>
-    <ul>
-        <li>Organização de agenda e compromissos</li>
-        <li>Pesquisa de viagens, reservas e serviços</li>
-        <li>Resolução de tarefas pessoais e administrativas</li>
-        <li>Acompanhamento de pendências importantes</li>
-        <li>Apoio na priorização de decisões e compromissos</li>
-    </ul>
-    <p>Por envolver confiança, proximidade e capacidade de execução, essa é considerada a área mais nobre da Assistência Virtual, onde profissionais bem posicionadas conseguem faturar R$ 10.000 mensais ou mais.</p>
-
-    <p class="main-text">O próximo passo para você</p>
-    <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, que vai além da organização e execução das demandas.</p>
-    <p>Hoje, sua atuação tende a se concentrar mais na parte operacional. O próximo passo é evoluir para uma posição com mais autonomia, proximidade e tomada de decisão junto ao cliente.</p>
-    <p>A <strong>Formação AExpert</strong> foi criada exatamente para desenvolver essa transição com mais clareza, consistência e posicionamento.</p>
-    <p>É uma experiência de aprendizado feita para quem deseja evoluir com mais segurança e autoridade no mercado.</p>
-`;
+                ${infoBlock}                
+                <p>Sua base administrativa é um diferencial, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                ${aexpertPre}
+                `;
             } else if (perfil === 'AA' && secundario === 'SR') {
                 titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
-    <p>Suas respostas mostram um forte interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia.</p>
+                    < p > Suas respostas mostram um forte interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia.</p >
     <p>Somado à sua experiência profissional, existe um alinhamento claro com a atuação em Assessoria Pessoal / Executiva.</p>                
 
     <p>Essa é a atuação mais estratégica da área, onde você pode atuar como braço direito de empresários e executivos, apoiando em diferentes demandas do dia a dia, como:</p>
@@ -326,12 +254,12 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
     <p>O próximo passo é direcionar essa experiência para uma atuação mais estratégica, com maior proximidade, autonomia e condução de prioridades.</p>
     <p>A <strong>Formação AExpert</strong> foi criada exatamente para estruturar essa evolução com mais clareza, consistência e posicionamento.</p>
     <p>É uma experiência de aprendizado feita para quem deseja evoluir com mais segurança e autoridade no mercado.</p>
-    `
+                `
             } else if (perfil === 'SR') {
                 titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
-        <p>Suas respostas mostram um forte interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia.</p>
+                    < p > Suas respostas mostram um forte interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia.</p >
         <p>Somado à sua experiência profissional, existe um alinhamento claro com a atuação em Assessoria Pessoal / Executiva.</p>                
 
         <p>Essa é a atuação mais estratégica da área, onde você pode atuar como braço direito de empresários e executivos, apoiando em diferentes demandas do dia a dia, como:</p>
@@ -350,7 +278,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
 
         <p>A <strong>Formação AExpert</strong> foi criada exatamente para desenvolver essa evolução com mais clareza, consistência e posicionamento.</p>
         <p>É uma experiência de aprendizado feita para quem deseja evoluir com mais segurança e autoridade no mercado.</p>
-    `;
+                `;
             }
 
         } else if (exp === 'atendimento') {
@@ -363,7 +291,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
             } else if (perfil === 'AA' && unanime) {
                 copy = `QUER SER AP: experiência atendimento + perfil administrativo → desenvolver perfil, experiencia com atendimento é plus.`;
             } else if (perfil === 'AA' && secundario === 'SR') {
-                copy = `QUER SER AP: experiência atendimento + perfil administrativo/atendimento → desenvolver o perfil, experiencia com atendimento é plus.`;
+                copy = `QUER SER AP: experiência atendimento + perfil administrativo / atendimento → desenvolver o perfil, experiencia com atendimento é plus.`;
             } else if (perfil === 'SR') {
                 copy = `QUER SER AP: experiência atendimento + perfil de atendimento → desenvolver perfil, experiencia com atendimento é plus.`;
             }
@@ -377,7 +305,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
             } else if (perfil === 'AA' && unanime) {
                 copy = `QUER SER AP: sem experiência + perfil administrativo → desenvolver perfil.`;
             } else if (perfil === 'AA' && secundario === 'SR') {
-                copy = `QUER SER AP: sem experiência + perfil administrativo/atendimento → desenvolver o perfil.`;
+                copy = `QUER SER AP: sem experiência + perfil administrativo / atendimento → desenvolver o perfil.`;
             } else if (perfil === 'SR') {
                 copy = `QUER SER AP: sem experiência + perfil de atendimento → desenvolver perfil.`;
             }
@@ -391,77 +319,77 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
 
             if (perfil === 'AP') {
                 // 🔼 Upgrade: elite + perfil AP quer AA → subvaloriza
-                copy = `TODO: bagagem elite + perfil AP quer AA → já opera acima do que pede. Tom: AA sólido para começar, mapa do topo na mão.`;
+                copy = `TODO: bagagem elite + perfil AP quer AA → já opera acima do que pede.Tom: AA sólido para começar, mapa do topo na mão.`;
 
             } else if (perfil === 'AA' && unanime) {
                 // ✅ Match total: elite + perfil 100% AA
-                copy = `TODO: bagagem elite + perfil unânime AA → bagagem e perfil confirmam. Tom: fortalecer diferencial, posicionar nos bastidores.`;
+                copy = `TODO: bagagem elite + perfil unânime AA → bagagem e perfil confirmam.Tom: fortalecer diferencial, posicionar nos bastidores.`;
 
             } else if (perfil === 'AA' && secundario === 'AP') {
                 // ✅ Match forte: elite + AA predominante + traço AP reforça
-                copy = `TODO: bagagem elite + AA predominante com traço AP → organização + iniciativa complementar. Tom: traço AP torna ainda mais completa.`;
+                copy = `TODO: bagagem elite + AA predominante com traço AP → organização + iniciativa complementar.Tom: traço AP torna ainda mais completa.`;
 
             } else if (perfil === 'AA' && secundario === 'SR') {
                 // ✅ Match forte: elite + AA predominante + traço SR reforça
-                copy = `TODO: bagagem elite + AA predominante com traço SR → organização + comunicação complementar. Tom: combinação rara, fortalecer base técnica.`;
+                copy = `TODO: bagagem elite + AA predominante com traço SR → organização + comunicação complementar.Tom: combinação rara, fortalecer base técnica.`;
 
             } else if (perfil === 'SR') {
                 // ⚠️ Gap: elite + perfil SR quer AA
-                copy = `TODO: bagagem elite + perfil SR quer AA → opera mais em comunicação do que processos. Tom: desenvolver lado técnico sem perder habilidade de comunicação.`;
+                copy = `TODO: bagagem elite + perfil SR quer AA → opera mais em comunicação do que processos.Tom: desenvolver lado técnico sem perder habilidade de comunicação.`;
             }
 
         } else if (exp === 'atendimento') {
 
             if (perfil === 'AP') {
-                copy = `TODO: atendimento + perfil AP quer AA → já opera acima do que pede. Tom: AA sólido para começar, mapa do topo na mão.`;
+                copy = `TODO: atendimento + perfil AP quer AA → já opera acima do que pede.Tom: AA sólido para começar, mapa do topo na mão.`;
 
             } else if (perfil === 'AA' && unanime) {
-                copy = `TODO: atendimento + perfil unânime AA → experiência e perfil confirmam. Tom: fortalecer diferencial técnico.`;
+                copy = `TODO: atendimento + perfil unânime AA → experiência e perfil confirmam.Tom: fortalecer diferencial técnico.`;
 
             } else if (perfil === 'AA' && secundario === 'AP') {
-                copy = `TODO: atendimento + AA predominante com traço AP → organização + iniciativa. Tom: traço AP torna ainda mais completa.`;
+                copy = `TODO: atendimento + AA predominante com traço AP → organização + iniciativa.Tom: traço AP torna ainda mais completa.`;
 
             } else if (perfil === 'AA' && secundario === 'SR') {
-                copy = `TODO: atendimento + AA predominante com traço SR → organização + comunicação. Tom: combinação valiosa nos bastidores.`;
+                copy = `TODO: atendimento + AA predominante com traço SR → organização + comunicação.Tom: combinação valiosa nos bastidores.`;
 
             } else if (perfil === 'SR') {
-                copy = `TODO: atendimento + perfil SR quer AA → gap técnico. Tom: desenvolver lado administrativo sem perder facilidade com pessoas.`;
+                copy = `TODO: atendimento + perfil SR quer AA → gap técnico.Tom: desenvolver lado administrativo sem perder facilidade com pessoas.`;
             }
 
         } else if (exp === 'adm') {
 
             if (perfil === 'AP') {
-                copy = `TODO: adm + perfil AP quer AA → já opera acima do que pede. Tom: AA direto, mas perfil pode ir além.`;
+                copy = `TODO: adm + perfil AP quer AA → já opera acima do que pede.Tom: AA direto, mas perfil pode ir além.`;
 
             } else if (perfil === 'AA' && unanime) {
-                copy = `TODO: adm + perfil unânime AA → experiência e perfil confirmam. Tom: trazer para o digital, fortalecer.`;
+                copy = `TODO: adm + perfil unânime AA → experiência e perfil confirmam.Tom: trazer para o digital, fortalecer.`;
 
             } else if (perfil === 'AA' && secundario === 'AP') {
-                copy = `TODO: adm + AA predominante com traço AP → organização + iniciativa. Tom: não só estrutura, previne problemas.`;
+                copy = `TODO: adm + AA predominante com traço AP → organização + iniciativa.Tom: não só estrutura, previne problemas.`;
 
             } else if (perfil === 'AA' && secundario === 'SR') {
-                copy = `TODO: adm + AA predominante com traço SR → organização + comunicação. Tom: combinação rara e valiosa.`;
+                copy = `TODO: adm + AA predominante com traço SR → organização + comunicação.Tom: combinação rara e valiosa.`;
 
             } else if (perfil === 'SR') {
-                copy = `TODO: adm + perfil SR quer AA → gap técnico. Tom: desenvolver lado técnico, comunicação já é vantagem.`;
+                copy = `TODO: adm + perfil SR quer AA → gap técnico.Tom: desenvolver lado técnico, comunicação já é vantagem.`;
             }
 
         } else if (exp === 'sem') {
 
             if (perfil === 'AP') {
-                copy = `TODO: sem exp + perfil AP quer AA → já opera acima do que pede. Tom: AA direto, mas perfil pode ir além.`;
+                copy = `TODO: sem exp + perfil AP quer AA → já opera acima do que pede.Tom: AA direto, mas perfil pode ir além.`;
 
             } else if (perfil === 'AA' && unanime) {
-                copy = `TODO: sem exp + perfil unânime AA → perfil confirma. Tom: formação constrói base, perfil certo para AA.`;
+                copy = `TODO: sem exp + perfil unânime AA → perfil confirma.Tom: formação constrói base, perfil certo para AA.`;
 
             } else if (perfil === 'AA' && secundario === 'AP') {
-                copy = `TODO: sem exp + AA predominante com traço AP → perfil certo + iniciativa. Tom: formação estrutura, traço AP abre portas.`;
+                copy = `TODO: sem exp + AA predominante com traço AP → perfil certo + iniciativa.Tom: formação estrutura, traço AP abre portas.`;
 
             } else if (perfil === 'AA' && secundario === 'SR') {
-                copy = `TODO: sem exp + AA predominante com traço SR → perfil certo + comunicação. Tom: combinação rara para quem está começando.`;
+                copy = `TODO: sem exp + AA predominante com traço SR → perfil certo + comunicação.Tom: combinação rara para quem está começando.`;
 
             } else if (perfil === 'SR') {
-                copy = `TODO: sem exp + perfil SR quer AA → gap técnico. Tom: comunicação é metade do caminho, formação constrói o resto.`;
+                copy = `TODO: sem exp + perfil SR quer AA → gap técnico.Tom: comunicação é metade do caminho, formação constrói o resto.`;
             }
         }
 
@@ -473,73 +401,73 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
         if (exp === 'elite') {
 
             if (perfil === 'AP') {
-                copy = `TODO: elite + perfil AP quer SR → vai muito além do Suporte básico. Tom: lapidar, porta de entrada mas teto é mais alto.`;
+                copy = `TODO: elite + perfil AP quer SR → vai muito além do Suporte básico.Tom: lapidar, porta de entrada mas teto é mais alto.`;
 
             } else if (perfil === 'AA') {
-                copy = `TODO: elite + perfil AA quer SR → organização + histórico forte. Tom: atende bem e mantém tudo estruturado, diferencial raro.`;
+                copy = `TODO: elite + perfil AA quer SR → organização + histórico forte.Tom: atende bem e mantém tudo estruturado, diferencial raro.`;
 
             } else if (perfil === 'SR' && unanime) {
-                copy = `TODO: elite + perfil unânime SR → histórico + perfil confirmam. Tom: padrão de excelência que poucos no Suporte têm.`;
+                copy = `TODO: elite + perfil unânime SR → histórico + perfil confirmam.Tom: padrão de excelência que poucos no Suporte têm.`;
 
             } else if (perfil === 'SR' && secundario === 'AP') {
-                copy = `TODO: elite + SR predominante com traço AP → comunicação + iniciativa. Tom: não só responde, resolve antes de escalar.`;
+                copy = `TODO: elite + SR predominante com traço AP → comunicação + iniciativa.Tom: não só responde, resolve antes de escalar.`;
 
             } else if (perfil === 'SR' && secundario === 'AA') {
-                copy = `TODO: elite + SR predominante com traço AA → comunicação + organização. Tom: atende bem e mantém tudo no lugar, combinação rara.`;
+                copy = `TODO: elite + SR predominante com traço AA → comunicação + organização.Tom: atende bem e mantém tudo no lugar, combinação rara.`;
             }
 
         } else if (exp === 'atendimento') {
 
             if (perfil === 'AP') {
-                copy = `TODO: atendimento + perfil AP quer SR → vai além do Suporte. Tom: entrada sólida, perfil pode ir mais longe.`;
+                copy = `TODO: atendimento + perfil AP quer SR → vai além do Suporte.Tom: entrada sólida, perfil pode ir mais longe.`;
 
             } else if (perfil === 'AA') {
-                copy = `TODO: atendimento + perfil AA quer SR → comunicação + organização técnica. Tom: acima da média no Suporte.`;
+                copy = `TODO: atendimento + perfil AA quer SR → comunicação + organização técnica.Tom: acima da média no Suporte.`;
 
             } else if (perfil === 'SR' && unanime) {
-                copy = `TODO: atendimento + perfil unânime SR → zona natural confirmada. Tom: fortalecer dom, estruturar para o digital.`;
+                copy = `TODO: atendimento + perfil unânime SR → zona natural confirmada.Tom: fortalecer dom, estruturar para o digital.`;
 
             } else if (perfil === 'SR' && secundario === 'AP') {
-                copy = `TODO: atendimento + SR predominante com traço AP → comunicação + iniciativa. Tom: não só responde, resolve.`;
+                copy = `TODO: atendimento + SR predominante com traço AP → comunicação + iniciativa.Tom: não só responde, resolve.`;
 
             } else if (perfil === 'SR' && secundario === 'AA') {
-                copy = `TODO: atendimento + SR predominante com traço AA → comunicação + organização. Tom: combinação valiosa.`;
+                copy = `TODO: atendimento + SR predominante com traço AA → comunicação + organização.Tom: combinação valiosa.`;
             }
 
         } else if (exp === 'adm') {
 
             if (perfil === 'AP') {
-                copy = `TODO: adm + perfil AP quer SR → clareza de processos + autonomia. Tom: entrada sólida, perfil vai além.`;
+                copy = `TODO: adm + perfil AP quer SR → clareza de processos + autonomia.Tom: entrada sólida, perfil vai além.`;
 
             } else if (perfil === 'AA') {
-                copy = `TODO: adm + perfil AA quer SR → organização técnica no Suporte. Tom: não só atende, estrutura para não repetir o problema.`;
+                copy = `TODO: adm + perfil AA quer SR → organização técnica no Suporte.Tom: não só atende, estrutura para não repetir o problema.`;
 
             } else if (perfil === 'SR' && unanime) {
-                copy = `TODO: adm + perfil unânime SR → processos + comunicação. Tom: entrar rápido, combinação forte.`;
+                copy = `TODO: adm + perfil unânime SR → processos + comunicação.Tom: entrar rápido, combinação forte.`;
 
             } else if (perfil === 'SR' && secundario === 'AP') {
-                copy = `TODO: adm + SR predominante com traço AP → comunicação + iniciativa. Tom: atende e antecipa, diferencial raro.`;
+                copy = `TODO: adm + SR predominante com traço AP → comunicação + iniciativa.Tom: atende e antecipa, diferencial raro.`;
 
             } else if (perfil === 'SR' && secundario === 'AA') {
-                copy = `TODO: adm + SR predominante com traço AA → comunicação + organização. Tom: atende bem e mantém tudo no lugar.`;
+                copy = `TODO: adm + SR predominante com traço AA → comunicação + organização.Tom: atende bem e mantém tudo no lugar.`;
             }
 
         } else if (exp === 'sem') {
 
             if (perfil === 'AP') {
-                copy = `TODO: sem exp + perfil AP quer SR → autonomia e iniciativa desde o início. Tom: entrada estruturada, perfil pode ir além.`;
+                copy = `TODO: sem exp + perfil AP quer SR → autonomia e iniciativa desde o início.Tom: entrada estruturada, perfil pode ir além.`;
 
             } else if (perfil === 'AA') {
-                copy = `TODO: sem exp + perfil AA quer SR → organização te destaca no Suporte. Tom: acima da média desde o primeiro cliente.`;
+                copy = `TODO: sem exp + perfil AA quer SR → organização te destaca no Suporte.Tom: acima da média desde o primeiro cliente.`;
 
             } else if (perfil === 'SR' && unanime) {
-                copy = `TODO: sem exp + perfil unânime SR → perfil certo para começar. Tom: formação estrutura o dom natural.`;
+                copy = `TODO: sem exp + perfil unânime SR → perfil certo para começar.Tom: formação estrutura o dom natural.`;
 
             } else if (perfil === 'SR' && secundario === 'AP') {
-                copy = `TODO: sem exp + SR predominante com traço AP → comunicação + iniciativa. Tom: mapa para ir além desde o início.`;
+                copy = `TODO: sem exp + SR predominante com traço AP → comunicação + iniciativa.Tom: mapa para ir além desde o início.`;
 
             } else if (perfil === 'SR' && secundario === 'AA') {
-                copy = `TODO: sem exp + SR predominante com traço AA → comunicação + organização. Tom: combinação rara para quem está começando.`;
+                copy = `TODO: sem exp + SR predominante com traço AA → comunicação + organização.Tom: combinação rara para quem está começando.`;
             }
         }
 
@@ -549,10 +477,10 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
     } else if (redirecionado) {
 
         if (desejoFinal === 'AA') {
-            copy = `TODO: queria AP mas escolheu começar com o que tem → perfil AA. Tom: escolha inteligente, formação AV Administrativa, caminho para AP fica aberto.`;
+            copy = `TODO: queria AP mas escolheu começar com o que tem → perfil AA.Tom: escolha inteligente, formação AV Administrativa, caminho para AP fica aberto.`;
 
         } else if (desejoFinal === 'SR') {
-            copy = `TODO: queria AP mas escolheu começar com o que tem → perfil SR. Tom: escolha inteligente, formação AV Suporte, caminho para AP fica aberto.`;
+            copy = `TODO: queria AP mas escolheu começar com o que tem → perfil SR.Tom: escolha inteligente, formação AV Suporte, caminho para AP fica aberto.`;
         }
     }
 
@@ -675,11 +603,11 @@ function showResult() {
         document.getElementById('result-text').innerHTML =
             resultado.mensagem
                 .split('\n\n')
-                .map(p => `<p>${p.replace(/\n/g, '')}</p>`)
+                .map(p => `< p > ${p.replace(/\n/g, '')}</p > `)
                 .join('') +
-            `<button class="next-btn" onclick="window.location.href=getLink('${resultado.formacao.path}')">
+            `< button class="next-btn" onclick = "window.location.href=getLink('${resultado.formacao.path}')" >
                 👉 ${resultado.formacao.label}
-             </button>`;
+             </button > `;
 
         navigateTo('step6');
     }
@@ -697,7 +625,7 @@ function showCursoGratis() {
     document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
     document.getElementById('result-title').innerText = 'Comece do jeito certo!';
     document.getElementById('result-text').innerHTML = `
-        <p>Se você ainda não conhece a profissão de <strong>Assistente Virtual</strong>, o primeiro passo é entender como ela funciona.</p>
+                    < p > Se você ainda não conhece a profissão de < strong > Assistente Virtual</strong >, o primeiro passo é entender como ela funciona.</p >
         <p>Para você começar da melhor forma possível, preparamos um <strong>curso 100% gratuito</strong> onde explicamos:</p>
         <ul>
             <li>O que faz uma Assistente Virtual</li>
