@@ -144,7 +144,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
         `;
         let aexpertPre =
             `
-            <p>O seu próximo passo é organizar tudo o que você já sabe fazer, aprimorar habilidades indispensáveis, se posicionar e precificar corretamente no mercado digital.</p>
+            <p>O seu próximo passo é consolidar tudo o que você já sabe fazer, aprimorar habilidades indispensáveis, se posicionar e precificar corretamente no mercado digital.</p>
             <p>A <strong>Formação AExpert</strong> te orienta em cada etapa desse processo, mostrando quais habilidades desenvolver, como precificar seu trabalho e como adquirir e reter bons clientes.</p>
             `;
 
@@ -166,7 +166,8 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                     `
                 ${expPref}
                 ${infoBlock}                
-                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas ser organizada e executar tarefas, mas também assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>                
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas ser organizada e executar tarefas, mas também assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
+                <p>A sua experiência já demonstra familiaridade com esse nível, o que coloca você em uma posição privilegiada para evoluir mais rápido.</p>                
                ${aexpertPre}
             `;
             } else if (perfil === 'AP' && secundario === 'SR') {
@@ -175,7 +176,8 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                     `
                 ${expPref}
                 ${infoBlock}                
-                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas se comunicar bem e responder demandas, mas também assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas se comunicar bem e responder solicitações, mas também assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
+                <p>A sua experiência já demonstra familiaridade com esse nível, o que coloca você em uma posição privilegiada para evoluir mais rápido.</p>                
                 ${aexpertPre}
                 `;
             } else if (perfil === 'AA' && unanime) {
@@ -193,6 +195,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${expEvl}
                 ${infoBlock}
                 <p>Sua experiência profissional mostra que você tem familiaridade com esse nível de atuação, mas seu momento atual indica uma atuação mais voltada à execução de tarefas e atendimento, o que pode acabar te mantendo em uma rotina mais operacional e reativa no dia a dia.</p>
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde você precisa assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>                
                 ${aexpertPre}
                 `
             } else if (perfil === 'SR') {
@@ -200,7 +203,8 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 copy = `
                 ${expEvl}
                 ${infoBlock}
-                <p>Sua experiência profissional mostra que você tem familiaridade com esse nível de atuação, mas seu momento atual indica uma atuação com foco em atendimento e resposta a demandas, o que pode acabar te mantendo em uma posição mais reativa no dia a dia.</p>
+                <p>Sua experiência profissional mostra que você tem familiaridade com esse nível de atuação, mas seu momento atual indica uma atuação com foco em atendimento e resposta a solicitações, o que pode acabar te mantendo em uma posição mais reativa no dia a dia.</p>
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde você precisa assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>                
                 ${aexpertPre}
                 `;
             }
