@@ -147,7 +147,11 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
             <p>O seu próximo passo é consolidar tudo o que você já sabe fazer, aprimorar habilidades indispensáveis, se posicionar e precificar corretamente no mercado digital.</p>
             <p>A <strong>Formação AExpert</strong> te orienta em cada etapa desse processo, mostrando quais habilidades desenvolver, como precificar seu trabalho e como adquirir e reter bons clientes.</p>
             `;
+        let aexpertNew = `
+            <p>Mesmo começando do zero, é totalmente possível chegar a esse nível desde que você tenha o direcionamento certo.</p>
+            <p>A <strong>Formação AExpert</strong> foi criada exatamente para te guiar neste caminho, mostrando quais habilidades desenvolver, quais ferramentas utilizar, como se posicionar no mercado, quanto cobrar pelo seu trabalho e como conquistar e reter bons clientes.</p>
 
+            `;
         if (exp === 'elite') {
             let expPref = `<p>Suas respostas mostram aptidão para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas.</p><p>Somado à sua experiência profissional, seu perfil se encaixa de forma muito natural na Assessoria Pessoal / Executiva.</p>`;
             let expEvl = `<p>Suas respostas mostram um interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia, exatamente o que uma Assessora Pessoal / Executiva faz.</p>`;
@@ -285,18 +289,60 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 `;
             }
         } else if (exp === 'sem') {
+            let expPref = `<p>Suas respostas mostram aptidão para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas, características muito alinhadas à atuação em Assessoria Pessoal / Executiva.</p>`;
+            let expEvl = `<p>Suas respostas mostram um interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia, exatamente o que faz um Assessora Pessoal / Executiva.</p>`;
+
             if (perfil === 'AP' && unanime) {
-                copy = `QUER SER AP: sem experiência + perfil de AP →  estruturar para o digital`;
+                titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
+                copy =
+                    `
+                ${expPref}
+                ${infoBlock}                
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde você precisa assumir um papel proativo, antecipando problemas e tomando decisões.</p>                
+                ${aexpertNew}
+            `;
             } else if (perfil === 'AP' && secundario === 'AA') {
-                copy = `QUER SER AP: sem experiência + perfil de AP com traço administrativo → lapidar perfil`;
+                titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
+                copy =
+                    `
+                ${expPref}
+                ${infoBlock}                
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas ser organizada e executar tarefas, mas também assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
+                ${aexpertNew}
+            `;
             } else if (perfil === 'AP' && secundario === 'SR') {
-                copy = `QUER SER AP: sem experiência + perfil de AP com traço de atendimento → lapidar perfil`;
+                titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
+                copy =
+                    `
+                ${expPref}
+                ${infoBlock}                
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas se comunicar bem e responder a solicitações, mas também assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
+                ${aexpertNew}
+            `;
             } else if (perfil === 'AA' && unanime) {
-                copy = `QUER SER AP: sem experiência + perfil administrativo → desenvolver perfil.`;
+                titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
+                copy = `
+                ${expEvl}
+                ${infoBlock}                
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas  ser organizada e executar tarefas, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                ${aexpertNew}
+                 `;
             } else if (perfil === 'AA' && secundario === 'SR') {
-                copy = `QUER SER AP: sem experiência + perfil administrativo / atendimento → desenvolver o perfil.`;
+                titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
+                copy = `
+                ${expEvl}
+                ${infoBlock}                
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas  executar tarefas e responder a solicitações, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                ${aexpertNew}
+                 `;
             } else if (perfil === 'SR') {
-                copy = `QUER SER AP: sem experiência + perfil de atendimento → desenvolver perfil.`;
+                titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
+                copy = `
+                ${expEvl}
+                ${infoBlock}                
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas  se comunicar bem e responder a solicitações, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                ${aexpertNew}
+                 `;
             }
         }
         // ─────────────────────────────────────────────────────────────────────────
