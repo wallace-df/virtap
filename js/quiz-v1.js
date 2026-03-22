@@ -509,7 +509,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
         // ─────────────────────────────────────────────────────────────────────────
         // REDIRECIONADO (p5 = 'existente')
         // ─────────────────────────────────────────────────────────────────────────
-    } 
+    }
 
     const formacao = getFormacao(desejoFinal);
     return { formacao, titulo, mensagem: copy + incluso };
