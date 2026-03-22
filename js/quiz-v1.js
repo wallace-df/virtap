@@ -349,49 +349,42 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
         // DESEJO: AA
         // ─────────────────────────────────────────────────────────────────────────
     } else if (desejoFinal === 'AA') {
+        const avBlock = 
+        `
+        <p>A <strong>Formação em Assistência Virtual</strong> da Virtap foi feita para te guiar neste caminho, mostrando as habilidades, ferramentas e técnicas essenciais que você precisa dominar, além de como você deve se posicionar, precificar seu trabalho e conquistar seus primeiros clientes.</p>
+        `;
+        let infoBlock =
+            `
+            <p>Como Assistente Administrativa, você atua no coração operacional de muitos negócios, auxiliando em tarefas como:</p>
+            <ul>
+                <li>Organização de arquivos, documentos e planilhas</li>
+                <li>Controle de prazos e acompanhamento de tarefas</li>
+                <li>Emissão de documentos e suporte administrativo</li>
+                <li>Organização de processos internos</li>
+                <li>Apoio financeiro e operacional</li>
+            </ul>
+            <p class="main-text">O próximo passo para você</p>
+            `;
 
         if (exp === 'elite') {
-
-            if (perfil === 'AP') {
-                // 🔼 Upgrade: elite + perfil AP quer AA → subvaloriza
-                copy = `TODO: bagagem elite + perfil AP quer AA → já opera acima do que pede.Tom: AA sólido para começar, mapa do topo na mão.`;
-
-            } else if (perfil === 'AA' && unanime) {
-                // ✅ Match total: elite + perfil 100% AA
-                copy = `TODO: bagagem elite + perfil unânime AA → bagagem e perfil confirmam.Tom: fortalecer diferencial, posicionar nos bastidores.`;
-
-            } else if (perfil === 'AA' && secundario === 'AP') {
-                // ✅ Match forte: elite + AA predominante + traço AP reforça
-                copy = `TODO: bagagem elite + AA predominante com traço AP → organização + iniciativa complementar.Tom: traço AP torna ainda mais completa.`;
-
-            } else if (perfil === 'AA' && secundario === 'SR') {
-                // ✅ Match forte: elite + AA predominante + traço SR reforça
-                copy = `TODO: bagagem elite + AA predominante com traço SR → organização + comunicação complementar.Tom: combinação rara, fortalecer base técnica.`;
-
-            } else if (perfil === 'SR') {
-                // ⚠️ Gap: elite + perfil SR quer AA
-                copy = `TODO: bagagem elite + perfil SR quer AA → opera mais em comunicação do que processos.Tom: desenvolver lado técnico sem perder habilidade de comunicação.`;
-            }
-
-        } else if (exp === 'atendimento') {
-
-            if (perfil === 'AP') {
-                copy = `TODO: atendimento + perfil AP quer AA → já opera acima do que pede.Tom: AA sólido para começar, mapa do topo na mão.`;
-
-            } else if (perfil === 'AA' && unanime) {
-                copy = `TODO: atendimento + perfil unânime AA → experiência e perfil confirmam.Tom: fortalecer diferencial técnico.`;
-
-            } else if (perfil === 'AA' && secundario === 'AP') {
-                copy = `TODO: atendimento + AA predominante com traço AP → organização + iniciativa.Tom: traço AP torna ainda mais completa.`;
-
-            } else if (perfil === 'AA' && secundario === 'SR') {
-                copy = `TODO: atendimento + AA predominante com traço SR → organização + comunicação.Tom: combinação valiosa nos bastidores.`;
-
-            } else if (perfil === 'SR') {
-                copy = `TODO: atendimento + perfil SR quer AA → gap técnico.Tom: desenvolver lado administrativo sem perder facilidade com pessoas.`;
-            }
+            titulo = 'Você pode brilhar como:<br/> Assistente Administrativa'
+            copy =
+                `
+            <p>Sua experiência profissional aponta que você tem familiaridade com o nível de exigência que bons clientes tem, o que te coloca em enorme vantagem para atuar como braço direito de um negócio.</p>
+            ${infoBlock}
+            <p>O próximo passo para você é estruturar seu conhecimento para atuar no mercado digital.</p>
+            ${avBlock}
+        `;
 
         } else if (exp === 'adm') {
+            titulo = 'Você pode brilhar como:<br/> Assistente Administrativa'
+            copy = `
+                <p>Sua experiência administrativa se encaixa naturalmente aqui. Você já lida com processos, prazos e rotinas operacionais, exatamente o que clientes buscam para apoiar seus negócios.</p>
+                ${infoBlock}
+                <p>O que te falta agora é adaptar sua experiência profissional para o mercado digital: saber se posicionar, precificar corretamente e conquistar seus primeiros clientes remotos.</p>
+                ${avBlock}
+            `;
+        } else if (exp === 'atendimento') {
 
             if (perfil === 'AP') {
                 copy = `TODO: adm + perfil AP quer AA → já opera acima do que pede.Tom: AA direto, mas perfil pode ir além.`;
@@ -566,6 +559,14 @@ function advance() {
     state.flowIndex++;
     if (state.flowIndex >= flow.length) return;
 
+    const justAnswered = flow[state.flowIndex - 1]; // step que acabou de ser respondido
+
+    // só pula para resultado se acabou de responder o step2 (desejo)
+    if (state.flow === 'iniciante' && justAnswered === 'step2' && state.desejo !== 'AP') {
+        showResult();
+        return;
+    }
+
     let nextId = flow[state.flowIndex];
 
     if (nextId === 'step5') {
@@ -578,7 +579,7 @@ function advance() {
     }
 
     if (nextId === 'step5') {
-        updateStep5Content(); // ← adiciona essa linha
+        updateStep5Content();
     }
 
     if (nextId === 'step-result') {
@@ -588,7 +589,6 @@ function advance() {
 
     navigateTo(nextId);
 }
-
 function goBack() {
     if (state.flowIndex > 0) {
         state.flowIndex--;
