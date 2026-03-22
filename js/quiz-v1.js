@@ -349,8 +349,8 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
         // DESEJO: AA
         // ─────────────────────────────────────────────────────────────────────────
     } else if (desejoFinal === 'AA') {
-        const avBlock = 
-        `
+        const avBlock =
+            `
         <p>A <strong>Formação em Assistência Virtual</strong> da Virtap foi feita para te guiar neste caminho, mostrando as habilidades, ferramentas e técnicas essenciais que você precisa dominar, além de como você deve se posicionar, precificar seu trabalho e conquistar seus primeiros clientes.</p>
         `;
         let infoBlock =
@@ -381,27 +381,27 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
             copy = `
                 <p>Sua experiência administrativa se encaixa naturalmente aqui. Você já lida com processos, prazos e rotinas operacionais, exatamente o que clientes buscam para apoiar seus negócios.</p>
                 ${infoBlock}
-                <p>O que te falta agora é adaptar sua experiência profissional para o mercado digital: saber se posicionar, precificar corretamente e conquistar seus primeiros clientes remotos.</p>
+                <p>O que te falta agora é adaptar sua experiência profissional para o mercado digital.</p>
                 ${avBlock}
             `;
         } else if (exp === 'atendimento') {
 
-            if (perfil === 'AP') {
-                copy = `TODO: adm + perfil AP quer AA → já opera acima do que pede.Tom: AA direto, mas perfil pode ir além.`;
-
-            } else if (perfil === 'AA' && unanime) {
-                copy = `TODO: adm + perfil unânime AA → experiência e perfil confirmam.Tom: trazer para o digital, fortalecer.`;
-
-            } else if (perfil === 'AA' && secundario === 'AP') {
-                copy = `TODO: adm + AA predominante com traço AP → organização + iniciativa.Tom: não só estrutura, previne problemas.`;
-
-            } else if (perfil === 'AA' && secundario === 'SR') {
-                copy = `TODO: adm + AA predominante com traço SR → organização + comunicação.Tom: combinação rara e valiosa.`;
-
-            } else if (perfil === 'SR') {
-                copy = `TODO: adm + perfil SR quer AA → gap técnico.Tom: desenvolver lado técnico, comunicação já é vantagem.`;
-            }
-
+            titulo = 'Você pode brilhar como:<br/> Secretária Administrativa'
+            copy = `
+            <p>Sua experiência com atendimento combinada com a atuação administrativa forma um perfil completo e valorizado no mercado: a Secretária Administrativa.</p>
+            <p>Como Secretária Administrativa, você atua tanto no relacionamento com clientes quanto na organização interna dos negócios, auxiliando em tarefas como:</p>
+            <ul>
+                <li>Atendimento e suporte a clientes via WhatsApp e redes sociais</li>
+                <li>Agendamento de compromissos e gestão de agenda</li>
+                <li>Organização de arquivos, documentos e planilhas</li>
+                <li>Controle de prazos e acompanhamento de tarefas</li>
+                <li>Emissão de documentos e suporte administrativo</li>
+                <li>Organização de processos internos</li>
+            </ul>
+            <p class="main-text">O próximo passo para você</p>
+            <p>Você já domina a interação com pessoas e a resolução de demandas. Agora, o próximo passo é desenvolver o lado técnico e operacional e adaptar sua experiência ao mercado digital.</p>
+            ${avBlock}
+            `;
         } else if (exp === 'sem') {
 
             if (perfil === 'AP') {
