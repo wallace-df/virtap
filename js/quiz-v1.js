@@ -185,7 +185,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${aexpertPre}
                 `;
             } else if (perfil === 'AA' && unanime) {
-                titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
+                titulo = 'Você pode  trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
                 ${expEvl}
                 ${infoBlock}
@@ -194,7 +194,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${aexpertPre}
            `;
             } else if (perfil === 'AA' && secundario === 'SR') {
-                titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
+                titulo = 'Você pode  trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
                 ${expEvl}
                 ${infoBlock}
@@ -203,7 +203,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${aexpertPre}
                 `
             } else if (perfil === 'SR') {
-                titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
+                titulo = 'Você pode  trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
                 ${expEvl}
                 ${infoBlock}
@@ -216,7 +216,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
             let expPref = `<p>Suas respostas mostram aptidão para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas, características muito alinhadas à atuação em Assessoria Pessoal / Executiva.</p>`;
             let expEvl = `<p>Suas respostas mostram um interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia, exatamente o que faz um Assessora Pessoal / Executiva.</p>`;
             if (perfil === 'AP' && (unanime || secundario === 'AA')) {
-                titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
+                titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
                 ${expPref}
@@ -225,7 +225,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${aexpertPre}
             `;
             } else if (perfil === 'AP' && secundario === 'SR') {
-                titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
+                titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
                 ${expPref}
@@ -234,7 +234,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${aexpertPre}
                 `;
             } else if (perfil === 'AA' && unanime) {
-                titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
+                titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
                 ${expEvl}
                 ${infoBlock}                
@@ -242,7 +242,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${aexpertPre}
                 `;
             } else {
-                titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
+                titulo = 'Você pode  trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
                 ${expEvl}
                 ${infoBlock}                
@@ -272,7 +272,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${aexpertPre}
                 `;
             } else if (perfil === 'AA') {
-                titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
+                titulo = 'Você pode  trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
                 ${expEvl}
                 ${infoBlock}                
@@ -280,7 +280,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${aexpertPre}
                 `;
             } else {
-                titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
+                titulo = 'Você pode  trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
                 ${expEvl}
                 ${infoBlock}                
@@ -509,15 +509,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
         // ─────────────────────────────────────────────────────────────────────────
         // REDIRECIONADO (p5 = 'existente')
         // ─────────────────────────────────────────────────────────────────────────
-    } else if (redirecionado) {
-
-        if (desejoFinal === 'AA') {
-            copy = `TODO: queria AP mas escolheu começar com o que tem → perfil AA.Tom: escolha inteligente, formação AV Administrativa, caminho para AP fica aberto.`;
-
-        } else if (desejoFinal === 'SR') {
-            copy = `TODO: queria AP mas escolheu começar com o que tem → perfil SR.Tom: escolha inteligente, formação AV Suporte, caminho para AP fica aberto.`;
-        }
-    }
+    } 
 
     const formacao = getFormacao(desejoFinal);
     return { formacao, titulo, mensagem: copy + incluso };
@@ -558,15 +550,14 @@ function updateStep5Content() {
     const p = document.querySelector('#step5 p');
     const [btn1, btn2] = document.querySelectorAll('#step5 .option-btn');
 
-    h2.textContent = 'Antes do seu resultado, uma pergunta...';
-    p.textContent = 'Existem dois caminhos possíveis para você. Qual combina mais com o que você busca agora?';
+    h2.textContent = 'O que faz mais sentido para você agora?';
 
     if (exp === 'sem') {
         btn1.textContent = 'Quero aumentar meu potencial de ganhos, mesmo assumindo mais responsabilidade e atendendo clientes mais exigentes.';
         btn2.textContent = 'Prefiro começar com mais tranquilidade, menos pressão e uma rotina mais previsível.';
     } else {
         btn1.textContent = 'Quero aumentar meu potencial de ganhos, mesmo assumindo mais responsabilidade e atendendo clientes mais exigentes.';
-        btn2.textContent = 'Prefiro começar usando as habilidades que já tenho e crescer a partir delas.';
+        btn2.textContent = 'Prefiro começar com mais tranquilidade e menos pressão, usando as habilidades que já tenho e crescer a partir delas.';
     }
 }
 
