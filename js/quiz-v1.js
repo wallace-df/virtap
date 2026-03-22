@@ -552,6 +552,25 @@ function navigateTo(stepId) {
     window.scrollTo(0, 0);
 }
 
+function updateStep5Content() {
+    const exp = EXP_MAP[state.experience] ?? 'sem';
+    const h2 = document.querySelector('#step5 h2');
+    const p = document.querySelector('#step5 p');
+    const [btn1, btn2] = document.querySelectorAll('#step5 .option-btn');
+
+    if (exp === 'sem') {
+        h2.textContent = 'Só mais uma coisa antes do seu resultado...';
+        p.textContent = 'Você ainda não tem experiência profissional nessa área — e tudo bem. Mas é importante entender o que isso significa para o caminho que você escolheu.';
+        btn1.textContent = 'Quero aprender tudo o que for necessário para chegar na Assessoria Pessoal, mesmo partindo do zero.';
+        btn2.textContent = 'Prefiro começar por algo mais acessível e crescer conforme ganho experiência.';
+    } else {
+        h2.textContent = 'Só mais uma coisa antes do seu resultado...';
+        p.textContent = 'Seus resultados mostram que o seu perfil atual é diferente do caminho que você escolheu. Isso não é um problema — mas é uma informação importante para te direcionar certo.';
+        btn1.textContent = 'Quero me desafiar e chegar no nível de Assessoria Pessoal, mesmo que precise desenvolver novas habilidades.';
+        btn2.textContent = 'Prefiro começar usando as habilidades que já tenho e crescer a partir delas.';
+    }
+}
+
 function advance() {
     const flow = FLOWS[state.flow];
     state.flowIndex++;
@@ -566,6 +585,10 @@ function advance() {
             if (state.flowIndex >= flow.length) return;
             nextId = flow[state.flowIndex];
         }
+    }
+
+    if (nextId === 'step5') {
+        updateStep5Content(); // ← adiciona essa linha
     }
 
     if (nextId === 'step-result') {
