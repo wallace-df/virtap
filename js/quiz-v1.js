@@ -558,15 +558,14 @@ function updateStep5Content() {
     const p = document.querySelector('#step5 p');
     const [btn1, btn2] = document.querySelectorAll('#step5 .option-btn');
 
+    h2.textContent = 'Antes do seu resultado, uma pergunta...';
+    p.textContent = 'Existem dois caminhos possíveis para você. Qual combina mais com o que você busca agora?';
+
     if (exp === 'sem') {
-        h2.textContent = 'Só mais uma coisa antes do seu resultado...';
-        p.textContent = 'Você ainda não tem experiência profissional nessa área — e tudo bem. Mas é importante entender o que isso significa para o caminho que você escolheu.';
-        btn1.textContent = 'Quero aprender tudo o que for necessário para chegar na Assessoria Pessoal, mesmo partindo do zero.';
-        btn2.textContent = 'Prefiro começar por algo mais acessível e crescer conforme ganho experiência.';
+        btn1.textContent = 'Quero aumentar meu potencial de ganhos, mesmo assumindo mais responsabilidade e atendendo clientes mais exigentes.';
+        btn2.textContent = 'Prefiro começar com mais tranquilidade, menos pressão e uma rotina mais previsível.';
     } else {
-        h2.textContent = 'Só mais uma coisa antes do seu resultado...';
-        p.textContent = 'Seus resultados mostram que o seu perfil atual é diferente do caminho que você escolheu. Isso não é um problema — mas é uma informação importante para te direcionar certo.';
-        btn1.textContent = 'Quero me desafiar e chegar no nível de Assessoria Pessoal, mesmo que precise desenvolver novas habilidades.';
+        btn1.textContent = 'Quero aumentar meu potencial de ganhos, mesmo assumindo mais responsabilidade e atendendo clientes mais exigentes.';
         btn2.textContent = 'Prefiro começar usando as habilidades que já tenho e crescer a partir delas.';
     }
 }
