@@ -176,7 +176,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                     `
                 ${expPref}
                 ${infoBlock}                
-                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas se comunicar bem e responder solicitações, mas também assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas se comunicar bem e responder a solicitações, mas também assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
                 <p>A sua experiência já demonstra familiaridade com esse nível, o que coloca você em uma posição privilegiada para evoluir mais rápido.</p>                
                 ${aexpertPre}
                 `;
@@ -194,7 +194,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 copy = `
                 ${expEvl}
                 ${infoBlock}
-                <p>Sua experiência profissional mostra que você tem familiaridade com esse nível de atuação, mas seu momento atual indica uma atuação mais voltada à execução de tarefas e atendimento, o que pode acabar te mantendo em uma rotina mais operacional e reativa no dia a dia.</p>
+                <p>Sua experiência profissional mostra que você tem familiaridade com esse nível de atuação, mas seu momento atual indica uma atuação mais voltada à execução de tarefas e resposta a solicitações, o que pode acabar te mantendo em uma rotina mais operacional e reativa no dia a dia.</p>
                 <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde você precisa assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>                
                 ${aexpertPre}
                 `
@@ -211,14 +211,13 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
         } else if (exp === 'adm') {
             let expPref = `<p>Suas respostas mostram aptidão para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas, características muito alinhadas à atuação em Assessoria Pessoal / Executiva.</p>`;
             let expEvl = `<p>Suas respostas mostram um interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia, exatamente o que faz um Assessora Pessoal / Executiva.</p>`;
-
             if (perfil === 'AP' && (unanime || secundario === 'AA')) {
                 titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
                 ${expPref}
                 ${infoBlock}                
-                <p>Sua base administrativa amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas organizar e executar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                <p>Sua experiência administrativa é uma grande vantagem e amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar tarefas, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
             `;
             } else if (perfil === 'AP' && secundario === 'SR') {
@@ -227,7 +226,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                     `
                 ${expPref}
                 ${infoBlock}                
-                <p>Sua base administrativa amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas organizar, executar e comunicar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                <p>Sua experiência administrativa é uma grande vantagem e amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar tarefas e responder a solicitações, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
                 `;
             } else if (perfil === 'AA' && unanime) {
@@ -235,7 +234,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 copy = `
                 ${expEvl}
                 ${infoBlock}                
-                <p>Sua base administrativa amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas organizar e executar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                <p>Sua experiência administrativa é uma grande vantagem e amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar tarefas, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
                 `;
             } else {
@@ -243,18 +242,20 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 copy = `
                 ${expEvl}
                 ${infoBlock}                
-                <p>Sua base administrativa amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas organizar, executar e comunicar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                <p>Sua experiência administrativa é uma grande vantagem e amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar tarefas e responder a solicitações, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
                 `;
             }
         } else if (exp === 'atendimento') {
+            let expPref = `<p>Suas respostas mostram aptidão para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas, características muito alinhadas à atuação em Assessoria Pessoal / Executiva.</p>`;
+            let expEvl = `<p>Suas respostas mostram um interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia, exatamente o que faz um Assessora Pessoal / Executiva.</p>`;
             if (perfil === 'AP' && (unanime || secundario === 'SR')) {
                 titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
                 ${expPref}
                 ${infoBlock}                
-                <p>Sua base em antedimento é um ótimo ponto de partida, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde desafio é sair da reatividade e assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
+                <p>Sua experiência com atendimento é um ótimo ponto de partida, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde desafio é sair da reatividade e assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
                 ${aexpertPre}
             `;
             } else if (perfil === 'AP' && secundario === 'AA') {
@@ -263,15 +264,15 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                     `
                 ${expPref}
                 ${infoBlock}                
-                <p>Sua base em antedimento é um ótimo ponto de partida, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas responder, organizar e executar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                <p>Sua experiência com atendimento é um ótimo ponto de partida, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar tarefas e responder a solicitações, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
                 `;
-            } else if (perfil === 'AA' && unanime) {
+            } else if (perfil === 'AA') {
                 titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
                 ${expEvl}
                 ${infoBlock}                
-                <p>Sua experiência em atendimento é um ótimo ponto de partida, mas como Assessora Pessoal / Executiva, o desafio é sair da reatividade do suporte e passar a gerenciar a rotina e as decisões de forma estratégica.</p>
+                <p>Sua experiência com atendimento é um ótimo ponto de partida, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar tarefas e responder a solicitações, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
                 `;
             } else {
@@ -279,7 +280,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 copy = `
                 ${expEvl}
                 ${infoBlock}                
-                <p>Sua base em suporte te dá agilidade na resolução de problemas, mas como Assessora Pessoal / Executiva, você eleva seu nível de entrega, passando a antecipar demandas e tomar decisões que facilitam a vida do cliente.</p>
+                <p>Sua experiência com atendimento é um ótimo ponto de partida, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde desafio é sair da reatividade e assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
                 ${aexpertPre}
                 `;
             }
