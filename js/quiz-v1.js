@@ -28,8 +28,8 @@ const EXP_MAP = {
 };
 
 const FORMACOES = {
-    AP: { label: 'Conheça a Formação AExpert', path: '/formacoes/assistencia-pessoal' },
-    AV: { label: 'Formação em Assistência Virtual', path: '/formacoes/assistencia-virtual' },
+    AP: { id: 'formacao-aexpert', label: 'Conheça a Formação AExpert', path: '/formacoes/assistencia-pessoal' },
+    AV: { id: 'formacao-av', label: 'Formação em Assistência Virtual', path: '/formacoes/assistencia-virtual' },
 };
 
 function getFormacao(perfil) {
@@ -145,19 +145,19 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
         let aexpertPre =
             `
             <p>O seu próximo passo é organizar tudo o que você já sabe fazer, aprimorar habilidades indispensáveis, se posicionar e precificar corretamente no mercado digital.</p>
-            <p>A <strong>Formação AExpert</strong> te orienta em cada etapa desse processo, mostrando quais habilidades desenvolver, como precificar seu trabalho e como atrair e reter bons clientes.</p>
+            <p>A <strong>Formação AExpert</strong> te orienta em cada etapa desse processo, mostrando quais habilidades desenvolver, como precificar seu trabalho e como adquirir e reter bons clientes.</p>
             `;
 
         if (exp === 'elite') {
-            let expPref = `p>Suas respostas mostram aptidão para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas. Somado à sua experiência profissional, seu perfil se encaixa de forma muito natural na Assessoria Pessoal / Executiva.</p>`;
-            let expEvl = `<p>Suas respostas mostram um interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia, exatamente o que faz uma Assessora Pessoal / Executiva.</p>`;
+            let expPref = `<p>Suas respostas mostram aptidão para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas.</p><p>Somado à sua experiência profissional, seu perfil se encaixa de forma muito natural na Assessoria Pessoal / Executiva.</p>`;
+            let expEvl = `<p>Suas respostas mostram um interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia, exatamente o que uma Assessora Pessoal / Executiva faz.</p>`;
             if (perfil === 'AP' && unanime) {
                 titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
                 ${expPref}
                 ${infoBlock}                
-                <p>Sua experiência profissional mostra que você já esteve próxima desse nível de atuação, tornando sua transição muito mais fácil.</p>
+                <p>Sua experiência profissional mostra que você tem familiaridade com esse nível de atuação, tornando sua transição muito mais natural.</p>
                 ${aexpertPre}
             `;
             } else if (perfil === 'AP' && secundario === 'AA') {
@@ -166,7 +166,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                     `
                 ${expPref}
                 ${infoBlock}                
-                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas organizar e executar, mas também antecipar, decidir e conduzir prioridades.</p>                
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas ser organizada e executar tarefas, mas também assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>                
                ${aexpertPre}
             `;
             } else if (perfil === 'AP' && secundario === 'SR') {
@@ -175,7 +175,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                     `
                 ${expPref}
                 ${infoBlock}                
-                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas se comunicar e responder demandas, mas também antecipar, decidir e conduzir prioridades.</p>
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas se comunicar bem e responder demandas, mas também assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
                 ${aexpertPre}
                 `;
             } else if (perfil === 'AA' && unanime) {
@@ -183,7 +183,8 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 copy = `
                 ${expEvl}
                 ${infoBlock}
-                <p>Sua experiência profissional mostra que você já esteve próxima desse nível de atuação, mas seu momento atual indica uma atuação mais voltada à organização e execução, o que pode acabar limitando seu posicionamento nesse nível mais alto.</p>
+                <p>Sua experiência profissional mostra que você tem familiaridade com esse nível de atuação, mas seu momento atual indica uma atuação mais voltada à organização e execução, o que pode acabar te mantendo em uma rotina mais operacional no dia a dia.</p>
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde você precisa assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>                
                 ${aexpertPre}
            `;
             } else if (perfil === 'AA' && secundario === 'SR') {
@@ -191,7 +192,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 copy = `
                 ${expEvl}
                 ${infoBlock}
-                <p>Sua experiência profissional mostra que você já esteve próxima desse nível de atuação, mas seu momento atual combina organização de tarefas com atendimento e resposta a demandas, o que pode acabar te mantendo em uma rotina mais operacional e reativa no dia a dia.</p>
+                <p>Sua experiência profissional mostra que você tem familiaridade com esse nível de atuação, mas seu momento atual indica uma atuação mais voltada à execução de tarefas e atendimento, o que pode acabar te mantendo em uma rotina mais operacional e reativa no dia a dia.</p>
                 ${aexpertPre}
                 `
             } else if (perfil === 'SR') {
@@ -199,7 +200,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 copy = `
                 ${expEvl}
                 ${infoBlock}
-                <p>Sua experiência profissional mostra que você já esteve próxima desse nível de atuação, mas seu momento atual indica uma atuação com foco em atendimento e resposta a demandas, o que pode acabar te mantendo em uma posição mais reativa no dia a dia.</p>
+                <p>Sua experiência profissional mostra que você tem familiaridade com esse nível de atuação, mas seu momento atual indica uma atuação com foco em atendimento e resposta a demandas, o que pode acabar te mantendo em uma posição mais reativa no dia a dia.</p>
                 ${aexpertPre}
                 `;
             }
@@ -213,7 +214,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                     `
                 ${expPref}
                 ${infoBlock}                
-                <p>Sua base administrativa amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                <p>Sua base administrativa amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas organizar e executar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
             `;
             } else if (perfil === 'AP' && secundario === 'SR') {
@@ -222,7 +223,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                     `
                 ${expPref}
                 ${infoBlock}                
-                <p>Sua base administrativa amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar e comunicar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                <p>Sua base administrativa amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas organizar, executar e comunicar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
                 `;
             } else if (perfil === 'AA' && unanime) {
@@ -230,7 +231,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 copy = `
                 ${expEvl}
                 ${infoBlock}                
-                <p>Sua base administrativa amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                <p>Sua base administrativa amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas organizar e executar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
                 `;
             } else {
@@ -238,23 +239,45 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 copy = `
                 ${expEvl}
                 ${infoBlock}                
-                <p>Sua base administrativa amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar e comunicar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                <p>Sua base administrativa amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas organizar, executar e comunicar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
                 `;
             }
         } else if (exp === 'atendimento') {
-            if (perfil === 'AP' && unanime) {
-                copy = `QUER SER AP: experiência atendimento + perfil de AP →  estruturar para o digital, experiencia com atendimento é plus`;
+            if (perfil === 'AP' && (unanime || secundario === 'SR')) {
+                titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
+                copy =
+                    `
+                ${expPref}
+                ${infoBlock}                
+                <p>Sua base em antedimento é um ótimo ponto de partida, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde desafio é sair da reatividade e assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
+                ${aexpertPre}
+            `;
             } else if (perfil === 'AP' && secundario === 'AA') {
-                copy = `QUER SER AP: experiência atendimento + perfil de AP com traço administrativo → lapidar perfil, experiencia com atendimento é plus.`;
-            } else if (perfil === 'AP' && secundario === 'SR') {
-                copy = `QUER SER AP: experiência atendimento + perfil de AP com traço de atendimento → lapidar perfil, experiencia com atendimento é plus.`;
+                titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
+                copy =
+                    `
+                ${expPref}
+                ${infoBlock}                
+                <p>Sua base em antedimento é um ótimo ponto de partida, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas responder, organizar e executar, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                ${aexpertPre}
+                `;
             } else if (perfil === 'AA' && unanime) {
-                copy = `QUER SER AP: experiência atendimento + perfil administrativo → desenvolver perfil, experiencia com atendimento é plus.`;
-            } else if (perfil === 'AA' && secundario === 'SR') {
-                copy = `QUER SER AP: experiência atendimento + perfil administrativo / atendimento → desenvolver o perfil, experiencia com atendimento é plus.`;
-            } else if (perfil === 'SR') {
-                copy = `QUER SER AP: experiência atendimento + perfil de atendimento → desenvolver perfil, experiencia com atendimento é plus.`;
+                titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
+                copy = `
+                ${expEvl}
+                ${infoBlock}                
+                <p>Sua experiência em atendimento é um ótimo ponto de partida, mas como Assessora Pessoal / Executiva, o desafio é sair da reatividade do suporte e passar a gerenciar a rotina e as decisões de forma estratégica.</p>
+                ${aexpertPre}
+                `;
+            } else {
+                titulo = 'Você tem base para trabalhar como:<br/> Assessora Pessoal / Executiva'
+                copy = `
+                ${expEvl}
+                ${infoBlock}                
+                <p>Sua base em suporte te dá agilidade na resolução de problemas, mas como Assessora Pessoal / Executiva, você eleva seu nível de entrega, passando a antecipar demandas e tomar decisões que facilitam a vida do cliente.</p>
+                ${aexpertPre}
+                `;
             }
         } else if (exp === 'sem') {
             if (perfil === 'AP' && unanime) {
@@ -559,14 +582,15 @@ function showResult() {
     if (state.flow === 'iniciante') {
         const exp = EXP_MAP[state.experience] ?? 'sem';
         const resultado = processarQuiz(state.desejo, state.p2, state.p3, exp, state.p5);
+        state.exp = exp;
 
         document.getElementById('result-title').innerHTML = resultado.titulo;
         document.getElementById('result-text').innerHTML =
             resultado.mensagem
                 .split('\n\n')
-                .map(p => `< p > ${p.replace(/\n/g, '')}</p > `)
+                .map(p => `<p> ${p.replace(/\n/g, '')}</p > `)
                 .join('') +
-            `< button class="next-btn" onclick = "window.location.href=getLink('${resultado.formacao.path}')" >
+            `<button class="next-btn" onclick = "window.location.href=getLink('${resultado.formacao.path}', '${resultado.formacao.id}', state)">
                 👉 ${resultado.formacao.label}
              </button > `;
 
@@ -586,7 +610,7 @@ function showCursoGratis() {
     document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
     document.getElementById('result-title').innerText = 'Comece do jeito certo!';
     document.getElementById('result-text').innerHTML = `
-                    < p > Se você ainda não conhece a profissão de < strong > Assistente Virtual</strong >, o primeiro passo é entender como ela funciona.</p >
+                    <p> Se você ainda não conhece a profissão de <strong> Assistente Virtual</strong>, o primeiro passo é entender como ela funciona.</p>
         <p>Para você começar da melhor forma possível, preparamos um <strong>curso 100% gratuito</strong> onde explicamos:</p>
         <ul>
             <li>O que faz uma Assistente Virtual</li>
@@ -605,7 +629,7 @@ function showCursoGratis() {
 
 // ─── UTM ──────────────────────────────────────────────────────────────────────
 
-function getLink(path) {
+function getLink(path, campaign, state) {
     const utm = getUTMParams();
     const params = new URLSearchParams();
 
@@ -613,27 +637,39 @@ function getLink(path) {
         const s = getNullableValue(utm.utm_last.utm_source);
         const m = getNullableValue(utm.utm_last.utm_medium);
         const c = getNullableValue(utm.utm_last.utm_campaign);
-        const ct = getNullableValue(utm.utm_last.utm_content);
+        let ct = getNullableValue(utm.utm_last.utm_content);
+        if (!ct) {
+            ct = 'main-quiz';
+        } else {
+            ct += '-main-quiz'
+        }
+        if (state) {
+            ct += `-${state.desejo}-${state.p2}-${state.p3}-${state.exp}`;
+        }
         if (s) params.set('utm_source', s);
         if (m) params.set('utm_medium', m);
         if (c) params.set('utm_campaign', c);
         if (ct) params.set('utm_content', ct);
     } else {
         params.set('utm_source', 'virtap');
-        params.set('utm_medium', 'quiz');
-        params.set('utm_campaign', 'formacao');
-        params.set('utm_content', 'quiz-principal');
+        params.set('utm_medium', 'site');
+        params.set('utm_campaign', campaign);
+        let c = 'main-quiz';
+        if (state) {
+            c += `-${state.desejo}-${state.p2}-${state.p3}-${state.exp}`;
+        }
+        params.set('utm_content', c);
     }
 
     return path + '?' + params.toString();
 }
 
 function getFreeCourseLink() {
-    return getLink('/curso-assistente-virtual');
+    return getLink('/curso-assistente-virtual', 'curso-gratuito');
 }
 
 function getFormacaoAExpertLink() {
-    return getLink('/formacoes/assistencia-pessoal');
+    return getLink('/formacoes/assistencia-pessoal', 'formacao-aexpert');
 }
 
 function getNullableValue(val) {
