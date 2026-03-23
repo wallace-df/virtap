@@ -1,7 +1,7 @@
 // ─── FLOWS ────────────────────────────────────────────────────────────────────
 const FLOWS = {
     iniciante: ['step1', 'step2', 'step3', 'step4', 'step5', 'step-result'],
-    atuante: ['step8', 'step9', 'step10', 'step11', 'step-result'],
+    atuante: ['step8', 'step9', 'step-result'],
 };
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
@@ -13,10 +13,8 @@ const state = {
     p2: null,
     p3: null,
     p5: null,
-    areaAtual: null,
-    dor: null,
-    perfilValidacao: null,
-    ambicao: null,
+    areaAtuante: null,
+    dorAtuante: null
 };
 
 // ─── DADOS ────────────────────────────────────────────────────────────────────
@@ -32,74 +30,15 @@ const FORMACOES = {
     AV: { id: 'formacao-av', label: 'Formação em Assistência Virtual', path: '/formacoes/assistencia-virtual' },
 };
 
+const RESULTS_ATUANTE = {
+    clientes: { titulo: '...', mensagem: `...`, btn: { label: '👉 Plataforma de Vagas', path: '/plataforma-de-vagas', id: 'plataforma-vagas' } },
+    especializar: { titulo: '...', mensagem: `...`, btn: { label: '👉 Formação AExpert', path: '/formacoes/assistencia-pessoal', id: 'formacao-aexpert' } },
+    escalar: { titulo: '...', mensagem: `...`, btn: { label: '👉 Mastermind', path: '/mastermind', id: 'mastermind' } },
+};
+
 function getFormacao(perfil) {
     return perfil === 'AP' ? FORMACOES.AP : FORMACOES.AV;
 }
-
-const RESULTS_ATUANTE = {
-    AP: {
-        title: "<span>Você pode brilhar como:</span>Assessora Pessoal",
-        text: `
-            <p>Suas respostas mostram tendência para tomar iniciativa, resolver pendências e ajudar a organizar a rotina de alguém: habilidades indispensáveis para uma Assessora Pessoal.</p>
-            <p>A Assessoria Pessoal é uma das áreas mais valorizadas da Assistência Virtual, onde profissionais bem posicionadas podem faturar R$ 10.000 ou mais por mês.</p>
-            <p class="main-text">O próximo passo para você</p>
-            <p>A <strong>Formação AExpert</strong> é a referência máxima no mercado de alto nível, criada exatamente para desenvolver competências que clientes exigentes realmente valorizam.</p>
-            <button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-pessoal')">👉 Conheça a Formação AExpert</button>
-        `
-    },
-    SR: {
-        title: "<span>Você pode brilhar como:</span>Secretária Remota",
-        text: `
-            <p>Suas respostas mostram facilidade para comunicação, atendimento e relacionamento com pessoas.</p>
-            <p class="main-text">O próximo passo para você</p>
-            <p>Na <strong>Formação em Assistência Virtual</strong> da Virtap, você terá acesso a todas as técnicas e ferramentas essenciais para profissionalizar seu serviço.</p>
-            <button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-virtual')">👉 Formação em Assistência Virtual</button>
-        `
-    },
-    AA: {
-        title: "<span>Você pode brilhar como:</span>Assistente Administrativa",
-        text: `
-            <p>Suas respostas mostram forte organização, atenção aos detalhes e facilidade para lidar com rotinas estruturadas.</p>
-            <p class="main-text">O próximo passo para você</p>
-            <p>Na <strong>Formação em Assistência Virtual</strong> da Virtap, você terá acesso a todas as técnicas e ferramentas essenciais para profissionalizar seu serviço.</p>
-            <button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-virtual')">👉 Formação em Assistência Virtual</button>
-        `
-    },
-    AP_SR: {
-        title: "<span>Seu perfil:</span>Assistente Pessoal com habilidade em atendimento",
-        text: `
-            <p>Suas respostas mostram facilidade tanto para resolver tarefas quanto para lidar com pessoas e comunicação.</p>
-            <p class="main-text">Próximo passo recomendado</p>
-            <button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-virtual')">👉 Formação Assistente Virtual</button>
-        `
-    },
-    AP_AA: {
-        title: "<span>Seu perfil:</span>Assistente Executiva com forte organização administrativa",
-        text: `
-            <p>Suas respostas mostram facilidade para resolver tarefas e também para estruturar processos e organizar informações.</p>
-            <p class="main-text">Próximo passo recomendado</p>
-            <button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-virtual')">👉 Formação Assistente Executiva</button>
-        `
-    },
-    SR_AA: {
-        title: "<span>Seu perfil:</span>Secretária Remota com organização administrativa",
-        text: `
-            <p>Suas respostas mostram facilidade para comunicação e atendimento, combinada com organização e atenção aos detalhes.</p>
-            <p class="main-text">Próximo passo recomendado</p>
-            <button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-virtual')">👉 Formação Secretária Remota</button>
-        `
-    },
-    ALL: {
-        title: "<span>Você pode brilhar como:</span>Assistente Virtual Versátil",
-        text: `
-            <p>Suas respostas revelam um perfil dinâmico, com habilidade natural para transitar entre diferentes áreas e resolver problemas de forma ágil.</p>
-            <p>Ser versátil agora é sua maior vantagem estratégica.</p>
-            <p class="main-text">O próximo passo para você</p>
-            <p>A <strong>Formação Assistente Virtual</strong> entrega as técnicas e ferramentas essenciais para você conquistar seus primeiros clientes com total liberdade e segurança.</p>
-            <button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-virtual')">👉 Formação em Assistência Virtual</button>
-        `
-    },
-};
 
 // ─── LÓGICA DO QUIZ ───────────────────────────────────────────────────────────
 
@@ -511,22 +450,10 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
     }
 
     const formacao = getFormacao(desejoFinal);
-    return { formacao, titulo, mensagem: copy  };
+    return { formacao, titulo, mensagem: copy };
 }
 
-function calcularResultadoAtuante() {
-    const votos = [state.dor, state.perfilValidacao, state.ambicao];
-    const scores = { AP: 0, AA: 0, SR: 0 };
-    votos.forEach(v => { if (v && v in scores) scores[v]++; });
-    const { AP, AA, SR } = scores;
-    if (AP > AA && AP > SR) return 'AP';
-    if (AA > AP && AA > SR) return 'AA';
-    if (SR > AP && SR > AA) return 'SR';
-    if (AP === SR && AP > AA) return 'AP_SR';
-    if (AP === AA && AP > SR) return 'AP_AA';
-    if (SR === AA && SR > AP) return 'SR_AA';
-    return 'ALL';
-}
+
 
 // ─── NAVEGAÇÃO ────────────────────────────────────────────────────────────────
 
@@ -560,6 +487,20 @@ function updateStep5Content() {
     }
 }
 
+function updateStep9Content() {
+    const [btn1, btn2] = document.querySelectorAll('#step9 .option-btn');
+    btn1.textContent = 'Tenho dificuldade em conquistar novos clientes.';
+    btn1.onclick = () => selectAnswer('clientes', btn1);
+
+    if (state.areaAtuante === 'AP') {
+        btn2.textContent = 'Já tenho clientes, mas quero escalar meu faturamento sem trabalhar mais horas.';
+        btn2.onclick = () => selectAnswer('escalar', btn2);
+    } else {
+        btn2.textContent = 'Quero me especializar para atender clientes melhores e ganhar mais.';
+        btn2.onclick = () => selectAnswer('especializar', btn2);
+    }
+}
+
 function advance() {
     const flow = FLOWS[state.flow];
     state.flowIndex++;
@@ -586,6 +527,10 @@ function advance() {
 
     if (nextId === 'step5') {
         updateStep5Content();
+    }
+
+    if (nextId === 'step9') {
+        updateStep9Content();
     }
 
     if (nextId === 'step-result') {
@@ -635,10 +580,8 @@ function selectAnswer(value, el) {
     }
 
     if (state.flow === 'atuante') {
-        if (stepId === 'step8') state.areaAtual = value;
-        if (stepId === 'step9') state.dor = value;
-        if (stepId === 'step10') state.perfilValidacao = value;
-        if (stepId === 'step11') state.ambicao = value;
+        if (stepId === 'step8') state.areaAtuante = value;
+        if (stepId === 'step9') state.dorAtuante = value;
     }
 
     el.closest('.step').querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
@@ -668,10 +611,13 @@ function showResult() {
     }
 
     if (state.flow === 'atuante') {
-        const key = calcularResultadoAtuante();
-        const resultData = RESULTS_ATUANTE[key];
-        document.getElementById('result-title-atuante').innerHTML = resultData.title;
-        document.getElementById('result-text-atuante').innerHTML = resultData.text;
+        const resultado = RESULTS_ATUANTE[state.dorAtuante];
+        document.getElementById('result-title-atuante').innerHTML = resultado.titulo;
+        document.getElementById('result-text-atuante').innerHTML =
+            resultado.mensagem +
+            `<button class="next-btn" onclick="window.location.href=getLink('${resultado.btn.path}', '${resultado.btn.id}', state)">
+            ${resultado.btn.label}
+        </button>`;
         navigateTo('step12');
     }
 }
