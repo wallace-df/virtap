@@ -391,7 +391,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 `
             <p>Sua experiência profissional aponta que você tem familiaridade com o nível de exigência que bons clientes tem, o que te coloca em enorme vantagem para atuar como braço direito de um negócio.</p>
             ${infoBlock}
-            <p>O próximo passo para você é estruturar seu conhecimento para atuar no mercado digital.</p>
+            <p>O próximo passo para você é migrar sua experiência para o mercado digital de forma estruturada.</p>
             ${avBlock}
         `;
 
@@ -400,17 +400,16 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
             copy = `
                 <p>Sua experiência administrativa se encaixa naturalmente aqui. Você já lida com processos, prazos e rotinas operacionais, exatamente o que clientes buscam para apoiar seus negócios.</p>
                 ${infoBlock}
-                <p>O que te falta agora é adaptar sua experiência profissional para o mercado digital.</p>
+                <p>O próximo passo para você é migrar sua experiência para o mercado digital de forma estruturada.</p>
                 ${avBlock}
             `;
         } else if (exp === 'atendimento') {
-
             titulo = 'Você pode brilhar como:<br/> Secretária Administrativa'
             copy = `
             <p>Sua experiência com atendimento combinada com a atuação administrativa forma um perfil completo e valorizado no mercado: a Secretária Administrativa.</p>
             <p>Como Secretária Administrativa, você atua tanto no relacionamento com clientes quanto na organização interna dos negócios, auxiliando em tarefas como:</p>
             <ul>
-                <li>Atendimento e suporte a clientes via WhatsApp e redes sociais</li>
+                <li>Atendimento e suporte via WhatsApp e outros canais</li>
                 <li>Agendamento de compromissos e gestão de agenda</li>
                 <li>Organização de arquivos, documentos e planilhas</li>
                 <li>Controle de prazos e acompanhamento de tarefas</li>
@@ -422,22 +421,13 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
             ${avBlock}
             `;
         } else if (exp === 'sem') {
-
-            if (perfil === 'AP') {
-                copy = `TODO: sem exp + perfil AP quer AA → já opera acima do que pede.Tom: AA direto, mas perfil pode ir além.`;
-
-            } else if (perfil === 'AA' && unanime) {
-                copy = `TODO: sem exp + perfil unânime AA → perfil confirma.Tom: formação constrói base, perfil certo para AA.`;
-
-            } else if (perfil === 'AA' && secundario === 'AP') {
-                copy = `TODO: sem exp + AA predominante com traço AP → perfil certo + iniciativa.Tom: formação estrutura, traço AP abre portas.`;
-
-            } else if (perfil === 'AA' && secundario === 'SR') {
-                copy = `TODO: sem exp + AA predominante com traço SR → perfil certo + comunicação.Tom: combinação rara para quem está começando.`;
-
-            } else if (perfil === 'SR') {
-                copy = `TODO: sem exp + perfil SR quer AA → gap técnico.Tom: comunicação é metade do caminho, formação constrói o resto.`;
-            }
+            titulo = 'Você pode começar como:<br/> Assistente Administrativa'
+            copy =
+                `            
+            ${infoBlock}
+            <p>O próximo passo para você é desenvolver seu lado técnico e operacional e começar sua carreira no mercado digital com um direcionamento claro.</p>
+            <p>A <strong>Formação em Assistência Virtual</strong> da Virtap foi feita para te guiar neste caminho a partir do zero, mostrando as habilidades, ferramentas e técnicas essenciais que você precisa dominar, além de como você deve se posicionar, precificar seu trabalho e conquistar seus primeiros clientes.</p>
+            `
         }
 
         // ─────────────────────────────────────────────────────────────────────────
@@ -445,82 +435,76 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
         // ─────────────────────────────────────────────────────────────────────────
     } else if (desejoFinal === 'SR') {
 
+        const avBlock =
+            `
+        <p>A <strong>Formação em Assistência Virtual</strong> da Virtap foi feita para te guiar neste caminho, mostrando as habilidades, ferramentas e técnicas essenciais que você precisa dominar, além de como você deve se posicionar, precificar seu trabalho e conquistar seus primeiros clientes.</p>
+        `;
+
+        let infoBlock =
+            `
+        <p>Como Secretária Remota, você atua diretamente na comunicação e no relacionamento com clientes, garantindo organização e agilidade no dia a dia, auxiliando em tarefas como:</p>
+        <ul>
+            <li>Atendimento e suporte via WhatsApp e outros canais</li>
+            <li>Agendamento de compromissos e gestão de agenda</li>
+            <li>Acompanhamento de demandas e alinhamento com clientes</li>
+            <li>Suporte administrativo para manter a rotina organizada</li>
+        </ul>
+        <p class="main-text">O próximo passo para você</p>
+        `;
+
         if (exp === 'elite') {
-
-            if (perfil === 'AP') {
-                copy = `TODO: elite + perfil AP quer SR → vai muito além do Suporte básico.Tom: lapidar, porta de entrada mas teto é mais alto.`;
-
-            } else if (perfil === 'AA') {
-                copy = `TODO: elite + perfil AA quer SR → organização + histórico forte.Tom: atende bem e mantém tudo estruturado, diferencial raro.`;
-
-            } else if (perfil === 'SR' && unanime) {
-                copy = `TODO: elite + perfil unânime SR → histórico + perfil confirmam.Tom: padrão de excelência que poucos no Suporte têm.`;
-
-            } else if (perfil === 'SR' && secundario === 'AP') {
-                copy = `TODO: elite + SR predominante com traço AP → comunicação + iniciativa.Tom: não só responde, resolve antes de escalar.`;
-
-            } else if (perfil === 'SR' && secundario === 'AA') {
-                copy = `TODO: elite + SR predominante com traço AA → comunicação + organização.Tom: atende bem e mantém tudo no lugar, combinação rara.`;
-            }
-
-        } else if (exp === 'atendimento') {
-
-            if (perfil === 'AP') {
-                copy = `TODO: atendimento + perfil AP quer SR → vai além do Suporte.Tom: entrada sólida, perfil pode ir mais longe.`;
-
-            } else if (perfil === 'AA') {
-                copy = `TODO: atendimento + perfil AA quer SR → comunicação + organização técnica.Tom: acima da média no Suporte.`;
-
-            } else if (perfil === 'SR' && unanime) {
-                copy = `TODO: atendimento + perfil unânime SR → zona natural confirmada.Tom: fortalecer dom, estruturar para o digital.`;
-
-            } else if (perfil === 'SR' && secundario === 'AP') {
-                copy = `TODO: atendimento + SR predominante com traço AP → comunicação + iniciativa.Tom: não só responde, resolve.`;
-
-            } else if (perfil === 'SR' && secundario === 'AA') {
-                copy = `TODO: atendimento + SR predominante com traço AA → comunicação + organização.Tom: combinação valiosa.`;
-            }
+            titulo = 'Você pode brilhar como:<br/> Secretária Remota'
+            copy =
+                `
+        <p>Sua experiência mostra que você já tem maturidade profissional e sabe lidar com pessoas, o que é essencial para resolver demandas de clientes no dia a dia.</p>
+        ${infoBlock}
+        <p>O próximo passo para você é migrar sua experiência para o mercado digital de forma estruturada.</p>
+        ${avBlock}
+    `;
 
         } else if (exp === 'adm') {
-
-            if (perfil === 'AP') {
-                copy = `TODO: adm + perfil AP quer SR → clareza de processos + autonomia.Tom: entrada sólida, perfil vai além.`;
-
-            } else if (perfil === 'AA') {
-                copy = `TODO: adm + perfil AA quer SR → organização técnica no Suporte.Tom: não só atende, estrutura para não repetir o problema.`;
-
-            } else if (perfil === 'SR' && unanime) {
-                copy = `TODO: adm + perfil unânime SR → processos + comunicação.Tom: entrar rápido, combinação forte.`;
-
-            } else if (perfil === 'SR' && secundario === 'AP') {
-                copy = `TODO: adm + SR predominante com traço AP → comunicação + iniciativa.Tom: atende e antecipa, diferencial raro.`;
-
-            } else if (perfil === 'SR' && secundario === 'AA') {
-                copy = `TODO: adm + SR predominante com traço AA → comunicação + organização.Tom: atende bem e mantém tudo no lugar.`;
-            }
-
+            titulo = 'Você pode brilhar como:<br/> Secretária Administrativa'
+            copy = `
+            <p>Sua experiência com atendimento combinada com a atuação administrativa forma um perfil completo e valorizado no mercado: a Secretária Administrativa.</p>
+            <p>Como Secretária Administrativa, você atua tanto no relacionamento com clientes quanto na organização interna dos negócios, auxiliando em tarefas como:</p>
+            <ul>
+                <li>Atendimento e suporte via WhatsApp e outros canais</li>
+                <li>Agendamento de compromissos e gestão de agenda</li>
+                <li>Organização de arquivos, documentos e planilhas</li>
+                <li>Controle de prazos e acompanhamento de tarefas</li>
+                <li>Emissão de documentos e suporte administrativo</li>
+                <li>Organização de processos internos</li>
+            </ul>
+            <p class="main-text">O próximo passo para você</p>
+            <p>Você já domina o lado técnico e operacional. Agora, o próximo passo é profissionalizar sua comunicação com clientes e adaptar sua experiência ao mercado digital.</p>
+            ${avBlock}
+            `;
+        } else if (exp === 'atendimento') {
+            titulo = 'Você pode brilhar como:<br/> Secretária Remota'
+            copy = `
+        <p>Sua experiência com atendimento é exatamente o que o mercado busca. A Secretária Remota é a profissional responsável por manter a comunicação fluida e organizada no dia a dia dos clientes.</p>
+        <p>Nessa atuação, você será responsável por:</p>
+        <ul>
+            <li>Atendimento e suporte via WhatsApp e outros canais</li>
+            <li>Organização da comunicação e respostas aos clientes</li>
+            <li>Gestão de agenda e compromissos</li>
+            <li>Acompanhamento de demandas e alinhamentos</li>
+            <li>Organização da rotina e suporte no dia a dia</li>
+        </ul>
+        <p class="main-text">O próximo passo para você</p>
+        <p>Você já domina a comunicação. Agora, o próximo passo é estruturar essa habilidade para atuar com profissionalismo no mercado digital.</p>
+        ${avBlock}
+        `;
         } else if (exp === 'sem') {
-
-            if (perfil === 'AP') {
-                copy = `TODO: sem exp + perfil AP quer SR → autonomia e iniciativa desde o início.Tom: entrada estruturada, perfil pode ir além.`;
-
-            } else if (perfil === 'AA') {
-                copy = `TODO: sem exp + perfil AA quer SR → organização te destaca no Suporte.Tom: acima da média desde o primeiro cliente.`;
-
-            } else if (perfil === 'SR' && unanime) {
-                copy = `TODO: sem exp + perfil unânime SR → perfil certo para começar.Tom: formação estrutura o dom natural.`;
-
-            } else if (perfil === 'SR' && secundario === 'AP') {
-                copy = `TODO: sem exp + SR predominante com traço AP → comunicação + iniciativa.Tom: mapa para ir além desde o início.`;
-
-            } else if (perfil === 'SR' && secundario === 'AA') {
-                copy = `TODO: sem exp + SR predominante com traço AA → comunicação + organização.Tom: combinação rara para quem está começando.`;
-            }
+            titulo = 'Você pode começar como:<br/> Secretária Remota'
+            copy =
+                `            
+        ${infoBlock}
+        <p>O próximo passo para você é desenvolver suas habilidades de comunicação e começar sua carreira no mercado digital com um direcionamento claro.</p>
+        <p>A <strong>Formação em Assistência Virtual</strong> da Virtap foi feita para te guiar neste caminho a partir do zero, mostrando as habilidades, ferramentas e técnicas essenciais que você precisa dominar, além de como você deve se posicionar, precificar seu trabalho e conquistar seus primeiros clientes.</p>
+        `;
         }
 
-        // ─────────────────────────────────────────────────────────────────────────
-        // REDIRECIONADO (p5 = 'existente')
-        // ─────────────────────────────────────────────────────────────────────────
     }
 
     const formacao = getFormacao(desejoFinal);
