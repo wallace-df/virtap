@@ -168,7 +168,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
-                ${expPref}
+                ${expEvl}
                 ${infoBlock}                
                 <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas ser organizada e executar tarefas, mas também assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
                 <p>A sua experiência já demonstra familiaridade com esse nível, o que coloca você em uma posição privilegiada para evoluir mais rápido.</p>                
@@ -178,7 +178,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
-                ${expPref}
+                ${expEvl}
                 ${infoBlock}                
                 <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas se comunicar bem e responder a solicitações, mas também assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
                 <p>A sua experiência já demonstra familiaridade com esse nível, o que coloca você em uma posição privilegiada para evoluir mais rápido.</p>                
@@ -228,7 +228,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
-                ${expPref}
+                ${expEvl}
                 ${infoBlock}                
                 <p>Sua experiência administrativa é uma grande vantagem e amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar tarefas, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
@@ -237,7 +237,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
-                ${expPref}
+                ${expEvl}
                 ${infoBlock}                
                 <p>Sua experiência administrativa é uma grande vantagem e amplia suas competências, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar tarefas e responder a solicitações, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
@@ -275,7 +275,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
-                ${expPref}
+                ${expEvl}
                 ${infoBlock}                
                 <p>Sua experiência com atendimento é um bom ponto de partida, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar tarefas e responder a solicitações, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
@@ -285,7 +285,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
-                ${expPref}
+                ${expEvl}
                 ${infoBlock}                
                 <p>Sua experiência com atendimento é um bom ponto de partida, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar tarefas e responder a solicitações, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertPre}
@@ -317,23 +317,23 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                     `
                 ${expPref}
                 ${infoBlock}                
-                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde você precisa assumir um papel proativo, antecipando problemas e tomando decisões.</p>                
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde você precisa assumir um papel proativo, antecipando problemas e tomando decisões. Suas respostas mostram que você tem a mentalidade certa para atuar nessa área.</p>                
                 ${aexpertNew}
             `;
             } else if (perfil === 'AP' && secundario === 'AA') {
-                titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
+                titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
-                ${expPref}
+                ${expEvl}
                 ${infoBlock}                
                 <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas ser organizada e executar tarefas, mas também assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
                 ${aexpertNew}
             `;
             } else if (perfil === 'AP' && secundario === 'SR') {
-                titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
+                titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
-                ${expPref}
+                ${expEvl}
                 ${infoBlock}                
                 <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde não basta apenas se comunicar bem e responder a solicitações, mas também assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
                 ${aexpertNew}
