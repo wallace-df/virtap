@@ -434,12 +434,10 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
         // DESEJO: SR
         // ─────────────────────────────────────────────────────────────────────────
     } else if (desejoFinal === 'SR') {
-
         const avBlock =
             `
         <p>A <strong>Formação em Assistência Virtual</strong> da Virtap foi feita para te guiar neste caminho, mostrando as habilidades, ferramentas e técnicas essenciais que você precisa dominar, além de como você deve se posicionar, precificar seu trabalho e conquistar seus primeiros clientes.</p>
         `;
-
         let infoBlock =
             `
         <p>Como Secretária Remota, você atua diretamente na comunicação e no relacionamento com clientes, garantindo organização e agilidade no dia a dia, auxiliando em tarefas como:</p>
@@ -465,8 +463,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
         } else if (exp === 'adm') {
             titulo = 'Você pode brilhar como:<br/> Secretária Administrativa'
             copy = `
-            <p>Sua experiência com atendimento combinada com a atuação administrativa forma um perfil completo e valorizado no mercado: a Secretária Administrativa.</p>
-            <p>Como Secretária Administrativa, você atua tanto no relacionamento com clientes quanto na organização interna dos negócios, auxiliando em tarefas como:</p>
+            <p>Sua experiência administrativa, aliada à comunicação com clientes, forma um perfil completo e valorizado no mercado: a Secretária Administrativa.</p>            <p>Como Secretária Administrativa, você atua tanto no relacionamento com clientes quanto na organização interna dos negócios, auxiliando em tarefas como:</p>
             <ul>
                 <li>Atendimento e suporte via WhatsApp e outros canais</li>
                 <li>Agendamento de compromissos e gestão de agenda</li>
