@@ -115,11 +115,17 @@ function precisaDeP5(desejo, p2, p3, exp) {
 function processarQuiz(desejo, p2, p3, exp, p5 = null) {
     const perfil = calcularPerfil(p2, p3);
     const redirecionado = precisaDeP5(desejo, p2, p3, exp) && p5 === 'existente';
-    const desejoFinal = redirecionado ? perfil : desejo;
+    let desejoFinal = redirecionado ? perfil : desejo;
     const unanime = p2 === p3;
     const secundario = p2 === perfil ? p3 : p2;
 
-    const incluso = ``;
+    if (redirecionado && exp === 'sem' && desejoFinal === 'AA' && !unanime) {
+        desejoFinal = 'SR';
+    }
+
+    if (redirecionado && exp === 'atendimento') {
+        desejoFinal = 'SR';
+    }
 
     let titulo = '';
     let copy = '';
@@ -505,7 +511,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
     }
 
     const formacao = getFormacao(desejoFinal);
-    return { formacao, titulo, mensagem: copy + incluso };
+    return { formacao, titulo, mensagem: copy  };
 }
 
 function calcularResultadoAtuante() {
