@@ -185,7 +185,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${aexpertPre}
                 `;
             } else if (perfil === 'AA' && unanime) {
-                titulo = 'Você pode  trabalhar como:<br/> Assessora Pessoal / Executiva'
+                titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
                 ${expEvl}
                 ${infoBlock}
@@ -194,7 +194,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${aexpertPre}
            `;
             } else if (perfil === 'AA' && secundario === 'SR') {
-                titulo = 'Você pode  trabalhar como:<br/> Assessora Pessoal / Executiva'
+                titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
                 ${expEvl}
                 ${infoBlock}
@@ -203,7 +203,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${aexpertPre}
                 `
             } else if (perfil === 'SR') {
-                titulo = 'Você pode  trabalhar como:<br/> Assessora Pessoal / Executiva'
+                titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
                 ${expEvl}
                 ${infoBlock}
@@ -251,7 +251,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${aexpertPre}
                 `;
             } else {
-                titulo = 'Você pode  trabalhar como:<br/> Assessora Pessoal / Executiva'
+                titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
                 ${expEvl}
                 ${infoBlock}                
@@ -291,7 +291,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${aexpertPre}
                 `;
             } else if (perfil === 'AA') {
-                titulo = 'Você pode  trabalhar como:<br/> Assessora Pessoal / Executiva'
+                titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
                 ${expEvl}
                 ${infoBlock}                
@@ -299,11 +299,11 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${aexpertPre}
                 `;
             } else {
-                titulo = 'Você pode  trabalhar como:<br/> Assessora Pessoal / Executiva'
+                titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy = `
                 ${expEvl}
                 ${infoBlock}                
-                <p>Sua experiência com atendimento é um bom ponto de partida, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde desafio é sair da reatividade e assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
+                <p>Sua experiência com atendimento é um bom ponto de partida, mas como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde o desafio é sair da reatividade e assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>
                 ${aexpertPre}
                 `;
             }
@@ -343,7 +343,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 copy = `
                 ${expEvl}
                 ${infoBlock}                
-                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas  ser organizada e executar tarefas, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas ser organizada e executar tarefas, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertNew}
                  `;
             } else if (perfil === 'AA' && secundario === 'SR') {
@@ -351,7 +351,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 copy = `
                 ${expEvl}
                 ${infoBlock}                
-                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas  executar tarefas e responder a solicitações, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
+                <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas executar tarefas e responder a solicitações, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertNew}
                  `;
             } else if (perfil === 'SR') {
@@ -361,7 +361,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 ${infoBlock}                
                 <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade mais elevado, onde não basta apenas  se comunicar bem e responder a solicitações, mas também antecipar demandas, tomar decisões e conduzir prioridades.</p>
                 ${aexpertNew}
-                 `;
+                `;
             }
         }
         // ─────────────────────────────────────────────────────────────────────────
@@ -487,9 +487,9 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
         <ul>
             <li>Atendimento e suporte via WhatsApp e outros canais</li>
             <li>Organização da comunicação e respostas aos clientes</li>
-            <li>Gestão de agenda e compromissos</li>
-            <li>Acompanhamento de demandas e alinhamentos</li>
-            <li>Organização da rotina e suporte no dia a dia</li>
+            <li>Agendamento de compromissos e gestão de agenda</li>
+            <li>Acompanhamento de demandas e alinhamento com clientes</li>
+            <li>Suporte administrativo para manter a rotina organizada</li>
         </ul>
         <p class="main-text">O próximo passo para você</p>
         <p>Você já domina a comunicação. Agora, o próximo passo é estruturar essa habilidade para atuar com profissionalismo no mercado digital.</p>
