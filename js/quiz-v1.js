@@ -161,7 +161,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                     `
                 ${expPref}
                 ${infoBlock}                
-                <p>Sua experiência profissional mostra que você tem familiaridade com esse nível de atuação, tornando sua transição muito mais natural.</p>
+                <p>Sua experiência profissional e suas respostas mostram que você tem familiaridade com esse nível de atuação, tornando sua transição muito mais natural.</p>
                 ${aexpertPre}
             `;
             } else if (perfil === 'AP' && secundario === 'AA') {
@@ -207,7 +207,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 copy = `
                 ${expEvl}
                 ${infoBlock}
-                <p>Sua experiência profissional mostra que você tem familiaridade com esse nível de atuação, mas seu momento atual indica uma atuação com foco em atendimento e resposta a solicitações, o que pode acabar te mantendo em uma posição mais reativa no dia a dia.</p>
+                <p>Sua experiência profissional mostra que você tem familiaridade com esse nível de atuação, mas seu momento atual indica uma atuação com foco em comunicação e resposta a solicitações, o que pode acabar te mantendo em uma posição mais reativa no dia a dia.</p>
                 <p>Como Assessora Pessoal / Executiva, você atua em um nível de responsabilidade elevado, onde você precisa assumir um papel mais proativo, antecipando problemas e tomando decisões.</p>                
                 ${aexpertPre}
                 `;
@@ -215,7 +215,16 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
         } else if (exp === 'adm') {
             let expPref = `<p>Suas respostas mostram aptidão para tomar iniciativa, resolver pendências e organizar a rotina de outras pessoas, características muito alinhadas à atuação em Assessoria Pessoal / Executiva.</p>`;
             let expEvl = `<p>Suas respostas mostram um interesse em atuar apoiando diretamente pessoas, organizando rotinas e lidando com demandas do dia a dia, exatamente o que faz um Assessora Pessoal / Executiva.</p>`;
-            if (perfil === 'AP' && (unanime || secundario === 'AA')) {
+            if (perfil === 'AP' && (unanime)) {
+                titulo = 'Você pode brilhar como:<br/> Assessora Pessoal / Executiva'
+                copy =
+                    `
+                ${expPref}
+                ${infoBlock}                
+                <p>Sua experiência administrativa é uma grande vantagem e suas respostas demostram que você tem a mentalidade certa para atuar como uma Assessora Pessoal / Executiva, onde você atua em um nível de responsabilidade elevado, assumindo um papel proativo, antecipando demandas e tomando decisões.</p>
+                ${aexpertPre}
+            `;
+            } else if (perfil === 'AP' && secundario === 'AA') {
                 titulo = 'Você pode trabalhar como:<br/> Assessora Pessoal / Executiva'
                 copy =
                     `
