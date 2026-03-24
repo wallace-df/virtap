@@ -30,12 +30,6 @@ const FORMACOES = {
     AV: { id: 'formacao-av', label: 'Formação em Assistência Virtual', path: '/formacoes/assistencia-virtual' },
 };
 
-const RESULTS_ATUANTE = {
-    clientes: { titulo: '...', mensagem: `...`, btn: { label: '👉 Plataforma de Vagas', path: '/plataforma-de-vagas', id: 'plataforma-vagas' } },
-    especializar: { titulo: '...', mensagem: `...`, btn: { label: '👉 Formação AExpert', path: '/formacoes/assistencia-pessoal', id: 'formacao-aexpert' } },
-    escalar: { titulo: '...', mensagem: `...`, btn: { label: '👉 Mastermind', path: '/mastermind', id: 'mastermind' } },
-};
-
 function getFormacao(perfil) {
     return perfil === 'AP' ? FORMACOES.AP : FORMACOES.AV;
 }
@@ -477,10 +471,8 @@ function processarQuizAtuante(area, dor) {
     } else if (area === 'AP' && dor === 'escalar') {
         titulo = 'Você está pronta para escalar';
         copy = `
-            <p>Você já provou que sabe entregar resultado no nível mais exigente da Assistência Virtual. O desafio agora não é trabalhar mais — é construir um modelo que cresça sem depender só das suas horas.</p>
+            <p>Você já provou que sabe entregar resultado no nível mais exigente da Assistência Virtual. O desafio agora não é trabalhar mais, e sim construir um modelo que cresça sem depender só das suas horas.</p>
             <p>O <strong>Mastermind da Virtap</strong> reúne Assessoras Pessoais de alto nível para trabalhar posicionamento, precificação e estratégias de crescimento com quem já está no mesmo nível que você.</p>
-            <p class="main-text">O próximo passo para você</p>
-            <p>Se você quer aumentar seu faturamento sem aumentar sua carga de trabalho, o Mastermind é o caminho.</p>
         `;
         btn = btnMastermind;
 
@@ -767,10 +759,6 @@ function getLink(path, campaign, state) {
 }
 function getFreeCourseLink() {
     return getLink('/curso-assistente-virtual', 'curso-gratuito');
-}
-
-function getFormacaoAExpertLink() {
-    return getLink('/formacoes/assistencia-pessoal', 'formacao-aexpert');
 }
 
 function getNullableValue(val) {
