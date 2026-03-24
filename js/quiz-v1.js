@@ -27,7 +27,7 @@ const EXP_MAP = {
 
 const FORMACOES = {
     AP: { id: 'formacao-aexpert', label: 'Conheça a Formação AExpert', path: '/formacoes/assistencia-pessoal' },
-    AV: { id: 'formacao-av', label: 'Formação em Assistência Virtual', path: '/formacoes/assistencia-virtual' },
+    AV: { id: 'virtap-club', label: 'Conheça o Virtap Club', path: '/virtap-club' },
 };
 
 function getFormacao(perfil) {
