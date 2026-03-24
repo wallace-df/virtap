@@ -453,6 +453,98 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
     return { formacao, titulo, mensagem: copy };
 }
 
+function processarQuizAtuante(area, dor) {
+    const btnPlataforma = `<button class="next-btn" onclick="window.location.href=getLink('/plataforma-de-vagas', 'plataforma-vagas', state)">👉 Conheça a Plataforma de Vagas</button>`;
+    const btnAexpert    = `<button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-pessoal', 'formacao-aexpert', state)">👉 Conheça a Formação AExpert</button>`;
+    const btnMastermind = `<button class="next-btn" onclick="window.location.href=getLink('/mastermind', 'mastermind', state)">👉 Conheça o Mastermind</button>`;
+
+    let titulo = '';
+    let copy   = '';
+    let btn    = '';
+
+    if (area === 'AP' && dor === 'clientes') {
+        titulo = 'Você precisa de mais clientes';
+        copy = `
+            <p>Você já atua no nível mais estratégico da Assistência Virtual — o que falta não é habilidade, é visibilidade.</p>
+            <p>A <strong>Plataforma de Vagas da Virtap</strong> conecta Assistentes Pessoais a empresários e executivos que já estão procurando exatamente esse perfil. Sem precisar garimpar cliente no escuro.</p>
+            <p class="main-text">O próximo passo para você</p>
+            <p>Crie seu perfil na plataforma e comece a receber oportunidades de clientes que já entendem o valor de uma Assessora Pessoal.</p>
+        `;
+        btn = btnPlataforma;
+
+    } else if (area === 'AP' && dor === 'escalar') {
+        titulo = 'Você está pronta para escalar';
+        copy = `
+            <p>Você já provou que sabe entregar resultado no nível mais exigente da Assistência Virtual. O desafio agora não é trabalhar mais — é construir um modelo que cresça sem depender só das suas horas.</p>
+            <p>O <strong>Mastermind da Virtap</strong> reúne Assessoras Pessoais de alto nível para trabalhar posicionamento, precificação e estratégias de crescimento com quem já está no mesmo nível que você.</p>
+            <p class="main-text">O próximo passo para você</p>
+            <p>Se você quer aumentar seu faturamento sem aumentar sua carga de trabalho, o Mastermind é o caminho.</p>
+        `;
+        btn = btnMastermind;
+
+    } else if (area === 'SR' && dor === 'clientes') {
+        titulo = 'Você precisa de mais clientes';
+        copy = `
+            <p>Você já domina o que negócios mais precisam: comunicação ágil e atendimento de qualidade. O que falta é estar no lugar certo para ser encontrada.</p>
+            <p>A <strong>Plataforma de Vagas da Virtap</strong> é o melhor lugar para isso — empresas que já buscam suporte em atendimento e comunicação encontram profissionais como você de forma direta e qualificada.</p>
+            <p class="main-text">O próximo passo para você</p>
+            <p>Crie seu perfil na plataforma e comece a receber oportunidades alinhadas com a sua área de atuação.</p>
+        `;
+        btn = btnPlataforma;
+
+    } else if (area === 'SR' && dor === 'especializar') {
+        titulo = 'Você está pronta para o próximo nível';
+        copy = `
+            <p>Você já tem o que clientes mais difíceis de lidar valorizam: saber se comunicar bem e resolver problemas com pessoas. Agora é hora de transformar isso em um serviço mais estratégico e mais bem pago.</p>
+            <p>A <strong>Formação AExpert</strong> foi criada para Assistentes que já atuam e querem se especializar em Assessoria Pessoal — o nível mais valorizado do mercado, onde profissionais bem posicionadas faturam R$ 10.000 ou mais por mês.</p>
+            <p class="main-text">O próximo passo para você</p>
+            <p>Sua habilidade com pessoas já é sua maior vantagem. A AExpert te ensina a usá-la no nível certo.</p>
+        `;
+        btn = btnAexpert;
+
+    } else if (area === 'AA' && dor === 'clientes') {
+        titulo = 'Você precisa de mais clientes';
+        copy = `
+            <p>Você já tem as habilidades que negócios precisam para funcionar: organização, processos e execução. O que falta é visibilidade para ser encontrada por quem está buscando exatamente isso.</p>
+            <p>A <strong>Plataforma de Vagas da Virtap</strong> conecta Assistentes Administrativas a empresas que precisam de apoio operacional — sem depender de indicações ou buscar cliente no improviso.</p>
+            <p class="main-text">O próximo passo para você</p>
+            <p>Crie seu perfil na plataforma e comece a receber oportunidades de empresas que já valorizam o trabalho que você faz.</p>
+        `;
+        btn = btnPlataforma;
+
+    } else if (area === 'AA' && dor === 'especializar') {
+        titulo = 'Você está pronta para o próximo nível';
+        copy = `
+            <p>Você já domina a execução e a organização — as bases de qualquer assistência de qualidade. O próximo passo é subir de nível: atender clientes mais exigentes, assumir mais responsabilidade e cobrar mais por isso.</p>
+            <p>A <strong>Formação AExpert</strong> foi criada para Assistentes que já atuam e querem migrar para a Assessoria Pessoal — a área mais valorizada do mercado, onde profissionais bem posicionadas faturam R$ 10.000 ou mais por mês.</p>
+            <p class="main-text">O próximo passo para você</p>
+            <p>Sua base administrativa é uma vantagem enorme. A AExpert te ensina a usá-la no nível estratégico.</p>
+        `;
+        btn = btnAexpert;
+
+    } else if (area === 'todos' && dor === 'clientes') {
+        titulo = 'Você precisa de mais clientes';
+        copy = `
+            <p>Ter versatilidade é uma grande vantagem — você consegue atender diferentes tipos de cliente e se adaptar a diferentes demandas. O que falta é estar no lugar certo para ser encontrada.</p>
+            <p>A <strong>Plataforma de Vagas da Virtap</strong> é o melhor lugar para isso — empresas com diferentes necessidades encontram profissionais qualificadas de forma direta, sem intermediários.</p>
+            <p class="main-text">O próximo passo para você</p>
+            <p>Crie seu perfil na plataforma, destaque suas principais habilidades e comece a receber oportunidades que combinam com você.</p>
+        `;
+        btn = btnPlataforma;
+
+    } else if (area === 'todos' && dor === 'especializar') {
+        titulo = 'Hora de escolher onde brilhar';
+        copy = `
+            <p>Versatilidade é ótimo para começar — mas para ganhar mais e atrair clientes melhores, chega um momento em que é preciso se posicionar com clareza em uma área específica.</p>
+            <p>A <strong>Formação AExpert</strong> vai te ajudar a identificar onde você tem mais potencial, se especializar na área mais estratégica do mercado e construir um posicionamento que justifica cobrar mais.</p>
+            <p class="main-text">O próximo passo para você</p>
+            <p>Pare de competir por preço e comece a competir por valor. A AExpert te mostra como.</p>
+        `;
+        btn = btnAexpert;
+    }
+
+    return { titulo, mensagem: copy, btn };
+}
 
 
 // ─── NAVEGAÇÃO ────────────────────────────────────────────────────────────────
@@ -611,13 +703,9 @@ function showResult() {
     }
 
     if (state.flow === 'atuante') {
-        const resultado = RESULTS_ATUANTE[state.dorAtuante];
+        const resultado = processarQuizAtuante(state.areaAtuante, state.dorAtuante);
         document.getElementById('result-title-atuante').innerHTML = resultado.titulo;
-        document.getElementById('result-text-atuante').innerHTML =
-            resultado.mensagem +
-            `<button class="next-btn" onclick="window.location.href=getLink('${resultado.btn.path}', '${resultado.btn.id}', state)">
-            ${resultado.btn.label}
-        </button>`;
+        document.getElementById('result-text-atuante').innerHTML = resultado.mensagem + resultado.btn;
         navigateTo('step12');
     }
 }
@@ -645,6 +733,12 @@ function showCursoGratis() {
 
 // ─── UTM ──────────────────────────────────────────────────────────────────────
 
+function getStateTag(state) {
+    if (!state) return '';
+    if (state.flow === 'atuante') return `-${state.areaAtuante}-${state.dorAtuante}`;
+    return `-${state.desejo}-${state.p2}-${state.p3}-${state.exp}`;
+}
+
 function getLink(path, campaign, state) {
     const utm = getUTMParams();
     const params = new URLSearchParams();
@@ -654,14 +748,8 @@ function getLink(path, campaign, state) {
         const m = getNullableValue(utm.utm_last.utm_medium);
         const c = getNullableValue(utm.utm_last.utm_campaign);
         let ct = getNullableValue(utm.utm_last.utm_content);
-        if (!ct) {
-            ct = 'main-quiz';
-        } else {
-            ct += '-main-quiz'
-        }
-        if (state) {
-            ct += `-${state.desejo}-${state.p2}-${state.p3}-${state.exp}`;
-        }
+        ct = ct ? ct + '-main-quiz' : 'main-quiz';
+        ct += getStateTag(state);
         if (s) params.set('utm_source', s);
         if (m) params.set('utm_medium', m);
         if (c) params.set('utm_campaign', c);
@@ -670,16 +758,11 @@ function getLink(path, campaign, state) {
         params.set('utm_source', 'virtap');
         params.set('utm_medium', 'site');
         params.set('utm_campaign', campaign);
-        let c = 'main-quiz';
-        if (state) {
-            c += `-${state.desejo}-${state.p2}-${state.p3}-${state.exp}`;
-        }
-        params.set('utm_content', c);
+        params.set('utm_content', 'main-quiz' + getStateTag(state));
     }
 
     return path + '?' + params.toString();
 }
-
 function getFreeCourseLink() {
     return getLink('/curso-assistente-virtual', 'curso-gratuito');
 }
