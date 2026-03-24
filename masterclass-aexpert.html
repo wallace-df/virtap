@@ -369,9 +369,9 @@
                             entrega, fortalecer sua postura profissional e aprender a conquistar e reter clientes
                             exigentes
                             que valorizam e pagam pelo seu nível de serviço.<br><br> Na Masterclass, vou te mostrar...
-                        </h3>
+                            </h3>
 
-                        <!-- <button class="next-btn" onclick="location.reload()">REFAZER TESTE</button> -->
+                            <!-- <button class="next-btn" onclick="location.reload()">REFAZER TESTE</button> -->
                     </div>
                 </div>
                 <h2 style="text-align: center;">Será que você tem perfil para ser uma Assessora Pessoal? 🤔</h2>
@@ -509,7 +509,8 @@
                     capacitação?</h2>
                 <div id="options-perfil">
                     <button class="option-btn" data-val="pronto"
-                        onclick="selectOption('investimento', 'pronto', 8)">Consigo investir à vista com desconto</button>
+                        onclick="selectOption('investimento', 'pronto', 8)">Consigo investir à vista com
+                        desconto</button>
                     <button class="option-btn" data-val="parcelamento-cartao"
                         onclick="selectOption('investimento', 'parcelamento-cartao', 8)">Posso investir, mas preciso
                         parcelar no cartão
@@ -525,6 +526,39 @@
             </div>
 
             <div class="step" id="step8">
+                <h2>Você já conhecia a Raquel ou a Virtap?</h2>
+                <div id="options-perfil">
+                    <button 
+                        class="option-btn" 
+                        data-val="raquel" 
+                        onclick="selectOption('conhece', 'raquel', 9)">
+                        Conheço apenas a Raquel
+                    </button>
+            
+                    <button 
+                        class="option-btn" 
+                        data-val="virtap"
+                        onclick="selectOption('conhece', 'virtap', 9)">
+                        Conheço apenas a Virtap
+                    </button>
+            
+                    <button 
+                        class="option-btn" 
+                        data-val="ambos"
+                        onclick="selectOption('conhece', 'ambos', 9)">
+                        Conheço a Raquel e a Virtap
+                    </button>
+            
+                    <button 
+                        class="option-btn" 
+                        data-val="nenhum" 
+                        onclick="selectOption('conhece', 'nenhum', 9)">
+                        Não conhecia nem a Raquel nem a Virtap
+                    </button>
+                </div>
+            </div>
+
+            <div class="step" id="step9">
                 <h2>Seu perfil está pronto! ✨</h2>
                 <p class="subheader">Preencha os dados abaixo para ver seu perfil.</p>
                 <input type="text" id="name" placeholder="Seu nome">
@@ -535,7 +569,7 @@
                 <div id="err-whatsapp" class="error-msg">Digite um WhatsApp válido</div>
                 <div id="err-api" class="error-msg" style="text-align:center;margin-top:1rem; font-size:1rem">Ocorreu um
                     erro. Tente novamente.</div>
-                <button id="btn-final" class="next-btn" onclick="validateStep8AndSend()">Ver Resultado Final</button>
+                <button id="btn-final" class="next-btn" onclick="validateStep9AndSend()">Ver Resultado Final</button>
             </div>
 
             <div class="step" id="stepResult">
@@ -547,7 +581,8 @@
                         <span id="res-alvo"></span>:
                     </h3>
                     <div style="text-align: center; margin-top: 3rem">
-                        <a class="next-btn" style="display:inline-block; line-height:1.2.rem; width:auto" href="https://chat.whatsapp.com/Cevacm7edGd7ZGYSQQevwU">Entrar no grupo da
+                        <a class="next-btn" style="display:inline-block; line-height:1.2.rem; width:auto"
+                            href="https://chat.whatsapp.com/Cevacm7edGd7ZGYSQQevwU">Entrar no grupo da
                             MasterClass</button></a>
                     </div>
                     <!-- <button class="next-btn" onclick="location.reload()">REFAZER TESTE</button> -->
@@ -573,7 +608,7 @@
         let isProcessing = false;
 
         document.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && currentStep === 8) validateStep8AndSend();
+            if (e.key === 'Enter' && currentStep === 9) validateStep9AndSend();
         });
 
         function handleMomento(val) {
@@ -632,7 +667,7 @@
             goToStep(7);
         }
 
-        async function validateStep8AndSend() {
+        async function validateStep9AndSend() {
             const n = document.getElementById('name'),
                 e = document.getElementById('email'),
                 btn = document.getElementById('btn-final'),
