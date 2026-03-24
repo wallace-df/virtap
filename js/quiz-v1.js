@@ -309,7 +309,8 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
     } else if (desejoFinal === 'AA') {
         const avBlock =
             `
-        <p>A <strong>Formação em Assistência Virtual</strong> da Virtap foi feita para te guiar neste caminho, mostrando as habilidades, ferramentas e técnicas essenciais que você precisa dominar, além de como você deve se posicionar, precificar seu trabalho e conquistar seus primeiros clientes.</p>
+        <p>O <strong>Virtap Club</strong> foi feito para te guiar neste caminho, mostrando as habilidades, ferramentas e técnicas essenciais que você precisa dominar, além de como você deve se posicionar, precificar seu trabalho e conquistar seus primeiros clientes.</p>
+        <p>E o melhor: você também tem acesso à Plataforma de Vagas da Virtap, onde todos os meses clientes prontos para contratar buscam assistentes exatamente com o seu perfil.</p>
         `;
         let infoBlock =
             `
@@ -365,7 +366,8 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 `            
             ${infoBlock}
             <p>O próximo passo para você é desenvolver seu lado técnico e operacional e começar sua carreira no mercado digital com um direcionamento claro.</p>
-            <p>A <strong>Formação em Assistência Virtual</strong> da Virtap foi feita para te guiar neste caminho a partir do zero, mostrando as habilidades, ferramentas e técnicas essenciais que você precisa dominar, além de como você deve se posicionar, precificar seu trabalho e conquistar seus primeiros clientes.</p>
+            <p>O <strong>Virtap Club</strong> foi feito para te guiar neste caminho a partir do zero, mostrando as habilidades, ferramentas e técnicas essenciais que você precisa dominar, além de como você deve se posicionar, precificar seu trabalho e conquistar seus primeiros clientes.</p>
+            <p>E o melhor: você também tem acesso à Plataforma de Vagas da Virtap, onde todos os meses clientes prontos para contratar buscam assistentes exatamente com o seu perfil.</p>
             `
         }
 
@@ -375,7 +377,8 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
     } else if (desejoFinal === 'SR') {
         const avBlock =
             `
-        <p>A <strong>Formação em Assistência Virtual</strong> da Virtap foi feita para te guiar neste caminho, mostrando as habilidades, ferramentas e técnicas essenciais que você precisa dominar, além de como você deve se posicionar, precificar seu trabalho e conquistar seus primeiros clientes.</p>
+        <p>O <strong>Virtap Club</strong> foi feito para te guiar neste caminho, mostrando as habilidades, ferramentas e técnicas essenciais que você precisa dominar, além de como você deve se posicionar, precificar seu trabalho e conquistar seus primeiros clientes.</p>
+        <p>E o melhor: você também tem acesso à Plataforma de Vagas da Virtap, onde todos os meses clientes prontos para contratar buscam assistentes exatamente com o seu perfil.</p>
         `;
         let infoBlock =
             `
@@ -437,7 +440,8 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
                 `            
         ${infoBlock}
         <p>O próximo passo para você é desenvolver suas habilidades de comunicação e começar sua carreira no mercado digital com um direcionamento claro.</p>
-        <p>A <strong>Formação em Assistência Virtual</strong> da Virtap foi feita para te guiar neste caminho a partir do zero, mostrando as habilidades, ferramentas e técnicas essenciais que você precisa dominar, além de como você deve se posicionar, precificar seu trabalho e conquistar seus primeiros clientes.</p>
+        <p>O <strong>Virtap Club</strong> foi feito para te guiar neste caminho a partir do zero, mostrando as habilidades, ferramentas e técnicas essenciais que você precisa dominar, além de como você deve se posicionar, precificar seu trabalho e conquistar seus primeiros clientes.</p>
+        <p>E o melhor: você também tem acesso à Plataforma de Vagas da Virtap, onde todos os meses clientes prontos para contratar buscam assistentes exatamente com o seu perfil.</p>
         `;
         }
 
