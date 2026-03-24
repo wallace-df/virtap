@@ -35,6 +35,13 @@
     <priority>0.75</priority>
   </url>
 
+  <!-- Vagas de trabalho -->
+  <url>
+    <loc>https://www.virtap.com.br/vagas-de-trabalho/</loc>
+    <lastmod>2026-03-24T23:35:40+00:00</lastmod>
+    <priority>0.75</priority>
+  </url>
+
   <!-- Página em inglês (Home) -->
   <url>
     <loc>https://www.virtap.com.br/en/</loc>
