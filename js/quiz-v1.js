@@ -455,20 +455,22 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
 
 function processarQuizAtuante(area, dor) {
     const btnPlataforma = `<button class="next-btn" onclick="window.location.href=getLink('/plataforma-de-vagas', 'plataforma-vagas', state)">👉 Conheça a Plataforma de Vagas</button>`;
-    const btnAexpert    = `<button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-pessoal', 'formacao-aexpert', state)">👉 Conheça a Formação AExpert</button>`;
+    const btnAexpert = `<button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-pessoal', 'formacao-aexpert', state)">👉 Conheça a Formação AExpert</button>`;
     const btnMastermind = `<button class="next-btn" onclick="window.location.href=getLink('/mastermind', 'mastermind', state)">👉 Conheça o Mastermind</button>`;
 
     let titulo = '';
-    let copy   = '';
-    let btn    = '';
+    let copy = '';
+    let btn = '';
 
+    let aexpertPre = `<p>Vamos te orientar em cada etapa desse processo, mostrando quais habilidades desenvolver, como precificar seu trabalho e como adquirir e reter bons clientes.</p>`;
+    
     if (area === 'AP' && dor === 'clientes') {
-        titulo = 'Você precisa de mais clientes';
+        titulo = 'Seu próximo cliente já está te procurando';
         copy = `
-            <p>Você já atua no nível mais estratégico da Assistência Virtual — o que falta não é habilidade, é visibilidade.</p>
-            <p>A <strong>Plataforma de Vagas da Virtap</strong> conecta Assistentes Pessoais a empresários e executivos que já estão procurando exatamente esse perfil. Sem precisar garimpar cliente no escuro.</p>
-            <p class="main-text">O próximo passo para você</p>
-            <p>Crie seu perfil na plataforma e comece a receber oportunidades de clientes que já entendem o valor de uma Assessora Pessoal.</p>
+            <p>Você já atua no nível mais estratégico da Assistência Virtual, o que te falta agora é estar no lugar certo para ser encontrada.</p>
+            <p>A <strong>Plataforma de Vagas da Virtap</strong> é o melhor lugar para isso: todos os meses, conectamos Assistentes Pessoais a empresários e executivos que já estão procurando exatamente esse perfil.</p>
+            <p>Você pula a etapa desgastante de educar e prospectar e vai direto para a negociação com clientes que já sabem que precisam delegar e já estão prontos para contratar.</p>
+            <p><strong>E o melhor:</strong> em média, 70% das assistentes ativas na Virtap conseguem fechar contratos nos 3 primeiros meses!</p>
         `;
         btn = btnPlataforma;
 
@@ -483,62 +485,58 @@ function processarQuizAtuante(area, dor) {
         btn = btnMastermind;
 
     } else if (area === 'SR' && dor === 'clientes') {
-        titulo = 'Você precisa de mais clientes';
+        titulo = 'Seu próximo cliente já está te procurando';
         copy = `
-            <p>Você já domina o que negócios mais precisam: comunicação ágil e atendimento de qualidade. O que falta é estar no lugar certo para ser encontrada.</p>
-            <p>A <strong>Plataforma de Vagas da Virtap</strong> é o melhor lugar para isso — empresas que já buscam suporte em atendimento e comunicação encontram profissionais como você de forma direta e qualificada.</p>
-            <p class="main-text">O próximo passo para você</p>
-            <p>Crie seu perfil na plataforma e comece a receber oportunidades alinhadas com a sua área de atuação.</p>
+            <p>Você já faz o que muitos negócios precisam: atender o público, organizar a agenda e responder as redes sociais para que o negócio não pare. O que te falta agora é estar no lugar certo para ser encontrada.</p>
+            <p>A <strong>Plataforma de Vagas da Virtap</strong> é o melhor lugar para isso: todos os meses, empresas e profissionais prontos para contratar buscam assistentes para auxíliar com atendimento, controle de agenda, suporte e outras rotinas administrativas. Você só precisa mostrar como você pode ajudá-los e ir direto para negociação.</p>
+            <p><strong>E o melhor:</strong> em média, 70% das assistentes ativas na Virtap conseguem fechar contratos nos 3 primeiros meses!</p>
         `;
         btn = btnPlataforma;
 
     } else if (area === 'SR' && dor === 'especializar') {
         titulo = 'Você está pronta para o próximo nível';
         copy = `
-            <p>Você já tem o que clientes mais difíceis de lidar valorizam: saber se comunicar bem e resolver problemas com pessoas. Agora é hora de transformar isso em um serviço mais estratégico e mais bem pago.</p>
-            <p>A <strong>Formação AExpert</strong> foi criada para Assistentes que já atuam e querem se especializar em Assessoria Pessoal — o nível mais valorizado do mercado, onde profissionais bem posicionadas faturam R$ 10.000 ou mais por mês.</p>
-            <p class="main-text">O próximo passo para você</p>
-            <p>Sua habilidade com pessoas já é sua maior vantagem. A AExpert te ensina a usá-la no nível certo.</p>
+            <p>Você já tem o que clientes mais difíceis de lidar valorizam: saber se comunicar bem e resolver problemas com pessoas.</p>
+            <p>O que você precisa não é trabalhar mais horas ou atender mais clientes, mas se posicionar e prestar um serviço mais estratégico para clientes que paguem bem.</p>
+            <p>A <strong>Formação AExpert</strong> foi criada para Assistentes que já atuam e querem se especializar em Assessoria Pessoal: o nível mais valorizado do mercado, onde profissionais bem posicionadas faturam R$ 10.000 ou mais por mês.</p>
+            ${aexpertPre}
         `;
         btn = btnAexpert;
 
     } else if (area === 'AA' && dor === 'clientes') {
-        titulo = 'Você precisa de mais clientes';
+        titulo = 'Seu próximo cliente já está te procurando';
         copy = `
-            <p>Você já tem as habilidades que negócios precisam para funcionar: organização, processos e execução. O que falta é visibilidade para ser encontrada por quem está buscando exatamente isso.</p>
-            <p>A <strong>Plataforma de Vagas da Virtap</strong> conecta Assistentes Administrativas a empresas que precisam de apoio operacional — sem depender de indicações ou buscar cliente no improviso.</p>
-            <p class="main-text">O próximo passo para você</p>
-            <p>Crie seu perfil na plataforma e comece a receber oportunidades de empresas que já valorizam o trabalho que você faz.</p>
+            <p>Você já resolve a parte mais crítica e burocrática das empresas: o financeiro e a operação do dia a dia. O que te falta agora é estar no lugar certo para ser encontrada.</p>
+            <p>A <strong>Plataforma de Vagas da Virtap</strong> é o melhor lugar para isso: todos os meses, empresas e profissionais prontos para contratar buscam assistentes para auxíliar com atendimento, controle de agenda, suporte e outras rotinas administrativas. Você só precisa mostrar como você pode ajudá-los e ir direto para negociação.</p>
+            <p><strong>E o melhor:</strong> em média, 70% das assistentes ativas na Virtap conseguem fechar contratos nos 3 primeiros meses!</p>
         `;
         btn = btnPlataforma;
 
     } else if (area === 'AA' && dor === 'especializar') {
         titulo = 'Você está pronta para o próximo nível';
         copy = `
-            <p>Você já domina a execução e a organização — as bases de qualquer assistência de qualidade. O próximo passo é subir de nível: atender clientes mais exigentes, assumir mais responsabilidade e cobrar mais por isso.</p>
-            <p>A <strong>Formação AExpert</strong> foi criada para Assistentes que já atuam e querem migrar para a Assessoria Pessoal — a área mais valorizada do mercado, onde profissionais bem posicionadas faturam R$ 10.000 ou mais por mês.</p>
-            <p class="main-text">O próximo passo para você</p>
-            <p>Sua base administrativa é uma vantagem enorme. A AExpert te ensina a usá-la no nível estratégico.</p>
+            <p>Você já resolve a parte mais crítica e burocrática das empresas: o financeiro e a operação do dia a dia.</p>
+            <p>O que te falta não é vender mais horas do seu dia, mas oferecer essa sua expertise em um formato de serviço mais estratégico e lucrativo para quem realmente valoriza.</p>
+            <p>A <strong>Formação AExpert</strong> foi criada para Assistentes que já atuam e querem se especializar em Assessoria Pessoal: o nível mais valorizado do mercado, onde profissionais bem posicionadas faturam R$ 10.000 ou mais por mês.</p>
+            ${aexpertPre}
         `;
         btn = btnAexpert;
 
     } else if (area === 'todos' && dor === 'clientes') {
-        titulo = 'Você precisa de mais clientes';
+        titulo = 'Seu próximo cliente já está te procurando';
         copy = `
-            <p>Ter versatilidade é uma grande vantagem — você consegue atender diferentes tipos de cliente e se adaptar a diferentes demandas. O que falta é estar no lugar certo para ser encontrada.</p>
-            <p>A <strong>Plataforma de Vagas da Virtap</strong> é o melhor lugar para isso — empresas com diferentes necessidades encontram profissionais qualificadas de forma direta, sem intermediários.</p>
-            <p class="main-text">O próximo passo para você</p>
-            <p>Crie seu perfil na plataforma, destaque suas principais habilidades e comece a receber oportunidades que combinam com você.</p>
+            <p>Ter versatilidade é uma grande vantagem: você consegue atender diferentes tipos de cliente e se adaptar a diferentes demandas. O que te falta agora é estar no lugar certo para ser encontrada.</p>
+            <p>A <strong>Plataforma de Vagas da Virtap</strong> é o melhor lugar para isso: todos os meses, empresas e profissionais prontos para contratar buscam assistentes para auxiliar em necessidades, como controle de agenda, compras, atendimento, rotinas administrativas e tarefas do dia a dia. Você só precisa mostrar como você pode ajudá-los e ir direto para negociação.</p>
+            <p><strong>E o melhor:</strong> em média, 70% das assistentes ativas na Virtap conseguem fechar contratos nos 3 primeiros meses!</p>
         `;
         btn = btnPlataforma;
 
     } else if (area === 'todos' && dor === 'especializar') {
         titulo = 'Hora de escolher onde brilhar';
         copy = `
-            <p>Versatilidade é ótimo para começar — mas para ganhar mais e atrair clientes melhores, chega um momento em que é preciso se posicionar com clareza em uma área específica.</p>
-            <p>A <strong>Formação AExpert</strong> vai te ajudar a identificar onde você tem mais potencial, se especializar na área mais estratégica do mercado e construir um posicionamento que justifica cobrar mais.</p>
-            <p class="main-text">O próximo passo para você</p>
-            <p>Pare de competir por preço e comece a competir por valor. A AExpert te mostra como.</p>
+            <p>Versatilidade é ótimo para começar, mas para ganhar mais e atrair clientes melhores, chega um momento em que é preciso se posicionar em uma área específica: a Assessoria Pessoal.</p>
+            <p>A <strong>Formação AExpert</strong> foi criada para assistentes que já atuam e querem se especializar no nível mais valorizado do mercado, onde profissionais bem posicionadas faturam R$ 10.000 ou mais por mês.</p>
+            ${aexpertPre}
         `;
         btn = btnAexpert;
     }
@@ -581,14 +579,14 @@ function updateStep5Content() {
 
 function updateStep9Content() {
     const [btn1, btn2] = document.querySelectorAll('#step9 .option-btn');
-    btn1.textContent = 'Tenho dificuldade em conquistar novos clientes.';
+    btn1.textContent = 'Tenho dificuldade em conseguir clientes';
     btn1.onclick = () => selectAnswer('clientes', btn1);
 
     if (state.areaAtuante === 'AP') {
-        btn2.textContent = 'Já tenho clientes, mas quero escalar meu faturamento sem trabalhar mais horas.';
+        btn2.textContent = 'Já tenho clientes, mas quero escalar sem trabalhar mais horas';
         btn2.onclick = () => selectAnswer('escalar', btn2);
     } else {
-        btn2.textContent = 'Quero me especializar para atender clientes melhores e ganhar mais.';
+        btn2.textContent = 'Trabalho muito, mas meu faturamento travou';
         btn2.onclick = () => selectAnswer('especializar', btn2);
     }
 }
@@ -736,7 +734,11 @@ function showCursoGratis() {
 function getStateTag(state) {
     if (!state) return '';
     if (state.flow === 'atuante') return `-${state.areaAtuante}-${state.dorAtuante}`;
-    return `-${state.desejo}-${state.p2}-${state.p3}-${state.exp}`;
+    if (state.p2 || state.p3) {
+        return `-${state.desejo}-${state.p2}-${state.p3}-${state.exp}`;
+    } else {
+        return `-${state.desejo}-${state.exp}`;
+    }
 }
 
 function getLink(path, campaign, state) {
