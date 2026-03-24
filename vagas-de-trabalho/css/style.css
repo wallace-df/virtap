@@ -2085,3 +2085,11 @@ p.copyright{
 	-webkit-filter: blur(125px);
 	        filter: blur(125px);
 }
+
+
+.vagas_section { margin-top: 4rem; margin-bottom: 2rem; }
+    .vagas_card { height: 100%; text-align: center; display: flex; flex-direction: column; }
+    .vagas_card h3 { font-size: 2.52rem; line-height: 1.2; }
+    .vagas_card .vagas_data { font-size: 1.82rem; line-height: 1.3; }
+    .vagas_card .vagas_desc { padding: 0 2rem 2rem; flex: 1; }
+    .vagas_btn { margin: auto auto 2rem; display: inline-block; font-size: 2.25rem; padding: 1rem 2rem; }
