@@ -152,16 +152,69 @@
 })(jQuery);
 
 
-
-    // ------------ login dropdwon toggle ----------------
-
-    document.querySelector('.login_dropdwon_toggle').addEventListener('click', function(){
-        document.querySelector('.login_dropdwon').classList.toggle('d-block');
-    });
-
-    window.addEventListener('mouseup',function(event){
-        var pol = document.getElementById('login_dropdwon');
-        if(event.target != pol && event.target.parentNode != pol){
-            pol.classList.remove('d-block');
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetElement = document.querySelector(this.getAttribute('href'));
+        if (targetElement) {
+            window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
         }
     });
+});
+
+const currentParams = new URLSearchParams(window.location.search);
+const elements = document.querySelectorAll("[data-link]");
+
+if (currentParams.toString()) {
+    elements.forEach(element => {
+        // Pega o href existente do elemento
+        const existingHref = element.href;
+
+        if (existingHref) {
+            // Cria um novo objeto URL com base no href existente
+            const url = new URL(existingHref, window.location.origin);
+
+            // Anexa os parâmetros da URL atual no href
+            currentParams.forEach((value, key) => {
+                url.searchParams.set(key, value);
+            });
+
+            // Atualiza o href do elemento com a nova URL completa
+            element.href = url.toString();
+        }
+    });
+}
+
+function getNullableValue(val) {
+    if (val) {
+        val = val.trim();
+        if (val.length === 0) val = null;
+    }
+    return val;
+}
+
+function getUTMParams() {
+    const params = new URLSearchParams(window.location.search);
+    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
+    const rawReferrer = getNullableValue(document.referrer);
+    const hasUTM = getNullableValue(params.get('utm_source')) && getNullableValue(params.get('utm_medium'));
+
+    let utmParams = {};
+    if (hasUTM) {
+        utmKeys.forEach(key => { utmParams[key] = getNullableValue(params.get(key)); });
+    }
+    utmParams.timestamp = Date.now();
+    utmParams.referral_url = rawReferrer;
+
+    let firstUtmParams = localStorage.getItem('first_visit_utm');
+    if (!firstUtmParams) {
+        firstUtmParams = utmParams;
+        try { localStorage.setItem('first_visit_utm', JSON.stringify(utmParams)); } catch { }
+    } else {
+        try { firstUtmParams = JSON.parse(firstUtmParams); } catch { firstUtmParams = utmParams; }
+    }
+
+    return { utm_first: firstUtmParams, utm_last: utmParams, has_utm: !!hasUTM };
+}
+
+try { console.log(getUTMParams()); } catch { }
