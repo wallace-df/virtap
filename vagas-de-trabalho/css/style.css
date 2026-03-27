@@ -368,6 +368,10 @@ h5 {
 	padding: 5rem 0 68rem;
 }
 
+.hero_area p {
+font-size: 2.4rem;
+}
+
 .hero_button {
 	position: relative;
 	display: inline-block;
@@ -2141,4 +2145,134 @@ p.copyright {
 	display: inline-block !important;
 	font-size: 2.25rem !important;
 	padding: 1rem 2rem !important;
+}
+
+
+/* ===== BLOCO DE ESTATÍSTICAS — versão destacada ===== */
+.stats_block {
+    background: linear-gradient(135deg, #532E88 0%, #8BCED3 100%);
+    border-radius: 2rem;
+    padding: 4rem 3rem;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(83, 46, 136, 0.28);
+}
+
+.stats_block::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -10%;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.07);
+    pointer-events: none;
+}
+.stats_block::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -5%;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+}
+
+.stats_block_inner {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.stat_item {
+    flex: 1;
+    min-width: 160px;
+    text-align: center;
+    padding: 1.5rem 2rem;
+    position: relative;
+}
+
+.stat_item + .stat_item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15%;
+    height: 70%;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.stat_number {
+    font-size: 3.8rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 0.4rem 0;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.stat_label {
+    font-size: 2.2rem;
+    color: rgba(255, 255, 255, 0.82);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.stat_icon {
+    font-size: 2.2rem;
+    display: block;
+    margin-bottom: 0.6rem;
+}
+
+.stat_item.stat_highlight .stat_number {
+    color: #ffe066;
+}
+.stat_item.stat_highlight .stat_label {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ===== BLOCO ROI abaixo dos planos ===== */
+.roi_block {
+    background: linear-gradient(135deg, #f0eaff 0%, #e8f8f9 100%);
+    border: 1.5px solid #c4a8e8;
+    border-radius: 1.4rem;
+    padding: 2.2rem 2.5rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+.roi_block p {
+    font-size: 1.9rem;
+    color: #3a1f6e;
+    margin: 0;
+    line-height: 1.6;
+}
+.roi_block strong {
+    color: #532E88;
+}
+
+/* ===== Tag de percentual dentro dos cards de plano ===== */
+.plan_roi_tag {
+    display: inline-block;
+    background: #f0eaff;
+    color: #532E88;
+    border-radius: 2rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 0.25rem 1rem;
+    margin-top: 0.6rem;
+}
+
+/* Responsivo mobile */
+@media (max-width: 576px) {
+    .stat_item + .stat_item::before { display: none; }
+    .stats_block { padding: 3rem 1.5rem; }
+    .stat_number { font-size: 3rem; }
+    .stat_item { min-width: 140px; padding: 1rem 1rem; }
 }
