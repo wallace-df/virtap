@@ -55,9 +55,9 @@ function collectFormData() {
     $("#popUp").modal('show');
 }
 
-
+ 
 function goToGroup() {
-    let url = 'https://chat.whatsapp.com/Cevacm7edGd7ZGYSQQevwU';
+    let url = 'https://chat.whatsapp.com/K7QAMjDWqaJBI7M7RBK0pc';
     window.dataLayer.push({
         'event': 'ga_event',
         'ga_event_name': 'go_to_whatsapp_page',
