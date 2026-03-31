@@ -731,9 +731,9 @@ function getStateTag(state) {
     if (!state) return '';
     if (state.flow === 'atuante') return `-${state.areaAtuante}-${state.dorAtuante}`;
     if (state.p2 || state.p3) {
-        return `-${state.desejo}-${state.p2}-${state.p3}-${state.exp}`;
+        return `${state.desejo}-${state.p2}-${state.p3}-${state.exp}`;
     } else {
-        return `-${state.desejo}-${state.exp}`;
+        return `${state.desejo}-${state.exp}`;
     }
 }
 
@@ -748,7 +748,7 @@ function getLink(path, campaign, state) {
         const ct = getNullableValue(utm.utm_last.utm_content);
         
         let t = getNullableValue(utm.utm_last.utm_term);
-        t = t ? t + '-main-quiz' : 'main-quiz';
+        t = t ? t + '-main-quiz-' : 'main-quiz-';
         t += getStateTag(state);
 
         if (s) params.set('utm_source', s);
