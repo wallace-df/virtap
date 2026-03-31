@@ -745,18 +745,23 @@ function getLink(path, campaign, state) {
         const s = getNullableValue(utm.utm_last.utm_source);
         const m = getNullableValue(utm.utm_last.utm_medium);
         const c = getNullableValue(utm.utm_last.utm_campaign);
-        let ct = getNullableValue(utm.utm_last.utm_content);
-        ct = ct ? ct + '-main-quiz' : 'main-quiz';
-        ct += getStateTag(state);
+        const ct = getNullableValue(utm.utm_last.utm_content);
+        
+        let t = getNullableValue(utm.utm_last.utm_term);
+        t = t ? t + '-main-quiz' : 'main-quiz';
+        t += getStateTag(state);
+
         if (s) params.set('utm_source', s);
         if (m) params.set('utm_medium', m);
         if (c) params.set('utm_campaign', c);
         if (ct) params.set('utm_content', ct);
+        if (t) params.set('utm_term', t);
     } else {
         params.set('utm_source', 'virtap');
         params.set('utm_medium', 'site');
         params.set('utm_campaign', campaign);
-        params.set('utm_content', 'main-quiz' + getStateTag(state));
+        params.set('utm_content', 'main-quiz');
+        params.set('utm_term', getStateTag(state))
     }
 
     return path + '?' + params.toString();
