@@ -22,7 +22,7 @@ function getNullableValue(val) {
 function getUTMParams() {
 
     const params = new URLSearchParams(window.location.search);
-    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
+    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content','utm_term'];
     const rawReferrer = getNullableValue(document.referrer);
     const hasUTM = getNullableValue(params.get('utm_source')) && getNullableValue(params.get('utm_medium'));
 
