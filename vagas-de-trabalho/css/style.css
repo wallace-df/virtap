@@ -2276,3 +2276,16 @@ p.copyright {
     .stat_number { font-size: 3rem; }
     .stat_item { min-width: 140px; padding: 1rem 1rem; }
 }
+
+.list_group li > span {
+	font-size: 1.8rem;
+	color:#777;
+}
+
+.list_group.plans li {
+	line-height: 1.25;
+}
+
+p.starter-warning {
+	font-size: 1.6rem;
+}
