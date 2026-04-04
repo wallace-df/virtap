@@ -49,8 +49,6 @@ Disallow: /perfil
 Disallow: /resetar-senha
 Disallow: /solicitar-nova-senha
 Disallow: /verificar-conta
-Disallow: /termos
-Disallow: /privacidade
 
 Disallow: /contratar-assistente-virtual/cadastrar
 Disallow: /contratar-assistente-virtual/login
@@ -62,3 +60,6 @@ Disallow: /en/login-with-email
 Disallow: /en/profile
 Disallow: /en/request-new-password
 Disallow: /en/reset-password
+
+
+Sitemap: https://www.virtap.com.br/sitemap.xml

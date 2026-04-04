@@ -6,48 +6,74 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-  <!-- Home -->
+  <!-- Home PT-BR -->
   <url>
     <loc>https://www.virtap.com.br/</loc>
-    <lastmod>2026-01-28T23:35:40+00:00</lastmod>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.00</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.virtap.com.br/en/"/>
+  </url>
+
+  <!-- Vagas de Trabalho - PRIORIDADE ALTA -->
+  <url>
+    <loc>https://www.virtap.com.br/vagas-assistente-virtual/</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
   </url>
 
   <!-- Contratar Assistente Virtual -->
   <url>
     <loc>https://www.virtap.com.br/contratar-assistente-virtual/</loc>
-    <lastmod>2026-01-28T23:35:40+00:00</lastmod>
-    <priority>0.80</priority>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.virtap.com.br/contratar-assistente-virtual/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.virtap.com.br/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.virtap.com.br/contratar-assistente-virtual/"/>
   </url>
 
   <!-- Curso Assistente Virtual -->
   <url>
     <loc>https://www.virtap.com.br/curso-assistente-virtual/</loc>
-    <lastmod>2026-01-28T23:35:40+00:00</lastmod>
-    <priority>0.75</priority>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
   </url>
 
-  <!-- O que e Assistencia Virtual -->
+  <!-- O que é Assistência Virtual -->
   <url>
     <loc>https://www.virtap.com.br/o-que-e-assistencia-virtual/</loc>
-    <lastmod>2026-01-28T23:35:40+00:00</lastmod>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
 
-  <!-- Vagas de trabalho -->
+  <!-- Privacidade -->
   <url>
-    <loc>https://www.virtap.com.br/vagas-de-trabalho/</loc>
-    <lastmod>2026-03-24T23:35:40+00:00</lastmod>
-    <priority>0.75</priority>
+    <loc>https://www.virtap.com.br/privacidade/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
   </url>
 
-  <!-- Página em inglês (Home) -->
+  <!-- Termos e Condições -->
+  <url>
+    <loc>https://www.virtap.com.br/termos/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+
+  <!-- Página em Inglês — par de /contratar-assistente-virtual/ -->
   <url>
     <loc>https://www.virtap.com.br/en/</loc>
-    <lastmod>2026-01-28T23:35:40+00:00</lastmod>
-    <priority>0.80</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.virtap.com.br/"/>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.virtap.com.br/contratar-assistente-virtual/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.virtap.com.br/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.virtap.com.br/contratar-assistente-virtual/"/>
   </url>
 
 </urlset>

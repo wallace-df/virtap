@@ -503,7 +503,7 @@ h5 {
 	gap: 0 1.4rem;
 }
 
-.icon_list a {
+.icon_list a,.icon_list span {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;

@@ -452,7 +452,7 @@ function processarQuiz(desejo, p2, p3, exp, p5 = null) {
 }
 
 function processarQuizAtuante(area, dor) {
-    const btnPlataforma = `<button class="next-btn" onclick="window.location.href=getLink('/vagas-de-trabalho', 'plataforma-vagas', state)">👉 Conheça a Plataforma de Vagas</button>`;
+    const btnPlataforma = `<button class="next-btn" onclick="window.location.href=getLink('/vagas-assistente-virtual', 'plataforma-vagas', state)">👉 Conheça a Plataforma de Vagas</button>`;
     const btnAexpert = `<button class="next-btn" onclick="window.location.href=getLink('/formacoes/assistencia-pessoal', 'formacao-aexpert', state)">👉 Conheça a Formação AExpert</button>`;
     const btnMastermind = `<button class="next-btn" onclick="window.location='https://docs.google.com/forms/d/e/1FAIpQLSd4d08MvexaQzMcjqUxjwmgrYLvuGqmHXGqkElLeWpSTJlvFg/viewform'">👉 Conheça o Mastermind</button>`;
 
