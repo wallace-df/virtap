@@ -2291,3 +2291,39 @@ p.copyright {
 p.starter-warning {
 	font-size: 1.6rem;
 }
+
+
+/* Seção comparação de plataformas */
+.comparacao_lista {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    font-size: 2rem;
+    line-height: 1.6;
+    padding: 0 1rem;
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.comparacao_lista_item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.comparacao_lista_icone {
+    flex-shrink: 0;
+    width: 2.8rem;
+    text-align: center;
+    padding-top: 0.2rem;
+}
+
+.comparacao_card_destaque {
+    border: 2px solid rgb(83, 46, 136);
+    box-shadow: 0 8px 30px rgba(83, 46, 136, 0.15);
+}
+
+.vagas_card.others h3, .vagas_card.others .comparacao_lista_item {
+	color:#999;
+}

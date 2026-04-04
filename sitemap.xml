@@ -44,6 +44,14 @@
     <priority>0.90</priority>
   </url>
 
+  <!-- Vagas de Assistente Virtual: como acessar -->
+  <url>
+    <loc>https://www.virtap.com.br/vagas-assistente-virtual/como-acessar</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
   <!-- O que é Assistência Virtual -->
   <url>
     <loc>https://www.virtap.com.br/o-que-e-assistencia-virtual</loc>
