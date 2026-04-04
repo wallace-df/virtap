@@ -2,8 +2,9 @@
 /assistente-virtual/* /:splat 301
 /assistente-virtual / 301
 /lista-de-espera /curso-gratuito 301
-/espera-curso-gratuito /curso-assistente-virtual 301
-/curso-gratuito /curso-assistente-virtual 301
+/espera-curso-gratuito /curso-assistente-virtual/ 301
+/curso-gratuito /curso-assistente-virtual/ 301
+/curso-assistente-virtual /curso-assistente-virtual/ 301
 /vagas-de-trabalho /vagas-assistente-virtual 301
 /vagas-de-trabalho/ /vagas-assistente-virtual/
 /o-que-fazemos /contratar-assistente-virtual  301
