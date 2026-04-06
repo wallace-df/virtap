@@ -58,7 +58,7 @@ function collectFormData() {
  
 function goToGroup() {
     
-    let url = 'https://chat.whatsapp.com/DCV64udIZ36E2pSYP7S82b';
+    let url = 'https://chat.whatsapp.com/HNadvb5K3sOCKrbY0E3vkD';
     window.dataLayer.push({
         'event': 'ga_event',
         'ga_event_name': 'go_to_whatsapp_page',
