@@ -16,11 +16,6 @@
 /feed https://blog.virtap.com.br/feed/ 301
 /feed/ https://blog.virtap.com.br/feed/ 301 
 
-/masterclass-aexpert /formacoes/assistencia-pessoal 301
-/masterclass-aexpert/* /formacoes/assistencia-pessoal/:splat 301
-/teste-perfil-ap /formacoes/assistencia-pessoal 301
-/teste-perfil-ap/* /formacoes/assistencia-pessoal/:splat 301
 
 /formacoes/assistencia-pessoal/lancamento-2026-04 /formacoes/assistencia-pessoal/ 301 
 /formacoes/assistencia-pessoal/lancamento-2026-04/* /formacoes/assistencia-pessoal/:splat 301
- 
