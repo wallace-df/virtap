@@ -4,11 +4,11 @@
     $(document).ready(function () {
 
 
-        
+
 
         // ------------ sticky header ----------------
 
-        function sticky_header(){
+        function sticky_header() {
             var wind = $(window);
             var sticky = $('.site_header');
             wind.on('scroll', function () {
@@ -39,7 +39,7 @@
                 scrollTop: 0,
             }, 1500);
         });
-        
+
         $('#back-to-top').on('click', function (event) {
             event.preventDefault();
 
@@ -54,99 +54,104 @@
 
         // ------------ excelente slider ----------------
 
-        $(function(){
-            $('.excelente-slider-nav').slick({
-                infinite: false,
-                vertical: true,
-                verticalSwiping: true,
-                slidesPerRow: 3,
-                slidesToShow: 3,
-                asNavFor: '.excelente-slider',
-                focusOnSelect: true,
-                arrows: false,
-                draggable: false,
-                swipeToSlide: false,
-                touchMove: false,
-                responsive: [
-                    {
-                        breakpoint: 992,
-                        settings: {
-                            vertical: false,
-                            slidesPerRow: 1,
-                            slidesToShow: 1,
-                            verticalSwiping: false,
-                            draggable: false,
-                            swipeToSlide: false,
-                            touchMove: false,
-                            focusOnSelect: false,
-                            swipe: false
-                        }
-                        
-                    },
-                ]
+
+        if ($.fn.slick) {
+
+            $(function () {
+                $('.excelente-slider-nav').slick({
+                    infinite: false,
+                    vertical: true,
+                    verticalSwiping: true,
+                    slidesPerRow: 3,
+                    slidesToShow: 3,
+                    asNavFor: '.excelente-slider',
+                    focusOnSelect: true,
+                    arrows: false,
+                    draggable: false,
+                    swipeToSlide: false,
+                    touchMove: false,
+                    responsive: [
+                        {
+                            breakpoint: 992,
+                            settings: {
+                                vertical: false,
+                                slidesPerRow: 1,
+                                slidesToShow: 1,
+                                verticalSwiping: false,
+                                draggable: false,
+                                swipeToSlide: false,
+                                touchMove: false,
+                                focusOnSelect: false,
+                                swipe: false
+                            }
+
+                        },
+                    ]
+                });
+                $('.excelente-slider').slick({
+                    infinite: false,
+                    vertical: true,
+                    verticalSwiping: true,
+                    slidesPerRow: 1,
+                    slidesToShow: 1,
+                    asNavFor: '.excelente-slider-nav',
+                    arrows: true,
+                    prevArrow: $('.excelente-slider-prev'),
+                    nextArrow: $('.excelente-slider-next'),
+                    draggable: false,
+                    swipeToSlide: false,
+                    touchMove: false,
+                    responsive: [
+                        {
+                            breakpoint: 992,
+                            settings: {
+                                vertical: false,
+                                verticalSwiping: false,
+                                draggable: false,
+                                swipeToSlide: false,
+                                touchMove: false,
+                                swipe: false
+                            }
+                        },
+                    ]
+                });
             });
-            $('.excelente-slider').slick({
+
+
+
+
+            // ------------ testimonial slider ----------------
+
+            $('.testimonial_slider').slick({
                 infinite: false,
-                vertical: true,
-                verticalSwiping: true,
                 slidesPerRow: 1,
                 slidesToShow: 1,
-                asNavFor: '.excelente-slider-nav',
                 arrows: true,
-                prevArrow: $('.excelente-slider-prev'),
-                nextArrow: $('.excelente-slider-next'),
-                draggable: false,
-                swipeToSlide: false,
-                touchMove: false,
-                responsive: [
-                    {
-                        breakpoint: 992,
-                        settings: {
-                            vertical: false,
-                            verticalSwiping: false,
-                            draggable: false,
-                            swipeToSlide: false,
-                            touchMove: false,
-                            swipe: false
-                        }
-                    },
-                ]
+                prevArrow: $('.testimonial_slider_prev'),
+                nextArrow: $('.testimonial_slider_next'),
             });
-        });
+
+
+
+            // ------------ youtube slider ----------------
+
+            $('.youtube_slider').slick({
+                infinite: false,
+                slidesPerRow: 1,
+                slidesToShow: 1,
+                arrows: true,
+                prevArrow: $('.youtube_slider_prev'),
+                nextArrow: $('.youtube_slider_next'),
+            });
 
 
 
 
-        // ------------ testimonial slider ----------------
 
-        $('.testimonial_slider').slick({
-            infinite: false,
-            slidesPerRow: 1,
-            slidesToShow: 1,
-            arrows: true,
-            prevArrow: $('.testimonial_slider_prev'),
-            nextArrow: $('.testimonial_slider_next'),
-        });
+        }
 
 
 
-        // ------------ youtube slider ----------------
-
-        $('.youtube_slider').slick({
-            infinite: false,
-            slidesPerRow: 1,
-            slidesToShow: 1,
-            arrows: true,
-            prevArrow: $('.youtube_slider_prev'),
-            nextArrow: $('.youtube_slider_next'),
-        });
-
-
-        
-
-
-        
-        
     });
 
 })(jQuery);
@@ -195,7 +200,7 @@ function getNullableValue(val) {
 
 function getUTMParams() {
     const params = new URLSearchParams(window.location.search);
-    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content','utm_term'];
+    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
     const rawReferrer = getNullableValue(document.referrer);
     const hasUTM = getNullableValue(params.get('utm_source')) && getNullableValue(params.get('utm_medium'));
 

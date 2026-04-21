@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descubra como Assistentes Virtuais estão fechando clientes sem precisar correr atrás todos os dias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+  @font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("../fonts/BeVietnamPro-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("../fonts/BeVietnamPro-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("../fonts/BeVietnamPro-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("../fonts/BeVietnamPro-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("../fonts/BeVietnamPro-ExtraBold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("../fonts/BeVietnamPro-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Be Vietnam Pro";
+  src: url("../fonts/BeVietnamPro-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --purple: #5B2D8E;
+  --purple-dark: #3D1D5E;
+  --purple-light: #7B4DB0;
+  --purple-soft: #F3EDF9;
+  --blue: #B3E3E5;
+  --blue-light: #D4F1F3;
+  --blue-soft: #EDF9FA;
+  --white: #FFFFFF;
+  --gray-50: #FAFAFA;
+  --gray-100: #F5F5F5;
+  --gray-200: #EBEBEB;
+  --gray-400: #B0B0B0;
+  --gray-500: #888888;
+  --gray-700: #444444;
+  --gray-900: #1A1A1A;
+  --green-soft: #4BBF7A;
+  --red-soft: #E85D5D;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--gray-900);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===== HERO ===== */
+.hero {
+  background: var(--white);
+  padding: 40px 24px 32px;
+  text-align: center;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.hero__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 48px;
+}
+
+.hero__logo-icon {
+  width: 34px;
+  height: 34px;
+  background: var(--purple);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--white);
+  font-size: 17px;
+}
+
+.hero__logo-text {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gray-900);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.hero__badge {
+  display: inline-block;
+  background: var(--purple-soft);
+  color: var(--purple);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.hero__title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 700;
+  color: var(--gray-900);
+  line-height: 1.2;
+  margin-bottom: 18px;
+}
+
+.hero__title span { color: var(--purple); }
+
+.hero__subtitle {
+  font-size: 17px;
+  color: var(--gray-500);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ===== VIDEO ===== */
+.video-section {
+  background: var(--white);
+  padding: 40px 24px 48px;
+}
+
+.video-wrapper {
+  max-width: 780px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.08);
+  aspect-ratio: 16/9;
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
+}
+
+.video-wrapper iframe,
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.video-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--purple-soft) 0%, var(--white) 100%);
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.video-placeholder:hover { opacity: 0.85; }
+
+.play-btn {
+  width: 72px;
+  height: 72px;
+  background: var(--purple);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  box-shadow: 0 8px 30px rgba(91,45,142,0.25);
+  transition: transform 0.3s;
+}
+
+.video-placeholder:hover .play-btn { transform: scale(1.06); }
+
+.play-btn svg {
+  width: 28px;
+  height: 28px;
+  fill: var(--white);
+  margin-left: 3px;
+}
+
+.video-placeholder span {
+  color: var(--gray-500);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ===== CTA BUTTON ===== */
+.cta-section {
+  padding: 40px 24px;
+  text-align: center;
+  background: var(--white);
+}
+
+.cta-btn {
+  display: inline-block;
+  background: var(--purple);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  padding: 22px 56px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  box-shadow: 0 6px 28px rgba(91,45,142,0.25);
+  letter-spacing: 0.3px;
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(91,45,142,0.35);
+  background: var(--purple-light);
+}
+
+.cta-btn__price {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.85;
+  margin-top: 4px;
+}
+
+.cta-note {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--gray-400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  padding: 72px 24px;
+}
+
+.section--white { background: var(--white); }
+.section--light { background: var(--blue-soft); }
+.section--light2 { background: var(--purple-soft);}
+
+.section__label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--purple);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.section__title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 14px;
+  line-height: 1.3;
+  color: var(--gray-900);
+}
+
+.section__subtitle {
+  text-align: center;
+  color: var(--gray-500);
+  font-size: 18px;
+  max-width: 560px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+}
+
+.divider {
+  width: 48px;
+  height: 3px;
+  background: var(--blue);
+  border-radius: 2px;
+  margin: 0 auto 48px;
+}
+
+/* ===== ERRORS ===== */
+.errors {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+@media (max-width: 780px) {
+  .errors { grid-template-columns: 1fr; gap: 32px; }
+}
+
+.error-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 32px 28px;
+  border-left: 4px solid var(--red-soft);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.error-group {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 28px 24px;
+  border-left: 4px solid var(--red-soft);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.error-group__label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--red-soft);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.error-group__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--gray-900);
+}
+
+.error-group__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.error-group__list li {
+  font-size: 17px;
+  color: var(--gray-700);
+  line-height: 1.5;
+  padding-left: 24px;
+  position: relative;
+}
+
+.error-group__list li::before {
+  content: '✗';
+  position: absolute;
+  left: 0;
+  color: var(--red-soft);
+  font-weight: 700;
+}
+
+/* ===== SOLUTION CARD ===== */
+.solution-card {
+  background: var(--purple-soft);
+  border: 2px solid var(--purple);
+  border-radius: 24px;
+  padding: 48px 40px;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.solution-card__title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 3.5vw, 28px);
+  font-weight: 700;
+  color: var(--purple);
+  margin-bottom: 14px;
+}
+
+.solution-card__text {
+  font-size: 17px;
+  color: var(--gray-700);
+  line-height: 1.7;
+  max-width: 580px;
+}
+
+.solution-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.solution-item {
+  font-size: 18px;
+  color: var(--gray-900);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.solution-item .check {
+  color: var(--green-soft);
+  margin-right: 6px;
+}
+
+/* ===== STEPS ===== */
+.steps {
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 20px;
+  padding: 24px 28px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.step:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+}
+
+.step__icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  background: var(--blue-soft);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step__icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--purple);
+  fill: none;
+  stroke-width: 2.5;
+}
+
+.step__number {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  background: var(--purple);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.step__content { flex: 1; }
+
+.step__title {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.step__text {
+  font-size: 16px;
+  color: var(--gray-500);
+  line-height: 1.6;
+}
+
+/* ===== SCREENSHOTS ===== */
+.screenshots {
+  max-width: 780px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 450px) {
+  .screenshots { grid-template-columns: 1fr; max-width: 360px; }
+}
+
+.screenshot {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  border: 1px solid var(--gray-200);
+  transition: transform 0.2s;
+}
+
+.screenshot:hover { transform: translateY(-2px); }
+
+.screenshot img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== INCLUDES ===== */
+.includes-list {
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.include-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 17px;
+  color: var(--gray-700);
+  font-weight: bold;
+}
+
+.include-item__icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  background: var(--purple-soft);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--purple);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* ===== GUARANTEE ===== */
+.guarantee {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--blue-soft);
+  border: 2px solid var(--blue);
+  border-radius: 24px;
+  padding: 48px 40px;
+}
+
+.guarantee__icon {
+  width: 80px;
+  height: 80px;
+  background: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 22px;
+  font-size: 42px;
+  box-shadow: 0 4px 16px rgba(179,227,229,0.3);
+}
+
+.guarantee__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--gray-900);
+}
+
+.guarantee__text {
+  font-size: 17px;
+  color: var(--gray-700);
+  line-height: 1.7;
+}
+
+/* ===== FAQ ===== */
+.faq {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.faq-item {
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--white);
+}
+
+.faq-item__question {
+  width: 100%;
+  padding: 18px 24px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--gray-900);
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s;
+}
+
+.faq-item__question:hover { background: var(--gray-50); }
+
+.faq-item__question::after {
+  content: '+';
+  font-size: 20px;
+  color: var(--purple);
+  font-weight: 400;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+.faq-item.active .faq-item__question::after { content: '−'; }
+
+.faq-item__answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-item.active .faq-item__answer { max-height: 200px; }
+
+.faq-item__answer-inner {
+  padding: 0 24px 18px;
+  font-size: 16px;
+  color: var(--gray-500);
+  line-height: 1.7;
+}
+
+/* ===== FINAL CTA ===== */
+.final-cta {
+  padding: 80px 24px;
+  text-align: center;
+  background: var(--blue);
+}
+
+.final-cta__title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 4vw, 34px);
+  font-weight: 700;
+  color: var(--purple-dark);
+  margin-bottom: 10px;
+}
+
+.final-cta__text {
+  font-size: 17px;
+  color: var(--purple);
+  opacity: 0.7;
+  margin-bottom: 36px;
+}
+
+.final-cta .cta-btn {
+  background: var(--purple);
+  color: var(--white);
+  box-shadow: 0 6px 28px rgba(91,45,142,0.3);
+}
+
+.final-cta .cta-btn:hover {
+  background: var(--purple-light);
+  box-shadow: 0 10px 40px rgba(91,45,142,0.4);
+}
+
+.final-cta .cta-btn .cta-btn__price { color: rgba(255,255,255,0.85); }
+
+.final-cta .cta-note { color: var(--purple-dark); opacity: 0.5; }
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: 28px 24px;
+  text-align: center;
+  background: var(--blue);
+  border-top: 1px solid rgba(91,45,142,0.08);
+}
+
+.footer__text {
+  font-size: 13px;
+  color: var(--purple-dark);
+  opacity: 0.35;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero__badge, .hero__title, .hero__subtitle {
+  animation: fadeUp 0.5s ease forwards;
+}
+.hero__title { animation-delay: 0.08s; }
+.hero__subtitle { animation-delay: 0.16s; }
+</style>
+
+ <!-- Google Tag Manager -->
+ <script>(function (w, d, s, l, i) {
+  w[l] = w[l] || []; w[l].push({
+      'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+  }); var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
+</script>
+<!-- End Google Tag Manager -->
+
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <h1 class="hero__title">Descubra como <span>Assistentes Virtuais</span> estão <span>fechando clientes</span> sem precisar correr atrás todos os dias</h1>
+    <p class="hero__subtitle">Assista ao vídeo e entenda como funciona.</p>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="video-section">
+  <div class="container">
+    <div class="video-wrapper">
+      <script src="https://fast.wistia.com/embed/medias/w079f7qzm6.jsonp" async></script>
+      <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+      <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+        <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+          <div class="wistia_embed wistia_async_w079f7qzm6 seo=true videoFoam=true" style="height:100%;position:relative;width:100%;">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA 1 -->
+<section class="cta-section" style="background: var(--purple-soft); border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200);"
+>
+  <a href="#checkout" class="cta-btn">
+    Quero entrar pra Virtap
+  </a>
+</section>
+
+<!-- 2 ERROS -->
+<section class="section section--light">
+  <div class="container" style="max-width:960px">
+    <h2 class="section__title">Os <span style="color:var(--red-soft);">2 erros</span> que travam quase toda Assistente Virtual</h2>
+    <p class="section__subtitle">Não é falta de esforço, experiência ou talento. São duas coisas específicas.</p>
+    <div class="errors">
+      <div class="error-group">
+        <div class="error-group__label">Erro 1</div>
+        <h3 class="error-group__title">Estar no lugar errado</h3>
+        <ul class="error-group__list">
+          <li>Competir em plataformas genéricas</li>
+          <li>Prospectar nas redes sociais sem retorno</li>
+          <li>Depender de indicação que não vem</li>
+        </ul>
+      </div>
+      <div class="error-group">
+        <div class="error-group__label">Erro 2</div>
+        <h3 class="error-group__title">Não ter um método claro</h3>
+        <ul class="error-group__list">
+          <li>Mandar proposta genérica e ser ignorada</li>
+          <li>Travar na hora de negociar com o cliente</li>
+          <li>Perder oportunidades sem entender por quê</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUÇÃO -->
+<section class="section section--white">
+  <div class="container">
+    <div class="solution-card">
+      <h2 class="solution-card__title">A Plataforma da Virtap resolve os dois de uma vez</h2>
+      <div class="solution-list">
+        <div class="solution-item"><span class="check">✓</span> O lugar certo — vagas exclusivas com clientes prontos pra contratar</div>
+        <div class="solution-item"><span class="check">✓</span> O método certo — como se posicionar, abordar e fechar</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- O TRABALHO PESADO -->
+<section class="section section--light">
+  <div class="container">
+    <h2 class="section__title">O trabalho pesado é nosso</h2>
+    <p class="section__subtitle">Sua única tarefa: escolher as vagas e aplicar o método.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step__icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="step__content">
+          <div class="step__title">Encontramos os clientes</div>
+          <p class="step__text">Nossa equipe vai atrás de quem precisa de Assistente Virtual.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="step__content">
+          <div class="step__title">Entendemos a demanda</div>
+          <p class="step__text">Conversamos com cada cliente e organizamos o que ele precisa.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="step__content">
+          <div class="step__title">Publicamos quando está pronto</div>
+          <p class="step__text">A vaga só vai pra plataforma quando o cliente está pronto pra contratar.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__icon">
+          <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+        </div>
+        <div class="step__content">
+          <div class="step__title">Acompanhamos até o fechamento</div>
+          <p class="step__text">Estamos junto no processo até você fechar o contrato.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MÉTODO -->
+<section class="section section--light2">
+  <div class="container">
+    <h2 class="section__title">Você entra sabendo exatamente o que fazer</h2>
+    <p class="section__subtitle">4 etapas pra se posicionar, abordar e fechar.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step__number">1</div>
+        <div class="step__content">
+          <div class="step__title">Perfil</div>
+          <p class="step__text">Ajuste como você se apresenta pra gerar confiança desde o primeiro contato.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__number">2</div>
+        <div class="step__content">
+          <div class="step__title">Proposta</div>
+          <p class="step__text">Aprenda a abordar o cliente do jeito certo e chamar atenção dele.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__number">3</div>
+        <div class="step__content">
+          <div class="step__title">Negociação</div>
+          <p class="step__text">Conduza a conversa, entenda a necessidade e mostre que você é a pessoa certa.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step__number">4</div>
+        <div class="step__content">
+          <div class="step__title">Acompanhamento</div>
+          <p class="step__text">Retome a conversa no momento certo e conduza até o fechamento.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA 2 -->
+<section class="cta-section" style="background: var(--gray-50); border-top: 1px solid var(--gray-100); border-bottom: 1px solid var(--gray-100);">
+  <a href="#checkout" class="cta-btn">
+    Quero entrar pra Virtap
+  </a>
+</section>
+
+<!-- PRINTS / DEPOIMENTOS -->
+<section class="section section--white">
+  <div class="container">
+    <h2 class="section__title">Quem já entrou, já tá fechando</h2>
+    <p class="section__subtitle">Prints reais de Assistentes Virtuais que usaram a Virtap.</p>
+    <div class="screenshots">
+      <!-- Substitua pelos caminhos reais dos seus prints -->
+      <!-- <div class="screenshot">
+        <img src="/prints/prova1.png" alt="Resultado de AV na Virtap">
+      </div> -->
+      <div class="screenshot">
+        <img src="/prints/prova2.png" alt="Resultado de AV na Virtap">
+      </div>
+      <div class="screenshot">
+        <img src="/prints/prova3.png" alt="Resultado de AV na Virtap">
+      </div>
+      <div class="screenshot">
+        <img src="/prints/prova4.png" alt="Resultado de AV na Virtap">
+      </div>
+      <div class="screenshot">
+        <img src="/prints/prova5.png" alt="Resultado de AV na Virtap">
+      </div>
+      <!-- <div class="screenshot">
+        <img src="/prints/prova6.png" alt="Resultado de AV na Virtap">
+      </div> -->
+    </div>
+  </div>
+</section>
+
+<!-- INCLUSO -->
+<section class="section section--light">
+  <div class="container">
+    <h2 class="section__title">O que vem no seu acesso</h2>
+    <div class="divider"></div>
+    <div class="includes-list">
+      <div class="include-item">
+        <div class="include-item__icon">✓</div>
+        <span>30 dias de acesso à Plataforma de Vagas exclusiva pra AVs</span>
+      </div>
+      <div class="include-item">
+        <div class="include-item__icon">✓</div>
+        <span>Método Virtap de Conquistar Clientes</span>
+      </div>
+      <div class="include-item">
+        <div class="include-item__icon">✓</div>
+        <span>Até 15 vagas reais para aplicar</span>
+      </div>
+      <div class="include-item">
+        <div class="include-item__icon">✓</div>
+        <span>Destaque ativo no seu perfil dentro da plataforma</span>
+      </div>
+      <div class="include-item">
+        <div class="include-item__icon">✓</div>
+        <span>Acompanhamento do processo até o fechamento</span>
+      </div>
+      <div class="include-item">
+        <div class="include-item__icon">✓</div>
+        <span>Zero comissão sobre os contratos que você fechar</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIA -->
+<section class="section section--white">
+  <div class="container">
+    <div class="guarantee">
+      <div class="guarantee__icon">🛡️</div>
+      <h3 class="guarantee__title">Garantia incondicional de 7 dias</h3>
+      <p class="guarantee__text">Se por qualquer motivo você sentir que não é pra você, basta pedir reembolso em até 7 dias. Devolvemos 100% do valor, sem perguntas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section--light2">
+  <div class="container">
+    <h2 class="section__title">Perguntas frequentes</h2>
+    <div class="divider"></div>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-item__question" onclick="this.parentElement.classList.toggle('active')">Preciso ter experiência como AV?</button>
+        <div class="faq-item__answer">
+          <div class="faq-item__answer-inner">A Plataforma da Virtap é recomendado pra quem já tem uma base mínima sobre a profissão. O Método te ensina o processo de conquistar clientes, mas o ideal é que você já saiba como prestar os serviços de uma AV.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-item__question" onclick="this.parentElement.classList.toggle('active')">Como funciona o acesso de 30 dias?</button>
+        <div class="faq-item__answer">
+          <div class="faq-item__answer-inner">Após a compra, você recebe acesso imediato à plataforma e ao Método. A plataforma dura 30 dias, o Método fica por 12 meses. Durante os 30 dias, você tem direito a 15 propostas.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-item__question" onclick="this.parentElement.classList.toggle('active')">E depois dos 30 dias?</button>
+        <div class="faq-item__answer">
+          <div class="faq-item__answer-inner">Você pode continuar assinando um dos nossos planos trimestrais. Muitas AVs já fecham o primeiro cliente nos 30 dias.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-item__question" onclick="this.parentElement.classList.toggle('active')">A Virtap cobra comissão?</button>
+        <div class="faq-item__answer">
+          <div class="faq-item__answer-inner">Não. Zero comissão. O que você fechar é 100% seu.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-item__question" onclick="this.parentElement.classList.toggle('active')">Posso pedir reembolso?</button>
+        <div class="faq-item__answer">
+          <div class="faq-item__answer-inner">Sim. Garantia de 7 dias, incondicional. Devolvemos 100% do valor.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="final-cta" id="checkout">
+  <h2 class="final-cta__title">Pare de correr atrás de cliente.</h2>
+  <p class="final-cta__text">Comece a escolher os seus.</p>
+  <a data-link href="https://www.virtap.com.br/comprar?p=VIRTAP_STARTER_KIT" class="cta-btn">
+    Quero entrar pra Virtap - R$ 197
+    <span class="cta-btn__price">30 dias · Método incluso · Garantia de 7 dias</span>
+  </a>
+  <p class="cta-note">Pagamento seguro · Acesso imediato</p>
+</section>
+
+<footer class="footer">
+  <p class="footer__text">© 2026 Virtap · Todos os direitos reservados</p>
+</footer>
+
+<script src="./vagas-assistente-virtual/js//jquery-3.4.1.min.js"></script>
+<script src="./vagas-assistente-virtual/js/main.js"></script>
+</body>
+</html>
