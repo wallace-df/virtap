@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+
+    <link href="/favicon.svg" type="image/svg+xml" rel="icon" />
+    <link href="/favicon.png" type="image/png" rel="icon" />
+
+    <title>Descubra seu caminho na profissão de Assistente Virtual | Virtap</title>
+    <link rel="stylesheet" href="/css/quiz-v1.css" />
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
+    </script>
+    <!-- End Google Tag Manager -->
+</head>
+
+<body>
+
+    <h1>Qual o próximo passo pra você como Assistente Virtual? ⭐
+        <p>Responda algumas perguntas rápidas e veja como avançar na sua carreira.</p>
+    </h1>
+    <div id="quiz-wrapper">
+        <div id="quiz-container">
+            <div class="header-nav" style="display:none" id="header-nav">
+                <div id="back-btn" class="back-link" onclick="goBack()">← Voltar</div>
+            </div>
+
+            <!-- step0: situação atual -->
+            <div class="step active" id="step0">
+                <h2>Qual sua situação atual?</h2>
+                <button class="option-btn" onclick="choosePath('nao-conhece', this)">
+                   Ainda não conheço a profissão, quero entender como funciona
+                </button>
+                <button class="option-btn" onclick="choosePath('quer-comecar', this)">
+                    Já conheço a profissão e quero começar minha carreira
+                </button>
+                <button class="option-btn" onclick="choosePath('ja-trabalha', this)">
+                    Já trabalho como Assistente Virtual
+                </button>
+            </div>
+
+            <!-- step1: experiência (P4) -->
+            <div class="step" id="step1">
+                <h2>Em qual dessas áreas você já atuou?</h2>
+                <button class="option-btn" onclick="selectAnswer('Executivo', this)">
+                    Secretariado Executivo / Concierge / Assessoria Especializada
+                </button>
+                <button class="option-btn" onclick="selectAnswer('Administrativo', this)">
+                    Administrativo / Financeiro / Operacional
+                </button>
+                <button class="option-btn" onclick="selectAnswer('Atendimento', this)">
+                    Atendimento ao Cliente / Suporte / Vendas
+                </button>
+                <button class="option-btn" onclick="selectAnswer(null, this)">
+                    Nenhuma das anteriores
+                </button>
+            </div>
+
+            <!-- step2: desejo (P1) -->
+            <div class="step" id="step2">
+                <h2>Com quais tarefas você quer trabalhar?</h2>
+                <button class="option-btn" onclick="selectAnswer('AA', this)">
+                    Organizar processos, planilhas e documentos de empresas.
+                </button>
+                <button class="option-btn" onclick="selectAnswer('AP', this)">
+                    Cuidar da agenda e demandas pessoais de um cliente.
+                </button>
+                <button class="option-btn" onclick="selectAnswer('SR', this)">
+                    Prestar suporte e atendimento ao público.
+                </button>
+            </div>
+
+            <!-- step3: perfil comportamental (P2) -->
+            <div class="step" id="step3">
+                <h2>Como você lida com um problema?</h2>
+                <button class="option-btn" onclick="selectAnswer('SR', this)">
+                    Comunicando: resolvo rápido conversando com as pessoas.
+                </button>
+                <button class="option-btn" onclick="selectAnswer('AA', this)">
+                    Organizando: crio um documento para não repetir o erro.
+                </button>
+                <button class="option-btn" onclick="selectAnswer('AP', this)">
+                    Antecipando: vejo o erro antes de acontecer.
+                </button>
+            </div>
+
+            <!-- step4: ambiente (P3) -->
+            <div class="step" id="step4">
+                <h2>Em momentos de pressão, o que você faz?</h2>
+                <button class="option-btn" onclick="selectAnswer('AP', this)">
+                    Defino prioridades e decido o que precisa ser resolvido primeiro.
+                </button>
+                <button class="option-btn" onclick="selectAnswer('SR', this)">
+                    Começo a responder e agir conforme as demandas vão chegando.
+                </button>
+                <button class="option-btn" onclick="selectAnswer('AA', this)">
+                    Organizo as tarefas para ter mais clareza do que precisa ser feito.
+                </button>
+            </div>
+
+            <!-- step5: P5 condicional (só aparece quando desejo=AP, perfil<AP, exp≠sem) -->
+            <div class="step" id="step5">
+                <h2>Só mais uma coisa antes do seu resultado...</h2>
+                <!-- <p style="margin-bottom:1.2rem; opacity:.7; font-size:.95rem; line-height:1.6;">
+                    Seus resultados mostram que o seu perfil atual é diferente do caminho que você escolheu.
+                    Isso não é um problema — mas é uma informação importante para te direcionar certo.
+                </p> -->
+                <button class="option-btn" onclick="selectAnswer('desafio', this)">
+                    Quero me desafiar e chegar no nível de Assessoria Pessoal, mesmo que precise desenvolver novas
+                    habilidades.
+                </button>
+                <button class="option-btn" onclick="selectAnswer('existente', this)">
+                    Prefiro começar usando as habilidades que já tenho e crescer a partir delas.
+                </button>
+            </div>
+
+            <!-- step6: resultado flow iniciante -->
+            <div class="step" id="step6">
+                <h2 id="result-title" class="text-center"></h2>
+                <div id="result-text"></div>
+            </div>
+
+            <!-- step8–11: flow atuante -->
+            <!-- step8: área de atuação -->
+            <div class="step" id="step8">
+                <h2>Em qual área você atua?</h2>
+                <button class="option-btn" onclick="selectAnswer('AP', this)">
+                    Assistência Pessoal / Executiva
+                </button>
+                <button class="option-btn" onclick="selectAnswer('SR', this)">
+                    Atendimento ao Cliente / Suporte / Vendas
+                </button>
+                <button class="option-btn" onclick="selectAnswer('AA', this)">
+                    Administrativo / Financeiro / Operacional
+                </button>
+                <button class="option-btn" onclick="selectAnswer('todos', this)">
+                    Um pouco de tudo
+                </button>
+            </div>
+
+            <!-- step9: dor principal (conteúdo dinâmico) -->
+            <div class="step" id="step9">
+                <h2>Qual é o seu maior desafio agora?</h2>
+                <button class="option-btn"></button>
+                <button class="option-btn"></button>
+            </div>
+
+            <!-- step12: resultado flow atuante -->
+            <div class="step" id="step12">
+                <h2 id="result-title-atuante"></h2>
+                <div id="result-text-atuante"></div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/quiz-v1.js"></script>
+</body>
+
+</html>

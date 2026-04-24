@@ -38,11 +38,13 @@
                 <div id="back-btn" class="back-link" onclick="goBack()">← Voltar</div>
             </div>
 
-            <!-- step0: situação atual -->
+            <!-- ═══════════════════════════════════════════════════════════════
+                 STEP 0: SITUAÇÃO ATUAL (ponto de partida — mantido)
+                 ═══════════════════════════════════════════════════════════════ -->
             <div class="step active" id="step0">
                 <h2>Qual sua situação atual?</h2>
                 <button class="option-btn" onclick="choosePath('nao-conhece', this)">
-                   Ainda não conheço a profissão, quero entender como funciona
+                    Ainda não conheço a profissão, quero entender como funciona
                 </button>
                 <button class="option-btn" onclick="choosePath('quer-comecar', this)">
                     Já conheço a profissão e quero começar minha carreira
@@ -52,120 +54,232 @@
                 </button>
             </div>
 
-            <!-- step1: experiência (P4) -->
-            <div class="step" id="step1">
-                <h2>Em qual dessas áreas você já atuou?</h2>
-                <button class="option-btn" onclick="selectAnswer('Executivo', this)">
-                    Secretariado Executivo / Concierge / Assessoria Especializada
+            <!-- ═══════════════════════════════════════════════════════════════
+                 PERSONA: DESCOBRINDO
+                 ═══════════════════════════════════════════════════════════════ -->
+
+            <!-- Origem -->
+            <div class="step" id="step-desc-origem">
+                <h2>Como você ficou sabendo sobre assistência virtual?</h2>
+                <button class="option-btn" onclick="saveAndAdvance('origem','anuncio',this)">
+                    Vi um anúncio ou post nas redes sociais
                 </button>
-                <button class="option-btn" onclick="selectAnswer('Administrativo', this)">
-                    Administrativo / Financeiro / Operacional
+                <button class="option-btn" onclick="saveAndAdvance('origem','indicacao',this)">
+                    Alguém me indicou
                 </button>
-                <button class="option-btn" onclick="selectAnswer('Atendimento', this)">
-                    Atendimento ao Cliente / Suporte / Vendas
-                </button>
-                <button class="option-btn" onclick="selectAnswer(null, this)">
-                    Nenhuma das anteriores
+                <button class="option-btn" onclick="saveAndAdvance('origem','pesquisa',this)">
+                    Tava pesquisando no Google ou em IAs
                 </button>
             </div>
 
-            <!-- step2: desejo (P1) -->
-            <div class="step" id="step2">
-                <h2>Com quais tarefas você quer trabalhar?</h2>
-                <button class="option-btn" onclick="selectAnswer('AA', this)">
-                    Organizar processos, planilhas e documentos de empresas.
+            <!-- Motivação -->
+            <div class="step" id="step-desc-motivacao">
+                <h2>O que mais te atrai na ideia de trabalhar como AV?</h2>
+                <button class="option-btn" onclick="saveAndAdvance('motivacao','flexibilidade',this)">
+                    Flexibilidade de horário
                 </button>
-                <button class="option-btn" onclick="selectAnswer('AP', this)">
-                    Cuidar da agenda e demandas pessoais de um cliente.
+                <button class="option-btn" onclick="saveAndAdvance('motivacao','home-office',this)">
+                    Trabalhar de casa ou de onde quiser
                 </button>
-                <button class="option-btn" onclick="selectAnswer('SR', this)">
-                    Prestar suporte e atendimento ao público.
+                <button class="option-btn" onclick="saveAndAdvance('motivacao','renda',this)">
+                    Ter uma renda própria
                 </button>
-            </div>
-
-            <!-- step3: perfil comportamental (P2) -->
-            <div class="step" id="step3">
-                <h2>Como você lida com um problema?</h2>
-                <button class="option-btn" onclick="selectAnswer('SR', this)">
-                    Comunicando: resolvo rápido conversando com as pessoas.
-                </button>
-                <button class="option-btn" onclick="selectAnswer('AA', this)">
-                    Organizando: crio um documento para não repetir o erro.
-                </button>
-                <button class="option-btn" onclick="selectAnswer('AP', this)">
-                    Antecipando: vejo o erro antes de acontecer.
+                <button class="option-btn" onclick="saveAndAdvance('motivacao','nao-sei',this)">
+                    Ainda não sei, quero entender melhor
                 </button>
             </div>
 
-            <!-- step4: ambiente (P3) -->
-            <div class="step" id="step4">
-                <h2>Em momentos de pressão, o que você faz?</h2>
-                <button class="option-btn" onclick="selectAnswer('AP', this)">
-                    Defino prioridades e decido o que precisa ser resolvido primeiro.
+            <!-- ═══════════════════════════════════════════════════════════════
+                 QUER COMEÇAR: SUB-IDENTIFICAÇÃO
+                 ═══════════════════════════════════════════════════════════════ -->
+
+            <div class="step" id="step-comecar-momento">
+                <h2>O que melhor descreve seu momento hoje?</h2>
+                <button class="option-btn" onclick="chooseSubPersona('clt',this)">
+                    Trabalho CLT e quero conciliar/migrar pro trabalho remoto
                 </button>
-                <button class="option-btn" onclick="selectAnswer('SR', this)">
-                    Começo a responder e agir conforme as demandas vão chegando.
+                <button class="option-btn" onclick="chooseSubPersona('desempregada',this)">
+                    Tô buscando um trabalho home office
                 </button>
-                <button class="option-btn" onclick="selectAnswer('AA', this)">
-                    Organizo as tarefas para ter mais clareza do que precisa ser feito.
+                <button class="option-btn" onclick="chooseSubPersona('pronta',this)">
+                    Me identifiquei com a profissão e quero começar o quanto antes
+                </button>
+                <button class="option-btn" onclick="chooseSubPersona('fez-curso',this)">
+                    Já fiz curso de AV mas ainda não comecei a atuar
                 </button>
             </div>
 
-            <!-- step5: P5 condicional (só aparece quando desejo=AP, perfil<AP, exp≠sem) -->
-            <div class="step" id="step5">
-                <h2>Só mais uma coisa antes do seu resultado...</h2>
-                <!-- <p style="margin-bottom:1.2rem; opacity:.7; font-size:.95rem; line-height:1.6;">
-                    Seus resultados mostram que o seu perfil atual é diferente do caminho que você escolheu.
-                    Isso não é um problema — mas é uma informação importante para te direcionar certo.
-                </p> -->
-                <button class="option-btn" onclick="selectAnswer('desafio', this)">
-                    Quero me desafiar e chegar no nível de Assessoria Pessoal, mesmo que precise desenvolver novas
-                    habilidades.
+            <!-- ═══════════════════════════════════════════════════════════════
+                 PERSONA: CLT
+                 ═══════════════════════════════════════════════════════════════ -->
+
+            <!-- Situação CLT -->
+            <div class="step" id="step-clt-situacao">
+                <h2>Hoje, o que descreve melhor sua situação?</h2>
+                <button class="option-btn" onclick="saveAndAdvance('cltSituacao','renda-extra',this)">
+                    Quero uma renda extra, sem sair do emprego
                 </button>
-                <button class="option-btn" onclick="selectAnswer('existente', this)">
-                    Prefiro começar usando as habilidades que já tenho e crescer a partir delas.
+                <button class="option-btn" onclick="saveAndAdvance('cltSituacao','migrar',this)">
+                    Quero migrar pro remoto, mas aos poucos
+                </button>
+                <button class="option-btn" onclick="saveAndAdvance('cltSituacao','sair',this)">
+                    Já decidi sair, só preciso me preparar
                 </button>
             </div>
 
-            <!-- step6: resultado flow iniciante -->
-            <div class="step" id="step6">
+            <!-- Preocupação CLT -->
+            <div class="step" id="step-clt-preocupacao">
+                <h2>O que mais te preocupa nessa transição?</h2>
+                <button class="option-btn" onclick="saveAndAdvance('cltPreocupacao','estabilidade',this)">
+                    Perder a estabilidade financeira
+                </button>
+                <button class="option-btn" onclick="saveAndAdvance('cltPreocupacao','clientes',this)">
+                    Não saber como conseguir clientes
+                </button>
+                <button class="option-btn" onclick="saveAndAdvance('cltPreocupacao','sozinha',this)">
+                    Fazer tudo sozinha, sem orientação
+                </button>
+                <button class="option-btn" onclick="saveAndAdvance('cltPreocupacao','remoto',this)">
+                    Medo de não me adaptar ao trabalho remoto
+                </button>
+            </div>
+
+            <!-- Prontidão CLT -->
+            <div class="step" id="step-clt-prontidao">
+                <h2>Se existisse um caminho claro pra você, quando começaria?</h2>
+                <button class="option-btn" onclick="saveAndAdvance('cltProntidao','agora',this)">
+                    Agora, já quero me preparar
+                </button>
+                <!-- <button class="option-btn" onclick="saveAndAdvance('cltProntidao','leve',this)">
+                    Em breve, mas já gostaria de ir me preparando
+                </button> -->
+                <button class="option-btn" onclick="saveAndAdvance('cltProntidao','entender',this)">
+                    Ainda preciso entender melhor antes de decidir
+                </button>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════════
+                 PERSONA: DESEMPREGADA
+                 ═══════════════════════════════════════════════════════════════ -->
+
+            <!-- Urgência -->
+            <div class="step" id="step-desemp-urgencia">
+                <h2>Como tá seu momento financeiro hoje?</h2>
+                <button class="option-btn" onclick="saveAndAdvance('desempUrgencia','alta',this)">
+                    Preciso de renda o mais rápido possível
+                </button>
+                <button class="option-btn" onclick="saveAndAdvance('desempUrgencia','media',this)">
+                    Tenho um tempinho pra me preparar, mas não muito
+                </button>
+                <button class="option-btn" onclick="saveAndAdvance('desempUrgencia','baixa',this)">
+                    Tô tranquila por agora, mas quero me planejar
+                </button>
+            </div>
+
+            <!-- Preocupação -->
+            <div class="step" id="step-desemp-preocupacao">
+                <h2>O que mais te preocupa nesse momento?</h2>
+                <button class="option-btn" onclick="saveAndAdvance('desempPreocupacao','risco',this)">
+                    Investir dinheiro e não ter retorno
+                </button>
+                <button class="option-btn" onclick="saveAndAdvance('desempPreocupacao','direcao',this)">
+                    Não saber por onde começar
+                </button>
+                <button class="option-btn" onclick="saveAndAdvance('desempPreocupacao','experiencia',this)">
+                    Não ter experiência em nada parecido
+                </button>
+                <button class="option-btn" onclick="saveAndAdvance('desempPreocupacao','frustrada',this)">
+                    Já tentei outras coisas e não deu certo
+                </button>
+            </div>
+
+            <!-- Prontidão -->
+            <div class="step" id="step-desemp-prontidao">
+                <h2>Qual caminho faria mais sentido pra você?</h2>
+                <button class="option-btn" onclick="saveAndAdvance('desempProntidao','rapido',this)">
+                    Algo acessível pra começar na prática
+                </button>
+                <button class="option-btn" onclick="saveAndAdvance('desempProntidao','completo',this)">
+                    Algo completo e estruturado, para fazer da melhor forma
+                </button>
+                <button class="option-btn" onclick="saveAndAdvance('desempProntidao','gratuito',this)">
+                    Primeiro quero aprender pra ver se é pra mim
+                </button>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════════
+                 PERSONA: PRONTA (quer começar + já decidiu)
+                 ═══════════════════════════════════════════════════════════════ -->
+
+            <div class="step" id="step-pronta-preocupacao">
+                <h2>O que mais pesa pra você nesse momento?</h2>
+                <button class="option-btn" onclick="saveAndAdvance('prontaPreocupacao','profissionalizar',this)">
+                    Quero me profissionalizar de verdade nessa área
+                </button>
+                <button class="option-btn" onclick="saveAndAdvance('prontaPreocupacao','acompanhamento',this)">
+                    Não quero fazer sozinha, quero ter acompanhamento
+                </button>
+                <!-- <button class="option-btn" onclick="saveAndAdvance('prontaPreocupacao','clientes',this)">
+                    Já sei o que fazer, preciso é de clientes
+                </button> -->
+                <button class="option-btn" onclick="saveAndAdvance('prontaPreocupacao','primeiro-passo',this)">
+                    Quero dar o primeiro passo sem investir muito
+                </button>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════════
+                 PERSONA: JÁ TEM BASE (já trabalha / fez curso)
+                 ═══════════════════════════════════════════════════════════════ -->
+
+            <!-- Situação -->
+            <div class="step" id="step-base-situacao">
+                <h2>Qual é sua situação como AV hoje?</h2>
+                <button class="option-btn" onclick="saveAndAdvance('baseSituacao','fez-curso-travou',this)">
+                    Fiz curso mas nunca consegui clientes
+                </button>
+                <button class="option-btn" onclick="saveAndAdvance('baseSituacao','informal',this)">
+                    Atendo alguns clientes informalmente
+                </button>
+                <button class="option-btn" onclick="saveAndAdvance('baseSituacao','profissional',this)">
+                    Já atuo profissionalmente e quero crescer
+                </button>
+            </div>
+
+            <!-- Necessidade -->
+            <div class="step" id="step-base-necessidade">
+                <h2>O que mais faz falta pra você hoje?</h2>
+                <button class="option-btn" onclick="saveAndAdvance('baseNecessidade','clientes',this)">
+                    Acesso a clientes e vagas de verdade
+                </button>
+                <button class="option-btn" onclick="saveAndAdvance('baseNecessidade','posicionamento',this)">
+                    Saber cobrar melhor e me posicionar como profissional
+                </button>
+                <button class="option-btn" onclick="saveAndAdvance('baseNecessidade','estrutura',this)">
+                    Estrutura pra formalizar e escalar meu trabalho
+                </button>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════════
+                 RESULTADO (tela única, conteúdo dinâmico)
+                 ═══════════════════════════════════════════════════════════════ -->
+
+            <div class="step" id="step-result">
                 <h2 id="result-title" class="text-center"></h2>
                 <div id="result-text"></div>
             </div>
 
-            <!-- step8–11: flow atuante -->
-            <!-- step8: área de atuação -->
-            <div class="step" id="step8">
-                <h2>Em qual área você atua?</h2>
-                <button class="option-btn" onclick="selectAnswer('AP', this)">
-                    Assistência Pessoal / Executiva
-                </button>
-                <button class="option-btn" onclick="selectAnswer('SR', this)">
-                    Atendimento ao Cliente / Suporte / Vendas
-                </button>
-                <button class="option-btn" onclick="selectAnswer('AA', this)">
-                    Administrativo / Financeiro / Operacional
-                </button>
-                <button class="option-btn" onclick="selectAnswer('todos', this)">
-                    Um pouco de tudo
-                </button>
+            <!-- Programa 30 dias: Espera -->
+            <div class="step" id="step-waitlist">
+                <h2 id="waitlist-title" class="text-center"></h2>
+                <div id="waitlist-context"></div>
+                <p><strong>Vem coisa boa aí:</strong> uma forma prática pra você começar como AV e já conseguir seus primeiros trabalhos, mesmo começando do zero!</p>
+                <p>Entra no nosso grupo pra acompanhar de perto e ser uma das primeiras a ter acesso:</p>
+                <button class="next-btn" onclick="window.location.href='https://chat.whatsapp.com/Kv1j9Z0hXhDEFKNiw8qrgs'">👉 Entrar no grupo</button>
             </div>
 
-            <!-- step9: dor principal (conteúdo dinâmico) -->
-            <div class="step" id="step9">
-                <h2>Qual é o seu maior desafio agora?</h2>
-                <button class="option-btn"></button>
-                <button class="option-btn"></button>
-            </div>
-
-            <!-- step12: resultado flow atuante -->
-            <div class="step" id="step12">
-                <h2 id="result-title-atuante"></h2>
-                <div id="result-text-atuante"></div>
-            </div>
         </div>
     </div>
-    <script src="/js/quiz-v1.js"></script>
+    <script src="/js/quiz-v2.js"></script>
 </body>
 
 </html>
