@@ -38,6 +38,8 @@
     <link href="/favicon.png" type="image/png" rel="icon" />
 
     <link rel="stylesheet" href="/css/course-v1.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+		media="print" onload="this.media='all'">
 
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
@@ -61,8 +63,14 @@
 
     <div class="container">
         <div class="video-box">
-            <img src="./img/curso-gratuito.jpeg"
-                alt="Imagem do curso gratuito de assistente virtual da Virtap — aprenda a trabalhar de casa">
+            <div class="video-card reveal" onclick="toggleVideo(this)">
+                <video preload="metadata"  playsinline>
+                    <source src="/videos/intro-av.mp4" type="video/mp4">
+                </video>
+                <div class="video-overlay">
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                </div>
+            </div>
             <div class="text-block">
                 <h1>Curso de Assistente Virtual gratuito: como trabalhar de casa</h1>
                 <ul>
@@ -267,6 +275,20 @@
                 showModal();
             }
         });
+
+        function toggleVideo(container) {
+            const video = container.querySelector('video');
+
+            if (video.paused) {
+                video.play();
+                container.classList.add('is-playing');
+                video.setAttribute('controls', 'true');
+            } else {
+                video.pause();
+                container.classList.remove('is-playing');
+                video.removeAttribute('controls');
+            }
+        }
     </script>
 
 
