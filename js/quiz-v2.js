@@ -3,10 +3,12 @@
 const PATHS = {
     cursoGratuito: '/curso-assistente-virtual',
     programa30dias: '/do-zero-a-av',                  // Programa R$ 97
-    formacaoAV: '/formacoes/assistente-virtual',      // Formação AV R$ 797
+    formacaoAV: '/formacao-av',      // Formação AV R$ 797
     acessoVirtap: '/vagas-assistente-virtual/acesso', // Plataforma
     whatsapp: 'https://wa.me/5548988089062',          // Número do WhatsApp
 };
+
+const DESTINO_QUIZ = 'whatsapp'; // 'whatsapp' ou 'lp'
 
 // ─── FLOWS ────────────────────────────────────────────────────────────────────
 const FLOWS = {
@@ -283,7 +285,7 @@ function gerarResultado() {
                 btn: makeCTA('👉 Conhecer a Plataforma de Vagas', PATHS.acessoVirtap, 'plataforma-vagas'),
             };
         }
-    
+
         // Resto → WhatsApp consultivo
         return resultadoWhatsApp(
             'Vamos acelerar seu próximo passo',
@@ -360,7 +362,35 @@ function resultadoCursoGratuito(titulo, corpo) {
     };
 }
 
+// function resultadoWhatsApp(titulo, contexto, corpo) {
+//     const tags = getStateTag();
+//     const whatsappUrl = PATHS.whatsapp + '?text=' + encodeURIComponent('Oi! Quero saber mais sobre a Formação AV da Virtap.\n\n#' + tags);
+
+//     return {
+//         destino: 'whatsapp',
+//         titulo,
+//         mensagem: contexto +
+//             `<p>A Virtap tem um caminho alinhado com o que você precisa agora. Mas antes de te indicar qualquer coisa, a gente quer entender melhor o seu momento.</p>
+//             <p>Vamos conversar e montar o plano certo pra você?</p>`,
+//         btn: `<button class="next-btn" onclick="window.location.href='${whatsappUrl}'">👉 Vamos conversar</button>`,
+//     };
+// }
+
 function resultadoWhatsApp(titulo, contexto, corpo) {
+
+    if (DESTINO_QUIZ === 'lp') {
+
+        return {
+            destino: 'lp',
+            titulo: 'Seu próximo passo tá aqui',
+            mensagem: contexto +
+                `<p>A Virtap tem um caminho alinhado com o que você precisa agora. </p>
+                `,
+            btn: makeCTA('Quero ver como funciona', PATHS.formacaoAV, 'lp-formacao'),
+        };
+
+    }
+
     const tags = getStateTag();
     const whatsappUrl = PATHS.whatsapp + '?text=' + encodeURIComponent('Oi! Quero saber mais sobre a Formação AV da Virtap.\n\n#' + tags);
 
