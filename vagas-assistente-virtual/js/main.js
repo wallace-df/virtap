@@ -168,7 +168,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 const currentParams = new URLSearchParams(window.location.search);
-const elements = document.querySelectorAll("[data-link]");
+let elements = document.querySelectorAll("[data-link]");
 
 if (currentParams.toString()) {
     elements.forEach(element => {
@@ -189,6 +189,33 @@ if (currentParams.toString()) {
         }
     });
 }
+
+
+elements = document.querySelectorAll("[data-wpp-link]");
+
+elements.forEach(element => {
+    const existingHref = element.href;
+
+    if (!existingHref) return;
+
+    const url = new URL(existingHref, window.location.origin);
+
+    // pega mensagem atual já existente no wa.me
+    let text = url.searchParams.get("text") || "";
+
+    // adiciona utm-term no final da mensagem
+    const utmTerm = currentParams.get("utm_term");
+
+    if (utmTerm) {
+        text += ` #${utmTerm}`;
+    }
+ 
+    // atualiza o parâmetro text
+    url.searchParams.set("text", text);
+
+    element.href = url.toString();
+});
+
 
 function getNullableValue(val) {
     if (val) {

@@ -8,7 +8,7 @@ const PATHS = {
     whatsapp: 'https://wa.me/5548988089062',          // Número do WhatsApp
 };
 
-const DESTINO_QUIZ = 'whatsapp'; // 'whatsapp' ou 'lp'
+const DESTINO_QUIZ = 'lp'; // 'whatsapp' ou 'lp'
 
 // ─── FLOWS ────────────────────────────────────────────────────────────────────
 const FLOWS = {
@@ -324,7 +324,7 @@ function montarContextoDesempregada() {
         'baixa': 'Você tá planejando com calma',
     };
     const preocupacoes = {
-        'risco': 'e sua maior preocupação é investir e não ter retorno',
+        'retorno': 'e sua maior preocupação é investir e não ter retorno',
         'direcao': 'e sua maior preocupação é não saber por onde começar',
         'experiencia': 'e você sente que não tem experiência suficiente',
         'frustrada': 'e você já tentou outras coisas que não deram certo',
