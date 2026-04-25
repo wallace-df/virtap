@@ -210,11 +210,12 @@
     }
 
     .cta-sub {
-  display: block;
-  margin-top: 0.75rem;
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
-}
+      display: block;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
     /* ── SECTION: PARA QUEM ── */
     .para-quem {
       padding: var(--section-padding);
@@ -367,7 +368,8 @@
     }
 
     .modulo h3 {
-      font-size: 1.1rem;;
+      font-size: 1.1rem;
+      ;
       font-weight: 700;
       margin-bottom: 4px;
     }
@@ -687,6 +689,263 @@
     .vsl-wrapper {
       animation-delay: 0.3s;
     }
+
+    .wpp-fab {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    /* ── Botão principal ── */
+    .wpp-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: none;
+      background: #25d366;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, .3), 0 2px 4px rgba(0, 0, 0, .1);
+      transition: transform .25s cubic-bezier(.34, 1.56, .64, 1), box-shadow .25s ease;
+      animation: wppEntrada .4s cubic-bezier(.34, 1.56, .64, 1) both;
+      animation-delay: .5s;
+    }
+
+    @keyframes wppEntrada {
+      from {
+        transform: scale(0);
+      }
+
+      to {
+        transform: scale(1);
+      }
+    }
+
+    .wpp-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 24px rgba(37, 211, 102, .4);
+    }
+
+    .wpp-btn:active {
+      transform: scale(.95);
+    }
+
+    .wpp-btn svg {
+      width: 30px;
+      height: 30px;
+      fill: #fff;
+    }
+
+    /* ── Pulse ── */
+    .wpp-pulse {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(37, 211, 102, .5);
+      animation: pulse 2s ease-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: .6;
+      }
+
+      100% {
+        transform: scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    /* ── Badge "1" ── */
+    .wpp-badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 18px;
+      height: 18px;
+      background: #ff3b5c;
+      border-radius: 50%;
+      border: 2.5px solid #fff;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: badgePop .4s cubic-bezier(.34, 1.56, .64, 1) both;
+      animation-delay: 1.2s;
+      opacity: 0;
+    }
+
+    @keyframes badgePop {
+      from {
+        opacity: 0;
+        transform: scale(0);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* ── Card / Tooltip ── */
+    .wpp-card {
+      display: none;
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      width: 280px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .18), 0 2px 8px rgba(0, 0, 0, .08);
+      position: relative;
+      animation: cardIn .3s cubic-bezier(.34, 1.56, .64, 1) both;
+    }
+
+    .wpp-card.aberto {
+      display: block;
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: scale(.85) translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .wpp-card-fechar {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: none;
+      background: #f0f2f5;
+      color: #8e8e9e;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wpp-card-fechar:hover {
+      background: #e4e6e9;
+      color: #333;
+    }
+
+    .wpp-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .wpp-card-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #25d366, #128c47);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .wpp-card-avatar svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    .wpp-card-nome {
+      font-weight: 600;
+      font-size: .9rem;
+      color: #1a1a2e;
+    }
+
+    .wpp-card-status {
+      font-size: .75rem;
+      color: #8e8e9e;
+      margin-top: 1px;
+    }
+
+    .wpp-card-msg {
+      background: #f0f2f5;
+      border-radius: 0 12px 12px 12px;
+      padding: 10px 14px;
+      font-size: .85rem;
+      color: #3a3a4a;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .wpp-card-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 11px 16px;
+      background: #25d366;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: .88rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .2s ease;
+    }
+
+    .wpp-card-cta:hover {
+      background: #1fb855;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(37, 211, 102, .35);
+    }
+
+    .wpp-card-cta svg {
+      width: 16px;
+      height: 16px;
+      fill: #fff;
+    }
+
+    @media (max-width: 480px) {
+      .wpp-fab {
+        bottom: 20px;
+        right: 16px;
+      }
+
+      .wpp-card {
+        width: 260px;
+      }
+
+      .wpp-btn {
+        width: 56px;
+        height: 56px;
+      }
+
+      .wpp-btn svg {
+        width: 26px;
+        height: 26px;
+      }
+    }
   </style>
   <!-- favicon -->
   <link href="/img/favicon.svg" type="image/svg+xml" rel="icon" />
@@ -864,8 +1123,11 @@
   <section class="diferenciais">
     <div class="container">
       <h2 class="section-title">A Virtap vai atrás dos clientes por você</h2>
-      <p style="text-align:center; max-width:640px; margin:0 auto 2rem; font-size:1rem; color:var(--color-text-soft); margin-top:-1rem">A
-        Virtap entende a necessidade de cada cliente e publica oportunidades prontas para contratação. Fazemos a parte pesada por você.</p>
+      <p
+        style="text-align:center; max-width:640px; margin:0 auto 2rem; font-size:1rem; color:var(--color-text-soft); margin-top:-1rem">
+        A
+        Virtap entende a necessidade de cada cliente e publica oportunidades prontas para contratação. Fazemos a parte
+        pesada por você.</p>
 
       <div class="proof-placeholder">
         <img src="/prints/prova3.png">
@@ -879,7 +1141,8 @@
   <section class="diferenciais" style="background: var(--color-bg);">
     <div class="container">
       <h2 class="section-title">Você não fica sozinha...</h2>
-      <p style="text-align:center; max-width:640px; margin:0 auto 2rem; font-size:1rem; color:var(--color-text-soft);margin-top:-1rem">
+      <p
+        style="text-align:center; max-width:640px; margin:0 auto 2rem; font-size:1rem; color:var(--color-text-soft);margin-top:-1rem">
         Durante 12 meses, quando bater dúvida no meio do caminho, você tem pra onde levar.</p>
 
       <div class="proof-placeholder">
@@ -929,13 +1192,14 @@
     <div class="container">
       <h2 class="section-title">Um caminho completo pra você</h2>
       <div class="oferta-box">
-        <h2 style="font-size: 1.5rem">Formação + Acompanhamento +  Clientes</h2>
+        <h2 style="font-size: 1.5rem">Formação + Acompanhamento + Clientes</h2>
         <div class="oferta-includes">
           <div class="oferta-item"><span class="check">✓</span> 38 aulas práticas</div>
           <div class="oferta-item"><span class="check">✓</span> Materiais complementares (planilhas, contratos, guias)
           </div>
           <div class="oferta-item"><span class="check">✓</span> 12 meses de suporte + encontros mensais ao vivo</div>
-          <div class="oferta-item"><span class="check">✓</span> 3 meses de acesso à plataforma de clientes da Virtap</div>
+          <div class="oferta-item"><span class="check">✓</span> 3 meses de acesso à plataforma de clientes da Virtap
+          </div>
         </div>
         <div class="oferta-price">
           <!-- Ajustar valores conforme necessário -->
@@ -943,7 +1207,8 @@
           <div class="oferta-price__value">R$ 997</div>
         </div>
         <div class="oferta-price__installment">ou 12x de R$ 99,90</div>
-        <a data-link href="https://www.virtap.com.br/comprar?p=FORMACAO_AV_FULL" class="cta-btn cta-btn--large">Quero começar agora</a>
+        <a data-link href="https://www.virtap.com.br/comprar?p=FORMACAO_AV_FULL" class="cta-btn cta-btn--large">Quero
+          começar agora</a>
         <span class="cta-sub">Acesso imediato · Garantia de 7 dias</span>
       </div>
     </div>
@@ -1004,9 +1269,73 @@
     <p>Virtap © 2026 — Todos os direitos reservados.</p>
   </footer>
 
-  <script src="./vagas-assistente-virtual/js//jquery-3.4.1.min.js"></script>
-<script src="./vagas-assistente-virtual/js/main.js"></script>
+  <div class="wpp-fab" id="wppWidget">
 
+    <!-- Card -->
+    <div class="wpp-card" id="wppCard">
+      <button class="wpp-card-fechar" onclick="toggleWpp()">✕</button>
+  
+      <div class="wpp-card-header">
+        <div class="wpp-card-avatar">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+        </div>
+        <div>
+          <div class="wpp-card-nome">Equipe Virtap</div>
+          <div class="wpp-card-status">Responde em minutos</div>
+        </div>
+      </div>
+  
+      <div class="wpp-card-msg">
+        Oi! 👋 Ficou com alguma dúvida sobre a Virtap? Manda uma mensagem pra gente!
+      </div>
+  
+      <a id="wppLink" class="wpp-card-cta" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Iniciar conversa
+      </a>
+    </div>
+  
+    <!-- Botão flutuante -->
+    <button class="wpp-btn" onclick="toggleWpp()" aria-label="Abrir WhatsApp">
+      <span class="wpp-pulse" id="wppPulse"></span>
+      <span class="wpp-badge" id="wppBadge">1</span>
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </button>
+  </div>
+
+  
+  <script src="./vagas-assistente-virtual/js//jquery-3.4.1.min.js"></script>
+  <script src="./vagas-assistente-virtual/js/main.js"></script>
+<script>
+  // ══════════════════════════════════════
+  // CONFIGURE AQUI
+  // ══════════════════════════════════════
+  var WPP_NUMERO  = '5548999999999'; // ← Seu número com DDI+DDD
+  var WPP_MSG     = 'Olá! Tenho dúvidas sobre a Virtap';
+
+  // ── Monta o link ──
+  document.getElementById('wppLink').href =
+    'https://wa.me/' + WPP_NUMERO + '?text=' + encodeURIComponent(WPP_MSG);
+
+  // ── Toggle ──
+  function toggleWpp() {
+    var card  = document.getElementById('wppCard');
+    var pulse = document.getElementById('wppPulse');
+    var badge = document.getElementById('wppBadge');
+    var aberto = card.classList.toggle('aberto');
+
+    if (aberto) {
+      if (pulse) pulse.remove();
+      if (badge) badge.remove();
+    }
+  }
+
+  // Para o pulse sozinho depois de 8s
+  setTimeout(function() {
+    var p = document.getElementById('wppPulse');
+    if (p) p.remove();
+  }, 8000);
+</script>
 </body>
 
 </html>
