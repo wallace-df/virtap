@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formação em Assistência Virtual — Virtap</title>
+
+  <style>
+    @font-face {
+      font-family: "Be Vietnam Pro";
+      src: url("../fonts/BeVietnamPro-Regular.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Be Vietnam Pro";
+      src: url("../fonts/BeVietnamPro-SemiBold.ttf") format("truetype");
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Be Vietnam Pro";
+      src: url("../fonts/BeVietnamPro-Black.ttf") format("truetype");
+      font-weight: 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Be Vietnam Pro";
+      src: url("../fonts/BeVietnamPro-Bold.ttf") format("truetype");
+      font-weight: bold;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Be Vietnam Pro";
+      src: url("../fonts/BeVietnamPro-ExtraBold.ttf") format("truetype");
+      font-weight: 800;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Be Vietnam Pro";
+      src: url("../fonts/BeVietnamPro-ExtraLight.ttf") format("truetype");
+      font-weight: 200;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Be Vietnam Pro";
+      src: url("../fonts/BeVietnamPro-Medium.ttf") format("truetype");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --color-bg: #FAF8FC;
+      --color-bg-warm: #F0EBF5;
+      --color-bg-accent: #E8E0F0;
+      --color-bg-blue: #E8F7F8;
+      --color-text: #2A1F3D;
+      --color-text-soft: #5A4E6B;
+      --color-text-muted: #8A7FA0;
+      --color-primary: #5B2D8E;
+      --color-primary-dark: #4A2375;
+      --color-primary-light: #8B5FBF;
+      --color-secondary: #B3E3E5;
+      --color-secondary-dark: #7BC8CB;
+      --color-white: #FFFFFF;
+      --color-border: #DDD4E8;
+      --color-green: #4A9B7F;
+      --color-green-bg: #EAF5F0;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+      --max-width: 960px;
+      --section-padding: 3.5rem 1.4rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.7;
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 3.5rem 1.5rem 3rem;
+      text-align: center;
+      background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-warm) 100%);
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4.2vw, 2.2rem);
+      line-height: 1.2;
+      color: var(--color-text);
+      max-width: 720px;
+      margin: 0 auto 1.2rem;
+    }
+
+    .hero h1 em {
+      color: var(--color-primary);
+      font-style: italic;
+    }
+
+    .hero__sub {
+      font-size: 1.05rem;
+      color: var(--color-text-soft);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      line-height: 1.65;
+    }
+
+    .hero__micro {
+      display: block;
+      margin-top: 0.85rem;
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      letter-spacing: 0.01em;
+    }
+
+    /* ── CTA BUTTON ── */
+    .cta-btn {
+      display: inline-block;
+      background: var(--color-primary);
+      color: var(--color-white);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 1rem 2.2rem;
+      border-radius: 0.75rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+    }
+
+    .cta-btn:hover {
+      background: var(--color-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(91, 45, 142, 0.3);
+    }
+
+    .cta-btn--large {
+      font-size: 1.05rem;
+      padding: 1.05rem 2.8rem;
+      border-radius: 0.7rem;
+      width: 100%;
+      max-width: 21rem;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.35rem, 3.8vw, 1.85rem);
+      line-height: 1.3;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 2.2rem;
+    }
+
+    /* ── RESUMO ── */
+    .resumo {
+      padding: var(--section-padding);
+      text-align: center;
+    }
+
+    .resumo p {
+      max-width: 620px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: var(--color-text-soft);
+      line-height: 1.75;
+    }
+
+    .resumo p + p {
+      margin-top: 0.6rem;
+    }
+
+    .resumo strong {
+      color: var(--color-text);
+    }
+
+    /* ── O QUE RECEBE ── */
+    .recebe {
+      padding: var(--section-padding);
+      background: var(--color-bg-warm);
+    }
+
+    .recebe-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 700px) {
+      .recebe-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .recebe-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 1rem;
+      padding: 1.8rem 1.6rem;
+      border-top: 3px solid var(--color-secondary-dark);
+    }
+
+    .recebe-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      color: var(--color-text);
+    }
+
+    .recebe-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .recebe-card li {
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+      line-height: 1.55;
+      padding: 0.3rem 0;
+      padding-left: 1.3rem;
+      position: relative;
+    }
+
+    .recebe-card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--color-primary);
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    /* ── PARA QUEM ── */
+    .para-quem {
+      padding: var(--section-padding);
+    }
+
+    .para-quem-list {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .para-quem-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.85rem 0;
+      font-size: 1.05rem;
+      color: var(--color-text-soft);
+      line-height: 1.55;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .para-quem-item:last-child {
+      border-bottom: none;
+    }
+
+    .para-quem-item .bullet {
+      color: var(--color-secondary-dark);
+      font-size: 1.3rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    /* ── DIFERENCIAL ── */
+    .diferencial {
+      padding: var(--section-padding);
+      background: var(--color-bg-warm);
+    }
+
+    .diferencial-box {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .diferencial-box p {
+      font-size: 1.05rem;
+      color: var(--color-text-soft);
+      line-height: 1.7;
+    }
+
+    /* ── PROVA SOCIAL ── */
+    .prova {
+      padding: var(--section-padding);
+    }
+
+    .prova-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      max-width: 720px;
+      margin: 0 auto 2rem;
+    }
+
+    @media (max-width: 600px) {
+      .prova-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .prova-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 0.85rem;
+      padding: 1.5rem 1.4rem;
+      position: relative;
+    }
+
+    .prova-card::before {
+      content: '\201C';
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      color: var(--color-secondary-dark);
+      line-height: 1;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .prova-card p {
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .proof-placeholder img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .proof-placeholder + .proof-placeholder {
+      margin-top: 1.2rem;
+    }
+
+    /* ── OFERTA ── */
+    .oferta {
+      padding: 3rem 1rem 2rem;
+      background: linear-gradient(180deg, var(--color-bg-warm) 0%, var(--color-bg) 100%);
+      text-align: center;
+    }
+
+    .oferta-box {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2.8rem 2.45rem;
+      border: none;
+      border-radius: 1.2rem;
+      background: linear-gradient(180deg, #FFFFFF 0%, #F8F5FC 100%);
+      box-shadow:
+        0 0 0 0.13rem var(--color-secondary-dark),
+        0 0 0 0.44rem var(--color-secondary),
+        0 1rem 2.8rem rgba(91, 45, 142, 0.18);
+    }
+
+    .oferta-box h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .oferta-box h2::after {
+      content: '';
+      display: block;
+      width: 3.5rem;
+      height: 0.175rem;
+      background: var(--color-secondary);
+      border-radius: 0.09rem;
+      margin: 0.7rem auto 1.4rem;
+    }
+
+    .oferta-includes {
+      text-align: left;
+      margin-bottom: 1.4rem;
+    }
+
+    .oferta-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 1rem;
+      color: var(--color-text-soft);
+      line-height: 1.5;
+      padding: 0.7rem 0.875rem;
+      background: var(--color-bg-blue);
+      border-radius: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    .oferta-item .check {
+      color: var(--color-primary);
+      font-weight: 700;
+      font-size: 0.96rem;
+      flex-shrink: 0;
+    }
+
+    .oferta-price {
+      margin: 1.4rem 0 0.5rem;
+    }
+
+    .oferta-price__from {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      text-decoration: line-through;
+    }
+
+    .oferta-price__value {
+      font-family: var(--font-display);
+      font-size: 2.975rem;
+      color: var(--color-primary);
+    }
+
+    .oferta-price__installment {
+      font-size: 0.875rem;
+      color: var(--color-text-soft);
+      margin-bottom: 1.4rem;
+    }
+
+    .cta-sub {
+      display: block;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ── GARANTIA ── */
+    .garantia {
+      padding: 2rem 1.5rem 2.5rem;
+      text-align: center;
+    }
+
+    .garantia-box {
+      max-width: 560px;
+      margin: 0 auto;
+      background: var(--color-green-bg);
+      border: 1px solid #c2ddd2;
+      border-radius: 1rem;
+      padding: 2rem 2rem;
+    }
+
+    .garantia-box h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--color-green);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .garantia-box p {
+      font-size: 1rem;
+      color: var(--color-text-soft);
+      line-height: 1.65;
+    }
+
+    /* ── FAQ ── */
+    .faq {
+      padding: var(--section-padding);
+      background: var(--color-bg-warm);
+    }
+
+    .faq-list {
+      max-width: 42.5rem;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: none;
+      margin-bottom: 0.75rem;
+    }
+
+    .faq-item summary {
+      font-weight: 600;
+      font-size: 1.05rem;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.15rem 1.4rem;
+      background: var(--color-white);
+      border-radius: 0.75rem;
+      border: 1px solid var(--color-border);
+      transition: all 0.2s;
+    }
+
+    .faq-item summary:hover {
+      border-color: var(--color-secondary-dark);
+      box-shadow: 0 2px 12px rgba(91, 45, 142, 0.06);
+    }
+
+    .faq-item[open] summary {
+      border-color: var(--color-secondary-dark);
+      border-radius: 0.75rem 0.75rem 0 0;
+      border-bottom: none;
+    }
+
+    .faq-item .faq-answer {
+      padding: 1rem 1.4rem 1.15rem;
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+      line-height: 1.7;
+      background: var(--color-white);
+      border: 1px solid var(--color-secondary-dark);
+      border-top: none;
+      border-radius: 0 0 0.75rem 0.75rem;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: '+';
+      font-size: 1.4rem;
+      color: var(--color-primary);
+      font-weight: 400;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    .faq-item[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    /* ── CTA FINAL ── */
+    .cta-final {
+      padding: 3.5rem 1.5rem 4rem;
+      text-align: center;
+      background: var(--color-bg);
+    }
+
+    .cta-final h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+      line-height: 1.3;
+      max-width: 540px;
+      margin: 0 auto 0.75rem;
+    }
+
+    .cta-final p {
+      font-size: 1.05rem;
+      color: var(--color-text-soft);
+      margin-bottom: 1.8rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero h1, .hero__sub, .hero .cta-btn {
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero h1 { animation-delay: 0.05s; }
+    .hero__sub { animation-delay: 0.15s; }
+    .hero .cta-btn { animation-delay: 0.25s; }
+
+    /* ── WHATSAPP FAB ── */
+    .wpp-fab {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .wpp-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: none;
+      background: #25d366;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, .3), 0 2px 4px rgba(0, 0, 0, .1);
+      transition: transform .25s cubic-bezier(.34, 1.56, .64, 1), box-shadow .25s ease;
+      animation: wppEntrada .4s cubic-bezier(.34, 1.56, .64, 1) both;
+      animation-delay: .5s;
+    }
+
+    @keyframes wppEntrada {
+      from { transform: scale(0); }
+      to { transform: scale(1); }
+    }
+
+    .wpp-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 24px rgba(37, 211, 102, .4);
+    }
+
+    .wpp-btn:active { transform: scale(.95); }
+    .wpp-btn svg { width: 30px; height: 30px; fill: #fff; }
+
+    .wpp-pulse {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(37, 211, 102, .5);
+      animation: pulse 2s ease-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: .6; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    .wpp-badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 18px;
+      height: 18px;
+      background: #ff3b5c;
+      border-radius: 50%;
+      border: 2.5px solid #fff;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: badgePop .4s cubic-bezier(.34, 1.56, .64, 1) both;
+      animation-delay: 1.2s;
+      opacity: 0;
+    }
+
+    @keyframes badgePop {
+      from { opacity: 0; transform: scale(0); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .wpp-card {
+      display: none;
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      width: 280px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .18), 0 2px 8px rgba(0, 0, 0, .08);
+      position: relative;
+      animation: cardIn .3s cubic-bezier(.34, 1.56, .64, 1) both;
+    }
+
+    .wpp-card.aberto { display: block; }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: scale(.85) translateY(8px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .wpp-card-fechar {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: none;
+      background: #f0f2f5;
+      color: #8e8e9e;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wpp-card-fechar:hover { background: #e4e6e9; color: #333; }
+
+    .wpp-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .wpp-card-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #25d366, #128c47);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .wpp-card-avatar svg { width: 20px; height: 20px; fill: #fff; }
+    .wpp-card-nome { font-weight: 600; font-size: .9rem; color: #1a1a2e; }
+    .wpp-card-status { font-size: .75rem; color: #8e8e9e; margin-top: 1px; }
+
+    .wpp-card-msg {
+      background: #f0f2f5;
+      border-radius: 0 12px 12px 12px;
+      padding: 10px 14px;
+      font-size: .85rem;
+      color: #3a3a4a;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .wpp-card-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 11px 16px;
+      background: #25d366;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: .88rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .2s ease;
+    }
+
+    .wpp-card-cta:hover {
+      background: #1fb855;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(37, 211, 102, .35);
+    }
+
+    .wpp-card-cta svg { width: 16px; height: 16px; fill: #fff; }
+
+    @media (max-width: 480px) {
+      .wpp-fab { bottom: 20px; right: 16px; }
+      .wpp-card { width: 260px; }
+      .wpp-btn { width: 56px; height: 56px; }
+      .wpp-btn svg { width: 26px; height: 26px; }
+    }
+  </style>
+
+  <!-- favicon -->
+  <link href="/img/favicon.svg" type="image/svg+xml" rel="icon" />
+  <link href="/favicon.png" type="image/png" rel="icon" />
+
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
+  </script>
+  <!-- End Google Tag Manager -->
+
+</head>
+
+<body>
+
+  <!-- ══ 1. HERO ══ -->
+  <section class="hero">
+    <div class="container">
+      <h1>Você já viu que é possível.<br />Agora entre <em>preparada</em>.</h1>
+      <p class="hero__sub">A Formação em Assistência Virtual da Virtap foi criada para quem quer transformar experiência em trabalho remoto — com base, suporte e acesso a oportunidades reais.</p>
+      <a href="#oferta" class="cta-btn">Quero entrar agora</a>
+      <span class="hero__micro">Acesso imediato · Faça no seu ritmo · Garantia de 7 dias</span>
+    </div>
+  </section>
+
+  <!-- ══ 2. RESUMO RÁPIDO ══ -->
+  <section class="resumo">
+    <div class="container">
+      <p><strong>Talvez hoje você não precise começar do zero.</strong></p>
+      <p>Talvez só precise da estrutura certa para transformar o que já sabe em uma nova possibilidade de renda, liberdade ou transição profissional.</p>
+    </div>
+  </section>
+
+  <!-- ══ 3. O QUE VOCÊ RECEBE ══ -->
+  <section class="recebe">
+    <div class="container">
+      <h2 class="section-title">Ao entrar hoje, você recebe:</h2>
+      <div class="recebe-grid">
+
+        <div class="recebe-card">
+          <h3>Formação Completa</h3>
+          <ul>
+            <li>38 aulas práticas</li>
+            <li>8 módulos organizados passo a passo</li>
+            <li>Acesso gravado para assistir no seu ritmo</li>
+          </ul>
+        </div>
+
+        <div class="recebe-card">
+          <h3>Materiais Prontos</h3>
+          <ul>
+            <li>Planilhas</li>
+            <li>Modelos de contrato</li>
+            <li>Guias práticos</li>
+            <li>Apoio para aplicação real</li>
+          </ul>
+        </div>
+
+        <div class="recebe-card">
+          <h3>Acompanhamento</h3>
+          <ul>
+            <li>12 meses de suporte</li>
+            <li>Encontros mensais ao vivo</li>
+            <li>Espaço para tirar dúvidas reais do processo</li>
+          </ul>
+        </div>
+
+        <div class="recebe-card">
+          <h3>Plataforma Virtap</h3>
+          <ul>
+            <li>Acesso à plataforma com oportunidades reais de clientes buscando apoio remoto</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 4. PARA QUEM É ══ -->
+  <section class="para-quem">
+    <div class="container">
+      <h2 class="section-title">Essa formação faz sentido para quem:</h2>
+      <div class="para-quem-list">
+        <div class="para-quem-item">
+          <span class="bullet">›</span>
+          Quer começar no paralelo sem largar o emprego atual
+        </div>
+        <div class="para-quem-item">
+          <span class="bullet">›</span>
+          Busca renda extra com mais estratégia
+        </div>
+        <div class="para-quem-item">
+          <span class="bullet">›</span>
+          Quer migrar para o remoto com segurança
+        </div>
+        <div class="para-quem-item">
+          <span class="bullet">›</span>
+          Já trabalhou no administrativo, atendimento ou financeiro
+        </div>
+        <div class="para-quem-item">
+          <span class="bullet">›</span>
+          Quer direção ao invés de tentar tudo sozinha
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 5. DIFERENCIAL ══ -->
+  <section class="diferencial">
+    <div class="container">
+      <div class="diferencial-box">
+        <h2 class="section-title">Você não aprende e fica sozinha.</h2>
+        <p>Enquanto muitas pessoas tentam descobrir tudo no escuro, na Virtap você aprende com método, recebe acompanhamento e entra em uma estrutura conectada ao mercado real.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 6. PROVA SOCIAL ══ -->
+  <section class="prova">
+    <div class="container">
+      <h2 class="section-title">Quem entra costuma dizer coisas como:</h2>
+      <div class="prova-cards">
+        <div class="prova-card">
+          <p>Eu achava que precisava começar do zero.</p>
+        </div>
+        <div class="prova-card">
+          <p>Percebi que minha experiência já tinha valor.</p>
+        </div>
+        <div class="prova-card">
+          <p>Ter suporte fez toda diferença nas primeiras decisões.</p>
+        </div>
+        <div class="prova-card">
+          <p>Sozinha eu demoraria muito mais.</p>
+        </div>
+      </div>
+
+      <!-- Adicionar prints reais aqui -->
+      <!-- <div class="proof-placeholder">
+        <img src="/prints/depoimento1.png">
+      </div>
+      <div class="proof-placeholder">
+        <img src="/prints/depoimento2.png">
+      </div> -->
+    </div>
+  </section>
+
+  <!-- ══ 7. OFERTA ══ -->
+  <section class="oferta" id="oferta">
+    <div class="container">
+      <h2 class="section-title">Hoje você entra por:</h2>
+      <div class="oferta-box">
+        <h2>Formação + Acompanhamento + Clientes</h2>
+        <div class="oferta-includes">
+          <div class="oferta-item"><span class="check">✓</span> 38 aulas práticas em 8 módulos</div>
+          <div class="oferta-item"><span class="check">✓</span> Materiais complementares (planilhas, contratos, guias)</div>
+          <div class="oferta-item"><span class="check">✓</span> 12 meses de suporte + encontros mensais ao vivo</div>
+          <div class="oferta-item"><span class="check">✓</span> Acesso à plataforma de clientes da Virtap</div>
+        </div>
+        <div class="oferta-price">
+          <div class="oferta-price__from">De R$ 1.497</div>
+          <div class="oferta-price__value">R$ 997</div>
+        </div>
+        <div class="oferta-price__installment">ou 12x de R$ 99,90</div>
+        <a data-wpp-link href="https://wa.me/5548988089062?text=Quero%20entrar%20pra%20Virtap" class="cta-btn cta-btn--large">Quero entrar agora</a>
+        <span class="cta-sub">Acesso imediato · Garantia de 7 dias</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 8. GARANTIA ══ -->
+  <section class="garantia">
+    <div class="container">
+      <div class="garantia-box">
+        <h3>🛡 Garantia de 7 dias</h3>
+        <p>Entre, veja por dentro e, se não fizer sentido para você, solicite reembolso dentro do prazo. Sem perguntas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 9. FAQ ══ -->
+  <section class="faq">
+    <div class="container">
+      <h2 class="section-title">Dúvidas comuns</h2>
+      <div class="faq-list">
+
+        <details class="faq-item">
+          <summary>Consigo fazer trabalhando no CLT?</summary>
+          <div class="faq-answer">Sim. A maioria começa conciliando com a rotina atual. As aulas são gravadas e você assiste no seu ritmo.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Preciso ter experiência?</summary>
+          <div class="faq-answer">Não. Mas quem já trabalhou em áreas administrativas costuma acelerar o processo.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Como funciona a plataforma?</summary>
+          <div class="faq-answer">Clientes reais publicam oportunidades e você pode se candidatar diretamente. É um ambiente curado, não marketplace aberto.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Quando acesso?</summary>
+          <div class="faq-answer">Imediatamente após a confirmação do pagamento.</div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 10. CTA FINAL ══ -->
+  <section class="cta-final">
+    <div class="container">
+      <h2>Você já entendeu a oportunidade.</h2>
+      <p>Agora falta decidir se vai tentar sozinha… ou com estrutura.</p>
+      <a data-wpp-link href="https://wa.me/5548988089062?text=Quero%20entrar%20pra%20Virtap" class="cta-btn">Quero entrar preparada</a>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="footer">
+    <p>Virtap © 2026 — Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- ══ WHATSAPP FAB ══ -->
+  <div class="wpp-fab" id="wppWidget">
+    <div class="wpp-card" id="wppCard">
+      <button class="wpp-card-fechar" onclick="toggleWpp()">✕</button>
+      <div class="wpp-card-header">
+        <div class="wpp-card-avatar">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+        </div>
+        <div>
+          <div class="wpp-card-nome">Equipe Virtap</div>
+          <div class="wpp-card-status">Responde em minutos</div>
+        </div>
+      </div>
+      <div class="wpp-card-msg">Oi! 👋 Ficou com alguma dúvida sobre a Formação? Manda uma mensagem pra gente!</div>
+      <a data-wpp-link id="wppLink" href="https://wa.me/5548988089062?text=Tenho%20dúvidas%20sobre%20a%20Virtap" class="wpp-card-cta" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Iniciar conversa
+      </a>
+    </div>
+    <button class="wpp-btn" onclick="toggleWpp()" aria-label="Abrir WhatsApp">
+      <span class="wpp-pulse" id="wppPulse"></span>
+      <span class="wpp-badge" id="wppBadge">1</span>
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </button>
+  </div>
+
+  <script>
+    function toggleWpp() {
+      var card  = document.getElementById('wppCard');
+      var pulse = document.getElementById('wppPulse');
+      var badge = document.getElementById('wppBadge');
+      var aberto = card.classList.toggle('aberto');
+      if (aberto) {
+        if (pulse) pulse.remove();
+        if (badge) badge.remove();
+      }
+    }
+
+    setTimeout(function() {
+      var p = document.getElementById('wppPulse');
+      if (p) p.remove();
+    }, 8000);
+  </script>
+
+</body>
+
+</html>
