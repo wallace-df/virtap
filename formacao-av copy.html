@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formação em Assistência Virtual | Virtap</title>
+  <title>Formação em Assistência Virtual — Virtap</title>
 
   <style>
     @font-face {
@@ -105,6 +105,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* ── UTILITY ── */
     .container {
       max-width: var(--max-width);
       margin: 0 auto;
@@ -142,20 +143,47 @@
       margin: 0 auto 1.5rem;
     }
 
-    .hero h1 em,
-    em {
+    .hero h1 em {
       color: var(--color-primary);
       font-style: italic;
     }
 
-    .hero__sub {
-      font-size: 18px;
-      color: var(--color-text-soft);
-      max-width: 580px;
+    /* ── VSL EMBED ── */
+    .vsl-wrapper {
+      max-width: 720px;
+      margin: 0 auto 2.4rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 0.5rem 2.4rem rgba(91, 45, 142, 0.15);
+      background: #1a1a1a;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+
+    .vsl-wrapper__placeholder .play-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin: 0 auto 1rem;
-      line-height: 1.6;
-      animation: fadeUp 0.6s ease both;
-      animation-delay: 0.2s;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .vsl-wrapper__placeholder .play-icon:hover {
+      transform: scale(1.08);
+    }
+
+    .vsl-wrapper__placeholder .play-icon svg {
+      fill: white;
+      margin-left: 3px;
     }
 
     /* ── CTA BUTTON ── */
@@ -188,8 +216,8 @@
       color: var(--color-text-muted);
     }
 
-    /* ── SECTION: O QUE TE TRAVA ── */
-    .travas {
+    /* ── SECTION: PARA QUEM ── */
+    .para-quem {
       padding: var(--section-padding);
     }
 
@@ -202,45 +230,114 @@
       margin: 0 auto 2.5rem;
     }
 
-    .trava-cards {
+    .profiles {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.2rem;
-      max-width: 1250px;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      max-width: 800px;
       margin: 0 auto;
     }
 
-    .trava-card {
+    @media (min-width: 800px) {
+      .profiles {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+
+    .profile-card {
       background: var(--color-white);
-      border-radius: 1rem;
-      padding: 1.5rem 1.8rem;
       border: 1px solid var(--color-border);
+      border-radius: 1rem;
+      padding: 2rem 1.75rem;
+      transition: box-shadow 0.3s;
     }
 
-    .trava-card__dor {
-      font-size: 1rem;
-      color: var(--color-text-muted);
-      margin-bottom: 0.8rem;
-      font-style: italic;
+    .profile-card {
+      border-left: 3px solid var(--color-primary);
     }
 
-    .trava-card h3 {
+    .profile-card:hover {
+      box-shadow: 0 4px 20px rgba(44, 37, 32, 0.08);
+    }
+
+    .profile-card__icon {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    .profile-card h3 {
       font-family: var(--font-display);
       font-size: 1.1rem;
-      margin-bottom: 0.6rem;
-      color: var(--color-primary);
+      margin-bottom: 0.5rem;
     }
 
-    .trava-card p {
+    .profile-card p {
       font-size: 1rem;
       color: var(--color-text-soft);
       line-height: 1.6;
     }
 
+    /* ── SECTION: CONTRASTE CLT x REMOTO ── */
+    .contraste {
+      padding: var(--section-padding);
+      background: var(--color-bg-warm);
+    }
+
+    .contraste-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.2rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 900px) {
+      .contraste-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    .contraste-col {
+      background: var(--color-white);
+      padding: 2rem 1.5rem;
+      border-radius: 1.1rem;
+      border: 1px solid var(--color-border);
+    }
+
+    .contraste-col--remoto {
+      border-color: var(--color-secondary-dark);
+      border-width: 2px;
+      background: var(--color-bg-blue);
+      border-width: 3px;
+      box-shadow: 0 8px 32px rgba(91, 45, 142, 0.12);
+    }
+
+    .contraste-col h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .contraste-item {
+      color: var(--color-text-soft);
+      border-bottom: 1px solid var(--color-border);
+      line-height: 1.5;
+      padding: 0.7rem 0;
+      font-size: 1rem;
+    }
+
+    .contraste-item:last-child {
+      border-bottom: none;
+    }
+
     /* ── SECTION: O QUE VOCÊ RECEBE ── */
     .conteudo {
       padding: var(--section-padding);
-      background: var(--color-bg-warm);
     }
 
     .modulos {
@@ -272,6 +369,7 @@
 
     .modulo h3 {
       font-size: 1.1rem;
+      ;
       font-weight: 700;
       margin-bottom: 4px;
     }
@@ -285,24 +383,51 @@
     /* ── SECTION: DIFERENCIAIS ── */
     .diferenciais {
       padding: var(--section-padding);
+      background: var(--color-bg-warm);
     }
 
-    .proof-placeholder img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-      display: block;
+    .diff-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      max-width: 800px;
       margin: 0 auto;
     }
 
-    .proof-placeholder+.proof-placeholder {
-      margin-top: 1.2rem;
+    .diff-card {
+      background: var(--color-white);
+      border-radius: 1rem;
+      padding: 1.5rem 2rem;
+      border: 1px solid var(--color-border);
+    }
+
+    .diff-card__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--color-bg-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .diff-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .diff-card p {
+      font-size: 1rem;
+      color: var(--color-text-soft);
+      line-height: 1.6;
     }
 
     /* ── SECTION: PROVA SOCIAL ── */
     .resultados {
       padding: var(--section-padding);
-      background: var(--color-bg-warm);
     }
 
     .resultado-cards {
@@ -348,9 +473,23 @@
       color: var(--color-text-muted);
     }
 
+    /* placeholder for screenshot proofs */
+    .proof-placeholder img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .proof-placeholder+.proof-placeholder {
+      margin-top: 1.2rem
+    }
+
     /* ── SECTION: OFERTA ── */
     .oferta {
       padding: 3.5rem 1rem 4.2rem;
+      background: linear-gradient(180deg, var(--color-bg-warm) 0%, var(--color-bg) 100%);
       text-align: center;
     }
 
@@ -431,7 +570,6 @@
       margin-bottom: 1.4rem;
     }
 
-
     .cta-btn--large {
       font-size: 1.05rem;
       padding: 1.05rem 2.8rem;
@@ -440,10 +578,10 @@
       max-width: 21rem;
     }
 
+
     /* ── SECTION: FAQ ── */
     .faq {
       padding: 5rem 1.5rem;
-      background: var(--color-bg-warm);
     }
 
     .faq-list {
@@ -533,8 +671,10 @@
       }
     }
 
+    .hero__badge,
     .hero h1,
-    .hero__sub {
+    .hero__sub,
+    .vsl-wrapper {
       animation: fadeUp 0.6s ease both;
     }
 
@@ -546,7 +686,10 @@
       animation-delay: 0.2s;
     }
 
-    /* ── WPP FAB ── */
+    .vsl-wrapper {
+      animation-delay: 0.3s;
+    }
+
     .wpp-fab {
       position: fixed;
       bottom: 28px;
@@ -559,6 +702,7 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
 
+    /* ── Botão principal ── */
     .wpp-btn {
       width: 60px;
       height: 60px;
@@ -577,8 +721,13 @@
     }
 
     @keyframes wppEntrada {
-      from { transform: scale(0); }
-      to { transform: scale(1); }
+      from {
+        transform: scale(0);
+      }
+
+      to {
+        transform: scale(1);
+      }
     }
 
     .wpp-btn:hover {
@@ -586,9 +735,17 @@
       box-shadow: 0 6px 24px rgba(37, 211, 102, .4);
     }
 
-    .wpp-btn:active { transform: scale(.95); }
-    .wpp-btn svg { width: 30px; height: 30px; fill: #fff; }
+    .wpp-btn:active {
+      transform: scale(.95);
+    }
 
+    .wpp-btn svg {
+      width: 30px;
+      height: 30px;
+      fill: #fff;
+    }
+
+    /* ── Pulse ── */
     .wpp-pulse {
       position: absolute;
       inset: -4px;
@@ -599,10 +756,18 @@
     }
 
     @keyframes pulse {
-      0% { transform: scale(1); opacity: .6; }
-      100% { transform: scale(1.5); opacity: 0; }
+      0% {
+        transform: scale(1);
+        opacity: .6;
+      }
+
+      100% {
+        transform: scale(1.5);
+        opacity: 0;
+      }
     }
 
+    /* ── Badge "1" ── */
     .wpp-badge {
       position: absolute;
       top: -2px;
@@ -624,10 +789,18 @@
     }
 
     @keyframes badgePop {
-      from { opacity: 0; transform: scale(0); }
-      to { opacity: 1; transform: scale(1); }
+      from {
+        opacity: 0;
+        transform: scale(0);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
+    /* ── Card / Tooltip ── */
     .wpp-card {
       display: none;
       background: #fff;
@@ -639,11 +812,20 @@
       animation: cardIn .3s cubic-bezier(.34, 1.56, .64, 1) both;
     }
 
-    .wpp-card.aberto { display: block; }
+    .wpp-card.aberto {
+      display: block;
+    }
 
     @keyframes cardIn {
-      from { opacity: 0; transform: scale(.85) translateY(8px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
+      from {
+        opacity: 0;
+        transform: scale(.85) translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
     }
 
     .wpp-card-fechar {
@@ -663,7 +845,10 @@
       justify-content: center;
     }
 
-    .wpp-card-fechar:hover { background: #e4e6e9; color: #333; }
+    .wpp-card-fechar:hover {
+      background: #e4e6e9;
+      color: #333;
+    }
 
     .wpp-card-header {
       display: flex;
@@ -683,9 +868,23 @@
       flex-shrink: 0;
     }
 
-    .wpp-card-avatar svg { width: 20px; height: 20px; fill: #fff; }
-    .wpp-card-nome { font-weight: 600; font-size: .9rem; color: #1a1a2e; }
-    .wpp-card-status { font-size: .75rem; color: #8e8e9e; margin-top: 1px; }
+    .wpp-card-avatar svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    .wpp-card-nome {
+      font-weight: 600;
+      font-size: .9rem;
+      color: #1a1a2e;
+    }
+
+    .wpp-card-status {
+      font-size: .75rem;
+      color: #8e8e9e;
+      margin-top: 1px;
+    }
 
     .wpp-card-msg {
       background: #f0f2f5;
@@ -721,79 +920,150 @@
       box-shadow: 0 4px 14px rgba(37, 211, 102, .35);
     }
 
-    .wpp-card-cta svg { width: 16px; height: 16px; fill: #fff; }
+    .wpp-card-cta svg {
+      width: 16px;
+      height: 16px;
+      fill: #fff;
+    }
 
     @media (max-width: 480px) {
-      .wpp-fab { bottom: 20px; right: 16px; }
-      .wpp-card { width: 260px; }
-      .wpp-btn { width: 56px; height: 56px; }
-      .wpp-btn svg { width: 26px; height: 26px; }
+      .wpp-fab {
+        bottom: 20px;
+        right: 16px;
+      }
+
+      .wpp-card {
+        width: 260px;
+      }
+
+      .wpp-btn {
+        width: 56px;
+        height: 56px;
+      }
+
+      .wpp-btn svg {
+        width: 26px;
+        height: 26px;
+      }
     }
   </style>
-
+  <!-- favicon -->
   <link href="/img/favicon.svg" type="image/svg+xml" rel="icon" />
   <link href="/favicon.png" type="image/png" rel="icon" />
 
   <!-- Google Tag Manager -->
   <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-      var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-      j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-      f.parentNode.insertBefore(j, f);
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
   </script>
+  <!-- End Google Tag Manager -->
+
 </head>
 
 <body>
 
   <!-- ══ TOPBAR ══ -->
   <div class="topbar">
-    Formação + plataforma de clientes + acompanhamento — <span>tudo num só lugar</span>
+    Formação + acompanhamento + clientes reais — <span>um caminho completo para trabalhar remoto</span>
   </div>
 
   <!-- ══ HERO ══ -->
   <section class="hero">
     <div class="container">
-      <h1>Você já decidiu.<br /><em>Agora é hora de começar certo.</em></h1>
-      <p class="hero__sub">Formação completa, acesso a clientes reais e acompanhamento.<br/> Tudo que você precisa pra sair da decisão e ir pra ação.</p>
+      <h1>Você não precisa começar do zero.<br /> Precisa da <em>estrutura certa</em> pra trabalhar no remoto.</h1>
+
+      <!-- ══ VSL EMBED ══ -->
+      <!-- TROCAR: substitua o conteúdo abaixo pelo embed do vídeo (Vimeo, YouTube, Panda, etc.) -->
+      <!-- Exemplo: <iframe src="https://player.vimeo.com/video/SEU_ID" width="100%" height="100%" frameborder="0" allowfullscreen></iframe> -->
+      <!-- <div class="vsl-wrapper" style="aspect-ratio: 16/9; padding: 0;">
+        <script src="https://fast.wistia.com/embed/medias/w079f7qzm6.jsonp" async></script>
+        <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+        <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;width:100%;">
+          <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+            <div class="wistia_embed wistia_async_w079f7qzm6 seo=true videoFoam=true"
+              style="height:100%;position:relative;width:100%;">&nbsp;</div>
+          </div>
+        </div>
+      </div> -->
+
       <a href="#oferta" class="cta-btn">Quero começar agora</a>
     </div>
   </section>
 
-  <!-- ══ O QUE TE TRAVA ══ -->
-  <section class="travas">
+  <!-- ══ PARA QUEM ══ -->
+  <section class="para-quem">
     <div class="container">
-      <h2 class="section-title">Você já sabe que quer começar.<br />A dúvida é <em>como</em>.</h2>
-      <div class="trava-cards">
-        <div class="trava-card">
-          <div class="trava-card__dor">"Quero me profissionalizar de verdade"</div>
-          <h3>Formação prática, não teoria solta</h3>
-          <p>38 aulas que ensinam do posicionamento à precificação. Você sai pronta pra atuar, não pra "pensar sobre".</p>
+      <h2 class="section-title">A Virtap é pra você que...</h2>
+      <div class="profiles">
+        <div class="profile-card">
+          <h3>Depende de um salário e quer criar uma segunda renda</h3>
+          <p>Quer começar no paralelo, sem largar a estabilidade, construindo uma fonte de renda que não depende de um
+            único emprego.</p>
         </div>
-        <div class="trava-card">
-          <div class="trava-card__dor">"Tenho medo de fazer tudo sozinha"</div>
-          <h3>12 meses de acompanhamento</h3>
-          <p>Encontros mensais ao vivo e suporte direto. Você não vai caminhar sozinha.</p>
+        <div class="profile-card">
+          <h3>Quer liberdade para trabalhar de onde faz sentido</h3>
+          <p>Não quer mais depender de um escritório fixo. Quer trabalhar de onde a vida pedir, com horário que funciona
+            pra você.</p>
         </div>
-        <div class="trava-card">
-          <div class="trava-card__dor">"Não sei como conseguir clientes"</div>
-          <h3>Plataforma com clientes reais</h3>
-          <p>A Virtap busca clientes, entende a demanda e publica vagas prontas. Você escolhe a vaga e se posiciona.</p>
+        <div class="profile-card">
+          <h3>Já trabalha no administrativo e quer usar isso no remoto</h3>
+          <p>Tem experiência com secretariado, financeiro ou atendimento e quer transformar essa bagagem em trabalho
+            remoto.</p>
+        </div>
+        <div class="profile-card">
+          <h3>Quer mudar sem se arriscar no escuro</h3>
+          <p>Sabe que quer fazer diferente, mas precisa de um caminho claro, com base e acompanhamento pra não se
+            perder.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTRASTE CLT x REMOTO ══ -->
+  <section class="contraste">
+    <div class="container">
+      <h2 class="section-title">Trabalho remoto é bem diferente...</h2>
+      <div class="contraste-grid">
+        <div class="contraste-col">
+          <h3>No CLT</h3>
+          <div class="contraste-item">A empresa define seu salário</div>
+          <div class="contraste-item">O trabalho vem até você</div>
+          <div class="contraste-item">Alguém organiza seus processos</div>
+          <div class="contraste-item">Tem chefe cobrando e supervisionando</div>
+          <div class="contraste-item">Horário fixo, estrutura pronta</div>
+        </div>
+        <div class="contraste-col contraste-col--remoto">
+          <h3>No Remoto</h3>
+          <div class="contraste-item"><strong>Você</strong> define quanto cobrar</div>
+          <div class="contraste-item"><strong>Você</strong> precisa encontrar os clientes</div>
+          <div class="contraste-item"><strong>Você</strong> monta sua organização</div>
+          <div class="contraste-item"><strong>Você </strong> se auto gerenciar e o cliente espera resultado</div>
+          <div class="contraste-item">Flexibilidade total, mas precisa de base</div>
+        </div>
+      </div>
+      <p
+        style="text-align:center; max-width:600px; margin:2rem auto 0; font-size:1rem; color:var(--color-text-soft);font-weight: bold; margin-top:60px">
+        A
+        Formação te ensina tudo que o CLT nunca precisou te ensinar: como se organizar, posicionar, cobrar e conseguir
+        clientes no remoto.</p>
     </div>
   </section>
 
   <!-- ══ O QUE VOCÊ RECEBE ══ -->
   <section class="conteudo">
     <div class="container">
-      <h2 class="section-title">38 aulas práticas em 6 módulos</h2>
+      <h2 class="section-title">Formação: 38 aulas práticas em 8 módulos</h2>
       <div class="modulos">
         <div class="modulo">
           <div class="modulo__num">01</div>
           <div>
-            <h3>Fundamentos</h3>
-            <p>O que é, como funciona o mercado e a mentalidade para começar do jeito certo.</p>
+            <h3>Fundamentos da Assistência Virtual</h3>
+            <p>O que é, como funciona o mercado, e por que essa profissão está em alta.</p>
           </div>
         </div>
         <div class="modulo">
@@ -813,8 +1083,8 @@
         <div class="modulo">
           <div class="modulo__num">04</div>
           <div>
-            <h3>Aquisição de clientes</h3>
-            <p>As melhores formas e lugares de conseguir seus clientes.</p>
+            <h3>Captação de clientes</h3>
+            <p>Como encontrar clientes, se apresentar e fechar contratos.</p>
           </div>
         </div>
         <div class="modulo">
@@ -831,16 +1101,32 @@
             <p>Contrato, nota fiscal, financeiro: como operar de forma profissional desde o dia 1.</p>
           </div>
         </div>
+        <div class="modulo">
+          <div class="modulo__num">07</div>
+          <div>
+            <h3>Organização e rotina remota</h3>
+            <p>Como gerenciar múltiplos clientes, prazos e tarefas sem enlouquecer.</p>
+          </div>
+        </div>
+        <div class="modulo">
+          <div class="modulo__num">08</div>
+          <div>
+            <h3>Posicionamento e crescimento</h3>
+            <p>Como se posicionar no mercado, criar autoridade e escalar seu trabalho como AV.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ DIFERENCIAIS: CLIENTES ══ -->
+  <!-- ══ DIFERENCIAIS ══ -->
   <section class="diferenciais">
     <div class="container">
-      <h2 class="section-title">A Virtap vai atrás de clientes por você</h2>
-      <p style="text-align:center; max-width:640px; margin:0 auto 2rem; font-size:1.2rem; color:var(--color-text-soft); margin-top:-1rem">
+      <h2 class="section-title">A Virtap vai atrás dos clientes por você</h2>
+      <p
+        style="text-align:center; max-width:640px; margin:0 auto 2rem; font-size:1.2rem; color:var(--color-text-soft); margin-top:-1rem">
         A Virtap busca clientes reais, entende as demandas e publica oportunidades prontas para contratação. Enquanto você se prepara, a parte pesada acontece nos bastidores.</p>
+
       <div class="proof-placeholder">
         <img src="/prints/prova3.png">
       </div>
@@ -850,12 +1136,13 @@
     </div>
   </section>
 
-  <!-- ══ DIFERENCIAIS: SUPORTE ══ -->
-  <section class="diferenciais" style="background: var(--color-bg-warm);">
+  <section class="diferenciais" style="background: var(--color-bg);">
     <div class="container">
       <h2 class="section-title">Você não fica sozinha...</h2>
-      <p style="text-align:center; max-width:640px; margin:0 auto 2rem; font-size:1.2rem; color:var(--color-text-soft); margin-top:-1rem">
+      <p
+        style="text-align:center; max-width:640px; margin:0 auto 2rem; font-size:1.2rem; color:var(--color-text-soft);margin-top:-1rem">
         Durante 12 meses, quando bater dúvida no meio do caminho, você tem pra onde levar.</p>
+
       <div class="proof-placeholder">
         <img src="/prints/mentoria2.png">
       </div>
@@ -865,26 +1152,35 @@
   <!-- ══ PROVA SOCIAL ══ -->
   <!-- <section class="resultados">
     <div class="container">
-      <h2 class="section-title">Quem decidiu e agiu</h2>
+      <div class="section-label">Resultados reais</div>
+      <h2 class="section-title">Quem já fez a transição</h2>
       <div class="resultado-cards">
         <div class="resultado-card">
           <div class="resultado-card__quote">"</div>
-          <p>Chegou desempregada, se preparou pela formação, e em um mês já tinha o primeiro cliente. Hoje fatura R$ 6 mil por mês com cartela cheia.</p>
-          <div class="resultado-card__author">— Aluna Virtap</div>
-          <div class="resultado-card__role">Começou do zero</div>
+          <p>Trabalhava no administrativo há 8 anos e achava que ia ser mais do mesmo. Em 3 meses já tinha meu primeiro
+            cliente remoto, cobrando mais do que ganhava no CLT.</p>
+          <div class="resultado-card__author">— Nome da aluna</div>
+          <div class="resultado-card__role">Ex-CLT, hoje AV remota</div>
         </div>
         <div class="resultado-card">
           <div class="resultado-card__quote">"</div>
-          <p>O que me segurou foi o acompanhamento. Toda vez que eu travava, levava pro encontro mensal e saía com clareza. Não teria conseguido sozinha.</p>
-          <div class="resultado-card__author">— Aluna Virtap</div>
-          <div class="resultado-card__role">Usou o suporte nos primeiros meses</div>
+          <p>O que me segurou foi o acompanhamento. Toda vez que eu travava, levava pro encontro mensal e saía com
+            clareza. Não teria conseguido sozinha.</p>
+          <div class="resultado-card__author">— Nome da aluna</div>
+          <div class="resultado-card__role">Conciliou CLT com AV nos primeiros meses</div>
         </div>
         <div class="resultado-card">
           <div class="resultado-card__quote">"</div>
-          <p>Achei minha primeira cliente pela plataforma de vagas. Mandei a proposta como aprendi no curso e fui contratada na mesma semana.</p>
-          <div class="resultado-card__author">— Aluna Virtap</div>
+          <p>Achei minha primeira cliente pela plataforma de vagas. Mandei a proposta como aprendi no curso e fui
+            contratada na mesma semana.</p>
+          <div class="resultado-card__author">— Nome da aluna</div>
           <div class="resultado-card__role">Contratada pela plataforma Virtap</div>
         </div>
+      </div>
+
+      <div class="proof-placeholder">
+        <strong>📸 Prints de depoimentos reais</strong>
+        Inserir screenshots de conversas, prints do WhatsApp, ou depoimentos em vídeo de alunas
       </div>
     </div>
   </section> -->
@@ -892,22 +1188,28 @@
   <!-- ══ OFERTA ══ -->
   <section class="oferta" id="oferta">
     <div class="container">
-      <h2 class="section-title">Formação completa.<br /><em>Comece agora.</em></h2>
+      <h2 class="section-title">Um caminho completo pra você</h2>
       <div class="oferta-box">
-        <h2 style="font-size: 1.5rem">Formação + Suporte + Clientes Reais</h2>
+        <h2 style="font-size: 1.5rem">Formação + Acompanhamento + Clientes</h2>
         <div class="oferta-includes">
-          <div class="oferta-item"><span class="check">✓</span> 38 aulas práticas em 6 módulos</div>
-          <div class="oferta-item"><span class="check">✓</span> Materiais complementares (planilhas, contratos, guias)</div>
+          <div class="oferta-item"><span class="check">✓</span> 38 aulas práticas</div>
+          <div class="oferta-item"><span class="check">✓</span> Materiais complementares (planilhas, contratos, guias)
+          </div>
           <div class="oferta-item"><span class="check">✓</span> 12 meses de suporte + encontros mensais ao vivo</div>
-          <div class="oferta-item"><span class="check">✓</span> 3 meses de acesso à plataforma de clientes da Virtap</div>
+          <div class="oferta-item"><span class="check">✓</span> 3 meses de acesso à plataforma de clientes da Virtap
+          </div>
         </div>
         <div class="oferta-price">
+          <!-- Ajustar valores conforme necessário -->
           <div class="oferta-price__from">De R$ 1.497</div>
           <div class="oferta-price__value">R$ 997</div>
         </div>
         <div class="oferta-price__installment">ou 12x de R$ 99,90</div>
-        <a data-wpp-link href="https://wa.me/5548988089062?text=Quero%20entrar%20pra%20Virtap"
-          class="cta-btn cta-btn--large">Quero começar agora</a>
+        <!-- <a data-link href="https://www.virtap.com.br/comprar?p=FORMACAO_AV_FULL" class="cta-btn cta-btn--large">Quero
+          começar agora</a> -->
+          <a data-wpp-link href="https://wa.me/5548988089062?text=Quero%20entrar%20pra%20Virtap" class="cta-btn cta-btn--large">Quero
+            começar agora</a>
+  
         <span class="cta-sub">Acesso imediato · Garantia de 7 dias</span>
       </div>
     </div>
@@ -920,28 +1222,43 @@
       <div class="faq-list">
 
         <details class="faq-item">
-          <summary>Quanto tempo leva pra terminar a formação?</summary>
-          <div class="faq-answer">Depende do seu ritmo. As aulas são gravadas e você assiste quando puder. Algumas alunas terminam em 2-3 semanas, outras levam mais. Sem deadline e sem pressão.</div>
+          <summary>Consigo fazer a formação trabalhando no CLT?</summary>
+          <div class="faq-answer">Sim. As aulas são gravadas e você assiste no seu ritmo, sem horário fixo, sem
+            deadline. A maioria das alunas começa conciliando com o emprego atual e faz a transição no tempo dela.</div>
         </details>
 
         <details class="faq-item">
-          <summary>Já posso me candidatar a vagas durante o curso?</summary>
-          <div class="faq-answer">Sim. A partir do momento que você se sente pronta, pode começar a enviar propostas pela plataforma. Não precisa terminar todos os módulos antes.</div>
-        </details>
-
-        <details class="faq-item">
-          <summary>E se eu já souber o básico?</summary>
-          <div class="faq-answer">Ótimo — você vai avançar mais rápido pelos primeiros módulos e aproveitar mais os módulos de precificação, captação de clientes e estrutura profissional. A formação cobre do zero ao avançado.</div>
+          <summary>Preciso ter experiência para começar?</summary>
+          <div class="faq-answer">Não. A formação ensina desde o básico. Mas se você já tem experiência no
+            administrativo, secretariado ou atendimento, vai aproveitar ainda mais, porque já sabe executar e a
+            formação te ensina a operar profissionalmente no remoto.</div>
         </details>
 
         <details class="faq-item">
           <summary>Como funciona a plataforma de vagas?</summary>
-          <div class="faq-answer">A Virtap busca clientes reais e publica oportunidades prontas pra contratação. Não é marketplace aberto com centenas competindo. Você se candidata diretamente e negocia com o cliente.</div>
+          <div class="faq-answer">Clientes reais publicam vagas na plataforma da Virtap e você se candidata diretamente.
+            Não é marketplace aberto com centenas competindo, é um ambiente curado onde a formação te prepara pra se
+            destacar.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>O que são os encontros mensais?</summary>
+          <div class="faq-answer">Encontros ao vivo em grupo onde você tira dúvidas, troca experiências e recebe
+            orientação direta. Dura 12 meses a partir da compra. É o acompanhamento que faz diferença na prática, não
+            só na teoria.</div>
         </details>
 
         <details class="faq-item">
           <summary>Tem garantia?</summary>
-          <div class="faq-answer">Sim. 7 dias de garantia incondicional. Se não fizer sentido, devolve o valor sem perguntas.</div>
+          <div class="faq-answer">Sim. Você tem 7 dias de garantia incondicional. Se não fizer sentido pra você, devolve
+            o valor sem perguntas.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Quanto tempo leva pra conseguir o primeiro cliente?</summary>
+          <div class="faq-answer">Depende da sua dedicação e do seu ritmo. Algumas alunas conseguem em poucas semanas,
+            outras levam 2-3 meses. A formação e a plataforma aceleram esse processo, mas não é promessa de resultado
+            imediato.</div>
         </details>
 
       </div>
@@ -953,10 +1270,12 @@
     <p>Virtap © 2026 — Todos os direitos reservados.</p>
   </footer>
 
-  <!-- ══ WPP FAB ══ -->
   <div class="wpp-fab" id="wppWidget">
+
+    <!-- Card -->
     <div class="wpp-card" id="wppCard">
       <button class="wpp-card-fechar" onclick="toggleWpp()">✕</button>
+  
       <div class="wpp-card-header">
         <div class="wpp-card-avatar">
           <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
@@ -966,12 +1285,18 @@
           <div class="wpp-card-status">Responde em minutos</div>
         </div>
       </div>
-      <div class="wpp-card-msg">Oi! 👋 Quer tirar alguma dúvida antes de começar?</div>
-      <a data-wpp-link id="wppLink" href="https://wa.me/5548988089062?text=Quero%20saber%20mais%20sobre%20a%20Formação" class="wpp-card-cta" target="_blank" rel="noopener">
+  
+      <div class="wpp-card-msg">
+        Oi! 👋 Ficou com alguma dúvida sobre a Virtap? Manda uma mensagem pra gente!
+      </div>
+  
+      <a  data-wpp-link id="wppLink" href="https://wa.me/5548988089062?text=Tenho%20dúvidas%20sobre%20a%20Virtap" class="wpp-card-cta" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Tirar uma dúvida
+        Iniciar conversa
       </a>
     </div>
+  
+    <!-- Botão flutuante -->
     <button class="wpp-btn" onclick="toggleWpp()" aria-label="Abrir WhatsApp">
       <span class="wpp-pulse" id="wppPulse"></span>
       <span class="wpp-badge" id="wppBadge">1</span>
@@ -979,24 +1304,30 @@
     </button>
   </div>
 
+  
   <script src="./vagas-assistente-virtual/js//jquery-3.4.1.min.js"></script>
   <script src="./vagas-assistente-virtual/js/main.js"></script>
-  <script>
-    function toggleWpp() {
-      var card = document.getElementById('wppCard');
-      var pulse = document.getElementById('wppPulse');
-      var badge = document.getElementById('wppBadge');
-      var aberto = card.classList.toggle('aberto');
-      if (aberto) {
-        if (pulse) pulse.remove();
-        if (badge) badge.remove();
-      }
+<script>
+
+  // ── Toggle ──
+  function toggleWpp() {
+    var card  = document.getElementById('wppCard');
+    var pulse = document.getElementById('wppPulse');
+    var badge = document.getElementById('wppBadge');
+    var aberto = card.classList.toggle('aberto');
+
+    if (aberto) {
+      if (pulse) pulse.remove();
+      if (badge) badge.remove();
     }
-    setTimeout(function () {
-      var p = document.getElementById('wppPulse');
-      if (p) p.remove();
-    }, 8000);
-  </script>
+  }
+
+  // Para o pulse sozinho depois de 8s
+  setTimeout(function() {
+    var p = document.getElementById('wppPulse');
+    if (p) p.remove();
+  }, 8000);
+</script>
 </body>
 
 </html>
