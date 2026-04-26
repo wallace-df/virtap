@@ -99,7 +99,7 @@
                     Trabalho CLT e quero conciliar/migrar pro trabalho remoto
                 </button>
                 <button class="option-btn" onclick="chooseSubPersona('desempregada',this)">
-                    Tô buscando um trabalho home office
+                    Tô desempregada e busco um trabalho home office
                 </button>
                 <button class="option-btn" onclick="chooseSubPersona('pronta',this)">
                     Me identifiquei com a profissão e quero começar o quanto antes
@@ -112,6 +112,14 @@
             <!-- ═══════════════════════════════════════════════════════════════
                  PERSONA: CLT
                  ═══════════════════════════════════════════════════════════════ -->
+ 
+            <!-- Área CLT --> 
+            <div id="step-clt-area" class="step">
+                <h2>Com o que você trabalha?</h2>
+                <button class="option-btn" onclick="saveAndAdvance('cltArea','admin',this)">Administrativo, secretariado
+                    ou atendimento</button>
+                <button class="option-btn" onclick="saveAndAdvance('cltArea','outra',this)">Outra área</button>
+            </div>
 
             <!-- Situação CLT -->
             <div class="step" id="step-clt-situacao">
@@ -272,9 +280,12 @@
             <div class="step" id="step-waitlist">
                 <h2 id="waitlist-title" class="text-center"></h2>
                 <div id="waitlist-context"></div>
-                <p><strong>Vem coisa boa aí:</strong> uma forma prática pra você começar como AV e já conseguir seus primeiros trabalhos, mesmo começando do zero!</p>
+                <p><strong>Vem coisa boa aí:</strong> uma forma prática pra você começar como AV e já conseguir seus
+                    primeiros trabalhos, mesmo começando do zero!</p>
                 <p>Entra no nosso grupo pra acompanhar de perto e ser uma das primeiras a ter acesso:</p>
-                <button class="next-btn" onclick="window.location.href='https://chat.whatsapp.com/Kv1j9Z0hXhDEFKNiw8qrgs'">👉 Entrar no grupo</button>
+                <button class="next-btn"
+                    onclick="window.location.href='https://chat.whatsapp.com/Kv1j9Z0hXhDEFKNiw8qrgs'">👉 Entrar no
+                    grupo</button>
             </div>
 
         </div>

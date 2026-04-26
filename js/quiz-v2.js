@@ -4,19 +4,25 @@ const PATHS = {
     cursoGratuito: '/curso-assistente-virtual',
     programa30dias: '/do-zero-a-av',                  // Programa R$ 97
     formacaoAV: '/formacao-av',      // Formação AV R$ 797
+    formacaoAV_CLT_ADM: '/formacao-av-clt-adm',      // Formação AV R$ 797
+    formacaoAV_CLT: '/formacao-av-clt',      // Formação AV R$ 797
+    formacaoAV_DESEMPREGADA: '/formacao-av-dspg',
     acessoVirtap: '/vagas-assistente-virtual/acesso', // Plataforma
     whatsapp: 'https://wa.me/5548988089062',          // Número do WhatsApp
 };
 
 const DESTINO_QUIZ = 'lp'; // 'whatsapp' ou 'lp'
+const DESTINO_CLT_ADMIN = 'lp';
+const DESTINO_CLT_NON_ADMIN = 'lp';
+const DESTINO_DESEMPREGADA_PRONTA = 'lp';
 
 // ─── FLOWS ────────────────────────────────────────────────────────────────────
 const FLOWS = {
-    descobrindo:  ['step-desc-origem', 'step-desc-motivacao', 'step-result'],
-    clt:          ['step-clt-situacao', 'step-clt-preocupacao', 'step-clt-prontidao', 'step-result'],
+    descobrindo: ['step-desc-origem', 'step-desc-motivacao', 'step-result'],
+    clt: ['step-clt-area', 'step-clt-situacao', 'step-clt-preocupacao', 'step-clt-prontidao', 'step-result'],
     desempregada: ['step-desemp-urgencia', 'step-desemp-preocupacao', 'step-desemp-prontidao', 'step-result'],
-    pronta:       ['step-pronta-preocupacao', 'step-result'],
-    base:         ['step-base-situacao', 'step-base-necessidade', 'step-result'],
+    pronta: ['step-pronta-preocupacao', 'step-result'],
+    base: ['step-base-situacao', 'step-base-necessidade', 'step-result'],
 };
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
@@ -31,6 +37,7 @@ const state = {
     motivacao: null,
 
     // CLT
+    cltArea: null,
     cltSituacao: null,
     cltPreocupacao: null,
     cltProntidao: null,
@@ -203,13 +210,35 @@ function gerarResultado() {
         }
 
         // prontidao === 'agora'
-        return resultadoWhatsApp(
-            'Vamos montar o melhor caminho pra você',
-            montarContextoCLT(),
-            `<p>Você já sabe o que quer e tá pronta pra agir. Agora a gente precisa entender melhor o seu momento pra te indicar o caminho mais eficiente.</p>
+        if (DESTINO_CLT_ADMIN === 'lp' && state.cltArea === 'admin') {
+            return {
+                destino: 'lp',
+                titulo: 'Seu próximo passo tá aqui',
+                mensagem: montarContextoCLT() +
+                    `<p>A Virtap tem um caminho certo pra você.</p>`,
+                btn: makeCTA('👉 Quero ver como funciona', PATHS.formacaoAV_CLT_ADM, 'lp-formacao-clt'),
+            };
+        }
+        else if (DESTINO_CLT_NON_ADMIN === 'lp' && state.cltArea !== 'admin') {
+            return {
+                destino: 'lp',
+                titulo: 'Seu próximo passo tá aqui',
+                mensagem: montarContextoCLT() +
+                    `<p>A Virtap tem um caminho certo pra você.</p>`,
+                btn: makeCTA('👉 Quero ver como funciona', PATHS.formacaoAV_CLT, 'lp-formacao-clt'),
+            };
+        }
+
+        else {
+            return resultadoWhatsApp(
+                'Vamos montar o melhor caminho pra você',
+                montarContextoCLT(),
+                `<p>Você já sabe o que quer e tá pronta pra agir. Agora a gente precisa entender melhor o seu momento pra te indicar o caminho mais eficiente.</p>
             <p>A Virtap tem formação completa com acompanhamento de especialistas por 12 meses, e dependendo do seu perfil, acesso a uma plataforma exclusiva com vagas reais toda semana.</p>
             <p>Vamos conversar pra montar o plano certo pra você?</p>`
-        );
+            );
+        }
+
     }
 
     // ─── DESEMPREGADA ─────────────────────────────────────────────────────
@@ -236,13 +265,25 @@ function gerarResultado() {
         }
 
         // prontidao === 'completo'
-        return resultadoWhatsApp(
-            'Vamos construir isso...',
-            montarContextoDesempregada(),
-            `<p>Você quer fazer direito — e isso mostra maturidade. Construir uma carreira sólida leva um pouco mais de tempo, mas o resultado é muito mais consistente.</p>
-            <p>A Virtap tem uma formação completa que te prepara do zero, com acompanhamento de especialistas por 12 meses. E dependendo do seu perfil, acesso a clientes reais pela nossa plataforma.</p>
-            <p>Vamos conversar pra entender melhor o seu momento e montar o plano certo?</p>`
-        );
+        if(DESTINO_DESEMPREGADA_PRONTA === 'lp') {
+            return {
+                destino: 'lp',
+                titulo: 'Seu próximo passo tá aqui',
+                mensagem: montarContextoDesempregada() +
+                    `<p>A Virtap tem um caminho certo pra você.</p>`,
+                btn: makeCTA('👉 Quero ver como funciona', PATHS.formacaoAV_DESEMPREGADA, 'lp-formacao-clt'),
+            };
+
+        } else {
+            return resultadoWhatsApp(
+                'Vamos construir isso...',
+                montarContextoDesempregada(),
+                `<p>Você quer fazer direito — e isso mostra maturidade. Construir uma carreira sólida leva um pouco mais de tempo, mas o resultado é muito mais consistente.</p>
+                <p>A Virtap tem uma formação completa que te prepara do zero, com acompanhamento de especialistas por 12 meses. E dependendo do seu perfil, acesso a clientes reais pela nossa plataforma.</p>
+                <p>Vamos conversar pra entender melhor o seu momento e montar o plano certo?</p>`
+            );
+    
+        }
     }
 
     // ─── PRONTA ───────────────────────────────────────────────────────────
