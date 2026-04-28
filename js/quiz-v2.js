@@ -19,7 +19,7 @@ const DESTINO_DESEMPREGADA_PRONTA = 'lp';
 // ─── FLOWS ────────────────────────────────────────────────────────────────────
 const FLOWS = {
     descobrindo: ['step-desc-origem', 'step-desc-motivacao', 'step-result'],
-    clt: ['step-clt-area', 'step-clt-situacao', 'step-clt-preocupacao', 'step-clt-prontidao', 'step-result'],
+    clt: ['step-clt-situacao', 'step-clt-preocupacao', 'step-clt-prontidao', 'step-result'],
     desempregada: ['step-desemp-urgencia', 'step-desemp-preocupacao', 'step-desemp-prontidao', 'step-result'],
     pronta: ['step-pronta-preocupacao', 'step-result'],
     base: ['step-base-situacao', 'step-base-necessidade', 'step-result'],
@@ -216,7 +216,7 @@ function gerarResultado() {
                 titulo: 'Seu próximo passo tá aqui',
                 mensagem: montarContextoCLT() +
                     `<p>A Virtap tem um caminho certo pra você.</p>`,
-                btn: makeCTA('👉 Quero ver como funciona', PATHS.formacaoAV_CLT_ADM, 'lp-formacao-clt'),
+                btn: makeCTA('👉 Quero ver como funciona', PATHS.formacaoAV_CLT, 'lp-formacao-clt'),
             };
         }
         else if (DESTINO_CLT_NON_ADMIN === 'lp' && state.cltArea !== 'admin') {
