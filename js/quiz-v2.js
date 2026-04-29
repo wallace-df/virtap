@@ -382,7 +382,7 @@ function montarContextoBase() {
         'profissional': 'Você já atua profissionalmente e quer crescer',
     };
     const necessidades = {
-        'clientes': 'O que mais faz falta é acesso a clientes e vagas de verdade.',
+        'clientes': 'O que mais faz falta é acesso a clientes de verdade.',
         'posicionamento': 'Você quer cobrar melhor e se posicionar como profissional.',
         'estrutura': 'Você precisa de estrutura pra formalizar e escalar.',
         'comunidade': 'Você quer fazer parte de uma comunidade e não trabalhar isolada.',
@@ -427,7 +427,7 @@ function resultadoWhatsApp(titulo, contexto, corpo) {
             mensagem: contexto +
                 `<p>A Virtap tem um caminho alinhado com o que você precisa agora. </p>
                 `,
-            btn: makeCTA('Quero ver como funciona', PATHS.formacaoAV, 'lp-formacao'),
+            btn: makeCTA('👉 Quero ver como funciona', PATHS.formacaoAV, 'lp-formacao'),
         };
 
     }
