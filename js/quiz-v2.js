@@ -2,7 +2,7 @@
 // Atualize esses caminhos conforme sua estrutura
 const PATHS = {
     cursoGratuito: '/curso-assistente-virtual',
-    programa30dias: '/do-zero-a-av',                  // Programa R$ 97
+    programa30dias: '/do-zero-ao-primeiro-cliente',                  // Programa R$ 97
     formacaoAV: '/formacao-av',      // Formação AV R$ 797
     formacaoAV_CLT_ADM: '/formacao-av-clt-adm',      // Formação AV R$ 797
     formacaoAV_CLT: '/formacao-av-clt',      // Formação AV R$ 797
@@ -201,11 +201,10 @@ function gerarResultado() {
 
         if (prontidao === 'leve') {
             return resultadoPrograma97(
-                'Ok! Um passo de cada vez...',
+                'Tem um programa feito pro seu momento',
                 montarContextoCLT(),
-                `<p>Pra quem quer começar sem um compromisso grande, o programa <strong>"Do Zero a Assistente Virtual em 30 Dias"</strong> é o caminho ideal.</p>
-                <p>Em 4 semanas você aprende o essencial, pratica com exercícios reais e sai pronta pra atender seu primeiro cliente — tudo isso sem sair do emprego.</p>
-                <p>É o primeiro passo mais leve pra você testar se essa profissão faz sentido na sua vida.</p>`
+                `<p>A Virtap criou um programa de 30 dias pra quem quer começar como AV sem largar o emprego.</p>
+                    <p>Você aprende o essencial, pratica com exercícios reais e sai pronta pra atender seu primeiro cliente.</p>`
             );
         }
 
@@ -256,16 +255,15 @@ function gerarResultado() {
 
         if (prontidao === 'rapido') {
             return resultadoPrograma97(
-                'Legal. Precisa de uma ajudinha né?',
+                'Tem um caminho prático pra você',
                 montarContextoDesempregada(),
-                `<p>Quando você precisa de resultado rápido, o mais importante é focar no essencial e agir.</p>
-                <p>O programa <strong>"Do Zero a Assistente Virtual em 30 Dias"</strong> foi feito exatamente pra isso: em 4 semanas você aprende na prática, treina com exercícios reais e sai pronta pra atender seu primeiro cliente.</p>
-                <p>É um investimento acessível pra quem quer começar sem esperar.</p>`
+                `<p>A Virtap tem um programa de 30 dias focado em resultado: você aprende na prática, treina com exercícios reais e sai pronta pra atender seu primeiro cliente.</p>
+                <p>É direto ao ponto, feito pra quem não pode esperar.</p>`
             );
         }
 
         // prontidao === 'completo'
-        if(DESTINO_DESEMPREGADA_PRONTA === 'lp') {
+        if (DESTINO_DESEMPREGADA_PRONTA === 'lp') {
             return {
                 destino: 'lp',
                 titulo: 'Seu próximo passo tá aqui',
@@ -282,7 +280,7 @@ function gerarResultado() {
                 <p>A Virtap tem uma formação completa que te prepara do zero, com acompanhamento de especialistas por 12 meses. E dependendo do seu perfil, acesso a clientes reais pela nossa plataforma.</p>
                 <p>Vamos conversar pra entender melhor o seu momento e montar o plano certo?</p>`
             );
-    
+
         }
     }
 
@@ -292,10 +290,9 @@ function gerarResultado() {
 
         if (preocupacao === 'primeiro-passo') {
             return resultadoPrograma97(
-                'Seu primeiro passo tá aqui',
-                `<p>Boa! Você já se decidiu... agora precisa de um caminho prático e acessível pra transformar essa decisão em ação, certo?</p>`,
-                `<p>O programa <strong>"Do Zero a Assistente Virtual em 30 Dias"</strong> é ideal pra você: em 4 semanas você aprende o essencial, pratica com exercícios reais e sai com seu primeiro cliente.</p>
-                <p>Sem enrolação, sem investimento alto, direto ao ponto.</p>`
+                'Seu próximo passo tá aqui',
+                `<p>Você já se decidiu... agora precisa de um caminho prático pra transformar essa decisão em ação.</p>`,
+                `<p>A Virtap tem um programa de 30 dias onde você aprende o essencial, pratica com exercícios reais e sai pronta pra atender seu primeiro cliente.</p>`
             );
         }
 
@@ -446,12 +443,13 @@ function resultadoWhatsApp(titulo, contexto, corpo) {
 }
 
 function resultadoPrograma97(titulo, contexto, corpo) {
-    document.getElementById('waitlist-title').innerHTML = titulo;
-    document.getElementById('waitlist-context').innerHTML = contexto;
-    navigateTo('step-waitlist');
-    return null;
+    return {
+        destino: 'lp',
+        titulo,
+        mensagem: contexto + corpo,
+        btn: makeCTA('👉 Conhecer o programa', PATHS.programa30dias, 'programa-30dias'),
+    };
 }
-
 
 // ─── CTA BUTTON ───────────────────────────────────────────────────────────────
 
