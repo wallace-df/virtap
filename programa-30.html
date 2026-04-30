@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:wght@700;800;900&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --purple: #3D2066;
+      --purple-mid: #6B4C9A;
+      --purple-light: #F5F0FF;
+      --purple-glow: #8B6BBF;
+      --teal: #2D7D9A;
+      --orange: #D4762C;
+      --green: #2D8C5A;
+      --dark: #1A1A2E;
+      --gray: #666;
+      --light-gray: #F8F8FA;
+      --white: #fff;
+      --radius: 1rem;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 18px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── UTILITY ── */
+    .container {
+      max-width: 42.5rem;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    .btn-main {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--green);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.0625rem;
+      font-weight: 700;
+      padding: 1.125rem 2.5rem;
+      border-radius: 0.75rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 0.25rem 1.5rem rgba(45, 140, 90, .35);
+      transition: transform .2s, box-shadow .2s;
+      width: 100%;
+      max-width: 26.25rem;
+    }
+
+    .btn-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0.375rem 2rem rgba(45, 140, 90, .45);
+    }
+
+    /* ── NAV ── */
+    .nav {
+      padding: 0.875rem 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo {
+      height: 1.5rem;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 3.75rem 0 3rem;
+      background: linear-gradient(180deg, var(--white) 0%, var(--purple-light) 100%);
+      padding-top: 2rem;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--purple-mid);
+      background: rgba(107, 76, 154, .1);
+      padding: 0.375rem 1.125rem;
+      border-radius: 6.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.75rem, 5.5vw, 2.75rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      color: var(--dark);
+      margin-bottom: 1rem;
+      max-width: 35rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 1.0625rem;
+      color: var(--gray);
+      line-height: 1.6;
+      max-width: 27.5rem;
+      margin: 0 auto 1.75rem;
+    }
+
+    .hero-proof {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      font-size: 0.8125rem;
+      color: #888;
+      margin-top: 0.5rem;
+    }
+
+    .hero-proof div {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+    }
+
+    .hero-proof svg {
+      width: 1rem;
+      height: 1rem;
+      color: var(--purple-mid);
+    }
+
+    /* ── VSL ── */
+    .vsl-section {
+      padding: 0 0 3.5rem;
+      background: var(--purple-light);
+    }
+
+    .vsl-box {
+      max-width: 35rem;
+      margin: 0 auto;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 0.75rem 3rem rgba(61, 32, 102, .2);
+    }
+
+
+    .vsl-label {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, .5);
+      backdrop-filter: blur(0.25rem);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.375rem 1rem;
+      border-radius: 6.25rem;
+      white-space: nowrap;
+    }
+
+    /* ── PAIN/PROMISE ── */
+    .pain-section {
+      padding: 3.5rem 0;
+      background: var(--white);
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+
+    .pain-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 36rem;
+      margin: 0 auto;
+    }
+
+
+    .pain-item {
+      font-size: 1.125rem;
+      color: var(--dark);
+      line-height: 1.5;
+      padding: 1.25rem 1.5rem 1.25rem 2.25rem;
+      background: var(--light-gray);
+      border-radius: 0.875rem;
+      border-left: 3px solid var(--purple-mid);
+      max-width: 100%;
+    }
+
+    .pain-item:nth-child(1) {
+      background: #F5F0FF;
+      border-left-color: var(--purple-mid);
+    }
+
+    .pain-item:nth-child(2) {
+      background: #EDF6F9;
+      border-left-color: var(--teal);
+    }
+
+    .pain-card,
+    .promise-card {
+      padding: 1.25rem;
+      border-radius: 0.875rem;
+    }
+
+    .pain-card {
+      background: #FFF5F5;
+      border: 1px solid #FFE0E0;
+    }
+
+    .promise-card {
+      background: #EDFAF2;
+      border: 1px solid #C8EDDA;
+    }
+
+    .pain-card .card-emoji,
+    .promise-card .card-emoji {
+      font-size: 1.375rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .pain-card p,
+    .promise-card p {
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: var(--dark);
+    }
+
+    .pain-card p strong {
+      color: #C0392B;
+    }
+
+    .promise-card p strong {
+      color: var(--green);
+    }
+
+
+    .section-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--purple-mid);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.375rem, 4vw, 2rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+    }
+
+    .section-title span {
+      color: var(--purple-mid);
+    }
+
+    /* ── TIMELINE ── */
+    .timeline-section {
+      padding: 3.5rem 0;
+      background: var(--light-gray);
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 33.75rem;
+      margin: 0 auto;
+    }
+
+    .timeline-line {
+      position: absolute;
+      left: 1.75rem;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 3px;
+      background: linear-gradient(180deg, var(--purple) 0%, var(--teal) 33%, var(--orange) 66%, var(--green) 100%);
+      border-radius: 0.25rem;
+      opacity: .2;
+    }
+
+    .week {
+      position: relative;
+      margin-bottom: 1rem;
+      cursor: pointer;
+    }
+
+    .week:last-child {
+      margin-bottom: 0;
+    }
+
+    .week-circle {
+      position: absolute;
+      left: 1rem;
+      top: 0.85rem;
+      width: 1.6875rem;
+      height: 1.6875rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #fff;
+      z-index: 2;
+      transition: box-shadow .25s;
+    }
+
+    .wcard {
+      margin-left: 3.5rem;
+      background: #fff;
+      border-radius: 0.875rem;
+      padding: 1rem 1.125rem;
+      border: 1.5px solid #eee;
+      transition: all .25s;
+    }
+
+    .wcard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .week.active .wcard-header {
+      margin-bottom: 0.75rem;
+    }
+
+    .wcard-title-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .wcard-icon {
+      font-size: 1.125rem;
+    }
+
+    .wcard-title {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .wcard-arrow {
+      font-size: 0.875rem;
+      font-weight: 700;
+      transition: transform .25s;
+    }
+
+    .week.active .wcard-arrow {
+      transform: rotate(90deg);
+    }
+
+    .wcard-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease;
+    }
+
+    .week.active .wcard-body {
+      max-height: 31.25rem;
+    }
+
+    .wcard-body-inner {
+      padding-top: 0.625rem;
+    }
+
+    .witem {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.625rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .witem:last-child {
+      margin-bottom: 0.75rem;
+    }
+
+    .witem-dot {
+      width: 0.375rem;
+      height: 0.375rem;
+      border-radius: 50%;
+      opacity: .5;
+      margin-top: 0.375rem;
+      flex-shrink: 0;
+    }
+
+    .witem-text {
+      font-size: 0.8438rem;
+      color: #555;
+      line-height: 1.45;
+    }
+
+    .wentrega {
+      border-radius: 0.625rem;
+      padding: 0.625rem 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .wentrega-text {
+      font-size: 0.7812rem;
+      font-weight: 600;
+    }
+
+    .timeline-hint {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #aaa;
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    /* ── GUARANTEE ── */
+    .guarantee-section {
+      padding: 3.5rem 0;
+      background: var(--white);
+    }
+
+    .guarantee-box {
+      max-width: 33.75rem;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #EDF6F9 0%, #F0F8FF 100%);
+      border: 2px solid #B8DAE6;
+      border-radius: var(--radius);
+      padding: 2rem 1.75rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .guarantee-box::before {
+      content: '';
+      position: absolute;
+      top: -2.5rem;
+      right: -2.5rem;
+      width: 7.5rem;
+      height: 7.5rem;
+      background: radial-gradient(circle, rgba(45, 125, 154, .12), transparent 70%);
+      border-radius: 50%;
+    }
+
+    .guarantee-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .guarantee-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.375rem;
+      font-weight: 800;
+      margin-bottom: 0.625rem;
+      color: #2D7D9A;
+    }
+
+    .guarantee-text {
+      font-size: 0.875rem;
+      color: #555;
+      line-height: 1.6;
+      max-width: 25rem;
+      margin: 0 auto;
+    }
+
+    .guarantee-text strong {
+      color: var(--dark);
+    }
+
+    /* ── PRICING ── */
+    .pricing-section {
+      padding: 3.5rem 0;
+      background: linear-gradient(180deg, var(--purple-light) 0%, var(--white) 100%);
+    }
+
+    .pricing-box {
+      max-width: 32rem;
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: 1.25rem;
+      border: 2px solid var(--purple-mid);
+      padding: 2.5rem 2rem 2rem;
+      text-align: center;
+      box-shadow: 0 0.5rem 2.5rem rgba(107, 76, 154, .12);
+      position: relative;
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -0.875rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--purple);
+      color: #fff;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 0.375rem 1.25rem;
+      border-radius: 6.25rem;
+      white-space: nowrap;
+    }
+
+    .pricing-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.375rem;
+      margin-top: 0.5rem;
+    }
+
+    .pricing-subtitle {
+      font-size: 0.8125rem;
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-items {
+      text-align: left;
+      margin-bottom: 1.75rem;
+    }
+
+    .pricing-item {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      margin-bottom: 0.625rem;
+      font-size: 1rem;
+      color: var(--dark);
+    }
+
+    .pricing-check {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 50%;
+      background: var(--purple-light);
+      color: var(--purple-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .pricing-divider {
+      height: 1px;
+      background: #eee;
+      margin: 1.5rem 0;
+    }
+
+    .pricing-original {
+      font-size: 0.875rem;
+      color: #aaa;
+      text-decoration: line-through;
+      margin-bottom: 0.25rem;
+    }
+
+    .pricing-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--purple);
+      line-height: 1;
+    }
+
+    .pricing-price sup {
+      font-size: 1.5rem;
+      top: -.6em;
+    }
+
+    .pricing-installment {
+      font-size: 1rem;
+      color: var(--gray);
+      margin: 0.375rem 0 1.5rem;
+    }
+
+    .pricing-installment strong {
+      color: var(--dark);
+    }
+
+    .pricing-secure {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+      font-size: 0.6875rem;
+      color: #aaa;
+      margin-top: 0.875rem;
+    }
+
+    .pricing-secure svg {
+      width: 0.75rem;
+      height: 0.75rem;
+    }
+
+    /* ── FAQ ── */
+    .faq-section {
+      padding: 3.5rem 0;
+      background: var(--white);
+    }
+
+    .faq-list {
+      max-width: 33.75rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .faq-item {
+      background: var(--light-gray);
+      border-radius: 0.875rem;
+      border: 1.5px solid #eee;
+      padding: 0 1.25rem;
+      cursor: pointer;
+      transition: background .3s, border-color .3s, box-shadow .3s;
+    }
+
+    .faq-item:hover {
+      border-color: #ddd;
+      box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, .04);
+    }
+
+    .faq-item.open {
+      background: var(--purple-light);
+      border-color: rgba(107, 76, 154, .2);
+    }
+
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.125rem 0;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--dark);
+      transition: color .3s;
+    }
+
+    .faq-item.open .faq-q {
+      color: var(--purple);
+    }
+
+    .faq-toggle {
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 50%;
+      background: var(--purple-light);
+      color: var(--purple-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.125rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      transition: transform .35s ease, background .3s, color .3s;
+    }
+
+    .faq-item.open .faq-toggle {
+      transform: rotate(45deg);
+      background: var(--purple-mid);
+      color: #fff;
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .4s ease;
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 18.75rem;
+    }
+
+    .faq-a-inner {
+      padding: 0 0 1.125rem;
+      font-size: 0.875rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      padding: 3.5rem 0;
+      text-align: center;
+      background: var(--purple);
+      color: #fff;
+    }
+
+    .final-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.375rem, 4.5vw, 2.125rem);
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+
+    .final-cta p {
+      font-size: 0.9375rem;
+      opacity: .75;
+      margin-bottom: 1.75rem;
+      max-width: 25rem;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+
+    .final-cta .btn-main {
+      background: #fff;
+      color: var(--purple);
+      box-shadow: 0 0.25rem 1.5rem rgba(0, 0, 0, .2);
+      max-width: 23.75rem;
+      margin: 0 auto;
+    }
+
+    /* ── FOOTER ── */
+    .lp-footer {
+      padding: 1.5rem 0;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #aaa;
+      background: var(--dark);
+    }
+
+    .lp-footer a {
+      color: #888;
+      text-decoration: none;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(1.25rem);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .anim {
+      opacity: 0;
+      animation: fadeUp .6s ease forwards;
+    }
+
+    .anim-d1 {
+      animation-delay: .1s;
+    }
+
+    .anim-d2 {
+      animation-delay: .2s;
+    }
+
+    .anim-d3 {
+      animation-delay: .3s;
+    }
+
+    .anim-d4 {
+      animation-delay: .4s;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <img src="/img/logo.png" alt="Virtap" class="nav-logo">
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-eyebrow anim">Programa 30 Dias</div>
+      <h1 class="anim anim-d1">Do Zero ao Primeiro Cliente como <span>Assistente Virtual</span></h1>
+      <p class="hero-sub anim anim-d2">O passo a
+        passo mais direto que existe.</p>
+      <a href="#preco" class="btn-main anim anim-d3">Quero me inscrever agora →</a>
+      <div class="hero-proof anim anim-d4">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+          Garantia de 30 dias
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+            <polyline points="22 4 12 14.01 9 11.01" />
+          </svg>
+          Acesso imediato
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" />
+            <line x1="8" y1="21" x2="16" y2="21" />
+            <line x1="12" y1="17" x2="12" y2="21" />
+          </svg>
+          100% online
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VSL -->
+  <section class="vsl-section">
+    <div class="container">
+      <div class="vsl-box">
+        <script src="https://fast.wistia.com/embed/medias/w079f7qzm6_ID.jsonp" async></script>
+        <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+        <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+          <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+            <div class="wistia_embed wistia_async_w079f7qzm6 seo=true videoFoam=true"
+              style="height:100%;position:relative;width:100%;">&nbsp;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAIN / PROMISE -->
+  <section class="pain-section">
+    <div class="container">
+      <div class="section-title">Esse programa é pra <span>você</span> que...</div>
+      <div class="pain-grid">
+        <div class="pain-list">
+          <div class="pain-item">Quer trabalhar de casa mas não sabe por onde começar</div>
+          <div class="pain-item">Precisa de um plano claro, passo a passo, sem enrolação</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline-section" id="conteudo">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:2rem;">
+        <div class="section-title">Sua jornada de <span>30 dias</span></div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-line"></div>
+
+        <!-- Week 1 -->
+        <div class="week" onclick="toggleWeek(this)">
+          <div class="week-circle" style="background:var(--purple);box-shadow:0 1px 3px #6B4C9A33;">1</div>
+          <div class="wcard">
+            <div class="wcard-header">
+              <div>
+                <div class="wcard-title-row">
+                  <!-- <span class="wcard-icon">🧭</span> -->
+                  <span class="wcard-title">Semana 1 · Entendendo a profissão</span>
+                </div>
+              </div>
+              <div class="wcard-arrow" style="color:var(--purple-mid);">›</div>
+            </div>
+            <div class="wcard-body">
+              <div class="wcard-body-inner" style="border-top:1px solid #6B4C9A20;">
+                <div class="witem">
+                  <div class="witem-dot" style="background:var(--purple-mid);"></div><span class="witem-text">Abertura:
+                    como vai funcionar sua jornada</span>
+                </div>
+                <div class="witem">
+                  <div class="witem-dot" style="background:var(--purple-mid);"></div><span class="witem-text">O que é
+                    Assistência Virtual?</span>
+                </div>
+                <div class="witem">
+                  <div class="witem-dot" style="background:var(--purple-mid);"></div><span class="witem-text">O que você
+                    precisa (e o que não precisa) pra começar</span>
+                </div>
+                <div class="witem">
+                  <div class="witem-dot" style="background:var(--purple-mid);"></div><span class="witem-text">Por que
+                    ser AV?</span>
+                </div>
+                <div class="wentrega" style="background:#F3EEFF;">
+                  <span style="font-size:0.875rem;">✅</span>
+                  <span class="wentrega-text" style="color:var(--purple-mid);">Clareza total sobre a profissão e se é
+                    pra você</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Week 2 -->
+        <div class="week" onclick="toggleWeek(this)">
+          <div class="week-circle" style="background:var(--teal);box-shadow:0 1px 3px #2D7D9A33;">2</div>
+          <div class="wcard">
+            <div class="wcard-header">
+              <div>
+                <div class="wcard-title-row">
+                  <!-- <span class="wcard-icon">🛠️</span> -->
+                  <span class="wcard-title">Semana 2 · Aprendendo na prática</span>
+                </div>
+              </div>
+              <div class="wcard-arrow" style="color:var(--teal);">›</div>
+            </div>
+            <div class="wcard-body">
+              <div class="wcard-body-inner" style="border-top:1px solid #2D7D9A20;">
+                <div class="witem">
+                  <div class="witem-dot" style="background:var(--teal);"></div><span class="witem-text">Entendendo o que
+                    faz uma AV no dia a dia</span>
+                </div>
+                <div class="witem">
+                  <div class="witem-dot" style="background:var(--teal);"></div><span class="witem-text">Serviço mais
+                    comum 1: Atendimento e Suporte ao Cliente</span>
+                </div>
+                <div class="witem">
+                  <div class="witem-dot" style="background:var(--teal);"></div><span class="witem-text">Serviço mais
+                    comum 2: Gerenciamento de Agenda</span>
+                </div>
+                <div class="witem">
+                  <div class="witem-dot" style="background:var(--teal);"></div><span class="witem-text">Exercícios
+                    práticos</span>
+                </div>
+                <div class="wentrega" style="background:#EBF7FC;">
+                  <span style="font-size:0.875rem;">✅</span>
+                  <span class="wentrega-text" style="color:var(--teal);">Aprenda na prática antes de fazer pro seu
+                    futuro cliente</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Week 3 -->
+        <div class="week" onclick="toggleWeek(this)">
+          <div class="week-circle" style="background:var(--orange);box-shadow:0 1px 3px #D4762C33;">3</div>
+          <div class="wcard">
+            <div class="wcard-header">
+              <div>
+                <div class="wcard-title-row">
+                  <!-- <span class="wcard-icon">💰</span> -->
+                  <span class="wcard-title">Semana 3 · Como cobrar e se apresentar</span>
+                </div>
+              </div>
+              <div class="wcard-arrow" style="color:var(--orange);">›</div>
+            </div>
+            <div class="wcard-body">
+              <div class="wcard-body-inner" style="border-top:1px solid #D4762C20;">
+                <div class="witem">
+                  <div class="witem-dot" style="background:var(--orange);"></div><span class="witem-text">Quanto cobrar
+                    do seu cliente?</span>
+                </div>
+                <div class="witem">
+                  <div class="witem-dot" style="background:var(--orange);"></div><span class="witem-text">Como falar
+                    sobre o seu serviço</span>
+                </div>
+                <div class="wentrega" style="background:#FFF4EB;">
+                  <span style="font-size:0.875rem;">✅</span>
+                  <span class="wentrega-text" style="color:var(--orange);">Saiba como vender seu serviço</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Week 4 -->
+        <div class="week" onclick="toggleWeek(this)">
+          <div class="week-circle" style="background:var(--green);box-shadow:0 1px 3px #2D8C5A33;">4</div>
+          <div class="wcard">
+            <div class="wcard-header">
+              <div>
+                <div class="wcard-title-row">
+                  <!-- <span class="wcard-icon">🚀</span> -->
+                  <span class="wcard-title">Semana 4 · Em busca do primeiro cliente</span>
+                </div>
+              </div>
+              <div class="wcard-arrow" style="color:var(--green);">›</div>
+            </div>
+            <div class="wcard-body">
+              <div class="wcard-body-inner" style="border-top:1px solid #2D8C5A20;">
+                <div class="witem">
+                  <div class="witem-dot" style="background:var(--green);"></div><span class="witem-text">O plano pra
+                    conseguir seu primeiro cliente</span>
+                </div>
+                <div class="witem">
+                  <div class="witem-dot" style="background:var(--green);"></div><span class="witem-text">Colocando em
+                    prática: nível 1</span>
+                </div>
+                <div class="witem">
+                  <div class="witem-dot" style="background:var(--green);"></div><span class="witem-text">Colocando em
+                    prática: nível 2</span>
+                </div>
+                <div class="witem">
+                  <div class="witem-dot" style="background:var(--green);"></div><span class="witem-text">Colocando em
+                    prática: nível 3</span>
+                </div>
+                <div class="witem">
+                  <div class="witem-dot" style="background:var(--green);"></div><span class="witem-text">Encerramento +
+                    seu caminho de evolução</span>
+                </div>
+                <div class="wentrega" style="background:#EDFAF2;">
+                  <span style="font-size:0.875rem;">✅</span>
+                  <span class="wentrega-text" style="color:var(--green);">O passo a passo colocado em prática</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-hint">Toque em cada semana pra ver os detalhes</div>
+    </div>
+  </section>
+
+  <!-- GUARANTEE -->
+  <section class="guarantee-section">
+    <div class="container">
+      <div class="guarantee-box">
+        <div class="guarantee-title">Garantia Dupla</div>
+        <div style="display:flex;gap:1.5rem;text-align:left;margin-top:1rem;">
+          <div style="flex:1;padding:1rem;background:rgba(45,125,154,.06);border-radius:0.75rem;">
+            <div style="font-size:0.875rem;font-weight:700;color:#2D7D9A;margin-bottom:0.25rem;">7 dias pra se
+              arrepender</div>
+            <div style="font-size:0.8125rem;color:#555;line-height:1.5;">Não curtiu? Devolvemos 100%. Sem perguntas.
+            </div>
+          </div>
+          <div style="flex:1;padding:1rem;background:rgba(45,125,154,.06);border-radius:0.75rem;">
+            <div style="font-size:0.875rem;font-weight:700;color:#2D7D9A;margin-bottom:0.25rem;">30 dias pra ter
+              resultado</div>
+            <div style="font-size:0.8125rem;color:#555;line-height:1.5;">Segiu tudo à risca e não teve resultados?
+              Dinheiro de
+              volta.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing-section" id="preco">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:2rem;">
+        <div class="section-title">Tudo isso por <span>menos do que um lanche...</span></div>
+      </div>
+
+      <div class="pricing-box">
+        <div class="pricing-badge">Oferta de lançamento</div>
+        <div class="pricing-title">Programa 30 dias</div>
+        <div class="pricing-subtitle">Do Zero ao Primeiro Cliente como AV</div>
+
+        <div class="pricing-items">
+          <div class="pricing-item">
+            <div class="pricing-check">✓</div> 4 semanas de conteúdo passo a passo
+          </div>
+          <div class="pricing-item">
+            <div class="pricing-check">✓</div> Exercícios práticos pra aplicar na hora
+          </div>
+          <div class="pricing-item">
+            <div class="pricing-check">✓</div> Plano completo pra conseguir o 1º cliente
+          </div>
+          <div class="pricing-item">
+            <div class="pricing-check">✓</div> Garantia de 30 dias
+          </div>
+        </div>
+
+        <div class="pricing-divider"></div>
+
+        <div class="pricing-original">De R$ 197</div>
+        <div class="pricing-price"><sup>R$</sup>97</div>
+        <p class="pricing-installment">ou <strong>12x de R$ 9,90</strong></p>
+
+        <a href="#" class="btn-main" style="max-width:100%;">Quero começar agora →</a>
+
+        <div class="pricing-secure">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+          Pagamento seguro · Acesso imediato
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:2rem;">
+        <div class="section-title">Dúvidas frequentes</div>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">Preciso ter experiência pra começar?<div class="faq-toggle">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Não! O programa foi feito exatamente pra quem tá começando do zero.</div>
+          </div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">Funciona mesmo pra quem nunca trabalhou online?<div class="faq-toggle">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Sim. O programa foi pensado justamente pra isso. Você vai aprender as ferramentas,
+              os serviços e o passo a passo completo pra encontrar clientes.</div>
+          </div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">E se eu não tiver resultados?<div class="faq-toggle">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Se você seguir o programa à risca e ainda sim não tiver resultados,
+              devolvemos 100% do valor.</div>
+          </div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">Quanto tempo dura o acesso ao conteúdo?<div class="faq-toggle">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Depois de se inscrever, você tem acesso ao conteúdo por 12 meses.</div>
+          </div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">Como recebo o acesso?<div class="faq-toggle">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Logo após a confirmação do pagamento, você recebe os dados de acesso diretamente no
+              seu e-mail. É imediato.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>Seu primeiro cliente tá a<br>30 dias de distância</h2>
+      <p>Não espere o momento perfeito. Comece agora.</p>
+      <a href="#preco" class="btn-main">Quero me inscrever →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="lp-footer">
+    <div class="container">
+      <p>© 2026 Virtap · Todos os direitos reservados · <a href="/termos">Termos de Uso</a> · <a
+          href="/privacidade">Política de
+          Privacidade</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleWeek(el) {
+      const wasActive = el.classList.contains('active');
+      document.querySelectorAll('.week').forEach(w => {
+        w.classList.remove('active');
+        const c = w.querySelector('.week-circle');
+        const color = getComputedStyle(c).backgroundColor;
+        c.style.boxShadow = '0 1px 3px ' + color.replace('rgb', 'rgba').replace(')', ',.2)');
+      });
+      if (!wasActive) {
+        el.classList.add('active');
+        const c = el.querySelector('.week-circle');
+        const bg = getComputedStyle(c).backgroundColor;
+        c.style.boxShadow = '0 0 0 4px rgba(255,255,255,.8), 0 2px 8px ' + bg.replace('rgb', 'rgba').replace(')', ',.3)');
+      }
+    }
+    function toggleFaq(el) {
+      const wasOpen = el.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+      if (!wasOpen) el.classList.add('open');
+    }
+  </script>
+
+</body>
+
+</html>
