@@ -2327,3 +2327,108 @@ p.starter-warning {
 .vagas_card.others h3, .vagas_card.others .comparacao_lista_item {
 	color:#999;
 }
+
+
+.como-funciona {
+	padding: 7rem 0 5rem;
+	background: #fff;
+  }
+  .como-funciona h2 {
+	text-align: center;
+	margin-bottom: 1.5rem;
+  }
+  .como-funciona .subtitulo {
+	text-align: center;
+	color: #777;
+	font-size: 2.2rem;
+	margin-bottom: 5rem;
+	max-width: 680px;
+	margin-left: auto;
+	margin-right: auto;
+	line-height: 1.6;
+  }
+  .timeline {
+	position: relative;
+	max-width: 900px;
+	margin: 0 auto;
+  }
+  .timeline::before {
+	content: '';
+	position: absolute;
+	left: 40px;
+	top: 0;
+	bottom: 0;
+	width: 3px;
+	background: linear-gradient(to bottom, #5B2D8E, #B3E3E5);
+	border-radius: 3px;
+  }
+  .timeline-step {
+	position: relative;
+	padding-left: 100px;
+	margin-bottom: 5rem;
+  }
+  .timeline-step:last-child {
+	margin-bottom: 0;
+  }
+  .timeline-dot {
+	position: absolute;
+	left: 25px;
+	top: 6px;
+	width: 34px;
+	height: 34px;
+	background: #5B2D8E;
+	border-radius: 50%;
+	border: 4px solid #fff;
+	box-shadow: 0 0 0 3px #5B2D8E;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	font-weight: 700;
+	font-size: 1.4rem;
+  }
+  .timeline-step:last-child .timeline-dot {
+	background: #B3E3E5;
+	box-shadow: 0 0 0 3px #B3E3E5;
+	color: #5B2D8E;
+  }
+  .timeline-content h3 {
+	font-size: 2.4rem;
+	color: #2d2d2d;
+	margin-bottom: 0.8rem;
+	font-weight: 700;
+  }
+  .timeline-content p {
+	font-size: 1.8rem;
+	color: #666;
+	line-height: 1.6;
+	margin-bottom: 1.5rem;
+  }
+  .timeline-img {
+	width: 100%;
+	max-width: 650px;
+	border-radius: 12px;
+	box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+	border: 1px solid #eee;
+  }
+  
+  @media (max-width: 768px) {
+	.timeline::before {
+	  left: 20px;
+	}
+	.timeline-dot {
+	  left: 6px;
+	  width: 30px;
+	  height: 30px;
+	}
+	.timeline-step {
+	  padding-left: 60px;
+	}
+	.timeline-content h3 {
+	  font-size: 2rem;
+	}
+	.timeline-content p {
+	  font-size: 1.6rem;
+	}
+  }
