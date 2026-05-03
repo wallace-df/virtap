@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comece como Assistente Virtual | Virtap</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-bg: #FAFAFA;
+      --color-bg-warm: #F5F0FA;
+      --color-text: #1A1A2E;
+      --color-text-soft: #4A4A5A;
+      --color-text-muted: #8A8A9A;
+      --color-primary: #5B2D8E;
+      --color-primary-dark: #4A2375;
+      --color-accent: #E8B931;
+      --color-accent-soft: #FFF8E1;
+      --color-green: #2E8B57;
+      --color-green-bg: #EAF5F0;
+      --color-white: #FFFFFF;
+      --color-border: #E0DCE8;
+      --color-urgent: #C0392B;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.7;
+      font-size: 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── URGENCY BAR ── */
+    .urgency-bar {
+      background: var(--color-primary);
+      color: #fff;
+      text-align: center;
+      padding: 0.7rem 1rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .urgency-bar .timer {
+      color: var(--color-accent);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      margin-left: 0.3rem;
+    }
+
+    .urgency-bar.expired { background: var(--color-text-muted); }
+
+    /* ── EXPIRED OVERLAY ── */
+    .expired-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 26, 46, 0.85);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .expired-overlay.visible { display: flex; }
+
+    .expired-box {
+      background: var(--color-white);
+      border-radius: 1rem;
+      padding: 2.5rem 2rem;
+      max-width: 420px;
+      text-align: center;
+      margin: 1rem;
+    }
+
+    .expired-box h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .expired-box p {
+      color: var(--color-text-soft);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+
+    .expired-box a {
+      color: var(--color-primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    /* ── SECTION BASE ── */
+    .s {
+      padding: 3.5rem 1.5rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .s--full {
+      max-width: 100%;
+      background: var(--color-bg-warm);
+    }
+
+    .s--full > .s__inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* ── CTA BUTTON ── */
+    .cta {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 1.08rem;
+      font-weight: 700;
+      padding: 1.05rem 2.6rem;
+      border-radius: 0.6rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .cta:hover {
+      background: var(--color-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(91, 45, 142, 0.25);
+    }
+
+    .cta--full {
+      width: 100%;
+      max-width: 22rem;
+      text-align: center;
+    }
+
+    .cta-hint {
+      display: block;
+      margin-top: 0.55rem;
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ══════════════════════════════
+       1. HERO
+    ══════════════════════════════ */
+    .hero {
+      padding: 3.5rem 1.5rem 2.5rem;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 em {
+      color: var(--color-primary);
+      font-style: italic;
+    }
+
+    .hero__sub {
+      font-size: 1.1rem;
+      color: var(--color-text-soft);
+      line-height: 1.6;
+      max-width: 560px;
+      margin: 0 auto 1.8rem;
+    }
+
+    .hero-bullets {
+      text-align: left;
+      max-width: 420px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero-bullets li {
+      list-style: none;
+      padding: 0.4rem 0;
+      font-size: 1rem;
+      color: var(--color-text);
+      font-weight: 500;
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+
+    .hero-bullets li::before {
+      content: '✓';
+      color: var(--color-green);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .hero__proof {
+      margin-top: 2rem;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+    }
+
+    .hero__proof img {
+      width: 100%;
+      display: block;
+    }
+
+    /* ══════════════════════════════
+       2. CONTINUIDADE
+    ══════════════════════════════ */
+    .continuidade {
+      text-align: center;
+    }
+
+    .continuidade h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+    }
+
+    .cont-items {
+      max-width: 480px;
+      margin: 0 auto 1.5rem;
+      text-align: left;
+    }
+
+    .cont-item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      padding: 0.5rem 0;
+      font-size: 1.05rem;
+      color: var(--color-text-soft);
+    }
+
+    .cont-item::before {
+      content: '→';
+      color: var(--color-primary);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .cont-conclusion {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-top: 0.5rem;
+    }
+
+    /* ══════════════════════════════
+       3. O QUE VOCÊ RECEBE
+    ══════════════════════════════ */
+    .recebe__label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-primary);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .bloco {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 0.75rem;
+      padding: 1.8rem 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .bloco__tag {
+      display: inline-block;
+      background: var(--color-green-bg);
+      color: var(--color-green);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 0.3rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .bloco h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .bloco-list {
+      list-style: none;
+    }
+
+    .bloco-list li {
+      padding: 0.3rem 0;
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .bloco-list li::before {
+      content: '·';
+      color: var(--color-primary);
+      font-weight: 700;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    /* ── Módulos expandíveis ── */
+    .modulos-toggle {
+      margin-top: 1rem;
+      border-top: 1px solid var(--color-border);
+      padding-top: 0.8rem;
+    }
+
+    .modulos-toggle summary {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .modulos-toggle summary::-webkit-details-marker { display: none; }
+
+    .modulos-toggle summary::before {
+      content: '▸';
+      font-size: 0.8rem;
+      transition: transform 0.2s;
+    }
+
+    .modulos-toggle[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    .modulos-content {
+      padding-top: 0.8rem;
+    }
+
+    .mod {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #f0eef3;
+    }
+
+    .mod:last-child { border-bottom: none; }
+
+    .mod__header {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-text);
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .mod__num {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--color-primary);
+      min-width: 1.5rem;
+    }
+
+    .mod__count {
+      margin-left: auto;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+    }
+
+    .mod__aulas {
+      list-style: none;
+      padding-left: 2rem;
+      margin-top: 0.3rem;
+    }
+
+    .mod__aulas li {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      padding: 0.18rem 0;
+      line-height: 1.5;
+    }
+
+    /* ══════════════════════════════
+       4. PROVA
+    ══════════════════════════════ */
+    .prova__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .prova-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .prova-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 0.75rem;
+      padding: 1.4rem 1.5rem;
+    }
+
+    .prova-card__text {
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+      line-height: 1.6;
+      font-style: italic;
+      margin-bottom: 0.8rem;
+    }
+
+    .prova-card__author {
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .prova-card__detail {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+    }
+
+    .prova-print {
+      border-radius: 0.75rem;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+    }
+
+    .prova-print img {
+      width: 100%;
+      display: block;
+    }
+
+    /* ══════════════════════════════
+       5. OBJEÇÕES
+    ══════════════════════════════ */
+    .objecoes__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .objecao {
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .objecao:last-child { border-bottom: none; }
+
+    .objecao__pergunta {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--color-text);
+      margin-bottom: 0.3rem;
+    }
+
+    .objecao__resposta {
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+      line-height: 1.6;
+    }
+
+    /* ══════════════════════════════
+       MICRO QUOTE
+    ══════════════════════════════ */
+    .micro-quote {
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    .micro-quote p {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+      line-height: 1.4;
+      color: var(--color-primary);
+      font-style: italic;
+    }
+
+    /* ══════════════════════════════
+       6. OFERTA
+    ══════════════════════════════ */
+    .oferta {
+      text-align: center;
+      padding: 4rem 1.5rem;
+    }
+
+    .oferta-box {
+      max-width: 520px;
+      margin: 0 auto;
+      background: var(--color-white);
+      border: 2px solid var(--color-primary);
+      border-radius: 1rem;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 12px 40px rgba(91, 45, 142, 0.1);
+    }
+
+    .oferta-timer {
+      display: inline-block;
+      background: var(--color-accent-soft);
+      color: #8B6914;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.45rem 1rem;
+      border-radius: 0.4rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .oferta-timer .timer {
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+    }
+
+    .oferta-box h2 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .oferta-items {
+      text-align: left;
+      margin-bottom: 1.6rem;
+    }
+
+    .oferta-item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      padding: 0.45rem 0;
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+      border-bottom: 1px solid #f0eef3;
+    }
+
+    .oferta-item:last-child { border-bottom: none; }
+
+    .oferta-item .ck {
+      color: var(--color-green);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .oferta-price {
+      margin: 1.4rem 0 0.3rem;
+    }
+
+    .oferta-price__from {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      text-decoration: line-through;
+    }
+
+    .oferta-price__value {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      color: var(--color-primary);
+      line-height: 1.1;
+    }
+
+    .oferta-price__installment {
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+      margin-bottom: 1.6rem;
+    }
+
+    .oferta-anchor {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    /* ══════════════════════════════
+       7. GARANTIA
+    ══════════════════════════════ */
+    .garantia {
+      text-align: center;
+    }
+
+    .garantia-box {
+      max-width: 520px;
+      margin: 0 auto;
+      background: var(--color-green-bg);
+      border-radius: 0.75rem;
+      padding: 2rem 1.8rem;
+    }
+
+    .garantia-box h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .garantia-box p {
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+      line-height: 1.6;
+    }
+
+    /* ══════════════════════════════
+       8. URGÊNCIA
+    ══════════════════════════════ */
+    .urgencia {
+      text-align: center;
+    }
+
+    .urgencia p {
+      font-size: 1.05rem;
+      color: var(--color-text-soft);
+      max-width: 500px;
+      margin: 0 auto 0.8rem;
+      line-height: 1.6;
+    }
+
+    .urgencia .timer-big {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--color-primary);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
+    .footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* ── WPP FAB ── */
+    .wpp-fab {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 16px;
+    }
+
+    .wpp-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: none;
+      background: #25d366;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, .3), 0 2px 4px rgba(0, 0, 0, .1);
+      transition: transform .25s cubic-bezier(.34, 1.56, .64, 1), box-shadow .25s ease;
+      animation: wppEntrada .4s cubic-bezier(.34, 1.56, .64, 1) both;
+      animation-delay: .5s;
+    }
+
+    @keyframes wppEntrada {
+      from { transform: scale(0); }
+      to { transform: scale(1); }
+    }
+
+    .wpp-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 24px rgba(37, 211, 102, .4);
+    }
+
+    .wpp-btn:active { transform: scale(.95); }
+    .wpp-btn svg { width: 30px; height: 30px; fill: #fff; }
+
+    .wpp-pulse {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(37, 211, 102, .5);
+      animation: wppPulse 2s ease-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes wppPulse {
+      0% { transform: scale(1); opacity: .6; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    .wpp-badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 18px;
+      height: 18px;
+      background: #ff3b5c;
+      border-radius: 50%;
+      border: 2.5px solid #fff;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: badgePop .4s cubic-bezier(.34, 1.56, .64, 1) both;
+      animation-delay: 1.2s;
+      opacity: 0;
+    }
+
+    @keyframes badgePop {
+      from { opacity: 0; transform: scale(0); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .wpp-card {
+      display: none;
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      width: 280px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .18), 0 2px 8px rgba(0, 0, 0, .08);
+      position: relative;
+      animation: cardIn .3s cubic-bezier(.34, 1.56, .64, 1) both;
+    }
+
+    .wpp-card.aberto { display: block; }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: scale(.85) translateY(8px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .wpp-card-fechar {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: none;
+      background: #f0f2f5;
+      color: #8e8e9e;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wpp-card-fechar:hover { background: #e4e6e9; color: #333; }
+
+    .wpp-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .wpp-card-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #25d366, #128c47);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .wpp-card-avatar svg { width: 20px; height: 20px; fill: #fff; }
+    .wpp-card-nome { font-weight: 600; font-size: 14px; color: #1a1a2e; }
+    .wpp-card-status { font-size: 12px; color: #8e8e9e; margin-top: 1px; }
+
+    .wpp-card-msg {
+      background: #f0f2f5;
+      border-radius: 0 12px 12px 12px;
+      padding: 10px 14px;
+      font-size: 14px;
+      color: #3a3a4a;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .wpp-card-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 11px 16px;
+      background: #25d366;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .2s ease;
+    }
+
+    .wpp-card-cta:hover {
+      background: #1fb855;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(37, 211, 102, .35);
+    }
+
+    .wpp-card-cta svg { width: 16px; height: 16px; fill: #fff; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 2.5rem 1.2rem 2rem; }
+      .s { padding: 2.5rem 1.2rem; }
+      .oferta { padding: 3rem 1.2rem; }
+      .oferta-box { padding: 2rem 1.3rem; }
+      .bloco { padding: 1.4rem 1.3rem; }
+      .wpp-fab { bottom: 20px; right: 16px; }
+      .wpp-card { width: 260px; }
+      .wpp-btn { width: 56px; height: 56px; }
+      .wpp-btn svg { width: 26px; height: 26px; }
+    }
+  </style>
+
+  <link href="/img/favicon.svg" type="image/svg+xml" rel="icon" />
+  <link href="/favicon.png" type="image/png" rel="icon" />
+
+  <!-- GTM -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N6VNPLTX');</script>
+</head>
+
+<body>
+
+  <!-- ══ URGENCY BAR ══ -->
+  <div class="urgency-bar" id="urgencyBar">
+    Essa condição expira em <span class="timer" id="topTimer">--:--:--</span>
+  </div>
+
+  <!-- ══ EXPIRED OVERLAY ══ -->
+  <div class="expired-overlay" id="expiredOverlay">
+    <div class="expired-box">
+      <h2>Essa oferta expirou</h2>
+      <p>O prazo da sua condição especial acabou. Se ainda tiver interesse, fala com a gente.</p>
+      <a href="https://wa.me/5548988089062?text=Oi%2C%20minha%20oferta%20expirou%20mas%20ainda%20tenho%20interesse">Falar com a Virtap →</a>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════
+       1. HERO
+  ═══════════════════════════════ -->
+  <section class="hero">
+    <h1>Comece como Assistente Virtual<br>e <em>conquiste seus primeiros clientes</em></h1>
+    <p class="hero__sub">Mesmo começando do zero, com o passo a passo certo, suporte e acesso a oportunidades reais.</p>
+
+    <ul class="hero-bullets">
+      <li>Saiba exatamente o que oferecer e quanto cobrar</li>
+      <li>Aprenda a se posicionar e fechar clientes</li>
+      <li>Tenha acesso a oportunidades reais todos os dias</li>
+    </ul>
+
+    <a href="#oferta" class="cta">Começar agora</a>
+    <span class="cta-hint">Últimas horas com essa condição</span>
+
+    <!-- PROOF VISUAL: troque pelo print de vagas ou resultado real -->
+    <div class="hero__proof">
+      <img src="/prints/prova3.png" alt="Oportunidades reais na Virtap">
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       2. CONTINUIDADE (ponte com VSL)
+  ═══════════════════════════════ -->
+  <div class="s s--full">
+    <div class="s__inner continuidade">
+      <h2>Se você chegou até aqui, você já viu que:</h2>
+
+      <div class="cont-items">
+        <div class="cont-item">Cliente existe — e está procurando agora</div>
+        <div class="cont-item">O problema não é falta de oportunidade</div>
+        <div class="cont-item">É saber como entrar do jeito certo</div>
+      </div>
+
+      <p class="cont-conclusion">Agora você só precisa de um caminho claro pra começar.</p>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════
+       3. O QUE VOCÊ RECEBE
+  ═══════════════════════════════ -->
+  <div class="s">
+    <p class="recebe__label">O que você recebe</p>
+
+    <div class="bloco">
+      <div class="bloco__tag">Formação</div>
+      <h3>Passo a passo do zero ao primeiro cliente</h3>
+      <ul class="bloco-list">
+        <li>O que oferecer como assistente virtual</li>
+        <li>Como cobrar de forma estratégica</li>
+        <li>Como atender com qualidade profissional</li>
+        <li>Como se posicionar pra atrair clientes</li>
+      </ul>
+      <details class="modulos-toggle">
+        <summary>Ver conteúdo completo (38 aulas em 6 módulos)</summary>
+        <div class="modulos-content">
+          <div class="mod">
+            <div class="mod__header"><span class="mod__num">01</span> Fundamentos <span class="mod__count">5 aulas</span></div>
+            <ul class="mod__aulas">
+              <li>Comece por aqui – Introdução</li>
+              <li>O que é a Assistência Virtual?</li>
+              <li>Pré-requisitos</li>
+              <li>Como se organizar para trabalhar de casa?</li>
+              <li>Mudança de Mentalidade</li>
+            </ul>
+          </div>
+          <div class="mod">
+            <div class="mod__header"><span class="mod__num">02</span> Ferramentas Essenciais <span class="mod__count">8 aulas</span></div>
+            <ul class="mod__aulas">
+              <li>Nuvem e Google Drive</li>
+              <li>Zoom e Hangouts</li>
+              <li>Assinatura de documentos digitais</li>
+              <li>Trello</li>
+              <li>Controle de Horas</li>
+              <li>LastPass</li>
+              <li>Email</li>
+              <li>WhatsApp Business</li>
+            </ul>
+          </div>
+          <div class="mod">
+            <div class="mod__header"><span class="mod__num">03</span> Serviços na Prática <span class="mod__count">10 aulas</span></div>
+            <ul class="mod__aulas">
+              <li>Introdução a Serviços</li>
+              <li>Cotação e Compras Online</li>
+              <li>Organização de Documentos no Drive</li>
+              <li>Pesquisa e Coleta de Informações</li>
+              <li>Atendimento ao Cliente e Suporte Remoto</li>
+              <li>Gerenciamento de Agendas</li>
+              <li>Agendamento de Compromissos</li>
+              <li>Conversão e Edição de Arquivos</li>
+              <li>Contas a Pagar e Receber</li>
+              <li>Áreas e Especializações</li>
+            </ul>
+          </div>
+          <div class="mod">
+            <div class="mod__header"><span class="mod__num">04</span> Aquisição de Clientes <span class="mod__count">6 aulas</span></div>
+            <ul class="mod__aulas">
+              <li>Introdução à Prospecção</li>
+              <li>Quem São Meus Clientes?</li>
+              <li>Marketplace da Virtap</li>
+              <li>Clientes Através das Redes Sociais</li>
+              <li>Como Conquistar Clientes Perto de Você</li>
+              <li>Clientes por Indicação</li>
+            </ul>
+          </div>
+          <div class="mod">
+            <div class="mod__header"><span class="mod__num">05</span> Precificação Estratégica <span class="mod__count">3 aulas</span></div>
+            <ul class="mod__aulas">
+              <li>Precificação na Prática</li>
+              <li>Como Estruturar Pacotes de Serviço</li>
+              <li>Descontos</li>
+            </ul>
+          </div>
+          <div class="mod">
+            <div class="mod__header"><span class="mod__num">06</span> Estrutura Profissional <span class="mod__count">6 aulas</span></div>
+            <ul class="mod__aulas">
+              <li>Formalização MEI</li>
+              <li>Modelo de Apresentação dos Serviços</li>
+              <li>Contratos</li>
+              <li>Organização e Regras de Negócio</li>
+              <li>Home Office Produtivo</li>
+              <li>Próximos Passos</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="bloco">
+      <div class="bloco__tag">Acompanhamento</div>
+      <h3>Você não fica sozinha</h3>
+      <ul class="bloco-list">
+        <li>Mentorias ao vivo mensais por 12 meses</li>
+        <li>Suporte direto pra tirar dúvidas</li>
+        <li>Comunidade de alunas no mesmo caminho</li>
+      </ul>
+    </div>
+
+    <div class="bloco">
+      <div class="bloco__tag">Clientes</div>
+      <h3>Acesso a oportunidades reais</h3>
+      <ul class="bloco-list">
+        <li>Plataforma com vagas prontas pra contratação</li>
+        <li>Clientes que já estão procurando AVs</li>
+        <li>Você se candidata e negocia direto</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════
+       4. PROVA
+  ═══════════════════════════════ -->
+  <div class="s s--full">
+    <div class="s__inner">
+      <h2 class="prova__title">Quem já começou — e o resultado</h2>
+
+      <div class="prova-grid">
+        <div class="prova-card">
+          <p class="prova-card__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Em 3 semanas já tinha minha primeira cliente.</p>
+          <div class="prova-card__author">Maria S.</div>
+          <div class="prova-card__detail">Começou do zero</div>
+        </div>
+
+        <div class="prova-card">
+          <p class="prova-card__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. O acompanhamento fez toda diferença.</p>
+          <div class="prova-card__author">Carla R.</div>
+          <div class="prova-card__detail">Ex-CLT · Transição em 2 meses</div>
+        </div>
+
+        <div class="prova-card">
+          <p class="prova-card__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Primeira vaga pela plataforma na segunda semana.</p>
+          <div class="prova-card__author">Juliana M.</div>
+          <div class="prova-card__detail">Encontrou cliente pela Virtap</div>
+        </div>
+
+        <!-- PRINTS DE RESULTADO: adicione aqui -->
+        <!--
+        <div class="prova-print">
+          <img src="/prints/resultado1.png" alt="Resultado real">
+        </div>
+        <div class="prova-print">
+          <img src="/prints/resultado2.png" alt="Resultado real">
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════
+       5. QUEBRA DE OBJEÇÕES
+  ═══════════════════════════════ -->
+  <div class="s">
+    <h2 class="objecoes__title">Talvez você esteja pensando...</h2>
+
+    <div class="objecao">
+      <div class="objecao__pergunta">"Mas eu não tenho experiência"</div>
+      <div class="objecao__resposta">A formação foi feita pra quem tá começando do zero. Você aprende tudo que precisa — do básico ao profissional.</div>
+    </div>
+
+    <div class="objecao">
+      <div class="objecao__pergunta">"E se eu não conseguir cliente?"</div>
+      <div class="objecao__resposta">Você tem acesso à plataforma de clientes da Virtap, onde existem oportunidades reais todos os dias.</div>
+    </div>
+
+    <div class="objecao">
+      <div class="objecao__pergunta">"Não tenho tempo agora"</div>
+      <div class="objecao__resposta">As aulas são gravadas e você faz no seu ritmo. Pode começar aos poucos, conciliando com o que já faz hoje.</div>
+    </div>
+
+    <div class="objecao">
+      <div class="objecao__pergunta">"E se não for pra mim?"</div>
+      <div class="objecao__resposta">Você tem 7 dias pra testar. Se não fizer sentido, pede o reembolso e a gente devolve 100%.</div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════
+       MICRO QUOTE (ponte VSL → oferta)
+  ═══════════════════════════════ -->
+  <div class="s">
+    <div class="micro-quote">
+      <p>O cliente não escolhe quem está começando.<br>Ele escolhe quem sabe o que fazer.</p>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════
+       6. OFERTA
+  ═══════════════════════════════ -->
+  <section class="oferta" id="oferta">
+    <div class="oferta-box">
+      <div class="oferta-timer" id="offerTimerBlock">
+        Sua condição expira em <span class="timer" id="offerTimer">--:--:--</span>
+      </div>
+
+      <h2>Tudo que você precisa<br>pra começar de verdade</h2>
+
+      <div class="oferta-items">
+        <div class="oferta-item"><span class="ck">✓</span> Formação completa (38 aulas práticas)</div>
+        <div class="oferta-item"><span class="ck">✓</span> Materiais complementares (planilhas, contratos, guias)</div>
+        <div class="oferta-item"><span class="ck">✓</span> 12 meses de acompanhamento + mentorias ao vivo</div>
+        <div class="oferta-item"><span class="ck">✓</span> Acesso à plataforma de clientes da Virtap</div>
+      </div>
+
+      <p class="oferta-anchor">Se você fosse acessar tudo isso separadamente, passaria de R$ 2.000.</p>
+
+      <div class="oferta-price">
+        <div class="oferta-price__from">De R$ 2.000+</div>
+        <div class="oferta-price__value">R$ 797</div>
+      </div>
+      <div class="oferta-price__installment">ou 12x de R$ 79,90</div>
+
+      <a href="#" class="cta cta--full" id="checkoutBtn">Começar agora</a>
+      <span class="cta-hint">Últimas horas com essa condição</span>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════
+       7. GARANTIA
+  ═══════════════════════════════ -->
+  <div class="s">
+    <div class="garantia">
+      <div class="garantia-box">
+        <h3>Garantia de 7 dias</h3>
+        <p>Você pode entrar, acessar tudo, e se perceber que não é pra você, é só pedir o reembolso em até 7 dias. A gente devolve 100% do valor, sem perguntas.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════
+       8. URGÊNCIA + CTA FINAL
+  ═══════════════════════════════ -->
+  <div class="s">
+    <div class="urgencia">
+      <p>Essa condição é exclusiva pra quem chegou até aqui e fica disponível por tempo limitado.</p>
+      <p>Depois disso, volta ao normal.</p>
+      <div class="timer-big" id="bottomTimer">--:--:--</div>
+      <a href="#oferta" class="cta">Começar agora</a>
+    </div>
+  </div>
+
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="footer">
+    <p>Virtap © 2026 — Todos os direitos reservados.</p>
+  </footer>
+
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var expiresParam = params.get('expires');
+      var expiresAt = expiresParam ? parseInt(expiresParam, 10) : null;
+
+      var topTimer = document.getElementById('topTimer');
+      var offerTimer = document.getElementById('offerTimer');
+      var bottomTimer = document.getElementById('bottomTimer');
+      var urgencyBar = document.getElementById('urgencyBar');
+      var expiredOverlay = document.getElementById('expiredOverlay');
+      var offerTimerBlock = document.getElementById('offerTimerBlock');
+
+      if (!expiresAt || isNaN(expiresAt)) {
+        showExpired();
+        return;
+      }
+
+      function pad(n) { return n < 10 ? '0' + n : n; }
+
+      function updateTimers() {
+        var now = Date.now();
+        var diff = expiresAt - now;
+
+        if (diff <= 0) {
+          showExpired();
+          return;
+        }
+
+        var totalSec = Math.floor(diff / 1000);
+        var days = Math.floor(totalSec / 86400);
+        var hours = Math.floor((totalSec % 86400) / 3600);
+        var mins = Math.floor((totalSec % 3600) / 60);
+        var secs = totalSec % 60;
+
+        var display = '';
+        if (days > 0) {
+          display = days + 'd ' + pad(hours) + ':' + pad(mins) + ':' + pad(secs);
+        } else {
+          display = pad(hours) + ':' + pad(mins) + ':' + pad(secs);
+        }
+
+        topTimer.textContent = display;
+        offerTimer.textContent = display;
+        bottomTimer.textContent = display;
+      }
+
+      function showExpired() {
+        expiredOverlay.classList.add('visible');
+        urgencyBar.classList.add('expired');
+        topTimer.textContent = 'Expirada';
+        if (offerTimerBlock) offerTimerBlock.style.display = 'none';
+        bottomTimer.textContent = 'Expirada';
+      }
+
+      updateTimers();
+      setInterval(updateTimers, 1000);
+    })();
+  </script>
+
+  <!-- ══ WPP FAB ══ -->
+  <div class="wpp-fab" id="wppWidget">
+    <div class="wpp-card" id="wppCard">
+      <button class="wpp-card-fechar" onclick="toggleWpp()">✕</button>
+      <div class="wpp-card-header">
+        <div class="wpp-card-avatar">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+        </div>
+        <div>
+          <div class="wpp-card-nome">Equipe Virtap</div>
+          <div class="wpp-card-status">Responde em minutos</div>
+        </div>
+      </div>
+      <div class="wpp-card-msg">Oi! 👋 Quer tirar alguma dúvida antes de começar?</div>
+      <a href="https://wa.me/5548988089062?text=Quero%20saber%20mais%20sobre%20a%20Formação" class="wpp-card-cta" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Tirar uma dúvida
+      </a>
+    </div>
+    <button class="wpp-btn" onclick="toggleWpp()" aria-label="Abrir WhatsApp">
+      <span class="wpp-pulse" id="wppPulse"></span>
+      <span class="wpp-badge" id="wppBadge">1</span>
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </button>
+  </div>
+
+  <script>
+    function toggleWpp() {
+      var card = document.getElementById('wppCard');
+      var pulse = document.getElementById('wppPulse');
+      var badge = document.getElementById('wppBadge');
+      var aberto = card.classList.toggle('aberto');
+      if (aberto) {
+        if (pulse) pulse.remove();
+        if (badge) badge.remove();
+      }
+    }
+    setTimeout(function () {
+      var p = document.getElementById('wppPulse');
+      if (p) p.remove();
+    }, 8000);
+  </script>
+
+</body>
+
+</html>
