@@ -1307,54 +1307,65 @@
 
 
   <script>
+    window.apiURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://api.virtap.com.br';
+
     (function () {
       var params = new URLSearchParams(window.location.search);
-      var expiresParam = params.get('expires');
-      var countdown = expiresParam ? parseInt(expiresParam, 10) : null;
-      var expiresAt = countdown ? Date.now() + countdown : null;
+      var rsrc = params.get('rsrc');
 
       var topTimer = document.getElementById('topTimer');
       var offerTimer = document.getElementById('offerTimer');
-      var bottomTimer = document.getElementById('bottomTimer');
       var urgencyBar = document.getElementById('urgencyBar');
       var expiredOverlay = document.getElementById('expiredOverlay');
       var offerTimerBlock = document.getElementById('offerTimerBlock');
+      var checkoutBtn = document.getElementById('checkoutBtn');
 
-      if (!expiresAt || isNaN(expiresAt)) {
+      if (!rsrc) {
         showExpired();
         return;
       }
 
+      // Checkout = /comprar + todos os params da URL atual
+      checkoutBtn.href = '/comprar' + window.location.search;
+
+      // Busca countdown do servidor
+      fetch(`${window.apiURL}/check-rsrc/` + rsrc)
+        .then(function (r) {
+          if (!r.ok) throw new Error(r.status);
+          return r.json();
+        })
+        .then(function (data) {
+          if (!data.countdown_ms || data.countdown_ms <= 0) {
+            showExpired();
+            return;
+          }
+          startTimer(data.countdown_ms);
+        })
+        .catch(function () {
+          showError();
+        });
+
       function pad(n) { return n < 10 ? '0' + n : n; }
 
-      function updateTimers() {
-        var now = Date.now();
-        var diff = expiresAt - now;
+      function startTimer(ms) {
+        var expiresAt = Date.now() + ms;
+        update();
+        setInterval(update, 1000);
 
-        if (diff <= 0) {
-          showExpired();
-          return;
+        function update() {
+          var diff = expiresAt - Date.now();
+          if (diff <= 0) { showExpired(); return; }
+          var totalSec = Math.floor(diff / 1000);
+          var days = Math.floor(totalSec / 86400);
+          var hours = Math.floor((totalSec % 86400) / 3600);
+          var mins = Math.floor((totalSec % 3600) / 60);
+          var secs = totalSec % 60;
+          var display = days > 0
+            ? days + 'd ' + pad(hours) + ':' + pad(mins) + ':' + pad(secs)
+            : pad(hours) + ':' + pad(mins) + ':' + pad(secs);
+          topTimer.textContent = display;
+          offerTimer.textContent = display;
         }
-
-        var totalSec = Math.floor(diff / 1000);
-        var days = Math.floor(totalSec / 86400);
-        var hours = Math.floor((totalSec % 86400) / 3600);
-        var mins = Math.floor((totalSec % 3600) / 60);
-        var secs = totalSec % 60;
-
-        var display = '';
-        if (days > 0) {
-          display = days + 'd ' + pad(hours) + ':' + pad(mins) + ':' + pad(secs);
-        } else {
-          display = pad(hours) + ':' + pad(mins) + ':' + pad(secs);
-        }
-
-        topTimer.textContent = display;
-        offerTimer.textContent = display;
-        // bottomTimer.textContent = display;
-
-        params.set('expires', Math.floor(diff));
-        history.replaceState(null, '', window.location.pathname + '?' + params.toString());
       }
 
       function showExpired() {
@@ -1362,13 +1373,16 @@
         urgencyBar.classList.add('expired');
         topTimer.textContent = 'Expirada';
         if (offerTimerBlock) offerTimerBlock.style.display = 'none';
-        // bottomTimer.textContent = 'Expirada';
       }
 
-      updateTimers();
-      setInterval(updateTimers, 1000);
-    })();
-  </script>
+      function showError() {
+        expiredOverlay.querySelector('.expired-box').innerHTML =
+          '<h2>⚠️ Erro ao carregar</h2>' +
+          '<p>Não foi possível carregar sua oferta. Verifique sua conexão e tente novamente.</p>' +
+          '<a href="javascript:location.reload()" style="color:var(--color-primary);font-weight:600;text-decoration:none;">Atualizar página →</a>';
+        expiredOverlay.classList.add('visible');
+      }
+    })();</script>
 
   <!-- ══ WPP FAB ══ -->
   <div class="wpp-fab" id="wppWidget">
