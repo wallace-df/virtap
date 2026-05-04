@@ -155,6 +155,7 @@
       display: block;
       margin-top: 0.55rem;
       font-size: 0.78rem;
+      font-weight: bold;
       color: var(--color-text-muted);
     }
 
@@ -271,8 +272,8 @@
        3. O QUE VOCÊ RECEBE
     ══════════════════════════════ */
     .recebe__label {
-      font-size: 0.75rem;
-      font-weight: 700;
+      font-size: 0.95rem;
+      font-weight: bold;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--color-primary);
@@ -290,10 +291,10 @@
 
     .bloco__tag {
       display: inline-block;
-      background: var(--color-green-bg);
-      color: var(--color-green);
+      background: var(--color-primary);
+      color: #fff;
       font-weight: 700;
-      font-size: 0.8rem;
+      font-size: 1rem;
       padding: 0.2rem 0.6rem;
       border-radius: 0.3rem;
       margin-bottom: 0.7rem;
@@ -493,7 +494,6 @@
     }
 
     .micro-quote p {
-      font-family: var(--font-display);
       font-size: clamp(1.2rem, 3.5vw, 1.5rem);
       line-height: 1.4;
       color: var(--color-primary);
@@ -551,6 +551,7 @@
       gap: 0.5rem;
       padding: 0.45rem 0;
       font-size: 0.95rem;
+      font-weight: bold;
       color: var(--color-text-soft);
       border-bottom: 1px solid #f0eef3;
     }
@@ -856,7 +857,7 @@
 
   <!-- ══ URGENCY BAR ══ -->
   <div class="urgency-bar" id="urgencyBar">
-    Essa condição expira em <span class="timer" id="topTimer">--:--:--</span>
+    Essa condição especial termina em <span class="timer" id="topTimer">--:--:--</span>
   </div>
 
   <!-- ══ EXPIRED OVERLAY ══ -->
@@ -874,21 +875,17 @@
   ═══════════════════════════════ -->
   <section class="hero">
     <h1>Comece como Assistente Virtual<br>e <em>conquiste seus primeiros clientes</em></h1>
-    <p class="hero__sub">Mesmo começando do zero, com o passo a passo certo, suporte e acesso a oportunidades reais.</p>
+    <p class="hero__sub">Mesmo começando do zero, com suporte e acesso a vagas reais.</p>
 
     <ul class="hero-bullets">
-      <li>Saiba exatamente o que oferecer e quanto cobrar</li>
-      <li>Aprenda a se posicionar e fechar clientes</li>
-      <li>Tenha acesso a oportunidades reais todos os dias</li>
+      <li>Aprenda na prática o que oferecer e quanto cobrar</li>
+      <li>Saiba se posicionar para conseguir clientes</li>
+      <li>Tenha acesso a oportunidades reais</li>
     </ul>
 
     <a href="#oferta" class="cta">Começar agora</a>
     <span class="cta-hint">Últimas horas com essa condição</span>
 
-    <!-- PROOF VISUAL: troque pelo print de vagas ou resultado real -->
-    <div class="hero__proof">
-      <img src="/prints/prova3.png" alt="Oportunidades reais na Virtap">
-    </div>
   </section>
 
 
@@ -897,15 +894,9 @@
   ═══════════════════════════════ -->
   <div class="s s--full">
     <div class="s__inner continuidade">
-      <h2>Se você chegou até aqui, você já viu que:</h2>
-
-      <div class="cont-items">
-        <div class="cont-item">Cliente existe — e está procurando agora</div>
-        <div class="cont-item">O problema não é falta de oportunidade</div>
-        <div class="cont-item">É saber como entrar do jeito certo</div>
-      </div>
-
-      <p class="cont-conclusion">Agora você só precisa de um caminho claro pra começar.</p>
+      <h2>Se você chegou até aqui…</h2>
+      <p class="cont-conclusion">Já viu que <strong style="color:var(--color-primary)">demanda existe.</strong></p>
+      <p class="cont-conclusion" style="margin-top:0.8rem;">Você só precisa se <strong style="color:var(--color-primary)">preparar</strong> do jeito certo.</p>
     </div>
   </div>
 
@@ -917,13 +908,13 @@
     <p class="recebe__label">O que você recebe</p>
 
     <div class="bloco">
-      <div class="bloco__tag">Formação</div>
-      <h3>Passo a passo do zero ao primeiro cliente</h3>
+      <div class="bloco__tag">Formação completa em Assistência Virtual</div>
       <ul class="bloco-list">
         <li>O que oferecer como assistente virtual</li>
+        <li>Como executar os serviços na prática</li>
         <li>Como cobrar de forma estratégica</li>
         <li>Como atender com qualidade profissional</li>
-        <li>Como se posicionar pra atrair clientes</li>
+        <li>Como se posicionar pra conseguir clientes</li>
       </ul>
       <details class="modulos-toggle">
         <summary>Ver conteúdo completo (38 aulas em 6 módulos)</summary>
@@ -1001,22 +992,20 @@
     </div>
 
     <div class="bloco">
-      <div class="bloco__tag">Acompanhamento</div>
-      <h3>Você não fica sozinha</h3>
+      <div class="bloco__tag">Mentorias mensais ao vivo</div>
       <ul class="bloco-list">
         <li>Mentorias ao vivo mensais por 12 meses</li>
         <li>Suporte direto pra tirar dúvidas</li>
-        <li>Comunidade de alunas no mesmo caminho</li>
       </ul>
     </div>
 
     <div class="bloco">
-      <div class="bloco__tag">Clientes</div>
-      <h3>Acesso a oportunidades reais</h3>
+      <div class="bloco__tag">Plataforma de Vagas</div>
       <ul class="bloco-list">
         <li>Plataforma com vagas prontas pra contratação</li>
-        <li>Clientes que já estão procurando AVs</li>
-        <li>Você se candidata e negocia direto</li>
+        <li>Mais de 20 vagas por mês</li>
+        <li>3 meses de acesso</li>
+        <li>Acompanhamento da Virtap para ajudar fechar contratos</li>
       </ul>
     </div>
   </div>
@@ -1070,12 +1059,17 @@
 
     <div class="objecao">
       <div class="objecao__pergunta">"Mas eu não tenho experiência"</div>
-      <div class="objecao__resposta">A formação foi feita pra quem tá começando do zero. Você aprende tudo que precisa — do básico ao profissional.</div>
+      <div class="objecao__resposta">A formação foi feita pra quem tá começando do zero. Você aprende tudo que precisa: do básico ao profissional.</div>
     </div>
 
     <div class="objecao">
-      <div class="objecao__pergunta">"E se eu não conseguir cliente?"</div>
-      <div class="objecao__resposta">Você tem acesso à plataforma de clientes da Virtap, onde existem oportunidades reais todos os dias.</div>
+      <div class="objecao__pergunta">"Como faço pra conseguir cliente?"</div>
+      <div class="objecao__resposta">Você tem acesso à plataforma de clientes da Virtap, onde existem oportunidades reais.</div>
+    </div>
+
+    <div class="objecao">
+      <div class="objecao__pergunta">"Dá retorno mesmo?"</div>
+      <div class="objecao__resposta">Em média, 7 em cada 10 assistentes conseguem um trabalho nos 3 primeiros meses. E, geralmente, um único cliente já paga o investimento!</div>
     </div>
 
     <div class="objecao">
@@ -1084,7 +1078,7 @@
     </div>
 
     <div class="objecao">
-      <div class="objecao__pergunta">"E se não for pra mim?"</div>
+      <div class="objecao__pergunta">"E se não não gostar?"</div>
       <div class="objecao__resposta">Você tem 7 dias pra testar. Se não fizer sentido, pede o reembolso e a gente devolve 100%.</div>
     </div>
   </div>
@@ -1093,9 +1087,9 @@
   <!-- ═══════════════════════════════
        MICRO QUOTE (ponte VSL → oferta)
   ═══════════════════════════════ -->
-  <div class="s">
+  <div class="s" style="padding-top:1rem;padding-bottom: 1rem;">
     <div class="micro-quote">
-      <p>O cliente não escolhe quem está começando.<br>Ele escolhe quem sabe o que fazer.</p>
+      <p>O cliente não escolhe quem tem mais anos de experiência.<br>Ele escolhe quem sabe o que fazer.</p>
     </div>
   </div>
 
@@ -1106,22 +1100,20 @@
   <section class="oferta" id="oferta">
     <div class="oferta-box">
       <div class="oferta-timer" id="offerTimerBlock">
-        Sua condição expira em <span class="timer" id="offerTimer">--:--:--</span>
+        Sua oferta termina em <span class="timer" id="offerTimer">--:--:--</span>
       </div>
 
-      <h2>Tudo que você precisa<br>pra começar de verdade</h2>
+      <h2>Tudo que você precisa pra<br> começar de verdade</h2>
 
       <div class="oferta-items">
-        <div class="oferta-item"><span class="ck">✓</span> Formação completa (38 aulas práticas)</div>
+        <div class="oferta-item"><span class="ck">✓</span> Formação Completa em Assistência Virtual + Certificado</div>
         <div class="oferta-item"><span class="ck">✓</span> Materiais complementares (planilhas, contratos, guias)</div>
         <div class="oferta-item"><span class="ck">✓</span> 12 meses de acompanhamento + mentorias ao vivo</div>
-        <div class="oferta-item"><span class="ck">✓</span> Acesso à plataforma de clientes da Virtap</div>
+        <div class="oferta-item"><span class="ck">✓</span> 3 meses de acesso à plataforma de vagas</div>
       </div>
 
-      <p class="oferta-anchor">Se você fosse acessar tudo isso separadamente, passaria de R$ 2.000.</p>
-
       <div class="oferta-price">
-        <div class="oferta-price__from">De R$ 2.000+</div>
+        <div class="oferta-price__from">De R$ 2.194</div>
         <div class="oferta-price__value">R$ 797</div>
       </div>
       <div class="oferta-price__installment">ou 12x de R$ 79,90</div>
@@ -1145,19 +1137,6 @@
   </div>
 
 
-  <!-- ═══════════════════════════════
-       8. URGÊNCIA + CTA FINAL
-  ═══════════════════════════════ -->
-  <div class="s">
-    <div class="urgencia">
-      <p>Essa condição é exclusiva pra quem chegou até aqui e fica disponível por tempo limitado.</p>
-      <p>Depois disso, volta ao normal.</p>
-      <div class="timer-big" id="bottomTimer">--:--:--</div>
-      <a href="#oferta" class="cta">Começar agora</a>
-    </div>
-  </div>
-
-
   <!-- ══ FOOTER ══ -->
   <footer class="footer">
     <p>Virtap © 2026 — Todos os direitos reservados.</p>
@@ -1168,7 +1147,8 @@
     (function () {
       var params = new URLSearchParams(window.location.search);
       var expiresParam = params.get('expires');
-      var expiresAt = expiresParam ? parseInt(expiresParam, 10) : null;
+      var countdown = expiresParam ? parseInt(expiresParam, 10) : null;
+      var expiresAt = countdown ? Date.now() + countdown : null;
 
       var topTimer = document.getElementById('topTimer');
       var offerTimer = document.getElementById('offerTimer');
@@ -1208,7 +1188,7 @@
 
         topTimer.textContent = display;
         offerTimer.textContent = display;
-        bottomTimer.textContent = display;
+       // bottomTimer.textContent = display;
       }
 
       function showExpired() {
@@ -1216,7 +1196,7 @@
         urgencyBar.classList.add('expired');
         topTimer.textContent = 'Expirada';
         if (offerTimerBlock) offerTimerBlock.style.display = 'none';
-        bottomTimer.textContent = 'Expirada';
+       // bottomTimer.textContent = 'Expirada';
       }
 
       updateTimers();
