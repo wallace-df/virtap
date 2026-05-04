@@ -1352,6 +1352,9 @@
         topTimer.textContent = display;
         offerTimer.textContent = display;
         // bottomTimer.textContent = display;
+
+        params.set('expires', Math.floor(diff));
+        history.replaceState(null, '', window.location.pathname + '?' + params.toString());
       }
 
       function showExpired() {
