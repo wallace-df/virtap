@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtap — Qual seu momento?</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #5B2D8E;
+    font-family: 'DM Sans', sans-serif;
+    padding: 24px;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 56px 48px;
+    max-width: 620px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  }
+
+  .logo {
+    margin-bottom: 40px;
+  }
+
+  .logo img {
+    height: 36px;
+    object-fit: contain;
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a1a2e;
+    line-height: 1.3;
+    margin-bottom: 14px;
+  }
+
+  .sub {
+    font-size: 17px;
+    color: #888;
+    margin-bottom: 44px;
+    line-height: 1.5;
+  }
+
+  .option {
+    display: block;
+    width: 100%;
+    padding: 22px 28px;
+    margin-bottom: 16px;
+    border: 2px solid #e8e8f0;
+    border-radius: 16px;
+    background: #fafafe;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: #1a1a2e;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+  }
+
+  .option:last-child {
+    margin-bottom: 0;
+  }
+
+  .option:hover {
+    border-color: #5B2D8E;
+    background: #f3edf9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(91,45,142,0.12);
+  }
+
+  .option:active {
+    transform: translateY(0);
+    background: #ebe0f5;
+  }
+
+  @media (max-width: 480px) {
+    .card { padding: 40px 28px; }
+    h1 { font-size: 26px; }
+    .sub { font-size: 15px; margin-bottom: 36px; }
+    .option { font-size: 17px; padding: 20px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="logo">
+    <img src="https://www.virtap.com.br/img/logo.png" alt="Virtap">
+  </div>
+
+  <h1>Qual o seu momento<br>profissional hoje?</h1>
+
+  <button class="option" onclick="redirect('dspg')">
+    Tô sem trabalho / Buscando renda
+  </button>
+
+  <button class="option" onclick="redirect('clt')">
+    Sou CLT e busco mais flexibilidade
+  </button>
+</div>
+
+<script>
+// ── CONFIG ──────────────────────────────────
+const DESTINATIONS = {
+  dspg: '/formacao-av-dspg',   // ← ajusta pro path real
+  clt:  '/formacao-av-clt'     // ← ajusta pro path real
+};
+
+// ── UTM PASSTHROUGH ─────────────────────────
+function getUTMs() {
+  const params = new URLSearchParams(window.location.search);
+  const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  const utms = {};
+  utmKeys.forEach(key => {
+    const val = params.get(key);
+    if (val && val.trim()) utms[key] = val.trim();
+  });
+  return utms;
+}
+
+function buildURL(path, perfil) {
+  const utms = getUTMs();
+  const params = new URLSearchParams();
+
+  Object.entries(utms).forEach(([k, v]) => params.set(k, v));
+
+  const existingTerm = utms.utm_term || '';
+  const newTerm = existingTerm ? existingTerm + '-quiz-' + perfil : 'quiz-' + perfil;
+  params.set('utm_term', newTerm);
+
+  if (!utms.utm_source) {
+    params.set('utm_source', 'virtap');
+    params.set('utm_medium', 'quiz');
+    params.set('utm_campaign', 'formacao-av');
+    params.set('utm_content', 'quiz-perfil');
+    params.set('utm_term', 'quiz-' + perfil);
+  }
+
+  return path + '?' + params.toString();
+}
+
+function redirect(perfil) {
+  const dest = DESTINATIONS[perfil];
+  const url = buildURL(dest, perfil);
+  window.location.href = url;
+}
+</script>
+
+</body>
+</html>
