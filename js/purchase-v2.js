@@ -118,7 +118,7 @@ function handleError(response, loading) {
         }
       } else {
         if (loading) {
-           showGenericError = false;
+          showGenericError = false;
           $("#access-conflict").show().find('strong').text('Compra não disponível');
         } else {
           showGenericError = false;
@@ -157,13 +157,13 @@ function handleError(response, loading) {
       $("#higher-plan").show();
 
       showGenericError = false;
-    } else if(response.errorCode === 'METODO_VIRTAP_CLIENTES_NOT_ALLOWED') {
-      if(loading) {
+    } else if (response.errorCode === 'METODO_VIRTAP_CLIENTES_NOT_ALLOWED') {
+      if (loading) {
         showGenericError = false;
         $("#clientes-not-allowed").show().find('strong:first').text('Compra não disponível');
       } else {
         $("#clientes-not-allowed").show();
-        showGenericError = false;  
+        showGenericError = false;
       }
     }
   }
@@ -195,11 +195,13 @@ function productName(orderRef) {
       return "<ul><li>Assinatura Profissional Trimestral</li></ul>";
     case 'ASSINATURA_ELITE_TRI':
       return "<ul><li>Assinatura Elite Trimestral</li></ul>";
-      case 'VIRTAP_STARTER_KIT':
-        return "<ul><li>30 dias de acesso à plataforma de vagas (até 15 propostas)</li><li>Método Virtap de Conquistar Clientes</li></ul>";
-        case 'VIRTAP_ALL_IN_ONE':
-          return "<ul><li>Formação AExpert - Assessoria Pessoal</li><li>Formação em Assistência Virtual</li><li>12 meses de mentorias ao vivo</li><li>Curso Método Virtap de Conquistar Clientes</li><li>3 Meses de Acesso a Vagas de Trabalho - Plano Elite da Virtap</li></ul>";
-          case 'VIRTAP_CLUB':
+    case 'VIRTAP_STARTER_KIT':
+      return "<ul><li>30 dias de acesso à plataforma de vagas (até 15 propostas)</li><li>Método Virtap de Conquistar Clientes</li></ul>";
+    case 'FORMACAO_AV_FULL':
+      return "<ul><li>Formação em Assistência Virtual</li><li>12 meses de mentorias ao vivo</li><li>Curso Método Virtap de Conquistar Clientes</li><li>3 Meses de Acesso a Vagas de Trabalho - Plano Elite da Virtap</li></ul>";
+    case 'VIRTAP_ALL_IN_ONE':
+      return "<ul><li>Formação AExpert - Assessoria Pessoal</li><li>Formação em Assistência Virtual</li><li>12 meses de mentorias ao vivo</li><li>Curso Método Virtap de Conquistar Clientes</li><li>3 Meses de Acesso a Vagas de Trabalho - Plano Elite da Virtap</li></ul>";
+    case 'VIRTAP_CLUB':
       return "<ul><li>Formação em Assistência Virtual</li><li>12 meses de acesso premium à plataforma de vagas</li><li>Aulas extras e sessões com especialistas</li></ul>";
     default:
       throw new Error("Invalid order ref:" + orderRef)

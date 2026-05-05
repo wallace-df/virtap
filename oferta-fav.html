@@ -1335,11 +1335,12 @@
           return r.json();
         })
         .then(function (data) {
-          if (!data.countdown_ms || data.countdown_ms <= 0) {
+          data = data.responseData;
+          if (!data.rsrc || data.rsrc.countdown_ms <= 0) {
             showExpired();
             return;
           }
-          startTimer(data.countdown_ms);
+          startTimer(data.rsrc.countdown_ms);
         })
         .catch(function () {
           showError();
