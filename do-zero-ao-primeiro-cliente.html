@@ -228,21 +228,11 @@
       border-radius: 0.875rem;
     }
 
-    .pain-item:nth-child(1) {
-      background: #F5F0FF;
-    }
-
-    .pain-item:nth-child(2) {
+    .pain-item {
       background: #EDF6F9;
     }
 
-    .pain-item:nth-child(3) {
-      background: #EDFAF2;
-    }
-
-    .pain-item:nth-child(4) {
-      background: var(--light-gray);
-    }
+    
 
     /* CONCEITO */
     .conceito-section {
@@ -818,10 +808,11 @@
     <div class="container">
       <div class="section-title">Isso é pra <span>você</span> que...</div>
       <div class="pain-list">
-        <div class="pain-item">Precisa de uma renda estável e recorrente, mas não sabe por onde começar</div>
-        <div class="pain-item">Quer trabalhar de casa, mas não sabe o que oferecer</div>
-        <div class="pain-item">Precisa de resultados em semanas, não em meses</div>
+        <div class="pain-item">Precisa de uma renda estável e recorrente</div>
+        <div class="pain-item">Quer trabalhar de casa, com flexibilidade</div>
+        <div class="pain-item">Quer começar sem precisar largar o emprego</div>
         <div class="pain-item">Já tentou de tudo e precisa de um caminho mais concreto</div>
+        <div class="pain-item">Precisa de resultados em semanas, não em meses</div>
       </div>
     </div>
   </section>
@@ -1049,6 +1040,16 @@
         </div>
 
         <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">Preciso saber usar tecnologia para começar?<div class="faq-toggle">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Não. Se você consegue usar o WhatsApp e navegar na internet, já tem o suficiente
+              para começar. As ferramentas que você vai usar são simples, gratuitas e ensinadas do zero na semana 2 —
+              com exercícios práticos antes de atender qualquer cliente.</div>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
           <div class="faq-q">Funciona pra quem ainda tem emprego?<div class="faq-toggle">+</div>
           </div>
           <div class="faq-a">
@@ -1056,6 +1057,8 @@
               crescendo no seu ritmo. Muitas pessoas começam como renda extra e depois migram completamente.</div>
           </div>
         </div>
+
+
 
         <div class="faq-item" onclick="toggleFaq(this)">
           <div class="faq-q">E se eu não gostar?<div class="faq-toggle">+</div>
