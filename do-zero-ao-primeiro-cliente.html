@@ -143,10 +143,10 @@
 
     .hero-proof {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.25rem;
       flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem 1.25rem;
+      /* row-gap / column-gap */
       font-size: 0.8125rem;
       color: #666;
       margin-top: 0.85rem;
@@ -154,15 +154,41 @@
     }
 
     .hero-proof div {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 0.375rem;
+      white-space: nowrap;
+      /* impede quebra dentro do item */
+      flex: 0 0 auto;
+      /* mantém cada badge com sua largura natural */
     }
 
     .hero-proof svg {
       width: 1rem;
       height: 1rem;
       color: var(--purple-mid);
+      flex-shrink: 0;
+    }
+
+    /* Quando os itens quebrarem (mobile), empilha e alinha tudo pela mesma coluna */
+    @media (max-width: 640px) {
+      .hero-proof {
+        display: inline-grid;
+        grid-template-columns: 1rem auto;
+        column-gap: 0.5rem;
+        row-gap: 0.75rem;
+        justify-content: center;
+        text-align: left;
+      }
+
+      .hero-proof div {
+        display: contents;
+      }
+
+      .hero-proof svg {
+        justify-self: center;
+        align-self: center;
+      }
     }
 
     /* ── VSL ── */
@@ -291,7 +317,7 @@
     }
 
     .section-title {
-      font-family: 'Playfair Display', serif;
+      font-family:  sans-serif;
       font-size: clamp(1.375rem, 4vw, 2rem);
       font-weight: 800;
       line-height: 1.2;
@@ -301,6 +327,98 @@
 
     .section-title span {
       color: var(--purple-mid);
+    }
+
+
+    /* ── CONCEITO ── */
+    .conceito-section {
+      padding: 3.5rem 0;
+      background: var(--purple-light);
+    }
+
+    .conceito-intro {
+      font-size: 1.2rem;
+      color: var(--teal);
+      line-height: 1.6;
+      max-width: 36rem;
+      margin: 0 auto 2rem;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .conceito-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      max-width: 34rem;
+      margin: 0 auto 1.25rem;
+    }
+
+    .conceito-tags span {
+      background: rgba(107, 76, 154, 0.08);
+      color: var(--purple-mid);
+      border: 1px solid rgba(107, 76, 154, 0.12);
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .conceito-multiply {
+      text-align: center;
+      font-size: 1.05rem;
+      color: var(--dark);
+      max-width: 32rem;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+
+    .conceito-multiply strong {
+      color: var(--purple-mid);
+    }
+
+    .conceito-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 36rem;
+      margin: 0 auto 2rem;
+    }
+
+    .conceito-card {
+      background: var(--white);
+      border-radius: 0.875rem;
+      padding: 1.25rem 1.5rem;
+      border: 1.5px solid #eee;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .conceito-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--purple-mid);
+      opacity: 0.4;
+      min-width: 2rem;
+      line-height: 1;
+    }
+
+    .conceito-card p {
+      font-size: 1rem;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    .conceito-cta-text {
+      font-size: 1.0625rem;
+      color: var(--purple-mid);
+      font-weight: 600;
+      text-align: center;
+      max-width: 32rem;
+      margin: 0 auto;
     }
 
     /* ── TIMELINE ── */
@@ -844,7 +962,7 @@
         na sua região.
       </p>
 
-      <!-- <div class="vsl-box">
+      <div class="vsl-box">
         <script src="https://fast.wistia.com/embed/medias/w079f7qzm6x_ID.jsonp" async></script>
         <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
         <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
@@ -853,7 +971,7 @@
               style="height:100%;position:relative;width:100%;">&nbsp;</div>
           </div>
         </div>
-      </div> -->
+      </div>
 
       <!-- SOCIAL PROOF -->
       <!-- <section style="padding-top:1rem;text-align:center;">
@@ -880,7 +998,7 @@
               <circle cx="12" cy="12" r="10" />
               <polyline points="12 6 12 12 16 14" />
             </svg>
-            Você define seus horários &nbsp;&nbsp;
+            Horário flexível
           </div>
           <div>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -888,7 +1006,7 @@
               <!-- Estrela / destaque -->
               <path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9L12 3z"></path>
             </svg>
-            Sem experiência prévia&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Sem experiência prévia
           </div>
 
         </div>
@@ -907,6 +1025,72 @@
           <div class="pain-item">Ou até já tentou algo online… mas não deu certo</div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- CONCEITO -->
+  <section class="conceito-section">
+    <div class="container">
+      <div class="section-title">Você ainda não percebeu, mas seus potenciais clientes <span>estão perto de
+          você...</span></div>
+      <p class="conceito-intro">
+        Pense nos profissionais que estão no seu bairro:
+      </p>
+
+      <div class="conceito-tags">
+        <span>Clínicas</span>
+        <span>Médicos</span>
+        <span>Dentistas</span>
+        <span>Psicólogos</span>
+        <span>Advogados</span>
+        <span>Corretores</span>
+        <span>Nutricionistas</span>
+        <span>Contadores</span>
+        <span>Salões de beleza</span>
+      </div>
+
+      <p class="conceito-multiply">
+        Agora multiplique isso por <strong style="color:var(--teal)">todos os bairros ao seu redor.</strong>
+      </p>
+
+      <p class="conceito-intro">
+        <strong>Sabe o que todos eles têm em comum?</strong>
+      </p>
+
+      <div class="conceito-cards">
+        <div class="conceito-card">
+          <p>Todos os dias, precisam responder mensagens, organizar agendas e atender clientes.</p>
+        </div>
+
+        <div class="conceito-card">
+          <p>Estão sobrecarregados e precisam de ajuda, mas não conseguem contratar alguém fixo.</p>
+        </div>
+
+      </div>
+
+       <p class="conceito-multiply" style="font-weight: bold;font-size: 1.5rem">Mas... podem pagar <strong>R$500 ou mais por mês</strong> para alguém que ajude <strong>remotamente, em horários flexíveis</strong>.</p>
+
+      <p class="conceito-multiply" style="font-weight: bold; font-size: 2rem;">
+        E esse alguém... <strong>pode ser você!</strong>
+      </p>
+      <!-- <div class="conceito-cards">
+        <div class="conceito-card">
+          <div class="conceito-num">01</div>
+          <p>Todos eles precisam de alguém pra cuidar do atendimento e da agenda. Todo dia, sem parar.</p>
+        </div>
+        <div class="conceito-card">
+          <div class="conceito-num">02</div>
+          <p>A maioria não pode contratar alguém fixo — carteira assinada, encargos, escritório. Mas podem pagar R$500
+            por mês pra alguém remoto que resolva isso.</p>
+        </div>
+        <div class="conceito-card">
+          <div class="conceito-num">03</div>
+          <p>Essa pessoa pode ser você. Sem sair de casa. Sem experiência prévia. Com o preparo certo.</p>
+        </div>
+      </div> -->
+
+
+      <p class="conceito-intro">A única pergunta agora é: como aprender esse serviço e conseguir o seu primeiro cliente?</p>
     </div>
   </section>
 
@@ -1107,7 +1291,7 @@
   <section class="pricing-section" id="preco">
     <div class="container">
       <div style="text-align:center;margin-bottom:2rem;">
-        <div class="section-title">Tudo isso por <span>menos que um lanche</span></div>
+        <div class="section-title">Um único cliente pode pagar várias vezes esse investimento</div>
       </div>
 
       <div class="pricing-box">
