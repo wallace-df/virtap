@@ -68,6 +68,14 @@
     <priority>0.80</priority>
   </url>
 
+  <!-- Formação em Assistente Virtual -->
+  <url>
+    <loc>https://www.virtap.com.br/formacoes/assistencia-virtual/</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
   <!-- Privacidade -->
   <url>
     <loc>https://www.virtap.com.br/privacidade</loc>
