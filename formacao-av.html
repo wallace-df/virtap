@@ -541,6 +541,78 @@
       margin: 0.7rem auto 1.4rem;
     }
 
+    /* ── BÔNUS / URGÊNCIA ───────────────────────────────────── */
+    .oferta-bonus {
+      margin: 1.2rem 0 1.6rem;
+      padding: 1rem 1.2rem;
+      background: var(--color-bg-blue);
+      border: 1px solid var(--color-secondary-dark);
+      border-radius: 0.85rem;
+      text-align: center;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--color-text-soft);
+    }
+
+    .oferta-bonus strong {
+      color: var(--color-primary);
+    }
+
+
+    /* ── ANCORAGEM DE VALOR ─────────────────────────────────── */
+    .oferta-value {
+      margin: 1.8rem 0 1.4rem;
+      padding: 1.25rem 1.4rem;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 0.85rem;
+      text-align: left;
+    }
+
+    .oferta-value__label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .oferta-value__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      font-size: 1rem;
+      /* ligeiramente maior */
+      line-height: 1.6;
+      color: var(--color-text-soft);
+    }
+
+    /* ── PREÇO ──────────────────────────────────────────────── */
+    .oferta-price__from {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      text-decoration: line-through;
+      text-decoration-thickness: 2px;
+      text-decoration-color: var(--color-text-muted);
+    }
+
+    @media (max-width: 640px) {
+      .oferta-value {
+        padding: 1.1rem 1.15rem;
+      }
+
+      .oferta-value__row {
+        font-size: 0.95rem;
+      }
+
+      .oferta-price__from {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* ── O QUE ESTÁ INCLUSO ─────────────────────────────────── */
     .oferta-includes {
       text-align: left;
       margin-bottom: 1.4rem;
@@ -557,7 +629,7 @@
       background: var(--color-bg-blue);
       border-radius: 0.5rem;
       margin-bottom: 0.5rem;
-      font-weight: bold;
+      font-weight: 700;
     }
 
     .oferta-item .check {
@@ -567,14 +639,104 @@
       flex-shrink: 0;
     }
 
+    /* ── ANCORAGEM DE VALOR ─────────────────────────────────── */
+    .oferta-value {
+      margin: 1.6rem 0 1.2rem;
+      padding: 1rem 1.2rem;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 0.85rem;
+      text-align: left;
+    }
+
+    .oferta-value__label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .oferta-value__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--color-text-soft);
+    }
+
+    .oferta-value__row+.oferta-value__row {
+      margin-top: 0.7rem;
+      padding-top: 0.7rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .oferta-value__row strong {
+      color: var(--color-primary);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .oferta-value__details {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--color-text);
+    }
+
+    .oferta-value__details span {
+      display: block;
+    }
+
+    .oferta-value__details {
+      font-size: 0.9rem;
+      color: var(--color-text);
+    }
+
+    .oferta-value__checks {
+      display: grid;
+      gap: 0.45rem;
+      width: 100%;
+    }
+
+    .oferta-value__check {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      line-height: 1.6;
+    }
+
+    .oferta-value__check .check {
+      color: var(--color-primary);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+
+    /* Preço riscado do bônus */
+    .oferta-value__old-price {
+      text-decoration: line-through;
+      opacity: 0.65;
+      font-weight: 500;
+      margin-right: 0.35rem;
+    }
+
+    /* Destaque do bônus */
+    .oferta-value__bonus-price {
+      color: var(--color-green) !important;
+      font-weight: 700;
+    }
+
+    /* ── PREÇO ──────────────────────────────────────────────── */
     .oferta-price {
       margin: 1.4rem 0 0.5rem;
     }
 
     .oferta-price__from {
-      font-size: 0.875rem;
+      font-size: 1rem;
       color: var(--color-text-muted);
-      text-decoration: line-through;
     }
 
     .oferta-price__value {
@@ -584,18 +746,143 @@
     }
 
     .oferta-price__installment {
-      font-size: 0.875rem;
+      font-size: 1.5rem;
       color: var(--color-text-soft);
       margin-bottom: 1.4rem;
     }
 
-
+    /* ── CTA ────────────────────────────────────────────────── */
     .cta-btn--large {
       font-size: 1.05rem;
       padding: 1.05rem 2.8rem;
       border-radius: 0.7rem;
       width: 100%;
       max-width: 21rem;
+    }
+
+    /* ── RESPONSIVO ─────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .oferta-box {
+        padding: 2.1rem 1.35rem;
+      }
+
+      .oferta-box h2 {
+        font-size: 1.5rem;
+      }
+
+      .oferta-bonus,
+      .oferta-value {
+        padding: 1rem;
+      }
+
+      .oferta-item {
+        font-size: 0.95rem;
+      }
+
+      .oferta-value__row {
+        font-size: 0.9rem;
+      }
+
+      .oferta-value__details {
+        font-size: 0.85rem;
+      }
+
+      .oferta-price__value {
+        font-size: 2.5rem;
+      }
+
+      .cta-btn--large {
+        max-width: 100%;
+      }
+    }
+
+    /* ── ANCORAGEM DE VALOR ─────────────────────────────────── */
+    .oferta-value {
+      margin: 1.8rem 0 1.4rem;
+      padding: 1.25rem 1.4rem;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 0.85rem;
+      text-align: left;
+    }
+
+    /* "Hoje você recebe" */
+    .oferta-value__label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 1rem;
+    }
+
+    /* Linhas principais */
+    .oferta-value__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      font-size: 1.08rem;
+      line-height: 1.6;
+      color: var(--color-text);
+    }
+
+    /* Valores à direita */
+    .oferta-value__row strong {
+      color: var(--color-primary);
+      font-weight: 700;
+      font-size: 1.1rem;
+      white-space: nowrap;
+    }
+
+    /* Espaçamento entre linhas */
+    .oferta-value__row+.oferta-value__row {
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* Texto dos checks */
+    .oferta-value__details {
+      font-size: 1rem;
+      color: var(--color-text);
+    }
+
+    /* Preço antigo do bônus */
+    .oferta-value__old-price {
+      text-decoration: line-through;
+      opacity: 0.65;
+      font-weight: 500;
+      margin-right: 0.35rem;
+    }
+
+    /* Destaque do bônus */
+    .oferta-value__bonus-price {
+      color: var(--color-green) !important;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    @media (max-width: 640px) {
+      .oferta-value {
+        padding: 1.1rem 1.15rem;
+      }
+
+      .oferta-value__label {
+        font-size: 0.85rem;
+      }
+
+      .oferta-value__row {
+        font-size: 1rem;
+      }
+
+      .oferta-value__row strong {
+        font-size: 1rem;
+      }
+
+      .oferta-value__details {
+        font-size: 0.95rem;
+      }
     }
 
     /* ── GARANTIA ───────────────────────────────────────────── */
@@ -639,7 +926,7 @@
       .garantia-box {
 
         margin-left: 1rem;
-    margin-right: 1rem;
+        margin-right: 1rem;
         padding: 1.35rem 1.2rem;
 
       }
@@ -1200,6 +1487,12 @@
 
       </p>
 
+
+      <div style="text-align:center; margin-top:2.5rem;">
+        <a href="#oferta" class="cta-btn">
+          Quero conquistar meus clientes
+        </a>
+      </div>
       <!-- TRANSIÇÃO PARA PROVA SOCIAL -->
       <h3 style="
       text-align:center;
@@ -1225,11 +1518,6 @@
 
     </div>
 
-    <div style="text-align:center; margin-top:2.5rem;">
-      <a href="#oferta" class="cta-btn">
-        Quero conquistar meus clientes
-      </a>
-    </div>
   </section>
 
 
@@ -1301,32 +1589,86 @@
     </div>
   </section>
 
-  <!-- ══ OFERTA ══ -->
   <section class="oferta" id="oferta">
     <div class="container">
-      <h2 class="section-title">Formação completa.<br /><em>Comece agora.</em></h2>
+      <h2 class="section-title">
+        Tudo o que você precisa para<br><em>começar do jeito certo.</em>
+      </h2>
+
       <div class="oferta-box">
-        <h2 style="font-size: 1.5rem">Formação + Acompanhamento + Clientes Reais</h2>
-        <div class="oferta-includes">
-          <div class="oferta-item"><span class="check">✓</span> 38 aulas práticas em 6 módulos</div>
-          <div class="oferta-item"><span class="check">✓</span> Materiais complementares (planilhas, contratos, guias)
+        <h2 style="font-size: 1.5rem;">
+          Formação + Acompanhamento + Clientes Reais
+        </h2>
+
+
+        <!-- ANCORAGEM DE VALOR -->
+        <div class="oferta-value">
+          <div class="oferta-value__row">
+            <span>Formação completa com certificado</span>
+            <strong>R$ 997</strong>
           </div>
-          <div class="oferta-item"><span class="check">✓</span> 12 meses de suporte + encontros mensais ao vivo</div>
-          <div class="oferta-item"><span class="check">✓</span> 3 meses de acesso à plataforma de clientes da Virtap
+
+          <div class="oferta-value__row oferta-value__details">
+            <div class="oferta-value__checks">
+              <div class="oferta-value__check">
+                <span class="check">✓</span>
+                <span>38 aulas práticas em 6 módulos (6h de conteúdo)</span>
+              </div>
+
+              <div class="oferta-value__check">
+                <span class="check">✓</span>
+                <span>Materiais complementares (planilhas, guias, modelos de contrato)</span>
+              </div>
+
+              <div class="oferta-value__check">
+                <span class="check">✓</span>
+                <span>12 meses de suporte e mentorias</span>
+              </div>
+
+              <div class="oferta-value__check">
+                <span class="check">✓</span>
+                <span>Certificado de conclusão</span>
+              </div>
+            </div>
+          </div>
+          <div class="oferta-value__row oferta-value__bonus-row">
+            <span>3 meses de acesso à Plataforma de Clientes</span>
+            <strong class="oferta-value__bonus-price">
+              <span class="oferta-value__old-price">R$ 597</span>
+              Bônus
+            </strong>
           </div>
         </div>
+
+        <!-- URGÊNCIA / BÔNUS -->
+        <div class="oferta-bonus">
+          <strong>Por tempo limitado:</strong> sua inscrição inclui
+          <b>3 meses de acesso à Plataforma de Clientes</b>
+          com novas oportunidades publicadas toda semana.
+        </div>
+
+
+        <!-- PREÇO FINAL -->
         <div class="oferta-price">
-          <div class="oferta-price__from">De R$ 1.497</div>
+          <div class="oferta-price__from">Valor total: R$ 1.594</div>
           <div class="oferta-price__value">R$ 997</div>
         </div>
-        <div class="oferta-price__installment">ou 12x de R$ 99,90</div>
-        <a data-link href="https://www.virtap.com.br/comprar?p=FORMACAO_AV" class="cta-btn cta-btn--large">Quero começar
-          agora</a>
-        <span class="cta-sub">Acesso imediato · Garantia de 7 dias</span>
+
+        <div class="oferta-price__installment">
+          ou 12x de R$ 99,90
+        </div>
+
+        <!-- CTA -->
+        <a data-link href="https://www.virtap.com.br/comprar?p=FORMACAO_AV" class="cta-btn cta-btn--large">
+          Quero começar agora
+        </a>
+
+        <span class="cta-sub">
+          Acesso imediato · Garantia de 7 dias
+        </span>
       </div>
     </div>
   </section>
-
   <!-- ══ GARANTIA ══ -->
   <section class="garantia-box">
     <div class="garantia-box__icon"></div>
@@ -1442,10 +1784,10 @@
         Você já sabe o caminho.<br>
         <em>Agora é só dar o próximo passo.</em>
       </h2>
-  
+
       <a href="#oferta" class="cta-btn">Quero começar agora</a>
-  
-   </div>
+
+    </div>
   </section>
 
   <!-- ══ FOOTER ══ -->
