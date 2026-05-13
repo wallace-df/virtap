@@ -6,11 +6,11 @@
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 const PATHS = {
     cursoGratuito: '/curso-assistente-virtual',
-    programa30dias: '/do-zero-ao-primeiro-cliente',     
-    formacaoAV: '/formacoes/assistencia-virtual',                     
+    programa30dias: '/do-zero-ao-primeiro-cliente',
+    formacaoAV: '/formacoes/assistencia-virtual',
     acessoVirtap: '/vagas-assistente-virtual/acesso',
     especializacao: '/formacoes/assistencia-pessoal',
-    mastermind: '/mastermind'
+    mastermind: 'https://docs.google.com/forms/d/e/1FAIpQLSd4d08MvexaQzMcjqUxjwmgrYLvuGqmHXGqkElLeWpSTJlvFg/viewform'
 };
 
 // ─── STEPS (questões) ─────────────────────────────────────────────────────────
@@ -24,7 +24,7 @@ const STEPS = {
         field: 'flow',
         options: [
             { value: 'explore', label: 'Estou descobrindo a profissão de Assistente Virtual' },
-            { value: 'build', label: 'Já decidi que quero ser Assistente Virtual' },
+            { value: 'build', label: 'Conheço a profissão e já decidi que quero começar' },
             { value: 'growth', label: 'Já sou Assistente Virtual' },
         ],
     },
@@ -60,9 +60,9 @@ const STEPS = {
         title: 'Em qual área você tem mais experiência?',
         field: 'area',
         options: [
-            { value: 'secretariado', label: 'Secretariado Executivo' },
+            { value: 'secretariado-executivo', label: 'Secretariado Executivo' },
             { value: 'atendimento', label: 'Atendimento e suporte ao cliente' },
-            { value: 'adm-fin', label: 'Administrativo e financeiro' },
+            { value: 'administrativo-financeiro', label: 'Administrativo e financeiro' },
             { value: 'comercial', label: 'Comercial e vendas' },
             { value: 'marketing', label: 'Marketing e redes sociais' },
             { value: 'nenhuma', label: 'Nenhuma dessas' },
@@ -254,7 +254,7 @@ const STEPS = {
             { value: 'secretariado-executivo', label: 'Secretariado Executivo' },
             { value: 'assistencia-pessoal', label: 'Assistência Pessoal' },
             { value: 'atendimento', label: 'Atendimento e suporte ao cliente' },
-            { value: 'administrativo-finaceiro', label: 'Administrativo e financeiro' },
+            { value: 'administrativo-financeiro', label: 'Administrativo e financeiro' },
             { value: 'outra', label: 'Outra' },
         ],
     },
@@ -291,7 +291,7 @@ const STEPS = {
 const FLOWS = {
     explore: ['origem', 'situacao', 'area', 'incomoda', 'renda'],
     build: ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'renda'],
-    'growth': ['comoComecou', 'areaAV', 'origem', 'incomodaAV', 'faturamento'],
+    growth: ['comoComecou', 'areaAV', 'origem', 'incomodaAV', 'faturamento'],
 };
 
 // ─── PROFILE SLUG SCHEMA ──────────────────────────────────────────────────────
@@ -369,7 +369,7 @@ let advanceTimer = null;
 function selectOption(field, value, el) {
     state[field] = value;
     markSelected(el);
-    // if (advanceTimer) clearTimeout(advanceTimer);
+    if (advanceTimer) clearTimeout(advanceTimer);
     advanceTimer = setTimeout(advance, 150);
 }
 function advance() {
@@ -440,84 +440,115 @@ function gerarResultado() {
     if (state.flow === 'explore') {
         return resultadoCursoGratuito(
             'Comece do jeito certo!',
-            `<p>Se você ainda não conhece a profissão de <strong>Assistente Virtual</strong>, o primeiro passo é entender como ela funciona.</p>
-             <p>Preparamos um <strong>curso 100% gratuito</strong> onde explicamos:</p>
-             <ul>
-                <li>O que faz uma Assistente Virtual</li>
-                <li>O que é preciso para trabalhar</li>
-                <li>Quanto é possível ganhar</li>
-                <li>Como começar a trabalhar</li>
-             </ul>
-             <p>Depois de assistir, a gente te ajuda com os próximos passos!</p>`
+            `<p>Pelas suas respostas, faz sentido começar conhecendo melhor a profissão de <strong>Assistente Virtual</strong> e entendendo se esse caminho combina com o que você busca.</p>
+             <p>Preparamos um conteúdo gratuito  pra você entender como esse trabalho funciona na prática e quais são as possibilidades reais de renda e crescimento.</p>
+             <p>Se fizer sentido pra você, a gente te ajuda com os próximos passos!</p>`
         );
     }
 
     // ─── FLOW 2: build ───────────────────────────────────────────────────
     if (state.flow === 'build') {
-        const rendaBaixa = ['ate-1800', '1800-2500'].includes(state.renda);
+        const rendaBaixa = ['ate-1800'].includes(state.renda);
         const desempregada = state.situacao === 'desempregada';
 
-        // Programa 30 Dias: desempregada OU renda baixa OU urgência alta
+        // Programa 30 Dias
         if (desempregada || rendaBaixa) {
             return resultadoPrograma30Dias(
-                'Tem um caminho prático pra você',
+                'Você já decidiu que quer mudar de vida',
                 montarContextoDecidi(),
-                `<p>A Virtap tem um programa de 30 dias focado em resultado: você aprende na prática, treina com exercícios reais e sai pronta pra atender seu primeiro cliente.</p>
-                 <p>É direto ao ponto, feito pra quem não pode esperar e não pode investir muito agora.</p>`
+                `<p>Pelas suas respostas, ficou claro que você não está apenas buscando uma forma de ganhar dinheiro. Você quer construir uma carreira com mais liberdade, segurança e propósito.</p>
+            <p>Neste momento, o melhor caminho é começar por algo prático e direto ao ponto, focado em te ajudar a entrar na profissão e conquistar seus primeiros resultados.</p>
+            <p>A partir daí, você poderá ganhar confiança e dar passos cada vez maiores na construção da vida que deseja.</p>
+            <p>Temos um programa perfeito pra você.</p>`
             );
         }
 
-        // Senão → Formação completa
-        return resultadoFormacao(
-            'Seu próximo passo tá aqui',
+        // Formação completa
+        return resultadoFormacaoAV(
+            'Você já decidiu que quer mudar de vida',
             montarContextoDecidi(),
-            `<p>A Virtap tem uma formação completa que te prepara do zero, com acompanhamento de especialistas por 12 meses.</p>
-             <p>É o caminho certo pra quem quer construir uma carreira sólida como AV.</p>`
+            `<p>Pelas suas respostas, ficou claro que você não está apenas pesquisando uma possibilidade.</p>
+     <p>Você quer construir uma carreira que te dê mais liberdade, segurança e a chance de conquistar uma renda que faça sentido para a vida que você deseja.</p>
+     <p>Pra alcançar isso, o melhor caminho é ter uma base sólida, com método e acompanhamento, para transformar esse projeto em algo real e duradouro.</p>
+     <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e alcançar seu objetivo mais rápido.</p>`
         );
     }
 
-    // ─── FLOW 3: Já sou AV ───────────────────────────────────────────────────
+    // ─── FLOW 3: growth ───────────────────────────────────────────────────
     if (state.flow === 'growth') {
+        const area = state.area;
         const dor = state.incomodaAV;
         const fat = state.faturamento;
 
-        // Não consigo clientes → Plataforma
+        // Não consigo clientes
         if (dor === 'clientes') {
             return resultadoPlataforma(
-                'Existe um caminho que você ainda não viu',
+                'Você precisa de clientes!',
                 montarContextoJaSou(),
-                `<p>A Virtap tem uma plataforma exclusiva de vagas pra Assistentes Virtuais... bem diferente de tudo que você já deve ter tentado.</p>`
+                `<p>Pelas suas respostas, o principal desafio não é mais aprender a profissão, mas encontrar oportunidades e se conectar com clientes com potencial real de contratação.</p>
+                 <p>A gente consegue te ajudar com isso!</p>`
             );
         }
 
-        // Quero escalar + já fatura bem → Mastermind
+        // Mastermind
         if (dor === 'escala' && fat === 'acima-5000') {
             return resultadoMastermind(
-                'Tá na hora de escalar de verdade',
+                'Você está pronta para um novo nível de crescimento',
                 montarContextoJaSou(),
-                `<p>O <strong>Mastermind Virtap</strong> é pra AVs que já faturam acima de R$ 5.000 e querem estruturar uma operação consistente. Mentoria estratégica, ambiente de pares e visão de longo prazo.</p>`
+                `<p>Pelas suas respostas, você já construiu uma base sólida e agora o desafio é estruturar seu crescimento de forma mais estratégica.</p>
+                <p>Esse é o momento de pensar em posicionamento, eficiência e expansão, para aumentar resultados sem depender apenas de mais horas de trabalho.</p>
+                <p>Participe do nosso grupo exclusivo apenas para AVs que se encontram neste patamar.</p>`
             );
         }
 
-        // Rentabilidade OU escala (sem fatura R$5k+) + tem clientes → Especialização
+        // Especialização
         if ((dor === 'rentabilidade' || dor === 'escala') && fat !== 'sem-clientes') {
-            return resultadoEspecializacao(
-                'Tá na hora de subir seu posicionamento',
-                montarContextoJaSou(),
-                `<p>A Virtap tem especializações pra AVs que querem cobrar por valor, não por hora. A <strong>Assessoria Pessoal</strong>, em especial, é a porta pra clientes que pagam melhor e exigem mais profundidade.</p>`
-            );
+
+            if (area === 'assistencia-pessoal') {
+                // Formação AP 
+                return resultadoFormacaoAP(
+                    'Alcance um novo patamar',
+                    montarContextoJaSou(),
+                    `<p>Pelas suas respostas, o mais importante agora é consolidar conhecimentos, ganhar mais segurança e estruturar melhor sua atuação.</p>
+                 <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e ir para um próximo nível mais rápido.</p>`
+                );
+
+            } else {
+                // Especialização
+                return resultadoEspecializacao(
+                    'O caminho agora é elevar seu posicionamento',
+                    montarContextoJaSou(),
+                    `<p>Pelas suas respostas, ficou claro que você já possui experiência e está pronta para atuar em um nível mais estratégico e valorizado.</p>
+                <p>Existe uma especialização que pode te preparar para atender clientes mais exigentes e conquistar oportunidades mais qualificadas e ganhos significativamente maiores.</p>`
+                );
+            }
         }
 
-        // Resto (insegurança, precificação, profissionalização, sem clientes...) → Formação
-        return resultadoFormacao(
-            'Vamos consolidar sua base',
-            montarContextoJaSou(),
-            `<p>A Virtap tem uma formação completa pra AVs que querem se profissionalizar de verdade — com acompanhamento de especialistas por 12 meses e ferramentas práticas pra você atuar com segurança.</p>`
-        );
+        if (area === 'assistencia-pessoal') {
+            // Formação AP 
+            return resultadoFormacaoAP(
+                'Alcance um novo patamar',
+                montarContextoJaSou(),
+                `<p>Pelas suas respostas, o mais importante agora é consolidar conhecimentos, ganhar mais segurança e estruturar melhor sua atuação.</p>
+             <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e ir para um próximo nível mais rápido.</p>`
+            );
+
+        } else {
+            // Formação AV 
+            return resultadoFormacaoAV(
+                'Alcance um novo patamar',
+                montarContextoJaSou(),
+                `<p>Pelas suas respostas, o mais importante agora é consolidar conhecimentos, ganhar mais segurança e estruturar melhor sua atuação.</p>
+             <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e ir para um próximo nível mais rápido.</p>`
+            );
+        }
     }
 
     // fallback
-    return resultadoCursoGratuito('Comece por aqui', '<p>Preparamos o melhor caminho pra você.</p>');
+    return resultadoCursoGratuito(
+        'Existe um caminho que faz sentido para você',
+        '<p>Pelas suas respostas, o mais importante agora é seguir um próximo passo claro e alinhado ao momento que você está vivendo.</p>'
+    );
 }
 
 // ─── HELPERS DE CONTEXTO ──────────────────────────────────────────────────────
@@ -529,7 +560,8 @@ function montarContextoDecidi() {
         desempregada: 'Você tá em transição e quer construir algo seu',
         aposentada: 'Você tá em uma nova fase e quer continuar ativa',
     };
-    return `<p>${situacoes[state.situacao] || 'Você decidiu seguir o caminho de AV'}. A gente entende esse momento.</p>`;
+    // return `<p>${situacoes[state.situacao] || 'Você decidiu seguir o caminho de AV'}. A gente entende esse momento.</p>`;
+    return '';
 }
 
 function montarContextoJaSou() {
@@ -541,7 +573,8 @@ function montarContextoJaSou() {
         rentabilidade: 'Você quer trabalhar menos e ganhar mais',
         escala: 'Você quer crescer e escalar sua atuação',
     };
-    return `<p>${dores[state.incomodaAV] || 'Você já atua como AV'}. Faz total sentido procurar o próximo passo.</p>`;
+    return '';
+    //    return `<p>${dores[state.incomodaAV] || 'Você já atua como AV'}. Faz total sentido procurar o próximo passo.</p>`;
 }
 
 // ─── TEMPLATES DE RESULTADO ───────────────────────────────────────────────────
@@ -551,7 +584,7 @@ function resultadoCursoGratuito(titulo, corpo) {
         destino: 'curso-gratuito',
         titulo,
         mensagem: corpo,
-        btn: makeCTA('👉 Acessar o Curso Gratuito', PATHS.cursoGratuito, 'curso-gratuito'),
+        btn: makeCTA('👉 Acessar o material gratuito', PATHS.cursoGratuito, 'curso-gratuito'),
     };
 }
 
@@ -564,7 +597,7 @@ function resultadoPrograma30Dias(titulo, contexto, corpo) {
     };
 }
 
-function resultadoFormacao(titulo, contexto, corpo) {
+function resultadoFormacaoAV(titulo, contexto, corpo) {
     return {
         destino: 'formacao',
         titulo,
@@ -573,12 +606,21 @@ function resultadoFormacao(titulo, contexto, corpo) {
     };
 }
 
+function resultadoFormacaoAP(titulo, contexto, corpo) {
+    return {
+        destino: 'formacao',
+        titulo,
+        mensagem: contexto + corpo,
+        btn: makeCTA('👉 Quero ver como funciona', PATHS.especializacao, 'formacao-ap'),
+    };
+}
+
 function resultadoPlataforma(titulo, contexto, corpo) {
     return {
         destino: 'plataforma',
         titulo,
         mensagem: contexto + corpo,
-        btn: makeCTA('👉 Conhecer a Plataforma de Vagas', PATHS.acessoVirtap, 'plataforma-vagas'),
+        btn: makeCTA('👉 Conheça nossa Plataforma de Clientes', PATHS.acessoVirtap, 'plataforma-vagas'),
     };
 }
 
@@ -596,7 +638,7 @@ function resultadoMastermind(titulo, contexto, corpo) {
         destino: 'mastermind',
         titulo,
         mensagem: contexto + corpo,
-        btn: makeCTA('👉 Conhecer o Mastermind', PATHS.mastermind, 'mastermind'),
+        btn: makeCTA('👉 Ir para o Grupo', PATHS.mastermind, 'mastermind'),
     };
 }
 
@@ -623,10 +665,7 @@ function getProfileSlug() {
         parts.push(value || PROFILE_NA);
     });
 
-    let x = parts.join(PROFILE_SEP);
-    let u = parseProfileSlug(x);
-    console.log(u);
-    return x;
+    return parts.join(PROFILE_SEP);
 }
 
 // ─── LINK BUILDER (UTM + profile separados) ───────────────────────────────────
@@ -721,9 +760,9 @@ function parseProfileSlug(slug) {
     }
 
     const PROFILE_SCHEMAS = {
-        explore: ['origin', 'situation', 'area', 'pain', 'income'],
-        build: ['origin', 'situation', 'area', 'pain', 'objection', 'income'],
-        growth: ['journey', 'area', 'origin', 'pain', 'income'],
+        explore: ['origin', 'situation', 'area', 'motivation', 'income'],
+        build: ['origin', 'situation', 'area', 'motivation', 'objection', 'income'],
+        growth: ['journey', 'area', 'origin', 'motivation', 'income'],
     };
 
     const PROFILE_SEP = '_';
