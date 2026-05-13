@@ -444,12 +444,6 @@ async function handleLeadCapture(e) {
         });
 
         if (response.status === 200 || response.status === 201) {
-            // Dispara evento analytics
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-                'event': 'ga_event',
-                'ga_event_name': 'sign_up_quiz_' + state.flow,
-            });
             showResult();
         } else {
             const data = await response.json().catch(() => ({}));
