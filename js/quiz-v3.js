@@ -1,17 +1,16 @@
 // ═════════════════════════════════════════════════════════════════════════════
 // VIRTAP QUIZ V2
-// 3 caminhos: descobrindo | decidi | ja-sou
+// 3 caminhos: explore | build | growth
 // ═════════════════════════════════════════════════════════════════════════════
 
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 const PATHS = {
     cursoGratuito: '/curso-assistente-virtual',
-    programa30dias: '/do-zero-ao-primeiro-cliente',     // R$ 97
-    formacaoAV: '/formacao-av',                     // R$ 797
-    acessoVirtap: '/vagas-assistente-virtual/acesso', // Plataforma
-    especializacao: '/especializacao-assessoria-pessoal',
-    mastermind: '/mastermind',
-    whatsapp: 'https://wa.me/5548988089062',
+    programa30dias: '/do-zero-ao-primeiro-cliente',     
+    formacaoAV: '/formacoes/assistencia-virtual',                     
+    acessoVirtap: '/vagas-assistente-virtual/acesso',
+    especializacao: '/formacoes/assistencia-pessoal',
+    mastermind: '/mastermind'
 };
 
 // ─── STEPS (questões) ─────────────────────────────────────────────────────────
@@ -24,9 +23,9 @@ const STEPS = {
         title: 'Em qual momento você está?',
         field: 'flow',
         options: [
-            { value: 'descobrindo', label: 'Estou descobrindo a profissão de Assistente Virtual' },
-            { value: 'decidi', label: 'Já decidi que quero ser Assistente Virtual' },
-            { value: 'ja-sou', label: 'Já sou Assistente Virtual' },
+            { value: 'explore', label: 'Estou descobrindo a profissão de Assistente Virtual' },
+            { value: 'build', label: 'Já decidi que quero ser Assistente Virtual' },
+            { value: 'growth', label: 'Já sou Assistente Virtual' },
         ],
     },
 
@@ -50,15 +49,15 @@ const STEPS = {
         title: 'Qual é a sua situação atual?',
         field: 'situacao',
         options: [
-            { value: 'clt', label: 'CLT' },
-            { value: 'autonoma', label: 'Autônoma' },
-            { value: 'desempregada', label: 'Desempregada' },
-            { value: 'aposentada', label: 'Aposentada' },
+            { value: 'clt', label: 'Trabalho no CLT' },
+            { value: 'autonoma', label: 'Sou autônoma' },
+            { value: 'desempregada', label: 'Estou desempregada' },
+            { value: 'aposentada', label: 'Sou aposentada' },
         ],
     },
 
     area: {
-        title: 'Em qual área você atua ou tem mais experiência?',
+        title: 'Em qual área você tem mais experiência?',
         field: 'area',
         options: [
             { value: 'secretariado', label: 'Secretariado Executivo' },
@@ -83,7 +82,7 @@ const STEPS = {
         ],
     },
 
-    // ─── Flow 1: Descobrindo ─────────────────────────────────────────────────
+    // ─── Flow 1: explore ─────────────────────────────────────────────────
 
     incomoda: {
         title: 'O que mais te incomoda hoje?',
@@ -91,9 +90,9 @@ const STEPS = {
         optionsFn: (s) => {
             const opts = {
                 desempregada: [
-                    { value: 'renda-insuficiente', label: 'Preciso de uma renda estável' },
+                    { value: 'renda-insuficiente', label: 'Tenho dificuldades financeiras' },
                     { value: 'flexibilidade', label: 'Não quero voltar a ficar presa a horários e local fixo' },
-                    { value: 'tempo', label: 'Não quero me afastar da minha família para poder trabalhar.' },
+                    { value: 'tempo', label: 'Não quero me afastar da minha família para poder trabalhar' },
                     { value: 'independencia', label: 'Quero recomeçar construindo algo que seja meu' },
                 ],
                 clt: [
@@ -132,31 +131,31 @@ const STEPS = {
     // ─── Flow 2: Já decidi ───────────────────────────────────────────────────
 
     sonho: {
-        title: 'Qual é o seu maior sonho neste momento?',
+        title: 'Qual é o seu maior sonho?',
         field: 'sonho',
         optionsFn: (s) => {
             const opts = {
                 desempregada: [
                     { value: 'renda-insuficiente', label: 'Ter minha renda própria' },
                     { value: 'flexibilidade', label: 'Trabalhar de onde eu quiser, nos meus horários' },
-                    { value: 'tempo', label: 'Trabalhar sem abrir mão de mim e da minha família' },
+                    { value: 'tempo', label: 'Ganhar dinheiro sem me afastar da minha família' },
                     { value: 'independencia', label: 'Recomeçar construindo algo que seja meu' },
                 ],
                 clt: [
-                    { value: 'renda-insuficiente', label: 'Ter uma nova fonte de renda' },
+                    { value: 'renda-insuficiente', label: 'Ter mais dinheiro sobrando no fim do mês' },
                     { value: 'flexibilidade', label: 'Trabalhar de onde eu quiser, nos meus horários' },
-                    { value: 'tempo', label: 'Ter mais tempo para mim e minha família' },
+                    { value: 'tempo', label: 'Ganhar dinheiro sem me afastar da minha família' },
                     { value: 'independencia', label: 'Construir algo que seja meu' },
                 ],
                 autonoma: [
-                    { value: 'renda-instavel', label: 'Ter uma renda mais previsível' },
-                    { value: 'renda-insuficiente', label: 'Aumentar minha renda atual' },
-                    { value: 'tempo', label: 'Ter mais tempo para mim e minha família' },
+                    { value: 'renda-instavel', label: 'Ter uma renda com a qual eu possa contar' },
+                    { value: 'renda-insuficiente', label: 'Ter mais dinheiro sobrando no fim do mês' },
+                    { value: 'tempo', label: 'Ganhar dinheiro sem me afastar da minha família' },
                     { value: 'independencia', label: 'Construir algo mais sólido e profissional' },
                 ],
                 aposentada: [
-                    { value: 'renda-insuficiente', label: 'Complementar minha aposentadoria com uma nova fonte de renda' },
-                    { value: 'flexibilidade', label: 'Continuar ativa no meu ritmo' },
+                    { value: 'renda-insuficiente', label: 'Ter mais dinheiro sobrando no fim do mês' },
+                    { value: 'flexibilidade', label: 'Continuar ativa, mas no meu ritmo' },
                     { value: 'independencia', label: 'Construir algo meu com propósito' },
                 ],
             };
@@ -176,7 +175,7 @@ const STEPS = {
     },
 
     obstaculo: {
-        title: 'O que mais está impedindo você de começar agora?',
+        title: 'O que te impede de começar agora como AV?',
         field: 'obstaculo',
         optionsFn: (s) => {
             // Obstáculos específicos por situação
@@ -249,22 +248,22 @@ const STEPS = {
 
     areaAV: {
         // Sem "Nenhuma dessas" no Flow 3 — quem já atua tem uma área.
-        title: 'Em qual área você atua ou tem mais experiência?',
+        title: 'Em qual área você tem mais experiência?',
         field: 'area',
         options: [
-            { value: 'secretariado', label: 'Secretariado Executivo' },
+            { value: 'secretariado-executivo', label: 'Secretariado Executivo' },
+            { value: 'assistencia-pessoal', label: 'Assistência Pessoal' },
             { value: 'atendimento', label: 'Atendimento e suporte ao cliente' },
-            { value: 'adm-fin', label: 'Administrativo e financeiro' },
-            { value: 'comercial', label: 'Comercial e vendas' },
-            { value: 'marketing', label: 'Marketing e redes sociais' },
+            { value: 'administrativo-finaceiro', label: 'Administrativo e financeiro' },
+            { value: 'outra', label: 'Outra' },
         ],
     },
 
     incomodaAV: {
-        title: 'O que mais está te incomodando hoje?',
+        title: 'O que mais te incomoda hoje?',
         field: 'incomodaAV',
         options: [
-            { value: 'clientes', label: 'Não consigo clientes com consistência' },
+            { value: 'clientes', label: 'Tenho dificuldades em conseguir clientes' },
             { value: 'inseguranca', label: 'Ainda me sinto insegura para atuar' },
             { value: 'precificacao', label: 'Não sei se estou cobrando corretamente' },
             { value: 'profissionalizacao', label: 'Sinto que preciso me profissionalizar melhor' },
@@ -274,7 +273,7 @@ const STEPS = {
     },
 
     faturamento: {
-        title: 'Quanto você fatura hoje como Assistente Virtual?',
+        title: 'Quanto você fatura hoje como Assistente?',
         field: 'faturamento',
         options: [
             { value: 'sem-clientes', label: 'Ainda não tenho clientes' },
@@ -290,18 +289,18 @@ const STEPS = {
 // ─── FLOWS ────────────────────────────────────────────────────────────────────
 // Ordem dos steps por flow. Renda termina o Flow 1 e 2 (cold close).
 const FLOWS = {
-    descobrindo: ['origem', 'situacao', 'area', 'incomoda', 'renda'],
-    decidi: ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'renda'],
-    'ja-sou': ['comoComecou', 'areaAV', 'origem', 'incomodaAV', 'faturamento'],
+    explore: ['origem', 'situacao', 'area', 'incomoda', 'renda'],
+    build: ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'renda'],
+    'growth': ['comoComecou', 'areaAV', 'origem', 'incomodaAV', 'faturamento'],
 };
 
 // ─── PROFILE SLUG SCHEMA ──────────────────────────────────────────────────────
 // Define a ordem dos campos no slug por flow. Server usa o MESMO schema
 // pra parsear ?profile=... em objeto.
 const PROFILE_SCHEMAS = {
-    descobrindo: ['origem', 'situacao', 'area', 'incomoda', 'renda'],
-    decidi: ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'renda'],
-    'ja-sou': ['comoComecou', 'area', 'origem', 'incomodaAV', 'faturamento'],
+    explore: ['origem', 'situacao', 'area', 'incomoda', 'renda'],
+    build: ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'renda'],
+    growth: ['comoComecou', 'area', 'origem', 'incomodaAV', 'faturamento'],
 };
 
 const PROFILE_SEP = '_';
@@ -309,7 +308,7 @@ const PROFILE_NA = 'na';
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
 const state = {
-    flow: null,         // descobrindo | decidi | ja-sou
+    flow: null,         // explore | build | growth
     flowIndex: -1,      // -1 = no P0, 0+ = dentro do flow
     history: [],        // pilha de steps pra voltar
 
@@ -437,8 +436,8 @@ function showResult() {
 
 function gerarResultado() {
 
-    // ─── FLOW 1: Descobrindo → Curso Gratuito ────────────────────────────────
-    if (state.flow === 'descobrindo') {
+    // ─── FLOW 1: explore ────────────────────────────────
+    if (state.flow === 'explore') {
         return resultadoCursoGratuito(
             'Comece do jeito certo!',
             `<p>Se você ainda não conhece a profissão de <strong>Assistente Virtual</strong>, o primeiro passo é entender como ela funciona.</p>
@@ -453,8 +452,8 @@ function gerarResultado() {
         );
     }
 
-    // ─── FLOW 2: Já decidi ───────────────────────────────────────────────────
-    if (state.flow === 'decidi') {
+    // ─── FLOW 2: build ───────────────────────────────────────────────────
+    if (state.flow === 'build') {
         const rendaBaixa = ['ate-1800', '1800-2500'].includes(state.renda);
         const desempregada = state.situacao === 'desempregada';
 
@@ -464,7 +463,7 @@ function gerarResultado() {
                 'Tem um caminho prático pra você',
                 montarContextoDecidi(),
                 `<p>A Virtap tem um programa de 30 dias focado em resultado: você aprende na prática, treina com exercícios reais e sai pronta pra atender seu primeiro cliente.</p>
-                 <p>É direto ao ponto, feito pra quem não pode esperar — e cabe no bolso.</p>`
+                 <p>É direto ao ponto, feito pra quem não pode esperar e não pode investir muito agora.</p>`
             );
         }
 
@@ -478,7 +477,7 @@ function gerarResultado() {
     }
 
     // ─── FLOW 3: Já sou AV ───────────────────────────────────────────────────
-    if (state.flow === 'ja-sou') {
+    if (state.flow === 'growth') {
         const dor = state.incomodaAV;
         const fat = state.faturamento;
 
@@ -624,13 +623,17 @@ function getProfileSlug() {
         parts.push(value || PROFILE_NA);
     });
 
-    return parts.join(PROFILE_SEP);
+    let x = parts.join(PROFILE_SEP);
+    let u = parseProfileSlug(x);
+    console.log(u);
+    return x;
 }
 
 // ─── LINK BUILDER (UTM + profile separados) ───────────────────────────────────
 function getLink(path, campaign) {
     const utm = getUTMParams();
     const params = new URLSearchParams();
+    const profile = getProfileSlug();
 
     // UTM (acquisition apenas)
     if (utm.has_utm) {
@@ -649,10 +652,13 @@ function getLink(path, campaign) {
         params.set('utm_medium', 'site');
         params.set('utm_campaign', campaign);
         params.set('utm_content', 'quiz');
+        if (profile) {
+            // fixme: remove later...
+            params.set('utm_term', profile);
+        }
     }
 
     // Profile (param dedicado, separado de UTM)
-    const profile = getProfileSlug();
     if (profile) {
         params.set('profile', profile);
     }
@@ -703,3 +709,64 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 try { console.log(getUTMParams()); } catch { }
+
+function parseProfileSlug(slug) {
+    function isEmpty(str) {
+        return (
+            str === undefined ||
+            str === null ||
+            typeof str !== 'string' ||
+            str.trim().length === 0
+        );
+    }
+
+    const PROFILE_SCHEMAS = {
+        explore: ['origin', 'situation', 'area', 'pain', 'income'],
+        build: ['origin', 'situation', 'area', 'pain', 'objection', 'income'],
+        growth: ['journey', 'area', 'origin', 'pain', 'income'],
+    };
+
+    const PROFILE_SEP = '_';
+    const PROFILE_NA = 'na';
+
+    try {
+        if (isEmpty(slug)) {
+            return null;
+        }
+
+        const parts = slug.split(PROFILE_SEP);
+        const flow = parts[0] && parts[0].trim();
+
+        if (isEmpty(flow)) {
+            return null;
+        }
+
+        const schema = PROFILE_SCHEMAS[flow];
+
+        if (!schema) {
+            return null;
+        }
+
+        // Deve ter exatamente: 1 (flow) + N campos
+        if (parts.length !== schema.length + 1) {
+            return null;
+        }
+
+        const profile = {
+            flow: flow
+        };
+
+        schema.forEach(function (field, index) {
+            const value = parts[index + 1] && parts[index + 1].trim();
+
+            profile[field] =
+                (value === PROFILE_NA || isEmpty(value))
+                    ? null
+                    : value;
+        });
+
+        return profile;
+    } catch (e) {
+        return null;
+    }
+}
