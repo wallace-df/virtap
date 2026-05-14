@@ -93,7 +93,7 @@ const STEPS = {
         optionsFn: (s) => {
             const opts = {
                 desempregada: [
-                    { value: 'renda-insuficiente', label: 'Tenho dificuldades financeiras' },
+                    { value: 'renda-insuficiente', label: 'Não ter renda' },
                     { value: 'flexibilidade', label: 'Não quero voltar a ficar presa a horários e local fixo' },
                     { value: 'tempo', label: 'Não quero me afastar da minha família para poder trabalhar' },
                     { value: 'independencia', label: 'Quero recomeçar construindo algo que seja meu' },
