@@ -19,7 +19,7 @@ JOBS_ENDPOINT = "https://api.virtap.com.br/public/projects"
 BASE_URL      = "https://www.virtap.com.br/vagas-assistente-virtual/"
 
 FULL_PAGES   = ["vagas-assistente-virtual/index.html", "vagas-assistente-virtual/como-acessar.html"]
-SIMPLE_PAGES = ["/formacoes/assistencia-virtual/index.html"]
+SIMPLE_PAGES = ["formacoes/assistencia-virtual/index.html"]
 
 # ─── Mock (só usado se USE_MOCK = True) ──────────────────────────────
 def _ms_ago(hours=0, days=0):
@@ -29,41 +29,40 @@ MOCK_JOBS = [
     {
         "id": "WlQ3MVTQNG",
         "title": "Assistente Pessoal",
-        "description": "Preciso de uma assistente para me auxiliar com coisas operacionais do dia a dia, como organizar minha agenda, fazer mercado online, eventualmente compra de passagens áreas, agendamentos médicos e outras tarefas pessoais.",
+        "description": "Preciso de uma assistente para me auxiliar com coisas operacionais do dia a dia, como organizar minha agenda, fazer mercado online, eventualmente compra de passagens áreas, agendamentos médicos e outras tarefas pessoais.\n",
         "registration_timestamp": _ms_ago(hours=3),
     },
     {
         "id": "4ICl8BcCon",
         "title": "Assistente ou Secretaria virtual",
-        "description": "Demanda de 3 a 4 horas por semana para as seguintes atividades:\nPreenchimento de planilha de despesas e reembolsos.\nPreenchimento de certificados de cursos dos alunos.\nGestão de e-mails, organização de documentos e agenda.\nPesquisa de orçamentos de serviços.",
+        "description": "Demanda de 3 a 4 horas por semana para as seguintes atividades:\nPreenchimento de planilha de despesas e reembolsos.\nPreenchimento de certificados de cursos dos alunos.\nPreenchimento de contratos.\nSolicitação de reembolsos de despesas\nOrganização de documentos p/ projetos de inovação.\nGestão de e-mails envio p/ clientes.\nPesquisa de orçamentos de serviços.\nPreparo de programas de cursos p/ divulgação no site da empresa.\nInscrições de alunos em cursos abertos.\nGestão de agenda, organização de compromissos. Envio de mensagens para clientes,\nparceiros de negócios e prospects no Linkedin (Textos padronizados elaborados pela\nempresa p/ fazer contato pelo whatsapp da Customer Sat).\nPesquisa de satisfação da empresa (Google Forms ou Docs).\nAgendamento de boletos.\nRSVP\nAtualização do Google Meu Negócio e site da empresa,\n(carregamento de documentos)\n",
         "registration_timestamp": _ms_ago(days=2),
     },
     {
         "id": "HZeapLKu8Q",
         "title": "Secretária para médico psiquiatra",
-        "description": "Preciso de uma secretária para ajudar com o atendimento e gestão de agenda, em horário comercial.",
+        "description": "Preciso de uma secretária para ajudar com o atendimento  e gestão de agenda, em horário comercial.",
         "registration_timestamp": _ms_ago(days=2),
     },
     {
         "id": "GcuHyV2Y53",
         "title": "Assistente Administrativo - Full-time",
-        "description": "Preciso de alguém para cuidar das seguintes tarefas:\n\n• Gestão de Agenda e E-mails\n• Atendimento ao Cliente.\n\nGostaria de alguém que fosse além do atendimento básico.",
+        "description": "Preciso de alguém para cuidar das seguintes tarefas:\n\n• Gestão de Agenda e E-mails\n• Atendimento ao Cliente.\n\nNormalmente os pacientes me procuram   na maior parte em horário comercial até+- 20 horas. Há procura também finais de semana.\n\n Mas seria importante de segunda a sexta das 9h às 19h.\n\nGostaria de alguém que fosse além do atendimento básico, que trabalhe para atender, acompanhar e ajudar a converter pessoas interessadas em meus pacientes.\n\nPor favor, envie os valores na proposta.",
         "registration_timestamp": _ms_ago(days=7),
     },
     {
         "id": "kF1droJVME",
         "title": "Assistente Pessoal",
-        "description": "Preciso de alguém para cuidar das seguintes tarefas:\n\n• Compromissos e Agenda Pessoal\n• Pagamentos, Cotações e Lembretes\n• Documentação e Seguros de Veículos\n• Tarefas do Dia a Dia.",
+        "description": "Preciso de alguém para cuidar das seguintes tarefas:\n\n• Compromissos e Agenda Pessoal\n• Pagamentos, Cotações e Lembretes\n• Documentação e Seguros de Veículos\n• Tarefas do Dia a Dia.\n\nEm especial, tem algumas coisas do meu dia a dia que acabo esquecendo de fazer.\n\nExemplos:\n1. Minha empresa reembolsa a escola do meu filho mas eu esqueço de pedir o reembolso.\n2. Esqueço também de marcar exames e consultas médicas\n3. Coisas relacionadas a veículos também (revisão, documentação).\n",
         "registration_timestamp": _ms_ago(days=7),
     },
     {
         "id": "1Rg0ur4WQf",
         "title": "Assistente Pessoal e Administrativo",
-        "description": "Busco assistente para auxiliar com:\n\n* Pagamentos via link de cartão de crédito;\n* Inclusão desses pagamentos no grupo de finanças;\n* Check-in de voos;\n* Organização de reservas de hotéis e viagens.",
+        "description": "Busco assistente para auxiliar com:\n\n* Pagamentos via link de cartão de crédito, tanto meus quanto do meu esposo;\n* Inclusão desses pagamentos no grupo de finanças;\n* Preenchimento e atualização de planilha financeira de controle;\n* Check-in de voos;\n* Organização de reservas de hotéis e viagens já feitas pelo Booking.\n\nAs demandas de viagens (check-in, reservas e organização) devem acontecer em média até 2x por mês. Já os pagamentos via link e controles financeiros ocorrem com mais frequência, aproximadamente 3x por semana.",
         "registration_timestamp": _ms_ago(days=8),
     },
 ]
-
 # ─── Helpers ─────────────────────────────────────────────────────────
 MESES = ["janeiro","fevereiro","março","abril","maio","junho",
          "julho","agosto","setembro","outubro","novembro","dezembro"]
@@ -158,21 +157,28 @@ def build_simple_cards(jobs, limit=3):
 
 # ─── Update ──────────────────────────────────────────────────────────
 def replace_vagas_block(content, inner, indent="                "):
+    block = f"<!-- VAGAS:START -->\n{inner}\n{indent}<!-- VAGAS:END -->"
     return re.sub(
         r"<!-- VAGAS:START -->[\s\S]*?<!-- VAGAS:END -->",
-        f"<!-- VAGAS:START -->\n{inner}\n{indent}<!-- VAGAS:END -->",
-        content,
+        lambda m: block, content,
     )
 
 def update_full(path, jobs):
     p = Path(path); c = p.read_text(encoding="utf-8")
+
     c = replace_vagas_block(c, build_cards(jobs))
+
+    schemas_block = f"<!-- SCHEMAS:START -->\n{build_schemas(jobs)}\n    <!-- SCHEMAS:END -->"
     c = re.sub(
         r"<!-- SCHEMAS:START -->[\s\S]*?<!-- SCHEMAS:END -->",
-        f"<!-- SCHEMAS:START -->\n{build_schemas(jobs)}\n    <!-- SCHEMAS:END -->", c)
+        lambda m: schemas_block, c,
+    )
+
     c = re.sub(r'<time datetime="[\d-]+">[^<]*</time>',
                f'<time datetime="{today_iso()}">{today_label()}</time>', c)
-    c = re.sub(r'"dateModified":\s*"[\d-]+"', f'"dateModified": "{today_iso()}"', c)
+    c = re.sub(r'"dateModified":\s*"[\d-]+"',
+               f'"dateModified": "{today_iso()}"', c)
+
     p.write_text(c, encoding="utf-8"); print(f"✓ {path}")
 
 def update_simple(path, jobs):
