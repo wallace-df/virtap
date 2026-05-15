@@ -40,7 +40,9 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # Adiciona e cria o commit local
-          git add formacoes/assistencia-virtual/index2.html
+          git add vagas-assistente-virtual/index.html
+          git add vagas-assistente-virtual/como-acessar.html
+          git add formacoes/assistencia-virtual/index.html
           git commit -m "Atualiza vagas automaticamente"
 
           # Busca mudanças remotas e reaplica este commit no topo
