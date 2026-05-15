@@ -8,7 +8,7 @@ const PATHS = {
     cursoGratuito: '/curso-assistente-virtual',
     programa30dias: '/do-zero-ao-primeiro-cliente',
     formacaoAV: '/formacoes/assistencia-virtual',
-    acessoVirtap: '/vagas-assistente-virtual/acesso',
+    acessoVirtap: '/vagas-assistente-virtual/como-acessar',
     especializacao: '/formacoes/assistencia-pessoal',
     mastermind: 'https://docs.google.com/forms/d/e/1FAIpQLSd4d08MvexaQzMcjqUxjwmgrYLvuGqmHXGqkElLeWpSTJlvFg/viewform'
 };

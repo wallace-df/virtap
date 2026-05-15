@@ -7,7 +7,7 @@ const PATHS = {
     formacaoAV_CLT_ADM: '/formacao-av-clt-adm',      // Formação AV R$ 797
     formacaoAV_CLT: '/formacao-av-clt',      // Formação AV R$ 797
     formacaoAV_DESEMPREGADA: '/formacao-av-dspg',
-    acessoVirtap: '/vagas-assistente-virtual/acesso', // Plataforma
+    acessoVirtap: '/vagas-assistente-virtual/como-acessar', // Plataforma
     whatsapp: 'https://wa.me/5548988089062',          // Número do WhatsApp
 };
 
