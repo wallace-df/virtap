@@ -22,7 +22,7 @@ jobs:
 
       - name: Atualizar vagas
         run: |
-          python3 scripts/atualizar_vagas.py formacoes/assistencia-virtual/index2.html
+          python3 scripts/update_jobs.py
 
       - name: Verificar alterações
         id: changes
