@@ -1,5 +1,5 @@
 // ═════════════════════════════════════════════════════════════════════════════
-// VIRTAP QUIZ V2
+// VIRTAP QUIZ V4
 // 3 caminhos: explore | build | growth
 // ═════════════════════════════════════════════════════════════════════════════
 
@@ -481,7 +481,6 @@ function selectOption(field, value, el) {
     if (advanceTimer) clearTimeout(advanceTimer);
     advanceTimer = setTimeout(advance, 150);
 }
-
 function advance() {
     // P0: começa o flow
     if (state.flowIndex === -1) {
@@ -783,10 +782,6 @@ function getLink(path, campaign) {
         params.set('utm_medium', 'site');
         params.set('utm_campaign', campaign);
         params.set('utm_content', 'quiz');
-        if (profile) {
-            // fixme: remove later
-            params.set('utm_term', profile);
-        }
     }
 
     if (profile) {
@@ -847,48 +842,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 try { console.log(getUTMParams()); } catch { }
 
-// ─── PARSER (referência pro servidor) ────────────────────────────────────────
-function parseProfileSlug(slug) {
-    function isEmpty(str) {
-        return (
-            str === undefined ||
-            str === null ||
-            typeof str !== 'string' ||
-            str.trim().length === 0
-        );
-    }
-
-    const PROFILE_SCHEMAS = {
-        explore: ['origin', 'situation', 'area', 'motivation', 'income'],
-        build: ['origin', 'situation', 'area', 'motivation', 'objection', 'income'],
-        growth: ['journey', 'area', 'origin', 'motivation', 'income'],
-    };
-
-    const PROFILE_SEP = '_';
-    const PROFILE_NA = 'na';
-
-    try {
-        if (isEmpty(slug)) return null;
-
-        const parts = slug.split(PROFILE_SEP);
-        const flow = parts[0] && parts[0].trim();
-
-        if (isEmpty(flow)) return null;
-
-        const schema = PROFILE_SCHEMAS[flow];
-        if (!schema) return null;
-
-        if (parts.length !== schema.length + 1) return null;
-
-        const profile = { flow: flow };
-
-        schema.forEach(function (field, index) {
-            const value = parts[index + 1] && parts[index + 1].trim();
-            profile[field] = (value === PROFILE_NA || isEmpty(value)) ? null : value;
-        });
-
-        return profile;
-    } catch (e) {
-        return null;
-    }
-}

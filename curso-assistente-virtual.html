@@ -230,6 +230,7 @@
                 nome: nome,
                 email: email,
                 whatsapp: intl.getNumber(),
+                profile: new URLSearchParams(window.location.search).get('profile'),
                 utm_params: getUTMParams()
             };
 
