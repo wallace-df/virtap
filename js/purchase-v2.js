@@ -197,7 +197,7 @@ function productName(orderRef) {
       return "<ul><li>Assinatura Elite Trimestral</li></ul>";
     case 'VIRTAP_STARTER_KIT':
       return "<ul><li>30 dias de acesso à plataforma de vagas (até 15 propostas)</li><li>Método Virtap de Conquistar Clientes</li></ul>";
-    case 'FORMACAO_AV_FULL':
+    case 'FORMACAO_AV_MTD_VIRTAP_ELITE_TRI':
       return "<ul><li>Formação em Assistência Virtual</li><li>12 meses de mentorias ao vivo</li><li>Curso Método Virtap de Conquistar Clientes</li><li>3 Meses de Acesso a Vagas de Trabalho - Plano Elite da Virtap</li></ul>";
     case 'VIRTAP_ALL_IN_ONE':
       return "<ul><li>Formação AExpert - Assessoria Pessoal</li><li>Formação em Assistência Virtual</li><li>12 meses de mentorias ao vivo</li><li>Curso Método Virtap de Conquistar Clientes</li><li>3 Meses de Acesso a Vagas de Trabalho - Plano Elite da Virtap</li></ul>";
