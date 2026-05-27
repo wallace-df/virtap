@@ -687,7 +687,7 @@ function resultadoPrograma30Dias(titulo, contexto, corpo) {
         destino: 'programa-30dias',
         titulo,
         mensagem: contexto + corpo,
-        btn: makeCTA('👉 Conhecer o programa', PATHS.programa30dias, 'programa-30dias'),
+        btn: makeCTA('👉 Conhecer o programa', PATHS.programa30dias, 'primeiro-cliente-av'),
     };
 }
 
