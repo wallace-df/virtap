@@ -189,9 +189,11 @@ function productName(orderRef) {
       return "<ul><li>Formação em Assistência Virtual</li></ul>";
     case 'FORMACAO_AEXPERT':
       return "<ul><li>Formação AExpert</li></ul>";
-    case 'METODO_VIRTAP_CLIENTES':
-      return "<ul><li>Método Virtap de Conquistar Clientes</li></ul>";
-    case 'ASSINATURA_PROFESSIONAL_TRI':
+      case 'METODO_VIRTAP_CLIENTES':
+        return "<ul><li>Método Virtap de Conquistar Clientes</li></ul>";
+        case 'PRIMEIRO_CLIENTE_AV':
+          return "<ul><li>Do Zero ao Primeiro Cliente como AV</li></ul>";
+          case 'ASSINATURA_PROFESSIONAL_TRI':
       return "<ul><li>Assinatura Profissional Trimestral</li></ul>";
     case 'ASSINATURA_ELITE_TRI':
       return "<ul><li>Assinatura Elite Trimestral</li></ul>";
