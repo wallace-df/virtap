@@ -13,7 +13,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 # ─── Config ──────────────────────────────────────────────────────────
-USE_MOCK = True   # ← True pra testar localmente | False pra usar o endpoint
+USE_MOCK = False   # ← True pra testar localmente | False pra usar o endpoint
 
 JOBS_ENDPOINT = "https://api.virtap.com.br/public/projects"
 BASE_URL      = "https://www.virtap.com.br/vagas-assistente-virtual/"
