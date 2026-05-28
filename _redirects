@@ -16,6 +16,9 @@
 /feed https://blog.virtap.com.br/feed/ 301
 /feed/ https://blog.virtap.com.br/feed/ 301 
 
+/certificado-gratuito /curso-assistente-virtual 301
+/certificado-gratuito/* /curso-assistente-virtual:/splat 301
+
 /masterclass-aexpert /formacoes/assistencia-pessoal 301
 /masterclass-aexpert/* /formacoes/assistencia-pessoal/:splat 301
 /teste-perfil-ap /formacoes/assistencia-pessoal 301
