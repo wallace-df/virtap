@@ -346,61 +346,61 @@ ul li::before {
 }
 
 .course-extra {
-    display: inline-block;
-    text-align: left;
-    margin-top: 1rem;
-    background: rgba(89, 43, 175, 0.04);
-    border-radius: 0.75rem;
-    padding: 0.8rem 1.2rem;
-    border: 1px solid rgba(89, 43, 175, 0.1);
-    transition: all 0.3s ease;
+  display: inline-block;
+  text-align: left;
+  margin-top: 1rem;
+  background: rgba(89, 43, 175, 0.04);
+  border-radius: 0.75rem;
+  padding: 0.8rem 1.2rem;
+  border: 1px solid rgba(89, 43, 175, 0.1);
+  transition: all 0.3s ease;
 }
 
 .course-extra[open] {
-    background: rgba(89, 43, 175, 0.06);
-    padding-bottom: 1rem;
+  background: rgba(89, 43, 175, 0.06);
+  padding-bottom: 1rem;
 }
 
 .course-extra summary {
-    font-size: 1.2rem;
-    color: #7b5daf;
-    cursor: pointer;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  font-size: 1.2rem;
+  color: #7b5daf;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .course-extra summary::-webkit-details-marker {
-    display: none;
+  display: none;
 }
 
 .course-extra summary::before {
-    content: "▸";
-    font-size: 1rem;
-    transition: transform 0.3s ease;
+  content: "▸";
+  font-size: 1rem;
+  transition: transform 0.3s ease;
 }
 
 .course-extra[open] summary::before {
-    transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .course-extra p {
-    font-size: 1rem;
-    color: #666;
-    line-height: 1.7;
-    margin: 0.6rem 0 0;
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.7;
+  margin: 0.6rem 0 0;
 }
 
 .course-extra a {
-    color: #592baf;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(89, 43, 175, 0.3);
-    transition: border-color 0.2s;
+  color: #592baf;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(89, 43, 175, 0.3);
+  transition: border-color 0.2s;
 }
 
 .course-extra a:hover {
-    border-bottom-color: #592baf;
+  border-bottom-color: #592baf;
 }
 
 .video-card {
@@ -461,4 +461,102 @@ ul li::before {
 .video-card.is-playing .video-overlay {
   opacity: 0;
   pointer-events: none;
+}
+
+
+/* ── Quiz embutido ── */
+.quiz-progress {
+  margin-bottom: 1.25rem;
+}
+
+.quiz-progress-track {
+  height: 4px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.quiz-progress-fill {
+  height: 100%;
+  background: var(--primary, #6c3fdf);
+  border-radius: 99px;
+  transition: width .35s ease;
+  width: 0%;
+}
+
+.quiz-step-label {
+  color: #999;
+  font-size: 0.72rem;
+  margin-top: 0.35rem;
+  display: block;
+}
+
+#quiz-step-content h2 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.quiz-option-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  transition: border-color .15s, background .15s;
+}
+
+
+.quiz-option-btn:hover {
+  border-color: var(--primary, #6c3fdf);
+  background: #faf9ff !important;
+}
+
+.quiz-option-btn.selected {
+  border-color: var(--primary, #6c3fdf);
+  background: #faf9ff !important;
+}
+
+.quiz-back-btn {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.quiz-back-btn:hover {
+  color: #555;
+}
+
+#quiz-box .quiz-option-btn {
+  background: #fff !important;
+  color: #333 !important;
+  border: 1.5px solid #ddd !important;
+  font-weight: normal !important;
+}
+
+#quiz-box .quiz-option-btn:hover {
+  border-color: var(--primary, #6c3fdf) !important;
+  background: #fff !important;
+}
+
+#quiz-box .quiz-option-btn.selected {
+  border-color: var(--primary, #6c3fdf) !important;
+  background: #fff !important;
+  font-weight: 600 !important;
+}
+
+#quiz-box .quiz-back-btn:hover {
+  color: #fff !important;
 }

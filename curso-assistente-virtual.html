@@ -37,9 +37,9 @@
     <link href="/favicon.svg" type="image/svg+xml" rel="icon" />
     <link href="/favicon.png" type="image/png" rel="icon" />
 
-    <link rel="stylesheet" href="/css/course-v1.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-		media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="/css/course-v2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        media="print" onload="this.media='all'">
 
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
@@ -101,7 +101,25 @@
             </div>
         </div>
 
-        <div class="form-box" id="signup-form">
+        <!-- ── QUIZ BOX (mostrado primeiro) ─────────────────────────────── -->
+        <div class="form-box" id="quiz-box">
+            <div class="logo">
+                <img src="/img/logo.png" alt="Virtap logo">
+            </div>
+            <div class="quiz-progress">
+                <div class="quiz-progress-track">
+                    <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                </div>
+                <span class="quiz-step-label" id="quiz-step-label"></span>
+            </div>
+            <div id="quiz-step-content"></div>
+            <button class="quiz-back-btn" id="quiz-back-btn" style="display:none" onclick="quizGoBack()">
+                ← Voltar
+            </button>
+        </div>
+
+        <!-- ── FORM BOX (mostrado após quiz) ────────────────────────────── -->
+        <div class="form-box" id="signup-form" style="display:none">
             <div class="logo">
                 <img src="/img/logo.png" alt="Virtap logo">
             </div>
@@ -141,14 +159,242 @@
     <script src="js/utils-v1.js"></script>
 
     <script>
-        let phone = document.getElementById('whatsapp');
-        intl = window.intlTelInput(phone, {
-            autoInsertDialCode: true,
+        // ─── Definição dos steps (subset do flow explore) ──────────────────
+        const QUIZ_STEPS = {
+            origem: {
+                title: 'Como você conheceu a Virtap?',
+                field: 'origem',
+                options: [
+                    { value: 'instagram', label: 'Instagram' },
+                    { value: 'youtube', label: 'YouTube' },
+                    { value: 'tiktok', label: 'TikTok' },
+                    { value: 'google', label: 'Google' },
+                    { value: 'indicacao', label: 'Indicação de conhecido' },
+                    { value: 'ia', label: 'ChatGPT, Gemini ou outra IA' },
+                    { value: 'outro', label: 'Outro' },
+                ],
+            },
+            situacao: {
+                title: 'Qual é a sua situação atual?',
+                field: 'situacao',
+                options: [
+                    { value: 'clt', label: 'Trabalho no CLT' },
+                    { value: 'autonoma', label: 'Sou autônoma' },
+                    { value: 'desempregada', label: 'Estou desempregada' },
+                    { value: 'aposentada', label: 'Sou aposentada' },
+                ],
+            },
+            area: {
+                title: 'Em qual área você tem mais experiência?',
+                field: 'area',
+                options: [
+                    { value: 'secretariado-executivo', label: 'Secretariado Executivo' },
+                    { value: 'atendimento', label: 'Atendimento e suporte ao cliente' },
+                    { value: 'administrativo-financeiro', label: 'Administrativo e financeiro' },
+                    { value: 'comercial', label: 'Comercial e vendas' },
+                    { value: 'marketing', label: 'Marketing e redes sociais' },
+                    { value: 'nenhuma', label: 'Nenhuma dessas' },
+                ],
+            },
+            incomoda: {
+                title: 'O que mais te incomoda hoje?',
+                field: 'incomoda',
+                optionsFn: function (s) {
+                    const opts = {
+                        desempregada: [
+                            { value: 'renda-insuficiente', label: 'Não ter renda' },
+                            { value: 'flexibilidade', label: 'Não quero voltar a ficar presa a horários e local fixo' },
+                            { value: 'tempo', label: 'Não quero me afastar da minha família para poder trabalhar' },
+                            { value: 'independencia', label: 'Quero recomeçar construindo algo que seja meu' },
+                        ],
+                        clt: [
+                            { value: 'renda-insuficiente', label: 'Meu salário mal paga minhas contas' },
+                            { value: 'flexibilidade', label: 'Odeio depender de horário e local fixo' },
+                            { value: 'tempo', label: 'Trabalho tanto que não sobra tempo pra mim e minha família' },
+                            { value: 'independencia', label: 'Quero algo que seja meu, não só um emprego' },
+                        ],
+                        autonoma: [
+                            { value: 'renda-instavel', label: 'Minha renda é imprevisível' },
+                            { value: 'renda-insuficiente', label: 'O que eu ganho hoje não é suficiente' },
+                            { value: 'tempo', label: 'Trabalho tanto que não sobra tempo pra mim e minha família' },
+                            { value: 'independencia', label: 'Quero trabalhar em algo mais sólido e profissional' },
+                        ],
+                        aposentada: [
+                            { value: 'renda-insuficiente', label: 'Minha aposentadoria não é suficiente' },
+                            { value: 'flexibilidade', label: 'Quero continuar ativa, mas no meu ritmo' },
+                            { value: 'independencia', label: 'Quero construir algo meu com propósito' },
+                        ],
+                    };
+                    return opts[s.situacao] || [];
+                },
+            },
+            renda: {
+                title: 'Qual é a sua renda mensal hoje?',
+                field: 'renda',
+                skipFn: function (s) { return s.situacao === 'desempregada'; },
+                options: [
+                    { value: 'ate-1800', label: 'Até R$ 1.800' },
+                    { value: '1800-2500', label: 'R$ 1.800 a R$ 2.500' },
+                    { value: '2500-3500', label: 'R$ 2.500 a R$ 3.500' },
+                    { value: '3500-5000', label: 'R$ 3.500 a R$ 5.000' },
+                    { value: 'acima-5000', label: 'Acima de R$ 5.000' },
+                ],
+            },
+        };
+
+        const QUIZ_FLOW = ['origem', 'situacao', 'area', 'incomoda', 'renda'];
+        const QUIZ_SCHEMA = ['origem', 'situacao', 'area', 'incomoda', 'renda']; // mesma ordem do profile slug
+        const PROFILE_NA = 'na';
+
+        // Estado
+        const quizState = { origem: null, situacao: null, area: null, incomoda: null, renda: null };
+        let quizIndex = 0;
+        let quizHistory = []; // índices visitados, pra voltar
+
+        // ─── Contagem real de steps (descontando skips) ────────────────────
+        function countVisibleSteps() {
+            return QUIZ_FLOW.filter(id => {
+                const step = QUIZ_STEPS[id];
+                return !(step.skipFn && step.skipFn(quizState));
+            }).length;
+        }
+
+        function countVisibleIndex(currentRealIndex) {
+            // Quantos steps não-pulados existem até currentRealIndex (inclusive)
+            let count = 0;
+            for (let i = 0; i <= currentRealIndex; i++) {
+                const step = QUIZ_STEPS[QUIZ_FLOW[i]];
+                if (!(step.skipFn && step.skipFn(quizState))) count++;
+            }
+            return count;
+        }
+
+        // ─── Render ────────────────────────────────────────────────────────
+        function quizRenderStep(index) {
+            const stepId = QUIZ_FLOW[index];
+            const step = QUIZ_STEPS[stepId];
+
+            const options = typeof step.optionsFn === 'function'
+                ? step.optionsFn(quizState)
+                : step.options;
+
+            const current = quizState[step.field];
+            const btns = options.map(opt => {
+                const sel = current === opt.value ? ' selected' : '';
+                return `<button class="quiz-option-btn${sel}"
+                            onclick="quizSelect('${step.field}','${opt.value}',this)">
+                            ${opt.label}
+                        </button>`;
+            }).join('');
+
+            document.getElementById('quiz-step-content').innerHTML =
+                `<h2>${step.title}</h2>${btns}`;
+
+            // Progresso
+            const visible = countVisibleSteps();
+            const position = countVisibleIndex(index);
+            document.getElementById('quiz-progress-fill').style.width =
+                ((position / visible) * 100) + '%';
+            document.getElementById('quiz-step-label').textContent =
+                `Pergunta ${position} de ${visible}`;
+
+            // Botão voltar
+            document.getElementById('quiz-back-btn').style.display =
+                quizHistory.length > 0 ? 'inline-flex' : 'none';
+
+            document.getElementById('quiz-box').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // ─── Seleção + avanço ──────────────────────────────────────────────
+        let _quizTimer = null;
+        function quizSelect(field, value, el) {
+            quizState[field] = value;
+            // Marca visualmente
+            el.parentNode.querySelectorAll('.quiz-option-btn')
+                .forEach(b => b.classList.remove('selected'));
+            el.classList.add('selected');
+            // Desabilita todos pra evitar double-click
+            el.parentNode.querySelectorAll('.quiz-option-btn')
+                .forEach(b => b.disabled = true);
+            if (_quizTimer) clearTimeout(_quizTimer);
+            _quizTimer = setTimeout(quizAdvance, 200);
+        }
+
+        function quizAdvance() {
+            quizHistory.push(quizIndex);
+            quizIndex++;
+
+            while (quizIndex < QUIZ_FLOW.length) {
+                const step = QUIZ_STEPS[QUIZ_FLOW[quizIndex]];
+                if (step.skipFn && step.skipFn(quizState)) {
+                    quizState[step.field] = null;
+                    quizIndex++;
+                    continue;
+                }
+                quizRenderStep(quizIndex);
+                return;
+            }
+
+            // Fim do quiz → mostra form
+            quizComplete();
+        }
+
+        function quizGoBack() {
+            if (quizHistory.length === 0) return;
+            quizIndex = quizHistory.pop();
+            // Limpa valor do step atual antes de re-renderizar
+            const stepId = QUIZ_FLOW[quizIndex];
+            quizState[QUIZ_STEPS[stepId].field] = null;
+            quizRenderStep(quizIndex);
+        }
+
+        // ─── Conclusão ─────────────────────────────────────────────────────
+        function quizComplete() {
+            // Barra cheia
+            document.getElementById('quiz-progress-fill').style.width = '100%';
+
+            // Monta slug: explore_<origem>_<situacao>_<area>_<incomoda>_<renda>
+            const parts = ['explore'].concat(
+                QUIZ_SCHEMA.map(f => quizState[f] || PROFILE_NA)
+            );
+            window._quizProfile = parts.join('_');
+
+            // Troca quiz → form
+            document.getElementById('quiz-box').style.display = 'none';
+            document.getElementById('signup-form').style.display = '';
+            document.getElementById('signup-form').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            // Inicializa intlTelInput (precisa do DOM visível)
+            const phone = document.getElementById('whatsapp');
+            window._intl = window.intlTelInput(phone, {
+                autoInsertDialCode: true,
             initialCountry: "BR",
             separateDialCode: true
+            });
+        }
+
+        // ─── Init ──────────────────────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlProfile = new URLSearchParams(window.location.search).get('profile');
+            if (urlProfile) {
+                // Usuário veio do quiz principal — profile já existe, pula quiz
+                window._quizProfile = urlProfile;
+                document.getElementById('quiz-box').style.display = 'none';
+                document.getElementById('signup-form').style.display = '';
+                const phone = document.getElementById('whatsapp');
+                window._intl = window.intlTelInput(phone, {
+                    autoInsertDialCode: true,
+                    initialCountry: 'BR',
+                    separateDialCode: true,
+                });
+            } else {
+                quizRenderStep(0);
+            }
         });
+    </script>
 
-
+    <!-- ── FORM + MODAIS ─────────────────────────────────────────────────── -->
+    <script>
         function showModal() {
             document.getElementById('error-modal').style.display = 'flex';
         }
@@ -157,17 +403,12 @@
             document.getElementById('error-modal').style.display = 'none';
         }
 
-
         window.addEventListener('click', function (event) {
             const modal = document.getElementById('error-modal');
             const content = document.querySelector('.modal-content');
-
             if (modal.style.display === 'flex' && !content.contains(event.target)) {
-                // Em vez de fechar, dá shake
                 content.classList.add('shake');
-                setTimeout(() => {
-                    content.classList.remove('shake');
-                }, 400); // tempo da animação
+                setTimeout(() => content.classList.remove('shake'), 400);
             }
         });
 
@@ -199,23 +440,20 @@
                 hasError = true;
             }
 
-            // Validação Email
             if (!/^\S+@\S+\.\S+$/.test(email)) {
                 document.getElementById('erro-email').textContent = 'Digite um e-mail válido (ex: nome@dominio.com).';
                 form.email.classList.add('input-error');
                 hasError = true;
             }
 
-            // Validação WhatsApp
-            if (!intl.isValidNumber()) {
+            if (!window._intl || !window._intl.isValidNumber()) {
                 document.getElementById('erro-whatsapp').textContent = 'Digite um número de WhatsApp.';
                 form.whatsapp.classList.add('input-error');
 
                 hasError = true;
             }
 
-            if (hasError) return; // Interrompe se houver erros
-
+            if (hasError) return;
 
             const inputs = form.querySelectorAll('input, button');
             const button = form.querySelector('button');
@@ -229,33 +467,31 @@
             const body = {
                 nome: nome,
                 email: email,
-                whatsapp: intl.getNumber(),
-                profile: new URLSearchParams(window.location.search).get('profile'),
-                utm_params: getUTMParams()
+                whatsapp: window._intl.getNumber(),
+                // Prioriza o profile coletado pelo quiz; fallback para URL param (retrocompat)
+                profile: window._quizProfile || new URLSearchParams(window.location.search).get('profile'),
+                utm_params: getUTMParams(),
             };
 
             try {
                 const response = await fetch(url, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(body)
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body),
                 });
 
                 if (response.status === 200) {
-
                     let data = await response.json();
-                    let url = "/cadastro-confirmado";
+                    let redir = '/cadastro-confirmado';
                     if (data.responseData.hasAccount) {
-                        url = "/cadastro-ja-realizado?e=" + email;
+                        redir = '/cadastro-ja-realizado?e=' + email;
                     }
                     window.dataLayer.push({
                         'event': 'ga_event',
                         'ga_event_name': 'sign_up_free_course',
-                        'redir_url': url
+                        'redir_url': redir,
                     });
-                    setTimeout(() => window.location.href = url, 5000);
+                    setTimeout(() => window.location.href = redir, 5000);
                 } else {
                     let data = await response.json();
 
@@ -332,7 +568,7 @@
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.virtap.com.br/" },
     { "@type": "ListItem", "position": 2, "name": "Curso Gratuito de Assistente Virtual", "item": "https://www.virtap.com.br/curso-assistente-virtual" }
-  ]
+    ]
 }
 </script>
 
