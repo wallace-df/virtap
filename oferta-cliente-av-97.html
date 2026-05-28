@@ -1038,7 +1038,7 @@
         </div>
 
         <div class="cont-item">
-          O importante é aprender a executar esse serviço de forma profissional.
+          O importante é aprender a executar um serviço de forma profissional.
         </div>
 
         <div class="cont-item">
@@ -1050,7 +1050,7 @@
       <p class="cont-conclusion">
         E é exatamente isso que o programa <strong style="color:var(--color-primary)">
           Do Zero ao Primeiro Cliente como AV
-        </strong> foi criado para fazer.
+        </strong> te ensina a fazer.
       </p>
 
     </div>
@@ -1102,7 +1102,7 @@
       </ul>
 
       <p style="margin-top:1rem;font-weight:600;color:var(--color-primary)">
-        Você aprende a executar antes mesmo de atender um cliente real.
+        Você aprende a executar antes de atender um cliente real.
       </p>
     </div>
 
@@ -1330,7 +1330,7 @@
 
         <div class="oferta-item">
           <span class="ck">✓</span>
-          Programa completo de 30 dias
+          Programa completo de 4 semanas
         </div>
 
         <div class="oferta-item">
@@ -1467,11 +1467,12 @@
           if (diff <= 0) { showExpired(); return; }
           var totalSec = Math.floor(diff / 1000);
           var days = Math.floor(totalSec / 86400);
-          var hours = Math.floor((totalSec % 86400) / 3600);
+          var hours = Math.floor((totalSec) / 3600);
           var mins = Math.floor((totalSec % 3600) / 60);
           var secs = totalSec % 60;
+          days = 0;
           var display = days > 0
-            ? days + 'd ' + pad(hours) + ':' + pad(mins) + ':' + pad(secs)
+            ? days + (days > 1 ? ' dias ' : ' dia ') + pad(hours) + ':' + pad(mins) + ':' + pad(secs)
             : pad(hours) + ':' + pad(mins) + ':' + pad(secs);
           topTimer.textContent = display;
           offerTimer.textContent = display;
@@ -1511,7 +1512,7 @@
         </div>
       </div>
       <div class="wpp-card-msg">Oi! 👋 Quer tirar alguma dúvida antes de começar?</div>
-      <a href="https://wa.me/5548988089062?text=Quero%20saber%20mais%20sobre%20a%20Formação" class="wpp-card-cta"
+      <a href="https://wa.me/5548988089062?text=Quero%20saber%20mais%20sobre%20o%20Programa" class="wpp-card-cta"
         target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24">
           <path
