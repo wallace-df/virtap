@@ -12,8 +12,7 @@
     <link href="/favicon.png" type="image/png" rel="icon" />
 
     <title>Descubra seu caminho na profissão de Assistente Virtual | Virtap</title>
-    <link rel="stylesheet" href="/css/quiz-v2.css" />
-    <link rel="stylesheet" href="/css/intlTelInput.min.css" />
+    <link rel="stylesheet" href="/css/quiz-v1.css" />
 
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
@@ -26,18 +25,14 @@
         })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
     </script>
     <!-- End Google Tag Manager -->
-
-    <script>
-        window.apiURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://api.virtap.com.br';
-    </script>
 </head>
 
 <body>
 
     <h1>Qual o próximo passo pra você como Assistente Virtual? ⭐
-    <p>Responda algumas perguntas rápidas e veja como avançar na sua carreira.</p>
+        <p>Responda algumas perguntas rápidas e veja como avançar na sua carreira.</p>
     </h1>
-
+    
     <div id="quiz-wrapper">
         <div id="quiz-container">
             <div class="header-nav" style="display:none" id="header-nav">
@@ -49,18 +44,7 @@
         </div>
     </div>
 
-    <!-- Error modal pra falhas no envio do form de captura -->
-    <div id="error-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeErrorModal()">×</span>
-            <h3>Ops! Algo deu errado 😕</h3>
-            <p>Não foi possível enviar seus dados. Por favor, tente novamente em instantes.</p>
-            <button onclick="closeErrorModal()">Fechar</button>
-        </div>
-    </div>
-
-    <script src="/js/intlTelInput.min.js"></script>
-    <script src="/js/quiz-v4.js"></script>
+    <script src="/js/quiz-v3.js"></script>
 </body>
 
 </html>
