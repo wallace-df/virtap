@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtap</title>
+
+  <!-- =========================================================
+       Wistia Player Scripts
+       Substitua WISTIA_7zo9bff143 pelo hashed ID do seu vídeo
+       (ex: "abc123def4")
+       ========================================================= -->
+  <script src="https://fast.wistia.com/embed/medias/7zo9bff143.jsonp" async></script>
+  <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+
+  <style>
+    :root {
+      /* Cores Virtap */
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #5a5a6e;
+      --purple: #6E2EBE;
+      --purple-hover: #5A22A0;
+      --purple-shadow: rgba(110, 46, 190, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 20px 60px;
+    }
+
+    /* ===== Header ===== */
+    header {
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .logo {
+      height: 48px;
+      width: auto;
+      display: inline-block;
+    }
+
+    @media (max-width: 600px) {
+      .logo {
+        height: 38px;
+      }
+    }
+
+
+    .restart-button {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 16px;
+      text-decoration: underline;
+      font-family: inherit;
+    }
+
+    .restart-button:hover {
+      color: var(--purple);
+    }
+
+    /* ===== Video container ===== */
+    .video-wrapper {
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .wistia_responsive_padding {
+      padding: 56.25% 0 0 0;
+      position: relative;
+      height: 100%;
+    }
+
+    .wistia_responsive_wrapper {
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    /* ===== Botão CTA ===== */
+    .cta-wrapper {
+      width: 100%;
+      max-width: 900px;
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+      min-height: 56px;
+    }
+
+    .cta-button {
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      padding: 16px 40px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 999px;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      box-shadow: 0 6px 20px var(--purple-shadow);
+      transition: transform 0.2s ease, background 0.2s ease,
+        box-shadow 0.2s ease, opacity 0.5s ease;
+
+      /* Animação de aparecer */
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      display: none;
+    }
+
+    .cta-button.visible {
+      display: inline-block;
+      animation: fadeInUp 0.6s ease forwards;
+      pointer-events: auto;
+    }
+
+    .cta-button:hover {
+      background: var(--purple-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px var(--purple-shadow);
+    }
+
+    .cta-button:active {
+      transform: translateY(0);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 20px 16px 40px;
+      }
+
+      header {
+        margin-bottom: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <img src="https://www.virtap.com.br/img/logo.png" alt="Virtap" class="logo" />
+  </header>
+
+  <!-- ===== VIDEO WISTIA ===== -->
+  <!-- IMPORTANTE: troque WISTIA_7zo9bff143 pelo hashed ID do seu vídeo -->
+  <div class="video-wrapper">
+    <div class="wistia_responsive_padding">
+      <div class="wistia_responsive_wrapper">
+        <div class="wistia_embed wistia_async_7zo9bff143
+                 playbar=false
+                 resumable=true
+                 smallPlayButton=false
+                 fullscreenButton=true
+                 volumeControl=true
+                 qualityControl=true
+                 settingsControl=true
+                 controlsVisibleOnLoad=true
+                 playButton=true
+                 " style="height:100%;width:100%">&nbsp;</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <button id="restartButton" class="restart-button" onclick="restartVideo()">
+    ↻ Reiniciar vídeo
+  </button> -->
+
+  <!-- ===== BOTÃO CTA (escondido até o tempo X) ===== -->
+  <div class="cta-wrapper">
+    <button id="ctaButton" class="cta-button" onclick="handleCtaClick()">
+      Quero entrar no programa
+    </button>
+  </div>
+
+  <script>
+    function restartVideo() {
+      if (!window._wistiaVideo) return;
+      window._wistiaVideo.time(0);
+      window._wistiaVideo.play();
+      // esconde o CTA de novo
+      const cta = document.getElementById("ctaButton");
+      cta.classList.remove("visible");
+    }
+
+    // =========================================================
+    // CONFIGURAÇÕES
+    // =========================================================
+    const SHOW_BUTTON_AT_SECONDS = 220;
+    const CTA_LINK = "https://www.virtap.com.br/do-zero-ao-primeiro-cliente";
+    // =========================================================
+
+    function handleCtaClick() {
+      const currentParams = window.location.search;
+
+      const finalUrl = currentParams
+        ? `${CTA_LINK}${CTA_LINK.includes('?') ? '&' : '?'}${currentParams.substring(1)}`
+        : CTA_LINK;
+
+      window.location.href = finalUrl;
+    }
+
+    // Hook do Wistia: dispara quando o player está pronto
+    window._wq = window._wq || [];
+    _wq.push({
+      id: "_all",
+      onReady: function (video) {
+        window._wistiaVideo = video;
+
+        const ctaButton = document.getElementById("ctaButton");
+        let buttonShown = false;
+
+
+        video.bind("secondchange", (sec) => {
+          if (!buttonShown && sec >= SHOW_BUTTON_AT_SECONDS) {
+            ctaButton.classList.add("visible");
+            buttonShown = true;
+          }
+        });
+
+        // Garantia: se o vídeo terminar antes do tempo definido,
+        // mostra o botão também
+        video.bind("end", function () {
+          if (!buttonShown) {
+            ctaButton.classList.add("visible");
+            buttonShown = true;
+          }
+        });
+      },
+    });
+  </script>
+</body>
+
+</html>
