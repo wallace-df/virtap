@@ -111,7 +111,6 @@ def build_cards(jobs):
                                 <p class="vagas_data">{time_ago(j['registration_timestamp'])}</p>
                             </div>
                             <p class="vagas_desc">{html.escape(j['description'])}</p>
-                            <a href="#acesso" class="secondary_button vagas_btn">Quero me candidatar</a>
                         </div>
                     </div>""" for j in jobs)
 
