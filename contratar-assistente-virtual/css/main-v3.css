@@ -416,8 +416,7 @@ section {
 }
 
 .landing-hero-text-area p,
-.landing-hero-text-area h2
-{
+.landing-hero-text-area h2 {
   font-weight: 400;
   font-size: 32px;
   line-height: 1.34;
@@ -884,8 +883,7 @@ section {
 }
 
 .cada-necessidade-area .virtap-funciona-btn,
-.vantagem-plataforma-area .virtap-funciona-btn
-{
+.vantagem-plataforma-area .virtap-funciona-btn {
   margin: 30px 0;
 }
 
@@ -2256,7 +2254,7 @@ section {
   }
 
   .landing-hero-text-area p,
-  .landing-hero-text-area h2{
+  .landing-hero-text-area h2 {
     font-size: 30px;
   }
 
@@ -2361,8 +2359,7 @@ section {
   }
 
   .landing-hero-text-area p,
-  .landing-hero-text-area h2
-  {
+  .landing-hero-text-area h2 {
     font-size: 20px;
   }
 
@@ -2844,8 +2841,7 @@ section {
   }
 
   .landing-hero-text-area p,
-  .landing-hero-text-area h2
-  {
+  .landing-hero-text-area h2 {
     font-size: 21px;
   }
 
@@ -3067,8 +3063,7 @@ section {
   }
 
   .landing-hero-text-area p,
-  .landing-hero-text-area h2
-  {
+  .landing-hero-text-area h2 {
     font-size: 20px;
     margin-bottom: 45px;
   }
@@ -3239,8 +3234,7 @@ section {
 
   .landing-hero-text-area h1,
   .landing-hero-text-area p,
-  .landing-hero-text-area h2
-  {
+  .landing-hero-text-area h2 {
     margin-left: auto;
     margin-right: auto;
   }
@@ -3503,8 +3497,7 @@ section {
   }
 
   .landing-hero-text-area p,
-  .landing-hero-text-area h2
-  {
+  .landing-hero-text-area h2 {
     font-size: 22px;
     line-height: 32px;
     margin-bottom: 30px;
@@ -4253,8 +4246,7 @@ section {
   }
 
   .landing-hero-text-area p,
-  .landing-hero-text-area h2
-  {
+  .landing-hero-text-area h2 {
     font-size: 18px;
     line-height: 28px;
   }
@@ -4481,4 +4473,238 @@ section {
   z-index: 9999;
   font-size: 12px;
   display: none;
+}
+
+/* ── WPP FAB ── */
+.wpp-fab {
+  position: fixed;
+  bottom: 80px;
+  right: 28px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16px;
+}
+
+.wpp-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background: #25d366;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, .3), 0 2px 4px rgba(0, 0, 0, .1);
+  transition: transform .25s cubic-bezier(.34, 1.56, .64, 1), box-shadow .25s ease;
+  animation: wppEntrada .4s cubic-bezier(.34, 1.56, .64, 1) both;
+  animation-delay: .5s;
+}
+
+@keyframes wppEntrada {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.wpp-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 24px rgba(37, 211, 102, .4);
+}
+
+.wpp-btn:active {
+  transform: scale(.95);
+}
+
+.wpp-btn svg {
+  width: 30px;
+  height: 30px;
+  fill: #fff;
+}
+
+.wpp-pulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(37, 211, 102, .5);
+  animation: wppPulse 2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes wppPulse {
+  0% {
+    transform: scale(1);
+    opacity: .6;
+  }
+
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.wpp-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 18px;
+  height: 18px;
+  background: #ff3b5c;
+  border-radius: 50%;
+  border: 2.5px solid #fff;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: badgePop .4s cubic-bezier(.34, 1.56, .64, 1) both;
+  animation-delay: 1.2s;
+  opacity: 0;
+}
+
+@keyframes badgePop {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.wpp-card {
+  display: none;
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  width: 280px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .18), 0 2px 8px rgba(0, 0, 0, .08);
+  position: relative;
+  animation: cardIn .3s cubic-bezier(.34, 1.56, .64, 1) both;
+}
+
+.wpp-card.aberto {
+  display: block;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: scale(.85) translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.wpp-card-fechar {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: #f0f2f5;
+  color: #8e8e9e;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wpp-card-fechar:hover {
+  background: #e4e6e9;
+  color: #333;
+}
+
+.wpp-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.wpp-card-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #25d366, #128c47);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wpp-card-avatar svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+}
+
+.wpp-card-nome {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1a1a2e;
+}
+
+.wpp-card-status {
+  font-size: 12px;
+  color: #8e8e9e;
+  margin-top: 1px;
+}
+
+.wpp-card-msg {
+  background: #f0f2f5;
+  border-radius: 0 12px 12px 12px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #3a3a4a;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.wpp-card-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 11px 16px;
+  background: #25d366;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .2s ease;
+}
+
+.wpp-card-cta:hover {
+  background: #1fb855;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(37, 211, 102, .35);
+}
+
+.wpp-card-cta svg {
+  width: 16px;
+  height: 16px;
+  fill: #fff;
 }
