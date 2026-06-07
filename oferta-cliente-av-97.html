@@ -1095,6 +1095,7 @@
       </h3>
 
       <ul class="bloco-list">
+
         <li>Atendimento profissional</li>
         <li>Organização de agendas</li>
         <li>Ferramentas simples e gratuitas</li>
@@ -1369,7 +1370,7 @@
         ou 12x de R$ 9,90
       </div>
 
-      <a href="https://www.virtap.com.br/comprar" class="cta cta--full" id="checkoutBtn">
+      <a href="https://wa.me/5548988089062?text=Quero%20entrar%20no%20Programa%20Primeiro%20Cliente%20Como%20AV" class="cta cta--full" id="checkoutBtn">
 
         Quero meu primeiro cliente
 
@@ -1435,7 +1436,9 @@
       }
 
       // Checkout = /comprar + todos os params da URL atual
-      checkoutBtn.href = '/comprar' + window.location.search;
+      // fixme
+//      checkoutBtn.href = '/comprar' + window.location.search;
+//        checkoutBtn.href='https://wa.me/5548988089062?text=Quero%20entrar%20no%20Programa%20Primeiro%20Cliente%20Como%20AV'
 
       // Busca countdown do servidor
       fetch(`${window.apiURL}/check-rsrc/` + rsrc)
@@ -1556,7 +1559,8 @@
       var btn = document.getElementById('checkoutBtn');
       if (!btn) return;
       var base = btn.href.split('?')[0];
-      btn.href = base + qs;
+      //fixme
+      //btn.href = base + qs;
     })();
   </script>
 
