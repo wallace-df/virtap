@@ -55,6 +55,7 @@
 
     <script>
         window.apiURL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://api.virtap.com.br';
+        window.dashboardURL = window.location.hostname === 'localhost' ? 'http://localhost:8080' : 'https://assistentes.virtap.com.br';
     </script>
 
 </head>
@@ -475,6 +476,7 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(body),
+                    credentials: 'include'
                 });
 
                 if (response.status === 200) {
@@ -482,6 +484,8 @@
                     let redir = '/cadastro-confirmado';
                     if (data.responseData.hasAccount) {
                         redir = '/cadastro-ja-realizado?e=' + email;
+                    } else if (data.responseData.loggedIn) {
+                        redir = window.dashboardURL + '/curso/intro-av';
                     }
                     window.dataLayer.push({
                         'event': 'ga_event',
