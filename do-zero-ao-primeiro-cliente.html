@@ -971,8 +971,8 @@
         <!-- <p class="pricing-retorno">Um cliente local paga em média R$500 por mês. Você recupera esse investimento em
           menos de uma semana de trabalho.</p>
  -->
-        <a data-wpp-link href="#" x-href="https://chat.whatsapp.com/CUXRZoldYWZBKSmRZQkEa8" class="btn-main" onclick="checkout()"
-          style="max-width:100%;">Quero meu primeiro cliente →</a>
+        <a data-wpp-link href="#" x-href="https://chat.whatsapp.com/CUXRZoldYWZBKSmRZQkEa8" class="btn-main"
+          onclick="checkout()" style="max-width:100%;">Quero meu primeiro cliente →</a>
 
         <div class="pricing-secure">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1111,6 +1111,13 @@
 
     function checkout() {
       let url = 'https://wa.me/5548988089062?text=Quero%20entrar%20no%20Programa%20Primeiro%20Cliente%20Como%20AV';
+
+      window.dataLayer.push({
+        'event': 'ga_event',
+        'ga_event_name': 'checkout_primeiro_client',
+        'redir_url': url
+      });
+
       setTimeout(() => location.href = url, 2000);
     }
 
