@@ -232,7 +232,7 @@
       background: #EDF6F9;
     }
 
-    
+
 
     /* CONCEITO */
     .conceito-section {
@@ -846,11 +846,11 @@
           <p>Todos os dias, precisam responder mensagens, organizar agendas e atender clientes.</p>
         </div>
         <div class="conceito-card">
-          <p>Estão sobrecarregados e precisam de ajuda, mas não querem ou não podem  contratar alguém fixo.</p>
+          <p>Estão sobrecarregados e precisam de ajuda, mas não querem ou não podem contratar alguém fixo.</p>
         </div>
       </div>
       <p class="conceito-destaque">Mas... eles não precisam contratar alguém fixo pra ter essa ajuda.</p>
-      
+
       <p class="conceito-destaque">Muitos já pagam <strong>R$500 ou mais por mês</strong> para alguém que resolva isso
         remotamente, em horários flexíveis.</p>
 
@@ -859,7 +859,8 @@
 
       <p class="conceito-cta-text" style="margin-top:2rem; color:var(--purple-mid); font-size: 2rem;">Como?</p>
       <p class="conceito-av" style="font-size: 1.2rem;color:var(--dark)">Esse é o serviço mais comum de uma
-        <span style="color:var(--purple-mid)">Assistente Virtual</span> e é exatamente assim que você pode começar...</p>
+        <span style="color:var(--purple-mid)">Assistente Virtual</span> e é exatamente assim que você pode começar...
+      </p>
 
 
     </div>
@@ -970,7 +971,7 @@
         <!-- <p class="pricing-retorno">Um cliente local paga em média R$500 por mês. Você recupera esse investimento em
           menos de uma semana de trabalho.</p>
  -->
-        <a data-wpp-link href="https://chat.whatsapp.com/CUXRZoldYWZBKSmRZQkEa8" class="btn-main"
+        <a data-wpp-link x-href="https://chat.whatsapp.com/CUXRZoldYWZBKSmRZQkEa8" class="btn-main" onclick="checkout()"
           style="max-width:100%;">Quero meu primeiro cliente →</a>
 
         <div class="pricing-secure">
@@ -1107,6 +1108,12 @@
       document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
       if (!wasOpen) el.classList.add('open');
     }
+
+    function checkout() {
+      let url = 'https://wa.me/5548988089062?text=Quero%20entrar%20no%20Programa%20Primeiro%20Cliente%20Como%20AV';
+      setTimeout(() => location.href = url, 2000);
+    }
+
   </script>
 
 </body>
