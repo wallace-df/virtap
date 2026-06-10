@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abre em poucos dias — Virtap</title>
+  <meta name="description"
+    content="As inscrições do programa abrem nos próximos dias. Entre na lista pra ser avisada assim que abrir.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --roxo: #5B2D8E;
+      --roxo-escuro: #3d1d61;
+      --azul: #B3E3E5;
+      --azul-claro: #eaf8f8;
+      --texto: #2a2336;
+      --texto-suave: #6b6478;
+      --branco: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      color: var(--texto);
+      background:
+        radial-gradient(120% 90% at 15% 0%, var(--azul-claro) 0%, transparent 55%),
+        radial-gradient(110% 80% at 100% 100%, #f3eefb 0%, transparent 50%),
+        var(--branco);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .cartao {
+      width: 100%;
+      max-width: 480px;
+      background: var(--branco);
+      border: 1px solid #efeaf6;
+      border-radius: 28px;
+      padding: 44px 34px 36px;
+      box-shadow: 0 30px 60px -28px rgba(91, 45, 142, .28);
+      text-align: center;
+      position: relative;
+    }
+
+    .marca {
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-size: 13px;
+      color: var(--roxo);
+      margin-bottom: 28px;
+    }
+
+    .marca span {
+      color: var(--azul);
+      -webkit-text-stroke: .4px #7fc9cc;
+    }
+
+    .selo {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--azul-claro);
+      color: var(--roxo);
+      font-weight: 600;
+      font-size: 13.5px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      margin-bottom: 26px;
+    }
+
+    .pontos {
+      display: inline-flex;
+      gap: 4px;
+    }
+
+    .pontos i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--roxo);
+      display: block;
+      animation: pulsa 1.4s infinite ease-in-out;
+    }
+
+    .pontos i:nth-child(2) {
+      animation-delay: .2s;
+    }
+
+    .pontos i:nth-child(3) {
+      animation-delay: .4s;
+    }
+
+    @keyframes pulsa {
+
+      0%,
+      100% {
+        opacity: .25;
+        transform: translateY(0);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translateY(-3px);
+      }
+    }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 1.15;
+      color: var(--roxo-escuro);
+      margin-bottom: 16px;
+      letter-spacing: -.01em;
+    }
+
+    .sub {
+      color: var(--texto-suave);
+      font-size: 16.5px;
+      margin-bottom: 14px;
+    }
+
+    .sub strong {
+      color: var(--texto);
+      font-weight: 600;
+    }
+
+    .reforco {
+      color: var(--texto);
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    .botao {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      width: 100%;
+      background: var(--roxo);
+      color: var(--branco);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16.5px;
+      padding: 17px 20px;
+      border-radius: 16px;
+      transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+      box-shadow: 0 14px 26px -12px rgba(91, 45, 142, .6);
+    }
+
+    .botao:hover {
+      background: var(--roxo-escuro);
+      transform: translateY(-2px);
+    }
+
+    .botao:active {
+      transform: translateY(0);
+    }
+
+    .botao:focus-visible {
+      outline: 3px solid var(--azul);
+      outline-offset: 3px;
+    }
+
+    .botao svg {
+      flex-shrink: 0;
+    }
+
+    .nota {
+      margin-top: 16px;
+      font-size: 13.5px;
+      color: var(--texto-suave);
+    }
+
+    .rodape {
+      margin-top: 30px;
+      padding-top: 22px;
+      border-top: 1px solid #f1ecf7;
+      font-size: 13px;
+      color: var(--texto-suave);
+    }
+
+    @media (max-width:420px) {
+      .cartao {
+        padding: 38px 24px 30px;
+        border-radius: 24px;
+      }
+
+      h1 {
+        font-size: 27px;
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      .pontos i {
+        animation: none;
+        opacity: .7;
+      }
+
+      .botao {
+        transition: none;
+      }
+    }
+  </style>
+
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');
+  </script>
+  <!-- End Google Tag Manager -->
+
+
+</head>
+
+<body>
+  <main class="cartao">
+    <div class="selo">
+      <span class="pontos"><i></i><i></i><i></i></span>
+      Abre em poucos dias
+    </div>
+
+    <!-- NOME DO PROGRAMA: edite o título abaixo se quiser -->
+    <h1>Você chegou cedo!</h1>
+
+    <p class="sub">
+      As inscrições do programa <strong>ainda não estão abertas</strong>.<br /><br />
+      Estamos finalizando os últimos detalhes pra abrir nos próximos dias.
+    </p>
+
+    <!-- ⚠️ TROQUE 55XXXXXXXXXXX pelo seu número (DDI 55 + DDD + número, sem espaços) -->
+    <a class="botao"
+      href="https://wa.me/5548988089062?text=Oi!%20Quero%20ser%20avisada%20quando%20o%20programa%20abrir%20%F0%9F%92%9C"
+      target="_blank" rel="noopener">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path
+          d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.215zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+      </svg>
+      Quero ser avisada no WhatsApp
+    </a>
+
+    <p class="rodape">Virtap · Do Zero ao Primeiro Cliente como AV</p>
+  </main>
+</body>
+
+</html>
