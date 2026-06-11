@@ -558,7 +558,7 @@ function gerarResultado() {
 
     // ─── FLOW 2: build ───────────────────────────────────────────────────
     if (state.flow === 'build') {
-        const rendaBaixa = ['ate-1800'].includes(state.renda);
+        const rendaBaixa = ['ate-1800','1800-2500'].includes(state.renda);
         const desempregada = state.situacao === 'desempregada';
 
         // Programa 30 Dias
