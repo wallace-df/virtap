@@ -1436,9 +1436,7 @@
       }
 
       // Checkout = /comprar + todos os params da URL atual
-      // fixme
-//      checkoutBtn.href = '/comprar' + window.location.search;
-//        checkoutBtn.href='https://wa.me/5548988089062?text=Quero%20entrar%20no%20Programa%20Primeiro%20Cliente%20Como%20AV'
+      checkoutBtn.href = '/comprar' + window.location.search;
 
       // Busca countdown do servidor
       fetch(`${window.apiURL}/check-rsrc/` + rsrc)
@@ -1559,8 +1557,7 @@
       var btn = document.getElementById('checkoutBtn');
       if (!btn) return;
       var base = btn.href.split('?')[0];
-      //fixme
-      //btn.href = base + qs;
+      btn.href = base + qs;
     })();
   </script>
 
