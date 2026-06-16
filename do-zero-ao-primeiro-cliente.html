@@ -972,8 +972,9 @@
         <!-- <p class="pricing-retorno">Um cliente local paga em média R$500 por mês. Você recupera esse investimento em
           menos de uma semana de trabalho.</p>
  -->
-        <a data-wpp-link x-href="https://chat.whatsapp.com/CUXRZoldYWZBKSmRZQkEa8" class="btn-main"
-          onclick="checkout()" style="max-width:100%;">Quero entrar agora</a>
+
+        <a data-link href="https://www.virtap.com.br/comprar?rsrc=v2iUTBB5oG" class="btn-main"
+          style="max-width:100%;">Quero entrar agora</a>
 
         <div class="pricing-secure">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1109,20 +1110,11 @@
       document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
       if (!wasOpen) el.classList.add('open');
     }
-
-    function checkout() {
-      let url = '/espera-30';
-
-      window.dataLayer.push({
-        'event': 'ga_event',
-        'ga_event_name': 'checkout_primeiro_cliente_av',
-        'redir_url': url
-      });
-
-      setTimeout(() => location.href = url, 2000);
-    }
-
   </script>
+
+<script src="./vagas-assistente-virtual/js//jquery-3.4.1.min.js"></script>
+<script src="./vagas-assistente-virtual/js/main.js"></script>
+
 
 </body>
 
