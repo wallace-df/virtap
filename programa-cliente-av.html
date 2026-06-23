@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu primeiro cliente como Assistente Virtual | Virtap</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --color-bg: #FAFAFA;
+            --color-bg-warm: #F5F0FA;
+            --color-text: #1A1A2E;
+            --color-text-soft: #4A4A5A;
+            --color-text-muted: #8A8A9A;
+            --color-primary: #5B2D8E;
+            --color-primary-dark: #4A2375;
+            --color-accent: #E8B931;
+            --color-green: #2E8B57;
+            --color-green-bg: #EAF5F0;
+            --color-white: #FFFFFF;
+            --color-border: #E0DCE8;
+            --color-urgent: #C0392B;
+            --font-display: 'DM Serif Display', Georgia, serif;
+            --font-body: 'DM Sans', -apple-system, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-bg);
+            line-height: 1.7;
+            font-size: 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* ── SECTION BASE ── */
+        .s {
+            padding: 3.5rem 1.5rem;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .s--full {
+            max-width: 100%;
+            background: var(--color-bg-warm);
+        }
+
+        .s--full>.s__inner {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        /* ── CTA ── */
+        .cta {
+            display: inline-block;
+            background: var(--color-primary);
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 1.08rem;
+            font-weight: 700;
+            padding: 1.05rem 2.6rem;
+            border-radius: 0.6rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cta:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(91, 45, 142, 0.25);
+        }
+
+        .cta:focus-visible {
+            outline: 3px solid var(--color-accent);
+            outline-offset: 3px;
+        }
+
+        .cta--full {
+            width: 100%;
+            max-width: 23rem;
+            text-align: center;
+        }
+
+        .cta-hint {
+            display: block;
+            margin-top: 0.55rem;
+            font-size: 0.78rem;
+            font-weight: bold;
+            color: var(--color-text-muted);
+        }
+
+        /* ── 1. HERO ── */
+        .hero {
+            padding: 3.5rem 1.5rem 2.5rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero__eyebrow {
+            display: inline-block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            background: var(--color-bg-warm);
+            padding: 0.35rem 0.9rem;
+            border-radius: 2rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(1.7rem, 5.5vw, 2.6rem);
+            line-height: 1.18;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero h1 em {
+            color: var(--color-primary);
+            font-style: italic;
+        }
+
+        .hero__nots {
+            font-size: 1.05rem;
+            color: var(--color-text);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hero__nots span {
+            color: var(--color-primary);
+        }
+
+        .hero .cta {
+            margin-top: 0.4rem;
+        }
+
+        /* ── 2. PROBLEMA ── */
+        .problema {
+            text-align: center;
+        }
+
+        .problema h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 4vw, 1.95rem);
+            line-height: 1.25;
+            margin-bottom: 1.5rem;
+        }
+
+        .problema h2 em {
+            color: var(--color-primary);
+            font-style: italic;
+        }
+
+        .problema__lead {
+            color: var(--color-text-soft);
+            font-size: 1.05rem;
+            max-width: 540px;
+            margin: 0 auto 1.4rem;
+        }
+
+        .duvidas {
+            max-width: 420px;
+            margin: 0 auto 1.6rem;
+            text-align: left;
+        }
+
+        .duvidas li {
+            list-style: none;
+            padding: 0.5rem 0;
+            font-size: 1.05rem;
+            color: var(--color-text);
+            font-weight: 500;
+            display: flex;
+            align-items: baseline;
+            gap: 0.6rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .duvidas li:last-child {
+            border-bottom: none;
+        }
+
+        .duvidas li::before {
+            content: '?';
+            color: var(--color-primary);
+            font-weight: 700;
+            font-family: var(--font-display);
+            flex-shrink: 0;
+        }
+
+        .problema__punch {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--color-text);
+            max-width: 560px;
+            margin: 1.2rem auto 0;
+            line-height: 1.5;
+        }
+
+        .problema__punch strong {
+            color: var(--color-primary);
+        }
+
+        /* ── 3. GRANDE IDEIA ── */
+        .ideia {
+            text-align: center;
+        }
+
+        .ideia h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 4.2vw, 2.05rem);
+            line-height: 1.25;
+            margin-bottom: 1rem;
+        }
+
+        .ideia h2 em {
+            color: var(--color-primary);
+            font-style: italic;
+        }
+
+        .ideia__sub {
+            font-size: 1.08rem;
+            color: var(--color-text-soft);
+            max-width: 520px;
+            margin: 0 auto 1.8rem;
+        }
+
+        .ganhos {
+            max-width: 360px;
+            margin: 0 auto 1.8rem;
+            text-align: left;
+        }
+
+        .ganhos li {
+            list-style: none;
+            padding: 0.45rem 0;
+            font-size: 1.02rem;
+            color: var(--color-text-soft);
+            display: flex;
+            align-items: baseline;
+            gap: 0.6rem;
+        }
+
+        .ganhos li::before {
+            content: '✓';
+            color: var(--color-green);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .ideia__punch {
+            font-family: var(--font-display);
+            font-size: clamp(1.3rem, 3.8vw, 1.6rem);
+            color: var(--color-primary);
+            line-height: 1.35;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* ── 4. O QUE VOCÊ VAI APRENDER ── */
+        .recebe__label {
+            font-size: 0.95rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-primary);
+            text-align: center;
+            margin-bottom: 0.6rem;
+        }
+
+        .recebe__intro {
+            text-align: center;
+            color: var(--color-text-soft);
+            font-size: 1rem;
+            max-width: 520px;
+            margin: 0 auto 0.5rem;
+        }
+
+        .recebe__h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 4vw, 1.9rem);
+            text-align: center;
+            line-height: 1.25;
+            margin-bottom: 0.6rem;
+        }
+
+        .passos {
+            display: grid;
+            gap: 0.9rem;
+            margin-top: 1.8rem;
+        }
+
+        .passo {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 0.75rem;
+            padding: 1.1rem 1.3rem;
+        }
+
+        .passo__n {
+            flex-shrink: 0;
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 50%;
+            background: var(--color-bg-warm);
+            color: var(--color-primary);
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .passo div {
+            line-height: 1.5;
+        }
+
+        .passo strong {
+            display: block;
+            font-size: 1.02rem;
+            color: var(--color-text);
+            margin-bottom: 0.15rem;
+        }
+
+        .passo div {
+            font-size: 0.92rem;
+            color: var(--color-text-soft);
+        }
+
+        .bloco {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 0.75rem;
+            padding: 1.8rem 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .bloco__tag {
+            display: inline-block;
+            background: var(--color-primary);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.92rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 0.3rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .bloco h3 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .bloco-list {
+            list-style: none;
+        }
+
+        .bloco-list li {
+            padding: 0.3rem 0;
+            font-size: 0.95rem;
+            color: var(--color-text-soft);
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .bloco-list li::before {
+            content: '·';
+            color: var(--color-primary);
+            font-weight: 700;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .bloco__out {
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            font-size: 0.95rem;
+            display: flex;
+            gap: 0.4rem;
+            align-items: baseline;
+        }
+
+        .bloco__out::before {
+            content: '→';
+            flex-shrink: 0;
+        }
+
+        /* ── 5. PARA QUEM É ── */
+        .paraquem {
+            background: var(--color-white);
+            border: 2px solid var(--color-primary);
+            border-radius: 1rem;
+            padding: 2.2rem 1.8rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .paraquem h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.3rem, 3.6vw, 1.7rem);
+            text-align: center;
+            margin-bottom: 1.4rem;
+        }
+
+        .paraquem-list {
+            list-style: none;
+        }
+
+        .paraquem-list li {
+            padding: 0.5rem 0;
+            font-size: 1rem;
+            color: var(--color-text);
+            font-weight: 500;
+            display: flex;
+            align-items: baseline;
+            gap: 0.6rem;
+        }
+
+        .paraquem-list li::before {
+            content: '✓';
+            color: var(--color-green);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* ── 6. PROVA ── */
+        .prova__title {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 4vw, 1.9rem);
+            text-align: center;
+            line-height: 1.25;
+            margin-bottom: 0.6rem;
+        }
+
+        .prova__sub {
+            text-align: center;
+            color: var(--color-text-soft);
+            font-size: 1rem;
+            max-width: 520px;
+            margin: 0 auto 2rem;
+        }
+
+        .prova-grid {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .prova-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 0.75rem;
+            padding: 1.4rem 1.5rem;
+        }
+
+        .prova-card__text {
+            font-size: 0.95rem;
+            color: var(--color-text-soft);
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 0.8rem;
+        }
+
+        .prova-card__footer {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .prova-card__photo {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: var(--color-bg-warm);
+            border: 2px solid var(--color-border);
+        }
+
+        .prova-card__author {
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .prova-card__detail {
+            font-size: 0.78rem;
+            color: var(--color-green);
+            font-weight: bold;
+        }
+
+        .prova-print {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            background: var(--color-white);
+        }
+
+        .prova-print img {
+            width: 100%;
+            display: block;
+        }
+
+        /* ── 7. OBJEÇÕES ── */
+        .objecoes__title {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 4vw, 1.9rem);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .objecao {
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .objecao:last-child {
+            border-bottom: none;
+        }
+
+        .objecao__pergunta {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--color-text);
+            margin-bottom: 0.3rem;
+        }
+
+        .objecao__resposta {
+            font-size: 0.95rem;
+            color: var(--color-text-soft);
+            line-height: 1.6;
+        }
+
+        /* ── 8. OFERTA ── */
+        .oferta {
+            text-align: center;
+            padding: 4rem 1.5rem;
+        }
+
+        .oferta-box {
+            max-width: 520px;
+            margin: 0 auto;
+            background: var(--color-white);
+            border: 2px solid var(--color-primary);
+            border-radius: 1rem;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 12px 40px rgba(91, 45, 142, 0.1);
+        }
+
+        .oferta-box h2 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            margin-bottom: 1.4rem;
+            line-height: 1.25;
+        }
+
+        .oferta-items {
+            text-align: left;
+            margin-bottom: 1.6rem;
+        }
+
+        .oferta-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            padding: 0.45rem 0;
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: var(--color-text-soft);
+            border-bottom: 1px solid #f0eef3;
+        }
+
+        .oferta-item:last-child {
+            border-bottom: none;
+        }
+
+        .oferta-item .ck {
+            color: var(--color-green);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .oferta-price {
+            margin: 1.4rem 0 0.3rem;
+        }
+
+        .oferta-price__from {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            text-decoration: line-through;
+        }
+
+        .oferta-price__label {
+            font-size: 0.9rem;
+            color: var(--color-text-soft);
+        }
+
+        .oferta-price__value {
+            font-family: var(--font-display);
+            font-size: 3.2rem;
+            color: var(--color-primary);
+            line-height: 1.05;
+        }
+
+        .oferta-price__installment {
+            font-size: 0.95rem;
+            color: var(--color-text-soft);
+            margin-bottom: 0.4rem;
+        }
+
+        .oferta-price__compare {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1.6rem;
+        }
+
+        /* ── GARANTIA ── */
+        .garantia {
+            text-align: center;
+        }
+
+        .garantia-box {
+            max-width: 520px;
+            margin: 0 auto;
+            background: var(--color-green-bg);
+            border: 2px solid var(--color-green);
+            border-radius: 0.75rem;
+            padding: 2rem 1.8rem;
+        }
+
+        .garantia-box h3 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .garantia-box p {
+            font-size: 0.95rem;
+            color: var(--color-text-soft);
+            line-height: 1.6;
+        }
+
+        /* ── 9. FECHAMENTO ── */
+        .fechamento {
+            text-align: center;
+            background: var(--color-primary);
+            color: #fff;
+        }
+
+        .fechamento h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 4.2vw, 2rem);
+            line-height: 1.25;
+            margin-bottom: 1.2rem;
+        }
+
+        .fechamento p {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 540px;
+            margin: 0 auto 1rem;
+            line-height: 1.6;
+        }
+
+        .fechamento .escolha {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .fechamento .cta {
+            background: var(--color-accent);
+            color: var(--color-text);
+            margin-top: 1.5rem;
+        }
+
+        .fechamento .cta:hover {
+            background: #d9a920;
+            box-shadow: 0 8px 24px rgba(232, 185, 49, 0.3);
+        }
+
+        .fechamento .ultima {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.25rem;
+            color: #fff;
+            margin: 1.4rem auto 0;
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            font-size: 0.78rem;
+            color: var(--color-text-muted);
+            border-top: 1px solid var(--color-border);
+        }
+
+        /* ── WPP FAB ── */
+        .wpp-fab {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+        }
+
+        .wpp-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            background: #25d366;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 4px 16px rgba(37, 211, 102, .3);
+            transition: transform .25s cubic-bezier(.34, 1.56, .64, 1);
+        }
+
+        .wpp-btn:hover {
+            transform: scale(1.08);
+        }
+
+        .wpp-btn:active {
+            transform: scale(.95);
+        }
+
+        .wpp-btn:focus-visible {
+            outline: 3px solid #fff;
+            outline-offset: 2px;
+        }
+
+        .wpp-btn svg {
+            width: 30px;
+            height: 30px;
+            fill: #fff;
+        }
+
+        .wpp-pulse {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid rgba(37, 211, 102, .5);
+            animation: wppPulse 2s ease-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes wppPulse {
+            0% {
+                transform: scale(1);
+                opacity: .6;
+            }
+
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .wpp-card {
+            display: none;
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px;
+            width: 280px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, .18);
+            position: relative;
+        }
+
+        .wpp-card.aberto {
+            display: block;
+            animation: cardIn .3s cubic-bezier(.34, 1.56, .64, 1) both;
+        }
+
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: scale(.85) translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .wpp-card-fechar {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: none;
+            background: #f0f2f5;
+            color: #8e8e9e;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .wpp-card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .wpp-card-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #25d366, #128c47);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .wpp-card-avatar svg {
+            width: 20px;
+            height: 20px;
+            fill: #fff;
+        }
+
+        .wpp-card-nome {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1a1a2e;
+        }
+
+        .wpp-card-status {
+            font-size: 12px;
+            color: #8e8e9e;
+            margin-top: 1px;
+        }
+
+        .wpp-card-msg {
+            background: #f0f2f5;
+            border-radius: 0 12px 12px 12px;
+            padding: 10px 14px;
+            font-size: 14px;
+            color: #3a3a4a;
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .wpp-card-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 11px 16px;
+            background: #25d366;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all .2s ease;
+        }
+
+        .wpp-card-cta:hover {
+            background: #1fb855;
+        }
+
+        .wpp-card-cta svg {
+            width: 16px;
+            height: 16px;
+            fill: #fff;
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding: 2.5rem 1.2rem 2rem;
+            }
+
+            .s {
+                padding: 2.5rem 1.2rem;
+            }
+
+            .oferta {
+                padding: 3rem 1.2rem;
+            }
+
+            .oferta-box,
+            .paraquem {
+                padding: 2rem 1.3rem;
+            }
+
+            .bloco {
+                padding: 1.4rem 1.3rem;
+            }
+
+            .wpp-fab {
+                bottom: 20px;
+                right: 16px;
+            }
+
+            .wpp-card {
+                width: 260px;
+            }
+
+            .wpp-btn {
+                width: 56px;
+                height: 56px;
+            }
+
+            .wpp-btn svg {
+                width: 26px;
+                height: 26px;
+            }
+        }
+    </style>
+
+    <link href="/img/favicon.svg" type="image/svg+xml" rel="icon" />
+    <link href="/favicon.png" type="image/png" rel="icon" />
+
+
+    <!-- GTM -->
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-N6VNPLTX');</script>
+
+</head>
+
+<body>
+
+    <!-- ═══ 1. HERO ═══ -->
+    <section class="hero">
+        <span class="hero__eyebrow" id="heroEyebrow">Do zero ao primeiro cliente em 4 semanas</span>
+        <h1>
+            Você decidiu ser Assistente Virtual.<br>
+            Agora falta o seu <em>primeiro cliente</em>.
+        </h1>
+        <p class="hero__nots">
+            Sem experiência. <span>·</span> Sem portfólio. <span>·</span> Sem investir milhares de reais.
+        </p>
+        <a href="#oferta" class="cta">Quero começar agora</a>
+    </section>
+
+
+    <!-- ═══ 2. O PROBLEMA ═══ -->
+    <div class="s s--full">
+        <div class="s__inner problema">
+
+            <h2><em>Você precisa de um plano de ação.</em></h2>
+            <p class="problema__lead">
+                Talvez você já tenha assistido vídeos, pesquisado sobre a profissão, entrado em grupos,
+                salvado conteúdos. Mas continua com as mesmas dúvidas:
+            </p>
+            <ul class="duvidas">
+                <li>O que eu posso oferecer?</li>
+                <li>Quanto eu devo cobrar?</li>
+                <li>Como conseguir clientes?</li>
+                <li>Como começar sem experiência?</li>
+            </ul>
+            <p class="problema__lead"><strong> E enquanto essas dúvidas continuam, os meses passam e você segue sem dar
+                    o primeiro passo.</strong>
+
+            </p>
+        </div>
+    </div>
+
+    <!-- ═══ 3. A GRANDE IDEIA ═══ -->
+    <div class="s ideia">
+        <h2>Você não precisa aprender tudo. <br><em>Apenas o suficiente para conquistar<br> o primeiro cliente.</em>
+        </h2>
+        <p class="ideia__sub">Porque é depois do primeiro cliente que tudo começa a girar:</p>
+        <ul class="ganhos">
+            <li>Você ganha experiência</li>
+            <li>Ganha confiança</li>
+            <li>Começa a receber indicações</li>
+        </ul>
+    </div>
+
+    <!-- ═══ 4. O QUE VOCÊ VAI APRENDER (resumo) ═══ -->
+    <div class="s">
+        <h2 class="recebe__h2"><em>Em 4 semanas, do zero ao primeiro cliente</em></h2>
+        <p class="recebe__intro">Sem teoria solta. Um passo a passo na prática.</p>
+
+        <div class="passos">
+            <div class="passo">
+                <span class="passo__n">1</span>
+                <div>
+                    <strong>Definindo o seu serviço</strong>
+                    O que você vai oferecer e como começar mesmo sem experiência.
+                </div>
+            </div>
+            <div class="passo">
+                <span class="passo__n">2</span>
+                <div>
+                    <strong>Aprendendo na prática</strong>
+                    Ferramentas, organização e simulações pra ganhar confiança.
+                </div>
+            </div>
+            <div class="passo">
+                <span class="passo__n">3</span>
+                <div>
+                    <strong>Como cobrar e se apresentar</strong>
+                    Quanto cobrar, se posicionar e passar segurança.
+                </div>
+            </div>
+            <div class="passo">
+                <span class="passo__n">4</span>
+                <div>
+                    <strong>Conquistando o primeiro cliente</strong>
+                    Onde procurar, como abordar e um plano de ação pra executar já.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ 5. PARA QUEM É ═══ -->
+    <div class="s">
+        <div class="paraquem">
+            <h2>Este programa é pra você que...</h2>
+            <ul class="paraquem-list">
+                <li>Já decidiu que quer ser Assistente Virtual</li>
+                <li>Precisa gerar uma renda extra ou complementar a atual</li>
+                <li>Não tem experiência profissional na área</li>
+                <li>Quer começar sem fazer um grande investimento</li>
+                <li>Está cansada de estudar e não sair do lugar</li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <!-- ═══ 7. OBJEÇÕES ═══ -->
+    <div class="s">
+        <h2 class="objecoes__title">Talvez você esteja pensando...</h2>
+
+        <div class="objecao">
+            <div class="objecao__pergunta">"Mas eu não tenho experiência."</div>
+            <div class="objecao__resposta">A maioria das alunas também começou sem experiência. Você não precisa começar
+                especialista, precisa apenas começar.</div>
+        </div>
+        <div class="objecao">
+            <div class="objecao__pergunta">"Mas eu não tenho dinheiro pra investir muito."</div>
+            <div class="objecao__resposta">Foi exatamente por isso que criamos esse programa. Pra que qualquer pessoa
+                possa dar os primeiros passos sem precisar investir milhares de reais.</div>
+        </div>
+        <div class="objecao">
+            <div class="objecao__pergunta">"Mas eu ainda trabalho."</div>
+            <div class="objecao__resposta">Muitas alunas começaram conciliando com CLT, filhos e rotina corrida. Você
+                avança no seu ritmo.</div>
+        </div>
+        <div class="objecao">
+            <div class="objecao__pergunta">"E se eu não conseguir clientes?"</div>
+            <div class="objecao__resposta">Você vai aprender exatamente onde procurar, como se apresentar e como se
+                posicionar
+                profissionalmente. Muito melhor do que tentar descobrir tudo sozinha.</div>
+        </div>
+    </div>
+
+    <!-- ═══ 8. OFERTA ═══ -->
+    <section class="oferta" id="oferta">
+        <div class="oferta-box">
+            <h2>Do Zero ao Primeiro Cliente como AV</h2>
+
+            <div class="oferta-items">
+                <div class="oferta-item"><span class="ck">✓</span> Programa completo de 4 semanas</div>
+                <div class="oferta-item"><span class="ck">✓</span> Exercícios práticos</div>
+                <div class="oferta-item"><span class="ck">✓</span> Modelos prontos pra usar</div>
+                <div class="oferta-item"><span class="ck">✓</span> Plano pra conquistar o primeiro cliente</div>
+                <div class="oferta-item"><span class="ck">✓</span> Acesso imediato</div>
+                <div class="oferta-item"><span class="ck">✓</span> Garantia de 7 dias</div>
+            </div>
+
+            <div class="oferta-price">
+                <div class="oferta-price__from">De R$ 397</div>
+                <div class="oferta-price__label">por apenas</div>
+                <div class="oferta-price__value">R$ 147</div>
+            </div>
+            <div class="oferta-price__installment">ou 12x de R$ 14,90</div>
+
+            <a href="#" class="cta cta--full" id="checkoutBtn">Quero entrar no programa</a>
+            <span class="cta-hint">Acesso imediato após a confirmação</span>
+        </div>
+    </section>
+
+    <!-- ═══ GARANTIA ═══ -->
+    <div class="s">
+        <div class="garantia">
+            <div class="garantia-box">
+                <h3>Garantia Virtap de 7 dias</h3>
+                <p>Entre agora, acesse o programa e veja tudo por dentro. Se perceber que não faz sentido pra você, é só
+                    pedir o reembolso dentro de 7 dias. A gente devolve 100% do valor.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ 9. FECHAMENTO ═══ -->
+    <div class="s s--full fechamento">
+        <div class="s__inner">
+            <h2>Você já escolheu a profissão.<br>Agora falta começar.</h2>
+            <p>
+                Daqui a alguns meses, você pode continuar pesquisando, assistindo vídeos e esperando
+                o momento perfeito.
+            </p>
+            <p class="escolha">Ou pode dar o primeiro passo hoje.</p>
+            <p class="ultima">Seu primeiro cliente começa com uma decisão.</p>
+            <a href="#oferta" class="cta">Quero começar agora</a>
+        </div>
+    </div>
+
+    <!-- ══ FOOTER ══ -->
+    <footer class="footer">
+        <p>Virtap © 2026 — Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- ══ WPP FAB ══ -->
+    <div class="wpp-fab" id="wppWidget">
+        <div class="wpp-card" id="wppCard">
+            <button class="wpp-card-fechar" onclick="toggleWpp()" aria-label="Fechar">✕</button>
+            <div class="wpp-card-header">
+                <div class="wpp-card-avatar"><svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+                    </svg></div>
+                <div>
+                    <div class="wpp-card-nome">Equipe Virtap</div>
+                    <div class="wpp-card-status">Responde em minutos</div>
+                </div>
+            </div>
+            <div class="wpp-card-msg">Oi! 👋 Quer tirar uma dúvida antes de começar?</div>
+            <a href="#" class="wpp-card-cta" id="wppCardLink" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+                Tirar uma dúvida
+            </a>
+        </div>
+        <button class="wpp-btn" onclick="toggleWpp()" aria-label="Abrir WhatsApp">
+            <span class="wpp-pulse" id="wppPulse"></span>
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        /* ════════════════════════════════════════════════════════════
+           CONFIG  —  >>> AJUSTE ESTES 3 VALORES ANTES DE PUBLICAR <<<
+        ════════════════════════════════════════════════════════════ */
+        var CONFIG = {
+            checkoutUrl: 'https://www.virtap.com.br/comprar?rsrc=DFvvsQiasS',     // 1) URL do seu checkout (params do quiz/UTMs repassados auto)
+            whatsapp: '5548988089062'     // 2) Seu WhatsApp (só números, com DDI)
+        };
+
+        (function () {
+            var url = new URL(CONFIG.checkoutUrl);
+
+            var currentParams = new URLSearchParams(window.location.search);
+            currentParams.forEach((value, key) => {
+                if (!url.searchParams.has(key)) {
+                    url.searchParams.append(key, value);
+                }
+            });
+            document.getElementById('checkoutBtn').href = url.toString();
+
+            var wppMsg = encodeURIComponent('Oi! Quero tirar uma dúvida sobre o Programa Do Zero ao Primeiro Cliente.');
+            document.getElementById('wppCardLink').href = 'https://wa.me/' + CONFIG.whatsapp + '?text=' + wppMsg;
+
+            setTimeout(function () { var p = document.getElementById('wppPulse'); if (p) p.remove(); }, 8000);
+        })();
+
+        function toggleWpp() {
+            var card = document.getElementById('wppCard');
+            var pulse = document.getElementById('wppPulse');
+            if (card.classList.toggle('aberto') && pulse) pulse.remove();
+        }
+    </script>
+
+</body>
+
+</html>
