@@ -6,7 +6,7 @@
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 const PATHS = {
     cursoGratuito: '/curso-assistente-virtual',
-    programa30dias: '/primeiro-cliente-av',
+    programa30dias: '/primeiro-cliente-av-lp',
     formacaoAV: '/formacoes/assistencia-virtual',
     acessoVirtap: '/vagas-assistente-virtual/como-acessar',
     especializacao: '/formacoes/assistencia-pessoal',
