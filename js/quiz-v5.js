@@ -548,6 +548,21 @@ function gerarResultado() {
 
     // ─── FLOW 1: explore ────────────────────────────────
     if (state.flow === 'explore') {
+
+        // [TESTE] explore + origem IA → roteia direto pro Primeiro Cliente (R$ 97),
+        // pulando o curso gratuito. Reverter: deletar este bloco.
+        if (state.origem === 'ia') {
+
+            return {
+                destino: 'programa-30dias',
+                titulo: 'Encontramos um caminho pra você',
+                mensagem: `<p>Pelas suas respostas, dá pra ver que você está começando a descobrir a profissão de <strong>Assistente Virtual</strong>.</p>
+        <p>Em vez de te deixar só na teoria, a gente quer te mostrar o caminho mais curto: um programa prático e direto ao ponto, feito pra te ajudar a entrar na profissão e <strong>conseguir renda</strong>.</p>
+        <p>É o passo certo pra quem quer sair da pesquisa e começar pra valer.</p>`,
+                btn: makeCTA('👉 Conhecer o programa', '/do-zero-ao-primeiro-cliente', 'primeiro-cliente-av-explore-ia'),
+            };
+        }
+
         return resultadoCursoGratuito(
             'Comece do jeito certo!',
             `<p>Pelas suas respostas, faz sentido começar conhecendo melhor a profissão de <strong>Assistente Virtual</strong> e entendendo se esse caminho combina com o que você busca.</p>
@@ -558,7 +573,7 @@ function gerarResultado() {
 
     // ─── FLOW 2: build ───────────────────────────────────────────────────
     if (state.flow === 'build') {
-        const rendaBaixa = ['ate-1800','1800-2500'].includes(state.renda);
+        const rendaBaixa = ['ate-1800', '1800-2500'].includes(state.renda);
         const desempregada = state.situacao === 'desempregada';
 
         // Programa 30 Dias
