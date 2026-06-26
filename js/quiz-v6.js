@@ -500,6 +500,21 @@ function advance() {
     // Pula steps com skipFn true
     while (state.flowIndex < flow.length) {
         const nextId = flow[state.flowIndex];
+
+        // Desvio IA: lead de IA no build vai direto pro R$97, sem captura
+        if (nextId === 'leadCapture' && state.flow === 'build' && state.origem === 'ia') {
+            const link = getLink(PATHS.programa30dias, 'primeiro-cliente-av-build-ia');
+            document.getElementById('step-content').innerHTML = `
+                <h2 class="text-center">Achamos o caminho certo pra você</h2>
+                <div>
+                    <p>Pelas suas respostas, o melhor primeiro passo é conquistar o seu <strong>primeiro cliente como Assistente Virtual</strong> — prático e direto ao ponto.</p>
+                    <button class="next-btn" onclick="window.location.href='${link}'">Ver meu primeiro passo</button>
+                </div>`;
+            document.getElementById('header-nav').style.display = 'flex';
+            window.scrollTo(0, 0);
+            return;
+        }
+
         const step = STEPS[nextId];
         // Guard `step &&` protege steps especiais (ex: leadCapture) que não têm entrada em STEPS
         if (step && step.skipFn && step.skipFn(state)) {
