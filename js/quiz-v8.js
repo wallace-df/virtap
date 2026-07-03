@@ -621,13 +621,13 @@ function gerarResultado() {
         const dor = state.incomodaAV;
         const fat = state.faturamento;
 
-        // Não consigo clientes
-        if (dor === 'clientes') {
+        // Não consigo clientes: dor explícita, OU dor de escala/rentabilidade sem nenhum cliente ainda
+        if (dor === 'clientes' || ((dor === 'rentabilidade' || dor === 'escala') && fat === 'sem-clientes')) {
             return resultadoPlataforma(
                 'Você precisa de clientes!',
                 montarContextoJaSou(),
                 `<p>Pelas suas respostas, o principal desafio não é mais aprender a profissão, mas encontrar oportunidades e se conectar com clientes com potencial real de contratação.</p>
-                 <p>A gente consegue te ajudar com isso!</p>`
+             <p>A gente consegue te ajudar com isso!</p>`
             );
         }
 
@@ -637,13 +637,13 @@ function gerarResultado() {
                 'Você está pronta para um novo nível de crescimento',
                 montarContextoJaSou(),
                 `<p>Pelas suas respostas, você já construiu uma base sólida e agora o desafio é estruturar seu crescimento de forma mais estratégica.</p>
-                <p>Esse é o momento de pensar em posicionamento, eficiência e expansão, para aumentar resultados sem depender apenas de mais horas de trabalho.</p>
-                <p>Participe do nosso grupo exclusivo apenas para AVs que se encontram neste patamar.</p>`
+            <p>Esse é o momento de pensar em posicionamento, eficiência e expansão, para aumentar resultados sem depender apenas de mais horas de trabalho.</p>
+            <p>Participe do nosso grupo exclusivo apenas para AVs que se encontram neste patamar.</p>`
             );
         }
 
-        // Especialização
-        if ((dor === 'rentabilidade' || dor === 'escala') && fat !== 'sem-clientes') {
+        // Especialização (aqui fat nunca é 'sem-clientes' pra escala/rentabilidade, já foi capturado acima)
+        if (dor === 'rentabilidade' || dor === 'escala') {
 
             if (area === 'assistencia-pessoal') {
                 // Formação AP
@@ -651,27 +651,27 @@ function gerarResultado() {
                     'Alcance um novo patamar',
                     montarContextoJaSou(),
                     `<p>Pelas suas respostas, o mais importante agora é consolidar conhecimentos, ganhar mais segurança e estruturar melhor sua atuação.</p>
-                 <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e ir para um próximo nível mais rápido.</p>`
+             <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e ir para um próximo nível mais rápido.</p>`
                 );
-
             } else {
                 // Especialização
                 return resultadoEspecializacao(
                     'O caminho agora é elevar seu posicionamento',
                     montarContextoJaSou(),
                     `<p>Pelas suas respostas, ficou claro que você já possui experiência e está pronta para atuar em um nível mais estratégico e valorizado.</p>
-                <p>Existe uma especialização que pode te preparar para atender clientes mais exigentes e conquistar oportunidades mais qualificadas e ganhos significativamente maiores.</p>`
+            <p>Existe uma especialização que pode te preparar para atender clientes mais exigentes e conquistar oportunidades mais qualificadas e ganhos significativamente maiores.</p>`
                 );
             }
         }
 
+        // Fallback: inseguranca, precificacao, profissionalizacao (com ou sem clientes)
         if (area === 'assistencia-pessoal') {
             // Formação AP
             return resultadoFormacaoAP(
                 'Alcance um novo patamar',
                 montarContextoJaSou(),
                 `<p>Pelas suas respostas, o mais importante agora é consolidar conhecimentos, ganhar mais segurança e estruturar melhor sua atuação.</p>
-             <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e ir para um próximo nível mais rápido.</p>`
+         <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e ir para um próximo nível mais rápido.</p>`
             );
 
         } else {
@@ -680,7 +680,7 @@ function gerarResultado() {
                 'Alcance um novo patamar',
                 montarContextoJaSou(),
                 `<p>Pelas suas respostas, o mais importante agora é consolidar conhecimentos, ganhar mais segurança e estruturar melhor sua atuação.</p>
-             <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e ir para um próximo nível mais rápido.</p>`
+         <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e ir para um próximo nível mais rápido.</p>`
             );
         }
     }
