@@ -502,6 +502,16 @@ function advance() {
     while (state.flowIndex < flow.length) {
         const nextId = flow[state.flowIndex];
 
+        // Leads não-IA que se qualificam pro programa de 97, vao pro curso gratuito.
+        if (nextId === 'leadCapture' && state.flow === 'build' && state.origem !== 'ia') {
+            const rendaBaixa = ['ate-1800', '1800-2500'].includes(state.renda);
+            const desempregada = state.situacao === 'desempregada';
+            if (desempregada || rendaBaixa) {
+                showResult();
+                return;
+            }
+        }
+
         // Desvio IA: lead de IA no build vai direto pro R$97, sem captura
         if (nextId === 'leadCapture' && state.flow === 'build' && state.origem === 'ia') {
             const link = getLink(PATHS.programa30dias, 'primeiro-cliente-av-build-ia');
