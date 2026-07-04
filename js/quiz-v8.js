@@ -592,16 +592,16 @@ function gerarResultado() {
         const rendaBaixa = ['ate-1800', '1800-2500'].includes(state.renda);
         const desempregada = state.situacao === 'desempregada';
 
+
         // Programa 30 Dias
         if (desempregada || rendaBaixa) {
-            return resultadoPrograma30Dias(
-                'Você já decidiu que quer mudar de vida',
-                montarContextoDecidi(),
-                `<p>Pelas suas respostas, ficou claro que você não está apenas buscando uma forma de ganhar dinheiro. Você quer construir uma carreira com mais liberdade, segurança e propósito.</p>
-            <p>Neste momento, o melhor caminho é começar por algo prático e direto ao ponto, focado em te ajudar a entrar na profissão e conquistar seus primeiros resultados.</p>
-            <p>A partir daí, você poderá ganhar confiança e dar passos cada vez maiores na construção da vida que deseja.</p>
-            <p>Temos um programa perfeito pra você.</p>`
+            return resultadoCursoGratuito(
+                'Você já deu o primeiro passo!',
+                `<p>Pelas suas respostas, você já conhece a profissão de Assistente Virtual e decidiu que quer construir uma carreira nessa área.</p>
+     <p>Agora é hora de entender melhor como esse mercado funciona, conhecer as possibilidades reais e descobrir quais são os próximos passos para começar.</p>
+     <p>Preparamos um conteúdo gratuito para ajudar você nessa jornada. Ao final, te mostrando os próximos passos para iniciar sua carreira.</p>`
             );
+
         }
 
         // Formação completa
