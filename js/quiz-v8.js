@@ -599,7 +599,7 @@ function gerarResultado() {
                 'Você já deu o primeiro passo!',
                 `<p>Pelas suas respostas, você já conhece a profissão de Assistente Virtual e decidiu que quer construir uma carreira nessa área.</p>
      <p>Agora é hora de entender melhor como esse mercado funciona, conhecer as possibilidades reais e descobrir quais são os próximos passos para começar.</p>
-     <p>Preparamos um conteúdo gratuito para ajudar você nessa jornada. Ao final, te mostrando os próximos passos para iniciar sua carreira.</p>`
+     <p>Preparamos um conteúdo gratuito para ajudar você nessa jornada. Ao final, mostramos os próximos passos para iniciar sua carreira.</p>`
             );
 
         }
