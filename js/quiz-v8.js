@@ -604,6 +604,7 @@ function gerarResultado() {
 
 
         // Programa 30 Dias
+        // Data de corte: 04/07/2026
         if (desempregada || rendaBaixa) {
             return resultadoCursoGratuito(
                 'Você já deu o primeiro passo!',
