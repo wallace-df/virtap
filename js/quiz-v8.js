@@ -633,7 +633,9 @@ function gerarResultado() {
         const fat = state.faturamento;
 
         // Não consigo clientes: dor explícita, OU dor de escala/rentabilidade sem nenhum cliente ainda
-        if (dor === 'clientes' || ((dor === 'rentabilidade' || dor === 'escala') && fat === 'sem-clientes')) {
+        const faturamentoBaixo = ['sem-clientes', 'ate-1800', '1800-2500'].includes(fat);
+
+        if (dor === 'clientes' || ((dor === 'rentabilidade' || dor === 'escala') && faturamentoBaixo)) {
             return resultadoPlataforma(
                 'Você precisa de clientes!',
                 montarContextoJaSou(),
