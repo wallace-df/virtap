@@ -585,7 +585,7 @@ function gerarResultado() {
                 mensagem: `<p>Pelas suas respostas, dá pra ver que você está começando a descobrir a profissão de <strong>Assistente Virtual</strong>.</p>
         <p>Em vez de te deixar só na teoria, a gente quer te mostrar o caminho mais curto: um programa prático e direto ao ponto, feito pra te ajudar a entrar na profissão e <strong>conseguir renda</strong>.</p>
         <p>É o passo certo pra quem quer sair da pesquisa e começar pra valer.</p>`,
-                btn: makeCTA('👉 Conhecer o programa', '/do-zero-ao-primeiro-cliente', 'primeiro-cliente-av-explore-ia'),
+                btn: makeCTA('👉 Conhecer o programa', '/primeiro-cliente-av-explore-97', 'primeiro-cliente-av-explore-lp-ia'),
             };
         }
 
