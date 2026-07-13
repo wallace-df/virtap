@@ -26,9 +26,9 @@ const STEPS = {
         title: 'Em qual momento você está?',
         field: 'flow',
         options: [
-            { value: 'explore', label: 'Estou descobrindo a profissão de Assistente Virtual' },
-            { value: 'build', label: 'Conheço a profissão e já decidi que quero começar' },
-            { value: 'growth', label: 'Já sou Assistente Virtual' },
+            { value: 'explore', label: 'Quero entender como funciona a profissão de Assistente Virtual' },
+            { value: 'build', label: 'Já decidi que quero ser Assistente Virtual' },
+            { value: 'growth', label: 'Já trabalho como Assistente Virtual' },
         ],
     },
 
