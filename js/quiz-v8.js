@@ -27,7 +27,7 @@ const STEPS = {
         field: 'flow',
         options: [
             { value: 'explore', label: 'Quero entender como funciona a profissão de Assistente Virtual' },
-            { value: 'build', label: 'Já decidi que quero ser Assistente Virtual' },
+            { value: 'build', label: 'Já sei como funciona e quero começar como Assistente Virtual' },
             { value: 'growth', label: 'Já trabalho como Assistente Virtual' },
         ],
     },
@@ -515,7 +515,7 @@ function advance() {
 
         // Desvio IA: lead de IA no build vai direto pro R$97, sem captura
         if (nextId === 'leadCapture' && state.flow === 'build' && state.origem === 'ia') {
-            const link = getLink(PATHS.programa30dias, 'primeiro-cliente-av-build-97-ia');
+            const link = getLink( '/primeiro-cliente-av', 'primeiro-cliente-av-build-vsl-ia');
             document.getElementById('step-content').innerHTML = `
                 <h2 class="text-center">Achamos o caminho certo pra você</h2>
                 <div>
