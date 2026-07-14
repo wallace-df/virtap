@@ -65,7 +65,8 @@ const STEPS = {
         options: [
             { value: 'secretariado-executivo', label: 'Secretariado Executivo' },
             { value: 'atendimento', label: 'Atendimento e suporte ao cliente' },
-            { value: 'administrativo-financeiro', label: 'Administrativo e financeiro' },
+            { value: 'administrativo', label: 'Administrativo' },
+            { value: 'financeiro', label: 'Financeiro' },
             { value: 'comercial', label: 'Comercial e vendas' },
             { value: 'marketing', label: 'Marketing e redes sociais' },
             { value: 'nenhuma', label: 'Nenhuma dessas' },
