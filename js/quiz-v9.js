@@ -505,17 +505,13 @@ function advance() {
 
         // Leads não-IA que se qualificam pro programa de 97, vao pro curso gratuito.
         if (nextId === 'leadCapture' && state.flow === 'build' && state.origem !== 'ia') {
-            const rendaBaixa = ['ate-1800', '1800-2500'].includes(state.renda);
-            const desempregada = state.situacao === 'desempregada';
-            if (desempregada || rendaBaixa) {
-                showResult();
-                return;
-            }
+            showResult();
+            return;
         }
 
         // Desvio IA: lead de IA no build vai direto pro R$97, sem captura
         if (nextId === 'leadCapture' && state.flow === 'build' && state.origem === 'ia') {
-            const link = getLink( '/primeiro-cliente-av', 'primeiro-cliente-av-build-vsl-ia');
+            const link = getLink('/primeiro-cliente-av', 'primeiro-cliente-av-build-vsl-ia');
             document.getElementById('step-content').innerHTML = `
                 <h2 class="text-center">Achamos o caminho certo pra você</h2>
                 <div>
@@ -600,30 +596,11 @@ function gerarResultado() {
 
     // ─── FLOW 2: build ───────────────────────────────────────────────────
     if (state.flow === 'build') {
-        const rendaBaixa = ['ate-1800', '1800-2500'].includes(state.renda);
-        const desempregada = state.situacao === 'desempregada';
-
-
-        // Programa 30 Dias
-        // Data de corte: 04/07/2026
-        if (desempregada || rendaBaixa) {
-            return resultadoCursoGratuito(
-                'Você já deu o primeiro passo!',
-                `<p>Pelas suas respostas, você já conhece a profissão de Assistente Virtual e decidiu que quer construir uma carreira nessa área.</p>
-     <p>Agora é hora de entender melhor como esse mercado funciona, conhecer as possibilidades reais e descobrir quais são os próximos passos para começar.</p>
-     <p>Preparamos um conteúdo gratuito para ajudar você nessa jornada. Ao final, mostramos os próximos passos para iniciar sua carreira.</p>`
-            );
-
-        }
-
-        // Formação completa
-        return resultadoFormacaoAV(
-            'Você já decidiu que quer mudar de vida',
-            montarContextoDecidi(),
-            `<p>Pelas suas respostas, ficou claro que você não está apenas pesquisando uma possibilidade.</p>
-     <p>Você quer construir uma carreira que te dê mais liberdade, segurança e a chance de conquistar uma renda que faça sentido para a vida que você deseja.</p>
-     <p>Pra alcançar isso, o melhor caminho é ter uma base sólida, com método e acompanhamento, para transformar esse projeto em algo real e duradouro.</p>
-     <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e alcançar seu objetivo mais rápido.</p>`
+        return resultadoCursoGratuito(
+            'Você já deu o primeiro passo!',
+            `
+             <p>Agora é hora de entender melhor como esse mercado funciona e conhecer as possibilidades.</p>
+             <p>Preparamos um conteúdo para ajudar você nessa jornada. Ao final, mostramos os próximos passos para iniciar sua carreira.</p>`
         );
     }
 
