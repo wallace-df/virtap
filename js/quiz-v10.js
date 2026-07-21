@@ -22,7 +22,7 @@ const LEAD_CAPTURE_ENDPOINT = '/signup-quiz';
 // - 'v1' / 'v2': força todo mundo pra uma versão específica.
 // - 'split': divide por porcentagem (BUILD_V2_PERCENT define a fatia do v2).
 // Override manual pra QA/teste de link: ?build=v2 ou ?build=v1 na URL.
-const BUILD_VERSION = 'v1'; // 'v1' | 'v2' | 'split'
+const BUILD_VERSION = 'split'; // 'v1' | 'v2' | 'split'
 const BUILD_V2_PERCENT = 0.5; // usado só quando BUILD_VERSION === 'split'
 
 function resolveBuildFlow() {
@@ -127,10 +127,10 @@ const STEPS = {
         title: 'Já investiu em treinamentos, cursos online ou mentorias?',
         field: 'investe',
         options: [
-            { value: 'investiu-quer', label: 'Já investi e pretendo investir agora' },
+            { value: 'investiu-quer', label: 'Já investi e pretendo investir novamente' },
             { value: 'investiu-naoquer', label: 'Já investi, mas não pretendo investir agora' },
             { value: 'nunca-quer', label: 'Nunca investi, mas pretendo investir agora' },
-            { value: 'nunca-naoquer', label: 'Nunca investi e não pretendo investir agora' },
+            { value: 'nunca-naoquer', label: 'Nunca investi e não pretendo investir' },
         ],
     },
 
@@ -327,7 +327,7 @@ const STEPS = {
 const FLOWS = {
     explore: ['origem', 'situacao', 'area', 'incomoda', 'renda'],
     build: ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'renda', 'leadCapture'],
-    'build-v2': ['origem', 'situacao', 'area', 'busca', 'sonho', 'obstaculo', 'investe', 'renda', 'leadCapture'],
+    'build-v2': ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'busca', 'investe', 'renda', 'leadCapture'],
     growth: ['comoComecou', 'areaAV', 'origem', 'incomodaAV', 'faturamento', 'leadCapture'],
 };
 
@@ -592,7 +592,7 @@ function advance() {
         }
 
         // Desvio IA: lead de IA no build (v1 ou v2) vai direto pro R$97, sem captura
-        if (nextId === 'leadCapture' && (state.flow === 'build' || state.flow === 'build-v2') && state.origem === 'ia') {
+        if (nextId === 'leadCapture' && (state.flow === 'build') && state.origem === 'ia') {
             const link = getLink('/primeiro-cliente-av', 'primeiro-cliente-av-build-vsl-ia');
             document.getElementById('step-content').innerHTML = `
                 <h2 class="text-center">Achamos o caminho certo pra você</h2>
@@ -657,14 +657,13 @@ function gerarResultado() {
         // [TESTE] explore + origem IA → roteia direto pro Primeiro Cliente (R$ 97),
         // pulando o curso gratuito. Reverter: deletar este bloco.
         if (state.origem === 'ia') {
-
             return {
                 destino: 'programa-30dias',
                 titulo: 'Encontramos um caminho pra você',
                 mensagem: `<p>Pelas suas respostas, dá pra ver que você está começando a descobrir a profissão de <strong>Assistente Virtual</strong>.</p>
         <p>Em vez de te deixar só na teoria, a gente quer te mostrar o caminho mais curto: um programa prático e direto ao ponto, feito pra te ajudar a entrar na profissão e <strong>conseguir renda</strong>.</p>
         <p>É o passo certo pra quem quer sair da pesquisa e começar pra valer.</p>`,
-                btn: makeCTA('👉 Conhecer o programa', '/primeiro-cliente-av', 'primeiro-cliente-av-explore-vsl-ia'),
+                btn: makeCTA('👉 Conhecer o programa', '/primeiro-cliente-av-2', 'primeiro-cliente-av-explore-vsl-ia-2'),
             };
         }
 
