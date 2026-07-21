@@ -22,7 +22,7 @@ const LEAD_CAPTURE_ENDPOINT = '/signup-quiz';
 // - 'v1' / 'v2': força todo mundo pra uma versão específica.
 // - 'split': divide por porcentagem (BUILD_V2_PERCENT define a fatia do v2).
 // Override manual pra QA/teste de link: ?build=v2 ou ?build=v1 na URL.
-const BUILD_VERSION = 'v2'; // 'v1' | 'v2' | 'split'
+const BUILD_VERSION = 'v1'; // 'v1' | 'v2' | 'split'
 const BUILD_V2_PERCENT = 0.5; // usado só quando BUILD_VERSION === 'split'
 
 function resolveBuildFlow() {
@@ -67,7 +67,7 @@ const STEPS = {
         field: 'flow',
         options: [
             { value: 'explore', label: 'Quero entender como funciona a profissão de Assistente Virtual' },
-            { value: 'build', label: 'Já sei como funciona e quero começar como Assistente Virtual' },
+            { value: 'build', label: 'Já decidi que quero trabalhar como Assistente Virtual' },
             { value: 'growth', label: 'Já trabalho como Assistente Virtual' },
         ],
     },
@@ -117,9 +117,9 @@ const STEPS = {
         title: 'O que você busca agora?',
         field: 'busca',
         options: [
-            { value: 'rapido', label: 'Quero um caminho simples para conseguir meus primeiros clientes rapidamente' },
-            { value: 'generalista', label: 'Quero me profissionalizar como Assistente Virtual e atuar com diferentes tipos de serviços' },
-            { value: 'assessoria', label: 'Quero me especializar em Assessoria Pessoal e atuar ao lado de empresários e executivos' },
+            { value: 'rapido', label: 'Quero um caminho simples para conseguir meus primeiros clientes' },
+            { value: 'generalista', label: 'Quero me profissionalizar e atuar com diferentes tipos de serviços' },
+            { value: 'assessoria', label: 'Quero me especializar em Assessoria Pessoal' },
         ],
     },
 
@@ -672,7 +672,7 @@ function gerarResultado() {
             'Comece do jeito certo!',
             `<p>Pelas suas respostas, faz sentido começar conhecendo melhor a profissão de <strong>Assistente Virtual</strong> e entendendo se esse caminho combina com o que você busca.</p>
              <p>Preparamos um conteúdo gratuito  pra você entender como esse trabalho funciona na prática e quais são as possibilidades reais de renda e crescimento.</p>
-             <p>Se fizer sentido pra você, a gente te ajuda com os próximos passos!</p>`
+             <p>Se você se identificar e gostar da profissão, a gente te ajuda com os próximos passos!</p>`
         );
     }
 
