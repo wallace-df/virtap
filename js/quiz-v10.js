@@ -114,7 +114,7 @@ const STEPS = {
         options: [
             { value: 'investiu-quer', label: 'Já investi e pretendo investir novamente' },
             { value: 'investiu-naoquer', label: 'Já investi, mas não pretendo investir agora' },
-            { value: 'nunca-quer', label: 'Nunca investi, mas pretendo investir agora' },
+            { value: 'nunca-quer', label: 'Nunca investi, mas pretendo investir' },
             { value: 'nunca-naoquer', label: 'Nunca investi e não pretendo investir' },
         ],
     },
@@ -296,7 +296,7 @@ const STEPS = {
 const FLOWS = {
     explore: ['origem', 'situacao', 'area', 'incomoda', 'renda'],
     build: ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'renda', 'leadCapture'],
-    'build-v2': ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'busca', 'investe', 'renda', 'leadCapture'],
+    'build-v2': ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'investe', 'busca', 'renda', 'leadCapture'],
     growth: ['comoComecou', 'areaAV', 'origem', 'incomodaAV', 'faturamento', 'leadCapture'],
 };
 // ─── PROFILE SLUG SCHEMA ──────────────────────────────────────────────────────
