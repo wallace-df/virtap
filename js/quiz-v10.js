@@ -9,7 +9,8 @@ const PATHS = {
     formacaoAV: '/formacoes/assistencia-virtual',
     acessoVirtap: '/vagas-assistente-virtual/como-acessar',
     especializacao: '/formacoes/assistencia-pessoal',
-    mastermind: 'https://docs.google.com/forms/d/e/1FAIpQLSd4d08MvexaQzMcjqUxjwmgrYLvuGqmHXGqkElLeWpSTJlvFg/viewform'
+    mastermind: 'https://docs.google.com/forms/d/e/1FAIpQLSd4d08MvexaQzMcjqUxjwmgrYLvuGqmHXGqkElLeWpSTJlvFg/viewform',
+    youtube: 'https://www.youtube.com/@virtapbr'
 };
 // Endpoint pra captura de lead nos flows build/growth (antes do resultado)
 const LEAD_CAPTURE_ENDPOINT = '/signup-quiz';
@@ -103,9 +104,9 @@ const STEPS = {
         title: 'O que você busca agora?',
         field: 'busca',
         options: [
-            { value: 'rapido', label: 'Quero um caminho simples para conseguir meus primeiros clientes' },
-            { value: 'generalista', label: 'Quero me profissionalizar e atuar com diferentes tipos de serviços' },
-            { value: 'assessoria', label: 'Quero me especializar em Assessoria Pessoal' },
+            { value: 'comecar', label: 'Quero um caminho simples para conseguir meus primeiros clientes' },
+            { value: 'profissionalizar', label: 'Quero me profissionalizar e atuar com diferentes tipos de serviços' },
+            { value: 'especializar', label: 'Quero me especializar em Assessoria Pessoal' },
         ],
     },
     investe: {
@@ -113,8 +114,8 @@ const STEPS = {
         field: 'investe',
         options: [
             { value: 'investiu-quer', label: 'Já investi e pretendo investir novamente' },
-            { value: 'investiu-naoquer', label: 'Já investi, mas não pretendo investir agora' },
-            { value: 'nunca-quer', label: 'Nunca investi, mas pretendo investir' },
+            { value: 'nunca-quer', label: 'Nunca investi, mas pretendo investir agora' },
+            { value: 'investiu-naoquer', label: 'Já investi, mas não pretendo investir dessa vez' },
             { value: 'nunca-naoquer', label: 'Nunca investi e não pretendo investir' },
         ],
     },
@@ -305,7 +306,7 @@ const FLOWS = {
 const PROFILE_SCHEMAS = {
     explore: ['origem', 'situacao', 'area', 'incomoda', 'renda'],
     build: ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'renda'],
-    'build-v2': ['origem', 'situacao', 'area', 'busca', 'sonho', 'obstaculo', 'investe', 'renda'],
+    'build-v2': ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'investe', 'busca', 'renda'], // ordem igual à FLOWS agora
     growth: ['comoComecou', 'area', 'origem', 'incomodaAV', 'faturamento'],
 };
 const PROFILE_SEP = '_';
@@ -504,7 +505,6 @@ function advance() {
             showResult();
             return;
         }
-        // BUILD-V2 — captura de lead sempre normal, sem bypass (nenhum atalho aqui).
         // Desvio IA: lead de IA no build (v1) vai direto pro R$97, sem captura.
         // build-v2 não tem esse atalho — IA também passa pela captura normalmente.
         if (nextId === 'leadCapture' && (state.flow === 'build') && state.origem === 'ia') {
@@ -519,6 +519,7 @@ function advance() {
             window.scrollTo(0, 0);
             return;
         }
+
         const step = STEPS[nextId];
         // Guard `step &&` protege steps especiais (ex: leadCapture) que não têm entrada em STEPS
         if (step && step.skipFn && step.skipFn(state)) {
@@ -595,16 +596,15 @@ function gerarResultado() {
         const naoQuerInvestir = ['investiu-naoquer', 'nunca-naoquer'].includes(state.investe);
         // Não quer investir agora → conteúdo gratuito (YouTube)
         if (naoQuerInvestir) {
-            return resultadoCursoGratuito(
-                'Você já deu o primeiro passo!',
-                `<p>Pelas suas respostas, você já conhece a profissão de Assistente Virtual e decidiu que quer construir uma carreira nessa área.</p>
-     <p>Agora é hora de entender melhor como esse mercado funciona, conhecer as possibilidades reais e descobrir quais são os próximos passos para começar.</p>
-     <p>Preparamos um conteúdo gratuito para ajudar você nessa jornada. Ao final, mostramos os próximos passos para iniciar sua carreira.</p>`
+            return resultadoYoutube(
+                'Acompanhe nosso canal no YouTube',
+                `<p>Acompanhe o conteúdo gratuito que preparamos para você no YouTube.</p>
+                 <p>No nosso canal, você vai encontrar aulas, dicas e orientações para te ajudar ao longo da sua jornada como Assistente Virtual.</p>`
             );
         }
         // Quer investir agora — rotear por 'busca'
         // Caminho rápido → Programa 30 dias (sempre LP)
-        if (state.busca === 'rapido') {
+        if (state.busca === 'comecar') {
             return resultadoPrograma30Dias(
                 'Encontramos o caminho mais rápido pra você',
                 montarContextoDecidi(),
@@ -613,35 +613,44 @@ function gerarResultado() {
             );
         }
         // Assessoria Pessoal → Especialização (LP ou WhatsApp, configurável)
-        if (state.busca === 'assessoria') {
+        if (state.busca === 'especializar') {
             const contexto = montarContextoDecidi();
-            const corpo = `<p>Pelas suas respostas, ficou claro que você quer se especializar em Assessoria Pessoal e atuar ao lado de empresários e executivos.</p>
-     <p>Pra isso, o melhor caminho é uma formação focada nesse tipo de atuação, com método e acompanhamento pra você se posicionar com segurança nesse nicho.</p>`;
+            const corpo = `
+            <p>Quem atua com Assessoria Pessoal não é apenas alguém que executa tarefas. É uma profissional de confiança, que organiza, antecipa necessidades e contribui para que empresários e executivos tenham mais tempo e produtividade.</p>
+            <p>Esse nível de atuação exige visão, proatividade, discrição e preparo para lidar com demandas de maior responsabilidade.</p>
+            <p>Por isso, uma formação especializada aliada a um acompanhamento próximo faz toda a diferença para desenvolver esse perfil e se posicionar nesse mercado.</p>`;
             if (DESTINO_BUILD.assessoria === 'whatsapp') {
                 return resultadoWhatsapp(
-                    'Vamos te mostrar o caminho certo',
+                    'Assessoria Pessoal é um novo nível de atuação',
                     contexto,
                     corpo,
                     WHATSAPP.mensagens.assessoria
                 );
             }
-            return resultadoEspecializacao('Vamos te mostrar o caminho certo', contexto, corpo);
+            return resultadoEspecializacao('Assessoria Pessoal é um novo nível de atuação', contexto, corpo);
         }
         // Generalista (padrão) → Formação AV (LP ou WhatsApp, configurável)
         const contexto = montarContextoDecidi();
-        const corpo = `<p>Pelas suas respostas, ficou claro que você não está apenas pesquisando uma possibilidade.</p>
-     <p>Você quer construir uma carreira que te dê mais liberdade, segurança e a chance de conquistar uma renda que faça sentido para a vida que você deseja.</p>
-     <p>Pra alcançar isso, o melhor caminho é ter uma base sólida, com método e acompanhamento, para transformar esse projeto em algo real e duradouro.</p>
-     <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e alcançar seu objetivo mais rápido.</p>`;
+
+        const corpo = `
+            <p>Pelas suas respostas, ficou claro que você quer construir uma carreira como Assistente Virtual.</p>
+            <p>Para isso, mais do que conhecer a profissão, é importante entender como atender clientes, organizar seu trabalho, definir seus serviços e se posicionar no mercado.</p>
+            <p>Uma formação estruturada ajuda você a começar pelo caminho certo, evitar erros comuns e acelerar sua evolução na profissão.</p>`;
+
         if (DESTINO_BUILD.generalista === 'whatsapp') {
             return resultadoWhatsapp(
-                'Você já decidiu que quer mudar de vida',
+                'Você quer construir uma carreira como Assistente Virtual',
                 contexto,
                 corpo,
                 WHATSAPP.mensagens.generalista
             );
         }
-        return resultadoFormacaoAV('Você já decidiu que quer mudar de vida', contexto, corpo);
+
+        return resultadoFormacaoAV(
+            'Você quer construir uma carreira como Assistente Virtual',
+            contexto,
+            corpo
+        );
     }
     // ─── FLOW 3: growth ───────────────────────────────────────────────────
     if (state.flow === 'growth') {
@@ -729,6 +738,17 @@ function resultadoCursoGratuito(titulo, corpo) {
         btn: makeCTA('👉 Acessar o material gratuito', PATHS.cursoGratuito, 'curso-gratuito'),
     };
 }
+
+
+function resultadoYoutube(titulo, corpo) {
+    return {
+        destino: 'youtube',
+        titulo,
+        mensagem: corpo,
+        btn: makeCTA('👉 Acessar o canal no YouTube', PATHS.youtube, 'youtube-build-v2'),
+    };
+}
+
 function resultadoPrograma30Dias(titulo, contexto, corpo) {
     return {
         destino: 'programa-30dias',
@@ -742,7 +762,7 @@ function resultadoFormacaoAV(titulo, contexto, corpo) {
         destino: 'formacao',
         titulo,
         mensagem: contexto + corpo,
-        btn: makeCTA('👉 Quero ver como funciona', PATHS.formacaoAV, 'formacao-av'),
+        btn: makeCTA('👉 Quero conhecer a Formação', PATHS.formacaoAV, 'formacao-av'),
     };
 }
 function resultadoFormacaoAP(titulo, contexto, corpo) {
@@ -775,7 +795,7 @@ function resultadoWhatsapp(titulo, contexto, corpo, mensagem) {
         destino: 'whatsapp',
         titulo,
         mensagem: contexto + corpo,
-        btn: `<button class="next-btn" onclick="window.location.href='${link}'">👉 Falar no WhatsApp</button>`,
+        btn: `<button class="next-btn" onclick="window.location.href='${link}'">👉 Fale com a gente no WhatsApp</button>`,
     };
 }
 function resultadoMastermind(titulo, contexto, corpo) {
