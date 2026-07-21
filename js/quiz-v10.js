@@ -2,7 +2,6 @@
 // VIRTAP QUIZ V10
 // 3 caminhos: explore | build | build-v2 | growth
 // ═════════════════════════════════════════════════════════════════════════════
-
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 const PATHS = {
     cursoGratuito: '/curso-assistente-virtual',
@@ -12,10 +11,8 @@ const PATHS = {
     especializacao: '/formacoes/assistencia-pessoal',
     mastermind: 'https://docs.google.com/forms/d/e/1FAIpQLSd4d08MvexaQzMcjqUxjwmgrYLvuGqmHXGqkElLeWpSTJlvFg/viewform'
 };
-
 // Endpoint pra captura de lead nos flows build/growth (antes do resultado)
 const LEAD_CAPTURE_ENDPOINT = '/signup-quiz';
-
 // ─── VERSÃO DO BUILD (A/B) ────────────────────────────────────────────────────
 // Controla quem cai em 'build' (original) vs 'build-v2' (novo) quando a pessoa
 // escolhe a opção "Já sei como funciona e quero começar" no P0.
@@ -24,19 +21,16 @@ const LEAD_CAPTURE_ENDPOINT = '/signup-quiz';
 // Override manual pra QA/teste de link: ?build=v2 ou ?build=v1 na URL.
 const BUILD_VERSION = 'split'; // 'v1' | 'v2' | 'split'
 const BUILD_V2_PERCENT = 0.5; // usado só quando BUILD_VERSION === 'split'
-
 function resolveBuildFlow() {
     const params = new URLSearchParams(window.location.search);
     const override = params.get('build');
     if (override === 'v2') return 'build-v2';
     if (override === 'v1') return 'build';
-
     if (BUILD_VERSION === 'v2') return 'build-v2';
     if (BUILD_VERSION === 'v1') return 'build';
     // split
     return Math.random() < BUILD_V2_PERCENT ? 'build-v2' : 'build';
 }
-
 // ─── DESTINO BUILD V2 ─────────────────────────────────────────────────────────
 // Pra quem "quer investir" (campo `investe`) e escolheu 'generalista' ou
 // 'assessoria' no campo `busca`, decide se o resultado leva pra LP ou WhatsApp.
@@ -46,8 +40,7 @@ const DESTINO_BUILD = {
     generalista: 'lp',       // 'lp' ou 'whatsapp' — Formação AV
     assessoria: 'whatsapp',  // 'lp' ou 'whatsapp' — Especialização AP
 };
-
-// TODO: preencher número real (formato internacional, só dígitos) e revisar as mensagens
+// TODO: revisar as mensagens
 const WHATSAPP = {
     numero: '5548988089062',
     mensagens: {
@@ -55,12 +48,10 @@ const WHATSAPP = {
         assessoria: 'Olá! Fiz o quiz da Virtap e quero saber mais sobre a Especialização em Assessoria Pessoal.',
     },
 };
-
 // ─── STEPS (questões) ─────────────────────────────────────────────────────────
 // Cada step define: title, field (nome no state), e options (estático) ou
 // optionsFn(state) (dinâmico baseado em respostas anteriores).
 const STEPS = {
-
     // P0 — Ponto de partida
     p0: {
         title: 'Em qual momento você está?',
@@ -71,9 +62,7 @@ const STEPS = {
             { value: 'growth', label: 'Já trabalho como Assistente Virtual' },
         ],
     },
-
     // ─── Comuns aos flows 1 e 2 ──────────────────────────────────────────────
-
     origem: {
         title: 'Como você conheceu a Virtap?',
         field: 'origem',
@@ -87,7 +76,6 @@ const STEPS = {
             { value: 'outro', label: 'Outro' },
         ],
     },
-
     situacao: {
         title: 'Qual é a sua situação atual?',
         field: 'situacao',
@@ -98,7 +86,6 @@ const STEPS = {
             { value: 'aposentada', label: 'Sou aposentada' },
         ],
     },
-
     area: {
         title: 'Em qual área você tem mais experiência?',
         field: 'area',
@@ -112,7 +99,6 @@ const STEPS = {
             { value: 'nenhuma', label: 'Nenhuma dessas' },
         ],
     },
-
     busca: {
         title: 'O que você busca agora?',
         field: 'busca',
@@ -122,7 +108,6 @@ const STEPS = {
             { value: 'assessoria', label: 'Quero me especializar em Assessoria Pessoal' },
         ],
     },
-
     investe: {
         title: 'Já investiu em treinamentos, cursos online ou mentorias?',
         field: 'investe',
@@ -133,7 +118,6 @@ const STEPS = {
             { value: 'nunca-naoquer', label: 'Nunca investi e não pretendo investir' },
         ],
     },
-
     renda: {
         title: 'Qual é a sua renda mensal hoje?',
         field: 'renda',
@@ -146,9 +130,7 @@ const STEPS = {
             { value: 'acima-5000', label: 'Acima de R$ 5.000' },
         ],
     },
-
     // ─── Flow 1: explore ─────────────────────────────────────────────────
-
     incomoda: {
         title: 'O que mais te incomoda hoje?',
         field: 'incomoda',
@@ -181,7 +163,6 @@ const STEPS = {
             return opts[s.situacao] || [];
         },
     },
-
     urgenciaIncomodo: {
         title: 'Quão urgente é resolver isso pra você?',
         field: 'urgencia',
@@ -192,9 +173,7 @@ const STEPS = {
             { value: 'pesquisando', label: 'Sem pressa, ainda explorando' },
         ],
     },
-
     // ─── Flow 2: Já decidi ───────────────────────────────────────────────────
-
     sonho: {
         title: 'Qual é o seu maior sonho?',
         field: 'sonho',
@@ -227,7 +206,6 @@ const STEPS = {
             return opts[s.situacao] || [];
         },
     },
-
     urgenciaSonho: {
         title: 'Em quanto tempo você quer começar a trabalhar como AV?',
         field: 'urgencia',
@@ -238,7 +216,6 @@ const STEPS = {
             { value: 'pesquisando', label: 'Sem prazo definido, ainda me organizando' },
         ],
     },
-
     obstaculo: {
         title: 'O que te impede de começar agora como AV?',
         field: 'obstaculo',
@@ -246,7 +223,6 @@ const STEPS = {
             const opts = [
                 { value: 'nao-sei-comecar', label: 'Não sei por onde começar' },
             ];
-
             if (s.situacao === 'desempregada') {
                 opts.push({ value: 'sem-investimento', label: 'Não posso investir muito agora' });
             }
@@ -259,7 +235,6 @@ const STEPS = {
             if (s.situacao === 'aposentada') {
                 opts.push({ value: 'medo-tecnologia', label: 'Tenho medo de não conseguir acompanhar a tecnologia' });
             }
-
             opts.push(
                 { value: 'medo-clientes', label: 'Tenho medo de não conseguir clientes' },
                 { value: 'inseguranca-pratica', label: 'Tenho receio de não conseguir colocar em prática' },
@@ -268,9 +243,7 @@ const STEPS = {
             return opts;
         },
     },
-
     // ─── Flow 3: Já sou AV ───────────────────────────────────────────────────
-
     comoComecou: {
         title: 'Como você começou na Assistência Virtual?',
         field: 'comoComecou',
@@ -280,7 +253,6 @@ const STEPS = {
             { value: 'trabalho-anterior', label: 'Já fazia atividades semelhantes no meu trabalho anterior' },
         ],
     },
-
     areaAV: {
         // Sem "Nenhuma dessas" no Flow 3 — quem já atua tem uma área.
         title: 'Em qual área você tem mais experiência?',
@@ -293,7 +265,6 @@ const STEPS = {
             { value: 'outra', label: 'Outra' },
         ],
     },
-
     incomodaAV: {
         title: 'O que mais te incomoda hoje?',
         field: 'incomodaAV',
@@ -306,7 +277,6 @@ const STEPS = {
             { value: 'escala', label: 'Quero crescer e escalar minha atuação' },
         ],
     },
-
     faturamento: {
         title: 'Quanto você fatura hoje como Assistente?',
         field: 'faturamento',
@@ -320,7 +290,6 @@ const STEPS = {
         ],
     },
 };
-
 // ─── FLOWS ────────────────────────────────────────────────────────────────────
 // 'leadCapture' é um step especial sem entrada em STEPS — renderiza um form
 // em vez de botões e captura nome/email/whatsapp antes do resultado.
@@ -330,7 +299,6 @@ const FLOWS = {
     'build-v2': ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'busca', 'investe', 'renda', 'leadCapture'],
     growth: ['comoComecou', 'areaAV', 'origem', 'incomodaAV', 'faturamento', 'leadCapture'],
 };
-
 // ─── PROFILE SLUG SCHEMA ──────────────────────────────────────────────────────
 // Define a ordem dos campos no slug por flow. Server usa o MESMO schema
 // pra parsear ?profile=... em objeto. leadCapture NÃO entra aqui (não é dado de profile).
@@ -340,16 +308,13 @@ const PROFILE_SCHEMAS = {
     'build-v2': ['origem', 'situacao', 'area', 'busca', 'sonho', 'obstaculo', 'investe', 'renda'],
     growth: ['comoComecou', 'area', 'origem', 'incomodaAV', 'faturamento'],
 };
-
 const PROFILE_SEP = '_';
 const PROFILE_NA = 'na';
-
 // ─── STATE ────────────────────────────────────────────────────────────────────
 const state = {
-    flow: null,         // explore | build | growth
+    flow: null,         // explore | build | build-v2 | growth
     flowIndex: -1,      // -1 = no P0, 0+ = dentro do flow
     history: [],        // pilha de steps pra voltar
-
     // Respostas (uma chave por campo capturado)
     origem: null,
     situacao: null,
@@ -365,74 +330,57 @@ const state = {
     faturamento: null,
     // urgencia: null,  // dormente, ativar se reincluir urgenciaIncomodo/urgenciaSonho nos flows
 };
-
 // Instância do intlTelInput, inicializada quando o form de captura é renderizado
 let leadIntl = null;
-
 // ─── RENDERIZAÇÃO ─────────────────────────────────────────────────────────────
-
 function renderStep(stepId) {
     // Step especial: captura de lead (form, não botões)
     if (stepId === 'leadCapture') {
         renderLeadCaptureForm();
         return;
     }
-
     const step = STEPS[stepId];
     if (!step) {
         console.error('Step não encontrado:', stepId);
         return;
     }
-
     const options = typeof step.optionsFn === 'function'
         ? step.optionsFn(state)
         : step.options;
-
     // P0: 'build-v2' deve marcar o mesmo botão que 'build' (é a mesma opção visível pro usuário)
     let currentValue = state[step.field];
     if (stepId === 'p0' && currentValue === 'build-v2') currentValue = 'build';
-
     const buttonsHtml = options.map(opt => {
         const selected = currentValue === opt.value ? ' selected' : '';
         return `<button class="option-btn${selected}" onclick="selectOption('${step.field}','${opt.value}',this)">${opt.label}</button>`;
     }).join('');
-
     document.getElementById('step-content').innerHTML = `
         <h2>${step.title}</h2>
         ${buttonsHtml}
     `;
-
     const isP0 = stepId === 'p0';
     document.getElementById('header-nav').style.display = isP0 ? 'none' : 'flex';
-
     window.scrollTo(0, 0);
 }
-
 function markSelected(el) {
     if (!el) return;
     el.parentNode.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
     el.classList.add('selected');
 }
-
 // ─── LEAD CAPTURE ─────────────────────────────────────────────────────────────
-
 function renderLeadCaptureForm() {
     document.getElementById('step-content').innerHTML = `
         <h2>Quase lá! Para ver seu caminho, preencha abaixo:</h2>
         <form id="lead-capture-form" novalidate>
             <input type="text" placeholder="Nome" id="lead-nome" maxlength="30" aria-label="Seu nome">
             <div class="error-message" id="erro-lead-nome" style="margin-top: -0.2rem"></div>
-
             <input type="text" placeholder="E-mail" id="lead-email" aria-label="Seu melhor email">
             <div class="error-message" id="erro-lead-email" style="margin-top: -0.2rem"></div>
-
             <input type="text" placeholder="(99) 99999-9999" id="lead-whatsapp" aria-label="Seu whatsapp">
             <div class="error-message" id="erro-lead-whatsapp"></div>
-
             <button type="submit" class="next-btn">Revelar meu caminho</button>
         </form>
     `;
-
     // Inicializa intlTelInput pro campo de whatsapp
     const phoneInput = document.getElementById('lead-whatsapp');
     leadIntl = window.intlTelInput(phoneInput, {
@@ -440,17 +388,13 @@ function renderLeadCaptureForm() {
         initialCountry: 'BR',
         separateDialCode: true,
     });
-
     // Bind do submit
     document.getElementById('lead-capture-form').addEventListener('submit', handleLeadCapture);
-
     document.getElementById('header-nav').style.display = 'flex';
     window.scrollTo(0, 0);
 }
-
 async function handleLeadCapture(e) {
     e.preventDefault();
-
     // Limpa mensagens de erro antigas
     document.getElementById('erro-lead-nome').textContent = '';
     document.getElementById('erro-lead-email').textContent = '';
@@ -458,44 +402,35 @@ async function handleLeadCapture(e) {
     document.getElementById('lead-nome').classList.remove('input-error');
     document.getElementById('lead-email').classList.remove('input-error');
     document.getElementById('lead-whatsapp').classList.remove('input-error');
-
     const nome = document.getElementById('lead-nome').value.trim();
     const email = document.getElementById('lead-email').value.trim().toLowerCase();
-
     let hasError = false;
-
     // Validação nome
     if (nome.length < 5) {
         document.getElementById('erro-lead-nome').textContent = 'O nome deve ter pelo menos 5 caracteres.';
         document.getElementById('lead-nome').classList.add('input-error');
         hasError = true;
     }
-
     // Validação email
     if (!/^\S+@\S+\.\S+$/.test(email)) {
         document.getElementById('erro-lead-email').textContent = 'Digite um e-mail válido (ex: nome@dominio.com).';
         document.getElementById('lead-email').classList.add('input-error');
         hasError = true;
     }
-
     // Validação whatsapp
     if (!leadIntl || !leadIntl.isValidNumber()) {
         document.getElementById('erro-lead-whatsapp').textContent = 'Digite um número de WhatsApp válido.';
         document.getElementById('lead-whatsapp').classList.add('input-error');
         hasError = true;
     }
-
     if (hasError) return;
-
     // Desabilita inputs e botão durante envio
     const form = e.target;
     const inputs = form.querySelectorAll('input, button');
     const button = form.querySelector('button');
     const originalButtonText = button.textContent;
-
     inputs.forEach(el => el.disabled = true);
     button.textContent = 'Enviando...';
-
     const body = {
         nome: nome,
         email: email,
@@ -504,7 +439,6 @@ async function handleLeadCapture(e) {
         profile: getProfileSlug(),
         utm_params: getUTMParams(),
     };
-
     try {
         const response = await fetch(`${window.apiURL}${LEAD_CAPTURE_ENDPOINT}`, {
             method: 'POST',
@@ -512,7 +446,6 @@ async function handleLeadCapture(e) {
             body: JSON.stringify(body),
             credentials: 'include'
         });
-
         if (response.status === 200 || response.status === 201) {
             showResult();
         } else {
@@ -532,19 +465,14 @@ async function handleLeadCapture(e) {
         showErrorModal();
     }
 }
-
 function showErrorModal() {
     document.getElementById('error-modal').style.display = 'flex';
 }
-
 function closeErrorModal() {
     document.getElementById('error-modal').style.display = 'none';
 }
-
 // ─── NAVEGAÇÃO ────────────────────────────────────────────────────────────────
-
 let advanceTimer = null;
-
 function selectOption(field, value, el) {
     // P0: se escolheu "build", decide entre 'build' e 'build-v2' (A/B)
     if (field === 'flow' && value === 'build') {
@@ -563,35 +491,22 @@ function advance() {
         renderStep(FLOWS[state.flow][0]);
         return;
     }
-
     // Salva step atual no history e avança
     const currentStepId = FLOWS[state.flow][state.flowIndex];
     state.history.push(currentStepId);
-
     state.flowIndex++;
     const flow = FLOWS[state.flow];
-
     // Pula steps com skipFn true
     while (state.flowIndex < flow.length) {
         const nextId = flow[state.flowIndex];
-
-        // BUILD (original) — leads não-IA que se qualificam pro programa de 97, vao pro curso gratuito.
+        // BUILD (original) — leads não-IA vão direto pro conteúdo gratuito, sem captura.
         if (nextId === 'leadCapture' && state.flow === 'build' && state.origem !== 'ia') {
             showResult();
             return;
         }
-
-        // BUILD-V2 — leads não-IA que não querem investir agora vão pro conteúdo gratuito (YouTube),
-        // sem passar pela captura de lead.
-        if (nextId === 'leadCapture' && state.flow === 'build-v2' && state.origem !== 'ia') {
-            const naoQuerInvestir = ['investiu-naoquer', 'nunca-naoquer'].includes(state.investe);
-            if (naoQuerInvestir) {
-                showResult();
-                return;
-            }
-        }
-
-        // Desvio IA: lead de IA no build (v1 ou v2) vai direto pro R$97, sem captura
+        // BUILD-V2 — captura de lead sempre normal, sem bypass (nenhum atalho aqui).
+        // Desvio IA: lead de IA no build (v1) vai direto pro R$97, sem captura.
+        // build-v2 não tem esse atalho — IA também passa pela captura normalmente.
         if (nextId === 'leadCapture' && (state.flow === 'build') && state.origem === 'ia') {
             const link = getLink('/primeiro-cliente-av', 'primeiro-cliente-av-build-vsl-ia');
             document.getElementById('step-content').innerHTML = `
@@ -604,7 +519,6 @@ function advance() {
             window.scrollTo(0, 0);
             return;
         }
-
         const step = STEPS[nextId];
         // Guard `step &&` protege steps especiais (ex: leadCapture) que não têm entrada em STEPS
         if (step && step.skipFn && step.skipFn(state)) {
@@ -615,15 +529,12 @@ function advance() {
         renderStep(nextId);
         return;
     }
-
     // Fim do flow → resultado
     showResult();
 }
-
 function goBack() {
     if (state.history.length === 0) return;
     const prev = state.history.pop();
-
     if (prev === 'p0') {
         // Volta pro ponto de partida: reseta flow
         state.flow = null;
@@ -631,14 +542,11 @@ function goBack() {
         renderStep('p0');
         return;
     }
-
     // Volta um step dentro do flow
     state.flowIndex = FLOWS[state.flow].indexOf(prev);
     renderStep(prev);
 }
-
 // ─── RESULTADO ────────────────────────────────────────────────────────────────
-
 function showResult() {
     const r = gerarResultado();
     document.getElementById('step-content').innerHTML = `
@@ -648,12 +556,9 @@ function showResult() {
     document.getElementById('header-nav').style.display = 'flex';
     window.scrollTo(0, 0);
 }
-
 function gerarResultado() {
-
     // ─── FLOW 1: explore ────────────────────────────────
     if (state.flow === 'explore') {
-
         // [TESTE] explore + origem IA → roteia direto pro Primeiro Cliente (R$ 97),
         // pulando o curso gratuito. Reverter: deletar este bloco.
         if (state.origem === 'ia') {
@@ -666,7 +571,6 @@ function gerarResultado() {
                 btn: makeCTA('👉 Conhecer o programa', '/primeiro-cliente-av-2', 'primeiro-cliente-av-explore-vsl-ia-2'),
             };
         }
-
         return resultadoCursoGratuito(
             'Comece do jeito certo!',
             `<p>Pelas suas respostas, faz sentido começar conhecendo melhor a profissão de <strong>Assistente Virtual</strong> e entendendo se esse caminho combina com o que você busca.</p>
@@ -674,7 +578,6 @@ function gerarResultado() {
              <p>Se você se identificar e gostar da profissão, a gente te ajuda com os próximos passos!</p>`
         );
     }
-
     // ─── FLOW 2: build (original) ───────────────────────────────────────
     if (state.flow === 'build') {
         return resultadoCursoGratuito(
@@ -684,11 +587,12 @@ function gerarResultado() {
                  <p>Preparamos um conteúdo para ajudar você nessa jornada. Ao final, mostramos os próximos passos para iniciar sua carreira.</p>`
         );
     }
-
     // ─── FLOW 2b: build-v2 (novo) ────────────────────────────────────────
+    // Sempre passa pela captura de lead normalmente (ver `advance()`); o campo
+    // `investe` aqui só decide QUAL resultado mostrar depois da captura, não
+    // se ela acontece.
     if (state.flow === 'build-v2') {
         const naoQuerInvestir = ['investiu-naoquer', 'nunca-naoquer'].includes(state.investe);
-
         // Não quer investir agora → conteúdo gratuito (YouTube)
         if (naoQuerInvestir) {
             return resultadoCursoGratuito(
@@ -698,9 +602,7 @@ function gerarResultado() {
      <p>Preparamos um conteúdo gratuito para ajudar você nessa jornada. Ao final, mostramos os próximos passos para iniciar sua carreira.</p>`
             );
         }
-
         // Quer investir agora — rotear por 'busca'
-
         // Caminho rápido → Programa 30 dias (sempre LP)
         if (state.busca === 'rapido') {
             return resultadoPrograma30Dias(
@@ -710,13 +612,11 @@ function gerarResultado() {
      <p>Por isso, o melhor caminho é um programa prático e direto ao ponto, feito pra te ajudar a sair do zero e conquistar seu primeiro cliente como Assistente Virtual.</p>`
             );
         }
-
         // Assessoria Pessoal → Especialização (LP ou WhatsApp, configurável)
         if (state.busca === 'assessoria') {
             const contexto = montarContextoDecidi();
             const corpo = `<p>Pelas suas respostas, ficou claro que você quer se especializar em Assessoria Pessoal e atuar ao lado de empresários e executivos.</p>
      <p>Pra isso, o melhor caminho é uma formação focada nesse tipo de atuação, com método e acompanhamento pra você se posicionar com segurança nesse nicho.</p>`;
-
             if (DESTINO_BUILD.assessoria === 'whatsapp') {
                 return resultadoWhatsapp(
                     'Vamos te mostrar o caminho certo',
@@ -727,14 +627,12 @@ function gerarResultado() {
             }
             return resultadoEspecializacao('Vamos te mostrar o caminho certo', contexto, corpo);
         }
-
         // Generalista (padrão) → Formação AV (LP ou WhatsApp, configurável)
         const contexto = montarContextoDecidi();
         const corpo = `<p>Pelas suas respostas, ficou claro que você não está apenas pesquisando uma possibilidade.</p>
      <p>Você quer construir uma carreira que te dê mais liberdade, segurança e a chance de conquistar uma renda que faça sentido para a vida que você deseja.</p>
      <p>Pra alcançar isso, o melhor caminho é ter uma base sólida, com método e acompanhamento, para transformar esse projeto em algo real e duradouro.</p>
      <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e alcançar seu objetivo mais rápido.</p>`;
-
         if (DESTINO_BUILD.generalista === 'whatsapp') {
             return resultadoWhatsapp(
                 'Você já decidiu que quer mudar de vida',
@@ -745,16 +643,13 @@ function gerarResultado() {
         }
         return resultadoFormacaoAV('Você já decidiu que quer mudar de vida', contexto, corpo);
     }
-
     // ─── FLOW 3: growth ───────────────────────────────────────────────────
     if (state.flow === 'growth') {
         const area = state.area;
         const dor = state.incomodaAV;
         const fat = state.faturamento;
-
         // Não consigo clientes: dor explícita, OU dor de escala/rentabilidade sem nenhum cliente ainda
         const faturamentoBaixo = ['sem-clientes', 'ate-1800', '1800-2500'].includes(fat);
-
         if (dor === 'clientes' || ((dor === 'rentabilidade' || dor === 'escala') && faturamentoBaixo)) {
             return resultadoPlataforma(
                 'Você precisa de clientes!',
@@ -763,7 +658,6 @@ function gerarResultado() {
              <p>A gente consegue te ajudar com isso!</p>`
             );
         }
-
         // Mastermind
         if (dor === 'escala' && fat === 'acima-5000') {
             return resultadoMastermind(
@@ -774,10 +668,8 @@ function gerarResultado() {
             <p>Participe do nosso grupo exclusivo apenas para AVs que se encontram neste patamar.</p>`
             );
         }
-
         // Especialização (aqui fat nunca é 'sem-clientes' pra escala/rentabilidade, já foi capturado acima)
         if (dor === 'rentabilidade' || dor === 'escala') {
-
             if (area === 'assistencia-pessoal') {
                 // Formação AP
                 return resultadoFormacaoAP(
@@ -796,7 +688,6 @@ function gerarResultado() {
                 );
             }
         }
-
         // Fallback: inseguranca, precificacao, profissionalizacao (com ou sem clientes)
         if (area === 'assistencia-pessoal') {
             // Formação AP
@@ -806,7 +697,6 @@ function gerarResultado() {
                 `<p>Pelas suas respostas, o mais importante agora é consolidar conhecimentos, ganhar mais segurança e estruturar melhor sua atuação.</p>
          <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e ir para um próximo nível mais rápido.</p>`
             );
-
         } else {
             // Formação AV
             return resultadoFormacaoAV(
@@ -817,26 +707,20 @@ function gerarResultado() {
             );
         }
     }
-
     // fallback
     return resultadoCursoGratuito(
         'Existe um caminho que faz sentido para você',
         '<p>Pelas suas respostas, o mais importante agora é seguir um próximo passo claro e alinhado ao momento que você está vivendo.</p>'
     );
 }
-
 // ─── HELPERS DE CONTEXTO ──────────────────────────────────────────────────────
-
 function montarContextoDecidi() {
     return '';
 }
-
 function montarContextoJaSou() {
     return '';
 }
-
 // ─── TEMPLATES DE RESULTADO ───────────────────────────────────────────────────
-
 function resultadoCursoGratuito(titulo, corpo) {
     return {
         destino: 'curso-gratuito',
@@ -845,7 +729,6 @@ function resultadoCursoGratuito(titulo, corpo) {
         btn: makeCTA('👉 Acessar o material gratuito', PATHS.cursoGratuito, 'curso-gratuito'),
     };
 }
-
 function resultadoPrograma30Dias(titulo, contexto, corpo) {
     return {
         destino: 'programa-30dias',
@@ -854,7 +737,6 @@ function resultadoPrograma30Dias(titulo, contexto, corpo) {
         btn: makeCTA('👉 Conhecer o programa', PATHS.programa30dias, 'primeiro-cliente-av'),
     };
 }
-
 function resultadoFormacaoAV(titulo, contexto, corpo) {
     return {
         destino: 'formacao',
@@ -863,7 +745,6 @@ function resultadoFormacaoAV(titulo, contexto, corpo) {
         btn: makeCTA('👉 Quero ver como funciona', PATHS.formacaoAV, 'formacao-av'),
     };
 }
-
 function resultadoFormacaoAP(titulo, contexto, corpo) {
     return {
         destino: 'formacao',
@@ -872,7 +753,6 @@ function resultadoFormacaoAP(titulo, contexto, corpo) {
         btn: makeCTA('👉 Quero ver como funciona', PATHS.especializacao, 'formacao-ap'),
     };
 }
-
 function resultadoPlataforma(titulo, contexto, corpo) {
     return {
         destino: 'plataforma',
@@ -881,7 +761,6 @@ function resultadoPlataforma(titulo, contexto, corpo) {
         btn: makeCTA('👉 Conheça nossa Plataforma de Clientes', PATHS.acessoVirtap, 'plataforma-vagas'),
     };
 }
-
 function resultadoEspecializacao(titulo, contexto, corpo) {
     return {
         destino: 'especializacao',
@@ -890,7 +769,6 @@ function resultadoEspecializacao(titulo, contexto, corpo) {
         btn: makeCTA('👉 Conhecer a Especialização', PATHS.especializacao, 'especializacao-assessoria-pessoal'),
     };
 }
-
 function resultadoWhatsapp(titulo, contexto, corpo, mensagem) {
     const link = `https://wa.me/${WHATSAPP.numero}?text=${encodeURIComponent(mensagem)}`;
     return {
@@ -900,7 +778,6 @@ function resultadoWhatsapp(titulo, contexto, corpo, mensagem) {
         btn: `<button class="next-btn" onclick="window.location.href='${link}'">👉 Falar no WhatsApp</button>`,
     };
 }
-
 function resultadoMastermind(titulo, contexto, corpo) {
     return {
         destino: 'mastermind',
@@ -909,37 +786,29 @@ function resultadoMastermind(titulo, contexto, corpo) {
         btn: makeCTA('👉 Ir para o Grupo', PATHS.mastermind, 'mastermind'),
     };
 }
-
 // ─── CTA BUTTON ───────────────────────────────────────────────────────────────
-
 function makeCTA(label, path, campaign) {
     const link = getLink(path, campaign);
     return `<button class="next-btn" onclick="window.location.href='${link}'">${label}</button>`;
 }
-
 // ─── PROFILE SLUG ─────────────────────────────────────────────────────────────
 // Formato: <flow>_<campo1>_<campo2>_..._<campoN>
 function getProfileSlug() {
     if (!state.flow) return '';
-
     const schema = PROFILE_SCHEMAS[state.flow];
     if (!schema) return state.flow;
-
     const parts = [state.flow];
     schema.forEach(field => {
         const value = state[field];
         parts.push(value || PROFILE_NA);
     });
-
     return parts.join(PROFILE_SEP);
 }
-
 // ─── LINK BUILDER (UTM + profile separados) ───────────────────────────────────
 function getLink(path, campaign) {
     const utm = getUTMParams();
     const params = new URLSearchParams();
     const profile = getProfileSlug();
-
     if (utm.has_utm) {
         const s = getNullableValue(utm.utm_last.utm_source);
         const m = getNullableValue(utm.utm_last.utm_medium);
@@ -957,14 +826,11 @@ function getLink(path, campaign) {
         params.set('utm_campaign', campaign);
         params.set('utm_content', 'quiz');
     }
-
     if (profile) {
         params.set('profile', profile);
     }
-
     return path + '?' + params.toString();
 }
-
 function getNullableValue(val) {
     if (val) {
         val = val.trim();
@@ -972,20 +838,17 @@ function getNullableValue(val) {
     }
     return val;
 }
-
 function getUTMParams() {
     const params = new URLSearchParams(window.location.search);
     const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
     const rawReferrer = getNullableValue(document.referrer);
     const hasUTM = getNullableValue(params.get('utm_source')) && getNullableValue(params.get('utm_medium'));
-
     let utmParams = {};
     if (hasUTM) {
         utmKeys.forEach(key => { utmParams[key] = getNullableValue(params.get(key)); });
     }
     utmParams.timestamp = Date.now();
     utmParams.referral_url = rawReferrer;
-
     let firstUtmParams = localStorage.getItem('first_visit_utm');
     if (!firstUtmParams) {
         firstUtmParams = utmParams;
@@ -993,10 +856,8 @@ function getUTMParams() {
     } else {
         try { firstUtmParams = JSON.parse(firstUtmParams); } catch { firstUtmParams = utmParams; }
     }
-
     return { utm_first: firstUtmParams, utm_last: utmParams, has_utm: !!hasUTM };
 }
-
 // ─── ERROR MODAL CLICK-OUTSIDE SHAKE ─────────────────────────────────────────
 // Quando user clica fora do modal de erro, dá um shake em vez de fechar
 window.addEventListener('click', function (event) {
@@ -1008,11 +869,8 @@ window.addEventListener('click', function (event) {
         setTimeout(() => content.classList.remove('shake'), 400);
     }
 });
-
 // ─── INIT ────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     renderStep('p0');
 });
-
 try { console.log(getUTMParams()); } catch { }
-
