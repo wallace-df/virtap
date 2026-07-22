@@ -278,6 +278,16 @@ const STEPS = {
             { value: 'escala', label: 'Quero crescer e escalar minha atuação' },
         ],
     },
+    investe: {
+        title: 'Já investiu em treinamentos, cursos online ou mentorias?',
+        field: 'investe',
+        options: [
+            { value: 'investiu-quer', label: 'Já investi e pretendo investir novamente' },
+            { value: 'nunca-quer', label: 'Nunca investi, mas pretendo investir agora' },
+            { value: 'investiu-naoquer', label: 'Já investi, mas não pretendo investir dessa vez' },
+            { value: 'nunca-naoquer', label: 'Nunca investi e não pretendo investir' },
+        ],
+    },
     faturamento: {
         title: 'Quanto você fatura hoje como Assistente?',
         field: 'faturamento',
@@ -298,7 +308,7 @@ const FLOWS = {
     explore: ['origem', 'situacao', 'area', 'incomoda', 'renda'],
     build: ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'renda', 'leadCapture'],
     'build-v2': ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'investe', 'busca', 'renda', 'leadCapture'],
-    growth: ['comoComecou', 'areaAV', 'origem', 'incomodaAV', 'faturamento', 'leadCapture'],
+    growth: ['comoComecou', 'areaAV', 'origem', 'incomodaAV', 'investe', 'faturamento', 'leadCapture'],
 };
 // ─── PROFILE SLUG SCHEMA ──────────────────────────────────────────────────────
 // Define a ordem dos campos no slug por flow. Server usa o MESMO schema
@@ -495,8 +505,20 @@ function advance() {
     // Salva step atual no history e avança
     const currentStepId = FLOWS[state.flow][state.flowIndex];
     state.history.push(currentStepId);
+
+    // GROWTH: se acabou de responder "disposta" com "não", encerra na hora —
+    // sem mais perguntas, sem lead capture.
+    if (currentStepId === 'investe' && state.flow === 'growth') {
+        const naoQuerInvestir = ['investiu-naoquer', 'nunca-naoquer'].includes(state.investe);
+        if (naoQuerInvestir) {
+            showResult();
+            return;
+        }
+    }
+
     state.flowIndex++;
     const flow = FLOWS[state.flow];
+
     // Pula steps com skipFn true
     while (state.flowIndex < flow.length) {
         const nextId = flow[state.flowIndex];
@@ -505,6 +527,7 @@ function advance() {
             showResult();
             return;
         }
+
         // Desvio IA: lead de IA no build (v1) vai direto pro R$97, sem captura.
         // build-v2 não tem esse atalho — IA também passa pela captura normalmente.
         if (nextId === 'leadCapture' && (state.flow === 'build') && state.origem === 'ia') {
@@ -657,6 +680,14 @@ function gerarResultado() {
         const area = state.area;
         const dor = state.incomodaAV;
         const fat = state.faturamento;
+
+        const naoQuerInvestir = ['investiu-naoquer', 'nunca-naoquer'].includes(state.investe);
+        if (naoQuerInvestir) {
+            return resultadoSemFit();
+        }
+
+
+
         // Não consigo clientes: dor explícita, OU dor de escala/rentabilidade sem nenhum cliente ainda
         const faturamentoBaixo = ['sem-clientes', 'ate-1800', '1800-2500'].includes(fat);
         if (dor === 'clientes' || ((dor === 'rentabilidade' || dor === 'escala') && faturamentoBaixo)) {
@@ -804,6 +835,15 @@ function resultadoMastermind(titulo, contexto, corpo) {
         titulo,
         mensagem: contexto + corpo,
         btn: makeCTA('👉 Ir para o Grupo', PATHS.mastermind, 'mastermind'),
+    };
+}
+
+function resultadoSemFit() {
+    return {
+        destino: 'sem-fit',
+        titulo: 'No momento, não temos um programa adequado para o seu perfil',
+        mensagem: `<p>Nosso foco é ajudar Assistentes Virtuais que desejam se profissionalizar e investir no próprio crescimento.</p>`,
+        btn: '',
     };
 }
 // ─── CTA BUTTON ───────────────────────────────────────────────────────────────
