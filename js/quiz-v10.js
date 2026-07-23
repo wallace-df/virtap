@@ -531,7 +531,7 @@ function advance() {
         // Desvio IA: lead de IA no build (v1) vai direto pro R$97, sem captura.
         // build-v2 não tem esse atalho — IA também passa pela captura normalmente.
         if (nextId === 'leadCapture' && (state.flow === 'build') && state.origem === 'ia') {
-            const link = getLink('/primeiro-cliente-av', 'primeiro-cliente-av-build-vsl-ia');
+            const link = getLink('/primeiro-cliente-av-2', 'primeiro-cliente-av-build-vsl-ia-2');
             document.getElementById('step-content').innerHTML = `
                 <h2 class="text-center">Achamos o caminho certo pra você</h2>
                 <div>
