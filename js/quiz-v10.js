@@ -9,6 +9,7 @@ const PATHS = {
     formacaoAV: '/formacoes/assistencia-virtual',
     acessoVirtap: '/vagas-assistente-virtual/como-acessar',
     especializacao: '/formacoes/assistencia-pessoal',
+    aulaoAssistenciaPessoal: '/live/do-zero-a-assistencia-pessoal/',
     mastermind: 'https://docs.google.com/forms/d/e/1FAIpQLSd4d08MvexaQzMcjqUxjwmgrYLvuGqmHXGqkElLeWpSTJlvFg/viewform',
     youtube: 'https://www.youtube.com/@virtapbr'
 };
@@ -33,15 +34,16 @@ function resolveBuildFlow() {
     return Math.random() < BUILD_V2_PERCENT ? 'build-v2' : 'build';
 }
 // ─── DESTINO BUILD V2 ─────────────────────────────────────────────────────────
-// Pra quem "quer investir" (campo `investe`) e escolheu 'generalista' ou
-// 'assessoria' no campo `busca`, decide se o resultado leva pra LP ou WhatsApp.
-// 'rapido' (Programa 30 dias) é sempre LP, não passa por aqui.
+// Pra quem "quer investir" (campo `investe`) e escolheu 'generalista' no
+// campo `busca`, decide se o resultado leva pra LP ou WhatsApp.
+// 'rapido' (Programa 30 dias) é sempre LP, e 'especializar' (Assessoria
+// Pessoal) sempre vai pro Aulão — nenhum dos dois passa por aqui.
 // Trocar 'lp' <-> 'whatsapp' aqui já muda o funil inteiro, sem mexer na lógica.
 const DESTINO_BUILD = {
     generalista: 'lp',       // 'lp' ou 'whatsapp' — Formação AV
     assessoria: 'whatsapp',  // 'lp' ou 'whatsapp' — Especialização AP
 };
-// TODO: revisar as mensagens
+// TODO: revisar a mensagem
 const WHATSAPP = {
     numero: '5548988089062',
     mensagens: {
@@ -494,6 +496,31 @@ function selectOption(field, value, el) {
     if (advanceTimer) clearTimeout(advanceTimer);
     advanceTimer = setTimeout(advance, 150);
 }
+// ─── PREDICADO: vai pro Aulão de Assistência Pessoal? ────────────────────────
+// Única fonte de verdade sobre quando o resultado final é o Aulão. Usada tanto
+// pra decidir se pula a captura de lead do quiz (o Aulão já coleta os dados
+// na própria página) quanto em gerarResultado() pra montar a mensagem certa.
+// Só é confiável depois que os campos usados abaixo já foram respondidos
+// (busca/investe pro build-v2; area/incomodaAV/investe/faturamento pro growth).
+function deveIrParaAulao(state) {
+    const naoQuerInvestir = ['investiu-naoquer', 'nunca-naoquer'].includes(state.investe);
+    if (naoQuerInvestir) return false;
+    if (state.flow === 'build-v2') {
+        return state.busca === 'especializar';
+    }
+    if (state.flow === 'growth') {
+        if (state.area !== 'assistencia-pessoal') return false;
+        const dor = state.incomodaAV;
+        const fat = state.faturamento;
+        const faturamentoBaixo = ['sem-clientes', 'ate-1800', '1800-2500'].includes(fat);
+        // Sem clientes → vai pra Plataforma, não pro Aulão
+        if (dor === 'clientes' || ((dor === 'rentabilidade' || dor === 'escala') && faturamentoBaixo)) return false;
+        // Faturamento alto + quer escalar → vai pro Mastermind, não pro Aulão
+        if (dor === 'escala' && fat === 'acima-5000') return false;
+        return true;
+    }
+    return false;
+}
 function advance() {
     // P0: começa o flow
     if (state.flowIndex === -1) {
@@ -540,6 +567,13 @@ function advance() {
                 </div>`;
             document.getElementById('header-nav').style.display = 'flex';
             window.scrollTo(0, 0);
+            return;
+        }
+
+        // Aulão de Assistência Pessoal: captura já acontece na própria página
+        // de inscrição, então pula o formulário de lead do quiz aqui.
+        if (nextId === 'leadCapture' && deveIrParaAulao(state)) {
+            showResult();
             return;
         }
 
@@ -612,9 +646,9 @@ function gerarResultado() {
         );
     }
     // ─── FLOW 2b: build-v2 (novo) ────────────────────────────────────────
-    // Sempre passa pela captura de lead normalmente (ver `advance()`); o campo
-    // `investe` aqui só decide QUAL resultado mostrar depois da captura, não
-    // se ela acontece.
+    // Passa pela captura de lead normalmente (ver `advance()`), EXCETO quando
+    // vai cair no Aulão de Assistência Pessoal — aí `advance()` já pula a
+    // captura antes de chegar aqui (ver `deveIrParaAulao`).
     if (state.flow === 'build-v2') {
         const naoQuerInvestir = ['investiu-naoquer', 'nunca-naoquer'].includes(state.investe);
         // Não quer investir agora → conteúdo gratuito (YouTube)
@@ -635,22 +669,14 @@ function gerarResultado() {
      <p>Por isso, o melhor caminho é um programa prático e direto ao ponto, feito pra te ajudar a sair do zero e conquistar seu primeiro cliente como Assistente Virtual.</p>`
             );
         }
-        // Assessoria Pessoal → Especialização (LP ou WhatsApp, configurável)
-        if (state.busca === 'especializar') {
+        // Assessoria Pessoal → Aulão "Do zero à Assistência Pessoal"
+        if (deveIrParaAulao(state)) {
             const contexto = montarContextoDecidi();
             const corpo = `
             <p>Quem atua com Assessoria Pessoal não é apenas alguém que executa tarefas. É uma profissional de confiança, que organiza, antecipa necessidades e contribui para que empresários e executivos tenham mais tempo e produtividade.</p>
             <p>Esse nível de atuação exige visão, proatividade, discrição e preparo para lidar com demandas de maior responsabilidade.</p>
-            <p>Por isso, uma formação especializada aliada a um acompanhamento próximo faz toda a diferença para desenvolver esse perfil e se posicionar nesse mercado.</p>`;
-            if (DESTINO_BUILD.assessoria === 'whatsapp') {
-                return resultadoWhatsapp(
-                    'Assessoria Pessoal é um novo nível de atuação',
-                    contexto,
-                    corpo,
-                    WHATSAPP.mensagens.assessoria
-                );
-            }
-            return resultadoEspecializacao('Assessoria Pessoal é um novo nível de atuação', contexto, corpo);
+            <p>Preparamos um aulão gratuito pra te mostrar como funciona esse caminho, do zero até se posicionar como Assessora Pessoal.</p>`;
+            return resultadoAulao('Assessoria Pessoal é um novo nível de atuação', contexto, corpo);
         }
         // Generalista (padrão) → Formação AV (LP ou WhatsApp, configurável)
         const contexto = montarContextoDecidi();
@@ -677,7 +703,6 @@ function gerarResultado() {
     }
     // ─── FLOW 3: growth ───────────────────────────────────────────────────
     if (state.flow === 'growth') {
-        const area = state.area;
         const dor = state.incomodaAV;
         const fat = state.faturamento;
 
@@ -710,13 +735,13 @@ function gerarResultado() {
         }
         // Especialização (aqui fat nunca é 'sem-clientes' pra escala/rentabilidade, já foi capturado acima)
         if (dor === 'rentabilidade' || dor === 'escala') {
-            if (area === 'assistencia-pessoal') {
-                // Formação AP
-                return resultadoFormacaoAP(
+            if (deveIrParaAulao(state)) {
+                // Aulão "Do zero à Assistência Pessoal"
+                return resultadoAulao(
                     'Alcance um novo patamar',
                     montarContextoJaSou(),
-                    `<p>Pelas suas respostas, o mais importante agora é consolidar conhecimentos, ganhar mais segurança e estruturar melhor sua atuação.</p>
-             <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e ir para um próximo nível mais rápido.</p>`
+                    `<p>Pelas suas respostas, o mais importante agora é consolidar conhecimentos, ganhar mais segurança e estruturar melhor sua atuação em Assistência Pessoal.</p>
+             <p>Preparamos um aulão gratuito pra te mostrar o caminho pra elevar seu posicionamento e seus ganhos nessa área.</p>`
                 );
             } else {
                 // Especialização
@@ -729,13 +754,13 @@ function gerarResultado() {
             }
         }
         // Fallback: inseguranca, precificacao, profissionalizacao (com ou sem clientes)
-        if (area === 'assistencia-pessoal') {
-            // Formação AP
-            return resultadoFormacaoAP(
+        if (deveIrParaAulao(state)) {
+            // Aulão "Do zero à Assistência Pessoal"
+            return resultadoAulao(
                 'Alcance um novo patamar',
                 montarContextoJaSou(),
-                `<p>Pelas suas respostas, o mais importante agora é consolidar conhecimentos, ganhar mais segurança e estruturar melhor sua atuação.</p>
-         <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e ir para um próximo nível mais rápido.</p>`
+                `<p>Pelas suas respostas, o mais importante agora é consolidar conhecimentos, ganhar mais segurança e estruturar melhor sua atuação em Assistência Pessoal.</p>
+         <p>Preparamos um aulão gratuito pra te mostrar o caminho certo pra crescer nessa área.</p>`
             );
         } else {
             // Formação AV
@@ -796,6 +821,8 @@ function resultadoFormacaoAV(titulo, contexto, corpo) {
         btn: makeCTA('👉 Quero conhecer a Formação', PATHS.formacaoAV, 'formacao-av'),
     };
 }
+// Sem chamadas ativas no momento — área 'assistencia-pessoal' agora vai pro
+// Aulão (ver resultadoAulao). Mantida caso queira reativar esse destino depois.
 function resultadoFormacaoAP(titulo, contexto, corpo) {
     return {
         destino: 'formacao',
@@ -818,6 +845,16 @@ function resultadoEspecializacao(titulo, contexto, corpo) {
         titulo,
         mensagem: contexto + corpo,
         btn: makeCTA('👉 Conhecer a Especialização', PATHS.especializacao, 'especializacao-assessoria-pessoal'),
+    };
+}
+// Quem sinaliza interesse em Assistência Pessoal (em qualquer funil) vai pro
+// Aulão "Do zero à Assistência Pessoal" em vez de direto pra Especialização/Formação AP.
+function resultadoAulao(titulo, contexto, corpo) {
+    return {
+        destino: 'aulao-assistencia-pessoal',
+        titulo,
+        mensagem: contexto + corpo,
+        btn: makeCTA('👉 Garantir minha vaga no Aulão', PATHS.aulaoAssistenciaPessoal, 'aulao-assistencia-pessoal'),
     };
 }
 function resultadoWhatsapp(titulo, contexto, corpo, mensagem) {
