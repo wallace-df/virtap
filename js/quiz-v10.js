@@ -11,7 +11,10 @@ const PATHS = {
     especializacao: '/formacoes/assistencia-pessoal',
     aulaoAssistenciaPessoal: '/live/do-zero-a-assistencia-pessoal/',
     mastermind: 'https://docs.google.com/forms/d/e/1FAIpQLSd4d08MvexaQzMcjqUxjwmgrYLvuGqmHXGqkElLeWpSTJlvFg/viewform',
-    youtube: 'https://www.youtube.com/@virtapbr'
+    youtube: 'https://www.youtube.com/@virtapbr',
+    // Curso gratuito no YouTube pra quem veio de IA (explore ou build) — vai direto
+    // pro vídeo, sem passar por lead capture nem por página interna.
+    cursoGratuitoYoutubeIA: 'https://www.youtube.com/watch?v=Ey4k5g8YdNc&list=PLmT3PVFu-ntGYrfWjYUQ1eILXXHSyU1eP&index=2'
 };
 // Endpoint pra captura de lead nos flows build/growth (antes do resultado)
 const LEAD_CAPTURE_ENDPOINT = '/signup-quiz';
@@ -549,20 +552,16 @@ function advance() {
     // Pula steps com skipFn true
     while (state.flowIndex < flow.length) {
         const nextId = flow[state.flowIndex];
-        // BUILD (original) — leads não-IA vão direto pro conteúdo gratuito, sem captura.
-        if (nextId === 'leadCapture' && state.flow === 'build' && state.origem !== 'ia') {
-            showResult();
-            return;
-        }
-
-        // Desvio IA: lead de IA no build (v1) vai direto pro R$97, sem captura.
-        // build-v2 não tem esse atalho — IA também passa pela captura normalmente.
+        // Desvio IA: lead de IA no build (v1) vai direto pro curso gratuito no
+        // YouTube, sem captura. Quem não é de IA passa pelo leadCapture normal
+        // (renderiza o form, como qualquer outro step do flow).
         if (nextId === 'leadCapture' && (state.flow === 'build') && state.origem === 'ia') {
-            const link = getLink('/primeiro-cliente-av-3', 'primeiro-cliente-av-build-vsl-ia-3');
+            const link = getLink(PATHS.cursoGratuitoYoutubeIA, 'primeiro-cliente-av-build-vsl-ia-3');
             document.getElementById('step-content').innerHTML = `
-                <h2 class="text-center">Achamos o caminho certo pra você</h2>
+                <h2 class="text-center">Você já deu o primeiro passo!</h2>
                 <div>
-                    <p>Pelas suas respostas, o melhor primeiro passo é conquistar o seu <strong>primeiro cliente como Assistente Virtual</strong> — prático e direto ao ponto.</p>
+                    <p>Agora é hora de entender melhor como esse mercado funciona e conhecer as possibilidades.</p>
+                    <p>Preparamos um conteúdo para ajudar você nessa jornada. Ao final, mostramos os próximos passos para iniciar sua carreira.</p>
                     <button class="next-btn" onclick="window.location.href='${link}'">Ver meu primeiro passo</button>
                 </div>`;
             document.getElementById('header-nav').style.display = 'flex';
@@ -617,23 +616,26 @@ function showResult() {
 function gerarResultado() {
     // ─── FLOW 1: explore ────────────────────────────────
     if (state.flow === 'explore') {
-        // [TESTE] explore + origem IA → roteia direto pro Primeiro Cliente (R$ 97),
-        // pulando o curso gratuito. Reverter: deletar este bloco.
+        // explore + origem IA → roteia direto pro curso gratuito no YouTube.
         if (state.origem === 'ia') {
             return {
-                destino: 'programa-30dias',
-                titulo: 'Encontramos um caminho pra você',
-                mensagem: `<p>Pelas suas respostas, dá pra ver que você está começando a descobrir a profissão de <strong>Assistente Virtual</strong>.</p>
-        <p>Em vez de te deixar só na teoria, a gente quer te mostrar o caminho mais curto: um programa prático e direto ao ponto, feito pra te ajudar a entrar na profissão e <strong>conseguir renda</strong>.</p>
-        <p>É o passo certo pra quem quer sair da pesquisa e começar pra valer.</p>`,
-                btn: makeCTA('👉 Conhecer o programa', '/primeiro-cliente-av-4', 'primeiro-cliente-av-explore-vsl-ia-4'),
+                destino: 'curso-gratuito',
+                titulo: 'Comece do jeito certo',
+                mensagem: `
+                    <p>Pelas suas respostas, vale a pena conhecer melhor a profissão de <strong>Assistente Virtual</strong> e entender se ela combina com você.</p>
+                    <p>Nas aulas, você vai entender como funciona o trabalho, o que pode fazer, quanto é possível ganhar e como atuar na área.</p>
+                    <p>Se você se identificar com a profissão, no final a gente mostra como você pode começar.</p>
+                `,
+                btn: makeCTA('👉 Acessar as aulas', PATHS.cursoGratuitoYoutubeIA, 'curso-gratuito'),
             };
         }
         return resultadoCursoGratuito(
             'Comece do jeito certo!',
-            `<p>Pelas suas respostas, faz sentido começar conhecendo melhor a profissão de <strong>Assistente Virtual</strong> e entendendo se esse caminho combina com o que você busca.</p>
-             <p>Preparamos um conteúdo gratuito  pra você entender como esse trabalho funciona na prática e quais são as possibilidades reais de renda e crescimento.</p>
-             <p>Se você se identificar e gostar da profissão, a gente te ajuda com os próximos passos!</p>`
+            `
+            <p>Pelas suas respostas, vale a pena conhecer melhor a profissão de <strong>Assistente Virtual</strong> e entender se ela combina com você.</p>
+            <p>Nas aulas, você vai entender como funciona o trabalho, o que pode fazer, quanto é possível ganhar e como atuar na área.</p>
+            <p>Se você se identificar com a profissão, no final a gente mostra como você pode começar.</p>
+     `
         );
     }
     // ─── FLOW 2: build (original) ───────────────────────────────────────
@@ -791,7 +793,7 @@ function resultadoCursoGratuito(titulo, corpo) {
         destino: 'curso-gratuito',
         titulo,
         mensagem: corpo,
-        btn: makeCTA('👉 Acessar o material gratuito', PATHS.cursoGratuito, 'curso-gratuito'),
+        btn: makeCTA('👉 Acessar as aulas', PATHS.cursoGratuito, 'curso-gratuito'),
     };
 }
 
@@ -926,7 +928,10 @@ function getLink(path, campaign) {
     if (profile) {
         params.set('profile', profile);
     }
-    return path + '?' + params.toString();
+    // Alguns PATHS (ex: link direto de vídeo do YouTube) já vêm com '?' e outros
+    // params na URL — nesse caso usa '&' pra não gerar um '?' duplicado.
+    const separator = path.includes('?') ? '&' : '?';
+    return path + separator + params.toString();
 }
 function getNullableValue(val) {
     if (val) {
