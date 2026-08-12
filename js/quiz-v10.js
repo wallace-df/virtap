@@ -552,11 +552,19 @@ function advance() {
     // Pula steps com skipFn true
     while (state.flowIndex < flow.length) {
         const nextId = flow[state.flowIndex];
+
+        // BUILD (original) — leads não-IA vão direto pro conteúdo gratuito, sem
+        // captura aqui no quiz (a própria página do curso gratuito já tem form).
+        if (nextId === 'leadCapture' && state.flow === 'build' && state.origem !== 'ia') {
+            showResult();
+            return;
+        }
+
         // Desvio IA: lead de IA no build (v1) vai direto pro curso gratuito no
         // YouTube, sem captura. Quem não é de IA passa pelo leadCapture normal
         // (renderiza o form, como qualquer outro step do flow).
         if (nextId === 'leadCapture' && (state.flow === 'build') && state.origem === 'ia') {
-            const link = getLink(PATHS.cursoGratuitoYoutubeIA, 'primeiro-cliente-av-build-vsl-ia-3');
+            const link = getLink(PATHS.cursoGratuitoYoutubeIA, 'curso-gratuito');
             document.getElementById('step-content').innerHTML = `
                 <h2 class="text-center">Você já deu o primeiro passo!</h2>
                 <div>
