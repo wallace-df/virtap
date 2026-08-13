@@ -24,7 +24,7 @@ const LEAD_CAPTURE_ENDPOINT = '/signup-quiz';
 // - 'v1' / 'v2': força todo mundo pra uma versão específica.
 // - 'split': divide por porcentagem (BUILD_V2_PERCENT define a fatia do v2).
 // Override manual pra QA/teste de link: ?build=v2 ou ?build=v1 na URL.
-const BUILD_VERSION = 'v1'; // 'v1' | 'v2' | 'split'
+const BUILD_VERSION = 'split'; // 'v1' | 'v2' | 'split'
 const BUILD_V2_PERCENT = 0.5; // usado só quando BUILD_VERSION === 'split'
 function resolveBuildFlow() {
     const params = new URLSearchParams(window.location.search);
