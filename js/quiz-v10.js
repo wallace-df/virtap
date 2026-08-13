@@ -552,19 +552,14 @@ function advance() {
     // Pula steps com skipFn true
     while (state.flowIndex < flow.length) {
         const nextId = flow[state.flowIndex];
+        // Rendas consideradas "acima de R$ 2.500" (renda >= R$ 2.500).
+        const RENDA_ACIMA_2500 = ['2500-3500', '3500-5000', 'acima-5000'];
 
-        // BUILD (original) — leads não-IA vão direto pro conteúdo gratuito, sem
-        // captura aqui no quiz (a própria página do curso gratuito já tem form).
-        if (nextId === 'leadCapture' && state.flow === 'build' && state.origem !== 'ia') {
-            showResult();
-            return;
-        }
-
-        // Desvio IA: lead de IA no build (v1) vai direto pro curso gratuito no
-        // YouTube, sem captura. Quem não é de IA passa pelo leadCapture normal
-        // (renderiza o form, como qualquer outro step do flow).
-        if (nextId === 'leadCapture' && (state.flow === 'build') && state.origem === 'ia') {
-            const link = getLink(PATHS.cursoGratuitoYoutubeIA, 'curso-gratuito');
+        // BUILD (original) — quem tem renda >= R$ 2.500 passa pelo leadCapture
+        // normal; quem tem renda menor vai direto pro curso gratuito no
+        // YouTube, sem captura.
+        if (nextId === 'leadCapture' && state.flow === 'build' && !RENDA_ACIMA_2500.includes(state.renda)) {
+            const link = getLink(PATHS.cursoGratuitoYoutubeIA, 'curso-gratuito-build');
             document.getElementById('step-content').innerHTML = `
                 <h2 class="text-center">Você já deu o primeiro passo!</h2>
                 <div>
@@ -624,8 +619,13 @@ function showResult() {
 function gerarResultado() {
     // ─── FLOW 1: explore ────────────────────────────────
     if (state.flow === 'explore') {
-        // explore + origem IA → roteia direto pro curso gratuito no YouTube.
-        if (state.origem === 'ia') {
+        // Rendas consideradas "acima de R$ 2.500" (renda >= R$ 2.500).
+        const RENDA_ACIMA_2500 = ['2500-3500', '3500-5000', 'acima-5000'];
+        const origemIaOuTiktok = state.origem === 'ia' || state.origem === 'tiktok';
+
+        // explore + origem IA/TikTok com renda < R$ 2.500 → roteia direto pro
+        // curso gratuito no YouTube, em vez da página normal do site.
+        if (origemIaOuTiktok && !RENDA_ACIMA_2500.includes(state.renda)) {
             return {
                 destino: 'curso-gratuito',
                 titulo: 'Comece do jeito certo',
@@ -801,7 +801,7 @@ function resultadoCursoGratuito(titulo, corpo) {
         destino: 'curso-gratuito',
         titulo,
         mensagem: corpo,
-        btn: makeCTA('👉 Acessar as aulas', PATHS.cursoGratuito, 'curso-gratuito'),
+        btn: makeCTA('👉 Acessar o material gratuito', PATHS.cursoGratuito, 'curso-gratuito'),
     };
 }
 
