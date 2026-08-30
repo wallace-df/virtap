@@ -536,9 +536,11 @@ function advance() {
     const currentStepId = FLOWS[state.flow][state.flowIndex];
     state.history.push(currentStepId);
 
-    // GROWTH: se acabou de responder "disposta" com "não", encerra na hora —
-    // sem mais perguntas, sem lead capture.
-    if (currentStepId === 'investe' && state.flow === 'growth') {
+    // GROWTH e BUILD-V2: se acabou de responder "disposta" com "não", encerra
+    // na hora — sem mais perguntas (busca/renda/faturamento), sem lead capture.
+    // No build-v2 quem não quer investir cai no resultado YouTube (gratuito),
+    // que não depende de 'busca', então é seguro pular direto pro resultado.
+    if (currentStepId === 'investe' && (state.flow === 'growth' || state.flow === 'build-v2')) {
         const naoQuerInvestir = ['investiu-naoquer', 'nunca-naoquer'].includes(state.investe);
         if (naoQuerInvestir) {
             showResult();
