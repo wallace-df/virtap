@@ -1,5 +1,5 @@
 // ═════════════════════════════════════════════════════════════════════════════
-// VIRTAP QUIZ V10
+// VIRTAP QUIZ V11
 // 3 caminhos: explore | build | build-v2 | growth
 // ═════════════════════════════════════════════════════════════════════════════
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
@@ -8,8 +8,6 @@ const PATHS = {
     programa30dias: '/do-zero-ao-primeiro-cliente',
     formacaoAV: '/formacoes/assistencia-virtual',
     acessoVirtap: '/vagas-assistente-virtual/como-acessar',
-    especializacao: '/formacoes/assistencia-pessoal',
-    aulaoAssistenciaPessoal: '/live/do-zero-a-assistencia-pessoal/',
     mastermind: 'https://docs.google.com/forms/d/e/1FAIpQLSd4d08MvexaQzMcjqUxjwmgrYLvuGqmHXGqkElLeWpSTJlvFg/viewform',
     youtube: 'https://www.youtube.com/@virtapbr',
     // Curso gratuito no YouTube pra quem veio de IA (explore ou build) — vai direto
@@ -39,12 +37,11 @@ function resolveBuildFlow() {
 // ─── DESTINO BUILD V2 ─────────────────────────────────────────────────────────
 // Pra quem "quer investir" (campo `investe`) e escolheu 'generalista' no
 // campo `busca`, decide se o resultado leva pra LP ou WhatsApp.
-// 'rapido' (Programa 30 dias) é sempre LP, e 'especializar' (Assessoria
-// Pessoal) sempre vai pro Aulão — nenhum dos dois passa por aqui.
+// 'rapido' (Programa 30 dias) é sempre LP. 'especializar' (Assessoria
+// Pessoal) sempre vai pro WhatsApp — não passa por aqui.
 // Trocar 'lp' <-> 'whatsapp' aqui já muda o funil inteiro, sem mexer na lógica.
 const DESTINO_BUILD = {
     generalista: 'lp',       // 'lp' ou 'whatsapp' — Formação AV
-    assessoria: 'whatsapp',  // 'lp' ou 'whatsapp' — Especialização AP
 };
 // TODO: revisar a mensagem
 const WHATSAPP = {
@@ -52,6 +49,7 @@ const WHATSAPP = {
     mensagens: {
         generalista: 'Olá! Fiz o quiz da Virtap e quero saber mais sobre a Formação AV.',
         assessoria: 'Olá! Fiz o quiz da Virtap e quero saber mais sobre a Especialização em Assessoria Pessoal.',
+        growth: 'Olá, já trabalho como AV e quero saber mais sobre a Virtap.',
     },
 };
 // ─── STEPS (questões) ─────────────────────────────────────────────────────────
@@ -169,16 +167,6 @@ const STEPS = {
             return opts[s.situacao] || [];
         },
     },
-    urgenciaIncomodo: {
-        title: 'Quão urgente é resolver isso pra você?',
-        field: 'urgencia',
-        options: [
-            { value: 'urgencia-alta', label: 'Preciso resolver agora, não dá pra esperar' },
-            { value: 'urgencia-media', label: 'Nos próximos meses, antes que aperte mais' },
-            { value: 'urgencia-baixa', label: 'Tenho tempo, mas quero começar a planejar' },
-            { value: 'pesquisando', label: 'Sem pressa, ainda explorando' },
-        ],
-    },
     // ─── Flow 2: Já decidi ───────────────────────────────────────────────────
     sonho: {
         title: 'Qual é o seu maior sonho?',
@@ -211,16 +199,6 @@ const STEPS = {
             };
             return opts[s.situacao] || [];
         },
-    },
-    urgenciaSonho: {
-        title: 'Em quanto tempo você quer começar a trabalhar como AV?',
-        field: 'urgencia',
-        options: [
-            { value: 'urgencia-alta', label: 'O quanto antes, é minha prioridade agora' },
-            { value: 'urgencia-media', label: 'Nos próximos 3 meses' },
-            { value: 'urgencia-baixa', label: 'Até o fim do ano' },
-            { value: 'pesquisando', label: 'Sem prazo definido, ainda me organizando' },
-        ],
     },
     obstaculo: {
         title: 'O que te impede de começar agora como AV?',
@@ -280,21 +258,21 @@ const STEPS = {
             { value: 'precificacao', label: 'Não sei se estou cobrando corretamente' },
             { value: 'profissionalizacao', label: 'Sinto que preciso me profissionalizar melhor' },
             { value: 'rentabilidade', label: 'Trabalho muito e ganho menos do que gostaria' },
-            { value: 'escala', label: 'Quero crescer e escalar minha atuação' },
+            { value: 'escala', label: 'Já faturo bem mas quero crescer ainda mais' },
         ],
     },
     investe: {
         title: 'Já investiu em treinamentos, cursos online ou mentorias?',
         field: 'investe',
         options: [
-            { value: 'investiu-quer', label: 'Já investi e pretendo investir novamente' },
-            { value: 'nunca-quer', label: 'Nunca investi, mas pretendo investir agora' },
+            { value: 'investiu-quer', label: 'Já investi e quero investir novamente' },
+            { value: 'nunca-quer', label: 'Nunca investi, mas quero investir agora' },
             { value: 'investiu-naoquer', label: 'Já investi, mas não pretendo investir dessa vez' },
             { value: 'nunca-naoquer', label: 'Nunca investi e não pretendo investir' },
         ],
     },
     faturamento: {
-        title: 'Quanto você fatura hoje como Assistente?',
+        title: 'Quanto você fatura hoje como Assistente Virtual?',
         field: 'faturamento',
         options: [
             { value: 'sem-clientes', label: 'Ainda não tenho clientes' },
@@ -344,7 +322,6 @@ const state = {
     comoComecou: null,
     incomodaAV: null,
     faturamento: null,
-    // urgencia: null,  // dormente, ativar se reincluir urgenciaIncomodo/urgenciaSonho nos flows
 };
 // Instância do intlTelInput, inicializada quando o form de captura é renderizado
 let leadIntl = null;
@@ -499,13 +476,13 @@ function selectOption(field, value, el) {
     if (advanceTimer) clearTimeout(advanceTimer);
     advanceTimer = setTimeout(advance, 150);
 }
-// ─── PREDICADO: vai pro Aulão de Assistência Pessoal? ────────────────────────
-// Única fonte de verdade sobre quando o resultado final é o Aulão. Usada tanto
-// pra decidir se pula a captura de lead do quiz (o Aulão já coleta os dados
-// na própria página) quanto em gerarResultado() pra montar a mensagem certa.
+// ─── PREDICADO: perfil é de Assistência/Assessoria Pessoal? ─────────────────
+// Única fonte de verdade sobre quando o perfil é de Assistência Pessoal.
+// Usada em gerarResultado() pra decidir a mensagem certa — esse perfil vai
+// pro WhatsApp igual aos outros.
 // Só é confiável depois que os campos usados abaixo já foram respondidos
 // (busca/investe pro build-v2; area/incomodaAV/investe/faturamento pro growth).
-function deveIrParaAulao(state) {
+function isAssistenciaPessoal(state) {
     const naoQuerInvestir = ['investiu-naoquer', 'nunca-naoquer'].includes(state.investe);
     if (naoQuerInvestir) return false;
     if (state.flow === 'build-v2') {
@@ -516,9 +493,9 @@ function deveIrParaAulao(state) {
         const dor = state.incomodaAV;
         const fat = state.faturamento;
         const faturamentoBaixo = ['sem-clientes', 'ate-1800', '1800-2500'].includes(fat);
-        // Sem clientes → vai pra Plataforma, não pro Aulão
+        // Sem clientes → vai pra Plataforma, não pro perfil de Assistência Pessoal
         if (dor === 'clientes' || ((dor === 'rentabilidade' || dor === 'escala') && faturamentoBaixo)) return false;
-        // Faturamento alto + quer escalar → vai pro Mastermind, não pro Aulão
+        // Faturamento alto + quer escalar → vai pro Mastermind, não pro perfil de Assistência Pessoal
         if (dor === 'escala' && fat === 'acima-5000') return false;
         return true;
     }
@@ -580,13 +557,6 @@ function advance() {
             return;
         }
 
-        // Aulão de Assistência Pessoal: captura já acontece na própria página
-        // de inscrição, então pula o formulário de lead do quiz aqui.
-        if (nextId === 'leadCapture' && deveIrParaAulao(state)) {
-            showResult();
-            return;
-        }
-
         const step = STEPS[nextId];
         // Guard `step &&` protege steps especiais (ex: leadCapture) que não têm entrada em STEPS
         if (step && step.skipFn && step.skipFn(state)) {
@@ -639,7 +609,7 @@ function gerarResultado() {
                 titulo: 'Comece do jeito certo',
                 mensagem: `
                     <p>Pelas suas respostas, vale a pena conhecer melhor a profissão de <strong>Assistente Virtual</strong> e entender se ela combina com você.</p>
-                    <p>Nas aulas, você vai entender como funciona o trabalho, o que pode fazer, quanto é possível ganhar e como atuar na área.</p>
+                    <p>Preparamos algumas aulas pra você entender como funciona o mercado, as atividades, quanto é possível ganhar e como atuar na área.</p>
                     <p>Se você se identificar com a profissão, no final a gente mostra como você pode começar.</p>
                 `,
                 btn: makeCTA('👉 Acessar as aulas', PATHS.cursoGratuitoYoutubeIA, 'curso-gratuito'),
@@ -649,7 +619,7 @@ function gerarResultado() {
             'Comece do jeito certo!',
             `
             <p>Pelas suas respostas, vale a pena conhecer melhor a profissão de <strong>Assistente Virtual</strong> e entender se ela combina com você.</p>
-            <p>Nas aulas, você vai entender como funciona o trabalho, o que pode fazer, quanto é possível ganhar e como atuar na área.</p>
+            <p>Preparamos algumas aulas pra você entender como funciona o mercado, as atividades, quanto é possível ganhar e como atuar na área.</p>
             <p>Se você se identificar com a profissão, no final a gente mostra como você pode começar.</p>
      `
         );
@@ -664,9 +634,8 @@ function gerarResultado() {
         );
     }
     // ─── FLOW 2b: build-v2 (novo) ────────────────────────────────────────
-    // Passa pela captura de lead normalmente (ver `advance()`), EXCETO quando
-    // vai cair no Aulão de Assistência Pessoal — aí `advance()` já pula a
-    // captura antes de chegar aqui (ver `deveIrParaAulao`).
+    // Passa pela captura de lead normalmente (ver `advance()`) antes de
+    // qualquer um dos resultados abaixo.
     if (state.flow === 'build-v2') {
         const naoQuerInvestir = ['investiu-naoquer', 'nunca-naoquer'].includes(state.investe);
         // Não quer investir agora → conteúdo gratuito (YouTube)
@@ -682,23 +651,23 @@ function gerarResultado() {
         if (state.busca === 'comecar') {
             return resultadoPrograma30Dias(
                 'Encontramos o caminho mais rápido pra você',
-                montarContextoDecidi(),
                 `<p>Pelas suas respostas, o que você mais quer agora é destravar seus primeiros clientes, sem enrolação.</p>
      <p>Por isso, o melhor caminho é um programa prático e direto ao ponto, feito pra te ajudar a sair do zero e conquistar seu primeiro cliente como Assistente Virtual.</p>`
             );
         }
-        // Assessoria Pessoal → Aulão "Do zero à Assistência Pessoal"
-        if (deveIrParaAulao(state)) {
-            const contexto = montarContextoDecidi();
+        // Assessoria Pessoal → WhatsApp (sempre, sem LP)
+        if (isAssistenciaPessoal(state)) {
             const corpo = `
             <p>Quem atua com Assessoria Pessoal não é apenas alguém que executa tarefas. É uma profissional de confiança, que organiza, antecipa necessidades e contribui para que empresários e executivos tenham mais tempo e produtividade.</p>
             <p>Esse nível de atuação exige visão, proatividade, discrição e preparo para lidar com demandas de maior responsabilidade.</p>
-            <p>Preparamos um aulão gratuito pra te mostrar como funciona esse caminho, do zero até se posicionar como Assessora Pessoal.</p>`;
-            return resultadoAulao('Assessoria Pessoal é um novo nível de atuação', contexto, corpo);
+            <p>Preparamos um caminho pra te mostrar como funciona essa atuação, do zero até se posicionar como Assessora Pessoal.</p>`;
+            return resultadoWhatsapp(
+                'Assessoria Pessoal é um novo nível de atuação',
+                corpo,
+                WHATSAPP.mensagens.assessoria
+            );
         }
         // Generalista (padrão) → Formação AV (LP ou WhatsApp, configurável)
-        const contexto = montarContextoDecidi();
-
         const corpo = `
             <p>Pelas suas respostas, ficou claro que você quer construir uma carreira como Assistente Virtual.</p>
             <p>Para isso, mais do que conhecer a profissão, é importante entender como atender clientes, organizar seu trabalho, definir seus serviços e se posicionar no mercado.</p>
@@ -707,7 +676,6 @@ function gerarResultado() {
         if (DESTINO_BUILD.generalista === 'whatsapp') {
             return resultadoWhatsapp(
                 'Você quer construir uma carreira como Assistente Virtual',
-                contexto,
                 corpo,
                 WHATSAPP.mensagens.generalista
             );
@@ -715,11 +683,13 @@ function gerarResultado() {
 
         return resultadoFormacaoAV(
             'Você quer construir uma carreira como Assistente Virtual',
-            contexto,
             corpo
         );
     }
     // ─── FLOW 3: growth ───────────────────────────────────────────────────
+    // Resultados de "formação" (Formação AV, Especialização e Assistência
+    // Pessoal) aqui sempre vão pro WhatsApp — nunca LP. Plataforma e
+    // Mastermind continuam como antes.
     if (state.flow === 'growth') {
         const dor = state.incomodaAV;
         const fat = state.faturamento;
@@ -729,14 +699,11 @@ function gerarResultado() {
             return resultadoSemFit();
         }
 
-
-
         // Não consigo clientes: dor explícita, OU dor de escala/rentabilidade sem nenhum cliente ainda
         const faturamentoBaixo = ['sem-clientes', 'ate-1800', '1800-2500'].includes(fat);
         if (dor === 'clientes' || ((dor === 'rentabilidade' || dor === 'escala') && faturamentoBaixo)) {
             return resultadoPlataforma(
                 'Você precisa de clientes!',
-                montarContextoJaSou(),
                 `<p>Pelas suas respostas, o principal desafio não é mais aprender a profissão, mas encontrar oportunidades e se conectar com clientes com potencial real de contratação.</p>
              <p>A gente consegue te ajudar com isso!</p>`
             );
@@ -745,7 +712,6 @@ function gerarResultado() {
         if (dor === 'escala' && fat === 'acima-5000') {
             return resultadoMastermind(
                 'Você está pronta para um novo nível de crescimento',
-                montarContextoJaSou(),
                 `<p>Pelas suas respostas, você já construiu uma base sólida e agora o desafio é estruturar seu crescimento de forma mais estratégica.</p>
             <p>Esse é o momento de pensar em posicionamento, eficiência e expansão, para aumentar resultados sem depender apenas de mais horas de trabalho.</p>
             <p>Participe do nosso grupo exclusivo apenas para AVs que se encontram neste patamar.</p>`
@@ -753,40 +719,40 @@ function gerarResultado() {
         }
         // Especialização (aqui fat nunca é 'sem-clientes' pra escala/rentabilidade, já foi capturado acima)
         if (dor === 'rentabilidade' || dor === 'escala') {
-            if (deveIrParaAulao(state)) {
-                // Aulão "Do zero à Assistência Pessoal"
-                return resultadoAulao(
+            if (isAssistenciaPessoal(state)) {
+                // Assistência Pessoal — sempre WhatsApp, nunca LP.
+                return resultadoWhatsapp(
                     'Alcance um novo patamar',
-                    montarContextoJaSou(),
                     `<p>Pelas suas respostas, o mais importante agora é consolidar conhecimentos, ganhar mais segurança e estruturar melhor sua atuação em Assistência Pessoal.</p>
-             <p>Preparamos um aulão gratuito pra te mostrar o caminho pra elevar seu posicionamento e seus ganhos nessa área.</p>`
+             <p>Preparamos um caminho pra te mostrar como elevar seu posicionamento e seus ganhos nessa área.</p>`,
+                    WHATSAPP.mensagens.growth
                 );
             } else {
-                // Especialização
-                return resultadoEspecializacao(
+                // Especialização — flow growth vai sempre pro WhatsApp, nunca LP.
+                return resultadoWhatsapp(
                     'O caminho agora é elevar seu posicionamento',
-                    montarContextoJaSou(),
                     `<p>Pelas suas respostas, ficou claro que você já possui experiência e está pronta para atuar em um nível mais estratégico e valorizado.</p>
-            <p>Existe uma especialização que pode te preparar para atender clientes mais exigentes e conquistar oportunidades mais qualificadas e ganhos significativamente maiores.</p>`
+            <p>Existe uma especialização que pode te preparar para atender clientes mais exigentes e conquistar oportunidades mais qualificadas e ganhos significativamente maiores.</p>`,
+                    WHATSAPP.mensagens.growth
                 );
             }
         }
         // Fallback: inseguranca, precificacao, profissionalizacao (com ou sem clientes)
-        if (deveIrParaAulao(state)) {
-            // Aulão "Do zero à Assistência Pessoal"
-            return resultadoAulao(
+        if (isAssistenciaPessoal(state)) {
+            // Assistência Pessoal — sempre WhatsApp, nunca LP.
+            return resultadoWhatsapp(
                 'Alcance um novo patamar',
-                montarContextoJaSou(),
                 `<p>Pelas suas respostas, o mais importante agora é consolidar conhecimentos, ganhar mais segurança e estruturar melhor sua atuação em Assistência Pessoal.</p>
-         <p>Preparamos um aulão gratuito pra te mostrar o caminho certo pra crescer nessa área.</p>`
+         <p>Preparamos um caminho pra te mostrar o passo certo pra crescer nessa área.</p>`,
+                WHATSAPP.mensagens.growth
             );
         } else {
-            // Formação AV
-            return resultadoFormacaoAV(
+            // Formação AV — flow growth vai sempre pro WhatsApp, nunca LP.
+            return resultadoWhatsapp(
                 'Alcance um novo patamar',
-                montarContextoJaSou(),
                 `<p>Pelas suas respostas, o mais importante agora é consolidar conhecimentos, ganhar mais segurança e estruturar melhor sua atuação.</p>
-         <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e ir para um próximo nível mais rápido.</p>`
+         <p>Com a orientação certa, você pode encurtar o caminho, evitar erros e ir para um próximo nível mais rápido.</p>`,
+                WHATSAPP.mensagens.growth
             );
         }
     }
@@ -795,13 +761,6 @@ function gerarResultado() {
         'Existe um caminho que faz sentido para você',
         '<p>Pelas suas respostas, o mais importante agora é seguir um próximo passo claro e alinhado ao momento que você está vivendo.</p>'
     );
-}
-// ─── HELPERS DE CONTEXTO ──────────────────────────────────────────────────────
-function montarContextoDecidi() {
-    return '';
-}
-function montarContextoJaSou() {
-    return '';
 }
 // ─── TEMPLATES DE RESULTADO ───────────────────────────────────────────────────
 function resultadoCursoGratuito(titulo, corpo) {
@@ -823,72 +782,44 @@ function resultadoYoutube(titulo, corpo) {
     };
 }
 
-function resultadoPrograma30Dias(titulo, contexto, corpo) {
+function resultadoPrograma30Dias(titulo, corpo) {
     return {
         destino: 'programa-30dias',
         titulo,
-        mensagem: contexto + corpo,
+        mensagem: corpo,
         btn: makeCTA('👉 Conhecer o programa', PATHS.programa30dias, 'primeiro-cliente-av'),
     };
 }
-function resultadoFormacaoAV(titulo, contexto, corpo) {
+function resultadoFormacaoAV(titulo, corpo) {
     return {
         destino: 'formacao',
         titulo,
-        mensagem: contexto + corpo,
+        mensagem: corpo,
         btn: makeCTA('👉 Quero conhecer a Formação', PATHS.formacaoAV, 'formacao-av'),
     };
 }
-// Sem chamadas ativas no momento — área 'assistencia-pessoal' agora vai pro
-// Aulão (ver resultadoAulao). Mantida caso queira reativar esse destino depois.
-function resultadoFormacaoAP(titulo, contexto, corpo) {
-    return {
-        destino: 'formacao',
-        titulo,
-        mensagem: contexto + corpo,
-        btn: makeCTA('👉 Quero ver como funciona', PATHS.especializacao, 'formacao-ap'),
-    };
-}
-function resultadoPlataforma(titulo, contexto, corpo) {
+function resultadoPlataforma(titulo, corpo) {
     return {
         destino: 'plataforma',
         titulo,
-        mensagem: contexto + corpo,
+        mensagem: corpo,
         btn: makeCTA('👉 Conheça nossa Plataforma de Clientes', PATHS.acessoVirtap, 'plataforma-vagas'),
     };
 }
-function resultadoEspecializacao(titulo, contexto, corpo) {
-    return {
-        destino: 'especializacao',
-        titulo,
-        mensagem: contexto + corpo,
-        btn: makeCTA('👉 Conhecer a Especialização', PATHS.especializacao, 'especializacao-assessoria-pessoal'),
-    };
-}
-// Quem sinaliza interesse em Assistência Pessoal (em qualquer funil) vai pro
-// Aulão "Do zero à Assistência Pessoal" em vez de direto pra Especialização/Formação AP.
-function resultadoAulao(titulo, contexto, corpo) {
-    return {
-        destino: 'aulao-assistencia-pessoal',
-        titulo,
-        mensagem: contexto + corpo,
-        btn: makeCTA('👉 Garantir minha vaga no Aulão', PATHS.aulaoAssistenciaPessoal, 'aulao-assistencia-pessoal'),
-    };
-}
-function resultadoWhatsapp(titulo, contexto, corpo, mensagem) {
+function resultadoWhatsapp(titulo, corpo, mensagem) {
     const link = `https://wa.me/${WHATSAPP.numero}?text=${encodeURIComponent(mensagem)}`;
     return {
         destino: 'whatsapp',
         titulo,
-        mensagem: contexto + corpo,
+        mensagem: corpo,
         btn: `<button class="next-btn" onclick="window.location.href='${link}'">👉 Fale com a gente no WhatsApp</button>`,
     };
 }
-function resultadoMastermind(titulo, contexto, corpo) {
+function resultadoMastermind(titulo, corpo) {
     return {
         destino: 'mastermind',
         titulo,
-        mensagem: contexto + corpo,
+        mensagem: corpo,
         btn: makeCTA('👉 Ir para o Grupo', PATHS.mastermind, 'mastermind'),
     };
 }
