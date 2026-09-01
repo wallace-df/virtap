@@ -557,20 +557,26 @@ function advance() {
         // Rendas consideradas "acima de R$ 2.500" (renda >= R$ 2.500).
         const RENDA_ACIMA_2500 = ['2500-3500', '3500-5000', 'acima-5000'];
 
-        // BUILD (original) — quem tem renda >= R$ 2.500 passa pelo leadCapture
-        // normal; quem tem renda menor vai direto pro curso gratuito no
-        // YouTube, sem captura.
-        if (nextId === 'leadCapture' && state.flow === 'build' && !RENDA_ACIMA_2500.includes(state.renda)) {
-            const link = getLink(PATHS.cursoGratuitoYoutubeIA, 'curso-gratuito-build');
-            document.getElementById('step-content').innerHTML = `
+        // BUILD (original) — NINGUÉM passa pelo leadCapture aqui (era o bug):
+        // renda baixa/vazia vai direto pro curso gratuito no YouTube, sem
+        // captura; renda >= R$ 2.500 vai direto pro curso gratuito no site
+        // (resultadoCursoGratuito), também sem captura.
+        if (nextId === 'leadCapture' && state.flow === 'build') {
+            if (!RENDA_ACIMA_2500.includes(state.renda)) {
+                const link = getLink(PATHS.cursoGratuitoYoutubeIA, 'curso-gratuito-build');
+                document.getElementById('step-content').innerHTML = `
                 <h2 class="text-center">Você já deu o primeiro passo!</h2>
                 <div>
                     <p>Agora é hora de entender melhor como esse mercado funciona e conhecer as possibilidades.</p>
                     <p>Preparamos um conteúdo para ajudar você nessa jornada. Ao final, mostramos os próximos passos para iniciar sua carreira.</p>
                     <button class="next-btn" onclick="window.location.href='${link}'">Ver meu primeiro passo</button>
                 </div>`;
-            document.getElementById('header-nav').style.display = 'flex';
-            window.scrollTo(0, 0);
+                document.getElementById('header-nav').style.display = 'flex';
+                window.scrollTo(0, 0);
+                return;
+            }
+            // Renda alta — direto pro resultado (curso gratuito no site), sem form.
+            showResult();
             return;
         }
 
