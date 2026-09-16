@@ -531,15 +531,14 @@ function advance() {
     // Pula steps com skipFn true
     while (state.flowIndex < flow.length) {
         const nextId = flow[state.flowIndex];
-        // Rendas consideradas "acima de R$ 2.500" (renda >= R$ 2.500).
-        const RENDA_ACIMA_2500 = ['2500-3500', '3500-5000', 'acima-5000'];
+        const RENDA_ACIMA_3500 = ['3500-5000', 'acima-5000'];
 
         // BUILD (original) — NINGUÉM passa pelo leadCapture aqui (era o bug):
         // renda baixa/vazia vai direto pro curso gratuito no YouTube, sem
         // captura; renda >= R$ 2.500 vai direto pro curso gratuito no site
         // (resultadoCursoGratuito), também sem captura.
         if (nextId === 'leadCapture' && state.flow === 'build') {
-            if (!RENDA_ACIMA_2500.includes(state.renda)) {
+            if (!RENDA_ACIMA_3500.includes(state.renda)) {
                 const link = getLink(PATHS.cursoGratuitoYoutubeIA, 'curso-gratuito-build');
                 document.getElementById('step-content').innerHTML = `
                 <h2 class="text-center">Você já deu o primeiro passo!</h2>
@@ -597,13 +596,12 @@ function showResult() {
 function gerarResultado() {
     // ─── FLOW 1: explore ────────────────────────────────
     if (state.flow === 'explore') {
-        // Rendas consideradas "acima de R$ 2.500" (renda >= R$ 2.500).
-        const RENDA_ACIMA_2500 = ['2500-3500', '3500-5000', 'acima-5000'];
+        const RENDA_ACIMA_3500 = ['3500-5000', 'acima-5000'];
         const origemIaOuTiktok = state.origem === 'ia' || state.origem === 'tiktok';
 
-        // explore + origem IA/TikTok com renda < R$ 2.500 → roteia direto pro
+        // explore + origem IA/TikTok com renda < R$ 3.500 → roteia direto pro
         // curso gratuito no YouTube, em vez da página normal do site.
-        if (origemIaOuTiktok && !RENDA_ACIMA_2500.includes(state.renda)) {
+        if (origemIaOuTiktok && !RENDA_ACIMA_3500.includes(state.renda)) {
             return {
                 destino: 'curso-gratuito',
                 titulo: 'Comece do jeito certo',
