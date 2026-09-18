@@ -6,7 +6,6 @@
 const PATHS = {
     cursoGratuito: '/curso-assistente-virtual',
     programa30dias: '/do-zero-ao-primeiro-cliente',
-    formacaoAV: '/formacoes/assistencia-virtual',
     acessoVirtap: '/vagas-assistente-virtual/como-acessar',
     mastermind: 'https://docs.google.com/forms/d/e/1FAIpQLSd4d08MvexaQzMcjqUxjwmgrYLvuGqmHXGqkElLeWpSTJlvFg/viewform',
     youtube: 'https://www.youtube.com/@virtapbr',
@@ -34,6 +33,10 @@ function resolveBuildFlow() {
     // split
     return Math.random() < BUILD_V2_PERCENT ? 'build-v2' : 'build';
 }
+// ─── RENDA: FAIXA "ALTA" COMPARTILHADA ───────────────────────────────────────
+// Usada no bypass de lead capture do build v1 (advance()) e no gate do
+// explore (gerarResultado()) — um único lugar pra atualizar se o corte mudar.
+const RENDA_ACIMA_3500 = ['3500-5000', 'acima-5000'];
 // TODO: revisar a mensagem
 const WHATSAPP = {
     numero: '5548988089062',
@@ -64,7 +67,7 @@ const PRECO_EXIBICAO = {
 const NOME_PRODUTO = {
     comecar: 'Programa 30 dias',
     profissionalizar: 'Formação em Assistência Virtual',
-    especializar: 'Formação em Assessoria Pessoal (AExpert)',
+    especializar: 'Formação em em Assessoria Pessoal (AExpert)',
 };
 // Artigo definido de cada produto, pra concordância correta nas frases
 // (masculino pro Programa, feminino pra Formação/Assessoria).
@@ -228,16 +231,6 @@ const STEPS = {
                 { label: `Quero saber mais sobre ${artigoPedido} ${nomePedido}`, link: linkMesmoAssim },
             ];
         },
-    },
-    investe: {
-        title: 'Já investiu em treinamentos, cursos online ou mentorias?',
-        field: 'investe',
-        options: [
-            { value: 'investiu-quer', label: 'Já investi e pretendo investir novamente' },
-            { value: 'nunca-quer', label: 'Nunca investi, mas pretendo investir agora' },
-            { value: 'investiu-naoquer', label: 'Já investi, mas não pretendo investir dessa vez' },
-            { value: 'nunca-naoquer', label: 'Nunca investi e não pretendo investir' },
-        ],
     },
     renda: {
         title: 'Qual é a sua renda mensal hoje?',
@@ -676,8 +669,6 @@ function advance() {
     // Pula steps com skipFn true
     while (state.flowIndex < flow.length) {
         const nextId = flow[state.flowIndex];
-        const RENDA_ACIMA_3500 = ['3500-5000', 'acima-5000'];
-
         // BUILD (original) — NINGUÉM passa pelo leadCapture aqui (era o bug):
         // renda baixa/vazia vai direto pro curso gratuito no YouTube, sem
         // captura; renda >= R$ 3.500 vai direto pro curso gratuito no site
@@ -741,7 +732,6 @@ function showResult() {
 function gerarResultado() {
     // ─── FLOW 1: explore ────────────────────────────────
     if (state.flow === 'explore') {
-        const RENDA_ACIMA_3500 = ['3500-5000', 'acima-5000'];
         const origemIaOuTiktok = state.origem === 'ia' || state.origem === 'tiktok';
 
         // explore + origem IA/TikTok com renda < R$ 3.500 → roteia direto pro
@@ -928,14 +918,6 @@ function resultadoPrograma30Dias(titulo, corpo) {
         btn: makeCTA('👉 Conhecer o programa', PATHS.programa30dias, 'primeiro-cliente-av'),
     };
 }
-function resultadoFormacaoAV(titulo, corpo) {
-    return {
-        destino: 'formacao',
-        titulo,
-        mensagem: corpo,
-        btn: makeCTA('👉 Quero conhecer a Formação', PATHS.formacaoAV, 'formacao-av'),
-    };
-}
 function resultadoPlataforma(titulo, corpo) {
     return {
         destino: 'plataforma',
@@ -950,7 +932,7 @@ function resultadoPlataforma(titulo, corpo) {
 // contexto sem perguntar de novo.
 function linkWhatsapp(mensagem) {
     const mensagemFinal = state.flow === 'build-v2'
-        ? `${mensagem}\#${getProfileSlug()}`
+        ? `${mensagem} #${getProfileSlug()}`
         : mensagem;
     return `https://wa.me/${WHATSAPP.numero}?text=${encodeURIComponent(mensagemFinal)}`;
 }
