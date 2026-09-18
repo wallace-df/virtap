@@ -34,15 +34,6 @@ function resolveBuildFlow() {
     // split
     return Math.random() < BUILD_V2_PERCENT ? 'build-v2' : 'build';
 }
-// ─── DESTINO BUILD V2 ─────────────────────────────────────────────────────────
-// Pra quem "quer investir" (campo `investe`) e escolheu 'generalista' no
-// campo `busca`, decide se o resultado leva pra LP ou WhatsApp.
-// 'rapido' (Programa 30 dias) é sempre LP. 'especializar' (Assessoria
-// Pessoal) sempre vai pro WhatsApp — não passa por aqui.
-// Trocar 'lp' <-> 'whatsapp' aqui já muda o funil inteiro, sem mexer na lógica.
-const DESTINO_BUILD = {
-    generalista: 'lp',       // 'lp' ou 'whatsapp' — Formação AV
-};
 // TODO: revisar a mensagem
 const WHATSAPP = {
     numero: '5548988089062',
@@ -52,6 +43,66 @@ const WHATSAPP = {
         growth: 'Olá, já trabalho como AV e quero saber mais sobre a Virtap.',
     },
 };
+// ─── PREÇOS E ORÇAMENTO (build-v2) ────────────────────────────────────────────
+// Preço NUMÉRICO de cada produto associado a `busca` — usado só pra
+// comparações matemáticas (cabeNoOrcamento, produtoMaisBaratoQueCabe).
+// NUNCA usar isso pra exibir texto — pra isso existe PRECO_EXIBICAO abaixo.
+const PRECO_PRODUTO = {
+    comecar: 197,
+    profissionalizar: 797,
+    especializar: 1497,
+};
+// Texto de exibição de cada preço (o que aparece nas mensagens/corpo) — pode
+// ter parcelamento, "à vista", etc. Só pra exibição, nunca pra comparação.
+const PRECO_EXIBICAO = {
+    comecar: '197',
+    profissionalizar: '797 à vista ou 12x de R$ 79,90',
+    especializar: '1497 à vista ou 12x de 149,90',
+};
+// Nome de exibição do produto, usado nas mensagens de WhatsApp e na tela de
+// descompasso orçamento x produto pedido.
+const NOME_PRODUTO = {
+    comecar: 'Programa 30 dias',
+    profissionalizar: 'Formação em Assistência Virtual',
+    especializar: 'Formação em Assessoria Pessoal (AExpert)',
+};
+// Artigo definido de cada produto, pra concordância correta nas frases
+// (masculino pro Programa, feminino pra Formação/Assessoria).
+const ARTIGO_PRODUTO = {
+    comecar: 'o',
+    profissionalizar: 'a',
+    especializar: 'a',
+};
+// Descrição curta de cada produto, usada pra dar contexto na tela de
+// descompasso — ela ainda não conhece nenhum desses produtos.
+const DESCRICAO_PRODUTO = {
+    comecar: 'um programa prático e direto ao ponto, focado em te ajudar a conquistar seus primeiros trabalhos.',
+    profissionalizar: 'uma formação completa pra você se profissionalizar e atuar com diferentes tipos de serviços como Assistente Virtual.',
+    especializar: 'uma especialização focada em Assessoria Pessoal, pra atender clientes mais exigentes e conquistar oportunidades mais qualificadas.',
+};
+// Teto de cada faixa de orçamento (o que ela indicou que pode investir agora).
+const TETO_ORCAMENTO = {
+    'menos-200': 200,
+    'ate-1000': 1000,
+    'acima-1000': Infinity,
+};
+// Cabe no orçamento? Compara o preço NUMÉRICO do produto pedido (busca) com
+// o teto da faixa de orçamento escolhida.
+function cabeNoOrcamento(state) {
+    const preco = PRECO_PRODUTO[state.busca];
+    const teto = TETO_ORCAMENTO[state.orcamento];
+    return preco <= teto;
+}
+// Dado um orçamento, qual é o produto mais completo que ainda cabe nele?
+// Usada na tela de descompasso, quando ela escolhe "ver opção que cabe" —
+// o produto certo depende da faixa (pode ser Programa 30 dias OU Formação
+// AV, não é sempre o mais barato de todos).
+function produtoMaisBaratoQueCabe(orcamento) {
+    const teto = TETO_ORCAMENTO[orcamento];
+    if (teto >= PRECO_PRODUTO.especializar) return 'especializar';
+    if (teto >= PRECO_PRODUTO.profissionalizar) return 'profissionalizar';
+    return 'comecar';
+}
 // ─── STEPS (questões) ─────────────────────────────────────────────────────────
 // Cada step define: title, field (nome no state), e options (estático) ou
 // optionsFn(state) (dinâmico baseado em respostas anteriores).
@@ -62,7 +113,7 @@ const STEPS = {
         field: 'flow',
         options: [
             { value: 'explore', label: 'Quero entender como funciona a profissão de Assistente Virtual' },
-            { value: 'build', label: 'Já decidi que quero trabalhar como Assistente Virtual' },
+            { value: 'build', label: 'Quero começar a trabalhar como Assistente Virtual' },
             { value: 'growth', label: 'Já trabalho como Assistente Virtual' },
         ],
     },
@@ -104,13 +155,79 @@ const STEPS = {
         ],
     },
     busca: {
-        title: 'O que você busca agora?',
+        title: 'Qual desses caminhos faz mais sentido pra você agora?',
         field: 'busca',
         options: [
-            { value: 'comecar', label: 'Quero um caminho simples para conseguir meus primeiros clientes' },
+            { value: 'comecar', label: 'Quero um caminho simples para conseguir meus primeiros trabalhos' },
             { value: 'profissionalizar', label: 'Quero me profissionalizar e atuar com diferentes tipos de serviços' },
             { value: 'especializar', label: 'Quero me especializar em Assessoria Pessoal' },
         ],
+    },
+    // ─── build-v2: quer investir + quanto pode investir, numa pergunta só ────
+    // Substitui o antigo step 'investe' no build-v2 (o growth continua usando
+    // 'investe' normalmente). selectOption() trata esse campo de forma especial:
+    // preenche state.investe ('quer'/'nao-quer') e state.orcamento juntos.
+    investeOrcamento: {
+        title: 'Quanto você pode investir para avançar mais rápido na sua carreira?',
+        field: 'investeOrcamento',
+        options: [
+            { value: 'nao-quer', label: 'Não pretendo investir agora' },
+            { value: 'menos-200', label: 'Menos de R$ 200' },
+            { value: 'ate-1000', label: 'Até R$ 1.000' },
+            { value: 'acima-1000', label: 'Acima de R$ 1.000' },
+        ],
+    },
+    // ─── build-v2: tela de descompasso orçamento x produto pedido ───────────
+    // Só aparece quando o preço do produto de `busca` não cabe no orçamento
+    // (skipFn pula quando cabeNoOrcamento() já é true). Título e corpo dão
+    // contexto dos dois produtos (ela ainda não conhece nenhum). As opções
+    // já levam o link do destino (opt.link) — clicar navega direto pro LP
+    // ou pro WhatsApp, sem passar por uma tela de resultado repetindo tudo.
+    confirmaOrcamento: {
+        field: 'confirmaOrcamento',
+        skipFn: (s) => cabeNoOrcamento(s),
+        title: 'Escolha a melhor opção para você',
+        corpoFn: (s) => {
+            const nomePedido = NOME_PRODUTO[s.busca];
+            const artigoPedido = ARTIGO_PRODUTO[s.busca];
+            const precoPedido = PRECO_EXIBICAO[s.busca];
+            const descPedido = DESCRICAO_PRODUTO[s.busca];
+            const produtoCabe = produtoMaisBaratoQueCabe(s.orcamento);
+            const nomeCabe = NOME_PRODUTO[produtoCabe];
+            const artigoCabe = ARTIGO_PRODUTO[produtoCabe];
+            const descCabe = DESCRICAO_PRODUTO[produtoCabe];
+            return `
+                <p>Pelo que você nos contou, a opção que atende exatamente o que você busca é ${artigoPedido} <strong>${nomePedido}</strong>, ${descPedido}</p>
+                <p>O investimento é de <strong>R$ ${precoPedido}</strong>, um pouco além da faixa que você indicou.</p>
+                <p>Dentro do valor que você pode investir agora, o caminho recomendado seria ${artigoCabe} <strong>${nomeCabe}</strong>, ${descCabe}</p>
+                <p>O que você prefere?</p>
+            `;
+        },
+        optionsFn: (s) => {
+            const nomePedido = NOME_PRODUTO[s.busca];
+            const artigoPedido = ARTIGO_PRODUTO[s.busca];
+            const precoPedido = PRECO_EXIBICAO[s.busca];
+            const produtoCabe = produtoMaisBaratoQueCabe(s.orcamento);
+            const nomeCabe = NOME_PRODUTO[produtoCabe];
+            const artigoCabe = ARTIGO_PRODUTO[produtoCabe];
+
+            // Link de quem topa ver a opção que cabe: Programa 30 dias (LP)
+            // ou Formação AV (WhatsApp), depende da faixa de orçamento.
+            const linkCabe = produtoCabe === 'profissionalizar'
+                ? linkWhatsapp(WHATSAPP.mensagens.generalista)
+                : getLink(PATHS.programa30dias, 'primeiro-cliente-av');
+
+            // Link de quem quer o produto pedido mesmo sabendo do valor —
+            // sempre WhatsApp, com mensagem de alta intenção.
+            const linkMesmoAssim = linkWhatsapp(
+                `Olá! Quero saber mais sobre ${artigoPedido} ${nomePedido}.`
+            );
+
+            return [
+                { label: `Quero conhecer ${artigoCabe} ${nomeCabe}`, link: linkCabe },
+                { label: `Quero saber mais sobre ${artigoPedido} ${nomePedido}`, link: linkMesmoAssim },
+            ];
+        },
     },
     investe: {
         title: 'Já investiu em treinamentos, cursos online ou mentorias?',
@@ -290,7 +407,10 @@ const STEPS = {
 const FLOWS = {
     explore: ['origem', 'situacao', 'area', 'incomoda', 'renda'],
     build: ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'renda', 'leadCapture'],
-    'build-v2': ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'investe', 'busca', 'renda', 'leadCapture'],
+    // build-v2 simplificado: sem sonho/obstaculo/renda/leadCapture. investeOrcamento
+    // substitui 'investe' (decide corte + orçamento numa pergunta só) e
+    // confirmaOrcamento só aparece quando o produto pedido não cabe no orçamento.
+    'build-v2': ['origem', 'situacao', 'area', 'investeOrcamento', 'busca', 'confirmaOrcamento'],
     growth: ['comoComecou', 'areaAV', 'origem', 'incomodaAV', 'investe', 'faturamento', 'leadCapture'],
 };
 // ─── PROFILE SLUG SCHEMA ──────────────────────────────────────────────────────
@@ -299,7 +419,7 @@ const FLOWS = {
 const PROFILE_SCHEMAS = {
     explore: ['origem', 'situacao', 'area', 'incomoda', 'renda'],
     build: ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'renda'],
-    'build-v2': ['origem', 'situacao', 'area', 'sonho', 'obstaculo', 'investe', 'busca', 'renda'], // ordem igual à FLOWS agora
+    'build-v2': ['origem', 'situacao', 'area', 'investe', 'busca', 'orcamento'], // sonho/obstaculo/renda saíram
     growth: ['comoComecou', 'area', 'origem', 'incomodaAV', 'faturamento'],
 };
 const PROFILE_SEP = '_';
@@ -315,6 +435,7 @@ const state = {
     area: null,
     incomoda: null,
     busca: null,
+    orcamento: null,
     sonho: null,
     obstaculo: null,
     investe: null,
@@ -340,15 +461,30 @@ function renderStep(stepId) {
     const options = typeof step.optionsFn === 'function'
         ? step.optionsFn(state)
         : step.options;
+    const title = typeof step.titleFn === 'function'
+        ? step.titleFn(state)
+        : step.title;
+    // Corpo opcional (parágrafos de contexto entre o título e os botões) —
+    // usado hoje só pela tela de descompasso orçamento x produto do build-v2.
+    const corpo = typeof step.corpoFn === 'function'
+        ? step.corpoFn(state)
+        : (step.corpo || '');
     // P0: 'build-v2' deve marcar o mesmo botão que 'build' (é a mesma opção visível pro usuário)
     let currentValue = state[step.field];
     if (stepId === 'p0' && currentValue === 'build-v2') currentValue = 'build';
     const buttonsHtml = options.map(opt => {
+        // Opção com link: navega direto pro destino (LP ou WhatsApp), sem
+        // passar por selectOption/advance nem por uma tela de resultado no
+        // meio — usada na tela de descompasso orçamento x produto (build-v2).
+        if (opt.link) {
+            return `<button class="option-btn" onclick="window.location.href='${opt.link}'">${opt.label}</button>`;
+        }
         const selected = currentValue === opt.value ? ' selected' : '';
         return `<button class="option-btn${selected}" onclick="selectOption('${step.field}','${opt.value}',this)">${opt.label}</button>`;
     }).join('');
     document.getElementById('step-content').innerHTML = `
-        <h2>${step.title}</h2>
+        <h2>${title}</h2>
+        ${corpo}
         ${buttonsHtml}
     `;
     const isP0 = stepId === 'p0';
@@ -471,6 +607,11 @@ function selectOption(field, value, el) {
     if (field === 'flow' && value === 'build') {
         value = resolveBuildFlow();
     }
+    // build-v2: uma pergunta só decide se quer investir E o orçamento
+    if (field === 'investeOrcamento') {
+        state.investe = value === 'nao-quer' ? 'nao-quer' : 'quer';
+        state.orcamento = value === 'nao-quer' ? null : value;
+    }
     state[field] = value;
     markSelected(el);
     if (advanceTimer) clearTimeout(advanceTimer);
@@ -513,16 +654,20 @@ function advance() {
     const currentStepId = FLOWS[state.flow][state.flowIndex];
     state.history.push(currentStepId);
 
-    // GROWTH e BUILD-V2: se acabou de responder "disposta" com "não", encerra
-    // na hora — sem mais perguntas (busca/renda/faturamento), sem lead capture.
-    // No build-v2 quem não quer investir cai no resultado YouTube (gratuito),
-    // que não depende de 'busca', então é seguro pular direto pro resultado.
-    if (currentStepId === 'investe' && (state.flow === 'growth' || state.flow === 'build-v2')) {
+    // GROWTH: se acabou de responder "disposta" com "não" em 'investe', encerra
+    // na hora — sem mais perguntas, sem lead capture.
+    if (currentStepId === 'investe' && state.flow === 'growth') {
         const naoQuerInvestir = ['investiu-naoquer', 'nunca-naoquer'].includes(state.investe);
         if (naoQuerInvestir) {
             showResult();
             return;
         }
+    }
+    // BUILD-V2: mesmo corte, mas a pergunta é 'investeOrcamento' (decide
+    // investir + orçamento juntos) e o critério é state.investe === 'nao-quer'.
+    if (currentStepId === 'investeOrcamento' && state.flow === 'build-v2' && state.investe === 'nao-quer') {
+        showResult();
+        return;
     }
 
     state.flowIndex++;
@@ -535,7 +680,7 @@ function advance() {
 
         // BUILD (original) — NINGUÉM passa pelo leadCapture aqui (era o bug):
         // renda baixa/vazia vai direto pro curso gratuito no YouTube, sem
-        // captura; renda >= R$ 2.500 vai direto pro curso gratuito no site
+        // captura; renda >= R$ 3.500 vai direto pro curso gratuito no site
         // (resultadoCursoGratuito), também sem captura.
         if (nextId === 'leadCapture' && state.flow === 'build') {
             if (!RENDA_ACIMA_3500.includes(state.renda)) {
@@ -545,7 +690,7 @@ function advance() {
                 <div>
                     <p>Agora é hora de entender melhor como esse mercado funciona e conhecer as possibilidades.</p>
                     <p>Preparamos um conteúdo para ajudar você nessa jornada. Ao final, mostramos os próximos passos para iniciar sua carreira.</p>
-                    <button class="next-btn" onclick="window.location.href='${link}'">Ver meu primeiro passo</button>
+                    <button class="next-btn" onclick="window.location.href='${link}'">Acessar o conteúdo</button>
                 </div>`;
                 document.getElementById('header-nav').style.display = 'flex';
                 window.scrollTo(0, 0);
@@ -607,7 +752,7 @@ function gerarResultado() {
                 titulo: 'Comece do jeito certo',
                 mensagem: `
                     <p>Pelas suas respostas, vale a pena conhecer melhor a profissão de <strong>Assistente Virtual</strong> e entender se ela combina com você.</p>
-                    <p>Preparamos algumas aulas pra você entender como funciona o mercado, as atividades, quanto é possível ganhar e como atuar na área.</p>
+                    <p>Preparamos algumas aulas pra você entender como funciona o mercado, as atividades, quanto é possível ganhar e o que você precisa para atuar na área.</p>
                     <p>Se você se identificar com a profissão, no final a gente mostra como você pode começar.</p>
                 `,
                 btn: makeCTA('👉 Acessar as aulas', PATHS.cursoGratuitoYoutubeIA, 'curso-gratuito'),
@@ -617,7 +762,7 @@ function gerarResultado() {
             'Comece do jeito certo!',
             `
             <p>Pelas suas respostas, vale a pena conhecer melhor a profissão de <strong>Assistente Virtual</strong> e entender se ela combina com você.</p>
-            <p>Preparamos algumas aulas pra você entender como funciona o mercado, as atividades, quanto é possível ganhar e como atuar na área.</p>
+            <p>Preparamos algumas aulas pra você entender como funciona o mercado, as atividades, quanto é possível ganhar e o que você precisa para atuar na área.</p>
             <p>Se você se identificar com a profissão, no final a gente mostra como você pode começar.</p>
      `
         );
@@ -632,57 +777,52 @@ function gerarResultado() {
         );
     }
     // ─── FLOW 2b: build-v2 (novo) ────────────────────────────────────────
-    // Passa pela captura de lead normalmente (ver `advance()`) antes de
-    // qualquer um dos resultados abaixo.
+    // Sem lead capture — só LP (Programa 30 dias) ou WhatsApp. `orcamento`
+    // decide até onde ela pode ir; `busca` decide o que ela quer dentro disso.
     if (state.flow === 'build-v2') {
-        const naoQuerInvestir = ['investiu-naoquer', 'nunca-naoquer'].includes(state.investe);
         // Não quer investir agora → conteúdo gratuito (YouTube)
-        if (naoQuerInvestir) {
+        if (state.investe === 'nao-quer') {
             return resultadoYoutube(
                 'Acompanhe nosso canal no YouTube',
                 `<p>Acompanhe o conteúdo gratuito que preparamos para você no YouTube.</p>
                  <p>No nosso canal, você vai encontrar aulas, dicas e orientações para te ajudar ao longo da sua jornada como Assistente Virtual.</p>`
             );
         }
-        // Quer investir agora — rotear por 'busca'
-        // Caminho rápido → Programa 30 dias (sempre LP)
+        // Caminho rápido → Programa 30 dias (sempre cabe, sempre LP)
         if (state.busca === 'comecar') {
             return resultadoPrograma30Dias(
-                'Encontramos o caminho mais rápido pra você',
+                'A melhor opção para você',
                 `<p>Pelas suas respostas, o que você mais quer agora é destravar seus primeiros clientes, sem enrolação.</p>
      <p>Por isso, o melhor caminho é um programa prático e direto ao ponto, feito pra te ajudar a sair do zero e conquistar seu primeiro cliente como Assistente Virtual.</p>`
             );
         }
-        // Assessoria Pessoal → WhatsApp (sempre, sem LP)
-        if (isAssistenciaPessoal(state)) {
-            const corpo = `
+        // profissionalizar ou especializar, cabendo no orçamento → resultado normal
+        if (cabeNoOrcamento(state)) {
+            if (state.busca === 'especializar') {
+                const corpo = `
             <p>Quem atua com Assessoria Pessoal não é apenas alguém que executa tarefas. É uma profissional de confiança, que organiza, antecipa necessidades e contribui para que empresários e executivos tenham mais tempo e produtividade.</p>
             <p>Esse nível de atuação exige visão, proatividade, discrição e preparo para lidar com demandas de maior responsabilidade.</p>
             <p>Preparamos um caminho pra te mostrar como funciona essa atuação, do zero até se posicionar como Assessora Pessoal.</p>`;
-            return resultadoWhatsapp(
-                'Assessoria Pessoal é um novo nível de atuação',
-                corpo,
-                WHATSAPP.mensagens.assessoria
-            );
-        }
-        // Generalista (padrão) → Formação AV (LP ou WhatsApp, configurável)
-        const corpo = `
+                return resultadoWhatsapp(
+                    'Assessoria Pessoal é um novo nível de atuação',
+                    corpo,
+                    WHATSAPP.mensagens.assessoria
+                );
+            }
+            // profissionalizar
+            const corpo = `
             <p>Pelas suas respostas, ficou claro que você quer construir uma carreira como Assistente Virtual.</p>
             <p>Para isso, mais do que conhecer a profissão, é importante entender como atender clientes, organizar seu trabalho, definir seus serviços e se posicionar no mercado.</p>
             <p>Uma formação estruturada ajuda você a começar pelo caminho certo, evitar erros comuns e acelerar sua evolução na profissão.</p>`;
-
-        if (DESTINO_BUILD.generalista === 'whatsapp') {
             return resultadoWhatsapp(
                 'Você quer construir uma carreira como Assistente Virtual',
                 corpo,
                 WHATSAPP.mensagens.generalista
             );
         }
-
-        return resultadoFormacaoAV(
-            'Você quer construir uma carreira como Assistente Virtual',
-            corpo
-        );
+        // Se chegou aqui, não cabia no orçamento — mas isso já foi resolvido
+        // direto na tela confirmaOrcamento (os botões ali navegam pro destino
+        // sem passar por aqui). Fica só o fallback genérico como rede de segurança.
     }
     // ─── FLOW 3: growth ───────────────────────────────────────────────────
     // Resultados de "formação" (Formação AV, Especialização e Assistência
@@ -766,7 +906,7 @@ function resultadoCursoGratuito(titulo, corpo) {
         destino: 'curso-gratuito',
         titulo,
         mensagem: corpo,
-        btn: makeCTA('👉 Acessar o material gratuito', PATHS.cursoGratuito, 'curso-gratuito'),
+        btn: makeCTA('👉 Acessar o conteúdo', PATHS.cursoGratuito, 'curso-gratuito'),
     };
 }
 
@@ -804,8 +944,18 @@ function resultadoPlataforma(titulo, corpo) {
         btn: makeCTA('👉 Conheça nossa Plataforma de Clientes', PATHS.acessoVirtap, 'plataforma-vagas'),
     };
 }
+// Monta o link do WhatsApp já com a mensagem certa. build-v2 não tem lead
+// capture, então a mensagem carrega o perfil (mesmo formato do slug
+// ?profile=... que já vai nos links de LP) pra quem for atender já ter o
+// contexto sem perguntar de novo.
+function linkWhatsapp(mensagem) {
+    const mensagemFinal = state.flow === 'build-v2'
+        ? `${mensagem}\#${getProfileSlug()}`
+        : mensagem;
+    return `https://wa.me/${WHATSAPP.numero}?text=${encodeURIComponent(mensagemFinal)}`;
+}
 function resultadoWhatsapp(titulo, corpo, mensagem) {
-    const link = `https://wa.me/${WHATSAPP.numero}?text=${encodeURIComponent(mensagem)}`;
+    const link = linkWhatsapp(mensagem);
     return {
         destino: 'whatsapp',
         titulo,
