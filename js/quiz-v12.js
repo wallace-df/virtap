@@ -67,7 +67,7 @@ const PRECO_EXIBICAO = {
 const NOME_PRODUTO = {
     comecar: 'Programa 30 dias',
     profissionalizar: 'Formação em Assistência Virtual',
-    especializar: 'Formação em em Assessoria Pessoal (AExpert)',
+    especializar: 'Formação em Assessoria Pessoal',
 };
 // Artigo definido de cada produto, pra concordância correta nas frases
 // (masculino pro Programa, feminino pra Formação/Assessoria).
