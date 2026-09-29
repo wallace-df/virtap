@@ -53,14 +53,14 @@ const WHATSAPP = {
 const PRECO_PRODUTO = {
     comecar: 197,
     profissionalizar: 797,
-    especializar: 1497,
+    especializar: 1797,
 };
 // Texto de exibição de cada preço (o que aparece nas mensagens/corpo) — pode
 // ter parcelamento, "à vista", etc. Só pra exibição, nunca pra comparação.
 const PRECO_EXIBICAO = {
     comecar: '197',
     profissionalizar: '797 à vista ou 12x de R$ 79,90',
-    especializar: '1497 à vista ou 12x de 149,90',
+    especializar: '1797 à vista ou 12x de 179,90',
 };
 // Nome de exibição do produto, usado nas mensagens de WhatsApp e na tela de
 // descompasso orçamento x produto pedido.
